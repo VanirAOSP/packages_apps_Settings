@@ -4827,4 +4827,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="see_through_title">Transparent lockscreen</string>
     <string name="see_through_summary">Allows visibility of the application or home screen behind the lock screen.</string>
 
+    <!-- Hostname setting -->
+    <string name="device_hostname">Device hostname</string>
+
 </resources>
