@@ -1901,6 +1901,9 @@
     <!-- About phone screen,  setting option name-->
     <string name="selinux_status">SELinux status</string>
 
+    <string name="mod_version">Vanir version</string>
+    <string name="mod_version_default">Unknown</string>
+
     <!-- About phone screen, show when a value of some status item is unavailable. -->
     <string name="device_info_not_available">Not available</string>
     <!-- About phone screen, phone status screen title -->
