@@ -61,6 +61,6 @@
         <CheckBoxPreference
              android:key="battery_percentage"
              android:title="@string/title_battery_percentage"
-             android:defaultValue="false" />	
+             android:defaultValue="true" />	
 
 </PreferenceScreen>
