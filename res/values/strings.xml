@@ -1707,6 +1707,8 @@
     <string name="summary_font_size" translatable="false">%1$s</string>
     <!-- [CHAR LIMIT=40] Sound & display settings screen, title of dialog for picking font size -->
     <string name="dialog_title_font_size">Font size</string>
+    <!-- Sound & display settings screen, allowing the user to have battery percentages -->
+    <string name="title_battery_percentage">Battery percentage</string>
 
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>

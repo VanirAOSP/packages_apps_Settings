@@ -58,4 +58,9 @@
             android:title="@string/notification_pulse_title"
             android:persistent="false" />
 
+        <CheckBoxPreference
+             android:key="battery_percentage"
+             android:title="@string/title_battery_percentage"
+             android:defaultValue="false" />	
+
 </PreferenceScreen>
