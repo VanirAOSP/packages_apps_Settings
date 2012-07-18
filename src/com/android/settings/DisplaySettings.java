@@ -57,6 +57,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_ACCELEROMETER = "accelerometer";
+    private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
@@ -72,6 +73,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private DisplayManager mDisplayManager;
 
     private CheckBoxPreference mAccelerometer;
+    private CheckBoxPreference mBatteryPercentage;
     private WarnedListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
     private CheckBoxPreference mFastTorch;
@@ -109,7 +111,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             // Display settings.  However, is still available in Accessibility settings.
             getPreferenceScreen().removePreference(mAccelerometer);
         }
-
+	
+	    mBatteryPercentage = (CheckBoxPreference) findPreference(KEY_BATTERY_PERCENTAGE);
+        mBatteryPercentage.setChecked((Settings.System.getInt(getContentResolver(),
+            Settings.System.STATUS_BAR_BATTERY, 0) == 1));
+	
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
                 && getResources().getBoolean(
@@ -151,6 +157,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 == WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE) {
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
+        }
+
         mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
         
         mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
@@ -174,7 +182,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
-
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -363,6 +370,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mAccelerometer) {
             RotationPolicy.setRotationLockForAccessibility(
                     getActivity(), !mAccelerometer.isChecked());
+        } else if (preference == mBatteryPercentage) {
+            boolean value = mBatteryPercentage.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_BATTERY,
+                    value ? 1 : 0);
         } else if (preference == mNotificationPulse) {
             boolean value = mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
