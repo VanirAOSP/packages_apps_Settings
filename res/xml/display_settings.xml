@@ -58,6 +58,12 @@
             android:title="@string/notification_pulse_title"
             android:persistent="false" />
 
+        <!-- Navigation Bar Customization -->
+        <PreferenceScreen
+            android:key="navigation_bar"
+            android:fragment="com.android.settings.vanir.NavBar"
+            android:title="@string/navigation_bar_title" />
+
         <CheckBoxPreference
              android:key="battery_percentage"
              android:title="@string/title_battery_percentage"
