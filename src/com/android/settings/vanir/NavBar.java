@@ -69,10 +69,7 @@ public class NavBar extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // If running on a phone, remove padding around container
-        if (!Utils.isScreenLarge()) {
-            mContainer.setPadding(0, 0, 0, 0);
-        }
+        mContainer.setPadding(0, 0, 0, 0);
     }
 
     @Override
