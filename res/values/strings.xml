@@ -4117,6 +4117,9 @@
     <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
 
     <!-- Navigation Bar Customization -->
+    <string name="ok">Ok</string>
+    <string name="profile_reset_title">Reset</string>
+    <string name="lockscreen_tartget_reset_title">Reset</string>
     <string name="navigation_bar_title">Navigation bar</string>
     <string name="navigation_bar_help_text">1 - To begin editing, tap the lock icon\n\n2 - Tap any button to assign or change functionality\n\n3 - Long press any button to rearrange the order\n\n4 - To save, tap the lock icon again\n\n5 - To restore system default, tap the reset button\n\n</string>
     <string name="navigation_bar_tips">&#8226; Actions can only be assigned to one button at a time\n\n&#8226; The home button cannot be re-assigned\n\n&#8226; Side buttons cannot be rearranged</string>
