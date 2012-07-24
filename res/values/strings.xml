@@ -128,6 +128,16 @@
     <!-- Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radioInfo_cid">CID</string>
 
+    <!-- Partition Info -->
+    <string name="storage_info_header">Storage info</string>
+    <string name="partition_info_title">Partition info</string>
+    <string name="partition_info_system">/system</string>
+    <string name="partition_info_data">/data</string>
+    <string name="partition_info_cache">/cache</string>
+    <string name="partition_info_sdcard">/sdcard (FAT)</string>
+    <string name="partition_info_sdext">/sd-ext (EXT)</string>
+    <string name="partition_info_used_of">/</string>
+
     <!-- Used for diagnostic info screens, precise translation isn't needed. Unmounts the SD card from the phone, meaning it will become available for an attached computer  [CHAR LIMIT=25] -->
     <string name="sdcard_unmount" product="nosdcard">Unmount USB storage</string>
     <!-- Used for diagnostic info screens, precise translation isn't needed. Unmounts the SD card from the phone, meaning it will become available for an attached computer -->
@@ -5500,7 +5510,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pie_restart_launcher_summary">Changing screensize can have adverse effects. This option allows your launcher to regain sanity, the cost is a slight blackout (recommended)</string>
     <string name="all_color">Custom Colors</string>
     <string name="stock_color">Default Colors</string>
-
     <string name="interface_layout">Interface mods</string>
     <string name="hide_extras_summary"></string>
     <string name="hide_extras">Hide Extras</string>
