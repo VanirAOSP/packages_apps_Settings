@@ -819,6 +819,14 @@
                 android:resource="@id/application_settings" />
         </activity-alias>
 
+        <activity android:name=".vanir.fragments.PartitionInfo"
+            android:label="Partition Info">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
         <!-- Still need a top-level activity for showing app details.  Aliasing
              trick is so the code that is now a fragment can still be called
              InstalledAppDetails. -->
