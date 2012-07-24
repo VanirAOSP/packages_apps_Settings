@@ -18,4 +18,11 @@
     android:title="@string/storage_settings_title">
 
 <!-- Preference categories are dynamically created based on the list of available storage volumes -->
+
+<!-- Partition info -->
+    <Preference
+        android:key="partitioninfo"
+        android:title="@string/partition_info_title"
+        android:fragment="com.android.settings.vanir.fragments.PartitionInfo" />
+
 </PreferenceScreen>
