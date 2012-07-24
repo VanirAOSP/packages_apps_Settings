@@ -1608,6 +1608,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".vanir.fragments.PartitionInfo"
+            android:label="@string/partition_info_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".vanir.ExcludedAppsActivity" />
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
