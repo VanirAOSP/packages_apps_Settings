@@ -34,7 +34,12 @@
         android:title="@string/statusbar_short"
         android:summary="@string/statusbar_short_summary"
         android:fragment="com.android.settings.vanir.fragments.StatusbarMods" />
-    
+
+    <PreferenceScreen
+        android:key="hardware_keys"
+        android:fragment="com.android.settings.vanir.HardwareKeys"
+        android:title="@string/hardware_keys_title" />
+
     <PreferenceScreen
         android:key="@+id/navbar"
         android:title="@string/title_navbar"
