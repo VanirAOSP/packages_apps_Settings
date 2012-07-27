@@ -59,6 +59,11 @@
         android:summary="@string/navigation_bar_summary"
         android:fragment="com.android.settings.vanir.fragments.Navbar" />
 
+    <PreferenceScreen
+        android:key="hardware_keys"
+        android:fragment="com.android.settings.vanir.HardwareKeys"
+        android:title="@string/hardware_keys_title" />
+
     <Preference
         android:key="transparency_dialog"
         android:title="@string/transparency_dialog_title" 
