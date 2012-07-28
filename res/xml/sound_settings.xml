@@ -39,6 +39,20 @@
                 android:targetClass="com.android.musicfx.ControlPanelPicker" />
     </Preference>
 
+    <!-- Volume Rocker Wake -->
+    <CheckBoxPreference
+            android:key="pref_volume_wake"
+            android:title="@string/pref_volume_wake_title"
+            android:summary="@string/pref_volume_wake_summary"
+            android:defaultValue="false" />
+
+    <!-- Volume Rocker music control -->
+    <CheckBoxPreference
+	    android:key="volbtn_music_controls"
+            android:title="@string/volbtn_music_controls_title"
+            android:summary="@string/volbtn_music_controls_summary"
+            android:persistent="false" />
+
     <PreferenceCategory
             android:key="category_calls_and_notification"
             android:title="@string/sound_category_call_ringtone_vibrate_title"/>
