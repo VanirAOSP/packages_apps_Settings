@@ -4383,6 +4383,14 @@
 
     <!-- Customized settings -->
     
+    <!-- Volume rocker music control -->
+    <string name="volbtn_music_controls_title">Volume rocker music controls</string>
+    <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_wake_title">Volume rocker wake</string>
+    <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the Nexus</string>
+    
     <!-- Volume Panel --> 
     <string name="volume_overlay_title">Volume panel</string>
     <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
@@ -4393,8 +4401,13 @@
     <string name="reboot_in_power">Power menu: reboot</string>
     <string name="reboot_in_power_summary">Include reboot options in power menu</string>
     
+    <!-- Shortcuts -->
+    <string name="shortcuts_title">Shortcuts</string>
+    
     <!-- Kill app long-press back -->
     <string name="kill_app_longpress_back">Kill app back button</string>
     <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back key</string>
 
+    <!-- Theme Chooser -->
+    <string name="themes_title">Themes</string>
 </resources>
