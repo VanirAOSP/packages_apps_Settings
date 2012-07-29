@@ -4128,13 +4128,17 @@
     <string name="navigation_bar_save_message">Navigation bar settings saved</string>
     <string name="navigation_bar_reset_toast">Navigation bar reset to default</string>
 
-    <!-- Volume rocker music control -->
+    <!-- Volume Rocker Music Control -->
     <string name="volbtn_music_controls_title">Volume rocker music controls</string>
     <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
 
-    <!-- Volume rocker wake -->
+    <!-- Volume Rocker Wake -->
     <string name="pref_volume_wake_title">Volume rocker wake</string>
     <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the Nexus</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcuts_title">Shortcuts</string>
 
+    <!-- Theme Chooser -->
+    <string name="themes_title">Themes</string>
 </resources>
