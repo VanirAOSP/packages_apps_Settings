@@ -51,6 +51,12 @@
             android:key="category_calls_and_notification"
             android:title="@string/sound_category_call_ringtone_vibrate_title"/>
 
+    <!-- Volume Panel -->
+    <CheckBoxPreference
+            android:key="enable_volume_options"
+            android:title="@string/enable_volume_options"
+            android:defaultValue="true" />
+
     <!-- Do not nest these, or removals in code will break -->
     <com.android.settings.DefaultRingtonePreference
             android:key="ringtone"

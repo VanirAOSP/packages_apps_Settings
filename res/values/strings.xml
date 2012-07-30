@@ -4141,4 +4141,7 @@
 
     <!-- Theme Chooser -->
     <string name="themes_title">Themes</string>
+
+    <!-- Volume Panel -->
+    <string name="enable_volume_options">Enable Volume Panel</string>
 </resources>
