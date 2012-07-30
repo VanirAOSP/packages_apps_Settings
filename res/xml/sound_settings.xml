@@ -51,7 +51,14 @@
     <CheckBoxPreference
             android:key="enable_volume_options"
             android:title="@string/enable_volume_options"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
+
+    <!-- Unlink Volumes -->
+    <CheckBoxPreference
+            android:key="volume_link_notification"
+            android:title="@string/unlink_volumes"
+	    android:summary="@string/unlink_volumes_summary"
+            android:defaultValue="false" />
 
     <PreferenceCategory
             android:key="category_calls_and_notification"

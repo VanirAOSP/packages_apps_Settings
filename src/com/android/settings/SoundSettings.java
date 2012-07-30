@@ -65,6 +65,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_ENABLE_VOLUME_OPTIONS = "enable_volume_options";
+    private static final String KEY_VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -85,6 +86,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolBtnMusicCtrl;
     private CheckBoxPreference mEnableVolumeOptions;
+    private CheckBoxPreference mVolumeLinkNotification;
 
     private Runnable mRingtoneLookupRunnable;
 
@@ -156,6 +158,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 	mEnableVolumeOptions = (CheckBoxPreference) findPreference(KEY_ENABLE_VOLUME_OPTIONS);
         mEnableVolumeOptions.setChecked(Settings.System.getInt(resolver,
                 Settings.System.ENABLE_VOLUME_OPTIONS, 0) != 0);
+
+	mVolumeLinkNotification = (CheckBoxPreference) findPreference(KEY_VOLUME_LINK_NOTIFICATION);
+        mVolumeLinkNotification.setChecked(Settings.System.getInt(resolver,
+                Settings.System.VOLUME_LINK_NOTIFICATION, 0) != 0);
 
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator == null || !vibrator.hasVibrator()) {
@@ -282,16 +288,24 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
+
         } else if (preference == mVolumeWake) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
             mVolumeWake.isChecked() ? 1 : 0);
             return true;
+
         } else if (preference == mVolBtnMusicCtrl) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
             mVolBtnMusicCtrl.isChecked() ? 1 : 0);
+
         } else if (preference == mEnableVolumeOptions) {
             Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_VOLUME_OPTIONS,
 	    mEnableVolumeOptions.isChecked() ? 1 : 0);
+
+	} else if (preference == mVolumeLinkNotification) {
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_LINK_NOTIFICATION,
+	    mVolumeLinkNotification.isChecked() ? 1 : 0);
+
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

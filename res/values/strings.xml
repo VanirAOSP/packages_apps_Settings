@@ -4144,4 +4144,8 @@
 
     <!-- Volume Panel -->
     <string name="enable_volume_options">Enable Volume Panel</string>
+
+    <!-- Unlink Volumes -->
+    <string name="unlink_volumes">Unlink Volumes</string>
+    <string name="unlink_volumes_summary">Unlinks System and Notification Volumes</string>
 </resources>
