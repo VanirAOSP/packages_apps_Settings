@@ -4143,9 +4143,10 @@
     <string name="themes_title">Themes</string>
 
     <!-- Volume Panel -->
-    <string name="enable_volume_options">Enable Volume Panel</string>
+    <string name="enable_volume_options">Enable volume panel</string>
+    <string name="enable_volume_options_summary">Enables an expandable volume panel that allows you to control all volumes</string>
 
     <!-- Unlink Volumes -->
-    <string name="unlink_volumes">Unlink Volumes</string>
-    <string name="unlink_volumes_summary">Unlinks System and Notification Volumes</string>
+    <string name="unlink_volumes">Unlink volumes</string>
+    <string name="unlink_volumes_summary">Unlinks system and notification volumes</string>
 </resources>

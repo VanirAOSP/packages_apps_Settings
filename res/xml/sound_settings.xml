@@ -51,6 +51,7 @@
     <CheckBoxPreference
             android:key="enable_volume_options"
             android:title="@string/enable_volume_options"
+	    android:summary="@string/enable_volume_options_summary"
             android:defaultValue="false" />
 
     <!-- Unlink Volumes -->
