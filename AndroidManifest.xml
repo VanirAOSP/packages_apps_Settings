@@ -90,6 +90,19 @@
             </intent-filter>
         </activity>
 
+        <!-- Toggles -->
+
+         <activity
+            android:name=".fragments.StatusBarToggles"
+            android:label="Statusbar Toggles" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.aokp.romcontrol.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
+
         <!-- Wireless Controls -->
 
         <activity android:name="Settings$WirelessSettingsActivity"
