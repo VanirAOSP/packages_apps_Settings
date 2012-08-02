@@ -1,5 +1,5 @@
 
-package com.aokp.romcontrol.widgets;
+package com.android.settings.widgets;
 
 /*
  * Copyright (C) 2008 The Android Open Source Project
@@ -33,7 +33,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.aokp.romcontrol.R;
+import com.android.settings.R;
 
 public class TouchInterceptor extends ListView {
 
