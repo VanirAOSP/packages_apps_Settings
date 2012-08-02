@@ -4142,14 +4142,16 @@
     <!-- Toogles -->
     <string name="header_statusbar">Statusbar</string>
     <string name="toggles_layout">Toggles</string>
+    <string name="led_options">LED options</string>
     
-        <!-- Header Summaries -->
+        <!-- Header Summaries needed to build -->
     <string name="header_summary_toggles">Customize toggles</string>
+    <string name="header_summary_led">Change default settings for Android to use</string>
+
     
         <!-- General Strings -->
-    <string name="advanced_settings">Advanced settings</string>
     <string name="misc_short">Misc</string>
-    
+
         <!-- Statusbar | Toggles -->
     <string name="toggle_style_title">Toggle style</string>
     <string name="toggle_style_summary">Whether to show icons or text on your toggles.</string>
@@ -4194,4 +4196,9 @@
     <!-- Unlink Volumes -->
     <string name="unlink_volumes">Unlink volumes</string>
     <string name="unlink_volumes_summary">Unlinks system and notification volumes</string>
+    
+        <!-- LED -->
+    <string name="led_on">LED On</string>
+    <string name="led_off">LED Off</string>
+    <string name="led_color_click">Click on the LED to change the color</string>
 </resources>
