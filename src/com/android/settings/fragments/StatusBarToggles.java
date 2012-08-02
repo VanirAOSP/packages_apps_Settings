@@ -1,5 +1,5 @@
 
-package com.android.settings..fragments;
+package com.android.settings.fragments;
 
 import java.util.ArrayList;
 
