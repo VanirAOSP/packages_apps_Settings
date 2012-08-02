@@ -190,4 +190,11 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
     </style>
+    
+    
+            <!-- Toggles -->
+    
+        <style name="Theme.CreateShortCut" parent="android:Theme.Holo.DialogWhenLarge">
+    </style>
+    
 </resources>
