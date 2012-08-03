@@ -66,8 +66,8 @@
         android:id="@+id/statusbar_toggles"
     	android:icon="@drawable/ic_rom_control_toggles"
         android:fragment="com.android.settings.fragments.StatusBarToggles" 
-        android:title="@string/toggles_layout" />
-    </header>
+        android:title="@string/toggles_layout" 
+        android:summary="@string/header_summary_toggles" />
 
     <!-- Theme chooser -->
     <header android:icon="@drawable/ic_settings_themes"
