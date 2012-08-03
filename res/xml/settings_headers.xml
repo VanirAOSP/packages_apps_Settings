@@ -59,6 +59,16 @@
 
     <!-- Quick Links -->
     <header android:title="@string/shortcuts_title" />
+    
+    
+    <!-- Toggles -->
+    <header 
+    	android:icon="@drawable/ic_rom_control_toggles"
+    	android:title="@string/toggles_layout"
+        android:id="@+id/statusbar_toggles"
+        android:fragment="com.android.settings.fragments.StatusBarToggles"
+        android:summary="@string/header_summary_toggles" />                   
+    </header>
 
     <!-- Theme chooser -->
     <header android:icon="@drawable/ic_settings_themes"
