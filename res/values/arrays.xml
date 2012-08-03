@@ -78,7 +78,6 @@
         <item>SILENT</item>
         <item>TORCH</item>
         <item>SYNC</item>
-        <item>SWAGGER</item>
     </string-array>
     <string-array name="available_toggles_values">
         <item>@string/toggle_auto_rotate</item>
@@ -90,7 +89,6 @@
         <item>@string/toggle_silent</item>
         <item>@string/toggle_torch</item>
         <item>@string/toggle_sync</item>
-        <item>@string/toggle_swagger</item>
     </string-array>
     
 
