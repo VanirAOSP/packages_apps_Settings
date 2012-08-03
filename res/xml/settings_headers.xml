@@ -63,11 +63,10 @@
     
     <!-- Toggles -->
     <header 
-    	android:icon="@drawable/ic_rom_control_toggles"
-    	android:title="@string/toggles_layout"
         android:id="@+id/statusbar_toggles"
-        android:fragment="com.android.settings.fragments.StatusBarToggles"
-        android:summary="@string/header_summary_toggles" />                   
+    	android:icon="@drawable/ic_rom_control_toggles"
+        android:fragment="com.android.settings.fragments.StatusBarToggles" 
+        android:title="@string/toggles_layout" />
     </header>
 
     <!-- Theme chooser -->
