@@ -65,7 +65,7 @@
 	            android:title="@string/navigation_bar_title" />
 
     	<!-- Toggles -->
-        <header 
+        <PreferenceScreen 
     		    android:key="statusbar_toggles"
     		    android:fragment="com.android.settings.fragments.StatusBarToggles" 
     		    android:title="@string/toggles_layout" 
