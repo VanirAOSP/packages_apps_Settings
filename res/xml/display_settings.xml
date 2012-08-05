@@ -29,8 +29,8 @@
                 android:fragment="com.android.settings.WallpaperTypeSettings" />
 
         <CheckBoxPreference
-            android:key="accelerometer"
-            android:title="@string/accelerometer_title"/>
+            	android:key="accelerometer"
+            	android:title="@string/accelerometer_title"/>
 
         <ListPreference
                 android:key="screen_timeout"
@@ -54,19 +54,26 @@
                 android:dialogTitle="@string/dialog_title_font_size" />
 
         <CheckBoxPreference
-            android:key="notification_pulse"
-            android:title="@string/notification_pulse_title"
-            android:persistent="false" />
-
+            	android:key="notification_pulse"
+            	android:title="@string/notification_pulse_title"
+            	android:persistent="false" />
+	
         <!-- Navigation Bar Customization -->
         <PreferenceScreen
-            android:key="navigation_bar"
-            android:fragment="com.android.settings.vanir.NavBar"
-            android:title="@string/navigation_bar_title" />
+            	android:key="navigation_bar"
+	            android:fragment="com.android.settings.vanir.NavBar"
+	            android:title="@string/navigation_bar_title" />
+
+    	<!-- Toggles -->
+        <header 
+    		    android:key="statusbar_toggles"
+    		    android:fragment="com.android.settings.fragments.StatusBarToggles" 
+    		    android:title="@string/toggles_layout" 
+    		    android:summary="@string/header_summary_toggles" />
 
         <CheckBoxPreference
-             android:key="battery_percentage"
-             android:title="@string/title_battery_percentage"
-             android:defaultValue="true" />	
+             	android:key="battery_percentage"
+             	android:title="@string/title_battery_percentage"
+    	        android:defaultValue="true" />	
 
 </PreferenceScreen>
