@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import java.util.List;
+import android.app.ActivityManagerNative;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -67,6 +68,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
     private static final String KEY_CATEGORY_CALLS = "category_calls_and_notification";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+    private static final String KEY_SAFE_HEADSET_RESTORE = "safe_headset_restore";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
@@ -132,6 +134,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         int volumeOverlay = Settings.System.getInt(getContentResolver(),
                 Settings.System.MODE_VOLUME_OVERLAY,
                 VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
+
+        mSafeHeadsetRestore = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_RESTORE);
+        mSafeHeadsetRestore.setPersistent(false);
+        mSafeHeadsetRestore.setChecked(Settings.System.getInt(resolver,
+                Settings.System.SAFE_HEADSET_VOLUME_RESTORE, 1) != 0);
         mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
         mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
 
@@ -289,6 +296,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
+
+        } else if (preference == mSafeHeadsetRestore) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.SAFE_HEADSET_VOLUME_RESTORE,
+                    mSafeHeadsetRestore.isChecked() ? 1 : 0);
         } else if (preference == mVolumeWake) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
             mVolumeWake.isChecked() ? 1 : 0);
