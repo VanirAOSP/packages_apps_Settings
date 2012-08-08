@@ -197,33 +197,40 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
         String procVersionStr;
 
         try {
-            procVersionStr = readLine(FILENAME_PROC_VERSION);
+            BufferedReader reader = new BufferedReader(new FileReader("/proc/version"), 256);
+            try {
+                int position = 0; // position of the first blank
+		procVersionStr = reader.readLine();
+		procVersionStr = procVersionStr.replaceFirst("Linux", "");
+		procVersionStr = procVersionStr.replaceFirst("version", "");
+		procVersionStr = procVersionStr.trim();
 
-            final String PROC_VERSION_REGEX =
-                "\\w+\\s+" + /* ignore: Linux */
-                "\\w+\\s+" + /* ignore: version */
-                "([^\\s]+)\\s+" + /* group 1: 2.6.22-omap1 */
-                "\\(([^\\s@]+(?:@[^\\s.]+)?)[^)]*\\)\\s+" + /* group 2: (xxxxxx@xxxxx.constant) */
-                "\\((?:[^(]*\\([^)]*\\))?[^)]*\\)\\s+" + /* ignore: (gcc ..) */
-                "([^\\s]+)\\s+" + /* group 3: #26 */
-                "(?:PREEMPT\\s+)?" + /* ignore: PREEMPT (optional) */
-                "(.+)"; /* group 4: date */
+		for (int i = 0; i < procVersionStr.length(); i++)
+			// Mark position of the first blank
+			if (procVersionStr.charAt(i) == ' ') {
+				position = i;
+				break;
+			}
 
-            Pattern p = Pattern.compile(PROC_VERSION_REGEX);
-            Matcher m = p.matcher(procVersionStr);
+		char[] cutstring = new char[position];
 
-            if (!m.matches()) {
-                Log.e(LOG_TAG, "Regex did not match on /proc/version: " + procVersionStr);
-                return "Unavailable";
-            } else if (m.groupCount() < 4) {
-                Log.e(LOG_TAG, "Regex match on /proc/version only returned " + m.groupCount()
-                        + " groups");
-                return "Unavailable";
-            } else {
-                return (new StringBuilder(m.group(1)).append("\n").append(
-                        m.group(2)).append(" ").append(m.group(3)).append("\n")
-                        .append(m.group(4))).toString();
+		// Truncate everything after the first blank
+		for (int j = 0; j < position; j++)
+			cutstring[j] = procVersionStr.charAt(j);
+
+		// Remove the trailing '+' that newer kernels have
+		if (cutstring[position-1] == '+')
+			cutstring[position-1] = ' ';
+
+		procVersionStr = new String(cutstring);
+                procVersionStr = procVersionStr.trim();
+
+            } finally {
+                reader.close();
             }
+
+            return procVersionStr;
+
         } catch (IOException e) {
             Log.e(LOG_TAG,
                 "IO Exception when getting kernel version for Device Info screen",
@@ -231,6 +238,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
             return "Unavailable";
         }
+
     }
 
     /**
