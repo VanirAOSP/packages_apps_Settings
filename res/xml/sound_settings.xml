@@ -37,6 +37,13 @@
             android:title="@string/musicfx_title" />
 
     <!-- Volume Rocker Wake -->
+     <CheckBoxPreference
+            android:key="safe_headset_restore"
+            android:title="@string/safe_headset_restore_title"
+            android:summary="@string/safe_headset_restore_summary"
+            android:defaultValue="true" />
+
+    <!-- Volume Rocker Wake -->
     <CheckBoxPreference
         android:key="pref_volume_wake"
         android:title="@string/pref_volume_wake_title"

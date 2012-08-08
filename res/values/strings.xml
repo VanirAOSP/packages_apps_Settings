@@ -4386,7 +4386,11 @@
     <string name="cell_broadcast_settings">Cell broadcasts</string>
     <!-- Cell Broadcast settings description [CHAR LIMIT=100] -->
     <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
-
+ 
+    <!-- Safe headset volume restore checkbox -->
+    <string name="safe_headset_restore_title">Safe headset volume</string>
+    <string name="safe_headset_restore_summary">Prevent loud volume levels when headset is first plugged in</string>
+    
     <!-- Customized settings -->
     <string name="headset_connect_player_title">Launch music app on connect</string>
 
