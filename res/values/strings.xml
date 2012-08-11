@@ -4147,7 +4147,6 @@
     <string name="led_options">LED options</string>
     
 	<!-- Header Summaries needed to build -->
-    <string name="header_summary_toggles">Customize toggles</string>
     <string name="header_summary_led">Change default settings for Android to use</string>
 
     

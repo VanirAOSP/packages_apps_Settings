@@ -68,8 +68,7 @@
         <PreferenceScreen 
     		    android:key="statusbar_toggles"
     		    android:fragment="com.android.settings.fragments.StatusBarToggles" 
-    		    android:title="@string/toggles_layout" 
-    		    android:summary="@string/header_summary_toggles" />
+    		    android:title="@string/toggles_layout" />
 
         <CheckBoxPreference
              	android:key="battery_percentage"
