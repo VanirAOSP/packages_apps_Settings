@@ -70,6 +70,14 @@
                 android:targetClass="com.tmobile.themechooser.ThemeChooser" />
     </header>
 
+    <!-- About Vanir -->
+	<header
+        android:id="@+id/about_vanir"
+        android:icon="@drawable/ic_settings_themes"
+        android:fragment="com.android.settings.AboutSettings"
+        android:title="@string/aboutvanir_title" />
+
+
     <!-- DEVICE -->
     <header android:title="@string/header_category_device" />
 

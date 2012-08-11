@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/about_settings"
+    android:key="about_settings"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+        android:key="aboutvanir_links"
+        android:title="@string/aboutvanir_links">
+
+        <Preference
+            android:key="aboutvanir_github"	
+            android:title="@string/aboutvanir_github"
+        />
+
+        <Preference
+            android:key="aboutvanir_irc"	
+            android:title="@string/aboutvanir_irc"
+        />
+
+    </PreferenceCategory>
+
+	<PreferenceCategory
+        android:key="aboutvanir_donate"
+        android:title="@string/aboutvanir_donate">
+
+        <Preference
+            android:key="aboutvanir_sonicxml"	
+            android:title="@string/aboutvanir_sonicxml"
+        />
+
+        <Preference
+            android:key="aboutvanir_dho"	
+            android:title="@string/aboutvanir_dho"
+        />
+
+        <Preference
+            android:key="aboutvanir_nuke"	
+            android:title="@string/aboutvanir_nuke"
+        />
+
+        <Preference
+            android:key="aboutvanir_pd"	
+            android:title="@string/aboutvanir_pd"
+        />
+    </PreferenceCategory>
+</PreferenceScreen>
