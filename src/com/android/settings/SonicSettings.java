@@ -15,10 +15,10 @@ import com.android.settings.R;
 
 public class SonicSettings extends SettingsPreferenceFragment {
 
-		private Activity mActivity;
-        Preference mSonicMe;
-        Preference mSonicTwitter;
-		Preference mSonicDonate;
+	private Activity mActivity;
+    Preference mSonicMe;
+    Preference mSonicTwitter;
+	Preference mSonicDonate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

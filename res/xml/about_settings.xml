@@ -22,7 +22,7 @@
     </PreferenceCategory>
 
 	<PreferenceCategory
-        android:key="aboutvanir_donate"
+        android:key="aboutvanir_team"
         android:title="@string/aboutvanir_donate">
 
         <PreferenceScreen
