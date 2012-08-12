@@ -5,11 +5,11 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-
 
 import com.android.settings.R;
 
@@ -50,6 +50,7 @@ public class SonicSettings extends SettingsPreferenceFragment {
     }
 
     private void showAboutMeDialog() {
+        mActivity = getActivity();
 		new AlertDialog.Builder(mActivity)
 			.setTitle(R.string.aboutvanir_me)
 			.setMessage(R.string.aboutsonic)
