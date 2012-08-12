@@ -13,7 +13,7 @@ import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
-public class SonicSettings extends SettingsPreferenceFragment {
+public class PDSettings extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
     Preference mMe;
@@ -23,7 +23,7 @@ public class SonicSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.sonic_settings);
+        addPreferencesFromResource(R.xml.pd_settings);
         
         mMe = findPreference("aboutvanir_me");
         mTwitter = findPreference("aboutvanir_twitter");
@@ -36,9 +36,9 @@ public class SonicSettings extends SettingsPreferenceFragment {
 		if (preference == mMe) {
 			showAboutMeDialog();
         } else if (preference == mTwitter) {
-            gotoUrl("https://twitter.com/sonicxml1");
+            gotoUrl("https://twitter.com/");
         } else if (preference == mDonate) {
-			gotoUrl("http://goo.gl/8ym3R");
+			gotoUrl("https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=XYjAOnnFhYJGGwLlJRMQ1RNXOxeoy0EZQ6Do8ntwBWV8I6IaWgyAYSm9hyq&dispatch=5885d80a13c0db1f8e263663d3faee8d7283e7f0184a5674430f290db9e9c846");
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -53,7 +53,7 @@ public class SonicSettings extends SettingsPreferenceFragment {
         mActivity = getActivity();
 		new AlertDialog.Builder(mActivity)
 			.setTitle(R.string.aboutvanir_me)
-			.setMessage(R.string.aboutsonic)
+			.setMessage(R.string.aboutpd)
 			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();

@@ -4203,6 +4203,10 @@
 	<string name="aboutvanir_twitter">Twitter</string>
 	<string name="aboutvanir_donate">Donate</string>
 	<string name="aboutsonic">Hi, I\'m Sonicxml.</string>
+	<string name="aboutdho">Hi, I\'m DHO.</string>
+	<string name="aboutnuke">Hi, I\'m NuclearMistake.</string>
+	<string name="aboutpd">Hi, I\'m PrimeDirective.</string>
+
 
     <!-- Volume Panel -->
     <string name="enable_volume_options">Enable volume panel</string>

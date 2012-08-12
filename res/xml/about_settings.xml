@@ -23,7 +23,7 @@
 
 	<PreferenceCategory
         android:key="aboutvanir_team"
-        android:title="@string/aboutvanir_donate">
+        android:title="@string/aboutvanir_team">
 
         <PreferenceScreen
             android:key="aboutvanir_sonicxml"
@@ -31,18 +31,21 @@
             android:title="@string/aboutvanir_sonicxml"
         />
 
-        <Preference
-            android:key="aboutvanir_dho"	
+        <PreferenceScreen
+            android:key="aboutvanir_dho"
+			android:fragment="com.android.settings.DHOSettings"	
             android:title="@string/aboutvanir_dho"
         />
 
         <Preference
-            android:key="aboutvanir_nuke"	
+            android:key="aboutvanir_nuke"
+			android:fragment="com.android.settings.NukeSettings"	
             android:title="@string/aboutvanir_nuke"
         />
 
         <Preference
-            android:key="aboutvanir_pd"	
+            android:key="aboutvanir_pd"
+			android:fragment="com.android.settings.PDSettings"	
             android:title="@string/aboutvanir_pd"
         />
     </PreferenceCategory>
