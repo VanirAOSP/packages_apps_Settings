@@ -25,8 +25,9 @@
         android:key="aboutvanir_donate"
         android:title="@string/aboutvanir_donate">
 
-        <Preference
-            android:key="aboutvanir_sonicxml"	
+        <PreferenceScreen
+            android:key="aboutvanir_sonicxml"
+			android:fragment="com.android.settings.SonicSettings"
             android:title="@string/aboutvanir_sonicxml"
         />
 

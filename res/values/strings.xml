@@ -4194,11 +4194,15 @@
 	<string name="aboutvanir_links">LINKS</string>
 	<string name="aboutvanir_github">Github</string>
 	<string name="aboutvanir_irc">Irc</string>
-	<string name="aboutvanir_donate">DONATE TO US</string>
+	<string name="aboutvanir_team">THE TEAM</string>
 	<string name="aboutvanir_sonicxml">Sonicxml</string>
 	<string name="aboutvanir_dho">DHO</string>
 	<string name="aboutvanir_nuke">NuclearMistake</string>
-	<string name="aboutvanir_pd">PrimeDirective</string>	
+	<string name="aboutvanir_pd">PrimeDirective</string>
+	<string name="aboutvanir_me">About Me</string>
+	<string name="aboutvanir_twitter">Twitter</string>
+	<string name="aboutvanir_donate">Donate</string>
+	<string name="aboutsonic">Hi, I\'m Sonicxml.</string>
 
     <!-- Volume Panel -->
     <string name="enable_volume_options">Enable volume panel</string>

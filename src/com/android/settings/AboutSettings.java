@@ -16,7 +16,6 @@ public class AboutSettings extends SettingsPreferenceFragment {
 
         Preference mVanirGithub;
         Preference mVanirIrc;
-		Preference mDonateSonic;
 		Preference mDonateDho;
 		Preference mDonateNuke;
 		Preference mDonatePd;
@@ -28,7 +27,6 @@ public class AboutSettings extends SettingsPreferenceFragment {
         
         mVanirGithub = findPreference("aboutvanir_github");
         mVanirIrc = findPreference("aboutvanir_irc");
-		mDonateSonic = findPreference("aboutvanir_sonicxml");
 		mDonateDho = findPreference("aboutvanir_dho");
 		mDonateNuke = findPreference("aboutvanir_nuke");
 		mDonatePd = findPreference("aboutvanir_pd");
@@ -41,8 +39,6 @@ public class AboutSettings extends SettingsPreferenceFragment {
             gotoUrl("https://github.com/VanirAOSP/");
         } else if (preference == mVanirIrc) {
             gotoUrl("http://webchat.freenode.net/?channels=vanir");
-        } else if (preference == mDonateSonic) {
-			gotoUrl("http://goo.gl/8ym3R");
         } else if (preference == mDonateDho) {
 			gotoUrl("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9Z79J3J6JFQ4N&lc=US&item_name=DHO&item_number=HYBRYD&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
         } else if (preference == mDonateNuke) {
