@@ -17,7 +17,6 @@
 <preference-headers
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <!-- WIRELESS and NETWORKS -->
     <header android:title="@string/header_category_wireless_networks" />
 
@@ -60,7 +59,6 @@
     <!-- Quick Links -->
     <header android:title="@string/shortcuts_title" />
     
-    
     <!-- Theme chooser -->
     <header android:icon="@drawable/ic_settings_themes"
             android:title="@string/themes_title">
@@ -76,7 +74,6 @@
         android:icon="@drawable/ic_settings_themes"
         android:fragment="com.android.settings.AboutSettings"
         android:title="@string/aboutvanir_title" />
-
 
     <!-- DEVICE -->
     <header android:title="@string/header_category_device" />
@@ -122,7 +119,6 @@
         android:id="@+id/manufacturer_settings">
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
-
 
     <!-- PERSONAL -->
     <header android:title="@string/header_category_personal" />
