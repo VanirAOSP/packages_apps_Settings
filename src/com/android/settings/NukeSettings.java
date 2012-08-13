@@ -28,7 +28,7 @@ public class NukeSettings extends SettingsPreferenceFragment {
         mMe = findPreference("aboutvanir_me");
         mTwitter = findPreference("aboutvanir_twitter");
 		mDonate = findPreference("aboutvanir_donate");
-      
+
     }
 
     @Override

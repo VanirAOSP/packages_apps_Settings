@@ -23,7 +23,7 @@ public class AboutSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.about_settings);
         
         mVanirGithub = findPreference("aboutvanir_github");
-        mVanirIrc = findPreference("aboutvanir_irc");    
+        mVanirIrc = findPreference("aboutvanir_irc");
     }
 
     @Override

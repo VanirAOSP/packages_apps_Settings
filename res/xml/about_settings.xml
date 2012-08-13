@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/about_settings"
-    android:key="about_settings"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+	android:title="@string/about_settings"
+	android:key="about_settings"
+	xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceCategory
-        android:key="aboutvanir_links"
-        android:title="@string/aboutvanir_links">
+   <PreferenceCategory
+		android:key="aboutvanir_links"
+		android:title="@string/aboutvanir_links">
 
-        <Preference
-            android:key="aboutvanir_github"	
-            android:title="@string/aboutvanir_github"
-        />
+	<Preference
+		android:key="aboutvanir_github"
+		android:title="@string/aboutvanir_github"
+	/>
 
-        <Preference
-            android:key="aboutvanir_irc"	
-            android:title="@string/aboutvanir_irc"
-        />
+	<Preference
+		android:key="aboutvanir_irc"
+		android:title="@string/aboutvanir_irc"
+	/>
 
-    </PreferenceCategory>
+   </PreferenceCategory>
 
-	<PreferenceCategory
-        android:key="aboutvanir_team"
-        android:title="@string/aboutvanir_team">
+   <PreferenceCategory
+		android:key="aboutvanir_team"
+		android:title="@string/aboutvanir_team">
 
-        <PreferenceScreen
-            android:key="aboutvanir_sonicxml"
-			android:fragment="com.android.settings.SonicSettings"
-            android:title="@string/aboutvanir_sonicxml"
-        />
+	<PreferenceScreen
+		android:key="aboutvanir_sonicxml"
+		android:fragment="com.android.settings.SonicSettings"
+		android:title="@string/aboutvanir_sonicxml"
+	/>
 
-        <PreferenceScreen
-            android:key="aboutvanir_dho"
-			android:fragment="com.android.settings.DHOSettings"	
-            android:title="@string/aboutvanir_dho"
-        />
+	<PreferenceScreen
+		android:key="aboutvanir_dho"
+		android:fragment="com.android.settings.DHOSettings"
+		android:title="@string/aboutvanir_dho"
+	/>
 
-        <Preference
-            android:key="aboutvanir_nuke"
-			android:fragment="com.android.settings.NukeSettings"	
-            android:title="@string/aboutvanir_nuke"
-        />
+	<Preference
+		android:key="aboutvanir_nuke"
+		android:fragment="com.android.settings.NukeSettings"
+		android:title="@string/aboutvanir_nuke"
+	/>
 
-        <Preference
-            android:key="aboutvanir_pd"
-			android:fragment="com.android.settings.PDSettings"	
-            android:title="@string/aboutvanir_pd"
-        />
-    </PreferenceCategory>
+	<Preference
+		android:key="aboutvanir_pd"
+		android:fragment="com.android.settings.PDSettings"
+		android:title="@string/aboutvanir_pd"
+	/>
+   </PreferenceCategory>
 </PreferenceScreen>
