@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/aboutvanir_nuke"
-    android:key="aboutvanir_nuke"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+	android:title="@string/aboutvanir_nuke"
+	android:key="aboutvanir_nuke"
+	xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <Preference
-        android:key="aboutvanir_me"	
-        android:title="@string/aboutvanir_me"
-    />
+	<Preference
+		android:key="aboutvanir_me"
+		android:title="@string/aboutvanir_me"
+	/>
 
-    <Preference
-        android:key="aboutvanir_twitter"	
-        android:title="@string/aboutvanir_twitter"
-    />
+	<Preference
+		android:key="aboutvanir_twitter"
+		android:title="@string/aboutvanir_twitter"
+	/>
 
-    <Preference
-        android:key="aboutvanir_donate"	
-        android:title="@string/aboutvanir_donate"
-    />
+	<Preference
+		android:key="aboutvanir_donate"
+		android:title="@string/aboutvanir_donate"
+	/>
 </PreferenceScreen>
