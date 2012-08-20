@@ -76,7 +76,6 @@
         <!-- Do not translate. -->
         <item>1800000</item>
     </string-array>
-
     <!-- Display settings.  The delay in inactivity before the dream is shown. These are shown in a list dialog. -->
     <string-array name="dream_timeout_entries">
         <item>Never</item>
@@ -2029,4 +2028,16 @@
         <item>7</item>
     </string-array> 
 
+    <!--- Volume key cursor control -->
+    <string-array name="volume_key_cursor_control_entries">
+        <item>@string/volume_key_cursor_control_off</item>
+        <item>@string/volume_key_cursor_control_on</item>
+        <item>@string/volume_key_cursor_control_on_reverse</item>
+    </string-array>
+
+    <string-array name="volume_key_cursor_control_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
