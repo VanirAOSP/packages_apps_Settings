@@ -1779,7 +1779,7 @@
     <!-- About phone screen,  setting option name-->
     <string name="build_number">Build number</string>
     <!-- About phone screen,  setting option name-->
-    <string name="mod_version">Mod version</string>
+    <string name="mod_version">VanirAOSP version</string>
     <string name="mod_version_default">Unknown</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
