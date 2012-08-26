@@ -16,18 +16,18 @@ import com.android.settings.R;
 public class NukeSettings extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
-    Preference mMe;
-    Preference mTwitter;
+	Preference mMe;
+	Preference mTwitter;
 	Preference mDonate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.nuke_settings);
-        
-        mMe = findPreference("aboutvanir_me");
-        mTwitter = findPreference("aboutvanir_twitter");
-		mDonate = findPreference("aboutvanir_donate");
+
+	mMe = findPreference("aboutvanir_me");
+	mTwitter = findPreference("aboutvanir_twitter");
+	mDonate = findPreference("aboutvanir_donate");
 
     }
 

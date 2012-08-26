@@ -21,10 +21,10 @@ public class ChevyCam94Settings extends SettingsPreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.chevy_settings);
-        
-        mMe = findPreference("aboutvanir_me");
+	super.onCreate(savedInstanceState);
+	addPreferencesFromResource(R.xml.chevy_settings);
+
+	mMe = findPreference("aboutvanir_me");
 	mDonate = findPreference("aboutvanir_donate");
 
     }

@@ -16,18 +16,18 @@ import com.android.settings.R;
 public class DHOSettings extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
-    Preference mMe;
-    Preference mTwitter;
+	Preference mMe;
+	Preference mTwitter;
 	Preference mDonate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.dho_settings);
-        
-        mMe = findPreference("aboutvanir_me");
-        mTwitter = findPreference("aboutvanir_twitter");
-		mDonate = findPreference("aboutvanir_donate");
+
+	mMe = findPreference("aboutvanir_me");
+	mTwitter = findPreference("aboutvanir_twitter");
+	mDonate = findPreference("aboutvanir_donate");
 
     }
 
