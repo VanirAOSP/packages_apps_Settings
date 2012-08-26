@@ -59,5 +59,12 @@
 		android:fragment="com.android.settings.PDSettings"
 		android:title="@string/aboutvanir_pd"
 	/>
+
+	<Preference
+		android:key="aboutvanir_chevy"
+		android:fragment="com.android.settings.ChevyCam94Settings"
+		android:title="@string/aboutvanir_chevy"
+	/>
+
    </PreferenceCategory>
 </PreferenceScreen>
