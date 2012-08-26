@@ -13,39 +13,25 @@ import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
-public class AboutSettings extends SettingsPreferenceFragment {
+public class Changelog extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
-        Preference mVanirGithub;
-        Preference mVanirIrc;
-        Preference mVanirChangelog;
+        Preference mAboutVanirChangelog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.about_settings);
-        
-        mVanirGithub = findPreference("aboutvanir_github");
-        mVanirIrc = findPreference("aboutvanir_irc");
-        mVanirChangelog = findPreference("aboutvanir_changelog");
+        addPreferencesFromResource(R.xml.changelog);
+
+        mAboutVanirChangelog = findPreference("aboutvanir_changelog");
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-		if (preference == mVanirGithub) {
-            gotoUrl("https://github.com/VanirAOSP/");
-        } else if (preference == mVanirIrc) {
-            gotoUrl("http://webchat.freenode.net/?channels=vanir");
-        } else if (preference == mVanirChangelog) {
+	if (preference == mAboutVanirChangelog) {
 		showChangelog();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    private void gotoUrl(String url) {
-        Uri page = Uri.parse(url);
-        Intent internet = new Intent(Intent.ACTION_VIEW, page);
-        getActivity().startActivity(internet);
     }
 
     private void showChangelog() {
@@ -60,5 +46,4 @@ public class AboutSettings extends SettingsPreferenceFragment {
 			})
 			.create().show();
     }
-
 }

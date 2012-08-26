@@ -4207,6 +4207,11 @@
 	<string name="aboutnuke">Hi, I\'m NuclearMistake.</string>
 	<string name="aboutpd">Hi, I\'m PrimeDirective.</string>
 
+    <!-- Changelog -->
+	<string name="aboutvanir_changelog_title">Changelog</string>
+	<string name="aboutvanir_changelog_big_title">Official changelog</string>
+	<string name="aboutvanir_changelog">Would-be changelog area...\n\nBlame Sonic for not filling it out yet!  LOL</string>
+
 
     <!-- Volume Panel -->
     <string name="enable_volume_options">Enable volume panel</string>
