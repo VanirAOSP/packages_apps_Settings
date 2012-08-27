@@ -36,7 +36,7 @@ public class DHOSettings extends SettingsPreferenceFragment {
 		if (preference == mMe) {
 			showAboutMeDialog();
         } else if (preference == mTwitter) {
-            gotoUrl("https://twitter.com/");
+            gotoUrl("https://twitter.com/DHO82");
         } else if (preference == mDonate) {
 			gotoUrl("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9Z79J3J6JFQ4N&lc=US&item_name=DHO&item_number=HYBRYD&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
         }
