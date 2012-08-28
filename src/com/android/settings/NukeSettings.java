@@ -36,9 +36,9 @@ public class NukeSettings extends SettingsPreferenceFragment {
 		if (preference == mMe) {
 			showAboutMeDialog();
         } else if (preference == mTwitter) {
-            gotoUrl("https://twitter.com/");
+            gotoUrl("https://twitter.com/eric_mccann");
         } else if (preference == mDonate) {
-			gotoUrl("https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=-Qh6zFwtaaYbi6CfgwQxLNagH-1EuyEkTYOvFWPS3CPqOImH17L6BqC92EW&dispatch=5885d80a13c0db1f8e263663d3faee8da6a0e86558d6153d8812cd76bf2fd83f");
+			gotoUrl("https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=3U27RorbN_DB7V6ZQDx9CvCJsJRbmhl-NYs4ODMYQLosBbATOt_riAl7dkm&dispatch=5885d80a13c0db1f8e263663d3faee8da6a0e86558d6153d8812cd76bf2fd83f");
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
