@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -99,7 +98,6 @@ public class LocationSettings extends SettingsPreferenceFragment
             getPreferenceScreen().addPreference(useLocation);
             mUseLocation = useLocation;
         }
-
         return root;
     }
 
@@ -119,7 +117,6 @@ public class LocationSettings extends SettingsPreferenceFragment
                 }
             };
         }
-
         mContentQueryMap.addObserver(mSettingsObserver);
     }
 
@@ -143,7 +140,6 @@ public class LocationSettings extends SettingsPreferenceFragment
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
-
         return true;
     }
 

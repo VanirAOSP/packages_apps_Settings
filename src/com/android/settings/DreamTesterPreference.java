@@ -51,7 +51,7 @@ import java.util.List;
 
 public class DreamTesterPreference extends Preference {
     private static final String TAG = "DreamTesterPreference";
-    
+
     private final PackageManager pm;
     private final ContentResolver resolver;
 

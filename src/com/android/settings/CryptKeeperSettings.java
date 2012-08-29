@@ -204,4 +204,3 @@ public class CryptKeeperSettings extends Fragment {
         ((PreferenceActivity) getActivity()).onPreferenceStartFragment(null, preference);
     }
 }
-

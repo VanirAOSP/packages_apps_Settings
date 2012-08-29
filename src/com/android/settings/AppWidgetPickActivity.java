@@ -48,23 +48,23 @@ public class AppWidgetPickActivity extends ActivityPicker {
 
     private PackageManager mPackageManager;
     private AppWidgetManager mAppWidgetManager;
-    
+
     /**
      * The allocated {@link AppWidgetManager#EXTRA_APPWIDGET_ID} that this
      * activity is binding.
      */
     private int mAppWidgetId;
-    
+
     @Override
     public void onCreate(Bundle icicle) {
         mPackageManager = getPackageManager();
         mAppWidgetManager = AppWidgetManager.getInstance(this);
-        
+
         super.onCreate(icicle);
-        
+
         // Set default return data
         setResultData(RESULT_CANCELED, null);
-        
+
         // Read the appWidgetId passed our direction, otherwise bail if not found
         final Intent intent = getIntent();
         if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
@@ -74,14 +74,14 @@ public class AppWidgetPickActivity extends ActivityPicker {
             finish();
         }
     }
-    
+
     /**
      * Create list entries for any custom widgets requested through
      * {@link AppWidgetManager#EXTRA_CUSTOM_INFO}.
      */
     void putCustomAppWidgets(List<PickAdapter.Item> items) {
         final Bundle extras = getIntent().getExtras();
-        
+
         // get and validate the extras they gave us
         ArrayList<AppWidgetProviderInfo> customInfo = null;
         ArrayList<Bundle> customExtras = null;
@@ -116,7 +116,6 @@ public class AppWidgetPickActivity extends ActivityPicker {
                 break try_custom_items;
             }
 
-
             for (int i=0; i<customExtrasSize; i++) {
                 Parcelable p = customExtras.get(i);
                 if (p == null || !(p instanceof Bundle)) {
@@ -131,14 +130,14 @@ public class AppWidgetPickActivity extends ActivityPicker {
         if (LOGD) Log.d(TAG, "Using " + customInfo.size() + " custom items");
         putAppWidgetItems(customInfo, customExtras, items);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void onClick(DialogInterface dialog, int which) {
         Intent intent = getIntentForPosition(which);
-        
+
         int result;
         if (intent.getExtras() != null) {
             // If there are any extras, it's because this entry is custom.
@@ -171,7 +170,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
         final int size = appWidgets.size();
         for (int i = 0; i < size; i++) {
             AppWidgetProviderInfo info = appWidgets.get(i);
-            
+
             CharSequence label = info.label;
             Drawable icon = null;
 
@@ -182,20 +181,20 @@ public class AppWidgetPickActivity extends ActivityPicker {
                             + " for provider: " + info.provider);
                 }
             }
-            
+
             PickAdapter.Item item = new PickAdapter.Item(this, label, icon);
-            
+
             item.packageName = info.provider.getPackageName();
             item.className = info.provider.getClassName();
-            
+
             if (customExtras != null) {
                 item.extras = customExtras.get(i);
             }
-            
+
             items.add(item);
         }
     }
-    
+
     /**
      * Build and return list of items to be shown in dialog. This will mix both
      * installed {@link AppWidgetProviderInfo} and those provided through
@@ -204,10 +203,10 @@ public class AppWidgetPickActivity extends ActivityPicker {
     @Override
     protected List<PickAdapter.Item> getItems() {
         List<PickAdapter.Item> items = new ArrayList<PickAdapter.Item>();
-        
+
         putInstalledAppWidgets(items);
         putCustomAppWidgets(items);
-        
+
         // Sort all items together by label
         Collections.sort(items, new Comparator<PickAdapter.Item>() {
                 Collator mCollator = Collator.getInstance();

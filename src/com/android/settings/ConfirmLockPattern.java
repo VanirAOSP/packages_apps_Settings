@@ -277,7 +277,6 @@ public class ConfirmLockPattern extends PreferenceActivity {
             }
         };
 
-
         private void handleAttemptLockout(long elapsedRealtimeDeadline) {
             updateStage(Stage.LockedOut);
             long elapsedRealtime = SystemClock.elapsedRealtime();

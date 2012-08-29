@@ -101,8 +101,6 @@ public class ChooseLockGeneric extends PreferenceActivity {
             }
         }
 
-
-
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
                 Preference preference) {

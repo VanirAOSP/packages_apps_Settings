@@ -24,7 +24,7 @@ public class AboutSettings extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.about_settings);
-        
+
         mVanirGithub = findPreference("aboutvanir_github");
         mVanirIrc = findPreference("aboutvanir_irc");
         mVanirChangelog = findPreference("aboutvanir_changelog");

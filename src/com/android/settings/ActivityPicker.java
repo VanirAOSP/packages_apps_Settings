@@ -57,23 +57,23 @@ import java.util.List;
  */
 public class ActivityPicker extends AlertActivity implements
         DialogInterface.OnClickListener, DialogInterface.OnCancelListener {
-    
+
     /**
      * Adapter of items that are displayed in this dialog.
      */
     private PickAdapter mAdapter;
-    
+
     /**
      * Base {@link Intent} used when building list.
      */
     private Intent mBaseIntent;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         final Intent intent = getIntent();
-        
+
         // Read base intent from extras, otherwise assume default
         Parcelable parcel = intent.getParcelableExtra(Intent.EXTRA_INTENT);
         if (parcel instanceof Intent) {
@@ -87,14 +87,14 @@ public class ActivityPicker extends AlertActivity implements
         AlertController.AlertParams params = mAlertParams;
         params.mOnClickListener = this;
         params.mOnCancelListener = this;
-        
+
         // Use custom title if provided, otherwise default window title
         if (intent.hasExtra(Intent.EXTRA_TITLE)) {
             params.mTitle = intent.getStringExtra(Intent.EXTRA_TITLE);
         } else {
             params.mTitle = getTitle();
         }
-        
+
         // Build list adapter of pickable items
         List<PickAdapter.Item> items = getItems();
         mAdapter = new PickAdapter(this, items);
@@ -102,7 +102,7 @@ public class ActivityPicker extends AlertActivity implements
 
         setupAlert();
     }
-    
+
     /**
      * Handle clicking of dialog item by passing back
      * {@link #getIntentForPosition(int)} in {@link #setResult(int, Intent)}.
@@ -112,7 +112,7 @@ public class ActivityPicker extends AlertActivity implements
         setResult(Activity.RESULT_OK, intent);
         finish();
     }
-    
+
     /**
      * Handle canceled dialog by passing back {@link Activity#RESULT_CANCELED}.
      */
@@ -140,19 +140,19 @@ public class ActivityPicker extends AlertActivity implements
     protected List<PickAdapter.Item> getItems() {
         PackageManager packageManager = getPackageManager();
         List<PickAdapter.Item> items = new ArrayList<PickAdapter.Item>();
-        
+
         // Add any injected pick items
         final Intent intent = getIntent();
         ArrayList<String> labels =
             intent.getStringArrayListExtra(Intent.EXTRA_SHORTCUT_NAME);
         ArrayList<ShortcutIconResource> icons =
             intent.getParcelableArrayListExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE);
-        
+
         if (labels != null && icons != null && labels.size() == icons.size()) {
             for (int i = 0; i < labels.size(); i++) {
                 String label = labels.get(i);
                 Drawable icon = null;
-                
+
                 try {
                     // Try loading icon from requested package
                     ShortcutIconResource iconResource = icons.get(i);
@@ -163,7 +163,7 @@ public class ActivityPicker extends AlertActivity implements
                 } catch (NameNotFoundException e) {
                     // Ignore
                 }
-                
+
                 items.add(new PickAdapter.Item(this, label, icon));
             }
         }
@@ -172,7 +172,7 @@ public class ActivityPicker extends AlertActivity implements
         if (mBaseIntent != null) {
             putIntentItems(mBaseIntent, items);
         }
-        
+
         return items;
     }
 
@@ -184,26 +184,26 @@ public class ActivityPicker extends AlertActivity implements
         List<ResolveInfo> list = packageManager.queryIntentActivities(baseIntent,
                 0 /* no flags */);
         Collections.sort(list, new ResolveInfo.DisplayNameComparator(packageManager));
-        
+
         final int listSize = list.size();
         for (int i = 0; i < listSize; i++) {
             ResolveInfo resolveInfo = list.get(i);
             items.add(new PickAdapter.Item(this, packageManager, resolveInfo));
         }
     }
-    
+
     /**
      * Adapter which shows the set of activities that can be performed for a
      * given {@link Intent}.
      */
     protected static class PickAdapter extends BaseAdapter {
-        
+
         /**
          * Item that appears in a {@link PickAdapter} list.
          */
         public static class Item {
             protected static IconResizer sResizer;
-            
+
             protected IconResizer getResizer(Context context) {
                 if (sResizer == null) {
                     final Resources resources = context.getResources();
@@ -212,13 +212,13 @@ public class ActivityPicker extends AlertActivity implements
                 }
                 return sResizer;
             }
-            
+
             CharSequence label;
             Drawable icon;
             String packageName;
             String className;
             Bundle extras;
-            
+
             /**
              * Create a list item from given label and icon.
              */
@@ -263,10 +263,10 @@ public class ActivityPicker extends AlertActivity implements
                 return intent;
             }
         }
-        
+
         private final LayoutInflater mInflater;
         private final List<Item> mItems;
-        
+
         /**
          * Create an adapter for the given items.
          */
@@ -303,16 +303,16 @@ public class ActivityPicker extends AlertActivity implements
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.pick_item, parent, false);
             }
-            
+
             Item item = (Item) getItem(position);
             TextView textView = (TextView) convertView;
             textView.setText(item.label);
             textView.setCompoundDrawablesWithIntrinsicBounds(item.icon, null, null, null);
-            
+
             return convertView;
         }
     }
-        
+
     /**
      * Utility class to resize icons to match default icon size. Code is mostly
      * borrowed from Launcher.
@@ -324,7 +324,7 @@ public class ActivityPicker extends AlertActivity implements
         private final DisplayMetrics mMetrics;
         private final Rect mOldBounds = new Rect();
         private final Canvas mCanvas = new Canvas();
-        
+
         public IconResizer(int width, int height, DisplayMetrics metrics) {
             mCanvas.setDrawFilter(new PaintFlagsDrawFilter(Paint.DITHER_FLAG,
                     Paint.FILTER_BITMAP_FLAG));
@@ -353,7 +353,7 @@ public class ActivityPicker extends AlertActivity implements
             if (icon == null) {
                 return new EmptyDrawable(width, height);
             }
-            
+
             try {
                 if (icon instanceof PaintDrawable) {
                     PaintDrawable painter = (PaintDrawable) icon;
@@ -369,17 +369,17 @@ public class ActivityPicker extends AlertActivity implements
                 }
                 int iconWidth = icon.getIntrinsicWidth();
                 int iconHeight = icon.getIntrinsicHeight();
-    
+
                 if (iconWidth > 0 && iconHeight > 0) {
                     if (width < iconWidth || height < iconHeight) {
                         final float ratio = (float) iconWidth / iconHeight;
-    
+
                         if (iconWidth > iconHeight) {
                             height = (int) (width / ratio);
                         } else if (iconHeight > iconWidth) {
                             width = (int) (height * ratio);
                         }
-    
+
                         final Bitmap.Config c = icon.getOpacity() != PixelFormat.OPAQUE ?
                                     Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
                         final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
@@ -417,7 +417,7 @@ public class ActivityPicker extends AlertActivity implements
                         canvas.setBitmap(null);
                     }
                 }
-    
+
             } catch (Throwable t) {
                 icon = new EmptyDrawable(width, height);
             }
@@ -471,5 +471,5 @@ public class ActivityPicker extends AlertActivity implements
         public int getOpacity() {
             return PixelFormat.TRANSLUCENT;
         }
-    }    
+    }
 }

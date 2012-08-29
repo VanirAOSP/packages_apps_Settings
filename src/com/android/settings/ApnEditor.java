@@ -43,7 +43,6 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.RILConstants;
 import com.android.internal.telephony.TelephonyProperties;
 
-
 public class ApnEditor extends PreferenceActivity
         implements SharedPreferences.OnSharedPreferenceChangeListener,
                     Preference.OnPreferenceChangeListener {
@@ -136,7 +135,6 @@ public class ApnEditor extends PreferenceActivity
     private static final int CARRIER_ENABLED_INDEX = 17;
     private static final int BEARER_INDEX = 18;
     private static final int ROAMING_PROTOCOL_INDEX = 19;
-
 
     @Override
     protected void onCreate(Bundle icicle) {

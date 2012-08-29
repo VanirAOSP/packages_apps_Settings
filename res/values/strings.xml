@@ -1063,7 +1063,6 @@
     <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
     <string name="bluetooth_empty_list_bluetooth_off">To see devices, turn Bluetooth on.</string>
 
-
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the user to choose which one he wants to connect to. -->
     <string name="bluetooth_connect_specific_profiles_title">Connect to\u2026</string>
 
@@ -1357,7 +1356,6 @@
     <!-- Do not translate.  Concise terminology for wifi with 802.1x EAP security -->
     <string name="wifi_security_eap">802.1x EAP</string>
 
-
     <!-- Button label to connect to a Wi-Fi network -->
     <string name="wifi_connect">Connect</string>
     <!-- Failured notification for connect -->
@@ -1418,7 +1416,6 @@
     <string name="wifi_network_prefix_length">Network prefix length</string>
     <!-- Hint text for network prefix length -->
     <string name="wifi_network_prefix_length_hint" translatable="false">24</string>
-
 
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
@@ -3681,8 +3678,7 @@
     <!-- UI debug setting: wait for debugger to attach to debugging process? [CHAR LIMIT=50] -->
     <string name="wait_for_debugger">Wait for debugger</string>
     <!-- UI debug setting: wait for debugger to attach to debugging process summary [CHAR LIMIT=500] -->
-    <string name="wait_for_debugger_summary">Debugged application waits for debugger to
-            attach before executing</string>
+    <string name="wait_for_debugger_summary">Debugged application waits for debugger to attach before executing</string>
 
     <!-- Preference category for input debugging development settings. [CHAR LIMIT=25] -->
     <string name="debug_input_category">Input</string>
@@ -3696,8 +3692,7 @@
     <!-- UI debug setting: always enable strict mode? [CHAR LIMIT=25] -->
     <string name="strict_mode">Strict mode enabled</string>
     <!-- UI debug setting: show strict mode summary [CHAR LIMIT=50] -->
-    <string name="strict_mode_summary">Flash screen when apps do long operations
-            on main thread</string>
+    <string name="strict_mode_summary">Flash screen when apps do long operations on main thread</string>
 
     <!-- UI debug setting: show pointer location? [CHAR LIMIT=25] -->
     <string name="pointer_location">Pointer location</string>
@@ -3771,8 +3766,7 @@
     <!-- UI debug setting: immediately destroy activities? [CHAR LIMIT=25] -->
     <string name="immediately_destroy_activities">Don\'t keep activities</string>
     <!-- UI debug setting: immediately destroy activities summary [CHAR LIMIT=50] -->
-    <string name="immediately_destroy_activities_summary">Destroy every activity as soon as
-            the user leaves it</string>
+    <string name="immediately_destroy_activities_summary">Destroy every activity as soon as the user leaves it</string>
 
     <!-- UI debug setting: limit number of running background processes [CHAR LIMIT=25] -->
     <string name="app_process_limit_title">Background process limit</string>
@@ -3780,14 +3774,12 @@
     <!-- UI debug setting: show all ANRs? [CHAR LIMIT=25] -->
     <string name="show_all_anrs">Show all ANRs</string>
     <!-- UI debug setting: show all ANRs summary [CHAR LIMIT=50] -->
-    <string name="show_all_anrs_summary">Show App Not Responding dialog
-        for background apps</string>
+    <string name="show_all_anrs_summary">Show App Not Responding dialog for background apps</string>
 
     <!-- UI debug setting: kill app long-press back [CHAR LIMIT=25] -->
     <string name="kill_app_longpress_back">Kill App Back Button</string>
     <!-- UI debug settting: kill app long-press back [CHAR LIMIT=50] -->
-    <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing
-            the back key</string>
+    <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back key</string>
 
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
@@ -4140,20 +4132,19 @@
 
     <!-- Shortcuts -->
     <string name="shortcuts_title">Shortcuts</string>
-    
-	<!-- Toogles -->
+
+    <!-- Toogles -->
     <string name="header_statusbar">Statusbar</string>
     <string name="toggles_layout">Toggles</string>
     <string name="led_options">LED options</string>
-    
-	<!-- Header Summaries needed to build -->
+
+    <!-- Header Summaries needed to build -->
     <string name="header_summary_led">Change default settings for Android to use</string>
 
-    
-	<!-- General Strings -->
+    <!-- General Strings -->
     <string name="misc_short">Misc</string>
 
-	<!-- Statusbar | Toggles -->
+    <!-- Statusbar | Toggles -->
     <string name="toggle_style_title">Toggle style</string>
     <string name="toggle_style_summary">Whether to show icons or text on your toggles.</string>
     <string name="toggles_layout_title">Toggle Layout</string>
@@ -4166,8 +4157,8 @@
     <string name="brightness_location_title">Brightness location</string>
     <string name="reset_toggles_title">Reset toggles</string>
     <string name="reset_toggles_summary">Reset all toggles and their order</string>
-    
-	<!-- Toggle Strings to be called from device overlays -->
+
+    <!-- Toggle Strings to be called from device overlays -->
     <string name="toggle_airplane_mode">Airplane mode</string>
     <string name="toggle_auto_rotate">Auto rotate</string>
     <string name="toggle_bluetooth">Bluetooth</string>
@@ -4184,36 +4175,34 @@
     <string name="toggle_vibrate">Vibrate</string>
     <string name="toggle_wifi_ap">Tether</string>
     <string name="toggle_wifi">Wi-Fi</string>
-    
-    
+
     <!-- Theme Chooser -->
     <string name="themes_title">Themes</string>
 
-	<!-- About Us -->
-	<string name="aboutvanir_title">TeamVanir</string>
-	<string name="aboutvanir_links">LINKS</string>
-	<string name="aboutvanir_github">Github</string>
-	<string name="aboutvanir_irc">Irc</string>
-	<string name="aboutvanir_team">THE TEAM</string>
-	<string name="aboutvanir_sonicxml">Sonicxml</string>
-	<string name="aboutvanir_dho">DHO</string>
-	<string name="aboutvanir_nuke">NuclearMistake</string>
-	<string name="aboutvanir_pd">PrimeDirective</string>
-	<string name="aboutvanir_chevy">ChevyCam94</string>
-	<string name="aboutvanir_me">About Me</string>
-	<string name="aboutvanir_twitter">Twitter</string>
-	<string name="aboutvanir_donate">Donate</string>
-	<string name="aboutsonic">Hi, I\'m Sonicxml.</string>
-	<string name="aboutdho">Hi, I\'m DHO.</string>
-	<string name="aboutnuke">I\'m Nuclearmistake. I enjoy long walks on the beach and voiding waranties.</string>
-	<string name="aboutpd">Hi, I\'m PrimeDirective.</string>
-	<string name="aboutchevy">Hi, I\'m ChevyCam94.</string>
+    <!-- About Us -->
+    <string name="aboutvanir_title">TeamVanir</string>
+    <string name="aboutvanir_links">LINKS</string>
+    <string name="aboutvanir_github">Github</string>
+    <string name="aboutvanir_irc">Irc</string>
+    <string name="aboutvanir_team">THE TEAM</string>
+    <string name="aboutvanir_sonicxml">Sonicxml</string>
+    <string name="aboutvanir_dho">DHO</string>
+    <string name="aboutvanir_nuke">NuclearMistake</string>
+    <string name="aboutvanir_pd">PrimeDirective</string>
+    <string name="aboutvanir_chevy">ChevyCam94</string>
+    <string name="aboutvanir_me">About Me</string>
+    <string name="aboutvanir_twitter">Twitter</string>
+    <string name="aboutvanir_donate">Donate</string>
+    <string name="aboutsonic">Hi, I\'m Sonicxml.</string>
+    <string name="aboutdho">Hi, I\'m DHO.</string>
+    <string name="aboutnuke">I\'m Nuclearmistake. I enjoy long walks on the beach and voiding waranties.</string>
+    <string name="aboutpd">Hi, I\'m PrimeDirective.</string>
+    <string name="aboutchevy">Yo! I\'m ChevyCam94!\n\nY U NO DO SOMETHING USEFUL RIGHT NOW INSTEAD OF READ THIS?</string>
 
     <!-- Changelog -->
-	<string name="aboutvanir_changelog_title">Changelog</string>
-	<string name="aboutvanir_changelog_big_title">Official changelog</string>
-	<string name="aboutvanir_changelog">Would-be changelog area...\n\nBlame Sonic for not filling it out yet!  LOL</string>
-
+    <string name="aboutvanir_changelog_title">Changelog</string>
+    <string name="aboutvanir_changelog_big_title">Official changelog</string>
+    <string name="aboutvanir_changelog">Would-be changelog area...\n\nBlame Sonic for not filling it out yet!  LOL</string>
 
     <!-- Volume Panel -->
     <string name="enable_volume_options">Enable volume panel</string>
