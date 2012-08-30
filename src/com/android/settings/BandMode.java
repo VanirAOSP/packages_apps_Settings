@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 
-
 /**
  * Radio Band Mode Selection Class
  *
@@ -58,7 +57,7 @@ public class BandMode extends Activity {
         super.onCreate(icicle);
 
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        
+
         setContentView(R.layout.band_mode);
 
         setTitle(getString(R.string.band_mode_title));
@@ -72,8 +71,6 @@ public class BandMode extends Activity {
                 android.R.layout.simple_list_item_1);
         mBandList.setAdapter(mBandListAdapter);
         mBandList.setOnItemClickListener(mBandSelectionHandler);
-
-
 
         loadBandList();
     }
@@ -117,7 +114,6 @@ public class BandMode extends Activity {
         String str = getString(R.string.band_mode_loading);
 
         if (DBG) log(str);
-
 
         //ProgressDialog.show(this, null, str, true, true, null);
         mProgressPanel = new AlertDialog.Builder(this)
@@ -212,6 +208,5 @@ public class BandMode extends Activity {
             }
         }
     };
-
 
 }

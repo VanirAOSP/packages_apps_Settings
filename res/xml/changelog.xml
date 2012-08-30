@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:title="@string/aboutvanir_changelog_title" android:key="aboutvanir_changelog"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+    <Preference android:title="@string/aboutvanir_changelog_title" android:key="aboutvanir_changelog" />
+</PreferenceScreen>

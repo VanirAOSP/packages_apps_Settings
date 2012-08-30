@@ -16,18 +16,18 @@ import com.android.settings.R;
 public class NukeSettings extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
-    Preference mMe;
-    Preference mTwitter;
+	Preference mMe;
+	Preference mTwitter;
 	Preference mDonate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.nuke_settings);
-        
-        mMe = findPreference("aboutvanir_me");
-        mTwitter = findPreference("aboutvanir_twitter");
-		mDonate = findPreference("aboutvanir_donate");
+
+	mMe = findPreference("aboutvanir_me");
+	mTwitter = findPreference("aboutvanir_twitter");
+	mDonate = findPreference("aboutvanir_donate");
 
     }
 
@@ -36,9 +36,9 @@ public class NukeSettings extends SettingsPreferenceFragment {
 		if (preference == mMe) {
 			showAboutMeDialog();
         } else if (preference == mTwitter) {
-            gotoUrl("https://twitter.com/");
+            gotoUrl("https://twitter.com/eric_mccann");
         } else if (preference == mDonate) {
-			gotoUrl("https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=-Qh6zFwtaaYbi6CfgwQxLNagH-1EuyEkTYOvFWPS3CPqOImH17L6BqC92EW&dispatch=5885d80a13c0db1f8e263663d3faee8da6a0e86558d6153d8812cd76bf2fd83f");
+			gotoUrl("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=E7LJZEL7B4XNQ&lc=US&item_name=Nuclearmistake%20rox%20sox&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest");
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

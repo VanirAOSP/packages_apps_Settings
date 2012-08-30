@@ -32,9 +32,9 @@ class EditPinPreference extends EditTextPreference {
     interface OnPinEnteredListener {
         void onPinEntered(EditPinPreference preference, boolean positiveResult);
     }
-    
+
     private OnPinEnteredListener mPinListener;
-    
+
     public EditPinPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -42,7 +42,7 @@ class EditPinPreference extends EditTextPreference {
     public EditPinPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-    
+
     public void setOnPinEnteredListener(OnPinEnteredListener listener) {
         mPinListener = listener;
     }

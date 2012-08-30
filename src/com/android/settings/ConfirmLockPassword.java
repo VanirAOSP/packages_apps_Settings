@@ -71,7 +71,6 @@ public class ConfirmLockPassword extends PreferenceActivity {
         private PasswordEntryKeyboardView mKeyboardView;
         private Button mContinueButton;
 
-
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
 

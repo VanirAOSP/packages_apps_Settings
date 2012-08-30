@@ -53,19 +53,19 @@ import java.util.ArrayList;
 
 public class DeviceAdminAdd extends Activity {
     static final String TAG = "DeviceAdminAdd";
-    
+
     static final int DIALOG_WARNING = 1;
 
     private static final int MAX_ADD_MSG_LINES_PORTRAIT = 5;
     private static final int MAX_ADD_MSG_LINES_LANDSCAPE = 2;
     private static final int MAX_ADD_MSG_LINES = 15;
-    
+
     Handler mHandler;
-    
+
     DevicePolicyManager mDPM;
     DeviceAdminInfo mDeviceAdmin;
     CharSequence mAddMsgText;
-    
+
     ImageView mAdminIcon;
     TextView mAdminName;
     TextView mAdminDescription;
@@ -76,19 +76,19 @@ public class DeviceAdminAdd extends Activity {
     ViewGroup mAdminPolicies;
     Button mActionButton;
     Button mCancelButton;
-    
+
     final ArrayList<View> mAddingPolicies = new ArrayList<View>();
     final ArrayList<View> mActivePolicies = new ArrayList<View>();
-    
+
     boolean mAdding;
     boolean mRefreshing;
-    
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mHandler = new Handler(getMainLooper());
-        
+
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
@@ -96,7 +96,7 @@ public class DeviceAdminAdd extends Activity {
             finish();
             return;
         }
-        
+
         ComponentName cn = (ComponentName)getIntent().getParcelableExtra(
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
         if (cn == null) {
@@ -104,7 +104,7 @@ public class DeviceAdminAdd extends Activity {
             finish();
             return;
         }
-        
+
         ActivityInfo ai;
         try {
             ai = getPackageManager().getReceiverInfo(cn, PackageManager.GET_META_DATA);
@@ -113,7 +113,7 @@ public class DeviceAdminAdd extends Activity {
             finish();
             return;
         }
-        
+
         ResolveInfo ri = new ResolveInfo();
         ri.activityInfo = ai;
         try {
@@ -127,7 +127,7 @@ public class DeviceAdminAdd extends Activity {
             finish();
             return;
         }
-        
+
         // This admin already exists, an we have two options at this point.  If new policy
         // bits are set, show the user the new list.  If nothing has changed, simply return
         // "OK" immediately.
@@ -153,7 +153,7 @@ public class DeviceAdminAdd extends Activity {
         mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
 
         setContentView(R.layout.device_admin_add);
-        
+
         mAdminIcon = (ImageView)findViewById(R.id.admin_icon);
         mAdminName = (TextView)findViewById(R.id.admin_name);
         mAdminDescription = (TextView)findViewById(R.id.admin_description);
@@ -228,13 +228,13 @@ public class DeviceAdminAdd extends Activity {
             }
         });
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
         updateInterface();
     }
-    
+
     @Override
     protected Dialog onCreateDialog(int id, Bundle args) {
         switch (id) {
@@ -255,17 +255,17 @@ public class DeviceAdminAdd extends Activity {
             }
             default:
                 return super.onCreateDialog(id, args);
-                    
+
         }
     }
-    
+
     static void setViewVisibility(ArrayList<View> views, int visibility) {
         final int N = views.size();
         for (int i=0; i<N; i++) {
             views.get(i).setVisibility(visibility);
         }
     }
-    
+
     void updateInterface() {
         mAdminIcon.setImageDrawable(mDeviceAdmin.loadIcon(getPackageManager()));
         mAdminName.setText(mDeviceAdmin.loadLabel(getPackageManager()));
@@ -321,7 +321,6 @@ public class DeviceAdminAdd extends Activity {
             mAdding = true;
         }
     }
-
 
     void toggleMessageEllipsis(View v) {
         TextView tv = (TextView) v;

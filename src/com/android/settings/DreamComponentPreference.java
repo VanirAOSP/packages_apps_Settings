@@ -101,10 +101,10 @@ public class DreamComponentPreference extends Preference {
         @Override
         public int compare(ResolveInfo a, ResolveInfo b) {
             CharSequence sa, sb;
-            
+
             ApplicationInfo aia = a.activityInfo != null ? a.activityInfo.applicationInfo : a.serviceInfo.applicationInfo;
             ApplicationInfo aib = b.activityInfo != null ? b.activityInfo.applicationInfo : b.serviceInfo.applicationInfo;
-            
+
             if (!aia.equals(aib)) {
                 sa = pm.getApplicationLabel(aia);
                 sb = pm.getApplicationLabel(aib);
@@ -133,11 +133,11 @@ public class DreamComponentPreference extends Preference {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             results = new ArrayList<ResolveInfo>();
-            
+
             if (SHOW_DREAM_ACTIVITIES) {
                 results.addAll(pm.queryIntentActivities(choosy, PackageManager.GET_META_DATA));
             }
-            
+
             if (SHOW_DREAM_SERVICES) {
                 results.addAll(pm.queryIntentServices(choosy, PackageManager.GET_META_DATA));
             }
@@ -220,7 +220,7 @@ public class DreamComponentPreference extends Preference {
 
                         setSummary(ri.loadLabel(pm));
                         //getContext().startActivity(intent);
-                        
+
                         IDreamManager dm = IDreamManager.Stub.asInterface(
                                 ServiceManager.getService("dreams"));
                         try {

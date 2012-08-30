@@ -136,7 +136,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(resid);
 
-
         // Add options for device encryption
         DevicePolicyManager dpm =
                 (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);

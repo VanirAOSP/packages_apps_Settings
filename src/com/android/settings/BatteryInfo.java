@@ -45,9 +45,9 @@ public class BatteryInfo extends Activity {
     private TextView mUptime;
     private IBatteryStats mBatteryStats;
     private IPowerManager mScreenStats;
-    
+
     private static final int EVENT_TICK = 1;
-    
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -55,7 +55,7 @@ public class BatteryInfo extends Activity {
                 case EVENT_TICK:
                     updateBatteryStats();
                     sendEmptyMessageDelayed(EVENT_TICK, 1000);
-                    
+
                     break;
             }
         }
@@ -89,7 +89,7 @@ public class BatteryInfo extends Activity {
                 mTemperature.setText("" + tenthsToFixedString(intent.getIntExtra("temperature", 0))
                         + getString(R.string.battery_info_temperature_units));
                 mTechnology.setText("" + intent.getStringExtra("technology"));
-                
+
                 mStatus.setText(Utils.getBatteryStatus(getResources(), intent));
 
                 switch (plugType) {
@@ -109,7 +109,7 @@ public class BatteryInfo extends Activity {
                         mPower.setText(getString(R.string.battery_info_power_unknown));
                         break;
                 }
-                
+
                 int health = intent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN);
                 String healthString;
                 if (health == BatteryManager.BATTERY_HEALTH_GOOD) {
@@ -157,12 +157,12 @@ public class BatteryInfo extends Activity {
         mVoltage = (TextView)findViewById(R.id.voltage);
         mTemperature = (TextView)findViewById(R.id.temperature);
         mUptime = (TextView) findViewById(R.id.uptime);
-        
+
         // Get awake time plugged in and on battery
         mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService("batteryinfo"));
         mScreenStats = IPowerManager.Stub.asInterface(ServiceManager.getService(POWER_SERVICE));
         mHandler.sendEmptyMessageDelayed(EVENT_TICK, 1000);
-        
+
         registerReceiver(mIntentReceiver, mIntentFilter);
     }
 
@@ -170,7 +170,7 @@ public class BatteryInfo extends Activity {
     public void onPause() {
         super.onPause();
         mHandler.removeMessages(EVENT_TICK);
-        
+
         // we are no longer on the screen stop the observers
         unregisterReceiver(mIntentReceiver);
     }
@@ -179,5 +179,5 @@ public class BatteryInfo extends Activity {
         long uptime = SystemClock.elapsedRealtime();
         mUptime.setText(DateUtils.formatElapsedTime(uptime / 1000));
     }
-    
+
 }

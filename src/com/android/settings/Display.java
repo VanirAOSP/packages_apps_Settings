@@ -31,7 +31,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-
 public class Display extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle icicle) {
@@ -73,7 +72,7 @@ public class Display extends Activity implements View.OnClickListener {
         mDisplayMetrics.widthPixels = metrics.widthPixels;
         mDisplayMetrics.xdpi = metrics.xdpi;
         mDisplayMetrics.ydpi = metrics.ydpi;
-        
+
         styledAttributes.recycle();
     }
 

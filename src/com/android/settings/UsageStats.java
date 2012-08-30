@@ -59,7 +59,7 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
     private LayoutInflater mInflater;
     private UsageStatsAdapter mAdapter;
     private PackageManager mPm;
-    
+
     public static class AppNameComparator implements Comparator<PkgUsageStats> {
         Map<String, CharSequence> mAppLabelList;
         AppNameComparator(Map<String, CharSequence> appList) {
@@ -71,14 +71,14 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
             return alabel.compareTo(blabel);
         }
     }
-    
+
     public static class LaunchCountComparator implements Comparator<PkgUsageStats> {
         public final int compare(PkgUsageStats a, PkgUsageStats b) {
             // return by descending order
             return b.launchCount - a.launchCount;
         }
     }
-    
+
     public static class UsageTimeComparator implements Comparator<PkgUsageStats> {
         public final int compare(PkgUsageStats a, PkgUsageStats b) {
             long ret = a.usageTime-b.usageTime;
@@ -91,27 +91,27 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
             return -1;
         }
     }
-    
+
      // View Holder used when displaying views
     static class AppViewHolder {
         TextView pkgName;
         TextView launchCount;
         TextView usageTime;
     }
-    
+
     class UsageStatsAdapter extends BaseAdapter {
          // Constants defining order for display order
         private static final int _DISPLAY_ORDER_USAGE_TIME = 0;
         private static final int _DISPLAY_ORDER_LAUNCH_COUNT = 1;
         private static final int _DISPLAY_ORDER_APP_NAME = 2;
-        
+
         private int mDisplayOrder = _DISPLAY_ORDER_USAGE_TIME;
         private List<PkgUsageStats> mUsageStats;
         private LaunchCountComparator mLaunchCountComparator;
         private UsageTimeComparator mUsageTimeComparator;
         private AppNameComparator mAppLabelComparator;
         private HashMap<String, CharSequence> mAppLabelMap;
-        
+
         UsageStatsAdapter() {
             mUsageStats = new ArrayList<PkgUsageStats>();
             mAppLabelMap = new HashMap<String, CharSequence>();
@@ -191,7 +191,7 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
             }
             return convertView;
         }
-        
+
         void sortList(int sortOrder) {
             if (mDisplayOrder == sortOrder) {
                 // do nothing
@@ -225,14 +225,14 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
         }
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mPm = getPackageManager();
-        
+
         setContentView(R.layout.usage_stats);
         mTypeSpinner = (Spinner) findViewById(R.id.typeSpinner);
         mTypeSpinner.setOnItemSelectedListener(this);
-        
+
         mListView = (ListView) findViewById(R.id.pkg_list);
         // Initialize the inflater
-        
+
         mAdapter = new UsageStatsAdapter();
         mListView.setAdapter(mAdapter);
     }
@@ -246,4 +246,3 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
         // do nothing
     }
 }
-

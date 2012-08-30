@@ -6,6 +6,17 @@
 	xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
    <PreferenceCategory
+		android:key="aboutvanir_changelog_title"
+		android:title="@string/aboutvanir_changelog_title">
+
+        <Preference
+		android:key="aboutvanir_changelog"
+		android:title="@string/aboutvanir_changelog_big_title"
+        />
+
+   </PreferenceCategory>
+
+   <PreferenceCategory
 		android:key="aboutvanir_links"
 		android:title="@string/aboutvanir_links">
 
@@ -48,5 +59,12 @@
 		android:fragment="com.android.settings.PDSettings"
 		android:title="@string/aboutvanir_pd"
 	/>
+
+	<Preference
+		android:key="aboutvanir_chevy"
+		android:fragment="com.android.settings.ChevyCam94Settings"
+		android:title="@string/aboutvanir_chevy"
+	/>
+
    </PreferenceCategory>
 </PreferenceScreen>

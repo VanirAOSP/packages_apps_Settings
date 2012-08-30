@@ -34,7 +34,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
     private final Context mContext;
 
     private PhoneStateIntentReceiver mPhoneStateReceiver;
-    
+
     private final CheckBoxPreference mCheckBoxPref;
 
     private static final int EVENT_SERVICE_STATE_CHANGED = 3;
@@ -58,18 +58,18 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
     };
 
     public AirplaneModeEnabler(Context context, CheckBoxPreference airplaneModeCheckBoxPreference) {
-        
+
         mContext = context;
         mCheckBoxPref = airplaneModeCheckBoxPreference;
-        
+
         airplaneModeCheckBoxPreference.setPersistent(false);
-    
+
         mPhoneStateReceiver = new PhoneStateIntentReceiver(mContext, mHandler);
         mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
     }
 
     public void resume() {
-        
+
         mCheckBoxPref.setChecked(isAirplaneModeOn(mContext));
 
         mPhoneStateReceiver.registerIntent();
@@ -78,7 +78,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
                 Settings.System.getUriFor(Settings.System.AIRPLANE_MODE_ON), true,
                 mAirplaneModeObserver);
     }
-    
+
     public void pause() {
         mPhoneStateReceiver.unregisterIntent();
         mCheckBoxPref.setOnPreferenceChangeListener(null);
@@ -96,7 +96,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
                                 enabling ? 1 : 0);
         // Update the UI to reflect system setting
         mCheckBoxPref.setChecked(enabling);
-        
+
         // Post the intent
         Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         intent.putExtra("state", enabling);
@@ -114,7 +114,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
     private void onAirplaneModeChanged() {
         mCheckBoxPref.setChecked(isAirplaneModeOn(mContext));
     }
-    
+
     /**
      * Called when someone clicks on the checkbox preference.
      */

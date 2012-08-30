@@ -13,20 +13,18 @@ import android.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
-public class DHOSettings extends SettingsPreferenceFragment {
+public class ChevyCam94Settings extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
 	Preference mMe;
-	Preference mTwitter;
 	Preference mDonate;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.dho_settings);
+	super.onCreate(savedInstanceState);
+	addPreferencesFromResource(R.xml.chevy_settings);
 
 	mMe = findPreference("aboutvanir_me");
-	mTwitter = findPreference("aboutvanir_twitter");
 	mDonate = findPreference("aboutvanir_donate");
 
     }
@@ -35,10 +33,8 @@ public class DHOSettings extends SettingsPreferenceFragment {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 		if (preference == mMe) {
 			showAboutMeDialog();
-        } else if (preference == mTwitter) {
-            gotoUrl("https://twitter.com/DHO82");
         } else if (preference == mDonate) {
-			gotoUrl("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9Z79J3J6JFQ4N&lc=US&item_name=DHO&item_number=HYBRYD&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+			gotoUrl("http://goo.gl/F6UNf");
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -53,7 +49,7 @@ public class DHOSettings extends SettingsPreferenceFragment {
         mActivity = getActivity();
 		new AlertDialog.Builder(mActivity)
 			.setTitle(R.string.aboutvanir_me)
-			.setMessage(R.string.aboutdho)
+			.setMessage(R.string.aboutchevy)
 			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();

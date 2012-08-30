@@ -181,4 +181,3 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
         };
     }
 }
-
