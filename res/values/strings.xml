@@ -1522,6 +1522,9 @@
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
     <string name="scan_list_label" translatable="false">Scan results:</string>
+    
+    <string name="link_volume_ringtones">Link volumes</string>
+    <string name="link_volume_mutes">Link mute states</string>  
 
     <!-- wifi state values-->
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
@@ -4039,28 +4042,29 @@
     <!-- User settings -->
     <skip/>
 
-    <!-- User settings screen title [CHAR LIMIT=25] -->
-    <string name="user_settings_title">Users &amp; restrictions</string>
-    <!-- User settings user list section header [CHAR LIMIT=30] -->
-    <string name="user_list_title">Users</string>
-    <!-- User settings add user menu [CHAR LIMIT=20] -->
-    <string name="user_add_user_menu">Add user</string>
-
-    <!-- User details -->
-    <skip/>
-
-    <!-- User details screen title [CHAR LIMIT=25] -->
-    <string name="user_details_title">Edit details</string>
-    <!-- User information section title [CHAR LIMIT=30] -->
-    <string name="user_information_heading">User information</string>
-    <!-- User name title [CHAR LIMIT=25] -->
-    <string name="user_name_title">Name</string>
-    <!-- User restrictions section title [CHAR LIMIT=30] -->
-    <string name="user_restrictions_heading">Content restrictions</string>
-    <!-- User restrictions, does market require PIN protection [CHAR LIMIT=30] -->
-    <string name="user_market_requires_pin">Require PIN</string>
-    <!-- User restrictions, maximum content rating for apps [CHAR LIMIT=25] -->
-    <string name="user_max_content_rating">Content rating</string>
+    <!-- Display | Backlight -->
+	<string name="backlight_title">Custom backlight settings</string>
+    <string name="backlight_settings">Automatic backlight</string>
+    <string name="backlight_settings_title">Automatic backlight</string>
+    <string name="backlight_summary">Tweak levels and filtering</string>
+    <string name="light_filter_title">Light sensor filter</string>
+    <string name="light_filter_enabled_title">Enabled</string>
+    <string name="light_filter_enabled_summary">Apply moving average filter to sensor data to reduce flicker</string>
+    <string name="light_filter_window_title">Window length</string>
+    <string name="light_filter_window_summary">Filtered value is the average sensor value during this period</string>
+    <string name="light_filter_reset_title">Reset threshold</string>
+    <string name="light_filter_reset_summary">Samples deviating this much from current average resets the filter</string>
+    <string name="light_filter_interval_title">Sample interval</string>
+    <string name="light_filter_interval_summary">Low value can improve accuracy but uses some more CPU</string>
+    <string name="light_levels_title">Light levels</string>
+    <string name="light_levels_enabled_title">Use custom</string>
+    <string name="light_levels_dim_title">Screen dim level</string>
+    <string name="light_levels_dim_summary">Brightness used to dim the screen</string>
+    <string name="light_levels_editor_title">Edit other levels\u2026</string>
+    <string name="light_decrease_enabled_title">Allow light decrease</string>
+    <string name="light_decrease_enabled_summary">Enable to allow lights to decrease. Use hysteresis to reduce flicker</string>
+    <string name="light_decrease_hysteresis_title">Decrease hysteresis</string>
+    <string name="light_decrease_hysteresis_summary">Sensor levels overlap this much downwards</string>
     <!-- Section title for list of system apps [CHAR LIMIT=30] -->
     <string name="user_system_apps_heading">System apps</string>
     <!-- Section title for list of downloaded apps [CHAR LIMIT=30] -->
@@ -4203,11 +4207,30 @@
     <string name="aboutvanir_changelog_title">Changelog</string>
     <string name="aboutvanir_changelog_big_title">Official changelog</string>
     <string name="aboutvanir_changelog">Would-be changelog area...\n\nBlame Sonic for not filling it out yet!  LOL</string>
-
+    
     <!-- Volume Panel -->
     <string name="enable_volume_options">Enable volume panel</string>
     <string name="enable_volume_options_summary">Enables an expandable volume panel that allows you to control all volumes</string>
-
+    
+    
+    <!-- Light sensor levels -->
+    <string name="ll_title">Light sensor levels</string>
+    <string name="ll_header_upper">Upper</string>
+    <string name="ll_header_lower">Lower</string>
+    <string name="ll_header_lcd">Screen</string>
+    <string name="ll_header_btn">Buttons</string>
+    <string name="ll_header_kb">Keyboard</string>
+    <string name="ll_lux">Sensor (filtered / raw):</string>
+    <string name="ll_lcd">Screen:</string>
+    <string name="ll_btn">Buttons:</string>
+    <string name="ll_kb">Keyboard:</string>
+    <string name="ll_disabled">disabled</string>
+    <string name="ll_default">Load defaults</string>
+    <string name="ll_save">Save &amp; apply</string>
+    <string name="ll_reload">Reload current</string>
+    <string name="ll_bad_levels">Levels must be increasing</string>
+    <string name="ll_num_levels">Set number of levels</string>
+    
     <!-- LED -->
     <string name="led_on">LED On</string>
     <string name="led_off">LED Off</string>
