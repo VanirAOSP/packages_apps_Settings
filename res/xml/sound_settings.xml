@@ -47,13 +47,6 @@
             android:summary="@string/volbtn_music_controls_summary"
             android:persistent="false" />
 
-    <!-- Volume Panel -->
-    <CheckBoxPreference
-            android:key="enable_volume_options"
-            android:title="@string/enable_volume_options"
-	    	android:summary="@string/enable_volume_options_summary"
-            android:defaultValue="false" />
-
     <PreferenceCategory
             android:key="category_calls_and_notification"
             android:title="@string/sound_category_call_ringtone_vibrate_title"/>

@@ -4208,10 +4208,6 @@
 	<string name="aboutpd">Hi, I\'m PrimeDirective.</string>
 
 
-    <!-- Volume Panel -->
-    <string name="enable_volume_options">Enable volume panel</string>
-    <string name="enable_volume_options_summary">Enables an expandable volume panel that allows you to control all volumes</string>
-
     <!-- LED -->
     <string name="led_on">LED On</string>
     <string name="led_off">LED Off</string>
