@@ -16,6 +16,7 @@ import com.android.settings.R;
 public class AboutSettings extends SettingsPreferenceFragment {
 
 	private Activity mActivity;
+        Preference mVanirGerrit;
         Preference mVanirGithub;
         Preference mVanirIrc;
         Preference mVanirChangelog;
@@ -24,7 +25,8 @@ public class AboutSettings extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.about_settings);
-
+        
+		mVanirGerrit = findPreference("aboutvanir_gerrit");
         mVanirGithub = findPreference("aboutvanir_github");
         mVanirIrc = findPreference("aboutvanir_irc");
         mVanirChangelog = findPreference("aboutvanir_changelog");
@@ -32,7 +34,9 @@ public class AboutSettings extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-		if (preference == mVanirGithub) {
+		if (preference == mVanirGerrit) {
+            gotoUrl("http://vaniraosp.goo.im");
+        } else if (preference == mVanirGithub) {
             gotoUrl("https://github.com/VanirAOSP/");
         } else if (preference == mVanirIrc) {
             gotoUrl("http://webchat.freenode.net/?channels=vanir");

@@ -19,7 +19,12 @@
    <PreferenceCategory
 		android:key="aboutvanir_links"
 		android:title="@string/aboutvanir_links">
-
+		
+	<Preference
+		android:key="aboutvanir_gerrit"
+		android:title="@string/aboutvanir_gerrit"
+	/>
+	
 	<Preference
 		android:key="aboutvanir_github"
 		android:title="@string/aboutvanir_github"
