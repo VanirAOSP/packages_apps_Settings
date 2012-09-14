@@ -4554,12 +4554,17 @@ Letting go of the power button will turn the torch off.</string>
 
     <!-- Performance Settings : I/O scheduler settings summary. -->
     <string name="io_scheds_summary">Change I/O scheduler</string>
-
+    
     <!-- Performance Settings : I/O scheduler settings sub items -->
     <string name="io_sched_title">I/O scheduler</string>
     <string name="io_sched_summary">%S</string>
     <string name="io_sched_set_on_boot">Set on boot</string>
     <string name="io_sched_set_on_boot_summary">Restore the I/O scheduler settings on boot</string>
+    <!-- CLOCK -->
+    <string name="status_bar_clock_title">Clock style</string>
+    <string name="status_bar_am_pm_title">AM/PM style</string>
+	<string name="status_bar_am_pm_info">24-hour clock is enabled</string>
+
 
     <!-- Purgeable Assets -->
     <string name="pref_purgeable_assets_title">Allow purging of assets</string>

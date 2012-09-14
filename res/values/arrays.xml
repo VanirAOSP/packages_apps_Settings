@@ -962,6 +962,18 @@
 	<item>2</item>
     </string-array>
 
+    <string-array name="clock_style_entries">
+        <item>Right clock</item>
+        <item>Center clock</item>
+        <item>No clock</item>
+    </string-array>
+
+    <string-array name="clock_style_values" translatable="false">
+        <item>1</item>
+	<item>2</item>
+        <item>0</item>
+    </string-array>
+
     <string-array name="long_press_home_entries">
         <item>Default</item>
         <item>Nothing</item>
@@ -990,11 +1002,23 @@
         <item>4</item>
     </string-array>
 
+    <string-array name="entries_status_bar_am_pm">
+        <item>Normal</item>
+        <item>Small</item>
+        <item>None (default)</item>
+    </string-array>    
+
     <string-array name="pref_navigation_menu_display_entries">
 	<item>Default</item>
 	<item>Invisible Icons</item>
 	<item>Always Show</item>
 	<item>Both Behaviours</item>
+    </string-array>
+	    
+    <string-array name="values_status_bar_am_pm" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="pref_navigation_menu_display_values">
