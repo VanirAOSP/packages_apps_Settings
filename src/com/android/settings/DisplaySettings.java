@@ -52,11 +52,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
+    
+    private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
+    private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
+    private static final String PREF_ENABLE = "clock_style";
 
     private CheckBoxPreference mAccelerometer;
     private CheckBoxPreference mBatteryPercentage;
     private ListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
+    private ListPreference mStatusBarAmPm;
+    private ListPreference mStatusBarClock;
+
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -121,6 +128,29 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
+        
+        mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
+        mStatusBarClock.setOnPreferenceChangeListener(this);
+        mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
+                1)));
+                
+        mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
+        try {
+            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.TIME_12_24) == 24) {
+                mStatusBarAmPm.setEnabled(false);
+                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
+            }
+        } catch (SettingNotFoundException e ) {
+        }
+
+        int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_AM_PM, 2);
+        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
+        mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
+        mStatusBarAmPm.setOnPreferenceChangeListener(this);
+
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -282,15 +312,31 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, value);
-                updateTimeoutPreferenceDescription(value);
-            } catch (NumberFormatException e) {
+                updateTimeoutPreferenceDescription(value);                
+                return true;
+            } catch (NumberFormatException e) {            
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
         }
-        if (KEY_FONT_SIZE.equals(key)) {
-            writeFontSizePreference(objValue);
+        if (preference == mStatusBarAmPm) {
+            int statusBarAmPm = Integer.valueOf((String) objValue);
+            int index = mStatusBarAmPm.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    STATUS_BAR_AM_PM, statusBarAmPm);
+            mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarClock) {
+            int clockStyle = Integer.parseInt((String) objValue);
+            int index = mStatusBarClock.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    STATUS_BAR_CLOCK, clockStyle);
+            mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
+            return true;
+        } else if (KEY_FONT_SIZE.equals(key)) {
+            writeFontSizePreference(objValue);            
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

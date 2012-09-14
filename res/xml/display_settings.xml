@@ -87,5 +87,18 @@
              	android:key="battery_percentage"
              	android:title="@string/title_battery_percentage"
     	        android:defaultValue="true" />	
+    	        
+        <ListPreference
+                android:entries="@array/clock_style_entries"
+                android:entryValues="@array/clock_style_values"
+                android:key="clock_style"
+                android:title="@string/status_bar_clock_title" />
+                
+        <ListPreference
+            android:key="status_bar_am_pm"
+            android:dialogTitle="@string/status_bar_am_pm_title"
+            android:title="@string/status_bar_am_pm_title"
+            android:entries="@array/entries_status_bar_am_pm"
+            android:entryValues="@array/values_status_bar_am_pm" />
 
 </PreferenceScreen>

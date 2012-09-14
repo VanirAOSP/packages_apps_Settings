@@ -4256,6 +4256,11 @@
     <string name="ll_reload">Reload current</string>
     <string name="ll_bad_levels">Levels must be increasing</string>
     <string name="ll_num_levels">Set number of levels</string>
+    
+    <!-- CLOCK -->
+    <string name="status_bar_clock_title">Clock style</string>
+    <string name="status_bar_am_pm_title">AM/PM style</string>
+	<string name="status_bar_am_pm_info">24-hour clock is enabled</string>
 
     <!-- Build Tweaks. Lock Screen Shortcuts -->
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
