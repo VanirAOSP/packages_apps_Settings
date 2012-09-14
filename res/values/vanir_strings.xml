@@ -216,4 +216,10 @@
     <string name="home_wake_summary">Pressing the home button will wake your device</string>
     <string name="header_summary_vibrations">@null</string>
     <string name="wallpaper_animations">Wallpaper animations</string>
+
+    <!-- CLOCK -->
+    <string name="status_bar_clock_title">Clock style</string>
+    <string name="status_bar_am_pm_title">AM/PM style</string>
+    <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
+
 </resources>
