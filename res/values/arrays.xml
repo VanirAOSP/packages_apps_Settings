@@ -185,6 +185,7 @@
         <item>High</item>
         <item>Very high</item>
     </string-array>
+
     <!-- Do not translate. -->
     <string-array name="tts_pitch_values">
         <item>50</item>
@@ -1153,6 +1154,21 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+
+    <!--- Sms security limit -->
+    <string-array name="sms_security_check_limit_entries" translatable="false">
+        <item>@string/sms_security_check_limit_default</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
+    </string-array>
+
+    <string-array name="sms_security_check_limit_values" translatable="false">
+        <item>30</item>
+        <item>50</item>
+        <item>100</item>
+        <item>200</item>
     </string-array>
 
 </resources>
