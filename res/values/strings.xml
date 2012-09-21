@@ -4167,7 +4167,6 @@
 
     <!-- Toggle Strings to be called from device overlays -->
     <string name="toggle_airplane_mode">Airplane mode</string>
-    <string name="toggle_auto_rotate">Auto rotate</string>
     <string name="toggle_bluetooth">Bluetooth</string>
     <string name="toggle_fast_charge">Fast charge</string>
     <string name="toggle_gps">GPS</string>
@@ -4204,7 +4203,7 @@
     <string name="aboutsonic">Hi, I\'m Sonicxml.</string>
     <string name="aboutdho">Hi, I\'m DHO.</string>
     <string name="aboutnuke">I\'m Nuclearmistake. I enjoy long walks on the beach and voiding waranties.</string>
-    <string name="aboutpd">Hi, I\'m PrimeDirective.</string>
+    <string name="aboutpd">Listen to heavy metal.</string>
     <string name="aboutchevy">Yo! I\'m ChevyCam94!\n\nY U NO DO SOMETHING USEFUL RIGHT NOW INSTEAD OF READ THIS?</string>
 
     <!-- Changelog -->
