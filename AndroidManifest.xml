@@ -91,20 +91,17 @@
         </activity>
 
         <!-- Toggles -->
-
          <activity
             android:name=".fragments.StatusBarToggles"
             android:label="Statusbar Toggles" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="com.aokp.romcontrol.SHORTCUT" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
 
         <!-- Wireless Controls -->
-
         <activity android:name="Settings$WirelessSettingsActivity"
                 android:label="@string/wireless_networks_settings_title"
                 android:parentActivityName="Settings">
@@ -122,9 +119,7 @@
                 android:resource="@id/wireless_settings" />
         </activity>
 
-
         <!-- Top-level settings -->
-
         <activity android:name="Settings$WifiSettingsActivity"
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
