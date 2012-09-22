@@ -61,8 +61,7 @@
 
         <CheckBoxPreference
             android:key="notification_pulse"
-            android:title="@string/notification_pulse_title"
-            android:persistent="false" />
+            android:title="@string/notification_pulse_title" />
        <CheckBoxPreference
             android:key="enable_fast_torch"	
             android:title="@string/enable_fast_torch_title"	

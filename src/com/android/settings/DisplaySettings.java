@@ -140,13 +140,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                         com.android.internal.R.bool.config_intrusiveNotificationLed) == false) {
             getPreferenceScreen().removePreference(mNotificationPulse);
         } else {
-            try {
-                mNotificationPulse.setChecked(Settings.System.getInt(resolver,
-                        Settings.System.NOTIFICATION_LIGHT_PULSE) == 1);
-                mNotificationPulse.setOnPreferenceChangeListener(this);
-            } catch (SettingNotFoundException snfe) {
-                Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
-            }
+            mNotificationPulse.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.NOTIFICATION_LIGHT_PULSE, 0) == 1);
+            mNotificationPulse.setOnPreferenceChangeListener(this);
         }
 
         mDisplayManager = (DisplayManager)getActivity().getSystemService(
@@ -366,7 +362,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {        
         if (preference == mAccelerometer) {
             RotationPolicy.setRotationLockForAccessibility(
                     getActivity(), !mAccelerometer.isChecked());
@@ -374,11 +370,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = mBatteryPercentage.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_BATTERY,
                     value ? 1 : 0);
-        } else if (preference == mNotificationPulse) {
-            boolean value = mNotificationPulse.isChecked();
-            Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
-                    value ? 1 : 0);
-            return true;
+        } else if (preference == mNotificationPulse) {    
+            boolean value = !mNotificationPulse.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE, value ? 1 : 0);
+            mNotificationPulse.setChecked(value);
         } else if (preference == mFastTorch) {
             boolean value = mFastTorch.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
