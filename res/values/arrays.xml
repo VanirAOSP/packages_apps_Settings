@@ -90,9 +90,9 @@
     </string-array>
     
 	<string-array name="brightness_location_entries">
-		<item>Don\'t Show</item>
 		<item>On the top</item>
 		<item>On the bottom</item>
+		<item>Don\'t Show</item>
 	</string-array>
 
 	<string-array name="brightness_location_values" translatable="false">

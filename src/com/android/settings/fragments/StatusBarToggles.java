@@ -60,7 +60,7 @@ public class StatusBarToggles extends PreferenceFragment implements OnPreference
         mBrightnessLocation.setOnPreferenceChangeListener(this);
         mBrightnessLocation.setValue(Integer.toString(Settings.System.getInt(getActivity()
         .getContentResolver(),
-        Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, 1)));
+        Settings.System.STATUSBAR_TOGGLES_BRIGHTNESS_LOC, 3)));
 
         mToggleStyle = (ListPreference) findPreference(PREF_TOGGLES_STYLE);
         mToggleStyle.setOnPreferenceChangeListener(this);
