@@ -4312,4 +4312,10 @@
     <string name="profile_reset_message">Delete all user created profiles and application groups and restore them to default?</string>
     <string name="ok">Ok</string>
     
+    <!-- DisplaySettings Headers -->
+    <string name="display_lockscreen">LOCKSCREEN</string>
+    <string name="display_navbar">NAVBAR</string>
+    <string name="display_statusbar">STATUSBAR</string>
+    
+    
 </resources>
