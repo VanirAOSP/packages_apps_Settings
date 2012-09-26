@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import java.util.List;
-import android.app.ActivityManagerNative;
-
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;

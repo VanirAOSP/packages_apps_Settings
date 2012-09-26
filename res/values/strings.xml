@@ -4132,7 +4132,7 @@
     <string name="pref_volume_wake_summary">Pressing the volume rocker up/down will wake the Nexus</string>
 
     <!-- Volume Panel -->
-    <string name="volume_overlay_title">Volume panel</string>
+    <string name="volume_overlay_title">Volume panel style</string>
     <string name="link_volume_ringtones">Link ringtone &amp; notifications volumes</string>
     <string name="link_volume_mutes">Silent mode affects notifications</string>
     <string name="volume_ring_only_description">Ringtone</string>    
