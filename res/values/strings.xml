@@ -4325,5 +4325,7 @@
     <string name="display_navbar">NAVBAR</string>
     <string name="display_statusbar">STATUSBAR</string>
     
-    
+    <string name="enable_fast_torch_title">Enable fast torch</string>
+    <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. 
+Letting go of the power button will turn the torch off.</string>
 </resources>

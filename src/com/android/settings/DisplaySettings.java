@@ -52,6 +52,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
+    private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
@@ -61,6 +62,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mBatteryPercentage;
     private ListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
+    private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
 
@@ -148,6 +150,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
+        mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -298,6 +301,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean value = !mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE, value ? 1 : 0);
             mNotificationPulse.setChecked(value);
+        } else if (preference == mFastTorch) {
+            boolean value = mFastTorch.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
