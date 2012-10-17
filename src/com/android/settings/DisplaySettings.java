@@ -61,6 +61,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
+    private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -69,6 +70,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAccelerometer;
     private WarnedListPreference mFontSizePref;
     private CheckBoxPreference mNotificationPulse;
+    private CheckBoxPreference mFastTorch;
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -142,6 +144,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 == WifiDisplayStatus.FEATURE_STATE_UNAVAILABLE) {
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
+        mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
         }
     }
 
@@ -336,6 +339,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_LIGHT_PULSE,
                     value ? 1 : 0);
             return true;
+        } else if (preference == mFastTorch) {
+            boolean value = mFastTorch.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

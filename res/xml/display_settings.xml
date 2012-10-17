@@ -63,6 +63,10 @@
             android:key="notification_pulse"
             android:title="@string/notification_pulse_title"
             android:persistent="false" />
+       <CheckBoxPreference
+            android:key="enable_fast_torch"	
+            android:title="@string/enable_fast_torch_title"	
+            android:summary="@string/enable_fast_torch_summary" />          
 
         <PreferenceScreen
                 android:key="wifi_display"

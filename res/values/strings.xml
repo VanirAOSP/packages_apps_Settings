@@ -4475,5 +4475,7 @@
     <string name="group_applications">Applications</string>
     <string name="navigation_bar_summary">Add/remove softkeys, change color, glow speed</string>
     <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
-
+    <string name="enable_fast_torch_title">Enable fast torch</string>
+    <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. 
+Letting go of the power button will turn the torch off.</string>
 </resources>
