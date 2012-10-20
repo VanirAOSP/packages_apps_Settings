@@ -1776,7 +1776,7 @@
     <!-- About phone screen,  setting option name-->
     <string name="build_number">Build number</string>
     <!-- About phone screen,  setting option name-->
-    <string name="mod_version">VanirAOSP version</string>
+    <string name="mod_version">Vanir version</string>
     <string name="mod_version_default">Unknown</string>
 
     <!-- About phone screen, show when a value of some status item is unavailable. -->
@@ -4198,7 +4198,7 @@
     <string name="aboutvanir_links">LINKS</string>
     <string name="aboutvanir_gerrit">Gerrit</string>
     <string name="aboutvanir_github">Github</string>
-    <string name="aboutvanir_irc">Irc</string>
+    <string name="aboutvanir_irc">IRC</string>
     <string name="aboutvanir_team">THE TEAM</string>
     <string name="aboutvanir_sonicxml">Sonicxml</string>
     <string name="aboutvanir_dho">DHO</string>
