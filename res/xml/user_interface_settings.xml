@@ -48,6 +48,12 @@
             android:title="@string/status_bar_notif_count_title"
             android:summary="@string/status_bar_notif_count_summary"
             android:defaultValue="true" />
+         <PreferenceScreen
+            android:id="@+id/slim_notification_shortcuts"
+            android:fragment="com.android.settings.vanir.notificationshortcuts.NotificationShortcuts"
+            android:key="slim_shortcuts_settings"
+            android:title="@string/notification_shortcuts_settings_title"
+            android:summary="@string/notification_shortcuts_settings_summary" />
 
         <Preference
             android:key="transparency_dialog"
