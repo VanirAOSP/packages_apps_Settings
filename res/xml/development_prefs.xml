@@ -210,6 +210,11 @@
     <PreferenceCategory android:key="debug_applications_category"
             android:title="@string/debug_applications_category">
 
+	<CheckBoxPreference
+            android:key="kill_app_longpress_back"
+            android:title="@string/kill_app_longpress_back"
+	        android:summary="@string/kill_app_longpress_back_summary"/>
+
         <CheckBoxPreference
             android:key="immediately_destroy_activities"
             android:title="@string/immediately_destroy_activities"
