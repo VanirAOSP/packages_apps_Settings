@@ -4410,4 +4410,70 @@
 
     <!-- Theme Chooser -->
     <string name="themes_title">Themes</string>
+
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Press on Color to apply</string>   
+    <string name="arrow_right">→</string> 
+    <string name="arrow_down">↓</string>
+    <string name="hex">Hex:</string>
+    <string name="hex_hint">#FF000000</string>
+    <string name="set">Set</string>
+    <string name="ics_color">ICS</string>
+
+    <!-- Navigation -->
+    <string name="navbar_width_title">Navbar width (landscape)</string>
+    <string name="navbar_width_summary">Requires a Reboot</string>
+    <string name="navbar_height_title">Navbar height (portrait)</string>
+    <string name="navbar_height_sumary">Requires a Reboot</string>
+    <string name="title_pref_menu_display">Menu location</string>
+    <string name="summary_pref_menu_display">Position of menu button</string>
+    <string name="navigation_bar">Navigation</string>
+    <string name="navigation_bar_tint_title">Softkey color</string>
+    <string name="navigation_bar_tint_summary">Navigation bar button color</string>
+    <string name="navigation_bar_glow_tint_title">Navbar Glow Color</string>
+    <string name="navigation_bar_glow_tint_summary">Custom button press glow color</string>
+    <string name="nav_button_background_color_title">Navbar Background Color</string>
+    <string name="title_pref_navigation_menu_display">Menu visibility</string>
+    <string name="summary_pref_navigation_menu_display">Appearance of the menus</string>
+    <string name="navigation_bar_height_landscape_title">Navigation bar height landscape</string>
+    <string name="navigation_bar_height_landscape_summary">Navigation Bar height while in landscape.</string>
+    <string name="navbar_order_title">Button Order</string>
+    <string name="navbar_order_summary">The order of your softkeys</string>
+    <string name="enabled_navbar_buttons_title">Enabled Buttons</string>
+    <string name="enabled_navbar_buttons_summary">Choose the desired softkeys</string>
+    <string name="button_transparency_title">Button transparency</string>
+    <string name="long_press_home_title">Longpress home</string>
+    <string name="long_press_home_summary">Long pressing the home softkey</string>
+    <string name="glow_times_summary">Adjust button animation speeds</string>
+    <string name="glow_times_title">Button glow animation</string>
+    <string name="glow_times_off">Off</string>
+    <string name="glow_times_superquick">Ultra fast</string>
+    <string name="glow_times_quick">Fast</string>
+    <string name="glow_times_normal">Normal</string>
+    <string name="navbar_qty_title">Navigation bar buttons</string>
+    <string name="navbar_qty_summary">Number of buttons</string>
+    <string name="navbar_action_title">Button %1$s action &amp; icon</string>
+    <string name="navbar_longpress_title">Button %1$s longpress action</string>
+    <string name="navbar_button_cat">Navigation bar buttons</string>
+    <string name="navbar_action_home">Home</string>
+    <string name="navbar_action_back">Back</string>
+    <string name="navbar_action_recents">Recents</string>
+    <string name="navbar_action_search">Search</string>
+    <string name="navbar_action_menu">Menu</string>
+    <string name="navbar_action_kill">Kill task</string>
+    <string name="navbar_action_power">Power</string>
+    <string name="navbar_action_none">Empty</string>
+    <string name="navbar_enable_bar">Enable Navbar</string>
+    <string name="navbar_widgets">Navbar Widgets</string>
+    <string name="navbar_widgets_reset">Reset Widgets</string>
+    <string name="navigation_bar_title">Navigation bar</string>
+    <string name="navigation_bar_height_title">Navigation bar height</string>
+    <string name="navigation_bar_height_summary">Navigation Bar height while in portrait.</string>
+    <string name="select_custom_app_title">Select custom application</string>
+    <string name="dpi">DPI</string>
+    <string name="group_applications">Applications</string>
+    <string name="navigation_bar_summary">Add/remove softkeys, change color, glow speed</string>
+    <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
+
 </resources>

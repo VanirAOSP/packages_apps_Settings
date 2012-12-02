@@ -18,6 +18,12 @@
         android:title="@string/display_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+        <PreferenceScreen 
+	            android:key="@+id/navbar"
+	            android:title="@string/navigation_bar_title"
+	            android:summary="@string/navigation_bar_summary"
+	            android:fragment="com.android.settings.eclipse.fragments.Navbar" />
+
         <com.android.settings.BrightnessPreference
                 android:key="brightness"
                 android:title="@string/brightness"
