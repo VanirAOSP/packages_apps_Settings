@@ -78,11 +78,17 @@
     <!-- Do not nest these, or removals in code will break -->
 
     <com.android.settings.DefaultRingtonePreference
-        android:key="notification_sound"
-        android:title="@string/notification_sound_title"
-        android:dialogTitle="@string/notification_sound_dialog_title"
-        android:persistent="false"
-        android:ringtoneType="notification" />
+            android:key="notification_sound"
+            android:title="@string/notification_sound_title"
+            android:dialogTitle="@string/notification_sound_dialog_title"
+            android:persistent="false"
+            android:ringtoneType="notification" />
+
+    <CheckBoxPreference
+            android:key="notification_convert_sound_to_vibration"
+            android:title="@string/notification_convert_sound_to_vibration_title"
+            android:summary="@string/notification_convert_sound_to_vibration_summary"
+            android:defaultValue="false" />
 
     <CheckBoxPreference
         android:key="dtmf_tone"
