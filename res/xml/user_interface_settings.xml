@@ -53,6 +53,40 @@
             android:key="transparency_dialog"
             android:title="@string/transparency_dialog_title" />
     </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:key="interface"
+        android:title="@string/interface_layout" >
+ 
+        <Preference
+            android:key="lcd_density_setup"
+            android:title="@string/lcd_density_title"
+            android:summary="@string/lcd_density_summary" />
+
+        <CheckBoxPreference
+            android:key="dual_pane"
+            android:title="@string/dual_pane"
+            android:summary="@string/dual_pane_summary" />
+
+       <CheckBoxPreference
+            android:key="force_dualpanel"
+            android:title="@string/multipane_ui"
+            android:summary="@string/multipane_ui_summary"
+            android:defaultValue="false" />
+            
+       <ListPreference
+            android:key="user_mode_ui"
+            android:title="@string/user_mode_ui"
+            android:summary="@string/user_mode_ui_summary"
+            android:entries="@array/user_mode_ui_entries"
+            android:entryValues="@array/user_mode_ui_values" />
+
+       <CheckBoxPreference
+            android:key="hide_extras"
+            android:title= "@string/hide_extras"
+            android:summary= "@string/hide_extras_summary"
+            android:defaultValue="false" />
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="misc"
@@ -73,20 +107,5 @@
             android:summary="@string/wakeup_when_plugged_unplugged_summary"
             android:defaultValue="true" />
 
-        <Preference
-            android:key="lcd_density_setup"
-            android:title="@string/lcd_density_title"
-            android:summary="@string/lcd_density_summary" />
-
-        <CheckBoxPreference
-            android:key="dual_pane"
-            android:title="@string/dual_pane"
-            android:summary="@string/dual_pane_summary" />
-
-       <CheckBoxPreference
-            android:key="force_dualpanel"
-            android:title="@string/multipane_ui"
-            android:summary="@string/multipane_ui_summary"
-            android:defaultValue="false" />
     </PreferenceCategory>
 </PreferenceScreen>

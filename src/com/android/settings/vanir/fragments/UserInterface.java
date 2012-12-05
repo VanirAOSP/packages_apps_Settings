@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Random;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentResolver;
@@ -23,6 +24,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.text.Spannable;
@@ -40,10 +42,12 @@ import android.widget.TextView;
 import android.view.Window;
 import android.view.View;
 
-import com.android.settings.widget.AlphaSeekBar;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.util.Helpers;
+import com.android.settings.widget.AlphaSeekBar;
+import com.android.settings.widget.SeekBarPreference;
+
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
@@ -63,6 +67,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
+    private static final String PREF_USER_MODE_UI = "user_mode_ui";
+    private static final String PREF_HIDE_EXTRAS = "hide_extras";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
@@ -74,6 +80,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ColorPickerPreference mExpandedClockPicker;
     Preference mCustomLabel;
     CheckBoxPreference mDualpane;
+    CheckBoxPreference mHideExtras;
+    ListPreference mUserModeUI;
 
     String mCustomLabelText = null;
 
@@ -91,7 +99,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         super.onCreate(savedInstanceState);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.user_interface_settings);
-
         PreferenceScreen prefs = getPreferenceScreen();
         ContentResolver cr = mContext.getContentResolver();
 
@@ -129,10 +136,21 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
+        mHideExtras = (CheckBoxPreference) findPreference(PREF_HIDE_EXTRAS);
+        mHideExtras.setChecked(Settings.System.getBoolean(cr,
+                        Settings.System.HIDE_EXTRAS_SYSTEM_BAR, false));
+
+        mUserModeUI = (ListPreference) findPreference(PREF_USER_MODE_UI);
+        int uiMode = Settings.System.getInt(cr,
+                Settings.System.CURRENT_UI_MODE, 0);
+        mUserModeUI.setValue(Integer.toString(Settings.System.getInt(cr,
+                Settings.System.USER_UI_MODE, uiMode)));
+        mUserModeUI.setOnPreferenceChangeListener(this);
+
         mDualPane = (CheckBoxPreference) findPreference(KEY_DUAL_PANE);
         boolean preferDualPane = getResources().getBoolean(
                 com.android.internal.R.bool.preferences_prefer_dual_pane);
-        boolean dualPaneMode = Settings.System.getInt(getActivity().getContentResolver(),
+        boolean dualPaneMode = Settings.System.getInt(cr,
                 Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
         mDualPane.setChecked(dualPaneMode);
         int statusBarBattery = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
@@ -178,7 +196,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mDualpane.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
                         Settings.System.FORCE_DUAL_PANEL, getResources().getBoolean(
                         com.android.internal.R.bool.preferences_prefer_dual_pane)));
-
     }
 
     private void openTransparencyDialog() {
@@ -234,6 +251,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             });
 
             alert.show();
+
+        } else if (preference == mHideExtras) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.HIDE_EXTRAS_SYSTEM_BAR,
+                    ((CheckBoxPreference) preference).isChecked());
+            return true;
         } else if (preference == mWakeUpWhenPluggedOrUnplugged) {
             Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
@@ -296,6 +319,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUS_BAR_SIGNAL_TEXT, signalStyle);
             mStatusBarSignal.setSummary(mStatusBarSignal.getEntries()[index]);
+            return true;
+        } else if (preference == mUserModeUI) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.USER_UI_MODE, Integer.parseInt((String) objValue));
+            Helpers.restartSystemUI();
             return true;
         }
         return false;
