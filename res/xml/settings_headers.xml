@@ -17,9 +17,9 @@
 <preference-headers
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <!-- WIRELESS and NETWORKS -->
-    <header android:id="@+id/wireless_section"
+    <header
+        android:id="@+id/wireless_section"
         android:title="@string/header_category_wireless_networks" />
 
     <!-- Wifi -->
@@ -64,14 +64,14 @@
     <!-- Theme chooser -->
     <header android:icon="@drawable/ic_settings_themes"
             android:title="@string/themes_title">
-        <intent
-                android:action="android.intent.action.MAIN"
+        <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.tmobile.themechooser"
                 android:targetClass="com.tmobile.themechooser.ThemeChooser" />
     </header>
 
     <!-- DEVICE -->
-    <header android:id="@+id/device_section"
+    <header
+        android:id="@+id/device_section"
         android:title="@string/header_category_device" />
 
     <!-- Sound -->
@@ -123,9 +123,9 @@
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
 
-
     <!-- PERSONAL -->
-    <header android:id="@+id/personal_section"
+    <header
+        android:id="@+id/personal_section"
         android:title="@string/header_category_personal" />
 
     <!-- Location -->
@@ -158,20 +158,27 @@
 
     <!--  ACCOUNTS section -->
     <header
-            android:id="@+id/account_settings"
-            android:title="@string/account_settings" />
+        android:id="@+id/account_settings"
+        android:title="@string/account_settings" />
 
     <header
-            android:id="@+id/account_add"
-            android:title="@string/add_account_label"
-            android:icon="@drawable/ic_menu_add">
-        <intent
-            android:action="android.settings.ADD_ACCOUNT_SETTINGS"/>
+        android:id="@+id/account_add"
+        android:title="@string/add_account_label"
+        android:icon="@drawable/ic_menu_add">
+        <intent android:action="android.settings.ADD_ACCOUNT_SETTINGS" />
     </header>
 
     <!-- SYSTEM -->
-    <header android:id="@+id/system_section"
+    <header
+        android:id="@+id/system_section"
         android:title="@string/header_category_system" />
+
+    <!-- Performance -->
+    <header
+        android:id="@+id/performance_settings"
+        android:fragment="com.android.settings.performance.PerformanceSettings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/performance_settings_title" />
 
     <!-- Date & Time -->
     <header
