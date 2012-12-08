@@ -61,7 +61,7 @@
     <dimen name="keyguard_appwidget_picker_margin_left">6dip</dimen>
     <dimen name="keyguard_appwidget_picker_margin_right">6dip</dimen>
     <integer name="keyguard_appwidget_picker_cols">1</integer>
-    
+
     <!-- height of a normal list item in edit playlist mode -->
     <dimen name="normal_height">64dip</dimen>
     <!-- height of an expanded list item in edit playlist mode -->
@@ -79,5 +79,8 @@
     <dimen name="navigation_bar_36">36.0dip</dimen>
     <dimen name="navigation_bar_30">30.0dip</dimen>
     <dimen name="navigation_bar_24">24.0dip</dimen>
+
+    <!-- Light settings dialog -->
+    <dimen name="dialog_light_settings_width">400dip</dimen>
 
 </resources>
