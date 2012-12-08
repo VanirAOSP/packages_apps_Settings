@@ -22,7 +22,7 @@
 	            android:key="@+id/navbar"
 	            android:title="@string/navigation_bar_title"
 	            android:summary="@string/navigation_bar_summary"
-	            android:fragment="com.android.settings.eclipse.fragments.Navbar" />
+	            android:fragment="com.android.settings.vanir.fragments.Navbar" />
 
         <com.android.settings.BrightnessPreference
                 android:key="brightness"

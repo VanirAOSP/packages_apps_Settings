@@ -16,10 +16,17 @@
 
 package com.android.settings.vanir.fragments;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.appwidget.AppWidgetHost;
 import android.appwidget.AppWidgetManager;
@@ -59,7 +66,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+//import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -71,13 +78,8 @@ import com.android.settings.util.Helpers;
 import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.widget.NavBarItemPreference;
 import com.android.settings.widget.SeekBarPreference;
-import com.android.settings.widget.TouchInterceptor;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
+import com.android.settings.vanir.NavRingTargets;
+//import com.android.settings.widget.TouchInterceptor;
 
 public class Navbar extends SettingsPreferenceFragment implements
             OnPreferenceChangeListener, ShortcutPickerHelper.OnPickListener {
@@ -95,11 +97,15 @@ public class Navbar extends SettingsPreferenceFragment implements
     private static final String NAVIGATION_BAR_WIDTH = "navigation_bar_width";
     private static final String PREF_MENU_UNLOCK = "pref_menu_display";
     private static final String PREF_NAVBAR_QTY = "navbar_qty";
+    private static final String PREF_NAVRING_AMOUNT = "pref_navring_amount";
+    private static final String ENABLE_NAVRING_LONG = "enable_navring_long";
 
     public static final int REQUEST_PICK_CUSTOM_ICON = 200;
     public static final int REQUEST_PICK_LANDSCAPE_ICON = 201;
 
     public static final String PREFS_NAV_BAR = "navbar";
+
+    Preference mNavRingTargets;
 
     // move these later
 	ColorPickerPreference mNavigationBarColor;
@@ -107,6 +113,8 @@ public class Navbar extends SettingsPreferenceFragment implements
     ListPreference mNavBarMenuDisplay;
     SeekBarPreference mButtonAlpha;
     ListPreference mNavBarButtonQty;
+    ListPreference mNavRingButtonQty;
+    CheckBoxPreference mEnableNavringLong;
 
     CheckBoxPreference mEnableNavigationBar;
     ListPreference mGlowTimes;
@@ -135,6 +143,8 @@ public class Navbar extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.prefs_navbar);
         PreferenceScreen prefs = getPreferenceScreen();
         mPicker = new ShortcutPickerHelper(this, this);
+        
+        mNavRingTargets = findPreference("navring_settings");
 
         menuDisplayLocation = (ListPreference) findPreference(PREF_MENU_UNLOCK);
         menuDisplayLocation.setOnPreferenceChangeListener(this);
@@ -147,6 +157,11 @@ public class Navbar extends SettingsPreferenceFragment implements
         mNavBarMenuDisplay.setValue(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.MENU_VISIBILITY,
                 0) + "");
+        
+        mNavRingButtonQty = (ListPreference) findPreference(PREF_NAVRING_AMOUNT);
+        mNavRingButtonQty.setOnPreferenceChangeListener(this);
+        mNavRingButtonQty.setValue(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SYSTEMUI_NAVRING_AMOUNT, 1) + "");
 
         mNavBarButtonQty = (ListPreference) findPreference(PREF_NAVBAR_QTY);
         mNavBarButtonQty.setOnPreferenceChangeListener(this);
@@ -249,6 +264,19 @@ public class Navbar extends SettingsPreferenceFragment implements
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             Helpers.restartSystemUI();
             return true;
+        } else if (preference == mEnableNavringLong) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.SYSTEMUI_NAVRING_LONG_ENABLE,
+                    ((CheckBoxPreference) preference).isChecked() ? true : false);
+            resetNavRingLong();
+            return true;
+        } else if (preference == mNavRingTargets) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            NavRingTargets fragment = new NavRingTargets();
+            ft.addToBackStack("config_nav_ring");
+            ft.replace(this.getId(), fragment);
+            ft.commit();
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -262,6 +290,14 @@ public class Navbar extends SettingsPreferenceFragment implements
         } else if (preference == mNavBarMenuDisplay) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.MENU_VISIBILITY, Integer.parseInt((String) newValue));
+            return true;
+        } else if (preference == mNavRingButtonQty) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SYSTEMUI_NAVRING_AMOUNT, val);
+            resetNavRing();
+            resetNavRingLong();
+            refreshSettings();
             return true;
         } else if (preference == mNavigationBarColor) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
@@ -352,6 +388,14 @@ public class Navbar extends SettingsPreferenceFragment implements
             return true;
         }
         return false;
+    }
+    
+    public void resetNavRing() {
+            // TODO : FIXME
+    }
+    
+    public void resetNavRingLong() {
+            // TODO : FIXME
     }
 
     public void toggleBar() {

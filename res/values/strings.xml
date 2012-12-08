@@ -4456,11 +4456,14 @@
     <string name="navbar_longpress_title">Button %1$s longpress action</string>
     <string name="navbar_button_cat">Navigation bar buttons</string>
     <string name="navbar_action_home">Home</string>
+    <string name="navbar_action_screenshot">Screenshot</string>
     <string name="navbar_action_back">Back</string>
     <string name="navbar_action_recents">Recents</string>
     <string name="navbar_action_search">Search</string>
     <string name="navbar_action_menu">Menu</string>
     <string name="navbar_action_kill">Kill task</string>
+    <string name="navbar_action_ime">Open IME Switcher</string>
+    <string name="navbar_action_notifications">Notifications</string>
     <string name="navbar_action_power">Power</string>
     <string name="navbar_action_none">Empty</string>
     <string name="navbar_enable_bar">Enable Navbar</string>
@@ -4474,7 +4477,60 @@
     <string name="group_applications">Applications</string>
     <string name="navigation_bar_summary">Add/remove softkeys, change color, glow speed</string>
     <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
+
     <string name="enable_fast_torch_title">Enable fast torch</string>
     <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on. 
 Letting go of the power button will turn the torch off.</string>
+
+    <string name="menu_nav_bar_reset">Reset nav bar</string> 
+    
+    <!-- Nav Ring Targets -->
+    <string name="navbar_ring_cat">Navigation Bar Ring Targets</string>
+    <string name="interface_softkey_settings">Softkey Settings</string>
+    <string name="interface_softkeys_pref_default_1_title">Target 1 short press activity</string>
+    <string name="interface_softkeys_pref_long_1_title">Target 1 long press activity</string>
+    <string name="interface_softkeys_pref_default_2_title">Target 2 short press activity</string>
+    <string name="interface_softkeys_pref_long_2_title">Target 2 long press activity</string>
+    <string name="interface_softkeys_pref_default_3_title">Target 3 short press activity</string>
+    <string name="interface_softkeys_pref_long_3_title">Target 3 long press activity</string>
+    <string name="interface_softkeys_pref_default_4_title">Target 4 short press activity</string>
+    <string name="interface_softkeys_pref_long_4_title">Target 4 long press activity</string>
+    <string name="interface_softkeys_pref_default_5_title">Target 5 short press activity</string>
+    <string name="interface_softkeys_pref_long_5_title">Target 5 long press activity</string>
+    <string name="interface_softkeys_pref_default_summary">Tap the settings icon to select a custom long press activity</string>
+    <string name="interface_softkeys_activity_dialog_title">Select Activity</string>
+    <string name="interface_softkeys_reboot_title">Reboot Menu</string>
+    <string name="interface_softkeys_screenshot_title">Screenshot</string>
+    <string name="interface_softkeys_screenoff_title">Screen Off</string>
+    <string name="interface_softkeys_ime_switcher_title">Open IME Switcher</string>
+    <string name="interface_softkeys_ring_vib_title">Toggle Ring/Vib</string>
+    <string name="interface_softkeys_ring_silent_title">Toggle Ring/Silent</string>
+    <string name="interface_softkeys_ring_vib_silent_title">Toggle Ring/Vib/Silent</string>
+    <string name="interface_softkeys_kill_process_title">Kill App</string>
+    <string name="interface_softkey_package_removed">The previously selected package was not found</string>
+    <string name="interface_navring_settings_title">Navigation bar ring</string>
+    <string name="interface_navring_settings_summary">Edit your custom nav ring apps</string>
+    <string name="title_navring_amount">Number of nav ring targets</string>
+    <string name="summary_navring_amount">How many ring targets you want? *Changing this will reset your current targets and restart your System UI*</string>
+    <string name="interface_navring_custom_pref_summary">Release on target to launch </string>
+    <string name="interface_navring_pref_default_summary">Tap to select a custom ring target activity</string>
+    <string name="interface_navring_assist_title">Google Now</string>
+    <string name="interface_navring">Ring Targets</string>
+    <string name="navbar_ring">Custom Ring Targets</string>
+    <string name="navring_enable_long">Enable Longpress for navring</string>
+    <string name="one_target">1 target</string>
+    <string name="two_targets">2 targets</string>
+    <string name="three_targets">3 targets</string>
+    <string name="four_targets">4 targets</string>
+    <string name="five_targets">5 targets</string>
+    <string name="none">None</string>
+    <string name="take_screenshot">Take Screenshot</string>
+    <string name="open_ime_switcher">Open IME Switcher</string>
+    <string name="ring_vib">Ring/Vib</string>
+    <string name="ring_silent">Ring/Silent</string>
+    <string name="ring_vib_silent">Ring/Vib/Silent</string>
+    <string name="kill_app">Kill app</string>
+    <string name="screen_off">Screen Off</string>
+    <string name="google_now">Google Now</string>
+
 </resources>

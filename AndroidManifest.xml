@@ -1514,7 +1514,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".eclipse.fragments.Navbar"
+        <activity android:name=".vanir.fragments.Navbar"
             android:label="Navigation Bar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

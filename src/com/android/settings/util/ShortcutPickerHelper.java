@@ -130,7 +130,7 @@ public class ShortcutPickerHelper {
                     final int id = resources.getIdentifier(iconResource.resourceName, null, null);
                     bmp = BitmapFactory.decodeResource(resources, id);
                 } catch (Exception e) {
-                    Log.w("eclipse.ShortcutPicker", "Could not load shortcut icon: " + extra);
+                    Log.w("vanir.ShortcutPicker", "Could not load shortcut icon: " + extra);
                 }
             }
         }

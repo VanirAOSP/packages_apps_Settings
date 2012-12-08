@@ -891,9 +891,12 @@
         <item>Back</item>
         <item>Recents</item>
         <item>Search</item>
+        <item>Screenshot</item>
         <item>Menu</item>
+        <item>open_ime_switcher</item>
         <item>Kill app</item>
 	    <item>Power</item>
+	    <item>notifications</item>
         <item>Custom app</item>
         <item>Blank</item>
     </string-array>
@@ -903,11 +906,53 @@
         <item>**back**</item>
         <item>**recents**</item>
         <item>**search**</item>
+        <item>**screenshot**</item>
         <item>**menu**</item>
+        <item>**ime**</item>
         <item>**kill**</item>
         <item>**power**</item>
+        <item>**notifications**</item>
         <item>**app**</item>
         <item>**null**</item>
+    </string-array>
+    
+    <string-array name="navring_dialog_entries" translatable="false">
+        <item>@string/none</item>
+        <item>@string/take_screenshot</item>
+        <item>@string/open_ime_switcher</item>
+        <item>@string/ring_vib</item>
+        <item>@string/ring_silent</item>
+        <item>@string/ring_vib_silent</item>
+        <item>@string/kill_app</item>
+        <item>@string/screen_off</item>
+        <item>@string/google_now</item>
+        <item>@string/select_application</item>
+    </string-array>
+    <string-array name="navring_dialog_values" translatable="false">
+        <item>**null**</item>
+        <item>**screenshot**</item>
+        <item>**ime**</item>
+        <item>**ring_vib**</item>
+        <item>**ring_silent**</item>
+        <item>**ring_vib_silent**</item>
+        <item>**kill**</item>
+        <item>**power**</item>
+        <item>**assist**</item>
+        <item>**app**</item>
+    </string-array>
+    <string-array name="pref_navring_amount_entries" translatable="false">
+        <item>@string/one_target</item>
+        <item>@string/two_targets</item>
+        <item>@string/three_targets</item>
+        <item>@string/four_targets</item>
+        <item>@string/five_targets</item>
+    </string-array>
+    <string-array name="pref_navring_amount_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="recent_app_switcher_entries">
