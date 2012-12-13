@@ -21,6 +21,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast; 
 
@@ -33,12 +36,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+
+import com.android.settings.util.CMDProcessor.CommandResult;
 
 public class Helpers {
 
@@ -118,7 +124,7 @@ public class Helpers {
         }
         return null;
     }
-    
+
     public static boolean getMount(final String mount)
     {
         final CMDProcessor cmd = new CMDProcessor();
@@ -136,7 +142,7 @@ public class Helpers {
         }
         return ( cmd.su.runWaitFor("busybox mount -o remount," + mount + " /system").success() );
     }
-    
+
     public static String getFile(final String filename) {
         String s = "";
         final File f = new File(filename);
@@ -158,7 +164,7 @@ public class Helpers {
         }
         return s;
     }
-    
+
     public static void writeNewFile(String filePath, String fileContents) {
         File f = new File(filePath);
         if (f.exists()) {
@@ -212,7 +218,24 @@ public class Helpers {
             msgLong(c, msg);
         }
     }
-    
+
+    /**
+     * Return a timestamp
+     *
+     * @param c Application Context
+     */
+    public static String getTimestamp(final Context context) {
+        String timestamp;
+        timestamp = "unknown";
+        Date now = new Date();
+        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+        java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(context);
+        if(dateFormat != null && timeFormat != null) {
+            timestamp = dateFormat.format(now) + " " + timeFormat.format(now);
+        }
+        return timestamp;
+    }
+
     public static boolean isPackageInstalled(final String packageName,
             final PackageManager pm)
     {
@@ -226,6 +249,28 @@ public class Helpers {
             return false;
         }       
         return true;
+    }
+
+    public static void restartSystemUI() {
+        new CMDProcessor().su.run("pkill -TERM -f com.android.systemui");
+    }
+
+    public static void setSystemProp(String prop, String val) {
+        new CMDProcessor().su.run("setprop " + prop + " " + val);
+    }
+
+    public static String getSystemProp(String prop, String def) {
+        String result = getSystemProp(prop);
+        return result == null ? def : result;
+    }
+
+    private static String getSystemProp(String prop) {
+        CommandResult cr = new CMDProcessor().sh.runWaitFor("getprop " + prop);
+        if (cr.success()) {
+            return cr.stdout;
+        } else {
+            return null;
+        }
     }
 
     /*
@@ -301,9 +346,6 @@ public class Helpers {
         return onOff;
     }
 
-    public static void restartSystemUI() {
-        new CMDProcessor().su.run("pkill -TERM -f com.android.systemui");
-    }
 
     public static boolean isScreenLarge() {
         final int screenSize = Resources.getSystem().getConfiguration().screenLayout &
@@ -312,4 +354,58 @@ public class Helpers {
             screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE;
         return isScreenLarge;
     }
+    public static int isETouchWake() {
+        int etouchonOff = 0;
+        String line = "";
+        final String filename = "/sys/class/misc/touchwake/enabled";
+        final File f = new File(filename);
+
+        if (f.exists() && f.canRead()) {
+            try {
+                final BufferedReader br = new BufferedReader(new FileReader(f), 256);
+                String buffer = null;
+                while ((buffer = br.readLine()) != null) {
+                    line += buffer + "\n";
+                    try {
+                        etouchonOff = Integer.parseInt(buffer);
+                    } catch (NumberFormatException nfe) {
+                        etouchonOff = 0;
+                    }
+                }
+                br.close();
+            } catch (final Exception e) {
+                Log.e(TAG, "Error reading file: " + filename, e);
+                etouchonOff = 0;
+            }
+        }
+        return etouchonOff;
+    }
+
+    public static int isESoundControl() {
+        int esoundonOff = 0;
+        String line = "";
+        final String filename = "/sys/class/misc/soundcontrol/highperf_enabled";
+        final File f = new File(filename);
+
+        if (f.exists() && f.canRead()) {
+            try {
+                final BufferedReader br = new BufferedReader(new FileReader(f), 256);
+                String buffer = null;
+                while ((buffer = br.readLine()) != null) {
+                    line += buffer + "\n";
+                    try {
+                        esoundonOff = Integer.parseInt(buffer);
+                    } catch (NumberFormatException nfe) {
+                        esoundonOff = 0;
+                    }
+                }
+                br.close();
+            } catch (final Exception e) {
+                Log.e(TAG, "Error reading file: " + filename, e);
+                esoundonOff = 0;
+            }
+        }
+        return esoundonOff;
+    }
+
 }

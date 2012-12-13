@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -44,6 +44,16 @@ public class ShortcutPickerHelper {
     public static final int REQUEST_CREATE_SHORTCUT = 102;
 
     public interface OnPickListener {
+
+        /**
+         * Callback after a shortcut is picked
+         *
+         * @param uri Intent for the shortcut
+         * @param friendlyName Title
+         * @param icon Icon for the shortcut, or null
+         * @param isApplication true for standard app, false for "shortcut"
+         */
+
         void shortcutPicked(String uri, String friendlyName, Bitmap icon, boolean isApplication);
     }
 
@@ -70,6 +80,7 @@ public class ShortcutPickerHelper {
 
     public void pickShortcut() {
         Bundle bundle = new Bundle();
+
         ArrayList<String> shortcutNames = new ArrayList<String>();
         shortcutNames.add(mParent.getString(R.string.group_applications));
         bundle.putStringArrayList(Intent.EXTRA_SHORTCUT_NAME, shortcutNames);
@@ -148,6 +159,7 @@ public class ShortcutPickerHelper {
                 friendlyName = ai.name;
             }
         }
+
         return friendlyName != null || labelOnly ? friendlyName : intent.toUri(0);
     }
 
@@ -177,4 +189,3 @@ public class ShortcutPickerHelper {
         return uri;
     }
 }
-

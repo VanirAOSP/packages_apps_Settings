@@ -42,5 +42,4 @@
 		android:gravity="fill_horizontal"
 		android:textAppearance="?android:attr/textAppearanceMedium" />
 
-
 </LinearLayout>

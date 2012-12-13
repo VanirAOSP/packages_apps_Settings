@@ -103,5 +103,10 @@
         android:title="@string/title_quick_quicksettings"
         android:summary="@string/summary_quick_quicksettings"
         android:defaultValue="false" />
+        
+    <PreferenceScreen
+        android:key="general_ui_settings"
+        android:fragment="com.android.settings.vanir.fragments.UserInterface"
+        android:title="@string/title_ui" />
 
 </PreferenceScreen>
