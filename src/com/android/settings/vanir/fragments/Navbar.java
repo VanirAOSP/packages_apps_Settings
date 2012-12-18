@@ -91,6 +91,7 @@ public class Navbar extends SettingsPreferenceFragment implements
     private static final String PREF_EANBLED_BUTTONS = "enabled_buttons";
     private static final String PREF_NAVBAR_MENU_DISPLAY = "navbar_menu_display";
     private static final String PREF_NAV_COLOR = "nav_button_color";
+    private static final String PREF_NAV_GLOW_COLOR = "nav_button_glow_color";
     private static final String PREF_GLOW_TIMES = "glow_times";
     private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
     private static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
@@ -109,6 +110,7 @@ public class Navbar extends SettingsPreferenceFragment implements
 
     // move these later
 	ColorPickerPreference mNavigationBarColor;
+	ColorPickerPreference mNavigationBarGlowColor;
     ListPreference menuDisplayLocation;
     ListPreference mNavBarMenuDisplay;
     SeekBarPreference mButtonAlpha;
@@ -169,11 +171,21 @@ public class Navbar extends SettingsPreferenceFragment implements
                 Settings.System.NAVIGATION_BAR_BUTTONS_QTY, 3) + "");
 
         mPicker = new ShortcutPickerHelper(this, this);
-	    mNavigationBarColor = (ColorPickerPreference) findPreference(PREF_NAV_COLOR);
- 	    mNavigationBarColor.setOnPreferenceChangeListener(this);
+	    
+	    boolean hasNavBarByDefault = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_showNavigationBar);
+        mEnableNavigationBar = (CheckBoxPreference) findPreference("enable_nav_bar");
+        mEnableNavigationBar.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_SHOW, hasNavBarByDefault ? 1 : 0) == 1);
 
-	mGlowTimes = (ListPreference) findPreference(PREF_GLOW_TIMES);
- 		mGlowTimes.setOnPreferenceChangeListener(this);
+        mNavigationBarColor = (ColorPickerPreference) findPreference(PREF_NAV_COLOR);
+        mNavigationBarColor.setOnPreferenceChangeListener(this);
+
+    mNavigationBarGlowColor = (ColorPickerPreference) findPreference(PREF_NAV_GLOW_COLOR);
+    mNavigationBarGlowColor.setOnPreferenceChangeListener(this);
+    mGlowTimes = (ListPreference) findPreference(PREF_GLOW_TIMES);
+    mGlowTimes.setOnPreferenceChangeListener(this);
+    updateGlowTimesSummary();
 
         float defaultAlpha = Settings.System.getFloat(getActivity()
                 .getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTON_ALPHA, 0.6f);
@@ -181,13 +193,8 @@ public class Navbar extends SettingsPreferenceFragment implements
         mButtonAlpha.setInitValue((int) (defaultAlpha * 100));
         mButtonAlpha.setOnPreferenceChangeListener(this);
 
-        boolean hasNavBarByDefault = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_showNavigationBar);
-        mEnableNavigationBar = (CheckBoxPreference) findPreference("enable_nav_bar");
-        mEnableNavigationBar.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, hasNavBarByDefault ? 1 : 0) == 1);
-
-        if (hasNavBarByDefault || mTablet) {
+        // don't allow devices that must use a navigation bar to disable it
+        if (hasNavBarByDefault) {
             prefs.removePreference(mEnableNavigationBar);
         }
 
@@ -199,10 +206,6 @@ public class Navbar extends SettingsPreferenceFragment implements
 
         mNavigationBarWidth = (ListPreference) findPreference("navigation_bar_width");
         mNavigationBarWidth.setOnPreferenceChangeListener(this);
-
-        if (mTablet) {
-            prefs.removePreference(mNavBarMenuDisplay);
-        }
 
         refreshSettings();
         setHasOptionsMenu(true);
@@ -221,13 +224,8 @@ public class Navbar extends SettingsPreferenceFragment implements
             case R.id.reset:
                 Settings.System.putInt(getActivity().getContentResolver(),
                         Settings.System.NAVIGATION_BAR_TINT, Integer.MIN_VALUE);
-
-                Settings.System.putFloat(getActivity().getContentResolver(),
-                        Settings.System.NAVIGATION_BAR_BUTTON_ALPHA, 0.6f);
-                mButtonAlpha.setValue(60);
                 Settings.System.putInt(getActivity().getContentResolver(),
-                        Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, mContext.getResources().getBoolean(
-                                com.android.internal.R.bool.config_showNavigationBar) ? 1 : 0);
+                        Settings.System.NAVIGATION_BAR_GLOW_TINT, Integer.MIN_VALUE);
                 Settings.System.putInt(getActivity().getContentResolver(),
                         Settings.System.NAVIGATION_BAR_BUTTONS_QTY, 3);
                 Settings.System.putString(getActivity().getContentResolver(),
@@ -260,7 +258,7 @@ public class Navbar extends SettingsPreferenceFragment implements
             Preference preference) {
         if (preference == mEnableNavigationBar) {
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_BUTTONS_SHOW,
+                    Settings.System.NAVIGATION_BAR_SHOW,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             Helpers.restartSystemUI();
             return true;
@@ -298,38 +296,12 @@ public class Navbar extends SettingsPreferenceFragment implements
             resetNavRing();
             resetNavRingLong();
             refreshSettings();
-            return true;
-        } else if (preference == mNavigationBarColor) {
-            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
-                    .valueOf(newValue)));
-            preference.setSummary(hex);
-            int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_TINT, intHex);
-            return true;
+            return true;      
         } else if (preference == mNavBarButtonQty) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.NAVIGATION_BAR_BUTTONS_QTY, val);
             refreshSettings();
-            return true;
-        } else if (preference == mGlowTimes) {
- 	 // format is (on|off) both in MS
- 	    String value = (String) newValue;
- 	    String[] breakIndex = value.split("\\|");
- 	    int onTime = Integer.valueOf(breakIndex[0]);
- 	    int offTime = Integer.valueOf(breakIndex[1]);
- 	 
-	    Settings.System.putInt(getActivity().getContentResolver(),
- 		Settings.System.NAVIGATION_BAR_GLOW_DURATION[0], offTime);
- 	    Settings.System.putInt(getActivity().getContentResolver(),
- 	 	Settings.System.NAVIGATION_BAR_GLOW_DURATION[1], onTime);
- 	    updateGlowTimesSummary();
- 	    return true;
-        } else if (preference == mButtonAlpha) {
-            float val = Float.parseFloat((String) newValue);
-            Settings.System.putFloat(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_BUTTON_ALPHA, val / 100);
             return true;
         } else if (preference == mNavigationBarWidth) {
             String newVal = (String) newValue;
@@ -386,6 +358,43 @@ public class Navbar extends SettingsPreferenceFragment implements
             }
             refreshSettings();
             return true;
+             } else if (preference == mNavigationBarColor) {
+
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_TINT, intHex);
+            return true;
+        } else if (preference == mNavigationBarGlowColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_GLOW_TINT, intHex);
+            return true;
+        } else if (preference == mGlowTimes) {
+            // format is (on|off) both in MS
+            String value = (String) newValue;
+            String[] breakIndex = value.split("\\|");
+            int onTime = Integer.valueOf(breakIndex[0]);
+            int offTime = Integer.valueOf(breakIndex[1]);
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[0], offTime);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[1], onTime);
+            updateGlowTimesSummary();
+            return true;
+        } else if (preference == mButtonAlpha) {
+            float val = Float.parseFloat((String) newValue);
+            Log.e("R", "value: " + val * 0.01f);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_BUTTON_ALPHA,
+                    val * 0.01f);
+            return true;
         }
         return false;
     }
@@ -402,9 +411,9 @@ public class Navbar extends SettingsPreferenceFragment implements
         boolean isBarOn = Settings.System.getInt(getContentResolver(),
                 Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, 1) == 1;
         Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, isBarOn ? 0 : 1);
+                Settings.System.NAVIGATION_BAR_SHOW, isBarOn ? 0 : 1);
         Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, isBarOn ? 1 : 0);
+                Settings.System.NAVIGATION_BAR_SHOW, isBarOn ? 1 : 0);
     }
 
     private void updateGlowTimesSummary() {
