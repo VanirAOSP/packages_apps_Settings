@@ -1814,6 +1814,7 @@
         <activity android:name=".vanir.NavRingTargets" />
         <activity android:name=".vanir.NavBarItemPreference" />
         <activity android:name=".vanir.NotificationDrawerStyle" />
+        <activity android:name=".vanir.fragments.BatteryBar" />
         <activity android:name=".widget.fragments.WidgetConfigurationFragment" />
         <activity android:name=".widget.SeekBarPreference" />
         <activity android:name=".widget.TouchInterceptor" />
