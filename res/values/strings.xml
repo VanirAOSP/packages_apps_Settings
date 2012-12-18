@@ -4688,4 +4688,6 @@ Letting go of the power button will turn the torch off.</string>
     <string name="saved">mV saved</string>
     <string name="sob">Set on boot</string>
  
+    <string name="keyguard_picker_all_widgets_title">Show all widgets</string>
+
 </resources>
