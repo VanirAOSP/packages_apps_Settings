@@ -4874,4 +4874,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="adb_icon">USB debugging icon</string>
     <string name="adb_icon_summary">Display a notification icon when USB debugging is connected</string>
 
+    <!-- Wireless display -->
+    <string name="pref_wifi_disable_hdcp_title">Skip HDCP negotiation</string>
+    <string name="pref_wifi_disable_hdcp_summary">Try this option if you can connect but don\'t get any output</string>
+
 </resources>
