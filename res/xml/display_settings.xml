@@ -90,6 +90,12 @@
         <CheckBoxPreference
              android:key="battery_percentage"
              android:title="@string/title_battery_percentage"
-             android:defaultValue="false" />	
+             android:defaultValue="false" />
+
+        <CheckBoxPreference
+             android:key="quick_quicksettings"
+             android:title="@string/title_quick_quicksettings"
+             android:summary="@string/summary_quick_quicksettings"
+             android:defaultValue="false" />
 
 </PreferenceScreen>

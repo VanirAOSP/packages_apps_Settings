@@ -71,6 +71,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_ENABLE = "clock_style";
 
+    private static final String KEY_QUICK_QS = "quick_quicksettings";
+
     private DisplayManager mDisplayManager;
 
     private CheckBoxPreference mAccelerometer;
@@ -79,6 +81,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
+    private CheckBoxPreference mQuickQS;
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -190,6 +193,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
+
+        mQuickQS = (CheckBoxPreference)findPreference(KEY_QUICK_QS);
+        mQuickQS.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.QS_QUICK_PULLDOWN, 0) == 1);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -403,6 +409,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else if (preference == mFastTorch) {
             boolean value = mFastTorch.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
+        } else if (preference == mQuickQS) {
+            int val = mQuickQS.isChecked() ? 1 : 0;
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.QS_QUICK_PULLDOWN, val);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
