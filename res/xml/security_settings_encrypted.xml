@@ -24,5 +24,11 @@
             style="?android:preferenceInformationStyle"
             android:title="@string/crypt_keeper_encrypt_title"
             android:summary="@string/crypt_keeper_encrypted_summary" />
+
+        <CheckBoxPreference
+            android:key="lock_sync_encryption_password"
+            android:title="@string/lockpattern_settings_enable_sync_enc_pass"
+        />
+
     </PreferenceCategory>
 </PreferenceScreen>
