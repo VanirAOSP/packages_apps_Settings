@@ -23,6 +23,12 @@
 	            android:title="@string/navigation_bar_title"
 	            android:summary="@string/navigation_bar_summary"
 	            android:fragment="com.android.settings.vanir.fragments.Navbar" />
+	            
+	    <PreferenceScreen
+	            android:key="@+id/statusbar"
+	            android:title="@string/status_bar_title"
+	            android:summary="@string/status_bar_summary" 
+	            android:fragment="com.android.settings.vanir.fragments.Statusbar"/>        
 
         <com.android.settings.BrightnessPreference
                 android:key="brightness"

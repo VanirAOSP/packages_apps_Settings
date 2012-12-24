@@ -1525,6 +1525,32 @@
                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name=".fragments.StatusBarToggles"
+            android:label="@string/title_statusbar_toggles" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.aokp.romcontrol.SHORTCUT" />
+            </intent-filter>
+        </activity>
+<!--        
+        <activity
+            android:name=".fragments.Vibrations"
+            android:label="@string/vibrations" >
+
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+
+                 <category android:name="com.android.settings.SHORTCUT" />
+             </intent-filter>
+         </activity>
+         
+         <provider
+            android:name=".vanir.VibrationsProvider"
+            android:authorities="com.android.settings.vanir.Vibrations"
+            android:exported="true" />  -->
 
         <!-- Performance Settings -->
         <activity android:name=".performance.PowerWidget" />

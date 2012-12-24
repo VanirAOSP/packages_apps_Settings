@@ -87,4 +87,11 @@
         <attr name="seekbar_interval" format="integer" />
         <attr name="seekbar_default_value" format="integer" />
     </declare-styleable>
+    
+    
+    <declare-styleable name="ImageListPreference">
+        <attr name="summaryImage" format="reference" />
+        <attr name="entryImages" format="reference" />
+    </declare-styleable>
+    
 </resources>
