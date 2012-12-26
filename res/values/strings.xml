@@ -1809,7 +1809,7 @@
 
     <!-- pulldown in right-most 30% of navbar == straight to quicksettings -->
     <string name="title_quick_quicksettings">Quicksettings quick pulldown</string>
-    <string name="summary_quick_quicksettings">(right 30% of width)</string>
+    <string name="summary_quick_quicksettings">QS panel from right 30% of width of status bar</string>
 
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>
