@@ -4637,13 +4637,12 @@ Letting go of the power button will turn the torch off.</string>
     <string name="toggle_airplane_mode">Airplane Mode</string>
     <string name="toggle_auto_rotate">Auto Rotate</string>
     <string name="toggle_bluetooth">Bluetooth</string>
-    <string name="toggle_fast_charge">Fast Charge</string>
+    <string name="toggle_fcharge">Fast Charge</string>
     <string name="toggle_gps">GPS</string>
     <string name="toggle_lte">LTE</string>
     <string name="toggle_data">Data</string>
     <string name="toggle_nfc">NFC</string>
     <string name="toggle_silent">Silent</string>
-    <string name="toggle_swagger">Swagger</string>
     <string name="toggle_sync">Sync</string>
     <string name="toggle_torch">Torch</string>
     <string name="toggle_2g">2G</string>
