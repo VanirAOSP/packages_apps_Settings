@@ -82,16 +82,16 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mUse16bppAlphaPref) {
             SystemProperties.set(USE_16BPP_ALPHA_PROP, mUse16bppAlphaPref.isChecked() ? "1" : "0");
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
+            return true;
         }
         
         if (preference == mPurgeableAssetsPref) {
             SystemProperties.set(PURGEABLE_ASSETS_PERSIST_PROP,
                     mPurgeableAssetsPref.isChecked() ? "1" : "0");
-            return super.onPreferenceTreeClick(preferenceScreen, preference);        
+            return true;
         }
 
-        return false;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
