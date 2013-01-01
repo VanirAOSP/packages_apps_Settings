@@ -15,29 +15,26 @@
 -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/bluetooth_device_advanced_title">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/bluetooth_device_advanced_title">
 
     <EditTextPreference
-            android:key="rename_device"
-            android:title="@string/bluetooth_device_advanced_rename_device"
-            android:order="20"
-            android:persistent="false" />
+        android:key="rename_device"
+        android:title="@string/bluetooth_device_advanced_rename_device"
+        android:order="20"
+        android:persistent="false" />
 
     <Preference
-            android:key="unpair"
-            android:title="@string/bluetooth_device_context_unpair"
-            android:order="40"
-            android:persistent="false"
-            />
+        android:key="unpair"
+        android:title="@string/bluetooth_device_context_unpair"
+        android:order="40"
+        android:persistent="false" />
 
     <PreferenceCategory
-            android:key="profile_container"
-            android:order="100"
-            android:title="@string/bluetooth_device_advanced_profile_header_title">
+        android:key="profile_container"
+        android:order="100"
+        android:title="@string/bluetooth_device_advanced_profile_header_title">
 
         <!-- Profile checkboxes will be added here programmatically. -->
-        
     </PreferenceCategory>
-
 </PreferenceScreen>

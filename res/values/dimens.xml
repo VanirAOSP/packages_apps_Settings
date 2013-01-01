@@ -47,7 +47,7 @@
     <dimen name="divider_margin_top">6dip</dimen>
     <dimen name="divider_margin_bottom">7dip</dimen>
 
-    <!--  Size of icons in the top-level of settings  -->
+    <!--  Size of icons in the top-level of settings -->
     <dimen name="header_icon_width">28dp</dimen>
     <dimen name="appwidget_min_width">260dip</dimen>
     <dimen name="appwidget_min_height">40dip</dimen>

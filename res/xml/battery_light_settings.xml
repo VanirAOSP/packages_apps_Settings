@@ -30,12 +30,11 @@
             android:key="battery_low_pulse"
             android:title="@string/battery_low_pulse_title"
             android:persistent="false" />
-
         </PreferenceCategory>
 
     <PreferenceCategory
         android:key="colors_list"
-        android:title="@string/battery_light_list_title" >
+        android:title="@string/battery_light_list_title">
 
         <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="low_color"
@@ -53,5 +52,4 @@
             android:persistent="false" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>

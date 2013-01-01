@@ -19,4 +19,3 @@
     <item settings:state_encrypted="true" android:drawable="@drawable/wifi_signal_lock" />
     <item settings:state_encrypted="false" android:drawable="@drawable/wifi_signal_open" />
 </selector>
-

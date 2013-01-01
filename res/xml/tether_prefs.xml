@@ -35,5 +35,4 @@
         android:key="enable_bluetooth_tethering"
         android:title="@string/bluetooth_tether_checkbox_text"
         android:persistent="false" />
-
 </PreferenceScreen>

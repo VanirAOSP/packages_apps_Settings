@@ -62,8 +62,9 @@
     <header android:title="@string/shortcuts_title" />
 
     <!-- Theme chooser -->
-    <header android:icon="@drawable/ic_settings_themes"
-            android:title="@string/themes_title">
+    <header
+        android:icon="@drawable/ic_settings_themes"
+        android:title="@string/themes_title">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.tmobile.themechooser"
                 android:targetClass="com.tmobile.themechooser.ThemeChooser" />
@@ -156,7 +157,7 @@
         android:title="@string/privacy_settings"
         android:id="@+id/privacy_settings" />
 
-    <!--  ACCOUNTS section -->
+    <!-- ACCOUNTS section -->
     <header
         android:id="@+id/account_settings"
         android:title="@string/account_settings" />

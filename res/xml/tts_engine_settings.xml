@@ -15,6 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" android:title="">
+
     <ListPreference
         android:key="tts_default_lang"
         android:title="@string/tts_default_lang_title"

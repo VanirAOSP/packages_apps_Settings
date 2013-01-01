@@ -18,6 +18,5 @@
     android:minWidth="@dimen/appwidget_min_width"
     android:minHeight="@dimen/appwidget_min_height"
     android:previewImage="@drawable/preview"
-    android:initialLayout="@layout/widget"
-    >
+    android:initialLayout="@layout/widget">
 </appwidget-provider>

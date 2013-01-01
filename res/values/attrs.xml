@@ -21,7 +21,7 @@
     <declare-styleable name="IconPreferenceScreen">
         <attr name="icon" format="reference" />
     </declare-styleable>
-    
+
     <declare-styleable name="BatteryHistoryChart">
         <!-- Base text color, typeface, size, and style. -->
         <attr name="android:textAppearance" />
@@ -81,17 +81,17 @@
         <attr name="fillColor" format="color" />
         <attr name="fillColorSecondary" format="color" />
     </declare-styleable>
+
     <declare-styleable name="SeekBarPreference">
         <attr name="seekbar_max" format="integer" />
         <attr name="seekbar_min" format="integer" />
         <attr name="seekbar_interval" format="integer" />
         <attr name="seekbar_default_value" format="integer" />
     </declare-styleable>
-    
-    
+
     <declare-styleable name="ImageListPreference">
         <attr name="summaryImage" format="reference" />
         <attr name="entryImages" format="reference" />
     </declare-styleable>
-    
+
 </resources>

@@ -108,7 +108,7 @@
         <item>1800000</item>
     </string-array>
 
-    <!-- Security settings.  The delay after screen is turned off until device locks. 
+    <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
         <item>Immediately</item>
@@ -294,8 +294,8 @@
         <item>@string/wifi_security_psk_generic</item>
     </string-array>
 
-   <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_security" translatable="false">
         <item>Open</item>
         <!-- Do not translate. -->
@@ -317,8 +317,8 @@
         <item>PWD</item>
     </string-array>
 
-   <!-- Wi-Fi WPS setup for p2p connections.  -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi WPS setup for p2p connections.  -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_p2p_wps_setup">
         <!-- Push button based configuration involves pushing a button on two connecting devices [CHAR LIMIT=30]-->
         <item>Push button</item>
@@ -434,8 +434,8 @@
         <item>GTC</item>
     </string-array>
 
-   <!-- Wi-Fi IP settings. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi IP settings. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ip_settings">
         <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
         <item>DHCP</item>
@@ -890,8 +890,8 @@
         <item>Menu</item>
         <item>open_ime_switcher</item>
         <item>Kill app</item>
-	    <item>Power</item>
-	    <item>notifications</item>
+        <item>Power</item>
+        <item>notifications</item>
         <item>Custom app</item>
         <item>Blank</item>
     </string-array>
@@ -910,7 +910,7 @@
         <item>**app**</item>
         <item>**null**</item>
     </string-array>
-    
+
     <string-array name="navring_dialog_entries" translatable="false">
         <item>@string/none</item>
         <item>@string/take_screenshot</item>
@@ -959,7 +959,7 @@
     <string-array name="recent_app_switcher_values" translatable="false">
         <item>0</item>
         <item>1</item>
-	<item>2</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="clock_style_entries">
@@ -970,7 +970,7 @@
 
     <string-array name="clock_style_values" translatable="false">
         <item>1</item>
-	<item>2</item>
+        <item>2</item>
         <item>0</item>
     </string-array>
 
@@ -989,16 +989,16 @@
     </string-array>
 
     <string-array name="pref_navigation_menu_entries">
-	<item>Right</item>
-	<item>Left</item>
-	<item>Both</item>
+        <item>Right</item>
+        <item>Left</item>
+        <item>Both</item>
         <item>Remove</item>
     </string-array>
 
     <string-array name="pref_navigation_menu_values">
-	<item>0</item>
-	<item>1</item>
-	<item>2</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
         <item>4</item>
     </string-array>
 
@@ -1006,15 +1006,15 @@
         <item>Normal</item>
         <item>Small</item>
         <item>None (default)</item>
-    </string-array>    
+    </string-array>
 
     <string-array name="pref_navigation_menu_display_entries">
-	<item>Default</item>
-	<item>Invisible Icons</item>
-	<item>Always Show</item>
-	<item>Both Behaviours</item>
+        <item>Default</item>
+        <item>Invisible Icons</item>
+        <item>Always Show</item>
+        <item>Both Behaviours</item>
     </string-array>
-	    
+
     <string-array name="values_status_bar_am_pm" translatable="false">
         <item>0</item>
         <item>1</item>
@@ -1022,10 +1022,10 @@
     </string-array>
 
     <string-array name="pref_navigation_menu_display_values">
-	<item>0</item>
-	<item>1</item>
-	<item>2</item>
-	<item>3</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="glow_times_entries">
@@ -1048,7 +1048,7 @@
         <item>@string/dithering_color_banding</item>
         <item>@string/dithering_blur_effect</item>
     </string-array>
-        
+
     <!-- Values for the notification light pulse spinners -->
     <string-array name="notification_pulse_length_entries">
         <item>@string/pulse_length_always_on</item>
@@ -1065,7 +1065,7 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="notification_pulse_length_values" translatable="false"> 
+    <string-array name="notification_pulse_length_values" translatable="false">
         <item>0</item>
         <item>250</item>
         <item>500</item>
@@ -1089,7 +1089,7 @@
         <item>2500</item>
         <item>5000</item>
     </string-array>
-    
+
     <!-- Generic toggle overlay. Should be set per device in overlay -->
     <string-array name="available_toggles_entries" translatable="false">
         <item>USER</item>
@@ -1116,7 +1116,8 @@
         <item>2G</item>
         <item>LTE</item>
     </string-array>
-    <string-array name="available_toggles_values" translatable="false">       
+
+    <string-array name="available_toggles_values" translatable="false">
         <item>@string/toggle_user</item>
         <item>@string/toggle_favorite_contact</item>
         <item>@string/toggle_brightness</item>
@@ -1141,7 +1142,7 @@
         <item>@string/toggle_2g</item>
         <item>@string/toggle_lte</item>
     </string-array>
-    
+
     <!-- Toggles per row -->
     <string-array name="toggles_per_row_entries" translatable="false">
         <item>3</item>
@@ -1153,5 +1154,5 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    
+
 </resources>

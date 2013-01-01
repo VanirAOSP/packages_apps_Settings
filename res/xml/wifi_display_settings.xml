@@ -16,6 +16,5 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/wifi_display_settings_title" >
-
+    android:title="@string/wifi_display_settings_title">
 </PreferenceScreen>

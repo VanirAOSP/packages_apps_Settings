@@ -24,11 +24,11 @@
             android:key="unlock_set_or_change"
             android:title="@string/unlock_set_unlock_launch_picker_title"
             android:summary="@string/unlock_set_unlock_mode_pattern"
-            android:persistent="false"/>
+            android:persistent="false" />
 
         <CheckBoxPreference
             android:key="visiblepattern"
-            android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title" />
 
         <ListPreference
             android:key="lock_after_timeout"
@@ -36,18 +36,16 @@
             android:summary="@string/lock_after_timeout_summary"
             android:entries="@array/lock_after_timeout_entries"
             android:entryValues="@array/lock_after_timeout_values"
-            android:persistent="false"/>
+            android:persistent="false" />
 
         <CheckBoxPreference
             android:key="power_button_instantly_locks"
-            android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
+            android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
 
         <PreferenceScreen
             android:fragment="com.android.settings.OwnerInfoSettings"
             android:key="owner_info_settings"
             android:title="@string/owner_info_settings_title"
-            android:summary="@string/owner_info_settings_summary"/>
-
+            android:summary="@string/owner_info_settings_summary" />
     </PreferenceCategory>
-
 </PreferenceScreen>

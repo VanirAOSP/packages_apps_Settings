@@ -18,6 +18,9 @@
     android:enterFadeDuration="@android:integer/config_mediumAnimTime"
     android:exitFadeDuration="@android:integer/config_mediumAnimTime">
 
-    <item android:state_activated="true" android:state_enabled="true" android:drawable="@drawable/data_sweep_right_activated" />
+    <item android:state_activated="true"
+        android:state_enabled="true"
+        android:drawable="@drawable/data_sweep_right_activated" />
+
     <item android:drawable="@drawable/data_sweep_right_default" />
 </selector>

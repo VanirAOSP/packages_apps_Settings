@@ -15,16 +15,15 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/wifi_settings_category">
+    android:title="@string/wifi_settings_category">
 
     <com.android.settings.bluetooth.BluetoothProgressCategory
-            android:key="access_points"
-            android:title="@string/wifi_access_points"
-            android:persistent="false" />
+        android:key="access_points"
+        android:title="@string/wifi_access_points"
+        android:persistent="false" />
 
     <Preference
-            android:key="add_network"
-            android:title="@string/wifi_add_network"
-            android:persistent="false" />
-
+        android:key="add_network"
+        android:title="@string/wifi_add_network"
+        android:persistent="false" />
 </PreferenceScreen>

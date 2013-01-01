@@ -21,4 +21,3 @@
     <item android:maxLevel="3" android:drawable="@drawable/ic_network_signal_3" />
     <item android:maxLevel="4" android:drawable="@drawable/ic_network_signal_4" />
 </level-list>
-
