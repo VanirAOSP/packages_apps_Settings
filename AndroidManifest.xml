@@ -1553,17 +1553,14 @@
             android:exported="true" />  -->
 
         <!-- Performance Settings -->
-        <activity android:name=".performance.PowerWidget" />
-        <activity android:name=".performance.SystemSettings" />
         <activity android:name=".performance.PerformanceSettings" />
+        <activity android:name=".performance.VoltageControlSettings" />
 
         <receiver android:name=".performance.BootReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <activity android:name=".performance.VoltageControlSettings" />
 
     </application>
 </manifest>

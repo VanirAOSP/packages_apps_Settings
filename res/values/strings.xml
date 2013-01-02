@@ -4551,7 +4551,7 @@ Letting go of the power button will turn the torch off.</string>
 
     <!-- Purgeable Assets -->
     <string name="pref_purgeable_assets_title">Allow purging of assets</string>
-    <string name="pref_purgeable_assets_summary">Purging of bitmap memory assets allows the freeing of more RAM when needed (requires reboot)</string>
+    <string name="pref_purgeable_assets_summary">Purging of bitmap memory assets frees up more RAM at an increased cost of I/O and processing overhead (requires reboot)</string>
 
     <!-- Display settings screen, notification light settings -->
     <string name="notification_light_general_title">General</string>
@@ -4667,6 +4667,13 @@ Letting go of the power button will turn the torch off.</string>
     <string name="current">mV current</string>
     <string name="saved">mV saved</string>
     <string name="sob">Set on boot</string>
+    <string name="general_perf">General preferences</string>
+    <string name="cpu_pref">CPU settings</string>
+    <string name="pref_disable_bootanimation_title">Disable boot animation</string>
+    <string name="pref_disable_bootanimation_summary">Disable the boot animation for a slightly quicker boot time</string>
+    <string name="io_pref">I/O settings</string>
+    <string name="pref_recents_title">Enhance recents panel</string>
+    <string name="pref_recents_summary">Add a memory usage bar to the recents panel</string>
 
     <string name="keyguard_picker_all_widgets_title">Show all widgets</string>
 

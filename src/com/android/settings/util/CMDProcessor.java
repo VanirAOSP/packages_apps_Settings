@@ -7,7 +7,7 @@ import java.io.InputStream;
 import android.util.Log;
 
 public class CMDProcessor {
-	
+
     private static final String TAG = "CMD Processor";
     private Boolean can_su;
     public SH sh;
@@ -36,81 +36,81 @@ public class CMDProcessor {
         }
 
         CommandResult(final Integer exit_value_in, final String stdout_in,
-            final String stderr_in) {
+                final String stderr_in) {
             exit_value = exit_value_in;
             stdout = stdout_in;
             stderr = stderr_in;
         }
 
         public boolean success() {
-        return exit_value != null && exit_value == 0;
+            return exit_value != null && exit_value == 0;
         }
     }
 
     public class SH {
-    private String SHELL = "sh";
+        private String SHELL = "sh";
 
-    public SH(final String SHELL_in) {
-        SHELL = SHELL_in;
-    }
+        public SH(final String SHELL_in) {
+            SHELL = SHELL_in;
+        }
 
-    private String getStreamLines(final InputStream is) {
-        String out = null;
-        StringBuffer buffer = null;
-        final DataInputStream dis = new DataInputStream(is);
+        private String getStreamLines(final InputStream is) {
+            String out = null;
+            StringBuffer buffer = null;
+            final DataInputStream dis = new DataInputStream(is);
 
-        try {
-            if (dis.available() > 0) {
-                buffer = new StringBuffer(dis.readLine());
-                while (dis.available() > 0) {
-                    buffer.append("\n").append(dis.readLine());
+            try {
+                if (dis.available() > 0) {
+                    buffer = new StringBuffer(dis.readLine());
+                    while (dis.available() > 0) {
+                        buffer.append("\n").append(dis.readLine());
+                    }
+                }
+                dis.close();
+            } catch (final Exception ex) {
+                Log.e(TAG, ex.getMessage());
+            }
+            if (buffer != null) {
+                out = buffer.toString();
+            }
+            return out;
+        }
+
+        public Process run(final String s) {
+            Process process = null;
+            try {
+                process = Runtime.getRuntime().exec(SHELL);
+                final DataOutputStream toProcess = new DataOutputStream(
+                        process.getOutputStream());
+                toProcess.writeBytes("exec " + s + "\n");
+                toProcess.flush();
+            } catch (final Exception e) {
+                Log.e(TAG, "Exception while trying to run: '" + s + "' "
+                        + e.getMessage());
+                process = null;
+            }
+            return process;
+        }
+
+        public CommandResult runWaitFor(final String s) {
+            final Process process = run(s);
+            Integer exit_value = null;
+            String stdout = null;
+            String stderr = null;
+            if (process != null) {
+                try {
+                    exit_value = process.waitFor();
+
+                    stdout = getStreamLines(process.getInputStream());
+                    stderr = getStreamLines(process.getErrorStream());
+
+                } catch (final InterruptedException e) {
+                    Log.e(TAG, "runWaitFor " + e.toString());
+                } catch (final NullPointerException e) {
+                    Log.e(TAG, "runWaitFor " + e.toString());
                 }
             }
-            dis.close();
-        } catch (final Exception ex) {
-            Log.e(TAG, ex.getMessage());
-        }
-        if (buffer != null) {
-        out = buffer.toString();
-        }
-        return out;
-    }
-
-    public Process run(final String s) {
-        Process process = null;
-        try {
-            process = Runtime.getRuntime().exec(SHELL);
-            final DataOutputStream toProcess = new DataOutputStream(
-            process.getOutputStream());
-            toProcess.writeBytes("exec " + s + "\n");
-            toProcess.flush();
-        } catch (final Exception e) {
-            Log.e(TAG, "Exception while trying to run: '" + s + "' "
-                        + e.getMessage());
-            process = null;
-        }
-        return process;
-    }
-
-    public CommandResult runWaitFor(final String s) {
-        final Process process = run(s);
-        Integer exit_value = null;
-        String stdout = null;
-        String stderr = null;
-        if (process != null) {
-            try {
-                exit_value = process.waitFor();
-
-                stdout = getStreamLines(process.getInputStream());
-                stderr = getStreamLines(process.getErrorStream());
-
-            } catch (final InterruptedException e) {
-                Log.e(TAG, "runWaitFor " + e.toString());
-            } catch (final NullPointerException e) {
-                Log.e(TAG, "runWaitFor " + e.toString());
-            }
-        }
-        return new CommandResult(exit_value, stdout, stderr);
+            return new CommandResult(exit_value, stdout, stderr);
         }
     }
 
