@@ -52,7 +52,7 @@
 
     <PreferenceCategory
         android:key="category_calls_and_notification"
-        android:title="@string/sound_category_call_ringtone_vibrate_title" />
+        android:title="@string/sound_category_call_ringtone_vibrate_title" /> 
 
     <!-- Do not nest these, or removals in code will break -->
     <com.android.settings.DefaultRingtonePreference
@@ -69,6 +69,11 @@
 
     <PreferenceCategory
         android:title="@string/sound_category_system_title" />
+        
+    <PreferenceScreen
+        android:key="quiet_hours"
+        android:fragment="com.android.settings.vanir.QuietHours"
+        android:title="@string/quiet_hours_title" />
 
     <!-- Do not nest these, or removals in code will break -->
 
