@@ -30,6 +30,12 @@
         android:title="@string/status_bar_title"
         android:summary="@string/status_bar_summary"
         android:fragment="com.android.settings.vanir.fragments.Statusbar" />
+        
+     <PreferenceScreen
+        android:id="@+id/lock_screen_settings"
+        android:fragment="com.android.settings.vanir.LockscreenInterface"
+        android:title="@string/lock_screen_title"
+        android:summary="@string/lock_screen_summary" />
 
     <PreferenceScreen
         android:key="general_ui_settings"
