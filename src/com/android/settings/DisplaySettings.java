@@ -57,30 +57,20 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_ACCELEROMETER = "accelerometer";
-    private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
-    private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
-    
-    private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
-    private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
-    private static final String PREF_ENABLE = "clock_style";
 
     private static final String KEY_QUICK_QS = "quick_quicksettings";
 
     private DisplayManager mDisplayManager;
 
     private CheckBoxPreference mAccelerometer;
-    private CheckBoxPreference mBatteryPercentage;
     private WarnedListPreference mFontSizePref;
-    private CheckBoxPreference mFastTorch;
-    private ListPreference mStatusBarAmPm;
-    private ListPreference mStatusBarClock;
     private CheckBoxPreference mQuickQS;
 
     private PreferenceScreen mNotificationPulse;
@@ -88,7 +78,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
 
     private final Configuration mCurConfig = new Configuration();
-    
+
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
 
@@ -118,17 +108,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(mAccelerometer);
         }
 	
-	    mBatteryPercentage = (CheckBoxPreference) findPreference(KEY_BATTERY_PERCENTAGE);
-        mBatteryPercentage.setChecked((Settings.System.getInt(getContentResolver(),
-            Settings.System.STATUS_BAR_BATTERY, 0) == 1));
-	
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
                 && getResources().getBoolean(
                         com.android.internal.R.bool.config_dreamsSupported) == false) {
             getPreferenceScreen().removePreference(mScreenSaverPreference);
         }
-        
+
         mScreenTimeoutPreference = (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
         final long currentTimeout = Settings.System.getLong(resolver, SCREEN_OFF_TIMEOUT,
                 FALLBACK_SCREEN_TIMEOUT_VALUE);
@@ -169,30 +155,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
         }
-
-        mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
-        
-        mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
-        mStatusBarClock.setOnPreferenceChangeListener(this);
-        mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
-                1)));
-                
-        mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
-        try {
-            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.TIME_12_24) == 24) {
-                mStatusBarAmPm.setEnabled(false);
-                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
-            }
-        } catch (SettingNotFoundException e ) {
-        }
-
-        int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.STATUS_BAR_AM_PM, 2);
-        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
-        mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
-        mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
         mQuickQS = (CheckBoxPreference)findPreference(KEY_QUICK_QS);
         mQuickQS.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.QS_QUICK_PULLDOWN, 0) == 1);
@@ -290,7 +252,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         return indices.length-1;
     }
-    
+
     public void readFontSizePreference(ListPreference pref) {
         try {
             mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
@@ -308,7 +270,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         pref.setSummary(String.format(res.getString(R.string.summary_font_size),
                 fontSizeNames[index]));
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
@@ -398,18 +360,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {        
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mAccelerometer) {
             RotationPolicy.setRotationLockForAccessibility(
                     getActivity(), !mAccelerometer.isChecked());
-        } else if (preference == mBatteryPercentage) {
-            boolean value = mBatteryPercentage.isChecked();
-            Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_BATTERY,
-                    value ? 1 : 0);
-        } else if (preference == mFastTorch) {
-            boolean value = mFastTorch.isChecked();
-            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
-        } else if (preference == mQuickQS) {
+        }  else if (preference == mQuickQS) {
             int val = mQuickQS.isChecked() ? 1 : 0;
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.QS_QUICK_PULLDOWN, val);
         }
@@ -422,28 +377,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, value);
-                updateTimeoutPreferenceDescription(value);                
+                updateTimeoutPreferenceDescription(value);
                 return true;
-            } catch (NumberFormatException e) {            
+            } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
         }
-        if (preference == mStatusBarAmPm) {
-            int statusBarAmPm = Integer.valueOf((String) objValue);
-            int index = mStatusBarAmPm.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    STATUS_BAR_AM_PM, statusBarAmPm);
-            mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[index]);
-            return true;
-        } else if (preference == mStatusBarClock) {
-            int clockStyle = Integer.parseInt((String) objValue);
-            int index = mStatusBarClock.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    STATUS_BAR_CLOCK, clockStyle);
-            mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
-            return true;
-        } else if (KEY_FONT_SIZE.equals(key)) {
-            writeFontSizePreference(objValue);            
+        if (KEY_FONT_SIZE.equals(key)) {
+            writeFontSizePreference(objValue);
             return true;
         }
         return false;

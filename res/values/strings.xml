@@ -4681,8 +4681,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pref_recents_summary">Add a memory usage bar to the recents panel</string>
 
     <string name="keyguard_picker_all_widgets_title">Show all widgets</string>
-    
-     <!-- Quiet hours -->
+
+    <!-- Quiet hours -->
     <string name="quiet_hours_title">Quiet hours</string>
     <string name="quiet_hours_summary">Configure the hours the device should be quiet</string>
     <string name="quiet_hours_note_title">Note</string>
@@ -4713,17 +4713,17 @@ Letting go of the power button will turn the torch off.</string>
     <string name="start_time_title">Start</string>
     <string name="end_time_title">End</string>
 
-
-
     <!--- Sms security limit -->
     <string name="app_security_title">App security</string>
     <string name="sms_security_check_limit_title">SMS message limit</string>
     <string name="sms_security_check_limit_summary">Display an alert dialog to prevent applications from sending SMS messages too frequently. Current limit: %d messages in 15 minutes</string>
     <string name="sms_security_check_limit_default">30 (Default)</string>
 
-    <!-- General UI -->
+    <!-- General Display Setup -->
     <string name="misc_short">Misc</string>
-    <string name="title_ui">General UI</string>
+    <string name="statusbar_short">Status Bar Mods</string>
+    <string name="title_ui">General Setup</string>
+    <string name="general_title_summary">Torch, Clock/Date, LCD changer, etc</string>
 
     <!-- LCD Density -->
     <string name="lcd_density_title">LCD Density</string>
