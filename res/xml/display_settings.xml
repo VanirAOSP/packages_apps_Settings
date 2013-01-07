@@ -65,6 +65,11 @@
         android:entryValues="@array/entryvalues_font_size"
         android:dialogTitle="@string/dialog_title_font_size" />
 
+    <CheckBoxPreference
+        android:key="enable_fast_torch"
+        android:title="@string/enable_fast_torch_title"	
+        android:summary="@string/enable_fast_torch_summary" />
+
     <PreferenceScreen
         android:key="notification_pulse"
         android:title="@string/notification_pulse_title"
