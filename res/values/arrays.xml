@@ -16,6 +16,7 @@
 ** limitations under the License.
 */
 -->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Choices for timezone picker first level.
          These values will be used as search terms for TimeZone displayName
@@ -212,7 +213,6 @@
     </string-array>
 
     <!-- Wi-Fi settings -->
-
     <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
     <!-- Wi-Fi settings. The status messages when the network is unknown. -->
     <string-array name="wifi_status">
@@ -340,7 +340,6 @@
    </string-array>
 
     <!-- Bluetooth Settings -->
-
     <!-- Discoverable mode timeout options -->
     <string-array name="bluetooth_visibility_timeout_entries">
         <item>2 minutes</item>
@@ -586,7 +585,9 @@
     <!-- Titles for window animation scale preference. [CHAR LIMIT=35] -->
     <string-array name="window_animation_scale_entries">
         <item>Animation off</item>
+        <item>Animation scale .25x</item>
         <item>Animation scale .5x</item>
+        <item>Animation scale .75x</item>
         <item>Animation scale 1x</item>
         <item>Animation scale 1.5x</item>
         <item>Animation scale 2x</item>
@@ -597,7 +598,9 @@
     <!-- Values for window animation scale preference. -->
     <string-array name="window_animation_scale_values" translatable="false" >
         <item>0</item>
+        <item>.25</item>
         <item>.5</item>
+        <item>.75</item>
         <item>1</item>
         <item>1.5</item>
         <item>2</item>
@@ -608,7 +611,9 @@
     <!-- Titles for transition animation scale preference. [CHAR LIMIT=35] -->
     <string-array name="transition_animation_scale_entries">
         <item>Animation off</item>
+        <item>Animation scale .25x</item>
         <item>Animation scale .5x</item>
+        <item>Animation scale .75x</item>
         <item>Animation scale 1x</item>
         <item>Animation scale 1.5x</item>
         <item>Animation scale 2x</item>
@@ -619,7 +624,9 @@
     <!-- Values for transition animation scale preference. -->
     <string-array name="transition_animation_scale_values" translatable="false" >
         <item>0</item>
+        <item>.25</item>
         <item>.5</item>
+        <item>.75</item>
         <item>1</item>
         <item>1.5</item>
         <item>2</item>
@@ -630,7 +637,9 @@
     <!-- Titles for animator duration scale preference. [CHAR LIMIT=35] -->
     <string-array name="animator_duration_scale_entries">
         <item>Animation off</item>
+        <item>Animation scale .25x</item>
         <item>Animation scale .5x</item>
+        <item>Animation scale .75</item>
         <item>Animation scale 1x</item>
         <item>Animation scale 1.5x</item>
         <item>Animation scale 2x</item>
@@ -641,7 +650,9 @@
     <!-- Values for animator duration scale preference. -->
     <string-array name="animator_duration_scale_values" translatable="false" >
         <item>0</item>
+        <item>.25</item>
         <item>.5</item>
+        <item>.75</item>
         <item>1</item>
         <item>1.5</item>
         <item>2</item>
