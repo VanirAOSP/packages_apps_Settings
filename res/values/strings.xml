@@ -4637,9 +4637,9 @@ Letting go of the power button will turn the torch off.</string>
     <string name="toggle_ime">IME</string>
     <string name="toggle_battery">Battery</string>
     <string name="toggle_brightness">Brightness</string>
-    <string name="status_bar_title">Statusbar mods</string>
-    <string name="status_bar_summary">Quick setting tiles, battery icons, clock, etc</string>
-    <string name="statusbar_settings">Statusbar mods</string>
+    <string name="status_bar_title">Quicksettings</string>
+    <string name="status_bar_summary">Active tiles, order, etc</string>
+    <string name="statusbar_settings">Quicksettings</string>
     <string name="toggles_order_summary">Choose the order which your quick settings are displayed</string>
     <string name="toggles_order_title">Quicksetting tile order</string>
     <string name="enabled_toggles_summary">Choose which quicksetting tiles are enabled/disabled</string>
