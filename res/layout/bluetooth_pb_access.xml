@@ -36,7 +36,8 @@
             android:gravity="center_horizontal"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <CheckBox android:id="@+id/bluetooth_pb_remember_choice"
+        <CheckBox
+            android:id="@+id/bluetooth_pb_remember_choice"
             style="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,5 +45,4 @@
             android:text="@string/bluetooth_pb_remember_choice" />
 
     </LinearLayout>
-
 </ScrollView>

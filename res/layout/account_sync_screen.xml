@@ -37,8 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:clipToPadding="false"
-        android:scrollbarStyle="@*android:integer/preference_fragment_scrollbarStyle" />
+        android:drawSelectorOnTop="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true" />
 
     <TextView android:id="@+id/sync_settings_error_info"
         android:layout_width="match_parent"
@@ -48,12 +48,38 @@
         android:drawablePadding="8dip"
         android:drawableLeft="@drawable/ic_sync_error_holo" />
 
+    <!--
+    <LinearLayout android:id="@+id/remove_account_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:drawable/bottom_bar">
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button android:id="@+id/remove_account_button"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginTop="5dip"
+            android:text="@string/remove_account_label" />
+
+        <View
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+    -->
+
     <RelativeLayout android:id="@+id/finish_button_area"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="@android:drawable/bottom_bar"
         android:visibility="gone">
-        
+
         <Button android:id="@+id/finish_button"
             android:layout_width="150dip"
             android:layout_height="wrap_content"
@@ -61,9 +87,6 @@
             android:layout_alignParentEnd="true"
             android:drawableEnd="@drawable/ic_btn_next"
             android:drawablePadding="3dip"
-            android:text="@string/finish_button_label"
-        />
-        
+            android:text="@string/finish_button_label" />
     </RelativeLayout>
-
 </LinearLayout>
