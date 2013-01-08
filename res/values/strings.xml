@@ -4463,6 +4463,8 @@
     <string name="group_applications">Applications</string>
     <string name="navigation_bar_summary">Add/remove softkeys, change color, glow speed</string>
     <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
+    <string name="navigation_bar_menu_arrow_keys_title">Menu arrow keys</string>
+    <string name="navigation_bar_menu_arrow_keys_summary">Show arrow keys in the navigation bar while typing</string>
 
     <string name="enable_fast_torch_title">Enable fast torch</string>
     <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on.

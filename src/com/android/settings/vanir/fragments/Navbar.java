@@ -79,7 +79,6 @@ import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.widget.NavBarItemPreference;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.vanir.NavRingTargets;
-//import com.android.settings.widget.TouchInterceptor;
 
 public class Navbar extends SettingsPreferenceFragment implements
             OnPreferenceChangeListener, ShortcutPickerHelper.OnPickListener {
@@ -100,6 +99,7 @@ public class Navbar extends SettingsPreferenceFragment implements
     private static final String PREF_NAVBAR_QTY = "navbar_qty";
     private static final String PREF_NAVRING_AMOUNT = "pref_navring_amount";
     private static final String ENABLE_NAVRING_LONG = "enable_navring_long";
+    private static final String PREF_MENU_ARROWS = "navigation_bar_menu_arrow_keys";
 
     public static final int REQUEST_PICK_CUSTOM_ICON = 200;
     public static final int REQUEST_PICK_LANDSCAPE_ICON = 201;
@@ -126,6 +126,7 @@ public class Navbar extends SettingsPreferenceFragment implements
     CheckBoxPreference mLongPressToKill;
     Preference mPendingPreference;
     ShortcutPickerHelper mPicker;
+    CheckBoxPreference mMenuArrowKeysCheckBox;
 
     private int mPendingIconIndex = -1;
     private int mPendingWidgetDrawer = -1;
@@ -186,6 +187,10 @@ public class Navbar extends SettingsPreferenceFragment implements
     mGlowTimes = (ListPreference) findPreference(PREF_GLOW_TIMES);
     mGlowTimes.setOnPreferenceChangeListener(this);
     updateGlowTimesSummary();
+    
+        mMenuArrowKeysCheckBox = (CheckBoxPreference) findPreference(PREF_MENU_ARROWS);
+        mMenuArrowKeysCheckBox.setChecked(Settings.System.getBoolean(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS, true));
 
         float defaultAlpha = Settings.System.getFloat(getActivity()
                 .getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTON_ALPHA, 0.6f);
@@ -288,6 +293,11 @@ public class Navbar extends SettingsPreferenceFragment implements
         } else if (preference == mNavBarMenuDisplay) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.MENU_VISIBILITY, Integer.parseInt((String) newValue));
+            return true;
+        } else if (preference == mMenuArrowKeysCheckBox) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS,
+                ((CheckBoxPreference) preference).isChecked() ? true : false);
             return true;
         } else if (preference == mNavRingButtonQty) {
             int val = Integer.parseInt((String) newValue);
