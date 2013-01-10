@@ -170,6 +170,10 @@ public class Navbar extends SettingsPreferenceFragment implements
         mNavBarButtonQty.setOnPreferenceChangeListener(this);
         mNavBarButtonQty.setValue(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.NAVIGATION_BAR_BUTTONS_QTY, 3) + "");
+                
+        mEnableNavringLong = (CheckBoxPreference) findPreference("enable_navring_long");
+        mEnableNavringLong.setChecked(Settings.System.getBoolean(getContentResolver(),
+                Settings.System.SYSTEMUI_NAVRING_LONG_ENABLE, false));
 
         mPicker = new ShortcutPickerHelper(this, this);
 	    
@@ -187,10 +191,6 @@ public class Navbar extends SettingsPreferenceFragment implements
     mGlowTimes = (ListPreference) findPreference(PREF_GLOW_TIMES);
     mGlowTimes.setOnPreferenceChangeListener(this);
     updateGlowTimesSummary();
-    
-        mMenuArrowKeysCheckBox = (CheckBoxPreference) findPreference(PREF_MENU_ARROWS);
-        mMenuArrowKeysCheckBox.setChecked(Settings.System.getBoolean(getContentResolver(),
-                Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS, true));
 
         float defaultAlpha = Settings.System.getFloat(getActivity()
                 .getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTON_ALPHA, 0.6f);
@@ -211,6 +211,10 @@ public class Navbar extends SettingsPreferenceFragment implements
 
         mNavigationBarWidth = (ListPreference) findPreference("navigation_bar_width");
         mNavigationBarWidth.setOnPreferenceChangeListener(this);
+        
+        mMenuArrowKeysCheckBox = (CheckBoxPreference) findPreference(PREF_MENU_ARROWS);
+        mMenuArrowKeysCheckBox.setChecked(Settings.System.getBoolean(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS, true));
 
         refreshSettings();
         setHasOptionsMenu(true);
@@ -280,6 +284,11 @@ public class Navbar extends SettingsPreferenceFragment implements
             ft.replace(this.getId(), fragment);
             ft.commit();
             return true;
+       } else if (preference == mMenuArrowKeysCheckBox) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS,
+                ((CheckBoxPreference) preference).isChecked() ? true : false);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -293,11 +302,6 @@ public class Navbar extends SettingsPreferenceFragment implements
         } else if (preference == mNavBarMenuDisplay) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.MENU_VISIBILITY, Integer.parseInt((String) newValue));
-            return true;
-        } else if (preference == mMenuArrowKeysCheckBox) {
-            Settings.System.putBoolean(getActivity().getContentResolver(),
-                Settings.System.NAVIGATION_BAR_MENU_ARROW_KEYS,
-                ((CheckBoxPreference) preference).isChecked() ? true : false);
             return true;
         } else if (preference == mNavRingButtonQty) {
             int val = Integer.parseInt((String) newValue);
