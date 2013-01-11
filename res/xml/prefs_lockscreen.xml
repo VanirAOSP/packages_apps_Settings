@@ -13,6 +13,11 @@
         android:key="lockscreen_targets"
         android:summary="@string/lockscreen_target_summary"
         android:title="@string/lockscreen_target_title" />
+
+    <CheckBoxPreference
+        android:key="see_through"
+        android:title="@string/see_through_title"
+        android:summary="@string/see_through_summary" />
         
     <CheckBoxPreference
         android:key="lockscreen_maximize_widgets"

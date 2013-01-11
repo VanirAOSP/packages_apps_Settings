@@ -16,6 +16,7 @@
 package com.android.settings.vanir;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -30,11 +31,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
     
+    public static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS = "lockscreen_hide_initial_page_hints";
     
+    private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
     CheckBoxPreference mLockscreenHideInitialPageHints;
+    
+    private Context mContext;
 
     public boolean hasButtons() {
         return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
@@ -45,6 +50,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.prefs_lockscreen);
+        
+        PreferenceScreen prefSet = getPreferenceScreen();
+        mContext = getActivity();
+        
+        mSeeThrough = (CheckBoxPreference) prefSet.findPreference(KEY_SEE_TRHOUGH);
         
         mLockscreenHideInitialPageHints = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS);
         mLockscreenHideInitialPageHints.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
@@ -78,7 +88,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-		if (preference == mLockscreenHideInitialPageHints) {
+		if (preference == mSeeThrough) {
+			Settings.System.putInt(mContext.getContentResolver(),
+			        Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
+			        ? 1 : 0);
+		return true;
+		} else if (preference == mLockscreenHideInitialPageHints) {
             Settings.System.putInt(getActivity().getContentResolver(),
                   Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS,
             ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
