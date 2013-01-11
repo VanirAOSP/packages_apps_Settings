@@ -29,5 +29,10 @@
         android:key="lockscreen_hide_initial_page_hints"
         android:title="@string/lockscreen_hide_initial_page_hints_title"
         android:summary="@string/lockscreen_hide_initial_page_hints_summary" />
+        
+    <CheckBoxPreference
+        android:key="allow_rotation"
+        android:title="@string/allow_rotate_title"
+        android:summary="@string/allow_rotate_summary" />
 
 </PreferenceScreen>

@@ -4826,6 +4826,9 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Lock screen see through -->
     <string name="see_through_title">Transparent lockscreen</string>
     <string name="see_through_summary">Allows visibility of the application or home screen behind the lock screen.</string>
+    <!-- Allow rotation -->
+    <string name="allow_rotate_title">Allow rotation</string>
+    <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
 
     <!-- Hostname setting -->
     <string name="device_hostname">Device hostname</string>

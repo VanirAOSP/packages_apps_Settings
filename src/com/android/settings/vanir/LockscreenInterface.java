@@ -34,10 +34,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     public static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS = "lockscreen_hide_initial_page_hints";
+    public static final String KEY_ALLOW_ROTATION = "allow_rotation";
     
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
     CheckBoxPreference mLockscreenHideInitialPageHints;
+    private CheckBoxPreference mAllowRotation;
     
     private Context mContext;
 
@@ -58,7 +60,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         
         mLockscreenHideInitialPageHints = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS);
         mLockscreenHideInitialPageHints.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
-              Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false));    
+              Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false)); 
+              
+        mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
+        mAllowRotation.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
     
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (Utils.isTablet(getActivity())) {
@@ -98,6 +104,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
                   Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS,
             ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
         return true;
+        } else if (preference == mAllowRotation) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
+                    ? 1 : 0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
