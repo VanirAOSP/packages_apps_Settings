@@ -4839,4 +4839,8 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Hostname setting -->
     <string name="device_hostname">Device hostname</string>
 
+    <!-- IME toggle switch -->
+    <string name="ime_switcher_icon">IME icon</string>
+    <string name="ime_switcher_icon_summary">Display input method selector notification in status bar</string>
+
 </resources>
