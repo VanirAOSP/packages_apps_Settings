@@ -4719,6 +4719,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="sms_security_check_limit_default">30 (Default)</string>
 
     <!-- General Display Setup -->
+    <string name="powermenu_short">Power Menu</string>
     <string name="misc_short">Misc</string>
     <string name="statusbar_short">Status Bar Mods</string>
     <string name="title_ui">General Setup</string>

@@ -52,12 +52,14 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
     public static final String TAG = "UserInterface";
 
+    private static final String KEY_POWER_REBOOT = "reboot_in_power";
     private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_ENABLE = "clock_style";
 
+    private CheckBoxPreference mReboot;
     private CheckBoxPreference mBatteryPercentage;
     private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
@@ -76,6 +78,10 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+
+        mReboot = (CheckBoxPreference) findPreference(KEY_POWER_REBOOT);
+        mReboot.setChecked(Settings.Secure.getInt(getContentResolver(),
+            Settings.Secure.REBOOT_IN_POWER_MENU, 0) == 1);
 
         mBatteryPercentage = (CheckBoxPreference) findPreference(KEY_BATTERY_PERCENTAGE);
         mBatteryPercentage.setChecked((Settings.System.getInt(getContentResolver(),
@@ -122,6 +128,10 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
+        } else if (preference == mReboot) {
+			Settings.Secure.putInt(getActivity().getContentResolver(),
+					Settings.Secure.REBOOT_IN_POWER_MENU,
+					mReboot.isChecked() ? 1 : 0);
         } else if (preference == mBatteryPercentage) {
             boolean value = mBatteryPercentage.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_BATTERY,

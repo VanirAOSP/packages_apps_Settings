@@ -27,11 +27,6 @@
         android:title="@string/bugreport_in_power"
         android:summary="@string/bugreport_in_power_summary" />
 
-    <CheckBoxPreference
-        android:key="reboot_in_power"
-        android:title="@string/reboot_in_power"
-        android:summary="@string/reboot_in_power_summary" />
-
     <PreferenceScreen
         android:key="local_backup_password"
         android:title="@string/local_backup_password_title"
