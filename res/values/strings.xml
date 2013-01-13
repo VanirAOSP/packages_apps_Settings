@@ -4819,11 +4819,11 @@ Letting go of the power button will turn the torch off.</string>
     <string name="icon_picker_gallery_title">Gallery</string>
     <string name="icon_picker_pack_title">Icon pack</string>
     <string name="profile_applist_title">Applications</string>
-    
+
     <string name="lockscreen_maximize_widgets_title">Maximize widgets</string>
-	<string name="lockscreen_maximize_widgets_summary">Show widgets maximized and the unlock minimized when the screen is turned on</string>
-	<string name="lockscreen_hide_initial_page_hints_title">Hide initial widget hints</string>
-	<string name="lockscreen_hide_initial_page_hints_summary">Show hints for the left and right widget trays when the screen is turned on.</string>
+    <string name="lockscreen_maximize_widgets_summary">Show widgets maximized and the unlock minimized when the screen is turned on</string>
+    <string name="lockscreen_hide_initial_page_hints_title">Show initial widget hints</string>
+    <string name="lockscreen_hide_initial_page_hints_summary">Show hints for the left and right widget trays when the screen is turned on.</string>
     <!-- Lock screen see through -->
     <string name="see_through_title">Transparent lockscreen</string>
     <string name="see_through_summary">Allows visibility of the application or home screen behind the lock screen.</string>
