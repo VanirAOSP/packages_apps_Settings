@@ -4843,4 +4843,15 @@ Letting go of the power button will turn the torch off.</string>
     <string name="ime_switcher_icon">IME icon</string>
     <string name="ime_switcher_icon_summary">Display input method selector notification in status bar</string>
 
+    <!-- Display Rotation Settings -->
+    <string name="display_rotation_title">Rotation Settings</string>
+    <string name="display_rotation_enabled">Enabled</string>
+    <string name="display_rotation_disabled">Disabled</string>
+    <string name="display_rotation_unit">degrees</string>
+    <string name="display_rotation_category_title">Rotation Mode</string>
+    <string name="display_rotation_0_title">0 degrees</string>
+    <string name="display_rotation_90_title">90 degrees</string>
+    <string name="display_rotation_180_title">180 degrees</string>
+    <string name="display_rotation_270_title">270 degrees</string>
+
 </resources>
