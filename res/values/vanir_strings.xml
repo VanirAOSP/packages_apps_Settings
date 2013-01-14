@@ -228,4 +228,21 @@
     <string name="appops_sysapp_warning">"Changing permissions of core Android components might lead to undesired behavior. Change settings here at your own risk!</string>
 
 
+    <!-- Status bar brightness slider -->
+    <string name="brightness_slider_title">Statusbar brightness slider</string>
+    <string name="brightness_slider_summary">When enabled, this option will allow you to change the brightness by
+        sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
+    </string> 
+
+    <!-- Display Rotation Settings -->
+    <string name="display_rotation_title">Rotation Settings</string>
+    <string name="display_rotation_enabled">Enabled</string>
+    <string name="display_rotation_disabled">Disabled</string>
+    <string name="display_rotation_unit">degrees</string>
+    <string name="display_rotation_category_title">Rotation Mode</string>
+    <string name="display_rotation_0_title">0 degrees</string>
+    <string name="display_rotation_90_title">90 degrees</string>
+    <string name="display_rotation_180_title">180 degrees</string>
+    <string name="display_rotation_270_title">270 degrees</string>
+
 </resources>

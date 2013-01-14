@@ -29,10 +29,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.WifiDisplay;
 import android.hardware.display.WifiDisplayStatus;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
@@ -52,6 +54,7 @@ import com.android.settings.DreamSettings;
 import com.android.settings.Utils;
 
 import org.cyanogenmod.hardware.AdaptiveBacklight;
+import com.android.settings.vanir.DisplayRotation;
 
 import java.util.ArrayList;
 
@@ -63,7 +66,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
-    private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
@@ -73,6 +75,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_LIGHTS = "lights_prefs";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
+    private static final String KEY_DISPLAY_ROTATION = "display_rotation";
+
+    // Strings used for building the summary for user defined auto rotate
+    private static final String ROTATION_ANGLE_0 = "0";
+    private static final String ROTATION_ANGLE_90 = "90";
+    private static final String ROTATION_ANGLE_180 = "180";
+    private static final String ROTATION_ANGLE_270 = "270";
+    private static final String ROTATION_ANGLE_DELIM = ", ";
+    private static final String ROTATION_ANGLE_DELIM_FINAL = " & ";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
@@ -84,28 +95,34 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mAccelerometer;
     private FontDialogPreference mFontSizePref;
-
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
+    private PreferenceScreen mDisplayRotationPreference;
 
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
-
-    private final Configuration mCurConfig = new Configuration();
-    
+    private CheckBoxPreference mAdaptiveBacklight;
     private ListPreference mScreenTimeoutPreference;
-    private Preference mScreenSaverPreference;
+    
+    private final Configuration mCurConfig = new Configuration();
 
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
+    private Preference mScreenSaverPreference;
 
-    private CheckBoxPreference mAdaptiveBacklight;
+    private ContentObserver mAccelerometerRotationObserver =
+            new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updateDisplayRotationPreferenceDescription();
+        }
+    };
 
     private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
             new RotationPolicy.RotationPolicyListener() {
         @Override
         public void onChange() {
-            updateAccelerometerRotationCheckbox();
+            updateDisplayRotationPreferenceDescription();
         }
     };
 
@@ -117,16 +134,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.display_settings);
 
-        mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
-        mAccelerometer.setPersistent(false);
-        if (!RotationPolicy.isRotationSupported(getActivity())
-                || RotationPolicy.isRotationLockToggleSupported(getActivity())) {
+        mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
+        if (RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
-            // Display settings.  However, is still available in Accessibility settings,
-            // if the device supports rotation.
-            getPreferenceScreen().removePreference(mAccelerometer);
+            // Display settings.  However, is still available in Accessibility settings.
+            getPreferenceScreen().removePreference(mDisplayRotationPreference);
         }
-
+	
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
                 && getResources().getBoolean(
@@ -141,6 +155,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
+        updateDisplayRotationPreferenceDescription();
 
         mFontSizePref = (FontDialogPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
@@ -280,9 +295,52 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         screenTimeoutPreference.setEnabled(revisedEntries.size() > 0);
     }
 
+    private void updateDisplayRotationPreferenceDescription() {
+        PreferenceScreen preference = mDisplayRotationPreference;
+        StringBuilder summary = new StringBuilder();
+        Boolean rotationEnabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) != 0;
+        int mode = Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION_ANGLES,
+                DisplayRotation.ROTATION_0_MODE|DisplayRotation.ROTATION_90_MODE|DisplayRotation.ROTATION_270_MODE);
+
+        if (!rotationEnabled) {
+            summary.append(getString(R.string.display_rotation_disabled));
+        } else {
+            ArrayList<String> rotationList = new ArrayList<String>();
+            String delim = "";
+            summary.append(getString(R.string.display_rotation_enabled) + " ");
+            if ((mode & DisplayRotation.ROTATION_0_MODE) != 0) {
+                rotationList.add(ROTATION_ANGLE_0);
+            }
+            if ((mode & DisplayRotation.ROTATION_90_MODE) != 0) {
+                rotationList.add(ROTATION_ANGLE_90);
+            }
+            if ((mode & DisplayRotation.ROTATION_180_MODE) != 0) {
+                rotationList.add(ROTATION_ANGLE_180);
+            }
+            if ((mode & DisplayRotation.ROTATION_270_MODE) != 0) {
+                rotationList.add(ROTATION_ANGLE_270);
+            }
+            for(int i=0;i<rotationList.size();i++) {
+                summary.append(delim).append(rotationList.get(i));
+                if (rotationList.size() >= 2 && (rotationList.size() - 2) == i) {
+                    delim = " " + ROTATION_ANGLE_DELIM_FINAL + " ";
+                } else {
+                    delim = ROTATION_ANGLE_DELIM + " ";
+                }
+             }
+             summary.append(" " + getString(R.string.display_rotation_unit));
+         }
+         if (preference != null && summary != null)
+             preference.setSummary(summary);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
+        updateDisplayRotationPreferenceDescription();
 
         RotationPolicy.registerRotationPolicyListener(getActivity(),
                 mRotationPolicyListener);
@@ -327,7 +385,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     }
 
     private void updateState() {
-        updateAccelerometerRotationCheckbox();
         readFontSizePreference(mFontSizePref);
         updateScreenSaverSummary();
         updateWifiDisplaySummary();
