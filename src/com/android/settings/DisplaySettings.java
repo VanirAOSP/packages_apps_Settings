@@ -217,7 +217,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
             summary.append(" " + getString(R.string.display_rotation_unit));
         }
-        preference.setSummary(summary);
+        if (preference != null && summary != null)
+            preference.setSummary(summary);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
