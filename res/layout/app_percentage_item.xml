@@ -67,4 +67,5 @@
         android:visibility="gone"
         android:maxLines="2"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </GridLayout>
