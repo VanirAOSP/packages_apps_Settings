@@ -4854,4 +4854,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="display_rotation_180_title">180 degrees</string>
     <string name="display_rotation_270_title">270 degrees</string>
 
+    <!-- ADB Icon -->
+    <string name="adb_icon">USB debugging icon</string>
+    <string name="adb_icon_summary">Display a notification icon when USB debugging is connected</string>
+
 </resources>
