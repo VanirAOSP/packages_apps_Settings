@@ -35,11 +35,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS = "lockscreen_hide_initial_page_hints";
     public static final String KEY_ALLOW_ROTATION = "allow_rotation";
+    private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
     CheckBoxPreference mLockscreenHideInitialPageHints;
     private CheckBoxPreference mAllowRotation;
+    CheckBoxPreference mLockscreenUseCarousel;
     
     private Context mContext;
 
@@ -65,7 +67,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
-    
+
+         mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
+		 mLockscreenUseCarousel.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
+			                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
+
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (Utils.isTablet(getActivity())) {
 	       getPreferenceScreen().removePreference(mMaximizeWidgets);
@@ -108,6 +114,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
                     ? 1 : 0);
+         } else if (preference == mLockscreenUseCarousel) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL,
+                    ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
+           return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

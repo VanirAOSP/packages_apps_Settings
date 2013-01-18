@@ -34,5 +34,10 @@
         android:key="allow_rotation"
         android:title="@string/allow_rotate_title"
         android:summary="@string/allow_rotate_summary" />
+    
+    <CheckBoxPreference
+        android:key="lockscreen_use_widget_container_carousel"
+        android:title="@string/lockscreen_use_widget_container_carousel_title"
+        android:summary="@string/lockscreen_use_widget_container_carousel_summary" />
 
 </PreferenceScreen>

@@ -4848,6 +4848,9 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Allow rotation -->
     <string name="allow_rotate_title">Allow rotation</string>
     <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
+    <!-- carousel -->
+    <string name="lockscreen_use_widget_container_carousel_title">Lockscreen carousel</string>
+	<string name="lockscreen_use_widget_container_carousel_summary">Use a carousel animation when switching between lockscreen widgets.</string>
 
     <!-- Hostname setting -->
     <string name="device_hostname">Device hostname</string>
