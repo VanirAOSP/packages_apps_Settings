@@ -75,7 +75,7 @@
             android:key="status_bar_ime_switcher"
             android:title="@string/ime_switcher_icon"
             android:summary="@string/ime_switcher_icon_summary"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:persistent="false" />
 
     <PreferenceCategory
