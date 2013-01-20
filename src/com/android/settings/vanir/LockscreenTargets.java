@@ -519,6 +519,12 @@ public class LockscreenTargets extends Fragment implements ShortcutPickHelper.On
     }
 
     @Override
+    public void onTargetChange(View v, int handle)
+    {
+        //guts?
+    }
+
+    @Override
     public void iconPicked(int requestCode, int resultCode, Intent in) {
         Drawable ic = null;
         String iconType = null;
