@@ -36,12 +36,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS = "lockscreen_hide_initial_page_hints";
     public static final String KEY_ALLOW_ROTATION = "allow_rotation";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
+    private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
     
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
     CheckBoxPreference mLockscreenHideInitialPageHints;
     private CheckBoxPreference mAllowRotation;
     CheckBoxPreference mLockscreenUseCarousel;
+    private CheckBoxPreference mCameraWidget;
     
     private Context mContext;
 
@@ -71,6 +73,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
          mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
 		 mLockscreenUseCarousel.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
 			                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
+
+		mCameraWidget = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
+        mCameraWidget.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.KG_CAMERA_WIDGET, 0) == 1);
 
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
         if (Utils.isTablet(getActivity())) {
@@ -105,6 +111,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 			        Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
 			        ? 1 : 0);
 		return true;
+		} else if (preference == mCameraWidget) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.KG_CAMERA_WIDGET, mCameraWidget.isChecked() ? 1 : 0);
+            return true;
 		} else if (preference == mLockscreenHideInitialPageHints) {
             Settings.System.putInt(getActivity().getContentResolver(),
                   Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS,

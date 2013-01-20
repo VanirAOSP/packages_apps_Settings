@@ -19,6 +19,11 @@
         android:title="@string/see_through_title"
         android:summary="@string/see_through_summary" />
         
+     <CheckBoxPreference
+        android:key="lockscreen_camera_widget"
+        android:title="@string/lockscreen_camera_widget_title" 
+        android:summary="@string/lockscreen_camera_widget_summary"/>
+        
     <CheckBoxPreference
         android:key="lockscreen_maximize_widgets"
         android:persistent="false"
