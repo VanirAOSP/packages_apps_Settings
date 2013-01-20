@@ -4888,5 +4888,12 @@ Letting go of the power button will turn the torch off.</string>
     <!-- dual panel mode -->
     <string name="dual_pane">Dual panel settings</string>
     <string name="dual_pane_summary">Restart settings to take effect</string>
+    <!-- Status Bar stuff from CM -->
+    <string name="status_bar_battery_title">Battery Style</string>
+    <string name="status_bar_battery_status_icon">Stock icon (default)</string>
+    <string name="status_bar_battery_status_percentage">Stock icon w/ percentage</string>
+    <string name="status_bar_battery_status_circle">Circle</string>
+    <string name="status_bar_battery_status_circle_percentage">Circle w/ percentage</string>
+    <string name="status_bar_battery_status_hidden">Hidden</string>
 
 </resources>

@@ -53,15 +53,15 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     public static final String TAG = "UserInterface";
 
     private static final String KEY_POWER_REBOOT = "reboot_in_power";
-    private static final String KEY_BATTERY_PERCENTAGE = "battery_percentage";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_ENABLE = "clock_style";
     private static final String KEY_DUAL_PANE = "dual_pane";
+    private static final String STATUS_BAR_BATTERY = "status_bar_battery";
 
     private CheckBoxPreference mReboot;
-    private CheckBoxPreference mBatteryPercentage;
+    private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
@@ -85,9 +85,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mReboot.setChecked(Settings.Secure.getInt(getContentResolver(),
             Settings.Secure.REBOOT_IN_POWER_MENU, 0) == 1);
 
-        mBatteryPercentage = (CheckBoxPreference) findPreference(KEY_BATTERY_PERCENTAGE);
-        mBatteryPercentage.setChecked((Settings.System.getInt(getContentResolver(),
-            Settings.System.STATUS_BAR_BATTERY, 0) == 1));
+        mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
 
         mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
 
@@ -119,6 +117,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         boolean dualPaneMode = Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
         mDualPane.setChecked(dualPaneMode);
+        int statusBarBattery = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_BATTERY, 0);
+        mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
+        mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
+        mStatusBarBattery.setOnPreferenceChangeListener(this);
 
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
@@ -141,10 +144,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 			Settings.Secure.putInt(getActivity().getContentResolver(),
 					Settings.Secure.REBOOT_IN_POWER_MENU,
 					mReboot.isChecked() ? 1 : 0);
-        } else if (preference == mBatteryPercentage) {
-            boolean value = mBatteryPercentage.isChecked();
-            Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_BATTERY,
-                    value ? 1 : 0);
         } else if (preference == mFastTorch) {
             boolean value = mFastTorch.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
@@ -164,6 +163,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     STATUS_BAR_AM_PM, statusBarAmPm);
             mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarBattery) {
+            int statusBarBattery = Integer.valueOf((String) objValue);
+            int index = mStatusBarBattery.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
+            mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
             return true;
         } else if (preference == mStatusBarClock) {
             int clockStyle = Integer.parseInt((String) objValue);
