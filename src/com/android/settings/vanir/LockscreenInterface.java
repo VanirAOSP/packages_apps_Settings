@@ -74,8 +74,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 		 mLockscreenUseCarousel.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
 			                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
 
-		mCameraWidget = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
-        mCameraWidget.setChecked(Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+		mCameraWidget = (CheckBoxPreference) prefSet.findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
+        mCameraWidget.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.KG_CAMERA_WIDGET, 0) == 1);
 
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
@@ -112,7 +112,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 			        ? 1 : 0);
 		return true;
 		} else if (preference == mCameraWidget) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.KG_CAMERA_WIDGET, mCameraWidget.isChecked() ? 1 : 0);
             return true;
 		} else if (preference == mLockscreenHideInitialPageHints) {
