@@ -1442,7 +1442,8 @@
 
         <!-- LCD changer -->
         <activity android:name=".vanir.fragments.UserInterface" />
-        <activity android:name=".slim.WifiSettings" />
+        
+        <activity android:name=".vanir.WifiSettings" />
 
         <activity
             android:name=".vanir.fragments.DensityChanger"

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.slim;
+package com.android.settings.vanir;
 
 import android.app.ListFragment;
 import android.content.Context;

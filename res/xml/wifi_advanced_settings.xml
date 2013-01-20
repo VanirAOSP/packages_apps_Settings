@@ -23,6 +23,23 @@
         android:title="@string/wifi_notify_open_networks"
         android:summary="@string/wifi_notify_open_networks_summary"
         android:persistent="false" />
+        
+        <ListPreference
+            android:key="wifi_countrycode"
+            android:title="@string/wifi_setting_countrycode_title"
+            android:summary="@string/wifi_setting_countrycode_summary"
+            android:persistent="false"
+            android:entries="@array/wifi_countrycode_entries"
+            android:entryValues="@array/wifi_countrycode_values"
+            />
+
+        <PreferenceScreen
+            android:key="wifi_priority"
+            android:title="@string/wifi_setting_priority_title"
+            android:summary="@string/wifi_setting_priority_summary"
+            android:persistent="false"
+            android:fragment="com.android.settings.vanir.WifiPriority"
+            />
 
     <ListPreference
         android:key="sleep_policy"

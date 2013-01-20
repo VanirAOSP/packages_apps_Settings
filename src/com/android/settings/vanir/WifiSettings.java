@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.slim;
+package com.android.settings.vanir;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -48,7 +48,7 @@ public class WifiSettings extends SettingsPreferenceFragment implements OnPrefer
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.wifi_settings_rom);
+        addPreferencesFromResource(R.xml.wifi_advanced_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
 
