@@ -43,6 +43,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.View;
 
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.util.CMDProcessor;
@@ -66,6 +67,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
     private CheckBoxPreference mDualPane;
+    SeekBarPreference mNavBarAlpha;
 
     Preference mLcdDensity;
 
@@ -84,6 +86,9 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mReboot = (CheckBoxPreference) findPreference(KEY_POWER_REBOOT);
         mReboot.setChecked(Settings.Secure.getInt(getContentResolver(),
             Settings.Secure.REBOOT_IN_POWER_MENU, 0) == 1);
+            
+        mNavBarAlpha = (SeekBarPreference) findPreference("navigation_bar_alpha");
+        mNavBarAlpha.setOnPreferenceChangeListener(this);
 
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
 
@@ -133,6 +138,17 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
     }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mNavBarAlpha != null) {
+            final float defaultNavAlpha = Settings.System.getFloat(getActivity()
+                    .getContentResolver(), Settings.System.NAVIGATION_BAR_ALPHA,
+                    0.8f);
+            mNavBarAlpha.setInitValue(Math.round(defaultNavAlpha * 100));
+        }
+    }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -178,7 +194,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
             return true;
+        } else if (preference == mNavBarAlpha) {
+            float val = (float) (Integer.parseInt((String) objValue) * 0.01);
+            return Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_ALPHA,
+                    val);
         }
-            return false;
-        }
+        return false;
+    }   
 }
