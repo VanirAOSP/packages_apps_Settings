@@ -76,12 +76,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
-    private static final String KEY_QUICK_QS = "quick_quicksettings";
-
     private DisplayManager mDisplayManager;
 
     private WarnedListPreference mFontSizePref;
-    private CheckBoxPreference mQuickQS;
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
@@ -175,9 +172,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(mWifiDisplayPreference);
             mWifiDisplayPreference = null;
         }
-
-        mQuickQS = (CheckBoxPreference)findPreference(KEY_QUICK_QS);
-        mQuickQS.setChecked(Settings.System.getInt(getActivity().getContentResolver(), Settings.System.QS_QUICK_PULLDOWN, 0) == 1);
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -425,10 +419,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mQuickQS) {
-            int val = mQuickQS.isChecked() ? 1 : 0;
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(), Settings.System.QS_QUICK_PULLDOWN, val);
-        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
