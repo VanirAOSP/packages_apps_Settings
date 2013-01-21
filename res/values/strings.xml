@@ -4885,5 +4885,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="lockscreen_camera_widget_title">Camera widget</string>
     <string name="lockscreen_camera_widget_summary">Show the lockscreen camera widget</string>
 
+    <!-- dual panel mode -->
+    <string name="dual_pane">Dual panel settings</string>
+    <string name="dual_pane_summary">Restart settings to take effect</string>
 
 </resources>

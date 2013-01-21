@@ -58,12 +58,14 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_ENABLE = "clock_style";
+    private static final String KEY_DUAL_PANE = "dual_pane";
 
     private CheckBoxPreference mReboot;
     private CheckBoxPreference mBatteryPercentage;
     private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
+    private CheckBoxPreference mDualPane;
 
     Preference mLcdDensity;
 
@@ -111,6 +113,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
+        mDualPane = (CheckBoxPreference) findPreference(KEY_DUAL_PANE);
+        boolean preferDualPane = getResources().getBoolean(
+                com.android.internal.R.bool.preferences_prefer_dual_pane);
+        boolean dualPaneMode = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
+        mDualPane.setChecked(dualPaneMode);
+
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
         try {
@@ -139,6 +148,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         } else if (preference == mFastTorch) {
             boolean value = mFastTorch.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
+        } else if (preference == mDualPane) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.DUAL_PANE_PREFS,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
