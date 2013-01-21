@@ -35,7 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.vanir.SettingsPreferenceFragment;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.TouchInterceptor;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.vanir.ImageListPreference;

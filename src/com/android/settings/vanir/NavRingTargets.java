@@ -18,10 +18,11 @@ import android.util.TypedValue;
 
 import java.net.URISyntaxException;
 
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.widget.NavBarItemPreference;
+
 
 public class NavRingTargets extends SettingsPreferenceFragment implements
         ShortcutPickerHelper.OnPickListener, OnPreferenceChangeListener {
@@ -53,6 +54,7 @@ public class NavRingTargets extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.title_navring);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.prefs_navring);
 

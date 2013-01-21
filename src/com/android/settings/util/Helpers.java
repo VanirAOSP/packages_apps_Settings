@@ -76,6 +76,29 @@ public class Helpers {
             return false;
         }
     }
+    
+     /**
+     * Checks device for network connectivity
+     *
+     * @return If the device has data connectivity
+    */
+    public static boolean isNetworkAvailable(final Context c) {
+        boolean state = false;
+        if (c != null) {
+            ConnectivityManager cm = (ConnectivityManager) c
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                Log.i(TAG, "The device currently has data connectivity");
+                state = true;
+            } else {
+                Log.i(TAG, "The device does not currently have data connectivity");
+                state = false;
+            }
+        }
+        return state;
+    }
+
 
     /**
      * Checks to see if Busybox is installed in "/system/"
@@ -142,6 +165,24 @@ public class Helpers {
         }
         return ( cmd.su.runWaitFor("busybox mount -o remount," + mount + " /system").success() );
     }
+    
+    public static String readOneLine(String fname) {
+        BufferedReader br;
+        String line = null;
+        try {
+            br = new BufferedReader(new FileReader(fname), 512);
+            try {
+                line = br.readLine();
+            } finally {
+                br.close();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "IO Exception when reading sys file", e);
+            // attempt to do magic!
+            return readFileViaShell(fname, true);
+        }
+        return line;
+    }
 
     public static String getFile(final String filename) {
         String s = "";
@@ -163,6 +204,50 @@ public class Helpers {
             }
         }
         return s;
+    }
+    
+    public static String readFileViaShell(String filePath, boolean useSu) {
+        CMDProcessor.CommandResult cr = null;
+        if (useSu) {
+            cr = new CMDProcessor().su.runWaitFor("cat " + filePath);
+        } else {
+            cr = new CMDProcessor().sh.runWaitFor("cat " + filePath);
+        }
+        if (cr.success())
+            return cr.stdout;
+        return null;
+    }
+    
+    public static boolean writeOneLine(String fname, String value) {
+        try {
+            FileWriter fw = new FileWriter(fname);
+            try {
+                fw.write(value);
+            } finally {
+                fw.close();
+            }
+        } catch (IOException e) {
+            String Error = "Error writing to " + fname + ". Exception: ";
+            Log.e(TAG, Error, e);
+            return false;
+        }
+        return true;
+    }
+
+    public static String[] getAvailableIOSchedulers() {
+        String[] schedulers = null;
+        String[] aux = readStringArray("/sys/block/mmcblk0/queue/scheduler");
+        if (aux != null) {
+            schedulers = new String[aux.length];
+            for (int i = 0; i < aux.length; i++) {
+                if (aux[i].charAt(0) == '[') {
+                    schedulers[i] = aux[i].substring(1, aux[i].length() - 1);
+                } else {
+                    schedulers[i] = aux[i];
+                }
+            }
+        }
+        return schedulers;
     }
 
     public static void writeNewFile(String filePath, String fileContents) {
@@ -217,6 +302,28 @@ public class Helpers {
         if (c != null && msg != null) {
             msgLong(c, msg);
         }
+    }
+    
+     private static String[] readStringArray(String fname) {
+        String line = readOneLine(fname);
+        if (line != null) {
+            return line.split(" ");
+        }
+        return null;
+    }
+
+    public static String getIOScheduler() {
+        String scheduler = null;
+        String[] schedulers = readStringArray("/sys/block/mmcblk0/queue/scheduler");
+        if (schedulers != null) {
+            for (String s : schedulers) {
+                if (s.charAt(0) == '[') {
+                    scheduler = s.substring(1, s.length() - 1);
+                    break;
+                }
+            }
+        }
+        return scheduler;
     }
 
     /**
