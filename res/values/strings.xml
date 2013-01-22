@@ -4658,17 +4658,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="custom_density_dialog_summary">"Changing your LCD density can cause unexpected app behavior. If you encounter market app incompatibility please return here and restart the process from step 1."</string>
     <string name="custom_density_dialog_button_got">Got it!</string>
     <string name="custom_density_dialog_button_reboot">Reboot now</string>
-<<<<<<< HEAD
-=======
 
-    <!-- Shortcut picker -->
-    <string name="use_custom_app_title">Use custom application</string>
-    <string name="use_custom_app_summary">Use custom application instead of the recent applications dialog</string>
-
-    <string name="notification_convert_sound_to_vibration_title">Notification conversion</string>
-    <string name="notification_convert_sound_to_vibration_summary">Sounds to vibrations during vibrate mode</string>
->>>>>>> e2b2b72... Settings: Specify the WiFi network priority
-    
     <!-- Android debugging over WiFi -->
     <string name="adb_over_network">ADB over network</string>
     <string name="adb_over_network_summary">Enable TCP/IP debugging over network interfaces (Wi-Fi, USB networks). This setting is reset on reboot</string>
