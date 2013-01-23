@@ -4403,10 +4403,6 @@
     <string name="link_volume_mutes">Silent mode affects notifications</string>
     <string name="volume_ring_only_description">Ringtone</string>
 
-    <!-- Reboot menu -->
-    <string name="reboot_in_power">Power menu: reboot</string>
-    <string name="reboot_in_power_summary">Include reboot options in power menu</string>
-
     <!-- Shortcuts -->
     <string name="shortcuts_title">Shortcuts</string>
 
@@ -4658,7 +4654,6 @@ Letting go of the power button will turn the torch off.</string>
     <string name="custom_density_dialog_summary">"Changing your LCD density can cause unexpected app behavior. If you encounter market app incompatibility please return here and restart the process from step 1."</string>
     <string name="custom_density_dialog_button_got">Got it!</string>
     <string name="custom_density_dialog_button_reboot">Reboot now</string>
-
     <!-- Android debugging over WiFi -->
     <string name="adb_over_network">ADB over network</string>
     <string name="adb_over_network_summary">Enable TCP/IP debugging over network interfaces (Wi-Fi, USB networks). This setting is reset on reboot</string>

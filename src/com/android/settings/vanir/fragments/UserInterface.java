@@ -53,7 +53,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
     public static final String TAG = "UserInterface";
 
-    private static final String KEY_POWER_REBOOT = "reboot_in_power";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
@@ -61,7 +60,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_DUAL_PANE = "dual_pane";
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
 
-    private CheckBoxPreference mReboot;
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
@@ -82,10 +80,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
-
-        mReboot = (CheckBoxPreference) findPreference(KEY_POWER_REBOOT);
-        mReboot.setChecked(Settings.Secure.getInt(getContentResolver(),
-            Settings.Secure.REBOOT_IN_POWER_MENU, 0) == 1);
             
         mNavBarAlpha = (SeekBarPreference) findPreference("navigation_bar_alpha");
         mNavBarAlpha.setOnPreferenceChangeListener(this);
@@ -156,10 +150,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
-        } else if (preference == mReboot) {
-			Settings.Secure.putInt(getActivity().getContentResolver(),
-					Settings.Secure.REBOOT_IN_POWER_MENU,
-					mReboot.isChecked() ? 1 : 0);
         } else if (preference == mFastTorch) {
             boolean value = mFastTorch.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_FAST_TORCH, value?1:0);
