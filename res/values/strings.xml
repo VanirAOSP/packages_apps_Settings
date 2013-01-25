@@ -4959,4 +4959,10 @@ Letting go of the power button will turn the torch off.</string>
     <string name="wifi_setting_priority_summary">Specify the priority of Wi-Fi networks</string>
     <string name="wifi_priority_disabled">Enable Wi-Fi to specify the priority</string>
 
+    <!-- Status bar signal -->
+    <string name="status_bar_signal_text_title">Signal status style</string>
+    <string name="status_bar_style_icon">Icon</string>
+    <string name="status_bar_style_hidden">Hidden</string>
+    <string name="status_bar_signal_text_show_text">Text</string>
+
 </resources>

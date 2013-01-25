@@ -59,10 +59,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String PREF_ENABLE = "clock_style";
     private static final String KEY_DUAL_PANE = "dual_pane";
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
+    private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
     private ListPreference mStatusBarAmPm;
+    private ListPreference mStatusBarSignal;
     private ListPreference mStatusBarClock;
     private CheckBoxPreference mDualPane;
     SeekBarPreference mNavBarAlpha;
@@ -85,6 +87,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mNavBarAlpha.setOnPreferenceChangeListener(this);
 
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
+
+        mStatusBarSignal = (ListPreference) findPreference(STATUS_BAR_SIGNAL);
 
         mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
 
@@ -121,6 +125,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
         mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
         mStatusBarBattery.setOnPreferenceChangeListener(this);
+
+        int signalStyle = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_SIGNAL_TEXT, 0);
+        mStatusBarSignal.setValue(String.valueOf(signalStyle));
+        mStatusBarSignal.setSummary(mStatusBarSignal.getEntry());
+        mStatusBarSignal.setOnPreferenceChangeListener(this);
 
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
@@ -183,6 +193,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarSignal) {
+            int signalStyle = Integer.valueOf((String) objValue);
+            int index = mStatusBarSignal.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_SIGNAL_TEXT, signalStyle);
+            mStatusBarSignal.setSummary(mStatusBarSignal.getEntries()[index]);
             return true;
         } else if (preference == mNavBarAlpha) {
             float val = (float) (Integer.parseInt((String) objValue) * 0.01);
