@@ -39,7 +39,7 @@ public class SeekBarPreference extends Preference
     private TextView monitorBox;
     private SeekBar bar;
 
-    int defaultValue = 60;
+    int defaultValue = 100;
 
     private OnPreferenceChangeListener changer;
 
