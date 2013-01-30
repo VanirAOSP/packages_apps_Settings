@@ -500,14 +500,22 @@ public class Navbar extends SettingsPreferenceFragment implements
 
     public int mapChosenDpToPixels(int dp) {
         switch (dp) {
+            case 52:
+                return getResources().getDimensionPixelSize(R.dimen.navigation_bar_52);
+            case 50:
+                return getResources().getDimensionPixelSize(R.dimen.navigation_bar_50);
             case 48:
                 return getResources().getDimensionPixelSize(R.dimen.navigation_bar_48);
+            case 46:
+                return getResources().getDimensionPixelSize(R.dimen.navigation_bar_46);
             case 44:
                 return getResources().getDimensionPixelSize(R.dimen.navigation_bar_44);
             case 42:
                 return getResources().getDimensionPixelSize(R.dimen.navigation_bar_42);
             case 40:
                 return getResources().getDimensionPixelSize(R.dimen.navigation_bar_40);
+            case 38:
+                return getResources().getDimensionPixelSize(R.dimen.navigation_bar_38);
             case 36:
                 return getResources().getDimensionPixelSize(R.dimen.navigation_bar_36);
             case 30:
@@ -517,7 +525,6 @@ public class Navbar extends SettingsPreferenceFragment implements
         }
         return -1;
     }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == ShortcutPickerHelper.REQUEST_PICK_SHORTCUT
