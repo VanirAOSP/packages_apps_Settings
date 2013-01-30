@@ -41,7 +41,7 @@
         android:key="pref_volume_wake"
         android:title="@string/pref_volume_wake_title"
         android:summary="@string/pref_volume_wake_summary"
-        android:defaultValue="false" />
+        android:persistent="false" />
 
     <!-- Volume Rocker music control -->
     <CheckBoxPreference

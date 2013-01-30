@@ -82,7 +82,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
-    private static final String KEY_VOLUME_WAKE = "volume_wake_screen";
+    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_CONVERT_SOUND_TO_VIBRATE = "notification_convert_sound_to_vibration";
@@ -238,7 +238,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             emergencyTonePreference.setOnPreferenceChangeListener(this);
         }
         
-	mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
+	    mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
         if (mVolumeWake != null) {
             mVolumeWake.setChecked(Settings.System.getInt(resolver,
                     Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
