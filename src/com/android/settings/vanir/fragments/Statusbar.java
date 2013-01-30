@@ -102,15 +102,15 @@ public class Statusbar extends SettingsPreferenceFragment implements
         
         mQuickPulldown = (ListPreference) prefSet.findPreference(QUICK_PULLDOWN);
         if (!Utils.isPhone(getActivity())) {
-            prefSet.removePreference(mQuickPulldown);
+            if(mQuickPulldown != null)
+                getPreferenceScreen().removePreference(mQuickPulldown);
         } else {
             mQuickPulldown.setOnPreferenceChangeListener(this);
-            int statusQuickPulldown = Settings.System.getInt(resolver, Settings.System.QS_QUICK_PULLDOWN, 0);
-            mQuickPulldown.setValue(String.valueOf(statusQuickPulldown));
+            int quickPulldownValue = Settings.System.getInt(resolver, Settings.System.QS_QUICK_PULLDOWN, 0);
+            mQuickPulldown.setValue(String.valueOf(quickPulldownValue));
             updatePulldownSummary();
         }
     }
-
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
