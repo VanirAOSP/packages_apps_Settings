@@ -682,8 +682,12 @@ public class Navbar extends SettingsPreferenceFragment implements
                 .getDisplayMetrics());
 
         Bitmap d = ((BitmapDrawable) image).getBitmap();
+        if (d == null) {
+			return getResources().getDrawable(R.drawable.ic_sysbar_null);
+        } else {
         Bitmap bitmapOrig = Bitmap.createScaledBitmap(d, px, px, false);
         return new BitmapDrawable(mContext.getResources(), bitmapOrig);
+	    }
     }
 
     private Drawable getNavbarIconImage(int index, boolean landscape) {
