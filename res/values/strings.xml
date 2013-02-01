@@ -233,6 +233,8 @@
     <string name="bluetooth_only_visible_to_paired_devices">Only visible to paired devices</string>
     <!-- Bluetooth settings screen, option name to pick discoverability timeout duration (a list dialog comes up) -->
     <string name="bluetooth_visibility_timeout">Visibility timeout</string>
+    <!-- Bluetooth settings screen, Discoverable timeout list dialog summary text -->
+    <string name="bluetooth_visibility_timeout_summary">Set how long device will be discoverable</string>
     <!-- Bluetooth settings screen, check box label whether or not to allow bluetooth voice dialing when lock screen is up-->
     <string name="bluetooth_lock_voice_dialing">Lock voice dialing</string>
     <!-- Bluetooth settings screen, lock voice dialing checkbox summary text -->
@@ -500,7 +502,7 @@
     <string name="band_mode_set">Set</string>
     <!-- Band mode screen. Status message when unsuccessful. -->
     <string name="band_mode_failed">Unsuccessful</string>
-    <!-- Band mode screen. Statusm essage when successful. -->
+    <!-- Band mode screen. Status message when successful. -->
     <string name="band_mode_succeeded">Successful</string>
 
     <!-- Instructions after the user changes the mass storage settings -->
@@ -513,7 +515,7 @@
     <string name="sdcard_settings_not_present_status" product="nosdcard">USB storage not mounted.</string>
     <!-- Message when there is no SD card present -->
     <string name="sdcard_settings_not_present_status" product="default">No SD card.</string>
-    <!-- Th label for the available (free) sapce on the SD card -->
+    <!-- Th label for the available (free) space on the SD card -->
     <string name="sdcard_settings_available_bytes_label">Available bytes:</string>
     <!-- Message when the SD card is being used by the computer as mass storage [CHAR LIMIT=30] -->
     <string name="sdcard_settings_mass_storage_status" product="nosdcard">USB storage is being used as a mass storage device.</string>
@@ -685,7 +687,7 @@
     <string name="location_settings_title">Location access</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
     <string name="security_settings_title">Security</string>
-    <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
+    <!-- Main Settings screen setting option summary text for the item to take you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
     <string name="cdma_security_settings_summary">Set My Location, screen unlock, credential storage lock</string>
@@ -816,10 +818,10 @@
     <!-- Title for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_change_title">Change lock screen</string>
 
-    <!-- Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45] -->
+    <!-- Summary for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_launch_picker_change_summary">Change or disable pattern, PIN, or password security</string>
 
-    <!-- Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45] -->
+    <!-- Summary for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_launch_picker_enable_summary">Choose a method to lock the screen</string>
 
     <!-- Info explaining the backup lock which is used for facelock -->
@@ -1487,7 +1489,7 @@
     <string name="wifi_advanced_settings_label">IP settings</string>
     <!-- Menu item to save the IP settings -->
     <string name="wifi_ip_settings_menu_save">Save</string>
-    <!-- Menu ietm to cancel the IP settings -->
+    <!-- Menu item to cancel the IP settings -->
     <string name="wifi_ip_settings_menu_cancel">Cancel</string>
     <!-- Error message if the IP address is not valid [CHAR LIMIT=50]-->
     <string name="wifi_ip_settings_invalid_ip_address">Type a valid IP address.</string>
@@ -1818,7 +1820,6 @@
     <string name="quick_pulldown_left">Left</string>
     <string name="quick_pulldown_right">Right</string>
     <string name="title_quick_pulldown">Quick pulldown</string>
-    
 
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>
@@ -1965,7 +1966,7 @@
     <string name="memory_available_read_only">Available (read-only)</string>
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
     <string name="memory_size">Total space</string>
-    <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
+    <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calculating. [CHAR LIMIT=30] -->
     <string name="memory_calculating_size">Calculating\u2026</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_apps_usage">Apps (app data &amp; media content)</string>
@@ -1981,13 +1982,13 @@
     <string name="memory_media_misc_usage">Misc.</string>
     <!-- Storage item representing all cached data on device. [CHAR LIMIT=48] -->
     <string name="memory_media_cache_usage">Cached data</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
+    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user physically removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
     <string name="sd_eject" product="nosdcard">Unmount shared storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems. -->
+    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user physically removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems. -->
     <string name="sd_eject" product="default">Unmount SD card</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
+    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user physically removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
     <string name="sd_eject_summary" product="nosdcard">Unmount the internal USB storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems. -->
+    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user physically removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems. -->
     <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove it</string>
     <!-- SD card & phone storage settings item title for toggling PTP mode on and off.  When PTP mode is on the device will appear on the USB bus as a PTP camera device instead of an MTP music player. -->
 
@@ -2090,7 +2091,7 @@
     <string name="apn_name">Name</string>
     <!-- Edit access point labels: The actual access point name-->
     <string name="apn_apn">APN</string>
-    <!-- Edit access point labels: The addess of the proxy to use for this APN -->
+    <!-- Edit access point labels: The address of the proxy to use for this APN -->
     <string name="apn_http_proxy">Proxy</string>
     <!-- Edit access point labels: The port number of the proxy to use for this APN -->
     <string name="apn_http_port">Port</string>
@@ -2110,15 +2111,15 @@
     <string name="apn_mcc">MCC</string>
     <!-- Edit access point labels: -->
     <string name="apn_mnc">MNC</string>
-    <!-- Edit access point labels: Authenticaton type-->
+    <!-- Edit access point labels: Authentication type-->
     <string name="apn_auth_type">Authentication type</string>
-    <!-- Authentication Typs: None -->
+    <!-- Authentication Types: None -->
     <string name="apn_auth_type_none">None</string>
-    <!-- Authentication Typs: PAP -->
+    <!-- Authentication Types: PAP -->
     <string name="apn_auth_type_pap">PAP</string>
-    <!-- Authentication Typs: CHAP -->
+    <!-- Authentication Types: CHAP -->
     <string name="apn_auth_type_chap">CHAP</string>
-    <!-- Authentication Typs: PAP or CHAP -->
+    <!-- Authentication Types: PAP or CHAP -->
     <string name="apn_auth_type_pap_chap">PAP or CHAP</string>
     <!-- Edit access point labels: The type of APN -->
     <string name="apn_type">APN type</string>
@@ -2406,7 +2407,7 @@
     <string name="lockpattern_need_to_unlock_wrong">Try again:</string>
     <!-- Do not translate. -->
     <string name="lockpattern_need_to_unlock_wrong_footer" />
-    <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen.  This si when they are supposed to draw a new unlock pattern (for example, if they are changing their unlock patterns)..-->
+    <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen.  This is when they are supposed to draw a new unlock pattern (for example, if they are changing their unlock patterns)..-->
     <string name="lockpattern_recording_intro_header">Draw an unlock pattern:</string>
     <!-- Security & location settings screen, change unlock pattern screen hint on bottom of screen.  We are telling them to press the menu button to see more options or help. -->
     <string name="lockpattern_recording_intro_footer">Press Menu for help.</string>
@@ -2421,7 +2422,7 @@
     <string name="lockpattern_pattern_confirmed_header">Your new unlock pattern:</string>
     <!-- Security & location settings screen, change unlock pattern screen button, on bottom of screen.  After they draw a pattern and release their finger, we display the pattern so they remember.  When they are ready to draw it once again to confirm it, they press this button. -->
     <string name="lockpattern_confirm_button_text">Confirm</string>
-    <!-- Security & location settings screen, change unlock pattern screen button, on bottom of screen.  After they draw a pattern and release their finger, we display the pattern so they remember.  If they are nto satisfied with this pattern, they click this button to redraw the pattern. -->
+    <!-- Security & location settings screen, change unlock pattern screen button, on bottom of screen.  After they draw a pattern and release their finger, we display the pattern so they remember.  If they are not satisfied with this pattern, they click this button to redraw the pattern. -->
     <string name="lockpattern_restart_button_text">Redraw</string>
     <!-- Security & location settings screen, change unlock pattern screen button, on bottom of screen. If they are supposed to enter their current pattern before being able to draw another one, and they screw up, they hit this button to try again -->
     <string name="lockpattern_retry_button_text">Retry</string>
@@ -2509,11 +2510,11 @@
     <string name="force_stop">Force stop</string>
     <!-- Manage applications, individual application info screen,label under Storage heading.  The total storage space taken up by this app. -->
     <string name="total_size_label">Total</string>
-    <!-- Manage applications, individual application info screen, label under Storage heading. The amount of space taken up by the application itself (for example, the java compield files and things like that) -->
+    <!-- Manage applications, individual application info screen, label under Storage heading. The amount of space taken up by the application itself (for example, the java compiled files and things like that) -->
     <string name="application_size_label">App</string>
     <!-- Manage applications, individual application info screen, label under Storage heading.  The amount of space taken up by the app's code on USB storage [CHARSIZE=40] -->
     <string name="external_code_size_label">USB storage app</string>
-    <!-- Manage applications, individual application info screen, label under Storage heading.  The amount of sapce taken up by the app's data (for example, downloaded emails or something like that) -->
+    <!-- Manage applications, individual application info screen, label under Storage heading.  The amount of space taken up by the app's data (for example, downloaded emails or something like that) -->
     <string name="data_size_label">Data</string>
     <!-- Manage applications, individual application info screen, label under Storage heading.  The amount of space taken up by the app's data on USB storage [CHARSIZE=40] -->
     <string name="external_data_size_label" product="nosdcard">USB storage data</string>
@@ -2529,7 +2530,7 @@
     <string name="disable_text">Disable</string>
     <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to re-enable an existing application. -->
     <string name="enable_text">Enable</string>
-    <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for exampel, remove all cached emails for an Email app) -->
+    <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for example, remove all cached emails for an Email app) -->
     <string name="clear_user_data_text">Clear data</string>
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
@@ -2797,7 +2798,7 @@
         and then on again.</string>
 
     <!-- Language Settings --> <skip />
-    <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
+    <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings related to locale and text -->
     <string name="language_settings">Language &amp; input</string>
     <!-- Title of Language and keyboard settings screen -->
     <string name="language_keyboard_settings_title">Language &amp; input</string>
@@ -2813,7 +2814,7 @@
     <string name="auto_replace">Auto-replace</string>
     <!-- On Text & language settings screen, setting summary.  This is the summary for the "Auto-replace" setting. -->
     <string name="auto_replace_summary">Correct mistyped words</string>
-    <!-- On Text & language settings screen, setting option name.  title of the setting to enable autocapitalization of entered text.  for example, after the user finishes a sentence, the next letter he types will automatically be capitalizated. [CHAR LIMIT=25] -->
+    <!-- On Text & language settings screen, setting option name.  title of the setting to enable autocapitalization of entered text.  for example, after the user finishes a sentence, the next letter he types will automatically be capitalized. [CHAR LIMIT=25] -->
     <string name="auto_caps">Auto-capitalization</string>
     <!-- On Text & language settings screen, setting summary. Summary for the Auto-cap setting. [CHAR LIMIT=100]-->
     <string name="auto_caps_summary">Capitalize first letter in sentences</string>
@@ -2879,7 +2880,7 @@
     <string name="user_dict_single_settings_title">Personal dictionary</string>
     <!-- User dictionary settings, The title of the list item to go into the User dictionary list when there are several user dictionaries. [CHAR LIMIT=35] -->
     <string name="user_dict_multiple_settings_title">Personal dictionaries</string>
-    <!-- User dictionary settings.  The summary of the listem item to go into the User dictionary settings screen. -->
+    <!-- User dictionary settings.  The summary of the list item to go into the User dictionary settings screen. -->
     <string name="user_dict_settings_summary">""</string>
     <!-- User dictionary settings. The title of the menu item to add a new word to the user dictionary. -->
     <string name="user_dict_settings_add_menu_title">Add</string>
@@ -2912,7 +2913,7 @@
     <!-- User dictionary settings. The text to show for the option that shows the entire list of supported locales to choose one [CHAR LIMIT=30] -->
     <string name="user_dict_settings_more_languages">More languages…</string>
 
-    <!-- This is for diagnostics screen. The title of a screen with various items realted to launching screens that will giev the user info. For example, it contains "Phone information" and "Battery information" -->
+    <!-- This is for diagnostics screen. The title of a screen with various items related to launching screens that will give the user info. For example, it contains "Phone information" and "Battery information" -->
     <string name="testing">Testing</string>
     <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information. -->
     <string name="testing_phone_info" product="tablet">Tablet information</string>
@@ -3092,13 +3093,13 @@
     <string name="accessibility_screen_magnification_title">Magnification gestures</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_summary">When this feature is turned on, you can zoom in and out by triple-tapping the screen.\n\nWhile zoomed in, you can:\n<ul><li>Pan: Drag two or more fingers across the screen.</li>\n<li>Adjust zoom level: Pinch two or more fingers together or spread them apart.</li></ul>\n\nYou can also temporarily magnify what\'s under your finger by triple-tapping and holding. In this magnified state, you can drag your finger to explore different parts of the screen. Lift your finger to return to your previous state.\n\nNote: Triple-tap for magnification works everywhere except the keyboard and navigation bar.</string>
-    <!-- Title for the preference to enable the global geture that turns on accessibility. [CHAR LIMIT=35] -->
+    <!-- Title for the preference to enable the global gesture that turns on accessibility. [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
-    <!-- Summary for the preference to enable the global geture that turns on accessibility (on state). [CHAR LIMIT=60] -->
+    <!-- Summary for the preference to enable the global gesture that turns on accessibility (on state). [CHAR LIMIT=60] -->
     <string name="accessibility_global_gesture_preference_summary_on">On</string>
-    <!-- Summary for the preference screen to enable the global geture that turns on accessibility (off state). [CHAR LIMIT=35] -->
+    <!-- Summary for the preference screen to enable the global gesture that turns on accessibility (off state). [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_summary_off">Off</string>
-    <!--  Description for the preference screen to enable the global geture taht turns on accessibility. [CHAR LIMIT=none] -->
+    <!--  Description for the preference screen to enable the global gesture that turns on accessibility. [CHAR LIMIT=none] -->
     <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly enable accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Touch and hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked.</string>
     <!-- Title for the accessibility preference to enable large text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_large_text_preference_title">Large text</string>
@@ -3109,7 +3110,7 @@
     <!-- Summary for the accessibility preference to auto update screen magnification. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary">Update screen magnification on app transitions</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
-    <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
+    <string name="accessibility_power_button_ends_call_preference_title">Power button ends call</string>
     <!-- Title for the accessibility preference to speak passwords. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_speak_password_preference_title">Speak passwords</string>
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
@@ -3117,12 +3118,12 @@
     <!-- Title for accessibility preference to install accessibility scripts from Google. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_script_injection_preference_title">Enhance web accessibility</string>
 
-    <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
+    <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
 
-    <!-- Summary for the enabled state of an accessiblity feature. [CHAR LIMIT=10] -->
+    <!-- Summary for the enabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_on">On</string>
-    <!-- Summary for the disabled state of an accessiblity feature. [CHAR LIMIT=10] -->
+    <!-- Summary for the disabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_off">Off</string>
 
     <!-- Summary for the allowed state of script injection. [CHAR LIMIT=15] -->
@@ -3160,7 +3161,7 @@
          selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_disable_warning_summary">Touching OK will stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
 
-    <!-- Title for the prompt shown as a placeholder if no accessibility serivices are installed. [CHAR LIMIT=50] -->
+    <!-- Title for the prompt shown as a placeholder if no accessibility services are installed. [CHAR LIMIT=50] -->
     <string name="accessibility_no_services_installed">No services installed</string>
 
     <!-- Title for the prompt that lets users know that they have no accessibility related apps
@@ -3176,10 +3177,10 @@
     <string name="accessibility_script_injection_security_warning_summary">Do you want apps to
         install scripts from Google that make their web content more accessible?</string>
 
-    <!-- Default description for an accessibility serivice if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
+    <!-- Default description for an accessibility service if the latter doesn't provide one. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_default_description">No description provided.</string>
 
-    <!-- Accessibility settings: button for lauching settings for an accessibility service -->
+    <!-- Accessibility settings: button for launching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
 
     <!-- App Fuel Gauge strings -->
@@ -3401,7 +3402,7 @@
     <string name="tts_install_data_title">Install voice data</string>
     <!-- On main TTS Settings screen, summary for click to install required speech synthesis data -->
     <string name="tts_install_data_summary">Install the voice data required for speech synthesis</string>
-    <!-- On main TTS Settings screen, summary for when required speech synthesis data alrady installed on SD card -->
+    <!-- On main TTS Settings screen, summary for when required speech synthesis data already installed on SD card -->
     <string name="tts_data_installed_summary">Voices required for speech synthesis already properly installed</string>
     <!-- Text spoken by the TTS engine when TTS settings (other than language) have been changed -->
     <string name="tts_settings_changed_demo">Your settings have changed. This is an example of how they sound.</string>
@@ -3672,7 +3673,7 @@
          Used in Wifi Setup For Setup Wizard with XL screen. -->
     <string name="wifi_setup_next">Next</string>
     <!-- Button label to go back to previous screen. Used in SetupWizard for
-      XLarge screen [CHAR LIMIT=10] -->
+         XLarge screen [CHAR LIMIT=10] -->
     <string name="wifi_setup_back">Back</string>
     <!-- Button label to show detailed dialog for a selected Wi-Fi settings.
          Used in SetupWizard for XLarge screen [CHAR LIMIT=20] -->
@@ -3788,7 +3789,7 @@
     <string name="sync_one_time_sync">Touch to sync now<xliff:g id="last_sync_time">\n%1$s</xliff:g></string>
     <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Gmail should be synced.  Should use "Gmail" to refer to this app.-->
     <string name="sync_gmail">Gmail</string>
-    <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Calendar shoudl be synced. -->
+    <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Calendar should be synced. -->
     <string name="sync_calendar">Calendar</string>
     <!-- Data synchronization settings screen, checkbox setting option name -->
     <string name="sync_contacts">Contacts</string>
@@ -3818,9 +3819,9 @@
     <string name="really_remove_account_message" product="tablet">Removing this account will delete all of its messages, contacts, and other data from the tablet!</string>
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
-    <!-- This is shown if the autheticator for a given account fails to remove it. -->
+    <!-- This is shown if the authentication for a given account fails to remove it. -->
     <string name="remove_account_failed" product="tablet">This account is required by some apps. You can only remove it by resetting the tablet to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>
-    <!-- This is shown if the autheticator for a given account fails to remove it. -->
+    <!-- This is shown if the authentication for a given account fails to remove it. -->
     <string name="remove_account_failed" product="default">This account is required by some apps. You can only remove it by resetting the phone to factory defaults (which deletes all your personal data) in Settings &gt; Backup &amp; reset.</string>
     <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
     <string name="provider_label">Push subscriptions</string>
@@ -3828,7 +3829,7 @@
     <string name="sync_item_title"><xliff:g id="authority" example="Calendar">%s</xliff:g></string>
     <!-- Title of dialog shown when you can't manually sync an item because it's disabled -->
     <string name="cant_sync_dialog_title">Can\'t manually sync</string>
-    <!-- Messaage shown in dialog when you can't manually sync -->
+    <!-- Message shown in dialog when you can't manually sync -->
     <string name="cant_sync_dialog_message">Sync for this item is currently disabled. To change this setting, temporarily turn on background data and automatic sync.</string>
 
     <string name="wimax_settings">4G settings</string>
@@ -3868,7 +3869,7 @@
 
     <!-- UI debug setting: title for app picker dialog [CHAR LIMIT=50] -->
     <string name="select_application">Select application</string>
-    <!-- UI debug setting: label for app picker to select no applicatiojn [CHAR LIMIT=50] -->
+    <!-- UI debug setting: label for app picker to select no application [CHAR LIMIT=50] -->
     <string name="no_application">Nothing</string>
 
     <!-- UI debug setting: wait for debugger to attach to debugging process? [CHAR LIMIT=50] -->
@@ -4252,7 +4253,7 @@
 
     <!-- Button label for setting the user's new full-backup password -->
     <string name="backup_pw_set_button_text">Set backup password</string>
-    <!-- Button label for cancelling the new-password operation and retaining the user's previous full-backup password -->
+    <!-- Button label for canceling the new-password operation and retaining the user's previous full-backup password -->
     <string name="backup_pw_cancel_button_text">Cancel</string>
 
     <!-- Representation of a numerical percentage. [CHAR LIMIT=8] -->
@@ -4262,7 +4263,7 @@
     from their cell phone carrier. The use of the string is similar to the string
     "system_update_settings_list_item_title" in this project. [CHAR LIMIT=25] -->
     <string name="additional_system_update_settings_list_item_title">Additional system updates</string>
-    <!-- These statuses are displayed when a device was built with SE Android supoprt.
+    <!-- These statuses are displayed when a device was built with SE Android support.
     These are displayed by the settings app in the about section. -->
     <string name="selinux_status_disabled">Disabled</string>
     <string name="selinux_status_permissive">Permissive</string>
@@ -4287,7 +4288,7 @@
     <string name="user_summary_not_set_up">Not set up</string>
     <!-- User information string to represent the owner of the device [CHAR LIMIT=25] -->
     <string name="user_owner">Owner</string>
-    <!-- Title for the preference to enter the nickname of the userto display in the user switcher [CHAR LIMIT=25]-->
+    <!-- Title for the preference to enter the nickname of the user to display in the user switcher [CHAR LIMIT=25]-->
     <string name="user_nickname">Nickname</string>
     <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
     <string name="user_add_user_title">Add new user</string>
@@ -4386,11 +4387,11 @@
     <string name="cell_broadcast_settings">Cell broadcasts</string>
     <!-- Cell Broadcast settings description [CHAR LIMIT=100] -->
     <string name="cell_broadcast_settings_summary">Select the types of emergency alerts to display.</string>
- 
+
     <!-- Safe headset volume restore checkbox -->
     <string name="safe_headset_restore_title">Safe headset volume</string>
     <string name="safe_headset_restore_summary">Prevent loud volume levels when headset is first plugged in</string>
-    
+
     <!-- Customized settings -->
     <string name="headset_connect_player_title">Launch music app on connect</string>
 
@@ -4725,7 +4726,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
     <!-- carousel -->
     <string name="lockscreen_use_widget_container_carousel_title">Lockscreen carousel</string>
-	<string name="lockscreen_use_widget_container_carousel_summary">Use a carousel animation when switching between lockscreen widgets.</string>
+    <string name="lockscreen_use_widget_container_carousel_summary">Use a carousel animation when switching between lockscreen widgets.</string>
 
     <!-- Hostname setting -->
     <string name="device_hostname">Device hostname</string>
@@ -4756,16 +4757,16 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Lockscreen Camera widget toggle -->
     <string name="lockscreen_camera_widget_title">Camera widget</string>
     <string name="lockscreen_camera_widget_summary">Show the lockscreen camera widget</string>
-    
+
     <!-- Shortcut picker -->
     <string name="use_custom_app_summary">Use custom application instead of the recent applications dialog</string>
     <string name="select_custom_app_title">Select custom application</string>
     <string name="group_applications">Applications</string>
-    
+
     <!-- notification/vibration toggle -->
     <string name="notification_convert_sound_to_vibration_title">Notification conversion</string>
     <string name="notification_convert_sound_to_vibration_summary">Sounds to vibrations during vibrate mode</string>
-    
+
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
     <string name="press_color_to_apply">Press on Color to apply</string>
@@ -4775,15 +4776,15 @@ Letting go of the power button will turn the torch off.</string>
     <string name="hex_hint">#FF000000</string>
     <string name="set">Set</string>
     <string name="ics_color">ICS Holo</string>
-    
+
     <string name="title_navbar">Navigation Bar</string>
     <string name="title_navring">Navigation Ring</string>
     <string name="lefty_mode_title">Lefty Mode</string>
     <string name="lefty_mode_summary">Swap NavBar location (requires UI restart)</string>
     <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
-    
-     <string name="dont_show">Don\'t show</string>
-    
+
+    <string name="dont_show">Don\'t show</string>
+
     <!-- Navigation Bar -->
     <string name="navigation_bar">Navigation bar</string>
     <string name="navbar_button_cat">Navigation bar buttons</string>
@@ -4893,7 +4894,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="interface_navring">Ring Targets</string>
     <string name="navbar_ring">Custom Ring Targets</string>
     <string name="navring_enable_long">Enable Longpress for navring</string>
-    
+
     <!-- NavBar -->
     <string name="right">Right</string>
     <string name="left">Left</string>
@@ -4948,14 +4949,13 @@ Letting go of the power button will turn the torch off.</string>
     <string name="size_4_dp">4 dp</string>
 
     <!-- Wifi settings -->
-    <string name="ass_wifi_settings_title">Wi-Fi</string>
     <!-- Wi-Fi region code settings-->
     <string name="wifi_setting_countrycode_title">Wi-Fi region code</string>
     <!-- Wi-Fi settings screen, setting summary for setting the wifi frequency band [CHAR LIMIT=50]. -->
     <string name="wifi_setting_countrycode_summary">Specify the region code for Wi-Fi</string>
     <!-- Wi-Fi settings screen, error message when the frequency band could not be set [CHAR LIMIT=50]. -->
     <string name="wifi_setting_countrycode_error">There was a problem setting the region code.</string>
-    <!-- Wi-Fi settings diables message if Wifi is off-->
+    <!-- Wi-Fi settings disables message if Wifi is off-->
     <string name="wifi_setting_countrycode_disabled">Enable Wi-Fi to change this option.</string>
     <!-- Wi-Fi settings screen, advanced, title of the item to set the Wi-Fi priority. -->
     <string name="wifi_setting_priority_title">Wi-Fi priority</string>
@@ -4969,6 +4969,6 @@ Letting go of the power button will turn the torch off.</string>
     <string name="status_bar_style_hidden">Hidden</string>
     <string name="status_bar_signal_text_show_text">Text</string>
 
-    <!-- Advanced, Device specific (DeviceParts) settings  -->
+    <!-- Advanced, Device specific (DeviceParts) settings -->
     <string name="advanced_settings_title">Advanced</string>
 </resources>
