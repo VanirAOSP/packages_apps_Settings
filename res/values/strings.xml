@@ -4775,7 +4775,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="hex">Hex:</string>
     <string name="hex_hint">#FF000000</string>
     <string name="set">Set</string>
-    <string name="ics_color">ICS Holo</string>
+    <string name="ics_color">Holo</string>
 
     <string name="title_navbar">Navigation Bar</string>
     <string name="title_navring">Navigation Ring</string>
