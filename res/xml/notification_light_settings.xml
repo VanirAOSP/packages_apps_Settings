@@ -33,11 +33,11 @@
         <CheckBoxPreference
             android:key="custom_enabled"
             android:title="@string/notification_light_use_custom" />
-        </PreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="phone_list"
-        android:title="@string/notification_light_phonelist_title" >
+        android:title="@string/notification_light_phonelist_title">
 
         <com.android.settings.notificationlight.ApplicationLightPreference
             android:key="missed_call"
@@ -52,7 +52,6 @@
 
     <PreferenceCategory
         android:key="applications_list"
-        android:title="@string/notification_light_applist_title" >
+        android:title="@string/notification_light_applist_title">
     </PreferenceCategory>
-
 </PreferenceScreen>

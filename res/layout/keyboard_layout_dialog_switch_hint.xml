@@ -34,5 +34,4 @@
         android:textColor="?android:attr/textColorAlertDialogListItem"
         android:minHeight="48dp"
         android:gravity="center" />
-
 </LinearLayout>

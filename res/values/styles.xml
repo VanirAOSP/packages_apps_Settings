@@ -193,5 +193,4 @@
     <style name="KeyguardAppWidgetItem">
         <item name="android:textSize">18sp</item>
     </style>
-
 </resources>

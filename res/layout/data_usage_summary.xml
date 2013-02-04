@@ -42,7 +42,5 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:smoothScrollbar="false" />
-
     </LinearLayout>
-
 </TabHost>

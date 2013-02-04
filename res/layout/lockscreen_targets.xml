@@ -46,5 +46,4 @@
         prvandroid:glowRadius="@*android:dimen/glowpadview_glow_radius"
         prvandroid:pointDrawable="@*android:drawable/ic_lockscreen_glowdot"
         prvandroid:allowScaling="true" />
-
 </LinearLayout>

@@ -18,7 +18,7 @@
     android:id="@+id/message_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/summary"
@@ -27,5 +27,4 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="?android:attr/textColorSecondary"
         android:padding="16dip" />
-
 </LinearLayout>

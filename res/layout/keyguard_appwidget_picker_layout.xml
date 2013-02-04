@@ -22,16 +22,18 @@
         android:paddingRight="@dimen/keyguard_appwidget_picker_margin_right"
         android:paddingTop="2dip"
         android:paddingBottom="2dip"
-        android:orientation="vertical" >
-  <GridView android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:numColumns="@integer/keyguard_appwidget_picker_cols"
-            android:layout_gravity="center_horizontal"
-            android:listSelector="@android:color/transparent"
-            android:id="@+id/widget_list" />
-  <Button android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/widget_showall"
-          android:text="@string/keyguard_picker_all_widgets_title"/>
+        android:orientation="vertical">
+
+    <GridView android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="@integer/keyguard_appwidget_picker_cols"
+        android:layout_gravity="center_horizontal"
+        android:listSelector="@android:color/transparent"
+        android:id="@+id/widget_list" />
+
+    <Button android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/widget_showall"
+        android:text="@string/keyguard_picker_all_widgets_title" />
 </LinearLayout>

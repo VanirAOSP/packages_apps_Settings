@@ -33,15 +33,15 @@
         android:entryValues="@array/volume_overlay_values" />
 
     <Preference
-            android:key="musicfx"
-            android:title="@string/musicfx_title" />
+        android:key="musicfx"
+        android:title="@string/musicfx_title" />
 
     <!-- Volume Rocker Wake -->
-     <CheckBoxPreference
-            android:key="safe_headset_restore"
-            android:title="@string/safe_headset_restore_title"
-            android:summary="@string/safe_headset_restore_summary"
-            android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="safe_headset_restore"
+        android:title="@string/safe_headset_restore_title"
+        android:summary="@string/safe_headset_restore_summary"
+        android:defaultValue="true" />
 
     <!-- Volume Rocker Wake -->
     <CheckBoxPreference
@@ -76,7 +76,7 @@
 
     <PreferenceCategory
         android:title="@string/sound_category_system_title" />
-        
+
     <PreferenceScreen
         android:key="quiet_hours"
         android:fragment="com.android.settings.vanir.QuietHours"
@@ -85,17 +85,17 @@
     <!-- Do not nest these, or removals in code will break -->
 
     <com.android.settings.DefaultRingtonePreference
-            android:key="notification_sound"
-            android:title="@string/notification_sound_title"
-            android:dialogTitle="@string/notification_sound_dialog_title"
-            android:persistent="false"
-            android:ringtoneType="notification" />
+        android:key="notification_sound"
+        android:title="@string/notification_sound_title"
+        android:dialogTitle="@string/notification_sound_dialog_title"
+        android:persistent="false"
+        android:ringtoneType="notification" />
 
     <CheckBoxPreference
-            android:key="notification_convert_sound_to_vibration"
-            android:title="@string/notification_convert_sound_to_vibration_title"
-            android:summary="@string/notification_convert_sound_to_vibration_summary"
-            android:defaultValue="false" />
+        android:key="notification_convert_sound_to_vibration"
+        android:title="@string/notification_convert_sound_to_vibration_title"
+        android:summary="@string/notification_convert_sound_to_vibration_summary"
+        android:defaultValue="false" />
 
     <CheckBoxPreference
         android:key="dtmf_tone"
@@ -132,6 +132,7 @@
     <PreferenceScreen
         android:key="dock_audio"
         android:title="@string/dock_audio_settings_title">
+
         <CheckBoxPreference
             android:title="@string/bluetooth_dock_settings_a2dp"
             android:key="dock_audio_media_enabled"
@@ -144,7 +145,7 @@
         android:defaultValue="false" />
 
     <PreferenceCategory
-            android:title="@string/headset_category_title"/>
+        android:title="@string/headset_category_title"/>
 
     <CheckBoxPreference
             android:key="headset_connect_player"

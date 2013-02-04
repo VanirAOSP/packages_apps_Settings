@@ -64,5 +64,4 @@
         android:summaryOn="@string/quiet_hours_dim_on"
         android:summaryOff="@string/quiet_hours_dim_off"
         android:dependency="quiet_hours_enabled" />
-
 </PreferenceScreen>

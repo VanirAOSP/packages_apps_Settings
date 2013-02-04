@@ -78,14 +78,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart" />
-
         </LinearLayout>
 
         <com.android.settings.widget.PieChartView
             android:id="@+id/app_pie_chart"
             android:layout_width="160dip"
             android:layout_height="160dip" />
-
     </LinearLayout>
 
     <Button
@@ -103,5 +101,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" />
-
 </LinearLayout>

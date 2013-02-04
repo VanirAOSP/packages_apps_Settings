@@ -16,42 +16,47 @@
  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1">
+
         <ListView android:id="@android:id/list"
-                android:layout_width="match_parent" 
-                android:layout_height="match_parent"
-                android:paddingStart="@*android:dimen/preference_fragment_padding_side"
-                android:paddingEnd="@*android:dimen/preference_fragment_padding_side"
-                android:drawSelectorOnTop="false"
-                android:scrollbarStyle="outsideOverlay"
-                android:fastScrollEnabled="true" />
-        <TextView android:id="@android:id/empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/no_running_services"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-    </FrameLayout>
-    <view class="com.android.settings.applications.LinearColorBar"
-            android:id="@+id/color_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-5dp"
-            android:orientation="horizontal"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:paddingTop="30dp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:paddingBottom="1dp"
-            android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
-            android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side">
+            android:layout_height="match_parent"
+            android:paddingStart="@*android:dimen/preference_fragment_padding_side"
+            android:paddingEnd="@*android:dimen/preference_fragment_padding_side"
+            android:drawSelectorOnTop="false"
+            android:scrollbarStyle="outsideOverlay"
+            android:fastScrollEnabled="true" />
+
+        <TextView android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/no_running_services"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </FrameLayout>
+
+    <view class="com.android.settings.applications.LinearColorBar"
+        android:id="@+id/color_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-5dp"
+        android:orientation="horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="30dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="1dp"
+        android:layout_marginStart="@*android:dimen/preference_fragment_padding_side"
+        android:layout_marginEnd="@*android:dimen/preference_fragment_padding_side">
+
         <TextView android:id="@+id/foregroundText"
             android:layout_width="0px"
             android:layout_height="wrap_content"
@@ -61,6 +66,7 @@
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
             android:textColor="#000"
             android:singleLine="true" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,6 +79,7 @@
             android:textStyle="bold"
             android:singleLine="true"
             android:text="@string/memory" />
+
         <TextView android:id="@+id/backgroundText"
             android:layout_gravity="center_vertical|end"
             android:layout_width="0px"

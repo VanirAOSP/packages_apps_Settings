@@ -20,22 +20,10 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
-        android:key="@+id/navbar"
-        android:title="@string/title_navbar"
-        android:summary="@string/navigation_bar_summary"
-        android:fragment="com.android.settings.vanir.fragments.Navbar" />
-
-    <PreferenceScreen
         android:key="@+id/statusbar"
         android:title="@string/status_bar_title"
         android:summary="@string/status_bar_summary"
         android:fragment="com.android.settings.vanir.fragments.Statusbar" />
-        
-     <PreferenceScreen
-        android:id="@+id/lock_screen_settings"
-        android:fragment="com.android.settings.vanir.LockscreenInterface"
-        android:title="@string/lock_screen_title"
-        android:summary="@string/lock_screen_summary" />
 
     <PreferenceScreen
         android:key="general_ui_settings"
@@ -43,15 +31,27 @@
         android:summary="@string/general_title_summary"
         android:fragment="com.android.settings.vanir.fragments.UserInterface" />
 
+     <PreferenceScreen
+        android:id="@+id/lock_screen_settings"
+        android:fragment="com.android.settings.vanir.LockscreenInterface"
+        android:title="@string/lock_screen_title"
+        android:summary="@string/lock_screen_summary" />
+
+    <PreferenceScreen
+        android:key="@+id/navbar"
+        android:title="@string/title_navbar"
+        android:summary="@string/navigation_bar_summary"
+        android:fragment="com.android.settings.vanir.fragments.Navbar" />
+
     <com.android.settings.BrightnessPreference
         android:key="brightness"
         android:title="@string/brightness"
         android:dialogTitle="@string/brightness" />
 
     <PreferenceScreen
-            android:key="display_rotation"
-            android:fragment="com.android.settings.vanir.DisplayRotation"
-            android:title="@string/display_rotation_title" />
+        android:key="display_rotation"
+        android:fragment="com.android.settings.vanir.DisplayRotation"
+        android:title="@string/display_rotation_title" />
 
     <PreferenceScreen
         android:key="wallpaper"
@@ -93,5 +93,4 @@
         android:key="wifi_display"
         android:title="@string/wifi_display_settings_title"
         android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
-
 </PreferenceScreen>

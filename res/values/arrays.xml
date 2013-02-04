@@ -238,7 +238,7 @@
         <item>Unsuccessful</item>
         <!-- Status message of Wi-Fi when it is blocked. -->
         <item>Blocked</item>
-        <!-- Status message of Wi-Fi when connectiong is being verified. -->
+        <!-- Status message of Wi-Fi when connection is being verified. -->
         <item>Temporarily avoiding poor connection</item>
     </string-array>
 
@@ -267,7 +267,7 @@
         <item>Unsuccessful</item>
         <!-- Status message of Wi-Fi when it is blocked. -->
         <item>Blocked</item>
-        <!-- Status message of Wi-Fi when connectiong is being verified. -->
+        <!-- Status message of Wi-Fi when connection is being verified. -->
         <item>Temporarily avoiding poor connection</item>
     </string-array>
 
@@ -295,8 +295,8 @@
         <item>@string/wifi_security_psk_generic</item>
     </string-array>
 
-   <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
-   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_security">
         <item>@string/wifi_security_none</item>
         <item>@string/wifi_security_wpa</item>
@@ -541,7 +541,7 @@
         <item>0</item>
     </string-array>
 
-    <!-- Apps on SD instalaltion location options in ApplicationSettings -->
+    <!-- Apps on SD installation location options in ApplicationSettings -->
     <string-array name="app_install_location_entries">
         <item>Internal device storage</item>
         <item>Removable SD card</item>
@@ -1039,7 +1039,7 @@
         <item>Default</item>
         <item>Invisible Icons</item>
         <item>Always Show</item>
-        <item>Both Behaviours</item>
+        <item>Both Behaviors</item>
     </string-array>
 
     <string-array name="values_status_bar_am_pm" translatable="false">
@@ -1181,7 +1181,7 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-    
+
     <string-array name="lockscreen_icon_picker_labels" translatable="false">
         <item>@string/icon_picker_alarm</item>
         <item>@string/icon_picker_browser</item>
@@ -1247,7 +1247,7 @@
         <item>200</item>
     </string-array>
 
- <string-array name="lcd_density_entries" translatable="false">
+    <string-array name="lcd_density_entries" translatable="false">
         <item>160</item>
         <item>182</item>
         <item>200</item>
@@ -1273,7 +1273,7 @@
         <item>240</item>
         <item>320</item>
     </string-array>
-    
+
     <!-- Quick pulldown -->
     <string-array name="quick_pulldown_entries" translatable="false">
         <item>@string/quick_pulldown_off</item>
@@ -1301,7 +1301,7 @@
         <item>Singapore</item>
         <item>Brazil</item>
     </string-array>
-    
+
     <string-array name="wifi_countrycode_values" translatable="false">
         <item>US</item>
         <item>CA</item>

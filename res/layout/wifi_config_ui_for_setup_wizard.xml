@@ -19,6 +19,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <!-- UI components that should be shown appropriately -->
     <FrameLayout
         android:id="@+id/eap_not_supported"
@@ -27,6 +28,7 @@
         android:minHeight="360dip"
         android:orientation="vertical"
         android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,6 +37,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="20sp" />
     </FrameLayout>
+
     <!-- In "add network" flow, we have security type field (@id/security below) below
          this View, so need a bit different layout than the other flow, in which we'll use
          @id/eap_not_supported. -->
@@ -44,6 +47,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,16 +56,19 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="20sp" />
     </FrameLayout>
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dip">
+
         <!-- To accomodate @id/type into TableLayout, we splitted the layout into two:
              @id/type_ssid and @id/type_security. -->
         <TableRow
             android:id="@+id/type_ssid"
             android:minHeight="56dip"
             android:visibility="gone">
+
             <TextView
                 android:id="@+id/ssid_text"
                 android:layout_width="wrap_content"
@@ -81,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/ssid_text"
                 android:layout_toEndOf="@id/ssid_text">
+
                 <EditText
                     android:id="@+id/ssid"
                     android:layout_width="368dip"
@@ -96,6 +104,7 @@
             android:id="@+id/security_fields"
             android:minHeight="56dip"
             android:visibility="gone">
+
             <TextView
                 android:id="@+id/password_text"
                 android:layout_width="wrap_content"
@@ -112,6 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="bottom">
+
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="368dip"
@@ -127,6 +137,7 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
                 <CheckBox
                     android:id="@+id/show_password"
                     android:layout_width="match_parent"
@@ -142,6 +153,7 @@
             android:id="@+id/type_security"
             android:minHeight="56dip"
             android:visibility="gone">
+
             <TextView
                 android:id="@+id/security_text"
                 android:layout_width="wrap_content"
@@ -151,18 +163,19 @@
                 android:text="@string/wifi_security"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20sp"
-                android:gravity="bottom"/>
+                android:gravity="bottom" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="bottom">
+
                 <Spinner
                     android:id="@+id/security"
                     android:layout_width="368dip"
                     android:layout_height="wrap_content"
                     android:minHeight="56dip"
-                    android:paddingStart="4dip"/>
+                    android:paddingStart="4dip" />
             </FrameLayout>
         </TableRow>
     </TableLayout>
@@ -175,88 +188,88 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-    <LinearLayout android:id="@+id/info"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"/>
+        <LinearLayout android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
-    <!--  android:id="@+id/security_fields" -->
-    <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:visibility="gone">
+    <!-- android:id="@+id/security_fields" -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-        <LinearLayout android:id="@+id/eap"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical"
-                      android:visibility="gone">
+                    <LinearLayout android:id="@+id/eap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-            <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_eap_method" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wifi_eap_method" />
 
-            <Spinner android:id="@+id/method"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:prompt="@string/wifi_eap_method"
-                     android:entries="@array/wifi_eap_method" />
+                        <Spinner android:id="@+id/method"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:prompt="@string/wifi_eap_method"
+                            android:entries="@array/wifi_eap_method" />
 
-            <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/please_select_phase2" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/please_select_phase2" />
 
-            <Spinner android:id="@+id/phase2"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:prompt="@string/please_select_phase2"
-                     android:entries="@array/wifi_phase2_entries" />
+                        <Spinner android:id="@+id/phase2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:prompt="@string/please_select_phase2"
+                            android:entries="@array/wifi_phase2_entries" />
 
-            <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_eap_ca_cert" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wifi_eap_ca_cert" />
 
-            <Spinner android:id="@+id/ca_cert"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:prompt="@string/wifi_eap_ca_cert" />
+                        <Spinner android:id="@+id/ca_cert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:prompt="@string/wifi_eap_ca_cert" />
 
-            <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_eap_user_cert" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wifi_eap_user_cert" />
 
-            <Spinner android:id="@+id/user_cert"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:prompt="@string/wifi_eap_user_cert" />
+                        <Spinner android:id="@+id/user_cert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:prompt="@string/wifi_eap_user_cert" />
 
-            <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_eap_identity" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wifi_eap_identity" />
 
-            <EditText android:id="@+id/identity"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:singleLine="true"
-                      android:inputType="textNoSuggestions" />
+                        <EditText android:id="@+id/identity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:inputType="textNoSuggestions" />
 
-            <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_eap_anonymous" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wifi_eap_anonymous" />
 
-            <EditText android:id="@+id/anonymous"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:singleLine="true"
-                      android:inputType="textNoSuggestions" />
-        </LinearLayout> <!-- android:id="@+id/eap" -->
+                        <EditText android:id="@+id/anonymous"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:inputType="textNoSuggestions" />
+                    </LinearLayout> <!-- android:id="@+id/eap" -->
 
         <!-- <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -343,7 +356,6 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:inputType="textNoSuggestions" />
-
         </LinearLayout>
 
         <LinearLayout android:id="@+id/ip_fields"

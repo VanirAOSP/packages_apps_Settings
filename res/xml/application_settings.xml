@@ -58,7 +58,7 @@
         android:summary="@string/app_install_location_summary"
         android:persistent="false"
         android:entries="@array/app_install_location_entries"
-        android:entryValues="@array/app_install_location_values"/>
+        android:entryValues="@array/app_install_location_values" />
 
     <!-- Disabled quick launch settings pending UI redesign.
     <PreferenceScreen

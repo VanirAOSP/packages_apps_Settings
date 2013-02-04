@@ -29,7 +29,5 @@
         android:layout_height="0dip"
         android:layout_weight="1"
         android:drawSelectorOnTop="false"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-    />
-
+        android:scrollbarAlwaysDrawVerticalTrack="true" />
 </LinearLayout>

@@ -32,5 +32,4 @@
         settings:minTickWidth="6dip"
         settings:emptyColor="@color/memory_avail">
     </com.android.settings.deviceinfo.PercentageBarChart>
-
 </LinearLayout>

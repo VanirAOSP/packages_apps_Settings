@@ -28,5 +28,4 @@
         android:key="pref_io_sched_set_on_boot"
         android:title="@string/io_sched_set_on_boot"
         android:summary="@string/io_sched_set_on_boot_summary" />
-
 </PreferenceScreen>

@@ -15,7 +15,7 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/testing">
+    android:title="@string/testing">
 
     <PreferenceScreen
         android:title="@string/testing_phone_info">
@@ -30,7 +30,6 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.BatteryInfo" />
     </PreferenceScreen>
-
 
     <PreferenceScreen
         android:title="@string/testing_usage_stats">

@@ -14,8 +14,9 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/privacy_settings_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/privacy_settings_title">
 
     <PreferenceCategory android:key="backup_category"
         android:title="@string/backup_section_title">
@@ -52,5 +53,4 @@
         android:title="@string/master_clear_title"
         android:summary="@string/master_clear_summary"
         android:fragment="com.android.settings.MasterClear" />
-
 </PreferenceScreen>

@@ -12,15 +12,14 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
-  -->
+-->
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dip"
-    android:orientation="vertical"
->
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
@@ -32,30 +31,26 @@
         android:textSize="30dip"
         android:textColor="@color/title_color"
         android:text="@string/crypt_keeper_setup_title"
-        android:gravity="bottom"
-    />
+        android:gravity="bottom" />
 
     <!-- Divider -->
     <RelativeLayout
         android:id="@+id/top_divider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    >
+        android:layout_height="wrap_content">
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?android:attr/progressBarStyleHorizontal"
-        />
+            style="?android:attr/progressBarStyleHorizontal" />
     </RelativeLayout>
-
 
     <TextView
         android:id="@+id/status"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    />
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/encroid"
@@ -64,8 +59,7 @@
         android:layout_weight="1"
         android:layout_gravity="bottom|end"
         android:src="@drawable/encroid_waiting"
-        android:contentDescription="@null"
-    />
+        android:contentDescription="@null" />
 
     <Button
         android:id="@+id/factory_reset"
@@ -74,7 +68,5 @@
         android:layout_margin="32dip"
         android:layout_gravity="center"
         android:text="@string/master_clear_button_text"
-        android:visibility="gone"
-    />
-
+        android:visibility="gone" />
 </LinearLayout>

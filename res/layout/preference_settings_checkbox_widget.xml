@@ -47,5 +47,4 @@
         android:layout_gravity="center"
         android:focusable="false"
         android:clickable="false" />
-
 </LinearLayout>

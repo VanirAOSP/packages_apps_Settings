@@ -15,13 +15,14 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/wifi_item" >
-    <TextView
-            style="@style/wifi_item_label"
-            android:id="@+id/name" />
+    style="@style/wifi_item">
 
     <TextView
-            android:id="@+id/value"
-            style="@style/wifi_item_content"
-            android:textStyle="bold" />
+        style="@style/wifi_item_label"
+        android:id="@+id/name" />
+
+    <TextView
+        android:id="@+id/value"
+        style="@style/wifi_item_content"
+        android:textStyle="bold" />
 </LinearLayout>

@@ -153,5 +153,4 @@
         style="?android:preferenceInformationStyle"
         android:title="@string/selinux_status"
         android:summary="@string/selinux_status_enforcing" />
-
 </PreferenceScreen>

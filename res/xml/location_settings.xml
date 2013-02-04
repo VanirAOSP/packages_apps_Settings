@@ -41,13 +41,9 @@
         android:dependency="location_toggle"
         android:persistent="false" />
 
-<!-- Disabled to avoid confusion on devices with no AGPS 
-     For Google experience devices we want AGPS on by default (if supported) so we don't really need this.
-     --> 
-        <CheckBoxPreference
-            android:key="assisted_gps"
-            android:title="@string/assisted_gps"
-            android:summaryOn="@string/assisted_gps_enabled"
-            android:summaryOff="@string/assisted_gps_disabled"/>
-
+    <CheckBoxPreference
+        android:key="assisted_gps"
+        android:title="@string/assisted_gps"
+        android:summaryOn="@string/assisted_gps_enabled"
+        android:summaryOff="@string/assisted_gps_disabled" />
 </PreferenceScreen>

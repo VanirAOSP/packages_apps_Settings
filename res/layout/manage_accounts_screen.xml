@@ -37,5 +37,4 @@
         android:text="@string/sync_is_failing"
         android:drawablePadding="8dip"
         android:drawableLeft="@drawable/ic_sync_error_holo" />
-
 </LinearLayout>

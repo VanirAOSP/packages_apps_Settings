@@ -93,5 +93,4 @@
         <attr name="summaryImage" format="reference" />
         <attr name="entryImages" format="reference" />
     </declare-styleable>
-
 </resources>

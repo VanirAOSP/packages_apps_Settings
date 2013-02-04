@@ -34,6 +34,4 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingStart="6dip" />
-        
 </LinearLayout>
-

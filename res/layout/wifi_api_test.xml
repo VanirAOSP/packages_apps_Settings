@@ -15,32 +15,30 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/wifi_settings_category">
+    android:title="@string/wifi_settings_category">
 
     <Preference
-            android:key="disable_network"
-            android:title="@string/disableNetwork"
-            android:persistent="false" />
+        android:key="disable_network"
+        android:title="@string/disableNetwork"
+        android:persistent="false" />
 
     <Preference
-            android:key="disconnect"
-            android:title="@string/disconnect"
-            android:persistent="false" />
+        android:key="disconnect"
+        android:title="@string/disconnect"
+        android:persistent="false" />
 
     <Preference
-            android:key="enable_network"
-            android:title="@string/enableNetwork"
-            android:persistent="false" />
+        android:key="enable_network"
+        android:title="@string/enableNetwork"
+        android:persistent="false" />
 
     <Preference
-            android:key="getConfiguredNetworks"
-            android:title="@string/getConfiguredNetworks"
-            android:persistent="false" />
+        android:key="getConfiguredNetworks"
+        android:title="@string/getConfiguredNetworks"
+        android:persistent="false" />
 
     <Preference
-            android:key="getConnectionInfo"
-            android:title="@string/getConnectionInfo"
-            android:persistent="false" />
-
-
+        android:key="getConnectionInfo"
+        android:title="@string/getConnectionInfo"
+        android:persistent="false" />
 </PreferenceScreen>

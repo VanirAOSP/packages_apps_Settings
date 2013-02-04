@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/performance_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-    
+
     <PreferenceCategory
         android:title="@string/cpu_pref">
 
@@ -33,27 +33,26 @@
         android:fragment="com.android.settings.performance.VoltageControlSettings"
         android:title="@string/cpu_voltage"
         android:summary="@string/cpu_voltage_summary" />
-        
     </PreferenceCategory>
-    
+
     <PreferenceCategory
         android:title="@string/io_pref">
-        
+
      <PreferenceScreen
         android:key="ioscheduler"
         android:fragment="com.android.settings.performance.IOScheduler"
         android:title="@string/io_sched_title"
         android:summary="@string/io_scheds_summary" />
-        
+
     <CheckBoxPreference
         android:key="pref_purgeable_assets"
         android:title="@string/pref_purgeable_assets_title"
         android:summary="@string/pref_purgeable_assets_summary" />
     </PreferenceCategory>
-         
+
     <PreferenceCategory
         android:title="@string/general_perf">
-    
+
     <CheckBoxPreference
         android:key="pref_disable_bootanimation"
         android:title="@string/pref_disable_bootanimation_title"
@@ -76,6 +75,5 @@
         android:title="@string/pref_use_dithering_title"
         android:entries="@array/dithering_entries"
         android:entryValues="@array/dithering_values" />
-        
     </PreferenceCategory>
 </PreferenceScreen>

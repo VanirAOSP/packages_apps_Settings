@@ -36,6 +36,7 @@
             android:layout_alignBottom="@id/title"
             android:gravity="bottom"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="0dip"
@@ -55,7 +56,6 @@
                 android:src="@*android:drawable/ic_menu_moreoverflow_holo_dark"
                 android:background="?android:attr/actionBarItemBackground"
                 android:contentDescription="@string/wifi_menu_more_options" />
-
         </LinearLayout>
 
         <!-- Divider -->
@@ -63,7 +63,6 @@
             android:id="@+id/top_divider"
             style="@style/TopDivider"
             android:layout_below="@id/title_bar" />
-
     </RelativeLayout>
 
     <LinearLayout
@@ -72,7 +71,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/title_area"
         android:background="@android:color/transparent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/wifi_required_info"
@@ -117,7 +116,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:minHeight="?android:attr/listPreferredItemHeight"
-            android:paddingEnd="?android:attr/scrollbarSize" >
+            android:paddingEnd="?android:attr/scrollbarSize">
 
             <ImageView
                 android:id="@+id/add_icon"
@@ -140,7 +139,6 @@
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/wifi_other_network" />
-
         </LinearLayout>
 
         <RelativeLayout
@@ -148,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/back_button"
@@ -170,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/skip_button"

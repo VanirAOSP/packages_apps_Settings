@@ -29,8 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_gravity="start|center"
-    />
+        android:layout_gravity="start|center" />
 
     <ProgressBar
         android:id="@+id/scanning_progress"
@@ -39,7 +38,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dip"
-        style="?android:attr/progressBarStyleSmallTitle"
-        />
-
+        style="?android:attr/progressBarStyleSmallTitle" />
 </LinearLayout>

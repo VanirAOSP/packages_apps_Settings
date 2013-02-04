@@ -49,7 +49,6 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="?android:attr/textColorSecondary"
             android:maxLines="4" />
-
     </RelativeLayout>
 
     <LinearLayout
@@ -58,5 +57,4 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical" />
-
 </LinearLayout>

@@ -36,7 +36,6 @@
          <com.android.settings.widget.SeekBarPreference
             android:key="navigation_bar_alpha"
             android:title="@string/navigation_bar_alpha_title" />
-            
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -52,11 +51,10 @@
             android:key="lcd_density_setup"
             android:title="@string/lcd_density_title"
             android:summary="@string/lcd_density_summary" />
- 
+
         <CheckBoxPreference
             android:key="dual_pane"
             android:title="@string/dual_pane"
             android:summary="@string/dual_pane_summary" />
-
     </PreferenceCategory>
 </PreferenceScreen>

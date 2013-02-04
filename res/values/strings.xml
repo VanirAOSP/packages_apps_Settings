@@ -3085,7 +3085,7 @@
     <string name="accessibility_settings">Accessibility</string>
     <!-- Settings title for accessibility settings screen -->
     <string name="accessibility_settings_title">Accessibility settings</string>
-    <!--  Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
+    <!-- Title for the accessibility preference category of accessibility services. [CHAR LIMIT=25] -->
     <string name="accessibility_services_title">Services</string>
     <!-- Title for the accessibility preference category of system related preferences. [CHAR LIMIT=25] -->
     <string name="accessibility_system_title">System</string>
@@ -3099,7 +3099,7 @@
     <string name="accessibility_global_gesture_preference_summary_on">On</string>
     <!-- Summary for the preference screen to enable the global gesture that turns on accessibility (off state). [CHAR LIMIT=35] -->
     <string name="accessibility_global_gesture_preference_summary_off">Off</string>
-    <!--  Description for the preference screen to enable the global gesture that turns on accessibility. [CHAR LIMIT=none] -->
+    <!-- Description for the preference screen to enable the global gesture that turns on accessibility. [CHAR LIMIT=none] -->
     <string name="accessibility_global_gesture_preference_description">When this feature is turned on, you can quickly enable accessibility features in two steps:\n\nStep 1: Press and hold the power button until you hear a sound or feel a vibration.\n\nStep 2: Touch and hold two fingers until you hear audio confirmation.\n\nIf the device has multiple users, using this shortcut on the lock screen temporarily enables accessibility until the device is unlocked.</string>
     <!-- Title for the accessibility preference to enable large text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_large_text_preference_title">Large text</string>
@@ -3954,12 +3954,12 @@
     <!-- UI debug setting: force hardware acceleration to render apps [CHAR LIMIT=25] -->
     <string name="force_hw_ui">Force GPU rendering</string>
     <!-- UI debug setting: force hardware acceleration summary [CHAR LIMIT=50] -->
-    <string name="force_hw_ui_summary">Force use of GPU for 2d drawing</string>
+    <string name="force_hw_ui_summary">Force use of GPU for 2D drawing</string>
 
     <!-- UI debug setting: force anti-aliasing to render apps [CHAR LIMIT=25] -->
     <string name="force_msaa">Force 4x MSAA</string>
     <!-- UI debug setting: force anti-aliasing summary [CHAR LIMIT=50] -->
-    <string name="force_msaa_summary">Enable 4x MSAA in OpenGL ES 2.0 apps</string>
+    <string name="force_msaa_summary">Force use of 4x MSAA in OpenGL ES 2.0 apps</string>
 
     <!-- UI debug setting: profile time taken by hardware acceleration to render apps [CHAR LIMIT=25] -->
     <string name="track_frame_time">Profile GPU rendering</string>
@@ -4788,9 +4788,9 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Navigation Bar -->
     <string name="navigation_bar">Navigation bar</string>
     <string name="navbar_button_cat">Navigation bar buttons</string>
-    <string name="title_pref_menu_display">Menu location</string>
+    <string name="title_pref_menu_display">Menu button location</string>
     <string name="summary_pref_menu_display">Remember to remove your menu buttons if you\'re using the big menu button!</string>
-    <string name="title_pref_navigation_menu_display">Menu visibility</string>
+    <string name="title_pref_navigation_menu_display">Menu button visibility</string>
     <string name="summary_pref_navigation_menu_display">How and when do you want the menu buttons to appear?</string>
     <string name="navbar_qty_title">Navigation button quantity</string>
     <string name="navbar_qty_summary">Choose the number of navigation buttons</string>
@@ -4971,7 +4971,7 @@ Letting go of the power button will turn the torch off.</string>
 
     <!-- Advanced, Device specific (DeviceParts) settings -->
     <string name="advanced_settings_title">Advanced</string>
-    
+
     <string name="perf_info">General Info</string>
     <string name="cpu_info">CPU Model</string>
     <string name="mem_info">RAM (Total)</string>

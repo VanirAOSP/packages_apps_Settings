@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical">
@@ -26,8 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:src="@drawable/nav_divider"
-        android:contentDescription="@null"
-         />
+        android:contentDescription="@null" />
 
     <!-- Details button -->
     <ImageView
@@ -39,5 +38,4 @@
         android:background="?android:attr/selectableItemBackground"
         android:src="@drawable/ic_bt_config"
         android:contentDescription="@string/wifi_display_details" />
-
 </LinearLayout>

@@ -42,7 +42,5 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dip"
             android:text="@string/bluetooth_pb_remember_choice" />
-
     </LinearLayout>
-
 </ScrollView>

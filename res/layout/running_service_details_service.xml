@@ -21,17 +21,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--    
+    <!--
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="?android:attr/listDivider"/>
     -->
-        
+
     <!-- Icon and label of the service. -->
     <include
         layout="@layout/running_processes_item"
-        android:id="@+id/service"/>
+        android:id="@+id/service" />
 
     <LinearLayout
         android:layout_width="match_parent"
