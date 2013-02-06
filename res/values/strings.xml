@@ -4975,4 +4975,9 @@ Letting go of the power button will turn the torch off.</string>
     <string name="perf_info">General Info</string>
     <string name="cpu_info">CPU Model</string>
     <string name="mem_info">RAM (Total)</string>
+    
+    <string name="custom_carrier_label_title">Custom carrier label</string>
+    <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
+    <string name="custom_carrier_label_notset">Custom label currently not set</string>
+    
 </resources>

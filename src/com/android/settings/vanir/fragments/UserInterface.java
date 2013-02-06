@@ -3,16 +3,15 @@ package com.android.settings.vanir.fragments;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Random;
 
-
+import android.app.AlertDialog;
 import android.content.Context;
-
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
-
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
@@ -27,6 +26,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.Spannable;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 
 import android.view.Window;
 import android.view.View;
@@ -47,6 +47,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_DUAL_PANE = "dual_pane";
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
+    private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
@@ -55,6 +56,9 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ListPreference mStatusBarClock;
     private CheckBoxPreference mDualPane;
     SeekBarPreference mNavBarAlpha;
+    Preference mCustomLabel;
+
+    String mCustomLabelText = null;
 
     Preference mLcdDensity;
 
@@ -113,6 +117,9 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
         mStatusBarBattery.setOnPreferenceChangeListener(this);
 
+        mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
+        updateCustomLabelTextSummary();
+
         int signalStyle = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUS_BAR_SIGNAL_TEXT, 0);
         mStatusBarSignal.setValue(String.valueOf(signalStyle));
@@ -155,6 +162,35 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.DUAL_PANE_PREFS,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mCustomLabel) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage(R.string.custom_carrier_label_explain);
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(getActivity());
+            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+            alert.setView(input);
+            alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+ 
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = ((Spannable) input.getText()).toString();
+                    Settings.System.putString(getActivity().getContentResolver(),
+                            Settings.System.CUSTOM_CARRIER_LABEL, value);
+                    updateCustomLabelTextSummary();
+                    Intent i = new Intent();
+                    i.setAction("com.android.settings.LABEL_CHANGED");
+                    mContext.sendBroadcast(i);
+                }
+            });
+            alert.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.show();   
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -195,5 +231,15 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     val);
         }
         return false;
+    }
+    
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
+            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
+        } else {
+            mCustomLabel.setSummary(mCustomLabelText);
+        }
     }   
 }
