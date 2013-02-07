@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.Random;
-
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +35,6 @@ import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 
-
 public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     public static final String TAG = "UserInterface";
@@ -44,6 +43,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_ENABLE = "clock_style";
+    private static final String PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_DUAL_PANE = "dual_pane";
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
@@ -60,6 +60,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
     String mCustomLabelText = null;
 
+    CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+
     Preference mLcdDensity;
 
     int newDensityValue;
@@ -73,7 +75,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
-            
+        ContentResolver cr = mContext.getContentResolver();
+
         mNavBarAlpha = (SeekBarPreference) findPreference("navigation_bar_alpha");
         mNavBarAlpha.setOnPreferenceChangeListener(this);
 
@@ -135,8 +138,18 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         }
 
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
+
+        mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
+        mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, true));
+
+        // hide option if device is already set to never wake up
+        if(!mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_unplugTurnsOnScreen)) {
+            ((PreferenceGroup) findPreference("misc")).removePreference(mWakeUpWhenPluggedOrUnplugged);
+        }
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
@@ -173,7 +186,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             input.setText(mCustomLabelText != null ? mCustomLabelText : "");
             alert.setView(input);
             alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
- 
+
                 public void onClick(DialogInterface dialog, int whichButton) {
                     String value = ((Spannable) input.getText()).toString();
                     Settings.System.putString(getActivity().getContentResolver(),
@@ -190,7 +203,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                 }
             });
 
-            alert.show();   
+            alert.show();
+
+        } else if (preference == mWakeUpWhenPluggedOrUnplugged) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
+                    ((CheckBoxPreference) preference).isChecked());
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -232,7 +251,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         }
         return false;
     }
-    
+
     private void updateCustomLabelTextSummary() {
         mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
                 Settings.System.CUSTOM_CARRIER_LABEL);
@@ -241,5 +260,5 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         } else {
             mCustomLabel.setSummary(mCustomLabelText);
         }
-    }   
+    }
 }
