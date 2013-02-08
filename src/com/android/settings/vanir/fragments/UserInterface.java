@@ -62,6 +62,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
+    private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
@@ -72,6 +73,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ColorPickerPreference mClockPicker;
     private ColorPickerPreference mExpandedClockPicker;
     Preference mCustomLabel;
+    CheckBoxPreference mDualpane;
 
     String mCustomLabelText = null;
 
@@ -171,6 +173,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                 com.android.internal.R.bool.config_unplugTurnsOnScreen)) {
             ((PreferenceGroup) findPreference("misc")).removePreference(mWakeUpWhenPluggedOrUnplugged);
         }
+
+        mDualpane = (CheckBoxPreference) findPreference(PREF_FORCE_DUAL_PANEL);
+        mDualpane.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                        Settings.System.FORCE_DUAL_PANEL, getResources().getBoolean(
+                        com.android.internal.R.bool.preferences_prefer_dual_pane)));
+
     }
 
     private void openTransparencyDialog() {
@@ -191,6 +199,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.DUAL_PANE_PREFS,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mDualpane) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.FORCE_DUAL_PANEL,
+                    ((CheckBoxPreference) preference).isChecked());
             return true;
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());

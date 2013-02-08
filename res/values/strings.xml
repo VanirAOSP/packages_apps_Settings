@@ -4869,8 +4869,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="navigation_bar_summary">Add/remove softkeys, change color, size, etc</string>
 
     <!-- dual panel mode -->
-    <string name="dual_pane">Dual panel settings</string>
-    <string name="dual_pane_summary">Restart settings to take effect</string>
+    <string name="dual_pane">Dual Panel Settings</string>
+    <string name="dual_pane_summary">Just the Settings app (Restart settings to take effect)</string>
     <!-- Status Bar stuff from CM -->
     <string name="status_bar_battery_title">Battery Style</string>
     <string name="status_bar_battery_status_icon">Stock icon (default)</string>
@@ -5013,7 +5013,7 @@ Letting go of the power button will turn the torch off.</string>
 
     <string name="wakeup_when_plugged_unplugged_title">Wake up on charger</string>
     <string name="wakeup_when_plugged_unplugged_summary">Wake up device if a charger is plugged/unplugged.</string>
-    
+
     <!-- Shortcuts -->
     <string name="lock_screen_shortcuts_title">Static lockscreen shortcuts</string>
     <string name="lock_screen_shortcuts_summary">Under Clock Line up Shortcuts</string>
@@ -5026,4 +5026,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="icon_presets">Presets</string>
     <string name="icon_custom">Custom</string>
     <string name="choose_app">Choose application</string>
+
+    <string name="multipane_ui">Dual Panel Preferences</string>
+    <string name="multipane_ui_summary">For all apps' preference screens (requires reboot)</string>
 </resources>
