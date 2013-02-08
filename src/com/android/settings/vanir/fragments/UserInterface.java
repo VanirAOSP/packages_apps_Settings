@@ -24,6 +24,7 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.text.Spannable;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ import android.view.View;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
@@ -42,6 +44,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
+    private static final String PREF_CLOCK_PICKER = "clock_color";
+    private static final String PREF_EXPANDED_CLOCK_PICKER = "expanded_clock_color";
     private static final String PREF_ENABLE = "clock_style";
     private static final String PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_DUAL_PANE = "dual_pane";
@@ -55,6 +59,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ListPreference mStatusBarSignal;
     private ListPreference mStatusBarClock;
     private CheckBoxPreference mDualPane;
+    private ColorPickerPreference mClockPicker;
+    private ColorPickerPreference mExpandedClockPicker;
     SeekBarPreference mNavBarAlpha;
     Preference mCustomLabel;
 
@@ -91,6 +97,12 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
                 1)));
+
+        mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
+        mClockPicker.setOnPreferenceChangeListener(this);
+
+        mExpandedClockPicker = (ColorPickerPreference) findPreference(PREF_EXPANDED_CLOCK_PICKER);
+        mExpandedClockPicker.setOnPreferenceChangeListener(this);
 
         mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
         try {
@@ -236,6 +248,22 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
             return true;
+        } else if (preference == mClockPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(objValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_CLOCK_COLOR, intHex);
+            Log.e("VANIR", "Statusbar: "+intHex + "");
+        } else if (preference == mExpandedClockPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(objValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_EXPANDED_CLOCK_COLOR, intHex);
+            Log.e("VANIR", "Expanded: "+intHex + "");
         } else if (preference == mStatusBarSignal) {
             int signalStyle = Integer.valueOf((String) objValue);
             int index = mStatusBarSignal.findIndexOfValue((String) objValue);

@@ -4454,6 +4454,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="status_bar_clock_title">Clock style</string>
     <string name="status_bar_am_pm_title">AM/PM style</string>
     <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
+    <string name="clock_color_title">Clock color</string>
+    <string name="expanded_clock_color_title">Expanded Notification Clock color</string>
 
     <!-- Purgeable Assets -->
     <string name="pref_purgeable_assets_title">Allow purging of assets</string>
