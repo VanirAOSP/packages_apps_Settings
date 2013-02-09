@@ -1548,6 +1548,16 @@
                <category android:name="android.intent.category.SHORTCUT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".vanir.fragments.TransparencyDialog"
+            android:theme="@android:style/Theme.Dialog"
+            android:label="@string/title_ui" >
+            <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SHORTCUT" />
+            </intent-filter>
+        </activity>
         
         <activity
             android:name=".fragments.StatusBarToggles"

@@ -49,9 +49,9 @@
             android:summary="@string/status_bar_notif_count_summary"
             android:defaultValue="true" />
 
-        <com.android.settings.widget.SeekBarPreference
-            android:key="navigation_bar_alpha"
-            android:title="@string/navigation_bar_alpha_title" />
+        <Preference
+            android:key="transparency_dialog"
+            android:title="@string/transparency_dialog_title" />
     </PreferenceCategory>
 
     <PreferenceCategory

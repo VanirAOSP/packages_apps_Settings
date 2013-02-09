@@ -4921,6 +4921,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="home">Home</string>
     <string name="back">Back</string>
     <string name="recents">Recents</string>
+    <string name="save">Save</string>
     <string name="search">Search</string>
     <string name="screenshot">Screenshot</string>
     <string name="menu">Menu</string>
@@ -4962,6 +4963,14 @@ Letting go of the power button will turn the torch off.</string>
     <string name="size_2_dp">2 dp</string>
     <string name="size_3_dp">3 dp</string>
     <string name="size_4_dp">4 dp</string>
+    <string name="transparency_dialog_title">Transparency settings</string>
+    <string name="transparency_dialog_linked_transparency">Link statusbar &amp; navbar alpha</string>
+    <string name="transparency_dialog_transparency_sb_and_nv">Statusbar and navigation bar</string>
+    <string name="transparency_dialog_statusbar">Statusbar</string>
+    <string name="transparency_dialog_navbar">Navigation bar</string>
+    <string name="transparency_dialog_match_keyguard_alpha">Match lockscreen alpha</string>
+    <string name="transparency_dialog_transparency">Homescreen alpha</string>
+    <string name="transparency_dialog_transparency_keyguard">Lockscreen alpha</string>
 
     <!-- Wifi settings -->
     <!-- Wi-Fi region code settings-->
