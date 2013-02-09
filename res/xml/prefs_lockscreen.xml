@@ -23,11 +23,22 @@
         android:title="@string/see_through_title"
         android:summary="@string/see_through_summary" />
 
+    <PreferenceCategory
+            android:key="lockscreen"
+            android:title="LockScreen Custom Apps">
+
     <Preference
         android:fragment="com.android.settings.vanir.LockscreenTargets"
         android:key="lockscreen_targets"
         android:summary="@string/lockscreen_target_summary"
         android:title="@string/lockscreen_target_title" />
+
+    <PreferenceScreen
+            android:key="lock_screen_shortcuts"
+            android:fragment="com.android.settings.shortcuts.Shortcuts"
+            android:title="@string/lock_screen_shortcuts_title" 
+            android:summary="@string/lock_screen_shortcuts_summary" />
+     </PreferenceCategory>
 
      <CheckBoxPreference
         android:key="lockscreen_camera_widget"
