@@ -166,6 +166,7 @@ public class Shortcuts extends ApplicationsDialogPreference {
                                 try {
                                     mImageTmp.createNewFile();
                                     mImageTmp.setWritable(true, false);
+                                    mImageTmp.setReadable(true, false);
                                     intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mImageTmp));
                                     intent.putExtra("return-data", false);
                                     startActivityForResult(intent, CUSTOM_USER_ICON);
