@@ -52,6 +52,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";
     private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+    private static final String PREF_STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
@@ -67,6 +68,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     String mCustomLabelText = null;
 
     CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+    CheckBoxPreference mStatusBarNotifCount;
 
     Preference mLcdDensity;
 
@@ -140,6 +142,10 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarSignal.setValue(String.valueOf(signalStyle));
         mStatusBarSignal.setSummary(mStatusBarSignal.getEntry());
         mStatusBarSignal.setOnPreferenceChangeListener(this);
+
+        mStatusBarNotifCount = (CheckBoxPreference) findPreference(PREF_STATUS_BAR_NOTIF_COUNT);
+        mStatusBarNotifCount.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUSBAR_NOTIF_COUNT, 0) == 1);
 
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
@@ -216,11 +222,15 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             });
 
             alert.show();
-
         } else if (preference == mWakeUpWhenPluggedOrUnplugged) {
             Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
                     ((CheckBoxPreference) preference).isChecked());
+            return true;
+        } else if (preference == mStatusBarNotifCount) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.STATUSBAR_NOTIF_COUNT,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
