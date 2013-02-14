@@ -2453,6 +2453,24 @@
     <!-- Displayed when user launches a widget configuration activity that was uninstalled -->
     <string name="activity_not_found">Application is not installed on your phone.</string>
 
+    <!-- ChooseLockPatternTutorial --> <skip />
+    <!-- ChooseLockPatternTutorial, button labels: This is to cancel the tutorial -->
+    <string name="skip_button_label">Cancel</string>
+    <!-- ChooseLockPatternTutorial, button labels: Continue to the next page of the tutorial -->
+    <string name="next_button_label">Next</string>
+    <!-- ChooseLockPatternTutorial, tutorial screen title -->
+    <string name="lock_title" product="tablet">Securing your tablet</string>
+    <!-- ChooseLockPatternTutorial, tutorial screen title -->
+    <string name="lock_title" product="default">Securing your phone</string>
+    <!-- ChooseLockPatternTutorial, tutorial screen text -->
+    <string name="lock_intro_message" product="tablet">Protect your tablet from unauthorized use by creating a personal screen unlock pattern. Slide your finger to connect the dots in any 
+        \n\nReady to start? Touch Next.
+    </string>
+    <!-- ChooseLockPatternTutorial, tutorial screen text -->
+    <string name="lock_intro_message" product="default">Protect your phone from unauthorized use by creating a personal screen unlock pattern. Slide your finger to connect at least four do
+        \n\nReady to start? Touch Next.
+    </string>
+
     <!-- Applications Settings --> <skip />
     <!-- Applications settings screen, setting option name for the user to go to the screen to manage installed applications -->
     <string name="manageapplications_settings_title">Manage apps</string>
@@ -2826,6 +2844,8 @@
     <string name="auto_punctuate_summary">Press Space key twice to insert \u0022.\u0022</string>
     <!-- On Security & location settings screen, setting check box name. Title of the checkbox to set whether password edit fields will show the most recent character typed and then hide it, or just hide it right away.  By hide, I mean mask it out. -->
     <string name="show_password">Make passwords visible</string>
+    <!-- On Security & location settings screen, setting check box summary. Summary for the visible passwords setting. -->
+    <string name="show_password_summary"></string>
     <!-- Warning message about security implications of enabling an input method, displayed as a dialog
          message when the user selects to enable an IME. -->
     <string name="ime_security_warning">This input method may be able to collect
