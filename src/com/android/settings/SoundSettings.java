@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import java.util.List;
-import android.app.ActivityManagerNative;
 
 import com.android.settings.bluetooth.DockEventReceiver;
 
@@ -84,11 +83,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
-    private static final String KEY_SAFE_HEADSET_RESTORE = "safe_headset_restore";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_CONVERT_SOUND_TO_VIBRATE = "notification_convert_sound_to_vibration";
-    private static final String KEY_HEADSET_CONNECT_PLAYER = "headset_connect_player";
 
 
     private static final String[] NEED_VOICE_CAPABILITY = {
@@ -108,12 +105,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
 
-    private CheckBoxPreference mHeadsetConnectPlayer;
     private Preference mRingtonePreference;
     private Preference mNotificationPreference;
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolBtnMusicCtrl;
-    private CheckBoxPreference mSafeHeadsetRestore;
     private PreferenceScreen mQuietHours;
 
     private Runnable mRingtoneLookupRunnable;
@@ -183,11 +178,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         int volumeOverlay = Settings.System.getInt(getContentResolver(),
                 Settings.System.MODE_VOLUME_OVERLAY,
                 VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
-
-        mSafeHeadsetRestore = (CheckBoxPreference) findPreference(KEY_SAFE_HEADSET_RESTORE);
-        mSafeHeadsetRestore.setPersistent(false);
-        mSafeHeadsetRestore.setChecked(Settings.System.getInt(resolver,
-                Settings.System.SAFE_HEADSET_VOLUME_RESTORE, 1) != 0);
         mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
         mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
 
@@ -212,10 +202,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
-
-        mHeadsetConnectPlayer = (CheckBoxPreference) findPreference(KEY_HEADSET_CONNECT_PLAYER);
-        mHeadsetConnectPlayer.setChecked(Settings.System.getInt(resolver,
-                Settings.System.HEADSET_CONNECT_PLAYER, 0) != 0);
 
         mRingtonePreference = findPreference(KEY_RINGTONE);
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
@@ -387,11 +373,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
-
-        } else if (preference == mSafeHeadsetRestore) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.SAFE_HEADSET_VOLUME_RESTORE,
-                    mSafeHeadsetRestore.isChecked() ? 1 : 0);
         } else if (preference == mVolumeWake) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
             mVolumeWake.isChecked() ? 1 : 0);
@@ -429,9 +410,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDockAudioMediaEnabled) {
             Settings.Global.putInt(getContentResolver(), Settings.Global.DOCK_AUDIO_MEDIA_ENABLED,
                     mDockAudioMediaEnabled.isChecked() ? 1 : 0);
-        } else if (preference == mHeadsetConnectPlayer) {
-            Settings.System.putInt(getContentResolver(), Settings.System.HEADSET_CONNECT_PLAYER,
-                    mHeadsetConnectPlayer.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
