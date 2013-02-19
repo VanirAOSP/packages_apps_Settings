@@ -5028,5 +5028,5 @@ Letting go of the power button will turn the torch off.</string>
     <string name="choose_app">Choose application</string>
 
     <string name="multipane_ui">Dual Panel Preferences</string>
-    <string name="multipane_ui_summary">For all apps' preference screens (requires reboot)</string>
+    <string name="multipane_ui_summary">For all apps\' preference screens (requires reboot)</string>
 </resources>
