@@ -5057,4 +5057,67 @@ Letting go of the power button will turn the torch off.</string>
 
     <string name="multipane_ui">Dual Panel Preferences</string>
     <string name="multipane_ui_summary">For all apps\' preference screens (requires reboot)</string>
+
+    <!-- expanded desktop -->
+    <string name="summary_expanded_desktop">%1$s</string>
+    <string name="expanded_desktop_summary_status_bar">With status bar</string>
+    <string name="expanded_desktop_summary_no_status_bar">Without status bar</string>
+    <string name="expanded_desktop_disabled">Off</string>
+    <string name="expanded_desktop_staus_bar">With status bar</string>
+    <string name="expanded_desktop_no_staus_bar">Without status bar</string>
+
+    <!-- Pie controls -->
+    <string name="pie_controls_title">Pie Controls</string>
+    <string name="pie_controls_summary">Adjust the controls of pie</string>
+    <string name="pie_gravity_title">Pie gravity</string>
+    <string name="pie_gravity_summary">Select the location where Pie will be placed at</string>
+    <string name="pie_gravity_top">Top</string>
+    <string name="pie_gravity_bottom">Bottom</string>
+    <string name="pie_gravity_right">Right</string>
+    <string name="pie_gravity_left">Left</string>
+    <string name="pie_mode_title">Pie style</string>
+    <string name="pie_mode_summary">Manage how animations and status additions will be handled</string>
+    <string name="pie_mode_bare">Bare</string>
+    <string name="pie_mode_quick">Quick</string>
+    <string name="pie_mode_default">Default</string>
+    <string name="pie_mode_slow">Slow</string>
+    <string name="pie_size_title">Pie size</string>
+    <string name="pie_size_summary">Define Pie controls size</string>
+    <string name="pie_size_small">Small</string>
+    <string name="pie_size_default">@string/pie_mode_default</string>
+    <string name="pie_size_large">Large</string>
+    <string name="pie_size_gigantic">Gigantic</string>
+    <string name="pie_color_title">Pie color settings</string>
+    <string name="pie_color_style_title">Pie color style</string>
+    <string name="pie_background_title">Background color</string>
+    <string name="pie_select_title">Selection color</string>
+    <string name="pie_outlines_title">Outlines color</string>
+    <string name="pie_status_clock_title">Clock color</string>
+    <string name="pie_status_title">Status color</string>
+    <string name="pie_chevron_left_title">Left chevron color</string>
+    <string name="pie_chevron_right_title">Right chevron color</string>
+    <string name="pie_juice_title">Battery juice color</string>
+    <string name="pie_button_color_title">Buttons color</string>
+    <string name="pie_gap_title">Pie gap</string>
+    <string name="pie_gap_summary">Adjust the gap that separates Pie elements</string>
+    <string name="pie_gap_none">None</string>
+    <string name="pie_gap_small">Small (default)</string>
+    <string name="pie_gap_big">Big</string>
+    <string name="pie_gap_huge">Huge</string>
+    <string name="pie_trigger_title">Trigger size</string>
+    <string name="pie_trigger_summary">Determine the size of the triggering area that will start pie controls</string>
+    <string name="pie_trigger_small">Small</string>
+    <string name="pie_trigger_normal">Normal (Default)</string>
+    <string name="pie_trigger_big">Big</string>
+    <string name="pie_trigger_huge">Huge</string>
+    <string name="pie_notifications_title">Enable Chevron Targets</string>
+    <string name="pie_notifications_summary">Enabling, will let the Notification panels and QuickSettings active when swipe.</string>
+    <string name="pie_menu_title">Show menu button always</string>
+    <string name="pie_menu_summary">Whether or not the menu button will appear when unneeded</string>
+    <string name="pie_search_title">Show search button</string>
+    <string name="pie_search_summary">Access to GoogleNow via Pie</string>
+    <string name="pie_center_title">Center pie</string>
+    <string name="pie_center_summary">If un-checked, pie appears where your fingers are</string>
+    <string name="all_color">Custom Colors</string>
+    <string name="stock_color">Default Colors</string>
 </resources>

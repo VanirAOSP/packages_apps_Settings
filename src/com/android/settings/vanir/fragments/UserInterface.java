@@ -238,7 +238,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
                     ((CheckBoxPreference) preference).isChecked());
-        } else if (preference.getKey().equals("transparency_dialog")) {
+        } else if (preference.getKey() != null && preference.getKey().equals("transparency_dialog")) {
             // getFragmentManager().beginTransaction().add(new
             // TransparencyDialog(), null).commit();
             openTransparencyDialog();

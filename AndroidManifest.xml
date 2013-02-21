@@ -1565,7 +1565,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="com.aokp.romcontrol.SHORTCUT" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 <!--        
@@ -1605,5 +1605,22 @@
              </intent-filter>
         </activity>
 
+        <activity
+              android:name=".vanir.fragments.Pie"
+              android:label="Pie" >
+              <intent-filter>
+                  <action android:name="android.intent.action.MAIN" />
+                  <category android:name="com.intent.category.SHORTCUT" />
+              </intent-filter>
+          </activity>
+
+        <activity
+              android:name=".vanir.fragments.PieColor"
+              android:label="Pie Color" >
+              <intent-filter>
+                  <action android:name="android.intent.action.MAIN" />
+                  <category android:name="com.intent.category.SHORTCUT" />
+              </intent-filter>
+          </activity>
     </application>
 </manifest>
