@@ -5068,9 +5068,9 @@ Letting go of the power button will turn the torch off.</string>
 
     <!-- Pie controls -->
     <string name="pie_controls_title">Pie Controls</string>
-    <string name="pie_controls_summary">Adjust the controls of pie</string>
+    <string name="pie_controls_summary">Adjust the Pie controls</string>
     <string name="pie_gravity_title">Pie gravity</string>
-    <string name="pie_gravity_summary">Select the location where Pie will be placed at</string>
+    <string name="pie_gravity_summary">Select the location where the Pie will be placed</string>
     <string name="pie_gravity_top">Top</string>
     <string name="pie_gravity_bottom">Bottom</string>
     <string name="pie_gravity_right">Right</string>
@@ -5099,25 +5099,25 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_juice_title">Battery juice color</string>
     <string name="pie_button_color_title">Buttons color</string>
     <string name="pie_gap_title">Pie gap</string>
-    <string name="pie_gap_summary">Adjust the gap that separates Pie elements</string>
+    <string name="pie_gap_summary">Adjust the gap that separates the Pie elements</string>
     <string name="pie_gap_none">None</string>
     <string name="pie_gap_small">Small (default)</string>
     <string name="pie_gap_big">Big</string>
     <string name="pie_gap_huge">Huge</string>
     <string name="pie_trigger_title">Trigger size</string>
-    <string name="pie_trigger_summary">Determine the size of the triggering area that will start pie controls</string>
+    <string name="pie_trigger_summary">Adjust the size of the triggering area that will open the Pie</string>
     <string name="pie_trigger_small">Small</string>
     <string name="pie_trigger_normal">Normal (Default)</string>
     <string name="pie_trigger_big">Big</string>
     <string name="pie_trigger_huge">Huge</string>
     <string name="pie_notifications_title">Enable Chevron Targets</string>
-    <string name="pie_notifications_summary">Enabling, will let the Notification panels and QuickSettings active when swipe.</string>
-    <string name="pie_menu_title">Show menu button always</string>
-    <string name="pie_menu_summary">Whether or not the menu button will appear when unneeded</string>
+    <string name="pie_notifications_summary">Enabling this will let the Notification panel and QuickSettings tiles become available when swiping</string>
+    <string name="pie_menu_title">Always show menu button</string>
+    <string name="pie_menu_summary">Whether or not the menu button should always be shown, even when its not needed</string>
     <string name="pie_search_title">Show search button</string>
     <string name="pie_search_summary">Access to GoogleNow via Pie</string>
     <string name="pie_center_title">Center pie</string>
-    <string name="pie_center_summary">If un-checked, pie appears where your fingers are</string>
+    <string name="pie_center_summary">If un-checked, Pie appears where your fingers touch the screen</string>
     <string name="all_color">Custom Colors</string>
     <string name="stock_color">Default Colors</string>
 </resources>
