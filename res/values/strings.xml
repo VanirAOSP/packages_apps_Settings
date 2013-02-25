@@ -5176,7 +5176,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_gap_title">Pie gap</string>
     <string name="pie_gap_summary">Adjust the gap that separates the Pie elements</string>
     <string name="pie_gap_none">None</string>
-    <string name="pie_gap_small">Small (default)</string>
+    <string name="pie_gap_small">Small</string>
     <string name="pie_gap_big">Big</string>
     <string name="pie_gap_huge">Huge</string>
     <string name="pie_trigger_title">Trigger size</string>
