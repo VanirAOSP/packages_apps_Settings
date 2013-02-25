@@ -1254,6 +1254,8 @@
         <item>2G</item>
         <item>LTE</item>
         <item>QUICKRECORD</item>
+<!--        <item>WEATHER</item>  -->
+        <item>MEMORY</item>
     </string-array>
 
     <string-array name="available_toggles_values" translatable="false">
@@ -1281,6 +1283,8 @@
         <item>@string/toggle_2g</item>
         <item>@string/toggle_lte</item>
         <item>@string/toggle_quickrecord</item>
+ <!--       <item>@string/toggle_weather</item> -->
+        <item>@string/toggle_memory</item>
     </string-array>
 
     <!-- Toggles per row -->
