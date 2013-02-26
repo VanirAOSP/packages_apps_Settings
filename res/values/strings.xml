@@ -4818,6 +4818,10 @@ Letting go of the power button will turn the torch off.</string>
     <string name="notification_convert_sound_to_vibration_title">Notification conversion</string>
     <string name="notification_convert_sound_to_vibration_summary">Sounds to vibrations during vibrate mode</string>
 
+    <!-- Swap volume buttons when the screen is rotated by 90 or 180 degrees -->
+    <string name="swap_volume_buttons_title">Swap volume buttons</string>
+    <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated by 90 or 180 degrees</string>
+
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
     <string name="press_color_to_apply">Press on Color to apply</string>
