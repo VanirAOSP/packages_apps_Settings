@@ -5075,6 +5075,8 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Pie controls -->
     <string name="pie_controls_title">Pie Controls</string>
     <string name="pie_controls_summary">Adjust the Pie controls</string>
+    <string name="pie_enable_title">Enable Pie</string>
+    <string name="pie_enable_summary">Nom nom nom nom</string>
     <string name="pie_gravity_title">Pie gravity</string>
     <string name="pie_gravity_summary">Select the location where the Pie will be placed</string>
     <string name="pie_gravity_top">Top</string>
