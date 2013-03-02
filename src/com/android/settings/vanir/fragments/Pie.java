@@ -51,6 +51,7 @@ public class Pie extends SettingsPreferenceFragment
     private static final String PIE_SEARCH = "pie_search";
     private static final String PIE_CENTER = "pie_center";
     private static final String PIE_STICK = "pie_stick";
+    private static final String PIE_COLOR = "pie_color";
 
     private ListPreference mPieMode;
     private ListPreference mPieSize;
@@ -63,6 +64,7 @@ public class Pie extends SettingsPreferenceFragment
     private CheckBoxPreference mPieSearch;
     private CheckBoxPreference mPieCenter;
     private CheckBoxPreference mPieStick;
+    private PreferenceScreen mPieColor;
 
     private Context mContext;
     private int mAllowedLocations;
@@ -134,6 +136,8 @@ public class Pie extends SettingsPreferenceFragment
         mPieSearch.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.PIE_SEARCH, 1) == 1);
 
+        mPieColor = (PreferenceScreen) prefSet.findPreference(PIE_COLOR);
+
         checkControls();
     }
 
@@ -145,6 +149,11 @@ public class Pie extends SettingsPreferenceFragment
         mPieTrigger.setEnabled(pieCheck);
         mPieGap.setEnabled(pieCheck);
         mPieNotifi.setEnabled(pieCheck);
+        mPieCenter.setEnabled(pieCheck);
+        mPieStick.setEnabled(pieCheck);
+        mPieMenu.setEnabled(pieCheck);
+        mPieSearch.setEnabled(pieCheck);
+        mPieColor.setEnabled(pieCheck);
     }
 
     @Override
