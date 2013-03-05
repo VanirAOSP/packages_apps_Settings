@@ -80,7 +80,6 @@
     <dimen name="navigation_bar_36">36.0dip</dimen>
     <dimen name="navigation_bar_30">30.0dip</dimen>
     <dimen name="navigation_bar_24">24.0dip</dimen>
-    <dimen name="navigation_bar_0">0.0dip</dimen>
 
     <!-- Light settings dialog -->
     <dimen name="dialog_light_settings_width">400dip</dimen>
