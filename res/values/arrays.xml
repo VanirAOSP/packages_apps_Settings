@@ -1521,7 +1521,6 @@
 
     <!-- Expanded desktop -->
     <string-array name="expanded_desktop_entries" translatable="false">
-        <item>@string/expanded_desktop_disabled</item>
         <item>@string/expanded_desktop_staus_bar</item>
         <item>@string/expanded_desktop_no_staus_bar</item>
     </string-array>
@@ -1529,7 +1528,6 @@
     <string-array name="expanded_desktop_values" translatable="false">
         <item>0</item>
         <item>1</item>
-        <item>2</item>
     </string-array>
 
     <string-array name="user_mode_ui_entries" translatable="false">
