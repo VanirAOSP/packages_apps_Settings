@@ -5131,12 +5131,14 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_notifications_summary">Enabling this will let the Notification panel and QuickSettings tiles become available when swiping</string>
     <string name="pie_menu_title">Always show menu button</string>
     <string name="pie_menu_summary">Whether or not the menu button should always be shown, even when its not needed</string>
-    <string name="pie_search_title">Show search button</string>
+    <string name="pie_search_title">Show recents button</string>
     <string name="pie_search_summary">Access to GoogleNow via Pie</string>
     <string name="pie_center_title">Center pie</string>
     <string name="pie_center_summary">Center Pie on the trigger edge</string>
     <string name="pie_stick_title">Prevent rotation</string>
     <string name="pie_stick_summary">If checked Pie will stay in place no matter which orientation option is choosen</string>
+    <string name="pie_restart_launcher_title">Restart Launcher</string>
+    <string name="pie_restart_launcher_summary">Changing screensize can have adverse effects. This option allows your launcher to regain sanity, the cost is a slight blackout (recommended)</string>
     <string name="all_color">Custom Colors</string>
     <string name="stock_color">Default Colors</string>
 

@@ -93,6 +93,11 @@
             android:title="@string/pie_search_title"
             android:summary="@string/pie_search_summary" />
 
+        <CheckBoxPreference
+            android:key="pie_restart_launcher"
+            android:title="@string/pie_restart_launcher_title"
+            android:summary="@string/pie_restart_launcher_summary" />
+
         <PreferenceScreen
             android:key="pie_color"
             android:title="@string/pie_color_title"
