@@ -5145,5 +5145,6 @@ Letting go of the power button will turn the torch off.</string>
     <string name="hide_extras">Hide Extras</string>
 
     <string name="power_menu_expanded_desktop">Expanded desktop</string>
+    <string name="expanded_desktop_off">Remove from power menu</string>
 
 </resources>
