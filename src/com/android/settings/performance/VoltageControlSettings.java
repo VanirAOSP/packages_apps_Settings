@@ -44,7 +44,7 @@ import java.util.List;
 
 import com.android.settings.R;
 
-import com.android.settings.util.CMDProcessor;
+import com.vanir.util.CMDProcessor;
 
 public class VoltageControlSettings extends Fragment {
 

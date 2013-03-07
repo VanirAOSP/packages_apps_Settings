@@ -44,7 +44,7 @@ import android.view.View;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
-import com.android.settings.util.Helpers;
+import com.vanir.util.Helpers;
 import com.android.settings.widget.AlphaSeekBar;
 import com.android.settings.widget.SeekBarPreference;
 

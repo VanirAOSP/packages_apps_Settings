@@ -52,7 +52,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.util.Helpers;
+import com.vanir.util.Helpers;
 import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.vanir.NavRingTargets;
 import com.android.settings.SettingsPreferenceFragment;

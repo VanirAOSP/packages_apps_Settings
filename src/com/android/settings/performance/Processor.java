@@ -26,6 +26,7 @@ import android.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.vanir.util.CMDProcessor;
 
 //
 // CPU Related Settings
@@ -46,6 +47,7 @@ public class Processor extends SettingsPreferenceFragment implements
     public static final String FREQ_MAX_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
     public static final String FREQ_MIN_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
     public static final String SOB_PREF = "pref_cpu_set_on_boot";
+    public static final String INTERACTIVE_PERMS_FIXER = "/system/xbin/vanirinteractivegovernorgovernor";
 
     private static final String TAG = "CPUSettings";
 
@@ -225,6 +227,9 @@ public class Processor extends SettingsPreferenceFragment implements
             if (Utils.fileWriteOneLine(fname, (String) newValue)) {
                 if (preference == mGovernorPref) {
                     mGovernorPref.setSummary(String.format(mGovernorFormat, (String) newValue));
+                    if ("interactive".equals((String)newValue)) {
+                        new CMDProcessor().suOrSH().run("vanirinteractivegovernorgovernor");
+                    }
                 } else if (preference == mMinFrequencyPref) {
                     mMinFrequencyPref.setSummary(String.format(mMinFrequencyFormat,
                             toMHz((String) newValue)));
