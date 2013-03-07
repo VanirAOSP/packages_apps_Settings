@@ -539,6 +539,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
             String statusBarPresent = res.getString(R.string.expanded_desktop_summary_no_status_bar);
             mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
+        } else if (value == 2) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
+            String statusBarPresent = res.getString(R.string.expanded_desktop_off);
+            mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
         }
     }
 
