@@ -25,6 +25,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.text.Spannable;
@@ -70,6 +71,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
     private static final String PREF_USER_MODE_UI = "user_mode_ui";
     private static final String PREF_HIDE_EXTRAS = "hide_extras";
+    private static final CharSequence PREF_POWER_CRT_MODE = "system_power_crt_mode";
+    private static final CharSequence PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
@@ -84,6 +87,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     CheckBoxPreference mDualpane;
     CheckBoxPreference mHideExtras;
     ListPreference mUserModeUI;
+    ListPreference mCrtMode;
+    CheckBoxPreference mCrtOff;
 
     String mCustomLabelText = null;
 
@@ -102,7 +107,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.user_interface_settings);
         PreferenceScreen prefs = getPreferenceScreen();
-        ContentResolver cr = mContext.getContentResolver();
+        ContentResolver mContentResolver = mContext.getContentResolver();
 
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
 
@@ -112,9 +117,8 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
         mStatusBarClock.setOnPreferenceChangeListener(this);
-        mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
-                1)));
+        mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(
+        mContentResolver, Settings.System.STATUS_BAR_CLOCK, 1)));
 
         mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
         mClockPicker.setOnPreferenceChangeListener(this);
@@ -124,7 +128,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
         try {
-            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+            if (Settings.System.getInt(mContentResolver,
                     Settings.System.TIME_12_24) == 24) {
                 mStatusBarAmPm.setEnabled(false);
                 mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
@@ -132,30 +136,30 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         } catch (SettingNotFoundException e ) {
         }
 
-        int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        int statusBarAmPm = Settings.System.getInt(mContentResolver,
                 Settings.System.STATUS_BAR_AM_PM, 2);
         mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
         mHideExtras = (CheckBoxPreference) findPreference(PREF_HIDE_EXTRAS);
-        mHideExtras.setChecked(Settings.System.getBoolean(cr,
+        mHideExtras.setChecked(Settings.System.getBoolean(mContentResolver,
                         Settings.System.HIDE_EXTRAS_SYSTEM_BAR, false));
 
         mUserModeUI = (ListPreference) findPreference(PREF_USER_MODE_UI);
-        int uiMode = Settings.System.getInt(cr,
+        int uiMode = Settings.System.getInt(mContentResolver,
                 Settings.System.CURRENT_UI_MODE, 0);
-        mUserModeUI.setValue(Integer.toString(Settings.System.getInt(cr,
+        mUserModeUI.setValue(Integer.toString(Settings.System.getInt(mContentResolver,
                 Settings.System.USER_UI_MODE, uiMode)));
         mUserModeUI.setOnPreferenceChangeListener(this);
 
         mDualPane = (CheckBoxPreference) findPreference(KEY_DUAL_PANE);
         boolean preferDualPane = getResources().getBoolean(
                 com.android.internal.R.bool.preferences_prefer_dual_pane);
-        boolean dualPaneMode = Settings.System.getInt(cr,
+        boolean dualPaneMode = Settings.System.getInt(mContentResolver,
                 Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
         mDualPane.setChecked(dualPaneMode);
-        int statusBarBattery = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        int statusBarBattery = Settings.System.getInt(mContentResolver,
                 Settings.System.STATUS_BAR_BATTERY, 0);
         mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
         mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
@@ -164,21 +168,21 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         PreferenceScreen prefSet = getPreferenceScreen();
         mExpandedDesktopPref = (ListPreference) prefSet.findPreference(KEY_EXPANDED_DESKTOP);
         mExpandedDesktopPref.setOnPreferenceChangeListener(this);
-        int expandedDesktopValue = Settings.System.getInt(getContentResolver(), Settings.System.EXPANDED_DESKTOP_STATUS_BAR_STATE, 0);
+        int expandedDesktopValue = Settings.System.getInt(mContentResolver, Settings.System.EXPANDED_DESKTOP_STATUS_BAR_STATE, 0);
         mExpandedDesktopPref.setValue(String.valueOf(expandedDesktopValue));
         updateExpandedDesktopSummary(expandedDesktopValue);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
 
-        int signalStyle = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+        int signalStyle = Settings.System.getInt(mContentResolver,
                 Settings.System.STATUS_BAR_SIGNAL_TEXT, 0);
         mStatusBarSignal.setValue(String.valueOf(signalStyle));
         mStatusBarSignal.setSummary(mStatusBarSignal.getEntry());
         mStatusBarSignal.setOnPreferenceChangeListener(this);
 
         mStatusBarNotifCount = (CheckBoxPreference) findPreference(PREF_STATUS_BAR_NOTIF_COUNT);
-        mStatusBarNotifCount.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+        mStatusBarNotifCount.setChecked(Settings.System.getInt(mContentResolver,
                 Settings.System.STATUSBAR_NOTIF_COUNT, 0) == 1);
 
         mLcdDensity = findPreference("lcd_density_setup");
@@ -191,8 +195,20 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
 
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
+        boolean isCrtOffChecked = (Settings.System.getBoolean(mContentResolver,
+                        Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF, true));
+        mCrtOff = (CheckBoxPreference) findPreference(PREF_POWER_CRT_SCREEN_OFF);
+        mCrtOff.setChecked(isCrtOffChecked);
+
+        mCrtMode = (ListPreference) findPreference(PREF_POWER_CRT_MODE);
+        int crtMode = Settings.System.getInt(mContentResolver,
+                Settings.System.SYSTEM_POWER_CRT_MODE, 0);
+        mCrtMode.setValue(Integer.toString(Settings.System.getInt(mContentResolver,
+                Settings.System.SYSTEM_POWER_CRT_MODE, crtMode)));
+        mCrtMode.setOnPreferenceChangeListener(this);
+
         mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
-        mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+        mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getBoolean(mContentResolver,
                 Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, true));
 
         // hide option if device is already set to never wake up
@@ -202,7 +218,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         }
 
         mDualpane = (CheckBoxPreference) findPreference(PREF_FORCE_DUAL_PANEL);
-        mDualpane.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+        mDualpane.setChecked(Settings.System.getBoolean(mContentResolver,
                         Settings.System.FORCE_DUAL_PANEL, getResources().getBoolean(
                         com.android.internal.R.bool.preferences_prefer_dual_pane)));
     }
@@ -280,6 +296,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.STATUSBAR_NOTIF_COUNT,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mCrtOff) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
+                    ((TwoStatePreference) preference).isChecked());
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -339,6 +360,13 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.USER_UI_MODE, Integer.parseInt((String) objValue));
             Helpers.restartSystemUI();
+            return true;
+                } else if (preference == mCrtMode) {
+            int crtMode = Integer.valueOf((String) objValue);
+            int index = mCrtMode.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SYSTEM_POWER_CRT_MODE, crtMode);
+            mCrtMode.setSummary(mCrtMode.getEntries()[index]);
             return true;
         }
         return false;
