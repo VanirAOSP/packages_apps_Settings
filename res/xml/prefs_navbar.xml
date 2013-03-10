@@ -47,13 +47,13 @@
         android:title="@string/navbar_qty_title"
         android:summary="@string/navbar_qty_summary" />
 
-    <PreferenceCategory
-        android:key="navbar_buttons"
-        android:title="@string/navbar_button_cat">
-        
     <com.android.settings.widget.SeekBarPreference
         android:key="button_transparency"
         android:title="@string/button_transparency_title" />
+
+    <PreferenceCategory
+        android:key="navbar_buttons"
+        android:title="@string/navbar_button_cat">
     </PreferenceCategory>
 
     <PreferenceCategory
