@@ -1361,6 +1361,7 @@
         <item>@string/status_bar_battery_status_circle</item>
         <item>@string/status_bar_battery_status_circle_percentage</item>
         <item>@string/status_bar_battery_status_hidden</item>
+        <item>@string/status_bar_battery_status_gear</item>
     </string-array>
     <string-array name="values_status_bar_battery" translatable="false">
         <item>0</item>
@@ -1368,6 +1369,7 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+        <item>5</item>
     </string-array>
     <string-array name="entries_status_bar_signal" translatable="false">
         <item>@string/status_bar_style_icon</item>
