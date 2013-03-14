@@ -19,36 +19,6 @@
     android:title="@string/display_settings"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <PreferenceScreen
-        android:key="@+id/statusbar"
-        android:title="@string/status_bar_title"
-        android:summary="@string/status_bar_summary"
-        android:fragment="com.android.settings.vanir.fragments.Statusbar" />
-
-    <PreferenceScreen
-        android:key="general_ui_settings"
-        android:title="@string/title_ui"
-        android:summary="@string/general_title_summary"
-        android:fragment="com.android.settings.vanir.fragments.UserInterface" />
-
-    <PreferenceScreen
-        android:id="@+id/pie_control"
-        android:fragment="com.android.settings.vanir.fragments.Pie"
-        android:summary="@string/pie_controls_summary"
-        android:title="@string/pie_controls_title" />
-
-     <PreferenceScreen
-        android:id="@+id/lock_screen_settings"
-        android:fragment="com.android.settings.vanir.LockscreenInterface"
-        android:title="@string/lock_screen_title"
-        android:summary="@string/lock_screen_summary" />
-
-    <PreferenceScreen
-        android:key="@+id/navbar"
-        android:title="@string/title_navbar"
-        android:summary="@string/navigation_bar_summary"
-        android:fragment="com.android.settings.vanir.fragments.Navbar" />
-
     <com.android.settings.vanir.DisplayBrightness
         android:key="brightness"
         android:title="@string/brightness"

@@ -1,4 +1,20 @@
-package com.android.settings.vanir.fragments;
+/*
+ * Copyright (C) 2007 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,6 +44,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.text.format.DateFormat;
 import android.text.Spannable;
 import android.util.Log;
 import android.util.TypedValue;
@@ -39,10 +56,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import android.view.Window;
-import android.view.View;
-
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.vanir.util.Helpers;
@@ -51,10 +64,25 @@ import com.android.settings.widget.SeekBarPreference;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
-public class UserInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+import android.view.Window;
+import android.view.View;
+import android.view.VolumePanel;
 
-    public static final String TAG = "UserInterface";
+import java.util.Date;
+import java.util.Calendar;
 
+import com.android.settings.vanir.fragments.*;
+
+public class VanirSettings extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
+    private static final String TAG = "VanirSettings";
+
+    private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
+    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
+    private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
+    private static final String KEY_QUIET_HOURS = "quiet_hours";
+    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
@@ -82,32 +110,36 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private CheckBoxPreference mDualPane;
     private ColorPickerPreference mClockPicker;
     private ColorPickerPreference mExpandedClockPicker;
-    ListPreference mExpandedDesktopPref;
-    Preference mCustomLabel;
-    CheckBoxPreference mDualpane;
-    CheckBoxPreference mHideExtras;
-    ListPreference mUserModeUI;
-    ListPreference mCrtMode;
-    CheckBoxPreference mCrtOff;
-
-    String mCustomLabelText = null;
-
-    CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
-    CheckBoxPreference mStatusBarNotifCount;
-
-    Preference mLcdDensity;
+    private ListPreference mExpandedDesktopPref;
+    private Preference mCustomLabel;
+    private CheckBoxPreference mDualpane;
+    private CheckBoxPreference mHideExtras;
+    private ListPreference mUserModeUI;
+    private ListPreference mCrtMode;
+    private CheckBoxPreference mCrtOff;
+    private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+    private CheckBoxPreference mStatusBarNotifCount;
+    private Preference mLcdDensity;
+    private DensityChanger densityFragment;
+    private ListPreference mVolumeOverlay;
+    private CheckBoxPreference mVolumeWake;
+    private CheckBoxPreference mVolBtnMusicCtrl;
+    private CheckBoxPreference mVolumeAdjustSounds;
+    private PreferenceScreen mQuietHours;
+    private CheckBoxPreference mKillAppLongpressBack;
 
     int newDensityValue;
-
-    DensityChanger densityFragment;
+    private String mCustomLabelText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.user_interface_settings);
+        ContentResolver resolver = getContentResolver();
+        ContentResolver mContentResolver = resolver; //lazy lazy lazy B-)
+
+        addPreferencesFromResource(R.xml.vanir_settings);
+
         PreferenceScreen prefs = getPreferenceScreen();
-        ContentResolver mContentResolver = mContext.getContentResolver();
 
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
 
@@ -118,7 +150,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
         mStatusBarClock.setOnPreferenceChangeListener(this);
         mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(
-        mContentResolver, Settings.System.STATUS_BAR_CLOCK, 1)));
+            mContentResolver, Settings.System.STATUS_BAR_CLOCK, 1)));
 
         mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
         mClockPicker.setOnPreferenceChangeListener(this);
@@ -221,6 +253,41 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mDualpane.setChecked(Settings.System.getBoolean(mContentResolver,
                         Settings.System.FORCE_DUAL_PANEL, getResources().getBoolean(
                         com.android.internal.R.bool.preferences_prefer_dual_pane)));
+
+        mQuietHours = (PreferenceScreen) findPreference(KEY_QUIET_HOURS);
+        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
+            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
+                    + " " + getString(R.string.quiet_hours_active_to) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
+        } else {
+           mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
+        }
+
+        mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
+        mVolumeOverlay.setOnPreferenceChangeListener(this);
+        int volumeOverlay = Settings.System.getInt(getContentResolver(),
+                Settings.System.MODE_VOLUME_OVERLAY,
+                VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
+        mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
+        mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
+
+        mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
+        mVolumeAdjustSounds.setChecked(Settings.System.getInt(resolver,
+                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
+
+        mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
+        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
+                Settings.System.VOLBTN_MUSIC_CONTROLS, 0) != 0);
+
+        mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
+        if (mVolumeWake != null) {
+            mVolumeWake.setChecked(Settings.System.getInt(resolver,
+                    Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
+        }
+
+		mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
+        updateKillAppLongpressBackOptions();
     }
 
     private void openTransparencyDialog() {
@@ -229,8 +296,58 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        updateState(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+	        Settings.Secure.putInt(getActivity().getContentResolver(),
+	                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+	
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
+    }
+
+    // updateState in fact updates the UI to reflect the system state
+    private void updateState(boolean force) {
+        if (getActivity() == null) return;
+        ContentResolver resolver = getContentResolver();
+
+        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
+            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
+                    + " " + getString(R.string.quiet_hours_active_to) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
+        } else {
+            mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
+        }
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mLcdDensity) {
+        if (preference == mVolumeWake) {
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
+            mVolumeWake.isChecked() ? 1 : 0);
+            return true;
+        } else if (preference == mVolumeAdjustSounds) {
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
+            mVolumeAdjustSounds.isChecked() ? 1 : 0);
+        } else if (preference == mVolBtnMusicCtrl) {
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
+            mVolBtnMusicCtrl.isChecked() ? 1 : 0);
+        } else if (preference == mKillAppLongpressBack) {
+            writeKillAppLongpressBackOptions();
+        } else if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
@@ -301,12 +418,23 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
                     ((TwoStatePreference) preference).isChecked());
             return true;
+        } else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return true;
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mStatusBarAmPm) {
+        final String key = preference.getKey();
+        if (preference == mVolumeOverlay) {
+            final int value = Integer.valueOf((String) objValue);
+            final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.MODE_VOLUME_OVERLAY, value);
+            mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
+        } else if (preference == mStatusBarAmPm) {
             int statusBarAmPm = Integer.valueOf((String) objValue);
             int index = mStatusBarAmPm.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
@@ -369,7 +497,23 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
             return true;
         }
-        return false;
+        return true;
+    }
+
+    private String returnTime(String t) {
+        if (t == null || t.equals("")) {
+            return "";
+        }
+        int hr = Integer.parseInt(t.trim());
+        int mn = hr;
+
+        hr = hr / 60;
+        mn = mn % 60;
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, hr);
+        cal.set(Calendar.MINUTE, mn);
+        Date date = cal.getTime();
+        return DateFormat.getTimeFormat(getActivity().getApplicationContext()).format(date);
     }
 
     public static class AdvancedTransparencyDialog extends DialogFragment {

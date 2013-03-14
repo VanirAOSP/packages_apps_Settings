@@ -65,7 +65,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
 
-    private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     private static final String KEY_VIBRATE = "vibrate_when_ringing";
     private static final String KEY_RING_VOLUME = "ring_volume";
     private static final String KEY_MUSICFX = "musicfx";
@@ -82,11 +81,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_SETTINGS = "dock_audio";
     private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
-    private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
-    private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
-    private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_CONVERT_SOUND_TO_VIBRATE = "notification_convert_sound_to_vibration";
-    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
 
     private static final String[] NEED_VOICE_CAPABILITY = {
             KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
@@ -97,7 +92,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final int MSG_UPDATE_NOTIFICATION_SUMMARY = 2;
 
     private CheckBoxPreference mVibrateWhenRinging;
-    private ListPreference mVolumeOverlay;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
@@ -107,10 +101,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private Preference mRingtonePreference;
     private Preference mNotificationPreference;
-    private CheckBoxPreference mVolumeWake;
-    private CheckBoxPreference mVolBtnMusicCtrl;
-    private CheckBoxPreference mVolumeAdjustSounds;
-    private PreferenceScreen mQuietHours;
 
     private Runnable mRingtoneLookupRunnable;
 
@@ -164,24 +154,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             findPreference(KEY_RING_VOLUME).setDependency(null);
         }
 
-        mQuietHours = (PreferenceScreen) findPreference(KEY_QUIET_HOURS);
-        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
-                    + " " + getString(R.string.quiet_hours_active_to) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
-        } else {
-           mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
-        }
-
-        mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
-        mVolumeOverlay.setOnPreferenceChangeListener(this);
-        int volumeOverlay = Settings.System.getInt(getContentResolver(),
-                Settings.System.MODE_VOLUME_OVERLAY,
-                VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
-        mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
-        mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
-
         mVibrateWhenRinging = (CheckBoxPreference) findPreference(KEY_VIBRATE);
         mVibrateWhenRinging.setPersistent(false);
         mVibrateWhenRinging.setChecked(Settings.System.getInt(resolver,
@@ -199,9 +171,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mHapticFeedback.setPersistent(false);
         mHapticFeedback.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0);
-        mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
-        mVolumeAdjustSounds.setChecked(Settings.System.getInt(resolver,
-                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
         mLockSounds = (CheckBoxPreference) findPreference(KEY_LOCK_SOUNDS);
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
@@ -209,16 +178,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mRingtonePreference = findPreference(KEY_RINGTONE);
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
-        
         mConvertSoundToVibration = (CheckBoxPreference) findPreference(KEY_CONVERT_SOUND_TO_VIBRATE);
         mConvertSoundToVibration.setPersistent(false);
         mConvertSoundToVibration.setChecked(Settings.System.getBoolean(resolver,
                 Settings.System.NOTIFICATION_CONVERT_SOUND_TO_VIBRATION, false));
 
-        mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
-        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
-                Settings.System.VOLBTN_MUSIC_CONTROLS, 0) != 0);
-
+        
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator == null || !vibrator.hasVibrator()) {
             removePreference(KEY_VIBRATE);
@@ -234,12 +199,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             emergencyTonePreference.setValue(String.valueOf(Settings.Global.getInt(
                 resolver, Settings.Global.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE)));
             emergencyTonePreference.setOnPreferenceChangeListener(this);
-        }
-
-            mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
-        if (mVolumeWake != null) {
-            mVolumeWake.setChecked(Settings.System.getInt(resolver,
-                    Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
         }
 
         mSoundSettings = (PreferenceGroup) findPreference(KEY_SOUND_SETTINGS);
@@ -284,7 +243,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     public void onResume() {
         super.onResume();
 
-        updateState(true);
         lookupRingtoneNames();
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_DOCK_EVENT);
@@ -296,21 +254,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         super.onPause();
 
         getActivity().unregisterReceiver(mReceiver);
-    }
-
-    // updateState in fact updates the UI to reflect the system state
-    private void updateState(boolean force) {
-        if (getActivity() == null) return;
-        ContentResolver resolver = getContentResolver();
-
-        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
-                    + " " + getString(R.string.quiet_hours_active_to) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
-        } else {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
-        }
     }
 
     private void updateRingtoneName(int type, Preference preference, int msg) {
@@ -370,23 +313,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
                     mLockSounds.isChecked() ? 1 : 0);
 
-        } else if (preference == mConvertSoundToVibration) {
-            Settings.System.putBoolean(getContentResolver(), Settings.System.NOTIFICATION_CONVERT_SOUND_TO_VIBRATION,
-                    mConvertSoundToVibration.isChecked());
-
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
-        } else if (preference == mVolumeWake) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
-            mVolumeWake.isChecked() ? 1 : 0);
-            return true;
-        } else if (preference == mVolumeAdjustSounds) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
-            mVolumeAdjustSounds.isChecked() ? 1 : 0);
-        } else if (preference == mVolBtnMusicCtrl) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
-            mVolBtnMusicCtrl.isChecked() ? 1 : 0);
+        } else if (preference == mConvertSoundToVibration) {
+            Settings.System.putBoolean(getContentResolver(), Settings.System.NOTIFICATION_CONVERT_SOUND_TO_VIBRATION,
+                    mConvertSoundToVibration.isChecked());
         } else if (preference == mDockAudioSettings) {
             int dockState = mDockIntent != null
                     ? mDockIntent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0)
@@ -434,31 +366,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
-        } else if (preference == mVolumeOverlay) {
-            final int value = Integer.valueOf((String) objValue);
-            final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.MODE_VOLUME_OVERLAY, value);
-            mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
         }
 
         return true;
-    }
-
-    private String returnTime(String t) {
-        if (t == null || t.equals("")) {
-            return "";
-        }
-        int hr = Integer.parseInt(t.trim());
-        int mn = hr;
-
-        hr = hr / 60;
-        mn = mn % 60;
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, hr);
-        cal.set(Calendar.MINUTE, mn);
-        Date date = cal.getTime();
-        return DateFormat.getTimeFormat(getActivity().getApplicationContext()).format(date);
     }
 
     @Override
