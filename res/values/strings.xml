@@ -4926,6 +4926,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="status_bar_battery_status_percentage">Stock icon w/ percentage</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle w/ percentage</string>
+    <string name="status_bar_battery_status_gear">Circle Gear</string>
     <string name="status_bar_battery_status_hidden">Hidden</string>
     <!-- Nav Ring Targets -->
     <string name="navbar_ring_cat">Navigation Bar Ring Targets</string>
