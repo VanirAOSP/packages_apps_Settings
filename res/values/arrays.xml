@@ -1150,6 +1150,8 @@
 <!--        <item>WEATHER</item>  -->
         <item>MEMORY</item>
         <item>REBOOTMENU</item>
+        <item>PIE</item>
+        <item>EXPANDED_DESKTOP</item>
     </string-array>
 
     <string-array name="available_toggles_values" translatable="false">
@@ -1180,6 +1182,8 @@
  <!--       <item>@string/toggle_weather</item> -->
         <item>@string/toggle_memory</item>
         <item>@string/toggle_rebootmenu</item>
+        <item>@string/toggle_pie</item>
+        <item>@string/toggle_expanded_desktop</item>
     </string-array>
 
     <!-- Toggles per row -->
