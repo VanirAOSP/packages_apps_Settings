@@ -34,15 +34,17 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.notificationlight.ColorPickerView.OnColorChangedListener;
+import net.margaritov.preference.colorpicker.ColorPickerView;
+import net.margaritov.preference.colorpicker.ColorPickerPanelView;
+import net.margaritov.preference.colorpicker.ColorPickerView.OnColorChangedListener;
 
 public class LightSettingsDialog extends AlertDialog implements
         ColorPickerView.OnColorChangedListener {
 
     private ColorPickerView mColorPicker;
 
-    private ColorPanelView mOldColor;
-    private ColorPanelView mNewColor;
+    private ColorPickerPanelView mOldColor;
+    private ColorPickerPanelView mNewColor;
     private Spinner mPulseSpeedOn;
     private Spinner mPulseSpeedOff;
     private LayoutInflater mInflater;
@@ -96,8 +98,8 @@ public class LightSettingsDialog extends AlertDialog implements
         View layout = mInflater.inflate(R.layout.dialog_light_settings, null);
 
         mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
-        mOldColor = (ColorPanelView) layout.findViewById(R.id.old_color_panel);
-        mNewColor = (ColorPanelView) layout.findViewById(R.id.new_color_panel);
+        mOldColor = (ColorPickerPanelView) layout.findViewById(R.id.old_color_panel);
+        mNewColor = (ColorPickerPanelView) layout.findViewById(R.id.new_color_panel);
 
         ((LinearLayout) mOldColor.getParent()).setPadding(Math
                 .round(mColorPicker.getDrawingOffset()), 0, Math
