@@ -662,13 +662,15 @@ public class ColorPickerView extends View {
 		
 		widthAllowed = chooseWidth(widthMode, widthAllowed);
 		heightAllowed = chooseHeight(heightMode, heightAllowed);
-		
+
 		if(!mShowAlphaPanel){
 			
 			height = (int) (widthAllowed - PANEL_SPACING - HUE_PANEL_WIDTH);
 
+            Object otag = getTag();
+
 			//If calculated height (based on the width) is more than the allowed height.
-			if(height > heightAllowed || getTag().equals("landscape")) {
+			if(height > heightAllowed || (otag != null ? otag.toString() : "").equals("landscape")) {
 				height = heightAllowed;
 				width = (int) (height + PANEL_SPACING + HUE_PANEL_WIDTH);
 			}
