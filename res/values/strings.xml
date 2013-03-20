@@ -4644,8 +4644,6 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pref_recents_title">Enhance recents panel</string>
     <string name="pref_recents_summary">Add a memory usage bar to the recents panel</string>
 
-    <string name="keyguard_picker_all_widgets_title">Show all widgets</string>
-
     <!-- Quiet hours -->
     <string name="quiet_hours_title">Quiet hours</string>
     <string name="quiet_hours_summary">Configure the hours the device should be quiet</string>
