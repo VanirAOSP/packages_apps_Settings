@@ -1740,6 +1740,10 @@
 
         <activity android:name=".profiles.NFCProfileSelect" />
 
+        <activity android:name=".QuickSettings" />
+
+        <activity android:name=".quicksettings.QuickSettingsTilesStyle" />
+
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
