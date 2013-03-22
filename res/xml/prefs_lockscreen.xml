@@ -2,6 +2,7 @@
 
 <!-- Vanir: fffffffk yea! 
      PrimeDirective was here.
+     Styr too qq.
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,7 +26,7 @@
 
     <PreferenceCategory
             android:key="lockscreen"
-            android:title="LockScreen Custom Apps">
+            android:title="@string/lockscreen_custom_apps">
 
     <Preference
         android:fragment="com.android.settings.vanir.LockscreenTargets"
@@ -39,6 +40,20 @@
             android:title="@string/lock_screen_shortcuts_title" 
             android:summary="@string/lock_screen_shortcuts_summary" />
      </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="security"
+            android:title="@string/lockscreen_security_cat">
+
+        <CheckBoxPreference
+            android:key="lockscreen_quick_unlock_control"
+            android:title="@string/lockscreen_quick_unlock_control_title"
+            android:summary="@string/lockscreen_quick_unlock_control_summary" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="misc"
+            android:title="@string/lockscreen_misc">
 
      <CheckBoxPreference
         android:key="lockscreen_camera_widget"
@@ -55,4 +70,5 @@
         android:key="lockscreen_hide_initial_page_hints"
         android:title="@string/lockscreen_hide_initial_page_hints_title"
         android:summary="@string/lockscreen_hide_initial_page_hints_summary" />
+    </PreferenceCategory>
 </PreferenceScreen>

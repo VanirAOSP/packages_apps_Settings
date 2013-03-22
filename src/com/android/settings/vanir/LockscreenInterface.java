@@ -37,14 +37,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     public static final String KEY_ALLOW_ROTATION = "allow_rotation";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
-    
+    private static final String PREF_QUICK_UNLOCK = "lockscreen_quick_unlock_control";
+
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
     CheckBoxPreference mLockscreenHideInitialPageHints;
     private CheckBoxPreference mAllowRotation;
     CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mCameraWidget;
-    
+    CheckBoxPreference mQuickUnlock;
     private Context mContext;
 
     public boolean hasButtons() {
@@ -65,7 +66,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mLockscreenHideInitialPageHints = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS);
         mLockscreenHideInitialPageHints.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
               Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false)); 
-              
+
+        mQuickUnlock = (CheckBoxPreference)findPreference(PREF_QUICK_UNLOCK);
+        mQuickUnlock.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, false));       
+      
         mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
@@ -124,6 +129,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
                     ? 1 : 0);
+        } else if (preference == mQuickUnlock) {
+            Settings.System.putBoolean(mContext.getContentResolver(),
+                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL,
+                    ((CheckBoxPreference) preference).isChecked());
+            return true;
          } else if (preference == mLockscreenUseCarousel) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL,

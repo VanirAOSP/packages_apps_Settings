@@ -4740,6 +4740,11 @@ Letting go of the power button will turn the torch off.</string>
     <string name="lockscreen_target_empty">Empty</string>
     <string name="lockscreen_target_edit_title">Edit shortcut and icon</string>
     <string name="lockscreen_target_edit_msg">Select or change the desired application or activity and the associated icon</string>
+    <string name="lockscreen_security_cat">Security</string>
+    <string name="lockscreen_quick_unlock_control_title">Quick pin unlock</string>
+    <string name="lockscreen_quick_unlock_control_summary">Unlock password/pin lockscreen without pressing enter button</string>
+    <string name="lockscreen_misc">Miscellaneous lockscreen settings</string>
+    <string name="lockscreen_custom_apps">Lockscreen custom Apps</string>
 
     <!-- Lock screen shortcuts -->
     <string name="picker_activities">Activities</string>
