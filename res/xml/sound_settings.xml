@@ -47,6 +47,12 @@
         android:title="@string/vibrate_when_ringing_title"
         android:persistent="false" />
 
+    <CheckBoxPreference
+        android:key="notification_convert_sound_to_vibration"
+        android:title="@string/notification_convert_sound_to_vibration_title"
+        android:summary="@string/notification_convert_sound_to_vibration_summary"
+        android:defaultValue="false" />
+
     <PreferenceCategory
         android:title="@string/sound_category_system_title" />
 
@@ -63,12 +69,6 @@
         android:key="dtmf_tone"
         android:title="@string/dtmf_tone_enable_title"
         android:defaultValue="true" />
-
-    <CheckBoxPreference
-        android:key="notification_convert_sound_to_vibration"
-        android:title="@string/notification_convert_sound_to_vibration_title"
-        android:summary="@string/notification_convert_sound_to_vibration_summary"
-        android:defaultValue="false" />
 
     <CheckBoxPreference
         android:key="sound_effects"
