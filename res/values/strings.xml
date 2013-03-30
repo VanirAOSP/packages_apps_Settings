@@ -3667,7 +3667,7 @@
 
     <!-- Category title for system-wide notification and feedback settings in the Sound Setting.
          [CHAR LIMIT=40] -->
-    <string name="sound_category_system_title">System</string>
+    <string name="sound_category_system_title">SyLanguagestem</string>
 
     <!-- Category title for headset specific Settings.
          [CHAR LIMIT=40] -->
@@ -5173,7 +5173,7 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Vanir menus -->
     <string name="vanir_title">Voodoo</string>
     <string name="vanir_settings_title">Vanir Customizations</string>
-    <string name="vanir_ui_short">UI Stuff</string>
+    <string name="vanir_ui_short">UI</string>
     <string name="vanir_buttons_short">BELLY BUTTON</string>
-    <string name="vanir_sound_short">Sound-ish Stuff</string>
+    <string name="vanir_sound_short">Sound</string>
 </resources>
