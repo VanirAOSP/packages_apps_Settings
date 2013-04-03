@@ -4460,6 +4460,10 @@ Letting go of the power button will turn the torch off.</string>
     <!-- Performance settings -->
     <string name="performance_settings_title">Performance</string>
 
+    <string name="pref_vibe_strength_title">Vibration Strength</string>
+    <string name="pref_vibe_strength_summary">Vibration strength is <xliff:g id="vibe_strength">%1$s</xliff:g></string>
+    <string name="pref_vibe_strength_dialogtitle">Enter a value between 0-127</string> 
+
     <!-- Performance Settings : Processor settings title -->
     <string name="processor_title">Processor</string>
     <!-- Performance Settings : Processor settings summary. -->

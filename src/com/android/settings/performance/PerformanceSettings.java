@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference; 
 import android.preference.Preference;
 import android.preference.ListPreference;
 import android.preference.PreferenceScreen;
@@ -30,6 +31,7 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.vanir.util.Helpers;
 
 public class PerformanceSettings extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
@@ -41,6 +43,9 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
 
     private static final String USE_16BPP_ALPHA_PREF = "pref_use_16bpp_alpha";
     private static final String USE_16BPP_ALPHA_PROP = "persist.sys.use_16bpp_alpha";
+
+    public static final String VIBE_STR = "pref_vibe_strength";
+    public static final String VIBE_STR_FILE = "/sys/vibrator/pwmvalue";
 
     private static final String PURGEABLE_ASSETS_PREF = "pref_purgeable_assets";
     private static final String PURGEABLE_ASSETS_PERSIST_PROP = "persist.sys.purgeable_assets";
@@ -57,6 +62,7 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
     private CheckBoxPreference mUse16bppAlphaPref;
     private CheckBoxPreference mDisableBootanimPref;
     private CheckBoxPreference mPurgeableAssetsPref;
+    private EditTextPreference mVibeStrength; 
     private CheckBoxPreference mMembar;
 
     @Override
@@ -83,7 +89,17 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
             mUse16bppAlphaPref = (CheckBoxPreference) prefSet.findPreference(USE_16BPP_ALPHA_PREF);
             String use16bppAlpha = SystemProperties.get(USE_16BPP_ALPHA_PROP, "0");
             mUse16bppAlphaPref.setChecked("1".equals(use16bppAlpha));
-            
+
+            mVibeStrength = (EditTextPreference) prefSet.findPreference(VIBE_STR);
+            if (!Utils.fileExists(VIBE_STR_FILE)) {
+                prefSet.removePreference(mVibeStrength);
+            } else {
+                mVibeStrength.setOnPreferenceChangeListener(this);
+                String mCurVibeStrength = Utils.fileReadOneLine(VIBE_STR_FILE);
+                mVibeStrength.setSummary(getString(R.string.pref_vibe_strength_summary, mCurVibeStrength));
+                mVibeStrength.setText(mCurVibeStrength);
+            } 
+
             mDisableBootanimPref = (CheckBoxPreference) getPreferenceScreen().findPreference(DISABLE_BOOTANIMATION_PREF);
 
             String disableBootanimation = SystemProperties.get(DISABLE_BOOTANIMATION_PERSIST_PROP,
@@ -132,8 +148,18 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
             int index = mUseDitheringPref.findIndexOfValue(newVal);
             SystemProperties.set(USE_DITHERING_PERSIST_PROP, newVal);
             mUseDitheringPref.setSummary(mUseDitheringPref.getEntries()[index]);
+	    } else if (preference == mVibeStrength) {
+            int strength = Integer.parseInt((String) newValue);
+            if (strength > 127 || strength < 0) {
+                return false;
+            }
+            if (Utils.fileWriteOneLine(VIBE_STR_FILE, (String) newValue)) {
+                mVibeStrength.setSummary(getString(R.string.pref_vibe_strength_summary, (String) newValue));
+                return true;
+            } else {
+                return false;
+            } 
 	    }
-        return true;
+	    return true;
     }
-
 }
