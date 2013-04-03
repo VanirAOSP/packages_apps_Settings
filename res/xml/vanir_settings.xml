@@ -43,6 +43,11 @@
         android:summary="@string/navigation_bar_summary"
         android:fragment="com.android.settings.vanir.fragments.Navbar" />
 
+    <Preference
+        android:key="transparency_dialog"
+        android:title="@string/transparency_dialog_title" 
+        android:summary="@string/transparency_dialog_summary" />
+
     <PreferenceCategory
         android:key="buttons"
         android:title="@string/vanir_buttons_short">
@@ -138,9 +143,6 @@
             android:summary="@string/status_bar_notif_count_summary"
             android:defaultValue="true" />
 
-        <Preference
-            android:key="transparency_dialog"
-            android:title="@string/transparency_dialog_title" />
     </PreferenceCategory>
 
     <PreferenceCategory

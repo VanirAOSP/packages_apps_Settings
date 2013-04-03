@@ -4961,16 +4961,16 @@ Letting go of the power button will turn the torch off.</string>
     <string name="interface_softkeys_ring_vib_silent_title">Toggle Ring/Vib/Silent</string>
     <string name="interface_softkeys_kill_process_title">Kill App</string>
     <string name="interface_softkey_package_removed">The previously selected package was not found</string>
-    <string name="interface_navring_settings_title">Navigation bar ring</string>
-    <string name="interface_navring_settings_summary">Edit your custom nav ring apps</string>
-    <string name="title_navring_amount">Number of nav ring targets</string>
-    <string name="summary_navring_amount">How many ring targets you want? *Changing this will reset your current targets and restart your System UI*</string>
+    <string name="interface_navring_settings_title">Customize navring</string>
+    <string name="interface_navring_settings_summary">Edit your custom navring targets</string>
+    <string name="title_navring_amount">Number of navring targets</string>
+    <string name="summary_navring_amount">Choose to enable 1-5 targets</string>
     <string name="interface_navring_custom_pref_summary">Release on target to launch </string>
     <string name="interface_navring_pref_default_summary">Tap to select a custom ring target activity</string>
     <string name="interface_navring_assist_title">Google Now</string>
     <string name="interface_navring">Ring Targets</string>
     <string name="navbar_ring">Custom Ring Targets</string>
-    <string name="navring_enable_long">Enable Longpress for navring</string>
+    <string name="navring_enable_long">Allow longpress on targets</string>
 
     <!-- NavBar -->
     <string name="right">Right</string>
@@ -5026,6 +5026,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="size_3_dp">3 dp</string>
     <string name="size_4_dp">4 dp</string>
     <string name="transparency_dialog_title">Transparency settings</string>
+    <string name="transparency_dialog_summary">Adjust navbar and statusbar transparency</string>
     <string name="transparency_dialog_linked_transparency">Link statusbar &amp; navbar alpha</string>
     <string name="transparency_dialog_transparency_sb_and_nv">Statusbar and navigation bar</string>
     <string name="transparency_dialog_statusbar">Statusbar</string>
