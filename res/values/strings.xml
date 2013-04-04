@@ -4743,10 +4743,10 @@ Letting go of the power button will turn the torch off.</string>
     <string name="lock_screen_summary">Custom targets, widgets, etc</string>
     <string name="lockscreen_prefs_header">Lockscreen customization</string>
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
-    <string name="lockscreen_target_title">Unlock slider shortcuts</string>
-    <string name="lockscreen_target_summary">View or change custom lock screen shortcuts</string>
-    <string name="lockscreen_target_reset">Lock screen shortcuts reset to default</string>
-    <string name="lockscreen_target_save">Lock screen shortcuts saved</string>
+    <string name="lockscreen_target_title">Lockscreen slider targets</string>
+    <string name="lockscreen_target_summary">View or change custom slider shortcuts</string>
+    <string name="lockscreen_target_reset">Lockscreen shortcuts reset to default</string>
+    <string name="lockscreen_target_save">Lockscreen shortcuts saved</string>
     <string name="lockscreen_target_reset_title">Reset</string>
     <string name="lockscreen_target_reset_message">Delete all user created lock screen shortcuts and restore to default?</string>
     <string name="lockscreen_target_empty">Empty</string>
@@ -5078,8 +5078,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="custom_carrier_label_notset">Custom label currently not set</string>
 
     <!-- Shortcuts -->
-    <string name="lock_screen_shortcuts_title">Static lockscreen shortcuts</string>
-    <string name="lock_screen_shortcuts_summary">Under Clock Line up Shortcuts</string>
+    <string name="lock_screen_shortcuts_title">Lockscreen static targets</string>
+    <string name="lock_screen_shortcuts_summary">View or change custom static shortcuts</string>
     <string name="lock_screen_shortcuts_add">Add</string>
     <string name="lock_screen_shortcuts_reset">Reset</string>
     <string name="lock_screen_shortcuts_reset_message">Reset lock screen shortcuts?</string>
