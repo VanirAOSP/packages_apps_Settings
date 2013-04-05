@@ -5151,7 +5151,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_notifications_summary">Enabling this will let the Notification panel and QuickSettings tiles become available when swiping</string>
     <string name="pie_menu_title">Always show menu button</string>
     <string name="pie_menu_summary">Whether or not the menu button should always be shown, even when its not needed</string>
-    <string name="pie_search_title">Show recents button</string>
+    <string name="pie_search_title">Show search button</string>
     <string name="pie_search_summary">Access to GoogleNow via Pie</string>
     <string name="pie_center_title">Center pie</string>
     <string name="pie_center_summary">Center Pie on the trigger edge</string>
