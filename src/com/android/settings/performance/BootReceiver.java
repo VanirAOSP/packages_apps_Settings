@@ -53,10 +53,6 @@ public class BootReceiver extends BroadcastReceiver {
         } else {
             SystemProperties.set(IOSCHED_SETTINGS_PROP, "false");
         }
-        if (Utils.fileExists(PerformanceSettings.VIBE_STR_FILE)
-                && intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
-            configureVibe(ctx);
-        } 
     }
 
     private void configureCPU(Context ctx) {
@@ -96,16 +92,6 @@ public class BootReceiver extends BroadcastReceiver {
                 Utils.fileWriteOneLine(Processor.GOV_FILE, governor);
             }
             Log.d(TAG, "CPU settings restored.");
-        }
-    }
-
-    private void configureVibe(Context ctx) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-
-        String vibeStrength = prefs.getString(PerformanceSettings.VIBE_STR, null);
-        if (vibeStrength != null) {
-            Utils.fileWriteOneLine(PerformanceSettings.VIBE_STR_FILE, vibeStrength);
-            Log.d(TAG, "Vibration strength settings restored.");
         }
     }
 
