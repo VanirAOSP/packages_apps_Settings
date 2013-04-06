@@ -16,12 +16,6 @@
 
 package com.android.settings;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.util.Random;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.app.Dialog;
@@ -40,38 +34,31 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.text.format.DateFormat;
 import android.text.Spannable;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Display;
+//import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.VolumePanel;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
-import com.vanir.util.Helpers;
 import com.android.settings.widget.AlphaSeekBar;
-import com.android.settings.widget.SeekBarPreference;
-
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
-
-import android.view.Window;
-import android.view.View;
-import android.view.VolumePanel;
+import com.vanir.util.Helpers;
 
 import java.util.Date;
 import java.util.Calendar;
 
-import com.android.settings.vanir.fragments.*;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
+
+import com.android.settings.vanir.fragments.DensityChanger;
 
 public class VanirSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -134,8 +121,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ContentResolver resolver = getContentResolver();
-        ContentResolver mContentResolver = resolver; //lazy lazy lazy B-)
+        ContentResolver mContentResolver = getContentResolver();
 
         addPreferencesFromResource(R.xml.vanir_settings);
 
@@ -255,34 +241,34 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                         com.android.internal.R.bool.preferences_prefer_dual_pane)));
 
         mQuietHours = (PreferenceScreen) findPreference(KEY_QUIET_HOURS);
-        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
+        if (Settings.System.getInt(mContentResolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
             mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
+                    returnTime(Settings.System.getString(mContentResolver, Settings.System.QUIET_HOURS_START))
                     + " " + getString(R.string.quiet_hours_active_to) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
+                    returnTime(Settings.System.getString(mContentResolver, Settings.System.QUIET_HOURS_END)));
         } else {
            mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
         }
 
         mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
         mVolumeOverlay.setOnPreferenceChangeListener(this);
-        int volumeOverlay = Settings.System.getInt(getContentResolver(),
+        int volumeOverlay = Settings.System.getInt(mContentResolver,
                 Settings.System.MODE_VOLUME_OVERLAY,
                 VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
         mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
         mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
 
         mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
-        mVolumeAdjustSounds.setChecked(Settings.System.getInt(resolver,
+        mVolumeAdjustSounds.setChecked(Settings.System.getInt(mContentResolver,
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
 
         mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
-        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
+        mVolBtnMusicCtrl.setChecked(Settings.System.getInt(mContentResolver,
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 0) != 0);
 
         mVolumeWake = (CheckBoxPreference) findPreference(KEY_VOLUME_WAKE);
         if (mVolumeWake != null) {
-            mVolumeWake.setChecked(Settings.System.getInt(resolver,
+            mVolumeWake.setChecked(Settings.System.getInt(mContentResolver,
                     Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
         }
 
@@ -462,7 +448,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_CLOCK_COLOR, intHex);
-            Log.e("VANIR", "Statusbar: "+intHex + "");
+            // Log.e("VANIR", "Statusbar: "+intHex + "");
         } else if (preference == mExpandedClockPicker) {
             String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
                     .valueOf(objValue)));
@@ -470,7 +456,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             int intHex = ColorPickerPreference.convertToColorInt(hex);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUSBAR_EXPANDED_CLOCK_COLOR, intHex);
-            Log.e("VANIR", "Expanded: "+intHex + "");
+            // Log.e("VANIR", "Expanded: "+intHex + "");
         } else if (preference == mStatusBarSignal) {
             int signalStyle = Integer.valueOf((String) objValue);
             int index = mStatusBarSignal.findIndexOfValue((String) objValue);
@@ -519,7 +505,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     public static class AdvancedTransparencyDialog extends DialogFragment {
 
         private static final int KEYGUARD_ALPHA = 112;
-
         private static final int STATUSBAR_ALPHA = 0;
         private static final int STATUSBAR_KG_ALPHA = 1;
         private static final int NAVBAR_ALPHA = 2;
@@ -701,17 +686,19 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         Resources res = getResources();
 
         if (value == 0) {
-            /* expanded desktop deactivated */
+			/* full expanded desktop */
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
             String statusBarPresent = res.getString(R.string.expanded_desktop_summary_status_bar);
             mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
         } else if (value == 1) {
+			/* expanded desktop with statusbar only */
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
             String statusBarPresent = res.getString(R.string.expanded_desktop_summary_no_status_bar);
             mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
         } else if (value == 2) {
+			/* expanded desktop deactivated */
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
             String statusBarPresent = res.getString(R.string.expanded_desktop_off);

@@ -5178,9 +5178,10 @@ Letting go of the power button will turn the torch off.</string>
     <string name="system_power_crt_mode_both">Orientation dependent</string>
 
     <!-- Vanir menus -->
+    <string name="vanir_header">Userspace options</string>
     <string name="vanir_title">Voodoo</string>
     <string name="vanir_settings_title">Vanir Customizations</string>
     <string name="vanir_ui_short">UI Stuff</string>
-    <string name="vanir_buttons_short">BELLY BUTTON</string>
+    <string name="vanir_buttons_short">Hardware key controls</string>
     <string name="vanir_sound_short">Sound-ish Stuff</string>
 </resources>
