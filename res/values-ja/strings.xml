@@ -1836,4 +1836,5 @@
     <string name="user_picture_title" msgid="7297782792000291692">"画像ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"エリアメール"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"表示する緊急警報の種類を選択してください。"</string>
+
 </resources>

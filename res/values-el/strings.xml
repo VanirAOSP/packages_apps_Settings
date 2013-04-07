@@ -1830,4 +1830,5 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Αναγνωριστικό φωτογραφίας"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Εκπομπές κινητής τηλεφωνίας"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Επιλέξτε τους τύπους ειδοποιήσεων έκτακτης ανάγκης που θα εμφανίζονται."</string>
+
 </resources>

@@ -1830,4 +1830,5 @@
     <string name="user_picture_title" msgid="7297782792000291692">"Ідентифікатор фотографії"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"Широкомовні повідомлення мережі"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"Виберіть типи сповіщень про надзвичайні ситуації, які мають відображатися."</string>
+
 </resources>

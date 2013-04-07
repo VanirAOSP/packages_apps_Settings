@@ -83,4 +83,11 @@
 
     <!-- Light settings dialog -->
     <dimen name="dialog_light_settings_width">400dip</dimen>
+
+    <!-- Autobrightnes settings dialog -->
+    <dimen name="auto_brightness_preview_text_size">8dip</dimen>
+    <dimen name="auto_brightness_preview_stroke_width">1dip</dimen>
+    <dimen name="auto_brightness_preview_marker_size">3dip</dimen>
+    <dimen name="auto_brightness_dialog_more_button_size">48dp</dimen>
+
 </resources>

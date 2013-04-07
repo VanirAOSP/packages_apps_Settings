@@ -1830,4 +1830,5 @@
     <string name="user_picture_title" msgid="7297782792000291692">"사진 ID"</string>
     <string name="cell_broadcast_settings" msgid="8415582011920085222">"셀 브로드캐스트"</string>
     <string name="cell_broadcast_settings_summary" msgid="3301339398950905913">"표시할 긴급 알림 유형을 선택합니다."</string>
+
 </resources>
