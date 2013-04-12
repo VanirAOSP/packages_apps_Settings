@@ -375,7 +375,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
 
         // On/off switch is hidden for Setup Wizard
-    /*    if (!mSetupWizardMode) {
+          if (!mSetupWizardMode) {
             Switch actionBarSwitch = new Switch(activity);
 
             if (activity instanceof PreferenceActivity) {
@@ -395,7 +395,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
             mWifiEnabler = new WifiEnabler(activity, actionBarSwitch);
         }
-*/
+
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         getListView().setEmptyView(mEmptyView);
 
