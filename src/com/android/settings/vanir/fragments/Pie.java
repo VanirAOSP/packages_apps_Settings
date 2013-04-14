@@ -41,6 +41,7 @@ public class Pie extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String PIE_CONTROLS = "pie_controls";
+    private static final String PIE_EXPANDED_ONLY = "pie_expanded_only";
     private static final String PIE_GRAVITY = "pie_gravity";
     private static final String PIE_MODE = "pie_mode";
     private static final String PIE_SIZE = "pie_size";
@@ -61,6 +62,7 @@ public class Pie extends SettingsPreferenceFragment
     private ListPreference mPieGap;
     private CheckBoxPreference mPieNotifi;
     private CheckBoxPreference mPieControls;
+    private CheckBoxPreference mPieExpandedOnly;
     private CheckBoxPreference mPieMenu;
     private CheckBoxPreference mPieSearch;
     private CheckBoxPreference mPieCenter;
@@ -82,6 +84,10 @@ public class Pie extends SettingsPreferenceFragment
         mPieControls = (CheckBoxPreference) findPreference(PIE_CONTROLS);
         mPieControls.setChecked((Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.PIE_CONTROLS, 0) == 1));
+
+        mPieExpandedOnly = (CheckBoxPreference) findPreference(PIE_EXPANDED_ONLY);
+        mPieExpandedOnly.setChecked((Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.PIE_EXPANDED_DESKTOP_ONLY, 1) == 1));
 
         mPieCenter = (CheckBoxPreference) prefSet.findPreference(PIE_CENTER);
         mPieCenter.setChecked(Settings.System.getInt(mContext.getContentResolver(),
@@ -149,6 +155,7 @@ public class Pie extends SettingsPreferenceFragment
 
     private void checkControls() {
         boolean pieCheck = mPieControls.isChecked();
+        mPieExpandedOnly.setEnabled(pieCheck);
         mPieGravity.setEnabled(pieCheck);
         mPieMode.setEnabled(pieCheck);
         mPieSize.setEnabled(pieCheck);
@@ -170,6 +177,10 @@ public class Pie extends SettingsPreferenceFragment
                     mPieControls.isChecked() ? 1 : 0);
             checkControls();
             Helpers.restartSystemUI();
+        } else if (preference == mPieExpandedOnly) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.PIE_EXPANDED_DESKTOP_ONLY,
+                    mPieExpandedOnly.isChecked() ? 1 : 0);
         } else if (preference == mPieNotifi) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.PIE_NOTIFICATIONS,

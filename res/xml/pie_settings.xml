@@ -27,6 +27,11 @@
             android:summary="@string/pie_enable_summary"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="pie_expanded_only"
+            android:title="@string/pie_expanded_only_title"
+            android:summary="@string/pie_expanded_only_summary" />
+
         <ListPreference
             android:key="pie_trigger"
             android:dialogTitle="@string/pie_trigger_title"
