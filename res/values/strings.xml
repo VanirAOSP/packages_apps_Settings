@@ -4755,6 +4755,12 @@ Letting go of the power button will turn the torch off.</string>
     <string name="lockscreen_misc">Miscellaneous lockscreen settings</string>
     <string name="lockscreen_custom_apps">Lockscreen custom Apps</string>
 
+    <!-- MediaScanner behavior on boot -->
+    <string name="media_scanner_on_boot_title">MediaScanner behavior on boot</string>
+    <string name="media_scanner_on_boot_enabled">Scan media</string>
+    <string name="media_scanner_on_boot_ask">Ask to scan (notification)</string>
+    <string name="media_scanner_on_boot_disabled">Do not scan media</string>
+
     <!-- Lock screen shortcuts -->
     <string name="picker_activities">Activities</string>
     <string name="select_custom_activity_title">Select custom activity</string>
