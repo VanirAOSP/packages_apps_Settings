@@ -4594,6 +4594,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="toggle_quickrecord">Quick Record</string>
     <string name="toggle_weather">Weather</string>
     <string name="toggle_memory">Memory</string>
+    <string name="toggle_rebootmenu">Reboot Menu</string>
     <string name="toggle_data">Data</string>
     <string name="toggle_nfc">NFC</string>
     <string name="toggle_silent">Silent</string>

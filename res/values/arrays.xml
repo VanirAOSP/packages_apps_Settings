@@ -1149,6 +1149,7 @@
         <item>QUICKRECORD</item>
 <!--        <item>WEATHER</item>  -->
         <item>MEMORY</item>
+        <item>REBOOTMENU</item>
     </string-array>
 
     <string-array name="available_toggles_values" translatable="false">
@@ -1178,6 +1179,7 @@
         <item>@string/toggle_quickrecord</item>
  <!--       <item>@string/toggle_weather</item> -->
         <item>@string/toggle_memory</item>
+        <item>@string/toggle_rebootmenu</item>
     </string-array>
 
     <!-- Toggles per row -->
