@@ -41,7 +41,7 @@
     <!-- [CHAR LIMIT=NONE] Device Info screen. Confirmation that developer settings are enabled -->
     <string name="show_dev_on">You have enabled development settings!</string>
     <!-- [CHAR LIMIT=NONE] Device Info screen. Okay we get it, stop pressing, you already have it on -->
-    <string name="show_dev_already">Quit poking me!</string>
+    <string name="show_dev_already">Stahp. :(</string>
 
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
@@ -3196,7 +3196,7 @@
     <!-- Title for a warning about disabling an accessibility service displayed as a dialog message when the user
          selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_disable_warning_title">Stop
-         <xliff:g id="service" example="TalkBack">%1$s</xliff:g>?</string>
+         <xliff:g id="service" example="TalkBack">%1$s</xliffstring name=:g>?</string>
     <!-- Summary for a warning about disabling accessibility service displayed as a dialog message when the user
          selects to disable that service. This avoids accidental disabling. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_disable_warning_summary">Touching OK will stop <xliff:g id="service" example="TalkBack">%1$s</xliff:g>.</string>
@@ -4933,12 +4933,12 @@ Letting go of the power button will turn the torch off.</string>
     <string name="dual_pane_summary">Just the Settings app (Restart settings to take effect)</string>
     <!-- Status Bar stuff from CM -->
     <string name="status_bar_battery_title">Battery Style</string>
-    <string name="status_bar_battery_status_icon">Stock icon (default)</string>
+    <string name="status_bar_battery_status_icon">Stock icon (default/boring)</string>
     <string name="status_bar_battery_status_percentage">Stock icon w/ percentage</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle w/ percentage</string>
     <string name="status_bar_battery_status_gear">Circle Gear</string>
-    <string name="status_bar_battery_status_hidden">Hidden</string>
+    <string name="status_bar_battery_status_hidden">Invisible</string>
     <!-- Nav Ring Targets -->
     <string name="navbar_ring_cat">Navigation Bar Ring Targets</string>
     <string name="interface_softkey_settings">Softkey Settings</string>
@@ -4977,7 +4977,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="right">Right</string>
     <string name="left">Left</string>
     <string name="both">Both</string>
-    <string name="default_jb_behavior">Default JB behavior</string>
+    <string name="default_jb_behavior">Default behavior</string>
     <string name="always_show_invincible_icons">Always show invisible icons</string>
     <string name="always_show">Always show</string>
     <string name="default_jb_with_invincible_icons_when_hidden">Default JB with invisible icons when hidden</string>
@@ -5071,7 +5071,7 @@ Letting go of the power button will turn the torch off.</string>
 
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
-    <string name="custom_carrier_label_notset">Custom label currently not set</string>
+    <string name="custom_carrier_label_notset">Custom label currently not set dude</string>
 
     <!-- Shortcuts -->
     <string name="lock_screen_shortcuts_title">Lockscreen static targets</string>
@@ -5086,8 +5086,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="icon_custom">Custom</string>
     <string name="choose_app">Choose application</string>
 
-    <string name="multipane_ui">Dual Panel Preferences</string>
-    <string name="multipane_ui_summary">For all apps\' preference screens (requires reboot)</string>
+    <string name="multipane_ui">Dual-Panel Preferences</string>
+    <string name="multipane_ui_summary">For all apps\' preference screens (requires a reboot)</string>
 
     <!-- expanded desktop -->
     <string name="summary_expanded_desktop">%1$s</string>
@@ -5098,10 +5098,10 @@ Letting go of the power button will turn the torch off.</string>
     <string name="expanded_desktop_no_staus_bar">Without status bar</string>
 
     <!-- Pie controls -->
-    <string name="pie_controls_title">Pie Controls</string>
+    <string name="pie_controls_title">PIE Controls</string>
     <string name="pie_controls_summary">Adjust the Pie controls</string>
     <string name="pie_enable_title">Enable Pie</string>
-    <string name="pie_enable_summary">Nom nom nom nom</string>
+    <string name="pie_enable_summary">mmmm.... pie</string>
     <string name="pie_expanded_only_title">Only in expanded desktop</string>
     <string name="pie_expanded_only_summary">Only allow pie to work when Expanded Desktop is on</string>
     <string name="pie_gravity_title">Pie gravity</string>
@@ -5181,5 +5181,6 @@ Letting go of the power button will turn the torch off.</string>
     <string name="vanir_settings_title">Vanir Customizations</string>
     <string name="vanir_ui_short">UI Stuff</string>
     <string name="vanir_buttons_short">Hardware key controls</string>
-    <string name="vanir_sound_short">Sound-ish Stuff</string>
+    <string name="vanir_sound_short">Sound</string>
 </resources>
+Dual Panel Preferences
