@@ -69,7 +69,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
     private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
-    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
@@ -113,7 +112,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mVolBtnMusicCtrl;
     private CheckBoxPreference mVolumeAdjustSounds;
     private PreferenceScreen mQuietHours;
-    private CheckBoxPreference mKillAppLongpressBack;
 
     int newDensityValue;
     private String mCustomLabelText = null;
@@ -271,9 +269,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             mVolumeWake.setChecked(Settings.System.getInt(mContentResolver,
                     Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
         }
-
-		mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
-        updateKillAppLongpressBackOptions();
     }
 
     private void openTransparencyDialog() {
@@ -291,17 +286,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    private void writeKillAppLongpressBackOptions() {
-	        Settings.Secure.putInt(getActivity().getContentResolver(),
-	                Settings.Secure.KILL_APP_LONGPRESS_BACK,
-                mKillAppLongpressBack.isChecked() ? 1 : 0);
-    }
-	
-    private void updateKillAppLongpressBackOptions() {
-        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
-            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
     }
 
     // updateState in fact updates the UI to reflect the system state
@@ -331,8 +315,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         } else if (preference == mVolBtnMusicCtrl) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
             mVolBtnMusicCtrl.isChecked() ? 1 : 0);
-        } else if (preference == mKillAppLongpressBack) {
-            writeKillAppLongpressBackOptions();
         } else if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);

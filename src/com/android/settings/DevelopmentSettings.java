@@ -129,6 +129,8 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
 
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+
     private static final String ENABLE_TRACES_KEY = "enable_traces";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -187,6 +189,7 @@ public class DevelopmentSettings extends PreferenceFragment
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
     private MultiCheckPreference mEnableTracesPref;
+    private CheckBoxPreference mKillAppLongpressBack;
 
     private CheckBoxPreference mImmediatelyDestroyActivities;
     private ListPreference mAppProcessLimit;
@@ -301,6 +304,21 @@ public class DevelopmentSettings extends PreferenceFragment
             mAllPrefs.add(hdcpChecking);
         }
         removeHdcpOptionsForProduction();
+
+		mKillAppLongpressBack = (CheckBoxPreference) findPreference(KILL_APP_LONGPRESS_BACK);
+        mAllPrefs.add(mKillAppLongpressBack);
+        updateKillAppLongpressBackOptions();
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+	        Settings.Secure.putInt(getActivity().getContentResolver(),
+	                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+	
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
     }
 
     private void disableForUser(Preference pref) {
@@ -1151,6 +1169,8 @@ public class DevelopmentSettings extends PreferenceFragment
             writeShowHwOverdrawOptions();
         } else if (preference == mDebugLayout) {
             writeDebugLayoutOptions();
+        } else if (preference == mKillAppLongpressBack) {
+            writeKillAppLongpressBackOptions();
         }
 
         return false;
