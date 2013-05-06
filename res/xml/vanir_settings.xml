@@ -191,11 +191,6 @@
         android:key="misc"
         android:title="@string/misc_short">
 
-        <CheckBoxPreference
-            android:key="kill_app_longpress_back"
-            android:title="@string/kill_app_longpress_back"
-            android:summary="@string/kill_app_longpress_back_summary" />
-
         <Preference
             android:key="custom_carrier_label"
             android:title="@string/custom_carrier_label_title" />
