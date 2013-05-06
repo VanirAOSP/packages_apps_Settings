@@ -16,6 +16,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/about_settings">
 
+    <PreferenceScreen android:key="logo1"
+        android:layout="@layout/logo_row" /> 
+
     <!-- Mod version -->
     <Preference android:key="mod_version"
         style="?android:preferenceInformationStyle"
