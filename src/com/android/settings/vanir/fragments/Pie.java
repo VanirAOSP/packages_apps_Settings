@@ -52,7 +52,6 @@ public class Pie extends SettingsPreferenceFragment
     private static final String PIE_SEARCH = "pie_search";
     private static final String PIE_CENTER = "pie_center";
     private static final String PIE_STICK = "pie_stick";
-    private static final String PIE_RESTART = "pie_restart_launcher";
     private static final String PIE_COLOR = "pie_color";
 
     private ListPreference mPieMode;
@@ -67,7 +66,6 @@ public class Pie extends SettingsPreferenceFragment
     private CheckBoxPreference mPieSearch;
     private CheckBoxPreference mPieCenter;
     private CheckBoxPreference mPieStick;
-    private CheckBoxPreference mPieRestart;
     private PreferenceScreen mPieColor;
 
     private Context mContext;
@@ -96,10 +94,6 @@ public class Pie extends SettingsPreferenceFragment
         mPieStick = (CheckBoxPreference) prefSet.findPreference(PIE_STICK);
         mPieStick.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.PIE_STICK, 1) == 1);
-
-        mPieRestart = (CheckBoxPreference) prefSet.findPreference(PIE_RESTART);
-        mPieRestart.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.EXPANDED_DESKTOP_RESTART_LAUNCHER, 1) == 1);
 
         mPieGravity = (ListPreference) prefSet.findPreference(PIE_GRAVITY);
         int pieGravity = Settings.System.getInt(mContext.getContentResolver(),
@@ -199,9 +193,6 @@ public class Pie extends SettingsPreferenceFragment
         } else if (preference == mPieStick) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.PIE_STICK, mPieStick.isChecked() ? 1 : 0);
-        } else if (preference == mPieRestart) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.EXPANDED_DESKTOP_RESTART_LAUNCHER, mPieRestart.isChecked() ? 1 : 0);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
