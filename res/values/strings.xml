@@ -5163,6 +5163,7 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_size_default">@string/pie_mode_default</string>
     <string name="pie_size_large">Large</string>
     <string name="pie_size_gigantic">Gigantic</string>
+    <string name="pie_size_monster">Monster</string>
     <string name="pie_color_title">Pie color settings</string>
     <string name="pie_color_style_title">Pie color style</string>
     <string name="pie_background_title">Background color</string>
@@ -5174,17 +5175,39 @@ Letting go of the power button will turn the torch off.</string>
     <string name="pie_chevron_right_title">Right chevron color</string>
     <string name="pie_juice_title">Battery juice color</string>
     <string name="pie_button_color_title">Buttons color</string>
-    <string name="pie_gap_title">Pie gap</string>
+    <string name="pie_gap_title">Item gap</string>
     <string name="pie_gap_summary">Adjust the gap that separates the Pie elements</string>
+    <string name="pie_angle_title">Pie angle</string>
+    <string name="pie_angle_summary">Adjust the angle of pie\'s egdes from the attachment</string>
+    <string name="pie_angle_none">None (old)</string>
+    <string name="pie_angle_small">Small</string>
+    <string name="pie_angle_big">Normal (default)</string>
+    <string name="pie_angle_huge">Big</string>
+    <string name="pie_angle_super">Huge</string>
     <string name="pie_gap_none">None</string>
     <string name="pie_gap_small">Small</string>
-    <string name="pie_gap_big">Big</string>
+
+    <string name="pie_gap_big">Big (default)</string>
     <string name="pie_gap_huge">Huge</string>
-    <string name="pie_trigger_title">Trigger size</string>
-    <string name="pie_trigger_summary">Adjust the size of the triggering area that will open the Pie</string>
-    <string name="pie_trigger_small">Small</string>
-    <string name="pie_trigger_normal">Normal (Default)</string>
-    <string name="pie_trigger_big">Big</string>
+
+    <string name="pie_center_title">Middle alignment</string>
+    <string name="pie_center_summary">Center pie on the trigger edge</string>
+
+    <string name="pie_stick_title">Prevent rotation</string>
+    <string name="pie_stick_summary">Avoids orientation change when screen rotates</string>
+
+    <string name="pie_menu_title">Persistent menu button</string>
+    <string name="pie_menu_summary">Always show menu button even when it\'s not necessary</string>
+
+    <string name="pie_search_title">Search button</string>
+    <string name="pie_search_summary">Enable search button on pie controls</string>
+
+    <string name="pie_trigger_title">Trigger area</string>
+    <string name="pie_trigger_summary">Determine the size of the region that registers swipes</string>
+    <string name="pie_trigger_none">None (Pie disabled)</string>
+    <string name="pie_trigger_small">@string/pie_size_small</string>
+    <string name="pie_trigger_normal">@string/pie_mode_default</string>
+    <string name="pie_trigger_big">@string/pie_gap_big</string>
     <string name="pie_trigger_huge">Huge</string>
     <string name="pie_notifications_title">Enable Chevron Targets</string>
     <string name="pie_notifications_summary">Enabling this will let the Notification panel and QuickSettings tiles become available when swiping</string>
@@ -5223,4 +5246,5 @@ Letting go of the power button will turn the torch off.</string>
     <string name="vanir_ui_short">UI Stuff</string>
     <string name="vanir_buttons_short">Hardware key controls</string>
     <string name="vanir_sound_short">Sound-ish Stuff</string>
+
 </resources>
