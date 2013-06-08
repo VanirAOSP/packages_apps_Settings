@@ -945,6 +945,13 @@
         <item>@string/hidden</item>
     </string-array>
 
+    <!-- Display settings.  Entries for each type of Subscription. -->
+    <string-array name="multi_sim_entries">
+        <item> Subscription 1 </item>
+        <item> Subscription 2 </item>
+        <item> Subscription 3 </item>
+    </string-array>
+
     <!-- Values for Volume Overlay. Do not translate. -->
     <string-array name="volume_overlay_values" translatable="false">
         <item>0</item>
