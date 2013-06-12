@@ -65,6 +65,8 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BIND_APPWIDGET" />
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+    <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
+
 
     <permission
         android:name="android.permission.REQUEST_SUPERUSER"
