@@ -4687,6 +4687,7 @@ Letting go of the power button will turn the torch off.</string>
 
     <!-- App sidebar -->
     <string name="app_sidebar_title">Appbar</string>
+    <string name="app_sidebar_title_summary">Adjust Appbar settings</string>
     <string name="app_sidebar_enable_title">Enable Appbar</string>
     <string name="app_sidebar_enable_summaryOn">Appbar is enabled</string>
     <string name="app_sidebar_enable_summaryOff">Appbar is disabled</string>

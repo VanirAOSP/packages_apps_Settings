@@ -44,6 +44,7 @@
     <PreferenceScreen
         android:key="app_sidebar"
         android:fragment="com.android.settings.vanir.AppSidebar"
+        android:summary="@string/app_sidebar_title_summary"
         android:title="@string/app_sidebar_title" />
 
      <PreferenceScreen
