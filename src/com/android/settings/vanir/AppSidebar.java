@@ -29,6 +29,8 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.vanir.util.Helpers;
+
 public class AppSidebar extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
     private static final String TAG = "PowerMenu";
@@ -125,6 +127,7 @@ public class AppSidebar extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.APP_SIDEBAR_ENABLED,
                     value ? 1 : 0);
+            Helpers.restartSystemUI();
             return true;
         }
         return false;
@@ -170,6 +173,13 @@ public class AppSidebar extends SettingsPreferenceFragment implements
         super.onPause();
         Settings.System.putInt(getContentResolver(),
                 Settings.System.APP_SIDEBAR_SHOW_TRIGGER, 0);
+    }
+
+    @Override
+    public void onDestroy() {
+		super.onDestroy();
+		Settings.System.putInt(getContentResolver(),
+		        Settings.System.APP_SIDEBAR_SHOW_TRIGGER, 0);
     }
 
     @Override
