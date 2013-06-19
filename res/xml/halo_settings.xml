@@ -28,6 +28,12 @@
             android:summaryOff="@string/halo_enabled_summaryOff"
             android:defaultValue="false" />
 
+        <CheckBoxPreference
+            android:key="halo_pie_only"
+            android:title="@string/halo_pie_only_title"
+            android:summary="@string/halo_pie_only_summary"
+            android:dependency="halo_enabled" />
+
         <ListPreference
             android:key="halo_state"
             android:dialogTitle="@string/halo_state_title"

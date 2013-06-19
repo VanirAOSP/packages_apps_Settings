@@ -46,6 +46,7 @@ public class Halo extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_HALO_ENABLED = "halo_enabled";
+    private static final String KEY_HALO_PIE_ONLY = "halo_pie_only";
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
@@ -57,6 +58,7 @@ public class Halo extends SettingsPreferenceFragment
     private static final String KEY_HALO_BUBBLE_TEXT_COLOR = "halo_bubble_text_color";
 
     private SwitchPreference mHaloEnabled;
+    private CheckBoxPreference mHaloPieOnly;
     private ListPreference mHaloState;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
@@ -87,6 +89,10 @@ public class Halo extends SettingsPreferenceFragment
         mHaloEnabled.setChecked((Settings.System.getInt(getContentResolver(),
             Settings.System.HALO_ENABLED, 0) == 1));
         mHaloEnabled.setOnPreferenceChangeListener(this);
+
+        mHaloPieOnly = (CheckBoxPreference) findPreference(KEY_HALO_PIE_ONLY);
+        mHaloPieOnly.setChecked((Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.HALO_PIE_ONLY, 1) == 1));
 
         mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
         mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
@@ -137,6 +143,10 @@ public class Halo extends SettingsPreferenceFragment
         if (preference == mHaloHide) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_HIDE, mHaloHide.isChecked()
+                    ? 1 : 0);
+        } else if (preference == mHaloPieOnly) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_PIE_ONLY, mHaloPieOnly.isChecked()
                     ? 1 : 0);
         } else if (preference == mHaloReversed) {
             Settings.System.putInt(mContext.getContentResolver(),

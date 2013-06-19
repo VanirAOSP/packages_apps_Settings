@@ -5113,6 +5113,8 @@ Letting go of the power button will turn the torch off.</string>
     <string name="halo_enabled_title">Enable HALO</string>
     <string name="halo_enabled_summaryOn">HALO is enabled</string>
     <string name="halo_enabled_summaryOff">HALO is disabled</string>
+    <string name="halo_pie_only_title">Only with Pie</string>
+    <string name="halo_pie_only_summary">Only allow HALO to work when Pie is on</string>
     <string name="halo_hide_title">Hide HALO after activity</string>
     <string name="halo_hide_summary">HALO will appear for incoming tasks and scroll out of sight after a while</string>
     <string name="halo_reversed_title">Reverse HALO gestures</string>
