@@ -28,6 +28,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
@@ -62,7 +63,7 @@ public class Pie extends SettingsPreferenceFragment
     private ListPreference mPieAngle;
     private ListPreference mPieGap;
     private CheckBoxPreference mPieNotifi;
-    private CheckBoxPreference mPieControls;
+    private SwitchPreference mPieControls;
     private CheckBoxPreference mPieExpandedOnly;
     private CheckBoxPreference mPieMenu;
     private CheckBoxPreference mPieSearch;
@@ -81,9 +82,10 @@ public class Pie extends SettingsPreferenceFragment
         PreferenceScreen prefSet = getPreferenceScreen();
         mContext = getActivity();
 
-        mPieControls = (CheckBoxPreference) findPreference(PIE_CONTROLS);
+        mPieControls = (SwitchPreference) findPreference(PIE_CONTROLS);
         mPieControls.setChecked((Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.PIE_CONTROLS, 0) == 1));
+        mPieControls.setOnPreferenceChangeListener(this);
 
         mPieExpandedOnly = (CheckBoxPreference) findPreference(PIE_EXPANDED_ONLY);
         mPieExpandedOnly.setChecked((Settings.System.getInt(mContext.getContentResolver(),
@@ -151,35 +153,11 @@ public class Pie extends SettingsPreferenceFragment
 
         mPieColor = (PreferenceScreen) prefSet.findPreference(PIE_COLOR);
 
-        checkControls();
-    }
-
-    private void checkControls() {
-        boolean pieCheck = mPieControls.isChecked();
-        mPieExpandedOnly.setEnabled(pieCheck);
-        mPieGravity.setEnabled(pieCheck);
-        mPieMode.setEnabled(pieCheck);
-        mPieSize.setEnabled(pieCheck);
-        mPieTrigger.setEnabled(pieCheck);
-        mPieGap.setEnabled(pieCheck);
-        mPieNotifi.setEnabled(pieCheck);
-        mPieAngle.setEnabled(pieCheck);
-        mPieCenter.setEnabled(pieCheck);
-        mPieStick.setEnabled(pieCheck);
-        mPieMenu.setEnabled(pieCheck);
-        mPieSearch.setEnabled(pieCheck);
-        mPieColor.setEnabled(pieCheck);
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mPieControls) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.PIE_CONTROLS,
-                    mPieControls.isChecked() ? 1 : 0);
-            checkControls();
-            Helpers.restartSystemUI();
-        } else if (preference == mPieExpandedOnly) {
+        if (preference == mPieExpandedOnly) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.PIE_EXPANDED_DESKTOP_ONLY,
                     mPieExpandedOnly.isChecked() ? 1 : 0);
@@ -206,7 +184,14 @@ public class Pie extends SettingsPreferenceFragment
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mPieMode) {
+        if (preference == mPieControls) {
+            boolean value = ((Boolean)newValue).booleanValue();
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.PIE_CONTROLS,
+                    value ? 1 : 0);
+            Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mPieMode) {
             int pieMode = Integer.valueOf((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.PIE_MODE, pieMode);

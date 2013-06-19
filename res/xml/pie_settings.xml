@@ -21,22 +21,25 @@
         android:key="pie_control"
         android:title="@string/pie_controls_title" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="pie_controls"
             android:title="@string/pie_enable_title"
-            android:summary="@string/pie_enable_summary"
+            android:summaryOn="@string/pie_enable_summaryOn"
+            android:summaryOff="@string/pie_enable_summaryOff"
             android:defaultValue="false" />
 
         <CheckBoxPreference
             android:key="pie_expanded_only"
             android:title="@string/pie_expanded_only_title"
-            android:summary="@string/pie_expanded_only_summary" />
+            android:summary="@string/pie_expanded_only_summary"
+            android:dependency="pie_controls" />
 
         <ListPreference
             android:key="pie_trigger"
             android:dialogTitle="@string/pie_trigger_title"
             android:title="@string/pie_trigger_title"
             android:summary="@string/pie_trigger_summary"
+            android:dependency="pie_controls"
             android:entries="@array/entries_pie_trigger"
             android:entryValues="@array/values_pie_trigger" />
 
@@ -45,24 +48,28 @@
             android:dialogTitle="@string/pie_gravity_title"
             android:title="@string/pie_gravity_title"
             android:summary="@string/pie_gravity_summary"
+            android:dependency="pie_controls"
             android:entries="@array/entries_pie_gravity"
             android:entryValues="@array/values_pie_gravity" />
 
         <CheckBoxPreference
             android:key="pie_center"
             android:title="@string/pie_center_title"
-            android:summary="@string/pie_center_summary" />
+            android:summary="@string/pie_center_summary"
+            android:dependency="pie_controls" />
 
         <CheckBoxPreference
             android:key="pie_stick"
             android:title="@string/pie_stick_title"
-            android:summary="@string/pie_stick_summary" />
+            android:summary="@string/pie_stick_summary"
+            android:dependency="pie_controls" />
 
         <ListPreference
             android:key="pie_size"
             android:dialogTitle="@string/pie_size_title"
             android:title="@string/pie_size_title"
             android:summary="@string/pie_size_summary"
+            android:dependency="pie_controls"
             android:entries="@array/entries_pie_size"
             android:entryValues="@array/values_pie_size" />
 
@@ -71,6 +78,7 @@
             android:dialogTitle="@string/pie_mode_title"
             android:title="@string/pie_mode_title"
             android:summary="@string/pie_mode_summary"
+            android:dependency="pie_controls"
             android:entries="@array/entries_pie_mode"
             android:entryValues="@array/values_pie_mode" />
 
@@ -79,6 +87,7 @@
             android:dialogTitle="@string/pie_angle_title"
             android:title="@string/pie_angle_title"
             android:summary="@string/pie_angle_summary"
+            android:dependency="pie_controls"
             android:entries="@array/entries_pie_angle"
             android:entryValues="@array/values_pie_angle" />
 
@@ -87,6 +96,7 @@
             android:dialogTitle="@string/pie_gap_title"
             android:title="@string/pie_gap_title"
             android:summary="@string/pie_gap_summary"
+            android:dependency="pie_controls"
             android:entries="@array/entries_pie_gap"
             android:entryValues="@array/values_pie_gap" />
 
@@ -94,21 +104,25 @@
             android:key="pie_notifications"
             android:title="@string/pie_notifications_title"
             android:summary="@string/pie_notifications_summary"
+            android:dependency="pie_controls"
             android:defaultValue="false" />
 
         <CheckBoxPreference
             android:key="pie_menu"
             android:title="@string/pie_menu_title"
-            android:summary="@string/pie_menu_summary" />
+            android:summary="@string/pie_menu_summary"
+            android:dependency="pie_controls" />
 
         <CheckBoxPreference
             android:key="pie_search"
             android:title="@string/pie_search_title"
-            android:summary="@string/pie_search_summary" />
+            android:summary="@string/pie_search_summary"
+            android:dependency="pie_controls" />
 
         <PreferenceScreen
             android:key="pie_color"
             android:title="@string/pie_color_title"
-            android:fragment="com.android.settings.vanir.fragments.PieColor" />
+            android:fragment="com.android.settings.vanir.fragments.PieColor"
+            android:dependency="pie_controls" />
 
 </PreferenceScreen>
