@@ -33,6 +33,31 @@
             android:title="@string/tiles_per_row_duplicate_landscape_title"
             android:summary="@string/tiles_per_row_duplicate_landscape_summary" />
 
+        <CheckBoxPreference
+            android:key="flip_qs_tiles"
+            android:title="@string/flip_qs_tiles_title"
+            android:summary="@string/flip_qs_tiles_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+       android:title="@string/qs_tiles_bg_color_title" >
+
+        <CheckBoxPreference
+            android:key="quick_tiles_custom_color"
+            android:title="@string/quick_tiles_custom_color_title"
+            android:defaultValue="false" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+             android:key="quick_tiles_bg_color"
+             android:title="@string/quick_tiles_bg_color_title"
+             android:defaultValue="0xff161616" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+             android:key="quick_tiles_bg_pressed_color"
+             android:title="@string/quick_tiles_bg_pressed_color_title"
+             android:defaultValue="0xff212121" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
