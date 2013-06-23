@@ -5163,6 +5163,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display number of pending notifications on the status bar</string>
 
+    <!-- USB Mass Storage -->
+    <string name="storage_rescan_media">Rescan media for the storage volume</string>
+    <string name="storage_rescan_media_complete">Scan completed</string>
+
     <!-- HALO -->
     <string name="halo_settings_title">HALO Settings</string>
     <string name="halo_settings_summary">Adjust the HALO settings</string>
