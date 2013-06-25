@@ -57,4 +57,19 @@
             android:summary="@string/halo_pause_summary"
             android:dependency="halo_enabled" />
 
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="halo_circle_color"
+            android:title="@string/halo_circle_color_title"
+            android:defaultValue="0xFF33B5E5" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="halo_bubble_color"
+            android:title="@string/halo_bubble_color_title"
+            android:defaultValue="0xFF33B5E5" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="halo_bubble_text_color"
+            android:title="@string/halo_bubble_text_color_title"
+            android:defaultValue="0xFFFFFFFF" />
+
 </PreferenceScreen>
