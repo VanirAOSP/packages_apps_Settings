@@ -160,7 +160,6 @@ public class Halo extends SettingsPreferenceFragment
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_COLORS, mHaloColors.isChecked()
                     ? 1 : 0);
-            Helpers.restartSystemUI();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -171,6 +170,7 @@ public class Halo extends SettingsPreferenceFragment
              Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_ENABLED,
                     value ? 1 : 0);
+            Helpers.restartSystemUI();
             return true;
         } else if (preference == mHaloState) {
             boolean state = Integer.valueOf((String) newValue) == 1;
