@@ -51,6 +51,12 @@
             android:persistent="false"
             android:fragment="com.android.settings.DeviceAdminSettings" />
 
+         <CheckBoxPreference
+            android:key="privacy_guard_default"
+            android:title="@string/privacy_guard_default_title"
+            android:summary="@string/privacy_guard_default_summary"
+            android:persistent="false" />
+
         <CheckBoxPreference
             android:key="toggle_install_applications"
             android:title="@string/install_applications"

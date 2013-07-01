@@ -28,5 +28,7 @@
             android:entries="@array/sms_security_check_limit_entries"
             android:entryValues="@array/sms_security_check_limit_values"
             android:defaultValue="30" />
+
     </PreferenceCategory>
+
 </PreferenceScreen>
