@@ -162,7 +162,7 @@ public class InstalledAppDetails extends Fragment
     private static final int CLEAR_USER_DATA = 1;
     private static final int CLEAR_CACHE = 3;
     private static final int PACKAGE_MOVE = 4;
-    
+
     // invalid size value used initially and also when size retrieval through PackageManager
     // fails for whatever reason
     private static final int SIZE_INVALID = -1;
@@ -458,7 +458,7 @@ public class InstalledAppDetails extends Fragment
 
         mRootView = view;
         mComputingStr = getActivity().getText(R.string.computing_size);
-        
+
         // Set default values on sizes
         mTotalSize = (TextView)view.findViewById(R.id.total_size_text);
         mAppSize = (TextView)view.findViewById(R.id.application_size_text);
@@ -684,7 +684,7 @@ public class InstalledAppDetails extends Fragment
 
         // Get list of preferred activities
         List<ComponentName> prefActList = new ArrayList<ComponentName>();
-        
+
         // Intent list cannot be null. so pass empty list
         List<IntentFilter> intentList = new ArrayList<IntentFilter>();
         mPm.getPreferredActivities(intentList, prefActList, packageName);
@@ -872,6 +872,11 @@ public class InstalledAppDetails extends Fragment
             }
         }
 
+        // only setup the privacy guard setting if we didn't get uninstalled
+        if (!mMoveInProgress) {
+            initPrivacyGuardButton();
+        }
+
         return true;
     }
 
@@ -938,7 +943,7 @@ public class InstalledAppDetails extends Fragment
             }
             mClearDataButton.setEnabled(false);
             mClearCacheButton.setEnabled(false);
-            
+
         } else {
             mHaveSizes = true;
             long codeSize = mAppEntry.codeSize;
@@ -973,7 +978,6 @@ public class InstalledAppDetails extends Fragment
                 mLastTotalSize = mAppEntry.size;
                 mTotalSize.setText(getSizeStr(mAppEntry.size));
             }
-            
             if ((mAppEntry.dataSize+ mAppEntry.externalDataSize) <= 0 || !mCanClearData) {
                 mClearDataButton.setEnabled(false);
             } else {
