@@ -26,8 +26,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -42,7 +40,6 @@ import android.provider.Settings.SettingNotFoundException;
 import android.text.format.DateFormat;
 import android.text.Spannable;
 //import android.util.Log;
-import android.view.IWindowManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +87,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final String PREF_HIDE_EXTRAS = "hide_extras";
     private static final CharSequence PREF_POWER_CRT_MODE = "system_power_crt_mode";
     private static final CharSequence PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
-    private static final String KEY_HARDWARE_KEYS = "hardware_keys";
 
     private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
@@ -272,17 +268,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         if (mVolumeWake != null) {
             mVolumeWake.setChecked(Settings.System.getInt(mContentResolver,
                     Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
-        }
-
-        // Only show the hardware keys config on a device that does not have a navbar
-        IWindowManager windowManager = IWindowManager.Stub.asInterface(
-                ServiceManager.getService(Context.WINDOW_SERVICE));
-        try {
-            if (windowManager.hasNavigationBar()) {
-                getPreferenceScreen().removePreference(findPreference(KEY_HARDWARE_KEYS));
-            }
-        } catch (RemoteException e) {
-            // Do nothing
         }
     }
 
