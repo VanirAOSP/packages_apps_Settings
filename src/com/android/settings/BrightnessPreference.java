@@ -20,8 +20,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
 import android.content.DialogInterface;
+import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IPowerManager;
@@ -113,25 +113,26 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
             });
         }
     }
-    
-	@Override
+
+    @Override
     protected void showDialog(Bundle state) {
         super.showDialog(state);
-           if (mAutomaticAvailable) {
-                // can't use onPrepareDialogBuilder for this as we want the dialog 
-                // to be kept open on click 
-                AlertDialog d = (AlertDialog) getDialog();
-                Button adjustButton = d.getButton(DialogInterface.BUTTON_NEUTRAL);
-                adjustButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Dialog d = new AutoBrightnessCustomizeDialog(getContext());
-                        d.show();
-                    }
-                });
-            }
 
-			updateAutoBrightnessCustomizeButton();
+        if (mAutomaticAvailable) {
+            // can't use onPrepareDialogBuilder for this as we want the dialog
+            // to be kept open on click
+            AlertDialog d = (AlertDialog) getDialog();
+            Button adjustButton = d.getButton(DialogInterface.BUTTON_NEUTRAL);
+            adjustButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showCustomizeDialog(null);
+                }
+            });
+        }
+
+        updateAutoBrightnessCustomizeButton();
+
         getContext().getContentResolver().registerContentObserver(
                 Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS), true,
                 mBrightnessObserver);
@@ -183,7 +184,7 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
                 }
             }
         } else {
-            mCheckBox.setVisibility(View.GONE);
+            mCheckBox.setEnabled(false);
             mSeekBar.setEnabled(true);
             mAutoSensitivityTitle.setVisibility(View.GONE);
             mAutoSensitivity.setVisibility(View.GONE);
@@ -216,13 +217,13 @@ public class BrightnessPreference extends SeekBarDialogPreference implements
     }
 
     private void updateAutoBrightnessCustomizeButton() {
-		AlertDialog d = (AlertDialog) getDialog();
-		if (d != null && mAutomaticAvailable) {
-			d.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(
-			        mCheckBox.isChecked());
-	    }
+        AlertDialog d = (AlertDialog) getDialog();
+        if (d != null && mAutomaticAvailable) {
+            d.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(
+                    mCheckBox.isChecked());
+        }
     }
-    
+
     private int getBrightness() {
         int mode = getBrightnessMode(0);
         float brightness = 0;
