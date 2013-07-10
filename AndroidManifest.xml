@@ -190,6 +190,7 @@
 
         <receiver
             android:name=".vanir.autosms.AlarmReceiver">
+
             <intent-filter>
                 <action android:name="android.intent.action.TIMEZONE_CHANGED"></action>
                 <action android:name="android.intent.action.TIME_CHANGED"></action>

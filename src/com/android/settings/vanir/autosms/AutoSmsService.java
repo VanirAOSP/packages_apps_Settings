@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.provider.Telephony.Sms.Intents;
 import android.telephony.PhoneStateListener;
@@ -32,7 +33,12 @@ import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 
 public class AutoSmsService extends Service {
+
+    public final static String TAG = "AutoSmsService";
+
     private TelephonyManager mTelephony;
+
+    public static PowerManager.WakeLock mWakeLock;
 
     private ContentObserver mQuietHoursObserver = new ContentObserver(new Handler()) {
         @Override
@@ -105,16 +111,26 @@ public class AutoSmsService extends Service {
         mPhoneStateListener = null;
         unregisterReceiver(mSmsReceiver);
         getContentResolver().unregisterContentObserver(mQuietHoursObserver);
+        releaseWakeLock();
         super.onDestroy();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        releaseWakeLock();
         return START_STICKY;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    private void releaseWakeLock() {
+        if (mWakeLock != null) {
+            if (mWakeLock.isHeld()) {
+                mWakeLock.release();
+            }
+        }
     }
 }
