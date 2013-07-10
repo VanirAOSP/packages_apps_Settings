@@ -4719,6 +4719,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="quiet_hours_haptic_off">Haptic feedback will function as normal</string>
     <string name="quiet_hours_active_from">Active from</string>
     <string name="quiet_hours_active_to">to</string>
+    <string name="quiet_hours_auto_sms_group">Auto Responder</string>
+    <string name="quiet_hours_auto_sms_title">Incoming text messages</string>
+    <string name="quiet_hours_auto_sms_call_title">Incoming phone calls</string>
+    <string name="quiet_hours_auto_string_title">Response text</string>
+    <string name="quiet_hours_auto_sms_null">[Automated Message] I\'ll get back to you when I can.</string>
+    <string name="quiet_hours_auto_disabled">Disabled</string>
+    <string name="quiet_hours_auto_enabled">All numbers</string>
+    <string name="quiet_hours_auto_contacts">Contacts only</string>
 
     <!-- App sidebar -->
     <string name="app_sidebar_title">Appbar</string>

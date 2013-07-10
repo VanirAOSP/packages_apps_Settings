@@ -24,6 +24,7 @@ import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.android.settings.vanir.autosms.MessagingHelper;
 import com.android.settings.Utils;
 
 import java.util.Arrays;
@@ -53,6 +54,7 @@ public class BootReceiver extends BroadcastReceiver {
         } else {
             SystemProperties.set(IOSCHED_SETTINGS_PROP, "false");
         }
+        MessagingHelper.scheduleService(ctx);
     }
 
     private void configureCPU(Context ctx) {

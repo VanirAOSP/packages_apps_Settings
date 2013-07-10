@@ -1248,6 +1248,19 @@
         <item>@*android:drawable/ic_lockscreen_twitter_normal</item>
     </string-array>
 
+    <!-- QuietHours AutoSMS response -->
+    <string-array name="auto_sms_entries" translatable="false">
+        <item>@string/quiet_hours_auto_disabled</item>
+        <item>@string/quiet_hours_auto_enabled</item>
+        <item>@string/quiet_hours_auto_contacts</item>
+    </string-array>
+
+    <string-array name="auto_sms_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <!--- Sms security limit -->
     <string-array name="sms_security_check_limit_entries" translatable="false">
         <item>@string/sms_security_check_limit_default</item>
