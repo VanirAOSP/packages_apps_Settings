@@ -64,6 +64,12 @@
         android:title="@string/transparency_dialog_title" 
         android:summary="@string/transparency_dialog_summary" />
 
+    <PreferenceScreen
+        android:key="blacklist"
+        android:title="@string/blacklist_title"
+        android:summary="@string/blacklist_summary"
+        android:fragment="com.android.settings.blacklist.BlacklistSettings" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
