@@ -63,6 +63,14 @@
             android:summary="@string/halo_pause_summary"
             android:dependency="halo_enabled" />
 
+        <ListPreference
+            android:key="halo_size"
+            android:dialogTitle="@string/halo_size_title"
+            android:title="@string/halo_size_title"
+            android:dependency="halo_enabled"
+            android:entries="@array/entries_halo_size"
+            android:entryValues="@array/values_halo_size" />
+
         <CheckBoxPreference
             android:key="halo_colors"
             android:title="@string/halo_colors_title"
