@@ -4705,6 +4705,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="quiet_hours_start_summary">When to start enforcing quiet hours</string>
     <string name="quiet_hours_end">End of quiet hours</string>
     <string name="quiet_hours_end_summary">When to stop enforcing quiet hours</string>
+    <string name="quiet_hours_ringer_title">Mute phone ringtones</string>
     <string name="quiet_hours_mute">Mute notifications</string>
     <string name="quiet_hours_mute_on">No sounds will be played</string>
     <string name="quiet_hours_mute_off">Sounds will play like normal</string>

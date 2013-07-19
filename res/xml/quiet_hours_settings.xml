@@ -45,6 +45,11 @@
         android:dependency="quiet_hours_enabled" />
 
     <CheckBoxPreference
+        android:key="quiet_hours_ringer"
+        android:title="@string/quiet_hours_ringer_title"
+        android:dependency="quiet_hours_enabled" />
+
+    <CheckBoxPreference
         android:key="quiet_hours_haptic"
         android:title="@string/quiet_hours_haptic"
         android:summaryOn="@string/quiet_hours_haptic_on"
