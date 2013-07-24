@@ -19,7 +19,7 @@
     android:title="@string/display_settings"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <com.android.settings.vanir.DisplayBrightness
+    <com.android.settings.BrightnessPreference
         android:key="brightness"
         android:title="@string/brightness"
         android:summary="@string/custom_brightness_summary"
