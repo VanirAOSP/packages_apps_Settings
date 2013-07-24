@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2013 Android Open Kang Project
+ * Copyright (C) 2013 The CyanogenMod Project
+ * Copyright (C) 2013 The Android Open Kang Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,10 +44,10 @@ public class MessagingHelper {
             "com.android.settings.vanir.autosms.STOP_SMS_SERVICE";
 
     /* package */ static final int DEFAULT_DISABLED = 0;
-    /* package */ static final int ALL_NUMBERS = 1;
-    /* package */ static final int CONTACTS_ONLY = 2;
+    /* package */ static final int ALL_NUMBERS      = 1;
+    /* package */ static final int CONTACTS_ONLY    = 2;
 
-    private static final int MINUTES_PER_DAY = 24 * 60;
+    private static final int MINUTES_PER_DAY = 1440; // 24 * 60
 
     public static boolean inQuietHours(Context context) {
         boolean quietHoursEnabled = Settings.System.getInt(context.getContentResolver(),
@@ -132,6 +133,7 @@ public class MessagingHelper {
         try {
             sms.sendTextMessage(phoneNumber, null, message, null, null);
         } catch (IllegalArgumentException e) {
+            // Do nothing here
         }
     }
 
@@ -185,11 +187,12 @@ public class MessagingHelper {
         int currentMinutes = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
 
         boolean inQuietHours = false;
-        // time from now on (in minutes) when the service start/stop should be scheduled
+        // Time from now on (in minutes) when the service
+        // start/stop should be scheduled
         int serviceStartMinutes = -1, serviceStopMinutes = -1;
 
         if (quietHoursEnd < quietHoursStart) {
-            // Starts at night, ends in the morning.
+            // Starts at night, ends in the morning
             if (currentMinutes >= quietHoursStart) {
                 // In QuietHours - quietHoursEnd in new day
                 inQuietHours = true;
@@ -200,13 +203,14 @@ public class MessagingHelper {
                 serviceStopMinutes = quietHoursEnd - currentMinutes;
             } else {
                 // Out of QuietHours
-                // Current time less than quietHoursStart, greater than quietHoursEnd
+                // Current time less than quietHoursStart
+                // greater than quietHoursEnd
                 inQuietHours = false;
                 serviceStartMinutes = quietHoursStart - currentMinutes;
                 serviceStopMinutes = MINUTES_PER_DAY - currentMinutes + quietHoursEnd;
             }
         } else {
-            // Starts in the morning, ends at night.
+            // Starts in the morning, ends at night
             if (currentMinutes >= quietHoursStart && currentMinutes <= quietHoursEnd) {
                 // In QuietHours
                 inQuietHours = true;
