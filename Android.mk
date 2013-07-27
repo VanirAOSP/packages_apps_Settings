@@ -2,7 +2,7 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_JAVA_LIBRARIES := bouncycastle telephony-common
-LOCAL_STATIC_JAVA_LIBRARIES := guava android-support-v4 jsr305
+LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4 android-support-v13 jsr305
 
 LOCAL_MODULE_TAGS := optional
 
@@ -12,6 +12,8 @@ LOCAL_PACKAGE_NAME := Settings
 LOCAL_CERTIFICATE := platform
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
+
+LOCAL_AAPT_FLAGS += -c zz_ZZ
 
 LOCAL_AAPT_INCLUDE_ALL_RESOURCES := true
 LOCAL_AAPT_FLAGS := --extra-packages com.koushikdutta.superuser:com.koushikdutta.widgets --auto-add-overlay

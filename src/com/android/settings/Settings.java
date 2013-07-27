@@ -16,25 +16,13 @@
 
 package com.android.settings;
 
-import com.android.internal.util.ArrayUtils;
-import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
-import com.android.settings.accounts.AccountSyncSettings;
-import com.android.settings.accounts.AuthenticatorHelper;
-import com.android.settings.accounts.ManageAccountsSettings;
-import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.applications.ManageApplications;
-import com.android.settings.bluetooth.BluetoothEnabler;
-import com.android.settings.deviceinfo.Memory;
-import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.vpn2.VpnSettings;
-import com.android.settings.wifi.WifiEnabler;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.RestrictionEntry;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -62,6 +50,18 @@ import android.widget.ListAdapter;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.internal.util.ArrayUtils;
+import com.android.settings.AccessibilitySettings.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accounts.AccountSyncSettings;
+import com.android.settings.accounts.AuthenticatorHelper;
+import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.wfd.WifiDisplaySettings;
+import com.android.settings.wifi.WifiEnabler;
+import com.android.settings.wifi.WifiSettings;
+import com.android.settings.wifi.p2p.WifiP2pSettings;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -85,7 +85,7 @@ public class Settings extends PreferenceActivity
     private static final String META_DATA_KEY_PARENT_FRAGMENT_CLASS =
         "com.android.settings.PARENT_FRAGMENT_CLASS";
 
-    private static final String EXTRA_CLEAR_UI_OPTIONS = "settings:remove_ui_options";
+    private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
@@ -137,8 +137,8 @@ public class Settings extends PreferenceActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (getIntent().getBooleanExtra(EXTRA_CLEAR_UI_OPTIONS, false)) {
-            getWindow().setUiOptions(0);
+        if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
+            getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
         mAuthenticatorHelper = new AuthenticatorHelper();
@@ -174,6 +174,7 @@ public class Settings extends PreferenceActivity
 
         if (mParentHeader != null) {
             setParentTitle(mParentHeader.title, null, new OnClickListener() {
+                @Override
                 public void onClick(View v) {
                     switchToParent(mParentHeader.fragment);
                 }
@@ -392,27 +393,15 @@ public class Settings extends PreferenceActivity
         return intent;
     }
 
-    private void onBuildStartFragmentIntentHelper(String fragmentName, Intent intent) {
-        // some fragments want to avoid split actionbar
-        if (DataUsageSummary.class.getName().equals(fragmentName) ||
-                PowerUsageSummary.class.getName().equals(fragmentName) ||
-                AccountSyncSettings.class.getName().equals(fragmentName) ||
-                UserDictionarySettings.class.getName().equals(fragmentName) ||
-                Memory.class.getName().equals(fragmentName) ||
-                ManageApplications.class.getName().equals(fragmentName) ||
-                WirelessSettings.class.getName().equals(fragmentName) ||
-                SoundSettings.class.getName().equals(fragmentName) ||
-                PrivacySettings.class.getName().equals(fragmentName) ||
-                ManageAccountsSettings.class.getName().equals(fragmentName) ||
-                VpnSettings.class.getName().equals(fragmentName) ||
-                SecuritySettings.class.getName().equals(fragmentName) ||
-                InstalledAppDetails.class.getName().equals(fragmentName) ||
-                ChooseLockGenericFragment.class.getName().equals(fragmentName) ||
-                TetherSettings.class.getName().equals(fragmentName) ||
-                ApnSettings.class.getName().equals(fragmentName) ||
-                LocationSettings.class.getName().equals(fragmentName) ||
-                ZonePicker.class.getName().equals(fragmentName)) {
-            intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
+        // Some fragments want split ActionBar; these should stay in sync with
+        // uiOptions for fragments also defined as activities in manifest.
+        if (WifiSettings.class.getName().equals(fragmentName) ||
+                WifiP2pSettings.class.getName().equals(fragmentName) ||
+                WifiDisplaySettings.class.getName().equals(fragmentName) ||
+                BluetoothSettings.class.getName().equals(fragmentName) ||
+                DreamSettings.class.getName().equals(fragmentName) ||
+                ToggleAccessibilityServicePreferenceFragment.class.getName().equals(fragmentName)) {
+            intent.putExtra(EXTRA_UI_OPTIONS, ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
         }
         intent.setClass(this, SubSettings.class);
     }
@@ -423,7 +412,6 @@ public class Settings extends PreferenceActivity
     @Override
     public void onBuildHeaders(List<Header> headers) {
         loadHeadersFromResource(R.xml.settings_headers, headers);
-
         updateHeaderList(headers);
     }
 
@@ -431,6 +419,7 @@ public class Settings extends PreferenceActivity
         final boolean showDev = true;
         int i = 0;
 
+        final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
         mHeaderIndexMap.clear();
         while (i < target.size()) {
             Header header = target.get(i);
@@ -471,6 +460,10 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
+                    target.remove(i);
+                }
+            } else if (id == R.id.account_add) {
+                if (um.hasUserRestriction(UserManager.DISALLOW_MODIFY_ACCOUNTS)) {
                     target.remove(i);
                 }
             }
@@ -780,13 +773,18 @@ public class Settings extends PreferenceActivity
             titleRes = R.string.wallpaper_settings_fragment_title;
         } else if (pref.getFragment().equals(OwnerInfoSettings.class.getName())
                 && UserHandle.myUserId() != UserHandle.USER_OWNER) {
-            titleRes = R.string.user_info_settings_title;
+            if (UserManager.get(this).isLinkedUser()) {
+                titleRes = R.string.profile_info_settings_title;
+            } else {
+                titleRes = R.string.user_info_settings_title;
+            }
         }
         startPreferencePanel(pref.getFragment(), pref.getExtras(), titleRes, pref.getTitle(),
                 null, 0);
         return true;
     }
 
+    @Override
     public boolean shouldUpRecreateTask(Intent targetIntent) {
         return super.shouldUpRecreateTask(new Intent(this, Settings.class));
     }
@@ -831,6 +829,7 @@ public class Settings extends PreferenceActivity
     public static class DeviceInfoSettingsActivity extends Settings { /* empty */ }
     public static class ApplicationSettingsActivity extends Settings { /* empty */ }
     public static class ManageApplicationsActivity extends Settings { /* empty */ }
+    public static class AppOpsSummaryActivity extends Settings { /* empty */ }
     public static class StorageUseActivity extends Settings { /* empty */ }
     public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
     public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
@@ -850,4 +849,7 @@ public class Settings extends PreferenceActivity
     public static class AndroidBeamSettingsActivity extends Settings { /* empty */ }
     public static class WifiDisplaySettingsActivity extends Settings { /* empty */ }
     public static class DreamSettingsActivity extends Settings { /* empty */ }
+    public static class NotificationStationActivity extends Settings { /* empty */ }
+    public static class UserSettingsActivity extends Settings { /* empty */ }
+    public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
 }
