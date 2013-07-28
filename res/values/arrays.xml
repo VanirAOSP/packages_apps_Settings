@@ -1589,7 +1589,6 @@
         <item>@*android:drawable/ic_lockscreen_calendar</item>
         <item>@*android:drawable/ic_lockscreen_camera</item>
         <item>@*android:drawable/ic_lockscreen_email</item>
-        <item>@*android:drawable/ic_lockscreen_email2</item>
         <item>@*android:drawable/ic_lockscreen_facebook</item>
         <item>@*android:drawable/ic_lockscreen_gallery</item>
         <item>@*android:drawable/ic_lockscreen_google_small</item>
