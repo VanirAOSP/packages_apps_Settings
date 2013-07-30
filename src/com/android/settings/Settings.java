@@ -393,6 +393,28 @@ public class Settings extends PreferenceActivity
         return intent;
     }
 
+    private void onBuildStartFragmentIntentHelper(String fragmentName, Intent intent) {
+        // some fragments want to avoid split actionbar
+        if (DataUsageSummary.class.getName().equals(fragmentName) ||
+                PowerUsageSummary.class.getName().equals(fragmentName) ||
+                AccountSyncSettings.class.getName().equals(fragmentName) ||
+                UserDictionarySettings.class.getName().equals(fragmentName) ||
+                Memory.class.getName().equals(fragmentName) ||
+                ManageApplications.class.getName().equals(fragmentName) ||
+                WirelessSettings.class.getName().equals(fragmentName) ||
+                SoundSettings.class.getName().equals(fragmentName) ||
+                PrivacySettings.class.getName().equals(fragmentName) ||
+                ManageAccountsSettings.class.getName().equals(fragmentName) ||
+                VpnSettings.class.getName().equals(fragmentName) ||
+                SecuritySettings.class.getName().equals(fragmentName) ||
+                InstalledAppDetails.class.getName().equals(fragmentName) ||
+                ChooseLockGenericFragment.class.getName().equals(fragmentName) ||
+                TetherSettings.class.getName().equals(fragmentName) ||
+                ApnSettings.class.getName().equals(fragmentName) ||
+                LocationSettings.class.getName().equals(fragmentName) ||
+                ZonePicker.class.getName().equals(fragmentName)) {
+            intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
+        }
         // Some fragments want split ActionBar; these should stay in sync with
         // uiOptions for fragments also defined as activities in manifest.
         if (WifiSettings.class.getName().equals(fragmentName) ||

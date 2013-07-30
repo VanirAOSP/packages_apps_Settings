@@ -1310,6 +1310,7 @@ public class DevelopmentSettings extends PreferenceFragment
         if (mAdbTcpDialog != null) {
             mAdbTcpDialog.dismiss();
             mAdbTcpDialog = null;
+        }
         if (mAdbKeysDialog != null) {
             mAdbKeysDialog.dismiss();
             mAdbKeysDialog = null;
