@@ -234,7 +234,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     @Override
     public Dialog onCreateDialog(int id) {
-        final Calendar calendar = Calendar.getInstance();
+        Dialog d;
+
         switch (id) {
         case DIALOG_DATEPICKER: {
             final Calendar calendar = Calendar.getInstance();
@@ -266,8 +267,10 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             break;
         }
         default:
-            throw new IllegalArgumentException();
+            d = null;
+            break;
         }
+        return d;
     }
 
     static void configureDatePicker(DatePicker datePicker) {

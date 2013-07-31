@@ -1349,6 +1349,9 @@ public class InstalledAppDetails extends Fragment
     }
 
     private void setNotificationsEnabled(boolean enabled) {
+        String packageName = mAppEntry.info.packageName;
+        INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         try {
             final boolean enable = mNotificationSwitch.isChecked();
             nm.setNotificationsEnabledForPackage(packageName, mAppEntry.info.uid, enabled);

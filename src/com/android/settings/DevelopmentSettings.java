@@ -82,8 +82,6 @@ public class DevelopmentSettings extends PreferenceFragment
                 OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
     private static final String TAG = "DevelopmentSettings";
 
-       private static final String TAG = "DevelopmentSettings";
-
     /**
      * Preference file were development settings prefs are stored.
      */

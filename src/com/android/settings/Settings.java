@@ -16,6 +16,19 @@
 
 package com.android.settings;
 
+import com.android.internal.util.ArrayUtils;
+import com.android.settings.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.accounts.AccountSyncSettings;
+import com.android.settings.accounts.AuthenticatorHelper;
+import com.android.settings.accounts.ManageAccountsSettings;
+import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.ManageApplications;
+import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.deviceinfo.Memory;
+import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.vpn2.VpnSettings;
+import com.android.settings.wifi.WifiEnabler;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
@@ -86,6 +99,8 @@ public class Settings extends PreferenceActivity
         "com.android.settings.PARENT_FRAGMENT_CLASS";
 
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
+
+    private static final String EXTRA_CLEAR_UI_OPTIONS = "settings:remove_ui_options";
 
     private static final String SAVE_KEY_CURRENT_HEADER = "com.android.settings.CURRENT_HEADER";
     private static final String SAVE_KEY_PARENT_HEADER = "com.android.settings.PARENT_HEADER";
