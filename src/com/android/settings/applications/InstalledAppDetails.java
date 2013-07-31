@@ -392,6 +392,8 @@ public class InstalledAppDetails extends Fragment
     }
 
     private void initNotificationButton() {
+		INotificationManager nm = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
         boolean enabled = true; // default on
         boolean allowedForHalo = true; // default on
         try {

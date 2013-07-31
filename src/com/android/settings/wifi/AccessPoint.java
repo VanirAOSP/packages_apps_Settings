@@ -347,7 +347,14 @@ class AccessPoint extends Preference {
         setTitle(ssid);
 
         Context context = getContext();
-        if (mConfig != null && mConfig.status == WifiConfiguration.Status.DISABLED) {
+        StringBuilder summary = new StringBuilder();
+ 
+        if (isIBSS)
+            summary.append(context.getString(R.string.wifi_mode_ibss_short)).append(" ");
+
+        if (mState != null) { // This is the active connection
+            summary.append(Summary.get(context, mState));
+        } else if (mConfig != null && mConfig.status == WifiConfiguration.Status.DISABLED) {
             switch (mConfig.disableReason) {
                 case WifiConfiguration.DISABLED_AUTH_FAILURE:
                     summary.append(context.getString(R.string.wifi_disabled_password_failure));
