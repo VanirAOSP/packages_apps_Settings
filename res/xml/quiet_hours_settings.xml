@@ -88,5 +88,4 @@
             android:title="@string/quiet_hours_auto_string_title"
             android:dependency="quiet_hours_enabled" />
     </PreferenceCategory>
-
 </PreferenceScreen>

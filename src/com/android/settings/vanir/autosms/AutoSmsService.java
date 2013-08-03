@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
- * Copyright (C) 2013 The Android Open Kang Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,7 +111,9 @@ public class AutoSmsService extends Service {
         mPhoneStateListener = null;
         unregisterReceiver(mSmsReceiver);
         getContentResolver().unregisterContentObserver(mQuietHoursObserver);
+
         releaseWakeLock();
+
         super.onDestroy();
     }
 
@@ -134,4 +135,5 @@ public class AutoSmsService extends Service {
             }
         }
     }
+
 }
