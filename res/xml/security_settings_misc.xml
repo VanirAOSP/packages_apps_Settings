@@ -45,6 +45,12 @@
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
+         <Preference
+            android:fragment="com.android.settings.vanir.fragments.PrivacyGuardManager"
+            android:key="privacy_guard_manager"
+            android:summary="@string/privacy_guard_manager_summary"
+            android:title="@string/privacy_guard_manager_title" />
+
         <CheckBoxPreference
                 android:key="toggle_install_applications"
                 android:title="@string/install_applications"
