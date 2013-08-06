@@ -297,7 +297,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // App security settings
             addPreferencesFromResource(R.xml.security_settings_app_cyanogenmod);
             mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
-            addPreferencesFromResource(R.xml.vanir_settings);
             mBlacklist = (PreferenceScreen) root.findPreference(KEY_BLACKLIST);
 
             // Determine options based on device telephony support
