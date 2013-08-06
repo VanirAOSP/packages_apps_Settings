@@ -31,6 +31,12 @@
             android:title="@string/appops_settings_title"
             android:summary="@string/appops_settings_summary"/>
 
+         <Preference
+            android:fragment="com.android.settings.vanir.fragments.PrivacyGuardManager"
+            android:key="privacy_guard_manager"
+            android:summary="@string/privacy_guard_manager_summary"
+            android:title="@string/privacy_guard_manager_title" />
+
         <ListPreference
             android:key="sms_security_check_limit"
             android:dialogTitle="@string/sms_security_check_limit_title"
