@@ -5062,6 +5062,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="notification_convert_sound_to_vibration_title">Notification conversion</string>
     <string name="notification_convert_sound_to_vibration_summary">Sounds to vibrations during vibrate mode</string>
 
+    <!-- vibrate during phone calls -->
+    <string name="notification_vibrate_during_calls_title">Vibrate during call</string>
+    <string name="notification_vibrate_during_calls_summary">Incoming notifications will softly vibrate during phone calls</string>
+
     <!-- Swap volume buttons when the screen is rotated by 90 or 180 degrees -->
     <string name="swap_volume_buttons_title">Swap volume buttons</string>
     <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated by 90 or 180 degrees</string>
@@ -5465,6 +5469,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="vanir_ui_short">UI Stuff</string>
     <string name="vanir_buttons_short">Hardware key controls</string>
     <string name="vanir_sound_short">Sound-ish Stuff</string>
+    <!-- Safe headset volume restore checkbox -->
+    <string name="safe_headset_volume_title">Safe headset volume</string>
+    <string name="safe_headset_volume_summary">Prevent loud volume levels when headset is first plugged in</string>
 
     <!-- Privacy Guard -->
     <string name="privacy_guard_switch_label">Enable Privacy Guard</string>

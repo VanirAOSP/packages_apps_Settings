@@ -30,6 +30,12 @@
         android:key="musicfx"
         android:title="@string/musicfx_title" />
 
+    <CheckBoxPreference
+            android:key="safe_headset_volume"
+            android:title="@string/safe_headset_volume_title"
+            android:summary="@string/safe_headset_volume_summary"
+            android:defaultValue="true" />
+
     <PreferenceCategory
         android:key="category_calls_and_notification"
         android:title="@string/sound_category_call_ringtone_vibrate_title" /> 
@@ -97,6 +103,13 @@
             android:summary="@string/camera_sounds_summary"
             android:defaultValue="true" />
 
+    <CheckBoxPreference
+            android:key="notification_vibrate_during_calls"
+            android:title="@string/notification_vibrate_during_calls_title"
+            android:summary="@string/notification_vibrate_during_calls_summary"
+            android:persistent="false"
+            android:defaultValue="false" />
+
     <!-- Dock -->
     <PreferenceCategory
         android:key="dock_category"
@@ -117,4 +130,5 @@
         android:key="dock_sounds"
         android:title="@string/dock_sounds_enable_title"
         android:defaultValue="false" />
+
 </PreferenceScreen>
