@@ -203,17 +203,22 @@ public class Statusbar extends SettingsPreferenceFragment implements
                 Uri contactData = data.getData();
                 String[] projection = new String[] {ContactsContract.Contacts.LOOKUP_KEY};
                 String selection = ContactsContract.Contacts.DISPLAY_NAME + " IS NOT NULL";
-                CursorLoader cursorLoader =  new CursorLoader(getActivity().getBaseContext(), contactData, projection, selection, null, null);
-                Cursor cursor = cursorLoader.loadInBackground();
-                if (cursor != null) {
-                    try {
+                CursorLoader cursorLoader =  null; 
+                Cursor cursor = null; 
+                try {
+					cursorLoader = new CursorLoader(getActivity().getBaseContext(), contactData, projection, selection, null, null);
+					cursor = cursorLoader.loadInBackground();
+                    if (cursor != null) {
                         if (cursor.moveToFirst()) {
                             String lookup_key = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
                             Settings.System.putString(getActivity().getContentResolver(),
                             Settings.System.QUICK_TOGGLE_FAV_CONTACT, lookup_key);
                         }
+                    }
                     } finally {
-                        cursor.close();
+                        if (cursor != null) {
+                            cursorLoader = null;
+                            cursor.close();
                     }
                 }
             }

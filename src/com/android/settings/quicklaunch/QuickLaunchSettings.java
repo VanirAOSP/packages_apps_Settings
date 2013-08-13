@@ -100,7 +100,9 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         mShortcutToPreference = new SparseArray<ShortcutPreference>();
         mBookmarksObserver = new BookmarksObserver(mUiHandler);
         initShortcutPreferences();
-        mBookmarksCursor = managedQuery(Bookmarks.CONTENT_URI, sProjection, null, null);
+        if (mBookmarksCursor != null)
+			mBookmarksCursor.close();
+            mBookmarksCursor = managedQuery(Bookmarks.CONTENT_URI, sProjection, null, null);
         getListView().setOnItemLongClickListener(this);
     }
 

@@ -1271,14 +1271,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
         }
 
         private static int getPhotoSize(Context context) {
-            Cursor cursor = context.getContentResolver().query(
+            Cursor cursor = null; 
+            try {
+				cursor = context.getContentResolver().query(
                     DisplayPhoto.CONTENT_MAX_DIMENSIONS_URI,
                     new String[]{DisplayPhoto.DISPLAY_MAX_DIM}, null, null, null);
-            try {
                 cursor.moveToFirst();
                 return cursor.getInt(0);
             } finally {
-                cursor.close();
+				if (cursor != null) {
+                    cursor.close();
+				}
             }
         }
 

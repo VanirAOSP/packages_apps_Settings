@@ -103,8 +103,10 @@ public class BlacklistSettings extends ListFragment
         mEnabledSwitch.setPaddingRelative(0, 0, padding, 0);
         mEnabledSwitch.setOnCheckedChangeListener(this);
 
-        mCursor = getActivity().managedQuery(Blacklist.CONTENT_URI,
-                BLACKLIST_PROJECTION, null, null, null);
+        if (mCursor == null) {
+            mCursor = getActivity().managedQuery(Blacklist.CONTENT_URI,
+                    BLACKLIST_PROJECTION, null, null, null);
+        }
         mAdapter = new BlacklistAdapter(getActivity(), null);
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
@@ -274,14 +276,19 @@ public class BlacklistSettings extends ListFragment
                 String result = null;
                 final String[] projection = new String[] { PhoneLookup.DISPLAY_NAME };
                 Uri uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
-                Cursor cursor = mResolver.query(uri, projection, null, null, null);
-                if (cursor != null) {
-                    if (cursor.moveToFirst()) {
-                        result = cursor.getString(0);
+                Cursor cursor = null;
+                try {
+					cursor = mResolver.query(uri, projection, null, null, null);
+                    if (cursor != null) {
+                        if (cursor.moveToFirst()) {
+                            result = cursor.getString(0);
+                        }
                     }
-                    cursor.close();
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
                 }
-
                 return result;
             }
         }

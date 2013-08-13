@@ -349,17 +349,21 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             summary = context.getString(com.android.internal.R.string.ringtone_silent);
         } else {
             // Fetch the ringtone title from the media provider
+            Cursor cursor = null;
             try {
-                Cursor cursor = context.getContentResolver().query(ringtoneUri,
+                cursor = context.getContentResolver().query(ringtoneUri,
                         new String[] { MediaStore.Audio.Media.TITLE }, null, null, null);
                 if (cursor != null) {
                     if (cursor.moveToFirst()) {
                         summary = cursor.getString(0);
                     }
-                    cursor.close();
                 }
-            } catch (SQLiteException sqle) {
-                // Unknown title for the ringtone
+             } catch (SQLiteException sqle) {
+                 // Unknown title for the ringtone
+             } finally {
+                if (cursor != null) {
+                     cursor.close();
+                }
             }
         }
         mHandler.sendMessage(mHandler.obtainMessage(msg, summary));

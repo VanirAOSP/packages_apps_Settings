@@ -171,17 +171,21 @@ public class EntryEditDialogFragment extends DialogFragment
             mBlockMessages.setChecked(savedState.getBoolean(STATE_MESSAGE));
         } else if (id >= 0) {
             Uri uri = ContentUris.withAppendedId(Blacklist.CONTENT_URI, id);
-            Cursor cursor = activity.getContentResolver().query(uri,
+            Cursor cursor = null;
+            try {
+				cursor = activity.getContentResolver().query(uri,
                     BLACKLIST_PROJECTION, null, null, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                mEditText.setText(cursor.getString(COLUMN_NUMBER));
-                mBlockCalls.setChecked(cursor.getInt(COLUMN_PHONE) != 0);
-                mBlockMessages.setChecked(cursor.getInt(COLUMN_MESSAGE) != 0);
-            } else {
-                id = -1;
-            }
-            if (cursor != null) {
-                cursor.close();
+                if (cursor != null && cursor.moveToFirst()) {
+                    mEditText.setText(cursor.getString(COLUMN_NUMBER));
+                    mBlockCalls.setChecked(cursor.getInt(COLUMN_PHONE) != 0);
+                    mBlockMessages.setChecked(cursor.getInt(COLUMN_MESSAGE) != 0);
+                } else {
+                    id = -1;
+                }
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
         }
 
@@ -261,13 +265,19 @@ public class EntryEditDialogFragment extends DialogFragment
         }
 
         if (resultCode == Activity.RESULT_OK) {
-            Cursor cursor = getActivity().getContentResolver().query(data.getData(),
+            Cursor cursor = null;
+            try {
+				cursor = getActivity().getContentResolver().query(data.getData(),
                     NUMBER_PROJECTION, null, null, null);
-            if (cursor != null) {
-                if (cursor.moveToFirst()) {
-                    mEditText.setText(cursor.getString(COLUMN_NUMBER));
+                if (cursor != null) {
+                    if (cursor.moveToFirst()) {
+                        mEditText.setText(cursor.getString(COLUMN_NUMBER));
+                    }
+				}
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
                 }
-                cursor.close();
             }
         }
     }
