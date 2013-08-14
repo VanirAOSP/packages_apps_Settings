@@ -426,7 +426,6 @@ public class Settings extends PreferenceActivity
                 InstalledAppDetails.class.getName().equals(fragmentName) ||
                 ChooseLockGenericFragment.class.getName().equals(fragmentName) ||
                 TetherSettings.class.getName().equals(fragmentName) ||
-                ApnSettings.class.getName().equals(fragmentName) ||
                 LocationSettings.class.getName().equals(fragmentName) ||
                 ZonePicker.class.getName().equals(fragmentName)) {
             intent.putExtra(EXTRA_CLEAR_UI_OPTIONS, true);
@@ -892,4 +891,6 @@ public class Settings extends PreferenceActivity
     public static class UserSettingsActivity extends Settings { /* empty */ }
     public static class NotificationAccessSettingsActivity extends Settings { /* empty */ }
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
+    public static class ApnSettingsActivity extends Settings { /* empty */ }
+    public static class ApnEditorActivity extends Settings { /* empty */ }
 }
