@@ -115,8 +115,7 @@ public class RingerVolumePreference extends VolumePreference {
             boolean muted = mAudioManager.isStreamMute(streamType);
 
             if (mCheckBoxes[i] != null) {
-                if (((streamType == AudioManager.STREAM_RING) ||
-                        (streamType == AudioManager.STREAM_NOTIFICATION)) &&
+                if (streamType == AudioManager.STREAM_RING &&
                         (mAudioManager.getRingerMode() == AudioManager.RINGER_MODE_VIBRATE)) {
                     mCheckBoxes[i].setImageResource(
                             com.android.internal.R.drawable.ic_audio_ring_notif_vibrate);
@@ -157,7 +156,7 @@ public class RingerVolumePreference extends VolumePreference {
         mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
-	private static int getCurrentMutableStreams(Context c) {
+    private static int getCurrentMutableStreams(Context c) {
         final int defaultMuteStreams = ((1 << AudioSystem.STREAM_RING)|(1 << AudioSystem.STREAM_NOTIFICATION)|
                 (1 << AudioSystem.STREAM_SYSTEM)|(1 << AudioSystem.STREAM_SYSTEM_ENFORCED));
         return Settings.System.getInt(c.getContentResolver(),
@@ -186,7 +185,7 @@ public class RingerVolumePreference extends VolumePreference {
             mCheckBoxes[i] = checkbox;
         }
 
-		final CheckBox linkCheckBox = (CheckBox) view.findViewById(R.id.link_ring_and_volume);
+        final CheckBox linkCheckBox = (CheckBox) view.findViewById(R.id.link_ring_and_volume);
         final CheckBox linkMuteStates = (CheckBox) view.findViewById(R.id.link_mutes);
 
         final View ringerSection = view.findViewById(R.id.ringer_section);
@@ -279,7 +278,7 @@ public class RingerVolumePreference extends VolumePreference {
                 }
             };
             getContext().registerReceiver(mRingModeChangedReceiver, filter);
-        } 
+        }
     }
 
     private Uri getMediaVolumeUri(Context context) {

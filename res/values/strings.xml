@@ -4700,6 +4700,23 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pref_purgeable_assets_title">Allow purging of assets</string>
     <string name="pref_purgeable_assets_summary">Purging of bitmap memory assets frees up more RAM at an increased cost of I/O and processing overhead (requires reboot)</string>
 
+    <string name="vibrator_type_ringer">Calls</string>
+    <string name="vibrator_type_notification">Notifications</string>
+    <string name="increasing_ring_title">Ascending ringtone</string>
+    <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
+    <string name="checkbox_increasing_ring">Enable</string>
+    <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
+    <string name="increasing_ring_min_volume_title">Ringing start volume</string>
+    <string name="increasing_ring_volume_notice">Notice:\nAs the start volume is set higher than the ringer volume, the ring tone will be played using the ringer volume.</string>
+    <string name="increasing_ring_interval_title">Increase interval</string>
+    <string name="increasing_ring_interval_eachring">On each ring</string>
+    <string name="increasing_ring_interval_half_second">0.5 seconds</string>
+    <string name="increasing_ring_interval_1second">1 second</string>
+    <string name="increasing_ring_interval_2seconds">2 seconds</string>
+    <string name="increasing_ring_interval_3seconds">3 seconds</string>
+    <string name="increasing_ring_interval_5seconds">5 seconds</string>
+    <string name="increasing_ring_interval_10seconds">10 seconds</string>
+
     <!-- Display settings screen, notification light settings -->
     <string name="notification_light_general_title">General</string>
     <string name="notification_light_applist_title">Applications</string>
@@ -4804,6 +4821,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="toggle_favcontact_summary">Choose your favorite contact</string>
 
     <string name="toggle_default_entries">USER|BRIGHTNESS|SETTINGS|WIFI|SIGNAL|ROTATE|BATTERY|AIRPLANE_MODE|BLUETOOTH</string>
+    <!-- Sound settings screen -->
+    <string name="volume_overlay_title">Volume panel style</string>
+    <string name="silent_mode_title">Silent mode</string>
+    <string name="volume_ring_only_description">Ringtone</string>
+
 
     <!-- Performance | Voltage Control -->
     <string name="cpu_voltage">Voltage control</string>
