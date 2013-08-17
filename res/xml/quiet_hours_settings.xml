@@ -19,6 +19,13 @@
     android:title="@string/quiet_hours_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <Preference
+        android:key="quiet_hours_note"
+        style="?android:preferenceInformationStyle"
+        android:title="@string/quiet_hours_note_title"
+        android:summary="@string/quiet_hours_note_summary"
+        android:selectable="false" />
+
     <CheckBoxPreference
         android:key="quiet_hours_enabled"
         android:title="@string/quiet_hours_enabled"
