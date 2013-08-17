@@ -481,8 +481,8 @@ public class DevelopmentSettings extends PreferenceFragment
         updateAdbOverNetwork();
         mAdbIcon.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ADB_ICON, 1) != 0);
-        updateCheckBox(mBugreportInPower, Settings.Secure.getInt(cr,
-                Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0);
+        updateCheckBox(mBugreportInPower, Settings.Global.getInt(cr,
+                Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0);
         updateCheckBox(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateCheckBox(mEnforceReadExternal, isPermissionEnforced(READ_EXTERNAL_STORAGE));
@@ -704,7 +704,7 @@ public class DevelopmentSettings extends PreferenceFragment
                 mBugreport.setEnabled(false);
                 mBugreportInPower.setEnabled(false);
                 mBugreportInPower.setChecked(false);
-                Settings.Secure.putInt(resolver, Settings.Secure.BUGREPORT_IN_POWER_MENU, 0);
+                Settings.Global.putInt(resolver, Settings.Global.BUGREPORT_IN_POWER_MENU, 0);
             }
         } else {
             mBugreportInPower.setEnabled(true);
@@ -1201,8 +1201,8 @@ public class DevelopmentSettings extends PreferenceFragment
                         .setNegativeButton(android.R.string.cancel, null)
                         .show();
         } else if (preference == mBugreportInPower) {
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.BUGREPORT_IN_POWER_MENU, 
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.BUGREPORT_IN_POWER_MENU, 
                     mBugreportInPower.isChecked() ? 1 : 0);
         } else if (preference == mKeepScreenOn) {
             Settings.Global.putInt(getActivity().getContentResolver(),
