@@ -25,6 +25,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.android.settings.vanir.autosms.MessagingHelper;
+import com.android.settings.DisplaySettings;
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 import java.util.Arrays;
@@ -55,6 +57,7 @@ public class BootReceiver extends BroadcastReceiver {
             SystemProperties.set(IOSCHED_SETTINGS_PROP, "false");
         }
         MessagingHelper.scheduleService(ctx);
+        DisplaySettings.restore(ctx);
     }
 
     private void configureCPU(Context ctx) {

@@ -25,6 +25,12 @@
         android:summary="@string/custom_brightness_summary"
         android:dialogTitle="@string/brightness" />
 
+    <CheckBoxPreference
+        android:key="adaptive_backlight"
+        android:title="@string/adaptive_backlight_title"
+        android:summary="@string/adaptive_backlight_summary"
+        android:defaultValue="true" />
+
     <PreferenceScreen
         android:key="display_rotation"
         android:fragment="com.android.settings.vanir.DisplayRotation"
@@ -70,4 +76,5 @@
         android:key="wifi_display"
         android:title="@string/wifi_display_settings_title"
         android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
 </PreferenceScreen>
