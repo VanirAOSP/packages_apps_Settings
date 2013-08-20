@@ -5584,4 +5584,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="remove_blacklist_entry">Do you want to remove this blacklist entry?</string>
     <string name="select_contact">Select contact</string>
 
+    <string name="tablet_statusbar_title">Tablet style statusbar</string>
+    <string name="tablet_statusbar_summary">Pull down 2 separate statusbars like tablets have</string>
+
 </resources>

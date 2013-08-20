@@ -193,6 +193,11 @@
             android:entryValues="@array/user_mode_ui_values" />
 
        <CheckBoxPreference
+            android:key="tablet_statusbar"
+            android:title="@string/tablet_statusbar_title"
+            android:summary="@string/tablet_statusbar_summary" />
+
+       <CheckBoxPreference
             android:key="hide_extras"
             android:title= "@string/hide_extras"
             android:summary= "@string/hide_extras_summary"

@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.app.Dialog;
@@ -50,6 +51,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.widget.AlphaSeekBar;
 import com.vanir.util.Helpers;
 
@@ -84,6 +86,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final String PREF_STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
     private static final String PREF_USER_MODE_UI = "user_mode_ui";
+    private static final String TABLET_STATUSBAR = "tablet_statusbar";
     private static final String PREF_HIDE_EXTRAS = "hide_extras";
     private static final CharSequence PREF_POWER_CRT_MODE = "system_power_crt_mode";
     private static final CharSequence PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
@@ -101,6 +104,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDualpane;
     private CheckBoxPreference mHideExtras;
     private ListPreference mUserModeUI;
+    private CheckBoxPreference mStatusbar;
     private ListPreference mCrtMode;
     private CheckBoxPreference mCrtOff;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
@@ -168,6 +172,14 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         mUserModeUI.setValue(Integer.toString(Settings.System.getInt(mContentResolver,
                 Settings.System.USER_UI_MODE, uiMode)));
         mUserModeUI.setOnPreferenceChangeListener(this);
+
+        mStatusbar = (CheckBoxPreference) findPreference(TABLET_STATUSBAR);
+        if (Utils.isPhone(getActivity())) {
+            getPreferenceScreen().removePreference(mStatusbar);
+        } else {
+            mStatusbar.setChecked(Settings.System.getInt(mContentResolver,
+                Settings.System.TABLET_STATUSBAR, 0) == 1);
+        }
 
         mDualPane = (CheckBoxPreference) findPreference(KEY_DUAL_PANE);
         boolean preferDualPane = getResources().getBoolean(
@@ -268,6 +280,17 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         if (mVolumeWake != null) {
             mVolumeWake.setChecked(Settings.System.getInt(mContentResolver,
                     Settings.System.VOLUME_WAKE_SCREEN, 0) == 1);
+        }
+        checkUI();
+    }
+
+    private void checkUI() {
+		boolean mode = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.USER_UI_MODE, 0) == 1;
+        if (mode) {
+            mStatusbar.setEnabled(false);
+        } else {
+            mStatusbar.setEnabled(true);
         }
     }
 
@@ -381,6 +404,12 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                     Settings.System.STATUSBAR_NOTIF_COUNT,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mStatusbar) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.TABLET_STATUSBAR,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+                    Helpers.restartSystemUI();
+            return true;
         } else if (preference == mCrtOff) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
@@ -456,8 +485,9 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.USER_UI_MODE, Integer.parseInt((String) objValue));
             Helpers.restartSystemUI();
+            checkUI();
             return true;
-                } else if (preference == mCrtMode) {
+        } else if (preference == mCrtMode) {
             int crtMode = Integer.valueOf((String) objValue);
             int index = mCrtMode.findIndexOfValue((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
