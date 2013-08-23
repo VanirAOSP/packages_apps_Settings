@@ -100,6 +100,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="hardware_keys_additional"
         android:title="@string/additional_options_title">
 
        <CheckBoxPreference
@@ -108,6 +109,12 @@
             android:summary="@string/hardware_keys_show_overflow_summary"
             android:persistent="false"
             android:defaultValue="false" />
+
+        <com.android.settings.vanir.ButtonBacklightBrightness
+            android:key="hardware_keys_backlight"
+            android:title="@string/button_backlight_title"
+            android:dialogTitle="@string/button_backlight_title"
+            android:persistent="false" />
 
     </PreferenceCategory>
 

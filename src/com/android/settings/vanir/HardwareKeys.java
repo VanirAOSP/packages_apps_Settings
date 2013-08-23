@@ -33,6 +33,7 @@ import com.android.settings.SettingsPreferenceFragment;
 public class HardwareKeys extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
     private static final String HARDWARE_KEYS_CATEGORY_BINDINGS = "hardware_keys_bindings";
+    private static final String HARDWARE_KEYS_CATEGORY_ADDITIONAL = "hardware_keys_additional";
     private static final String HARDWARE_KEYS_ENABLE_CUSTOM = "hardware_keys_enable_custom";
     private static final String HARDWARE_KEYS_HOME_LONG_PRESS = "hardware_keys_home_long_press";
     private static final String HARDWARE_KEYS_MENU_PRESS = "hardware_keys_menu_press";
@@ -42,6 +43,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     private static final String HARDWARE_KEYS_APP_SWITCH_PRESS = "hardware_keys_app_switch_press";
     private static final String HARDWARE_KEYS_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
     private static final String HARDWARE_KEYS_SHOW_OVERFLOW = "hardware_keys_show_overflow";
+    private static final String HARDWARE_KEYS_BACKLIGHT = "hardware_keys_backlight";
 
     // Available custom actions to perform on a key press.
     // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
@@ -104,6 +106,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                 HARDWARE_KEYS_APP_SWITCH_LONG_PRESS);
         mShowActionOverflow = (CheckBoxPreference) prefSet.findPreference(
                 HARDWARE_KEYS_SHOW_OVERFLOW);
+        PreferenceCategory additionalCategory = (PreferenceCategory) prefSet.findPreference(
+                HARDWARE_KEYS_CATEGORY_ADDITIONAL);
         PreferenceCategory bindingsCategory = (PreferenceCategory) prefSet.findPreference(
                 HARDWARE_KEYS_CATEGORY_BINDINGS);
 
@@ -189,6 +193,12 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
         mShowActionOverflow.setChecked((Settings.System.getInt(getActivity().
                 getApplicationContext().getContentResolver(),
                 Settings.System.UI_FORCE_OVERFLOW_BUTTON, 0) == 1));
+
+        final ButtonBacklightBrightness backlight =
+                (ButtonBacklightBrightness) findPreference(HARDWARE_KEYS_BACKLIGHT);
+        if (!backlight.isButtonSupported() && !backlight.isKeyboardSupported()) {
+            additionalCategory.removePreference(backlight);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
