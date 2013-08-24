@@ -4815,7 +4815,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="silent_mode_title">Silent mode</string>
     <string name="volume_ring_only_description">Ringtone</string>
 
-
     <!-- Performance | Voltage Control -->
     <string name="cpu_voltage">Voltage control</string>
     <string name="cpu_voltage_summary">Change CPU voltage of each frequency</string>
@@ -5569,7 +5568,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="blacklist_private_numbers_summary"><xliff:g id="type">%s</xliff:g> from private numbers</string>
     <string name="blacklist_unknown_numbers_title">Unknown numbers</string>
     <string name="blacklist_unknown_numbers_summary"><xliff:g id="type">%s</xliff:g> from numbers not in the contact list</string>
-	<string name="blacklist_summary_type_nothing">Don\'t block calls or messages</string>
+    <string name="blacklist_summary_type_nothing">Don\'t block calls or messages</string>
     <string name="blacklist_summary_type_calls_only">Block incoming calls</string>
     <string name="blacklist_summary_type_messages_only">Block incoming messages</string>
     <string name="blacklist_summary_type_calls_and_messages">Block incoming calls and messages</string>
@@ -5586,5 +5585,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <string name="tablet_statusbar_title">Tablet style statusbar</string>
     <string name="tablet_statusbar_summary">Pull down 2 separate statusbars like tablets have</string>
+
+    <!-- vanir config toggle -->
+    <string name="vanir_config_title">Vanir tweaks</string>
+    <string name="vanir_config_enabled_summary">Enable application of available kernel tweaks during boot\n\nTo configure settings, run \"vanir config\" as root in a terminal emulator or adb shell</string>
+    <string name="vanir_config_disabled_summary">Disable application of available kernel tweaks during boot</string>
+    <string name="vanir_config_just_disabled_summary">Disable application of available kernel tweaks during boot\n\n<b>Reboot required for default values to be restored</b></string> 
 
 </resources>
