@@ -179,6 +179,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         } else {
             mStatusbar.setChecked(Settings.System.getInt(mContentResolver,
                 Settings.System.TABLET_STATUSBAR, 0) == 1);
+            getPreferenceScreen().removePreference(mHideExtras);
         }
 
         mDualPane = (CheckBoxPreference) findPreference(KEY_DUAL_PANE);
