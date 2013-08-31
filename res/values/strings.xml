@@ -5592,4 +5592,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="vanir_config_disabled_summary">Disable application of available kernel tweaks during boot</string>
     <string name="vanir_config_just_disabled_summary">Disable application of available kernel tweaks during boot\n\n<b>Reboot required for default values to be restored</b></string> 
 
+    <!-- Status bar brightness slider -->
+    <string name="brightness_slider_title">Statusbar brightness slider</string>
+    <string name="brightness_slider_summary">When enabled, this option will allow you to change the brightness by
+        sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
+    </string> 
+
 </resources>

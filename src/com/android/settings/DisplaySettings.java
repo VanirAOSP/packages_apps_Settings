@@ -63,6 +63,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
+    private static final String STATUS_BAR_BRIGHTNESS = "statusbar_brightness_slider"; 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
@@ -83,6 +84,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
     private DisplayManager mDisplayManager;
+    private CheckBoxPreference mStatusbarSliderPreference;
 
     private WarnedListPreference mFontSizePref;
 
@@ -139,6 +141,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
         updateDisplayRotationPreferenceDescription();
+
+        mStatusbarSliderPreference = (CheckBoxPreference) findPreference(STATUS_BAR_BRIGHTNESS);
+        mStatusbarSliderPreference.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUSBAR_BRIGHTNESS_SLIDER, 0) == 1));
 
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
@@ -431,6 +437,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mAdaptiveBacklight) {
             return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
+        } else if (preference == mStatusbarSliderPreference) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUSBAR_BRIGHTNESS_SLIDER, mStatusbarSliderPreference.isChecked() ? 1 : 0);
+            return true; 
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
