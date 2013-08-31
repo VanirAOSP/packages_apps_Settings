@@ -4925,4 +4925,10 @@
     <string name="vanirupdate_settings_title">Vanir updates</string>
     <string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
 
+    <!-- Status bar brightness slider -->
+    <string name="brightness_slider_title">Statusbar brightness slider</string>
+    <string name="brightness_slider_summary">When enabled, this option will allow you to change the brightness by
+        sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
+    </string> 
+
 </resources>
