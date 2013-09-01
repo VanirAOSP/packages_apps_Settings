@@ -399,6 +399,7 @@ public class InstalledAppDetails extends Fragment
         try {
             enabled = nm.areNotificationsEnabledForPackage(mAppEntry.info.packageName,
                     mAppEntry.info.uid);
+        allowedForHalo = mNotificationManager.isPackageAllowedForHalo(mAppEntry.info.packageName);
         } catch (android.os.RemoteException ex) {
             // this does not bode well
         }
