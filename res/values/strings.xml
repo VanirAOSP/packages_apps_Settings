@@ -4839,7 +4839,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pref_recents_summary">Add a memory usage bar to the recents panel</string>
 
     <!-- Quiet hours -->
-    <string name="quiet_hours_title">Quiet hours</string>
+    <string name="quiet_hours_title">Quiet Hours</string>
     <string name="quiet_hours_summary">Configure the hours the device should be quiet</string>
     <string name="quiet_hours_note_title">Note</string>
     <string name="quiet_hours_note_summary">Incoming calls will behave like usual during quiet hours</string>
@@ -4921,7 +4921,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- General Display Setup -->
     <string name="powermenu_short">Power Menu</string>
     <string name="misc_short">Misc</string>
-    <string name="statusbar_short">Statusbar mods</string>
+    <string name="statusbar_short">Status Bar Mods</string>
     <string name="title_ui">General Setup</string>
     <string name="general_title_summary">Torch, Clock/Date, LCD changer, etc</string>
 
@@ -5094,8 +5094,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="set">Set</string>
     <string name="ics_color">Holo</string>
 
-    <string name="title_navbar">Navigation bar</string>
-    <string name="title_navring">Navigation ring</string>
+    <string name="title_navbar">Navigation Bar</string>
+    <string name="title_navring">Navigation Ring</string>
+    <string name="lefty_mode_title">Lefty Mode</string>
+    <string name="lefty_mode_summary">Swap NavBar location (requires UI restart)</string>
     <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
 
     <string name="dont_show">Don\'t show</string>
@@ -5305,7 +5307,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="storage_rescan_media_complete">Scan completed</string>
 
     <!-- HALO -->
-    <string name="halo_settings_title">HALO settings</string>
+    <string name="halo_settings_title">HALO Settings</string>
     <string name="halo_settings_summary">Adjust the HALO settings</string>
     <string name="halo_enabled_title">Enable HALO</string>
     <string name="halo_enabled_summaryOn">HALO is enabled</string>
@@ -5373,7 +5375,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="expanded_desktop_no_staus_bar">Without status bar</string>
 
     <!-- Pie controls -->
-    <string name="pie_controls_title">Pie controls</string>
+    <string name="pie_controls_title">Pie Controls</string>
     <string name="pie_controls_summary">Adjust the Pie controls</string>
     <string name="pie_enable_title">Enable Pie</string>
     <string name="pie_enable_summaryOn">Nom nom nom nom</string>
@@ -5594,8 +5596,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="brightness_slider_title">Statusbar brightness slider</string>
     <string name="brightness_slider_summary">When enabled, this option will allow you to change the brightness by
         sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
-    </string>
-
-    <string name="statusbar_short_summary">Clock, battery, signal, etc</string>
+    </string> 
 
 </resources>

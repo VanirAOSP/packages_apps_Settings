@@ -1755,14 +1755,6 @@
         <activity android:name=".widget.SeekBarPreference" />
         <activity android:name=".widget.TouchInterceptor" />
 
-        <activity android:name=".vanir.fragments.StatusbarMods"
-            android:label="Statusbar Mods">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.SHORTCUT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name=".vanir.fragments.Navbar"
             android:label="Navigation Bar" >
             <intent-filter>
