@@ -141,8 +141,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                 Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
         mDualPane.setChecked(dualPaneMode);
 
-        PreferenceScreen prefSet = getPreferenceScreen();
-        mExpandedDesktopPref = (ListPreference) prefSet.findPreference(KEY_EXPANDED_DESKTOP);
+        mExpandedDesktopPref = (ListPreference) findPreference(KEY_EXPANDED_DESKTOP);
         mExpandedDesktopPref.setOnPreferenceChangeListener(this);
         int expandedDesktopValue = Settings.System.getInt(mContentResolver, Settings.System.EXPANDED_DESKTOP_STATUS_BAR_STATE, 0);
         mExpandedDesktopPref.setValue(String.valueOf(expandedDesktopValue));
