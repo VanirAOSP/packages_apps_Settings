@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Vanir custom UI:
-     PrimeDirective was here
-     So was ChevyCam94...
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
