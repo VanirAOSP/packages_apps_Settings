@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ContentResolver;
@@ -58,8 +57,6 @@ import com.vanir.util.Helpers;
 import java.util.Date;
 import java.util.Calendar;
 
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
-
 import com.android.settings.vanir.fragments.DensityChanger;
 
 public class VanirSettings extends SettingsPreferenceFragment implements
@@ -72,18 +69,10 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
-    private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
-    private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
-    private static final String PREF_CLOCK_PICKER = "clock_color";
-    private static final String PREF_EXPANDED_CLOCK_PICKER = "expanded_clock_color";
-    private static final String PREF_ENABLE = "clock_style";
     private static final String PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_DUAL_PANE = "dual_pane";
-    private static final String STATUS_BAR_BATTERY = "status_bar_battery";
-    private static final String STATUS_BAR_SIGNAL = "status_bar_signal";
     private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
-    private static final String PREF_STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
     private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
     private static final String PREF_USER_MODE_UI = "user_mode_ui";
     private static final String TABLET_STATUSBAR = "tablet_statusbar";
@@ -91,14 +80,8 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final CharSequence PREF_POWER_CRT_MODE = "system_power_crt_mode";
     private static final CharSequence PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
 
-    private ListPreference mStatusBarBattery;
     private CheckBoxPreference mFastTorch;
-    private ListPreference mStatusBarAmPm;
-    private ListPreference mStatusBarSignal;
-    private ListPreference mStatusBarClock;
     private CheckBoxPreference mDualPane;
-    private ColorPickerPreference mClockPicker;
-    private ColorPickerPreference mExpandedClockPicker;
     private ListPreference mExpandedDesktopPref;
     private Preference mCustomLabel;
     private CheckBoxPreference mDualpane;
@@ -108,7 +91,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private ListPreference mCrtMode;
     private CheckBoxPreference mCrtOff;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
-    private CheckBoxPreference mStatusBarNotifCount;
+
     private Preference mLcdDensity;
     private DensityChanger densityFragment;
     private ListPreference mVolumeOverlay;
@@ -129,38 +112,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefs = getPreferenceScreen();
 
-        mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
-
-        mStatusBarSignal = (ListPreference) findPreference(STATUS_BAR_SIGNAL);
-
         mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
-
-        mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
-        mStatusBarClock.setOnPreferenceChangeListener(this);
-        mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(
-            mContentResolver, Settings.System.STATUS_BAR_CLOCK, 1)));
-
-        mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
-        mClockPicker.setOnPreferenceChangeListener(this);
-
-        mExpandedClockPicker = (ColorPickerPreference) findPreference(PREF_EXPANDED_CLOCK_PICKER);
-        mExpandedClockPicker.setOnPreferenceChangeListener(this);
-
-        mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
-        try {
-            if (Settings.System.getInt(mContentResolver,
-                    Settings.System.TIME_12_24) == 24) {
-                mStatusBarAmPm.setEnabled(false);
-                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
-            }
-        } catch (SettingNotFoundException e ) {
-        }
-
-        int statusBarAmPm = Settings.System.getInt(mContentResolver,
-                Settings.System.STATUS_BAR_AM_PM, 2);
-        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
-        mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
-        mStatusBarAmPm.setOnPreferenceChangeListener(this);
 
         mHideExtras = (CheckBoxPreference) findPreference(PREF_HIDE_EXTRAS);
         mHideExtras.setChecked(Settings.System.getBoolean(mContentResolver,
@@ -188,11 +140,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         boolean dualPaneMode = Settings.System.getInt(mContentResolver,
                 Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
         mDualPane.setChecked(dualPaneMode);
-        int statusBarBattery = Settings.System.getInt(mContentResolver,
-                Settings.System.STATUS_BAR_BATTERY, 0);
-        mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
-        mStatusBarBattery.setSummary(mStatusBarBattery.getEntry());
-        mStatusBarBattery.setOnPreferenceChangeListener(this);
 
         mExpandedDesktopPref = (ListPreference) findPreference(KEY_EXPANDED_DESKTOP);
         mExpandedDesktopPref.setOnPreferenceChangeListener(this);
@@ -202,16 +149,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
-
-        int signalStyle = Settings.System.getInt(mContentResolver,
-                Settings.System.STATUS_BAR_SIGNAL_TEXT, 0);
-        mStatusBarSignal.setValue(String.valueOf(signalStyle));
-        mStatusBarSignal.setSummary(mStatusBarSignal.getEntry());
-        mStatusBarSignal.setOnPreferenceChangeListener(this);
-
-        mStatusBarNotifCount = (CheckBoxPreference) findPreference(PREF_STATUS_BAR_NOTIF_COUNT);
-        mStatusBarNotifCount.setChecked(Settings.System.getInt(mContentResolver,
-                Settings.System.STATUSBAR_NOTIF_COUNT, 0) == 1);
 
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
@@ -350,6 +287,12 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                     Settings.System.DUAL_PANE_PREFS,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mStatusbar) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.TABLET_STATUSBAR,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+                    Helpers.restartSystemUI();
+            return true;
         } else if (preference == mDualpane) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.FORCE_DUAL_PANEL,
@@ -399,17 +342,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             // TransparencyDialog(), null).commit();
             openTransparencyDialog();
             return true;
-        } else if (preference == mStatusBarNotifCount) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.STATUSBAR_NOTIF_COUNT,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-            return true;
-        } else if (preference == mStatusbar) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.TABLET_STATUSBAR,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-                    Helpers.restartSystemUI();
-            return true;
         } else if (preference == mCrtOff) {
             Settings.System.putBoolean(mContext.getContentResolver(),
                     Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
@@ -431,50 +363,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.MODE_VOLUME_OVERLAY, value);
             mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
-        } else if (preference == mStatusBarAmPm) {
-            int statusBarAmPm = Integer.valueOf((String) objValue);
-            int index = mStatusBarAmPm.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    STATUS_BAR_AM_PM, statusBarAmPm);
-            mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[index]);
-            return true;
-        } else if (preference == mStatusBarBattery) {
-            int statusBarBattery = Integer.valueOf((String) objValue);
-            int index = mStatusBarBattery.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_BATTERY, statusBarBattery);
-            mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
-            return true;
-        } else if (preference == mStatusBarClock) {
-            int clockStyle = Integer.parseInt((String) objValue);
-            int index = mStatusBarClock.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    STATUS_BAR_CLOCK, clockStyle);
-            mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
-            return true;
-        } else if (preference == mClockPicker) {
-            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
-                    .valueOf(objValue)));
-            preference.setSummary(hex);
-            int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUSBAR_CLOCK_COLOR, intHex);
-            // Log.e("VANIR", "Statusbar: "+intHex + "");
-        } else if (preference == mExpandedClockPicker) {
-            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
-                    .valueOf(objValue)));
-            preference.setSummary(hex);
-            int intHex = ColorPickerPreference.convertToColorInt(hex);
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUSBAR_EXPANDED_CLOCK_COLOR, intHex);
-            // Log.e("VANIR", "Expanded: "+intHex + "");
-        } else if (preference == mStatusBarSignal) {
-            int signalStyle = Integer.valueOf((String) objValue);
-            int index = mStatusBarSignal.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_SIGNAL_TEXT, signalStyle);
-            mStatusBarSignal.setSummary(mStatusBarSignal.getEntries()[index]);
-            return true;
+        
         } else if (preference == mExpandedDesktopPref) {
             int expandedDesktopValue = Integer.valueOf((String) objValue);
             Settings.System.putInt(getContentResolver(),
