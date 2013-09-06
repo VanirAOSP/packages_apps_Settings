@@ -5167,7 +5167,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- dual panel mode -->
     <string name="dual_pane">Dual Panel Settings</string>
     <string name="dual_pane_summary">Just the Settings app (Restart settings to take effect)</string>
-
     <!-- Status Bar stuff from CM -->
     <string name="status_bar_battery_title">Battery Style</string>
     <string name="status_bar_battery_status_icon">Stock icon (default)</string>
@@ -5176,7 +5175,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_battery_status_circle_percentage">Circle w/ percentage</string>
     <string name="status_bar_battery_status_gear">Circle Gear</string>
     <string name="status_bar_battery_status_hidden">Hidden</string>
-
     <!-- Nav Ring Targets -->
     <string name="navbar_ring_cat">Navigation Bar Ring Targets</string>
     <string name="interface_softkey_settings">Softkey Settings</string>

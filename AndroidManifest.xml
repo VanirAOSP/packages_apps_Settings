@@ -190,6 +190,7 @@
         </activity>
 
         <!-- QuietHours AutoSMS -->
+
         <service android:name=".vanir.autosms.AutoSmsService" />
 
         <receiver

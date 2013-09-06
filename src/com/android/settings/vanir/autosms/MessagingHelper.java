@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The CyanogenMod Project
+ * Copyright (C) 2013 The Android Open Kang Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -186,8 +187,8 @@ public class MessagingHelper {
         int currentMinutes = calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
 
         boolean inQuietHours = false;
-
-        // time from now on (in minutes) when the service start/stop should be scheduled
+        // Time from now on (in minutes) when the service
+        // start/stop should be scheduled
         int serviceStartMinutes = -1, serviceStopMinutes = -1;
 
         if (quietHoursEnd < quietHoursStart) {
@@ -202,15 +203,13 @@ public class MessagingHelper {
                 serviceStopMinutes = quietHoursEnd - currentMinutes;
             } else {
                 // Out of QuietHours
-
-                // Current time less than quietHoursStart, greater than quietHoursEnd
-
+                // Current time less than quietHoursStart
+                // greater than quietHoursEnd
                 inQuietHours = false;
                 serviceStartMinutes = quietHoursStart - currentMinutes;
                 serviceStopMinutes = MINUTES_PER_DAY - currentMinutes + quietHoursEnd;
             }
         } else {
-
             // Starts in the morning, ends at night
             if (currentMinutes >= quietHoursStart && currentMinutes <= quietHoursEnd) {
                 // In QuietHours
