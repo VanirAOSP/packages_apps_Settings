@@ -72,6 +72,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_ADAPTIVE_BACKLIGHT = "adaptive_backlight";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
+    private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
 
     // Strings used for building the summary for user defined auto rotate
     private static final String ROTATION_ANGLE_0 = "0";
@@ -100,6 +101,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
     private CheckBoxPreference mAdaptiveBacklight;
+    private CheckBoxPreference mListViewAnimation;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -145,6 +147,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mStatusbarSliderPreference = (CheckBoxPreference) findPreference(STATUS_BAR_BRIGHTNESS);
         mStatusbarSliderPreference.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.STATUSBAR_BRIGHTNESS_SLIDER, 0) == 1));
+ 
+         //ListView Animations
+        mListViewAnimation = (CheckBoxPreference) findPreference(KEY_LISTVIEW_ANIMATION);
+        mListViewAnimation.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+            Settings.System.LISTVIEW_ANIMATION, 0) == 1));
 
         mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
@@ -441,6 +448,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUSBAR_BRIGHTNESS_SLIDER, mStatusbarSliderPreference.isChecked() ? 1 : 0);
             return true; 
+        } else if (preference == mListViewAnimation) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LISTVIEW_ANIMATION, mListViewAnimation.isChecked() ? 0 : 1);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

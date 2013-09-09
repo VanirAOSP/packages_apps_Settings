@@ -60,6 +60,12 @@
         android:title="@string/screensaver_settings_title"
         android:fragment="com.android.settings.DreamSettings" />
 
+    <CheckBoxPreference
+         android:key="listview_animation"
+         android:title="@string/listview_animation_title"
+         android:summary="@string/listview_animation_summary"
+         android:defaultValue="true" />
+
     <com.android.settings.WarnedListPreference
         android:key="font_size"
         android:title="@string/title_font_size"

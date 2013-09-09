@@ -5596,4 +5596,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <string name="statusbar_short_summary">Clock, battery, signal, etc</string>
 
+    <!-- ListView animation -->
+    <string name="listview_animation_title">Alpha listView animation</string>
+    <string name="listview_animation_summary">Basic fade-in listview animation during scrolling</string>
+
+
 </resources>
