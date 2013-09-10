@@ -54,7 +54,7 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
     private static final String PURGEABLE_ASSETS_DEFAULT = "1";
 
     private static final String DISABLE_BOOTANIMATION_PREF = "pref_disable_bootanimation";
-    private static final String DISABLE_BOOTANIMATION_PERSIST_PROP = "persist.sys.nobootanimation";
+    private static final String DISABLE_BOOTANIMATION_PERSIST_PROP = "debug.sf.nobootanimation";
     private static final String DISABLE_BOOTANIMATION_DEFAULT = "0";
 
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
