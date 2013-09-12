@@ -201,4 +201,9 @@
     <style name="KeyguardAppWidgetItem">
         <item name="android:textSize">18sp</item>
     </style>
+
+    <!-- Toggles -->
+    
+    <style name="Theme.CreateShortCut" parent="android:Theme.Holo.DialogWhenLarge">
+    </style> 
 </resources>
