@@ -50,18 +50,26 @@ public class Statusbar extends SettingsPreferenceFragment implements
 
     private static final String TAG = "TogglesLayout";
 
+    private static final String PREF_ENABLE_QS = "enabled_qs";
     private static final String PREF_ENABLE_TOGGLES = "enabled_toggles";
     private static final String PREF_TOGGLES_PER_ROW = "toggles_per_row";
     private static final String PREF_TOGGLE_FAV_CONTACT = "toggle_fav_contact";
     private static final String QUICK_PULLDOWN = "quick_pulldown";
+    private static final String PREF_TOGGLES_STYLE = "toggle_style";
+    private static final String PREF_ALT_BUTTON_LAYOUT = "toggles_layout_preference"; 
     
     private final int PICK_CONTACT = 1;
 
+    Preference mEnabledQS;
     Preference mEnabledToggles;
     Preference mLayout;
+    Preference mTogLayout; 
     ListPreference mTogglesPerRow;
     Preference mFavContact;
     ListPreference mQuickPulldown;
+    ImageListPreference mTogglesLayout;
+    ListPreference mToggleStyle;
+    Preference mResetToggles; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +78,7 @@ public class Statusbar extends SettingsPreferenceFragment implements
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.prefs_statusbar);
 
+        mEnabledQS = findPreference(PREF_ENABLE_QS);
         mEnabledToggles = findPreference(PREF_ENABLE_TOGGLES);
         
         mTogglesPerRow = (ListPreference) findPreference(PREF_TOGGLES_PER_ROW);
@@ -92,6 +101,18 @@ public class Statusbar extends SettingsPreferenceFragment implements
         else {
             getPreferenceScreen().removePreference(mFavContact);
         }
+
+        mToggleStyle = (ListPreference) findPreference(PREF_TOGGLES_STYLE);
+        mToggleStyle.setOnPreferenceChangeListener(this);
+        mToggleStyle.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.STATUSBAR_TOGGLES_STYLE, 3)));
+
+        mTogglesLayout = (ImageListPreference) findPreference(PREF_ALT_BUTTON_LAYOUT);
+        mTogglesLayout.setOnPreferenceChangeListener(this);
+
+        mTogLayout = findPreference("og_toggles");
+
+        mResetToggles = findPreference("reset_toggles"); 
     }
     
      @Override
@@ -115,6 +136,8 @@ public class Statusbar extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
 		ContentResolver resolver = getActivity().getApplicationContext().getContentResolver();
+        boolean result = false;
+
         if (preference == mTogglesPerRow) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getActivity().getContentResolver(),
@@ -125,18 +148,87 @@ public class Statusbar extends SettingsPreferenceFragment implements
             Settings.System.putInt(resolver, Settings.System.QS_QUICK_PULLDOWN,
                     statusQuickPulldown);
             updatePulldownSummary();
-        return true;
+            return true;
+        } else if (preference == mToggleStyle) {
+            int val2 = Integer.parseInt((String) newValue);
+            result = Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_TOGGLES_STYLE, val2);
+        } else if (preference == mTogLayout) {
+            int val3 = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_TOGGLES_STYLE, val3 == 0 ? 3 : 2);
+            result = Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_TOGGLES_USE_BUTTONS,
+                    val3);
         }
-        return false;
+        return result;
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 		ContentResolver resolver = getActivity().getApplicationContext().getContentResolver();
-        if (preference == mEnabledToggles) {
+        if (preference == mEnabledQS) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-            ArrayList<String> enabledToggles = getTogglesStringArray(getActivity());
+            ArrayList<String> enabledToggles = getQSTogglesStringArray(getActivity());
+
+            final String[] finalArray = getResources().getStringArray(
+                    R.array.available_toggles_entries);
+            final String[] values = getResources().getStringArray(R.array.available_toggles_values);
+
+            boolean checkedToggles[] = new boolean[finalArray.length];
+
+            for (int i = 0; i < checkedToggles.length; i++) {
+                if (enabledToggles.contains(finalArray[i])) {
+                    checkedToggles[i] = true;
+                }
+            }
+
+            builder.setTitle(R.string.toggles_display_dialog);
+            builder.setCancelable(true);
+            builder.setPositiveButton(R.string.toggles_display_close,
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.setMultiChoiceItems(values, checkedToggles, new OnMultiChoiceClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    String toggleKey = (finalArray[which]);
+
+                    if (isChecked)
+                        addQSToggle(getActivity(), toggleKey);
+                    else
+                        removeQSToggle(getActivity(), toggleKey);
+                        
+                     if (toggleKey.equals("FAVCONTACT")) {
+                        mFavContact.setEnabled(isChecked);
+                    }
+                }
+            });
+
+            AlertDialog d = builder.create();
+
+            d.show();
+
+            return true;
+        } else if (preference == mLayout) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            QSTogglesLayout fragment = new QSTogglesLayout();
+            ft.addToBackStack("toggles_layout");
+            ft.replace(this.getId(), fragment);
+            ft.commit();
+        } else if (preference == mFavContact) {
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, PICK_CONTACT);
+        } else if (preference == mEnabledToggles) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            ArrayList<String> enabledToggles = getQSTogglesStringArray(getActivity());
 
             final String[] finalArray = getResources().getStringArray(
                     R.array.available_toggles_entries);
@@ -170,10 +262,6 @@ public class Statusbar extends SettingsPreferenceFragment implements
                         addToggle(getActivity(), toggleKey);
                     else
                         removeToggle(getActivity(), toggleKey);
-                        
-                     if (toggleKey.equals("FAVCONTACT")) {
-                        mFavContact.setEnabled(isChecked);
-                    }
                 }
             });
 
@@ -182,17 +270,19 @@ public class Statusbar extends SettingsPreferenceFragment implements
             d.show();
 
             return true;
-        } else if (preference == mLayout) {
+        } else if (preference == mTogLayout) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             TogglesLayout fragment = new TogglesLayout();
             ft.addToBackStack("toggles_layout");
             ft.replace(this.getId(), fragment);
             ft.commit();
-        }
-        else if (preference == mFavContact) {
-            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-            startActivityForResult(intent, PICK_CONTACT);
-        }
+
+        } else if (preference == mResetToggles) {
+            // return default setup
+            Settings.System.putString(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_TOGGLES, "WIFI|BT|GPS|ROTATE|VIBRATE|SYNC|SILENT");
+            return true;
+        } 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -226,18 +316,30 @@ public class Statusbar extends SettingsPreferenceFragment implements
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    public void addQSToggle(Context context, String key) {
+        ArrayList<String> enabledToggles = getQSTogglesStringArray(context);
+        enabledToggles.add(key);
+        setQSTogglesFromStringArray(context, enabledToggles);
+    }
+
     public void addToggle(Context context, String key) {
         ArrayList<String> enabledToggles = getTogglesStringArray(context);
         enabledToggles.add(key);
         setTogglesFromStringArray(context, enabledToggles);
+    } 
+
+    public void removeQSToggle(Context context, String key) {
+        ArrayList<String> enabledToggles = getQSTogglesStringArray(context);
+        enabledToggles.remove(key);
+        setQSTogglesFromStringArray(context, enabledToggles);
     }
 
     public void removeToggle(Context context, String key) {
         ArrayList<String> enabledToggles = getTogglesStringArray(context);
         enabledToggles.remove(key);
         setTogglesFromStringArray(context, enabledToggles);
-    }
-    
+    } 
+
     private void updatePulldownSummary() {
         ContentResolver resolver = getActivity().getApplicationContext().getContentResolver();
         int summaryId;
@@ -260,6 +362,138 @@ public class Statusbar extends SettingsPreferenceFragment implements
             mQuickPulldown.setSummary(getResources().getString(directionId)
                     + " " + getResources().getString(summaryId));
         }
+    }
+
+    public class QSTogglesLayout extends ListFragment {
+
+        private ListView mQSButtonList;
+        private ButtonAdapter mQSButtonAdapter;
+        private Context mContext;
+
+        /** Called when the activity is first created. */
+        @Override
+        public void onCreate(Bundle icicle) {
+            super.onCreate(icicle);
+
+            mContext = getActivity().getBaseContext();
+
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            View v = inflater.inflate(R.layout.order_power_widget_buttons_activity, container,
+                    false);
+
+            return v;
+        }
+
+        public void onActivityCreated(Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            mQSButtonList = this.getListView();
+            ((TouchInterceptor) mQSButtonList).setDropListener(mDropListener);
+            mQSButtonAdapter = new ButtonAdapter(mContext);
+            setListAdapter(mQSButtonAdapter);
+        };
+
+        @Override
+        public void onDestroy() {
+            ((TouchInterceptor) mQSButtonList).setDropListener(null);
+            setListAdapter(null);
+            super.onDestroy();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            // reload our buttons and invalidate the views for redraw
+            mQSButtonAdapter.reloadButtons();
+            mQSButtonList.invalidateViews();
+        }
+
+        private TouchInterceptor.DropListener mDropListener = new TouchInterceptor.DropListener() {
+            public void drop(int from, int to) {
+                // get the current button list
+                ArrayList<String> toggles = getQSTogglesStringArray(mContext);
+
+                // move the button
+                if (from < toggles.size()) {
+                    String toggle = toggles.remove(from);
+
+                    if (to <= toggles.size()) {
+                        toggles.add(to, toggle);
+
+                        // save our buttons
+                        setQSTogglesFromStringArray(mContext, toggles);
+
+                        // tell our adapter/listview to reload
+                        mQSButtonAdapter.reloadButtons();
+                        mQSButtonList.invalidateViews();
+                    }
+                }
+            }
+        };
+
+        private class ButtonAdapter extends BaseAdapter {
+            private Context mContext;
+            private Resources mSystemUIResources = null;
+            private LayoutInflater mInflater;
+            private ArrayList<Toggle> mToggles;
+
+            public ButtonAdapter(Context c) {
+                mContext = c;
+                mInflater = LayoutInflater.from(mContext);
+
+                PackageManager pm = mContext.getPackageManager();
+                if (pm != null) {
+                    try {
+                        mSystemUIResources = pm.getResourcesForApplication("com.android.systemui");
+                    } catch (Exception e) {
+                        mSystemUIResources = null;
+                        Log.e(TAG, "Could not load SystemUI resources", e);
+                    }
+                }
+
+                reloadButtons();
+            }
+
+            public void reloadButtons() {
+                ArrayList<String> toggles = getQSTogglesStringArray(mContext);
+
+                mToggles = new ArrayList<Toggle>();
+                for (String toggle : toggles) {
+                    mToggles.add(new Toggle(toggle, 0));
+                }
+            }
+
+            public int getCount() {
+                return mToggles.size();
+            }
+
+            public Object getItem(int position) {
+                return mToggles.get(position);
+            }
+
+            public long getItemId(int position) {
+                return position;
+            }
+
+            public View getView(int position, View convertView, ViewGroup parent) {
+                final View v;
+                if (convertView == null) {
+                    v = mInflater.inflate(R.layout.order_power_widget_button_list_item, null);
+                } else {
+                    v = convertView;
+                }
+
+                Toggle toggle = mToggles.get(position);
+                final TextView name = (TextView) v.findViewById(R.id.name);
+                name.setText(toggle.getId());
+                return v;
+            }
+        }
+
     }
 
     public class TogglesLayout extends ListFragment {
@@ -323,7 +557,7 @@ public class Statusbar extends SettingsPreferenceFragment implements
                         toggles.add(to, toggle);
 
                         // save our buttons
-                        setTogglesFromStringArray(mContext, toggles);
+                       setTogglesFromStringArray(mContext, toggles);
 
                         // tell our adapter/listview to reload
                         mButtonAdapter.reloadButtons();
@@ -368,7 +602,6 @@ public class Statusbar extends SettingsPreferenceFragment implements
             public int getCount() {
                 return mToggles.size();
             }
-
             public Object getItem(int position) {
                 return mToggles.get(position);
             }
@@ -386,7 +619,7 @@ public class Statusbar extends SettingsPreferenceFragment implements
                 }
 
                 Toggle toggle = mToggles.get(position);
-                final TextView name = (TextView) v.findViewById(R.id.name);
+               final TextView name = (TextView) v.findViewById(R.id.name);
                 name.setText(toggle.getId());
                 return v;
             }
@@ -412,7 +645,7 @@ public class Statusbar extends SettingsPreferenceFragment implements
         }
     }
 
-    public void setTogglesFromStringArray(Context c, ArrayList<String> newGoodies) {
+    public void setQSTogglesFromStringArray(Context c, ArrayList<String> newGoodies) {
         String newToggles = "";
 
         for (String s : newGoodies)
@@ -428,7 +661,23 @@ public class Statusbar extends SettingsPreferenceFragment implements
                 newToggles);
     }
 
-    public ArrayList<String> getTogglesStringArray(Context c) {
+    public void setTogglesFromStringArray(Context c, ArrayList<String> newGoodies) {
+        String newToggles = "";
+
+        for (String s : newGoodies)
+            newToggles += s + "|";
+
+        // remote last |
+        try {
+            newToggles = newToggles.substring(0, newToggles.length() - 1);
+        } catch (StringIndexOutOfBoundsException e) {
+        }
+
+        Settings.System.putString(c.getContentResolver(), Settings.System.STATUSBAR_TOGGLES,
+                newToggles);
+    }
+
+    public ArrayList<String> getQSTogglesStringArray(Context c) {
         String clusterfuck = Settings.System.getString(c.getContentResolver(),
                 Settings.System.QUICK_TOGGLES);
 
@@ -438,9 +687,9 @@ public class Statusbar extends SettingsPreferenceFragment implements
             clusterfuck = getResources().getString(R.string.toggle_default_entries);
         }
 
-        String[] togglesStringArray = clusterfuck.split("\\|");
+        String[] QSStringArray = clusterfuck.split("\\|");
         ArrayList<String> iloveyou = new ArrayList<String>();
-        for (String s : togglesStringArray) {
+        for (String s : QSStringArray) {
             if(s != null && s != "") {
                 Log.e(TAG, "adding: " + s);
                 iloveyou.add(s);
@@ -448,4 +697,24 @@ public class Statusbar extends SettingsPreferenceFragment implements
         }
         return iloveyou;
     }
+
+    public ArrayList<String> getTogglesStringArray(Context c) {
+        String dingdong = Settings.System.getString(c.getContentResolver(),
+                Settings.System.STATUSBAR_TOGGLES);
+
+        if (dingdong == null) {
+            Log.e(TAG, "clusterfuck dingdong was null");
+            // return null;
+            dingdong = "WIFI|BT|GPS|ROTATE|VIBRATE|SYNC|SILENT";
+        }
+
+        String[] togglesStringArray = dingdong.split("\\|");
+        ArrayList<String> goldfish = new ArrayList<String>();
+        for (String s : togglesStringArray) {
+            Log.e(TAG, "adding: " + s);
+            goldfish.add(s);
+        }
+
+        return goldfish;
+    } 
 }

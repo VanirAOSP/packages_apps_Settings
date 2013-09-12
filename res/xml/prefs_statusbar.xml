@@ -6,15 +6,18 @@
     android:title="@string/statusbar_settings"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory
+        android:key="quicksetting_options"
+        android:title="@string/statusbar_settings" >
     <Preference
-        android:key="enabled_toggles"
-        android:summary="@string/enabled_toggles_summary"
-        android:title="@string/enabled_toggles_title" />
+        android:key="enabled_qs"
+        android:summary="@string/enabled_QS_summary"
+        android:title="@string/enabled_QS_title" />
 
     <Preference
         android:key="toggles"
-        android:summary="@string/toggles_order_summary"
-        android:title="@string/toggles_order_title" />
+        android:summary="@string/QS_order_summary"
+        android:title="@string/QS_order_title" />
 
     <ListPreference
         android:entries="@array/toggles_per_row_entries"
@@ -34,4 +37,47 @@
             android:entries="@array/quick_pulldown_entries"
             android:entryValues="@array/quick_pulldown_values"
             android:persistent="false" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="toggle_settings"
+        android:title="@string/toggle_settings_title" >
+
+        <Preference
+            android:key="enable_toggles"
+            android:summary="@string/enabled_toggles_summary"
+            android:title="@string/enabled_toggles_title" />
+
+    <Preference
+        android:key="og_toggles"
+        android:summary="@string/toggles_order_summary"
+        android:title="@string/toggles_order_title" />
+
+    <com.android.settings.vanir.ImageListPreference
+        android:entries="@array/toggles_layout_entries"
+        android:entryValues="@array/toggles_layout_entries"
+        settings:entryImages="@array/toggles_layout_images"
+        settings:summaryImage="@drawable/toggle_layout_summary"
+        android:key="toggles_layout_preference"
+        android:title="@string/toggles_layout_title" />
+
+        <ListPreference
+            android:entries="@array/toggle_style_entries"
+            android:entryValues="@array/toggle_style_values"
+            android:key="toggle_style"
+            android:summary="@string/toggle_style_summary"
+            android:title="@string/toggle_style_title" />
+
+        <Preference
+            android:key="reset_toggles"
+            android:summary="@string/reset_toggles_summary"
+            android:title="@string/reset_toggles_title" >
+        </Preference>
+        
+  <!--  <ListPreference
+            android:entries="@array/brightness_location_entries"
+            android:entryValues="@array/brightness_location_values"
+            android:key="brightness_location"
+            android:title="@string/brightness_location_title" /> -->
+    </PreferenceCategory> 
 </PreferenceScreen>
