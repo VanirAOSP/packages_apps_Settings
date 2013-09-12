@@ -5332,6 +5332,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_enabled_summaryOff">HALO is disabled</string>
     <string name="halo_pie_only_title">Only with Pie</string>
     <string name="halo_pie_only_summary">Only allow HALO to work when Pie is on</string>
+    <string name="halo_behavior_title">HALO Behavior</string>
     <string name="halo_hide_title">Hide HALO after activity</string>
     <string name="halo_hide_summary">HALO will appear for incoming tasks and scroll out of sight after a while</string>
     <string name="halo_reversed_title">Reverse HALO gestures</string>
@@ -5341,14 +5342,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_state_black">Black list</string>
     <string name="halo_state_white">White list</string>
     <string name="halo_pause_title">HALO pause active app</string>
-    <string name="halo_pause_summary">When opening an app with HALO the underlying app will get paused (enabled by default on low memory devices)</string>
-    <string name="halo_colors_title">Custom colors</string>
-    <string name="halo_colors_summary">Enable custom colors for HALO instead of the default theme colors</string>
-    <string name="halo_circle_color_title">Circle color</string>
-    <string name="halo_bubble_color_title">Speech bubble color</string>
-    <string name="halo_bubble_text_color_title">Speech bubble text color</string>
-    <string name="halo_effect_color_title">Effect color</string>
-    <string name="halo_effect_color_summary">Requires a systemui restart</string>
+    <string name="halo_pause_summary">When opening an app with HALO the underlying app will get paused</string>
+    <string name="halo_ninja_title">Ninja mode</string>
+    <string name="halo_ninja_summary">HALO will disappear completely when empty</string>
+    <string name="halo_notification_msgbox_title">Enable message pop-up</string>
+    <string name="halo_notification_msgbox_summary">Show message box for incoming notifications</string>
+    <string name="halo_unlock_ping_title">Ping on unlock</string>
+    <string name="halo_unlock_ping_summary">HALO will ping when device is unlocked if new notifications were received</string>
+
     <string name="halo_size_title">HALO size</string>
     <string name="halo_size_miniscule">Miniscule</string>
     <string name="halo_size_small">Small</string>
@@ -5356,6 +5357,27 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="halo_size_large">Large</string>
     <string name="halo_size_gigantic">Gigantic</string>
     <string name="halo_size_monster">Monster</string>
+
+    <string name="halo_notification_count_title">Notification count</string>
+    <string name="halo_notification_count_summary">Display notification counts on HALO</string>
+    <string name="halo_notification_count_none">None</string>
+    <string name="halo_notification_count_total">Total</string>
+    <string name="halo_notification_count_individual">Per app</string>
+    <string name="halo_notification_count_both">Both</string>
+
+    <string name="halo_msgbox_animation_title">Message box animation</string>
+    <string name="halo_msgbox_animation_summary">Halo message box animation for incoming notifications</string>
+    <string name="halo_msgbox_animation_none">None</string>
+    <string name="halo_msgbox_animation_flip">Flip</string>
+
+    <string name="halo_colors_title">Custom colors</string>
+    <string name="halo_colors_summary">Enable custom colors for HALO instead of the default theme colors</string>
+    <string name="halo_circle_color_title">Circle color</string>
+    <string name="halo_bubble_color_title">Speech bubble color</string>
+    <string name="halo_bubble_text_color_title">Speech bubble text color</string>
+    <string name="halo_effect_color_title">Effect color</string>
+    <string name="halo_effect_color_summary">Requires a systemui restart</string>
+
 
     <!-- Advanced, Device specific (DeviceParts) settings -->
     <string name="advanced_settings_title">Advanced</string>
