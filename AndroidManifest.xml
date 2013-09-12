@@ -1796,16 +1796,6 @@
                 <category android:name="android.intent.category.SHORTCUT" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".fragments.StatusBarToggles"
-            android:label="@string/title_statusbar_toggles" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-        </activity>
 <!--
         <activity
             android:name=".fragments.Vibrations"
