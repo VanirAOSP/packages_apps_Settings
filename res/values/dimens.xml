@@ -97,4 +97,19 @@
     <dimen name="auto_brightness_preview_marker_size">3dip</dimen>
     <dimen name="auto_brightness_preview_grid_margin">3dip</dimen>
     <dimen name="auto_brightness_dialog_more_button_size">48dp</dimen>
+
+    <!--  start toggles  -->
+    <!-- height of a normal list item in edit playlist mode -->
+    <dimen name="normal_height">64dip</dimen>
+    <!-- height of an expanded list item in edit playlist mode -->
+    <dimen name="expanded_height">128dip</dimen>
+    
+    <dimen name="navigation_bar_48">48.0dip</dimen>
+    <dimen name="navigation_bar_44">44.0dip</dimen>
+    <dimen name="navigation_bar_42">42.0dip</dimen>
+    <dimen name="navigation_bar_40">40.0dip</dimen>
+    <dimen name="navigation_bar_36">36.0dip</dimen>
+    <dimen name="navigation_bar_30">30.0dip</dimen>
+    <dimen name="navigation_bar_24">24.0dip</dimen>
+    <!--  End toggles  --> 
 </resources>

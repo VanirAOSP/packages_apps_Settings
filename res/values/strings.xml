@@ -4794,13 +4794,14 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="toggle_ime">IME</string>
     <string name="toggle_battery">Battery</string>
     <string name="toggle_brightness">Brightness</string>
-    <string name="status_bar_title">Quicksettings</string>
-    <string name="status_bar_summary">Active tiles, order, etc</string>
+    <string name="status_bar_title">Quicksettings &amp; toggles</string>
+    <string name="status_bar_summary">Active tiles, toggles, order, etc</string>
     <string name="statusbar_settings">Quicksettings</string>
-    <string name="toggles_order_summary">Choose the order which your quick settings are displayed</string>
-    <string name="toggles_order_title">Quicksetting tile order</string>
-    <string name="enabled_toggles_summary">Choose which quicksetting tiles are enabled/disabled</string>
-    <string name="enabled_toggles_title">Active quicksetting tiles</string>
+    <string name="toggle_settings_title">Toggles</string>
+    <string name="QS_order_summary">Choose the order which your quick settings are displayed</string>
+    <string name="QS_order_title">Quicksetting tile order</string>
+    <string name="enabled_QS_summary">Choose which quicksetting tiles are enabled/disabled</string>
+    <string name="enabled_QS_title">Active quicksetting tiles</string>
     <string name="title_statusbar_toggles">Quicksetting Tiles</string>
     <string name="toggles_display_dialog">Choose which toggles to use</string>
     <string name="toggles_display_close">Close</string>
@@ -5419,7 +5420,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="pie_controls_summary">Adjust the Pie controls</string>
     <string name="pie_enable_title">Enable Pie</string>
     <string name="pie_enable_summaryOn">Nom nom nom nom</string>
-    <string name="pie_enable_summaryOff">No Nom nom nom nom</string>
+    <string name="pie_enable_summaryOff">Pie is disabled</string>
     <string name="pie_expanded_only_title">Only in expanded desktop</string>
     <string name="pie_expanded_only_summary">Only allow pie to work when Expanded Desktop is on</string>
     <string name="pie_gravity_title">Pie gravity</string>
@@ -5646,5 +5647,35 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <string name="home_wake_title">Home button wake</string>
     <string name="home_wake_summary">Pressing the home button will wake your device</string>
+
+    <!-- Toogles -->
+    <string name="header_statusbar">Statusbar</string>
+    <string name="toggles_layout">Toggles</string>
+    
+        <!-- Header Summaries -->
+    <string name="header_summary_toggles">Customize toggles</string>
+    
+        <!-- General Strings -->
+    <string name="advanced_settings">Advanced settings</string>
+    <string name="misc_short">Misc</string>
+    
+        <!-- Statusbar | Toggles -->
+    <string name="toggle_style_title">Toggle style</string>
+    <string name="toggle_style_summary">Whether to show icons or text on your toggles.</string>
+    <string name="toggles_layout_title">Toggle Layout</string>
+    <string name="enabled_toggles_title">Enabled toggles</string>
+    <string name="enabled_toggles_summary">Choose toggles to display</string>
+    <string name="toggles_display_dialog">Choose which toggles to use</string>
+    <string name="toggles_display_close">Close</string>
+    <string name="toggles_order_title">Toggle order</string>
+    <string name="toggles_order_summary">Choose the order which your toggles are displayed</string>
+    <string name="brightness_location_title">Brightness location</string>
+    <string name="reset_toggles_title">Reset toggles</string>
+    <string name="reset_toggles_summary">Reset all toggles and their order</string>
+    <string name="toggle_control_title">Enable toggles</string>
+    <string name="toggle_control_summary">Enable 4.1 style toggles in the notification shade</string>
+    
+        <!-- Toggle Strings to be called from device overlays -->
+    <string name="toggle_fast_charge">Fast charge</string>
 
 </resources>
