@@ -5622,5 +5622,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="listview_animation_title">Alpha listView animation</string>
     <string name="listview_animation_summary">Basic fade-in listview animation during scrolling</string>
 
+    <string name="home_wake_title">Home button wake</string>
+    <string name="home_wake_summary">Pressing the home button will wake your device</string>
 
 </resources>

@@ -17,6 +17,7 @@
 package com.android.settings.vanir;
 
 import android.os.Bundle;
+import android.content.res.Resources;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -81,6 +82,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
         final boolean hasAssistKey = (deviceKeys & KEY_MASK_ASSIST) != 0;
         final boolean hasAppSwitchKey = (deviceKeys & KEY_MASK_APP_SWITCH) != 0;
 
+        final Resources res = getResources();
         addPreferencesFromResource(R.xml.hardware_keys);
         PreferenceScreen prefSet = getPreferenceScreen();
 
@@ -106,6 +108,9 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                 HARDWARE_KEYS_CATEGORY_BINDINGS);
 
         if (hasHomeKey) {
+            if (!res.getBoolean(R.bool.config_show_homeWake)) {
+                bindingsCategory.removePreference(findPreference(Settings.System.HOME_WAKE_SCREEN));
+            }
             int homeLongPressAction;
             if (hasAppSwitchKey) {
                 homeLongPressAction = Settings.System.getInt(getContentResolver(),
