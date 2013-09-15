@@ -5320,6 +5320,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display number of pending notifications on the status bar</string>
 
+    <!-- Network speed -->
+    <string name="show_network_speed">Network speed indicator</string>
+    <string name="show_network_speed_summary">Show network speed in statsbar</string>
+
     <!-- USB Mass Storage -->
     <string name="storage_rescan_media">Rescan media for the storage volume</string>
     <string name="storage_rescan_media_complete">Scan completed</string>

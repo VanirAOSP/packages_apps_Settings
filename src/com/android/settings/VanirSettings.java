@@ -83,6 +83,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final String KEY_HARDWARE_KEYS = "hardware_keys";
     private static final CharSequence PREF_POWER_CRT_MODE = "system_power_crt_mode";
     private static final CharSequence PREF_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
+    private static final String KEY_STATUS_BAR_TRAFFIC = "status_bar_traffic";
 
     private CheckBoxPreference mFastTorch;
     private CheckBoxPreference mDualPane;
@@ -95,6 +96,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private ListPreference mCrtMode;
     private CheckBoxPreference mCrtOff;
     private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+    private CheckBoxPreference mStatusBarTraffic;
 
     private Preference mLcdDensity;
     private DensityChanger densityFragment;
@@ -179,6 +181,10 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
         mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getBoolean(mContentResolver,
                 Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, true));
+
+        mStatusBarTraffic = (CheckBoxPreference) findPreference(KEY_STATUS_BAR_TRAFFIC);
+        mStatusBarTraffic.setChecked(Settings.System.getBoolean(mContentResolver,
+                Settings.System.STATUS_BAR_TRAFFIC, false));
 
         // hide option if device is already set to never wake up
         if(!mContext.getResources().getBoolean(
@@ -318,6 +324,11 @@ public class VanirSettings extends SettingsPreferenceFragment implements
 
             alert.setTitle(R.string.custom_carrier_label_title);
             alert.setMessage(R.string.custom_carrier_label_explain);
+        } else if (preference == mStatusBarTraffic) {
+            Settings.System.putBoolean(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_TRAFFIC,
+                    mStatusBarTraffic.isChecked());
+            return true;
 
             // Set an EditText view to get user input
             final EditText input = new EditText(getActivity());
