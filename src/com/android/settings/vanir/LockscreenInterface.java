@@ -31,21 +31,21 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
     
-    public static final String KEY_SEE_TRHOUGH = "see_through";
+    private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS = "lockscreen_hide_initial_page_hints";
-    public static final String KEY_ALLOW_ROTATION = "allow_rotation";
+    private static final String KEY_ALLOW_ROTATION = "allow_rotation";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
     private static final String PREF_QUICK_UNLOCK = "lockscreen_quick_unlock_control";
 
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
-    CheckBoxPreference mLockscreenHideInitialPageHints;
+    private CheckBoxPreference mLockscreenHideInitialPageHints;
     private CheckBoxPreference mAllowRotation;
-    CheckBoxPreference mLockscreenUseCarousel;
+    private CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mCameraWidget;
-    CheckBoxPreference mQuickUnlock;
+    private CheckBoxPreference mQuickUnlock;
     private Context mContext;
 
     public boolean hasButtons() {
@@ -68,11 +68,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
               Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false)); 
 
         mQuickUnlock = (CheckBoxPreference)findPreference(PREF_QUICK_UNLOCK);
-        mQuickUnlock.setChecked(Settings.System.getBoolean(mContext.getContentResolver(),
+        mQuickUnlock.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, false));       
       
         mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
-        mAllowRotation.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+        mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
 
          mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
@@ -80,28 +80,22 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 			                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
 
 		mCameraWidget = (CheckBoxPreference) prefSet.findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
-        mCameraWidget.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+        mCameraWidget.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.KG_CAMERA_WIDGET, 0) == 1);
 
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
-        if (Utils.isTablet(getActivity())) {
-	       getPreferenceScreen().removePreference(mMaximizeWidgets);
+        if (Utils.isTablet(getActivity()) || Utils.isHybrid(getActivity())) {
+	        getPreferenceScreen().removePreference(mMaximizeWidgets);
 	        mMaximizeWidgets = null;
         } else {
-        mMaximizeWidgets.setOnPreferenceChangeListener(this);
+            mMaximizeWidgets.setOnPreferenceChangeListener(this);
         }
-}
+        adjustYourAttitude();
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        
-        ContentResolver cr = getActivity().getContentResolver();
-
-        if (mMaximizeWidgets != null) {
-            mMaximizeWidgets.setChecked(Settings.System.getInt(cr,
-                    Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, 0) == 1);
-        }
     }
 
     @Override
@@ -112,25 +106,26 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 		if (preference == mSeeThrough) {
-			Settings.System.putInt(mContext.getContentResolver(),
+			Settings.System.putInt(getActivity().getContentResolver(),
 			        Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
 			        ? 1 : 0);
 		return true;
 		} else if (preference == mCameraWidget) {
-            Settings.System.putInt(mContext.getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.KG_CAMERA_WIDGET, mCameraWidget.isChecked() ? 1 : 0);
             return true;
 		} else if (preference == mLockscreenHideInitialPageHints) {
             Settings.System.putInt(getActivity().getContentResolver(),
                   Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS,
             ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
+            adjustYourAttitude();
         return true;
         } else if (preference == mAllowRotation) {
-            Settings.System.putInt(mContext.getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
                     ? 1 : 0);
         } else if (preference == mQuickUnlock) {
-            Settings.System.putBoolean(mContext.getContentResolver(),
+            Settings.System.putBoolean(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL,
                     ((CheckBoxPreference) preference).isChecked());
             return true;
@@ -138,6 +133,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL,
                     ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
+            adjustYourAttitude();
            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -153,5 +149,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 			return true;
 	    }
 	    return false;
+    }
+
+    private void adjustYourAttitude() {
+        boolean mode = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, 0) == 1;
+        if (mode) {
+            mLockscreenHideInitialPageHints.setEnabled(false);
+        } else {
+            mLockscreenHideInitialPageHints.setEnabled(true);
+        }
     }
 }
