@@ -4867,6 +4867,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="hardware_keys_bindings_title">Key actions</string>
     <string name="hardware_keys_enable_custom_title">Enable custom actions</string>
     <string name="hardware_keys_home_long_press_title">Home key (long press)</string>
+    <string name="hardware_keys_home_double_tap_title">Home key (double tap)</string>
     <string name="hardware_keys_menu_press_title">Menu key</string>
     <string name="hardware_keys_menu_long_press_title">Menu key (long press)</string>
     <string name="hardware_keys_assist_press_title">Search key</string>
