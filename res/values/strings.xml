@@ -5085,6 +5085,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="ad_redisplay_1h">1 hour</string>
     <string name="ad_redisplay_2h">2 hours</string>
     <string name="ad_redisplay_5h">5 hours</string>
+    <string name="ad_show_date_title">Show date</string>
+    <string name="ad_show_date_summary">Show the date above the clock</string>
+    <string name="ad_show_ampm_title">Show AM/PM</string>
+    <string name="ad_show_ampm_summary">Show AM/PM indicator next to time when using 12hour format</string>
 
     <!-- String for IconPicker -->
     <string name="icon_picker_title">Choose icon source</string>
