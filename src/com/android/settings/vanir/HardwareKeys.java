@@ -35,6 +35,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     private static final String HARDWARE_KEYS_CATEGORY_BINDINGS = "hardware_keys_bindings";
     private static final String HARDWARE_KEYS_ENABLE_CUSTOM = "hardware_keys_enable_custom";
     private static final String HARDWARE_KEYS_HOME_LONG_PRESS = "hardware_keys_home_long_press";
+    private static final String HARDWARE_KEYS_HOME_DOUBLE_TAP = "hardware_keys_home_double_tap";
     private static final String HARDWARE_KEYS_MENU_PRESS = "hardware_keys_menu_press";
     private static final String HARDWARE_KEYS_MENU_LONG_PRESS = "hardware_keys_menu_long_press";
     private static final String HARDWARE_KEYS_ASSIST_PRESS = "hardware_keys_assist_press";
@@ -63,6 +64,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
 
     private CheckBoxPreference mEnableCustomBindings;
     private ListPreference mHomeLongPressAction;
+    private ListPreference mHomeDoubleTapAction;
     private ListPreference mMenuPressAction;
     private ListPreference mMenuLongPressAction;
     private ListPreference mAssistPressAction;
@@ -90,6 +92,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                 HARDWARE_KEYS_ENABLE_CUSTOM);
         mHomeLongPressAction = (ListPreference) prefSet.findPreference(
                 HARDWARE_KEYS_HOME_LONG_PRESS);
+	mHomeDoubleTapAction = (ListPreference) prefSet.findPreference(
+                HARDWARE_KEYS_HOME_DOUBLE_TAP);
         mMenuPressAction = (ListPreference) prefSet.findPreference(
                 HARDWARE_KEYS_MENU_PRESS);
         mMenuLongPressAction = (ListPreference) prefSet.findPreference(
@@ -112,18 +116,28 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                 bindingsCategory.removePreference(findPreference(Settings.System.HOME_WAKE_SCREEN));
             }
             int homeLongPressAction;
+            int homeDoubleTapAction;
             if (hasAppSwitchKey) {
                 homeLongPressAction = Settings.System.getInt(getContentResolver(),
                         Settings.System.KEY_HOME_LONG_PRESS_ACTION, ACTION_NOTHING);
+                homeDoubleTapAction = Settings.System.getInt(getContentResolver(),
+                        Settings.System.KEY_HOME_DOUBLE_TAP_ACTION, ACTION_NOTHING);
             } else {
                 homeLongPressAction = Settings.System.getInt(getContentResolver(),
                         Settings.System.KEY_HOME_LONG_PRESS_ACTION, ACTION_APP_SWITCH);
+                homeDoubleTapAction = Settings.System.getInt(getContentResolver(),
+                        Settings.System.KEY_HOME_DOUBLE_TAP_ACTION, ACTION_APP_SWITCH);
             }
             mHomeLongPressAction.setValue(Integer.toString(homeLongPressAction));
             mHomeLongPressAction.setSummary(mHomeLongPressAction.getEntry());
             mHomeLongPressAction.setOnPreferenceChangeListener(this);
+
+            mHomeDoubleTapAction.setValue(Integer.toString(homeDoubleTapAction));
+            mHomeDoubleTapAction.setSummary(mHomeDoubleTapAction.getEntry());
+            mHomeDoubleTapAction.setOnPreferenceChangeListener(this);
         } else {
             bindingsCategory.removePreference(mHomeLongPressAction);
+            bindingsCategory.removePreference(mHomeDoubleTapAction);
         }
 
         if (hasMenuKey) {
@@ -199,6 +213,14 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                     mHomeLongPressAction.getEntries()[index]);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.KEY_HOME_LONG_PRESS_ACTION, value);
+            return true;
+        } else if (preference == mHomeDoubleTapAction) {
+            int value = Integer.valueOf((String) newValue);
+            int index = mHomeDoubleTapAction.findIndexOfValue((String) newValue);
+            mHomeDoubleTapAction.setSummary(
+                    mHomeDoubleTapAction.getEntries()[index]);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.KEY_HOME_DOUBLE_TAP_ACTION, value);
             return true;
         } else if (preference == mMenuPressAction) {
             int value = Integer.valueOf((String) newValue);
