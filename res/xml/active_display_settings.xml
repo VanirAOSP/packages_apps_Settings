@@ -54,6 +54,20 @@
         android:entryValues="@array/ad_redisplay_values"
         android:dependency="ad_enable"/>
 
+    <CheckBoxPreference
+        android:key="ad_show_date"
+        android:persistent="false"
+        android:title="@string/ad_show_date_title"
+        android:summary="@string/ad_show_date_summary"
+        android:dependency="ad_enable" />
+
+    <CheckBoxPreference
+        android:key="ad_show_ampm"
+        android:persistent="false"
+        android:title="@string/ad_show_ampm_title"
+        android:summary="@string/ad_show_ampm_summary"
+        android:dependency="ad_enable"/>
+
     <com.android.settings.vanir.SeekBarPreference
         android:key="ad_brightness"
         android:persistent="false"
