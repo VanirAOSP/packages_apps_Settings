@@ -4955,6 +4955,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="trigger_top_summary">Adjust the vertical postion of the trigger area</string>
     <string name="trigger_bottom_title">Trigger height</string>
     <string name="trigger_bottom_summary">Adjust the height of the trigger area</string>
+    <!-- Change Log strings -->
+    <string name="changelog_title">View changelog</string>
+    <string name="changelog_dialog">Changelog</string>
+    <string name="changelog_loading">Loading changelog...</string>
+    <string name="changelog_error">Unable to load changelog</string>
+    <string name="changelog_unknown">Unknown</string>
+    <string name="changelog_version">Version</string>
 
     <!-- time range preference -->
     <string name="start_time_title">Start</string>
@@ -5704,5 +5711,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="location_gps_source_summary">Choose to use either an external bluetooth GPS or internal GPS as location provider</string>
     <string name="location_gps_source_notification_title">Alert</string>
     <string name="location_gps_source_notification">The GPS source has been switched! GPS will be disabled. Please re-enable before use!</string>
+
+    <!-- Vanir Updater -->
+    <string name="vanirupdate_settings_title">Vanir updates</string>
+    <string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
 
 </resources>

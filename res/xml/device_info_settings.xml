@@ -25,12 +25,20 @@
         android:title="@string/mod_version"
         android:summary="@string/mod_version_default" />
 
-    <PreferenceScreen
-        android:key="additional_system_update_settings"
-        android:title="@string/additional_system_update_settings_list_item_title">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="@string/additional_system_update"
-                    android:targetClass="@string/additional_system_update_menu" />
+    <!-- Updater -->
+    <PreferenceScreen android:key="vanir_updates"
+            android:title="@string/vanirupdate_settings_title" 
+            android:summary="@string/vanirupdate_settings_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.vanir.updater"
+                android:targetClass="com.vanir.updater.UpdatesSettings" />
+    </PreferenceScreen>
+    <!-- Change Log -->
+    <PreferenceScreen android:key="changelog"
+            android:title="@string/changelog_title">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.vanir.ChangeLog" />
     </PreferenceScreen>
 
     <!-- Device status - launches activity -->
@@ -59,7 +67,10 @@
                 <intent android:action="android.settings.COPYRIGHT" />
         </PreferenceScreen>
 
-        <!-- License information -->
+        <!-- Legal Information -->
+        <!-- Legal Information -->
+
+        <!-- Legal Information -->
         <PreferenceScreen
             android:key="license"
             android:title="@string/license_title">
