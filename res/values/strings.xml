@@ -4929,5 +4929,8 @@
     <!-- Themes settings  -->
     <string name="themes_settings_title">Themes</string>
 
-    <!-- **** CYANOGENMOD ADDITIONS END **** -->
+    <!-- Vanir Updater -->
+    <string name="vanirupdate_settings_title">Vanir updates</string>
+    <string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
+
 </resources>
