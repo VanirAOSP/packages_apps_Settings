@@ -70,7 +70,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     private static final String KEY_MOD_BUILD_DATE = "build_date";
     private static final String KEY_DEVICE_CPU = "device_cpu";
     private static final String KEY_DEVICE_MEMORY = "device_memory";
-    private static final String KEY_CM_UPDATES = "cm_updates";
+    private static final String KEY_VANIR_UPDATES = "vanir_updates";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
     long[] mHits = new long[3];
@@ -100,7 +100,7 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
-        setValueSummary(KEY_MOD_VERSION, "ro.cm.version");
+        setValueSummary(KEY_MOD_VERSION, "ro.build.version");
         findPreference(KEY_MOD_VERSION).setEnabled(true);
         setValueSummary(KEY_MOD_BUILD_DATE, "ro.build.date");
 
@@ -121,9 +121,9 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
 
         // Only the owner should see the Updater settings, if it exists
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            removePreferenceIfPackageNotInstalled(findPreference(KEY_CM_UPDATES));
+            removePreferenceIfPackageNotInstalled(findPreference(KEY_VANIR_UPDATES));
         } else {
-            getPreferenceScreen().removePreference(findPreference(KEY_CM_UPDATES));
+            getPreferenceScreen().removePreference(findPreference(KEY_VANIR_UPDATES));
         }
 
         if (cpuInfo != null) {
@@ -179,10 +179,6 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
         }
         Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-
-        // Read platform settings for additional system update setting
-        removePreferenceIfBoolFalse(KEY_UPDATE_SETTING,
-                R.bool.config_additional_system_update_setting_enable);
 
         // Remove regulatory information if not enabled.
         removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,

@@ -4903,4 +4903,8 @@
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
+
+    <!-- Vanir Updater -->
+    <string name="vanirupdate_settings_title">Vanir updates</string>
+    <string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
 </resources>
