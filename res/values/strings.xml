@@ -1776,7 +1776,7 @@
     <!-- Sound settings screen, setting check box summary -->
     <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with volume rocker</string>
     <string name="camera_sounds_title">Camera shutter sound</string>
-    <string name="camera_sounds_summary">WARNING: Disabling the camera shutter sound maybe illegal in some areas!</string>
+    <string name="camera_sounds_summary">WARNING: Disabling the camera shutter sound may be illegal in some areas!</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
     <string name="audio_record_proc_title">Noise cancellation</string>
     <!-- Volume description for media volume -->
