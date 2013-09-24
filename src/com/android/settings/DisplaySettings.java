@@ -73,6 +73,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
     private static final String KEY_LISTVIEW_ANIMATION = "listview_animation";
+    private static final String KEY_SCREEN_OFF_ANIMATION = "screen_off_animation";
 
     // Strings used for building the summary for user defined auto rotate
     private static final String ROTATION_ANGLE_0 = "0";
@@ -102,6 +103,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private WifiDisplayStatus mWifiDisplayStatus;
     private Preference mWifiDisplayPreference;
     private CheckBoxPreference mAdaptiveBacklight;
+
+    private CheckBoxPreference mScreenOffAnimation;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -191,6 +194,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(mAdaptiveBacklight);
             mAdaptiveBacklight = null;
         }
+
+        mScreenOffAnimation = (CheckBoxPreference) findPreference(KEY_SCREEN_OFF_ANIMATION);
+			if(getResources().getBoolean(com.android.internal.R.bool.config_screenOffAnimation)) {
+			mScreenOffAnimation.setChecked(Settings.System.getInt(resolver,
+			Settings.System.SCREEN_OFF_ANIMATION, 1) == 1);
+			} else {
+			getPreferenceScreen().removePreference(mScreenOffAnimation);
+		}
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -452,6 +463,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LISTVIEW_ANIMATION, mListViewAnimation.isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mScreenOffAnimation) {
+			Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_OFF_ANIMATION,
+			mScreenOffAnimation.isChecked() ? 1 : 0);
+			return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
