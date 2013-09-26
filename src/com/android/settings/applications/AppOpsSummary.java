@@ -39,8 +39,11 @@ public class AppOpsSummary extends Fragment {
     private ViewPager mViewPager;
 
     CharSequence[] mPageNames;
-    static AppOpsState.OpsTemplate[] sPageTemplates = new AppOpsState.OpsTemplate[] {        
-        AppOpsState.PERMISSIONS_TEMPLATE
+    static AppOpsState.OpsTemplate[] sPageTemplates = new AppOpsState.OpsTemplate[] {
+        AppOpsState.LOCATION_TEMPLATE,
+        AppOpsState.PERSONAL_TEMPLATE,
+        AppOpsState.MESSAGING_TEMPLATE,
+        AppOpsState.DEVICE_TEMPLATE
     };
 
     int mCurPos;
