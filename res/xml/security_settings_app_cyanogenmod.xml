@@ -26,11 +26,6 @@
             android:title="@string/blacklist_title"
             android:fragment="com.android.settings.blacklist.BlacklistSettings" />
 
-        <Preference android:fragment="com.android.settings.applications.AppOpsSummary"
-            android:id="@+id/appops_settings"
-            android:title="@string/appops_settings_title"
-            android:summary="@string/appops_settings_summary"/>
-
          <Preference
             android:fragment="com.android.settings.vanir.fragments.PrivacyGuardManager"
             android:key="privacy_guard_manager"
