@@ -74,6 +74,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_MUSICFX = "musicfx";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
+    private static final String KEY_QUIET_HOURS = "quiet_hours";
+    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
@@ -117,6 +119,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Preference mRingtonePreference;
     private Preference mNotificationPreference;
     private CheckBoxPreference mSafeHeadsetVolume;
+    private CheckBoxPreference mVolumeAdjustSounds;
+    private PreferenceScreen mQuietHours;
 
     private Runnable mRingtoneLookupRunnable;
 
@@ -175,6 +179,20 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
         mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
         mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
+
+        mQuietHours = (PreferenceScreen) findPreference(KEY_QUIET_HOURS);
+        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
+            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
+                    + " " + getString(R.string.quiet_hours_active_to) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
+        } else {
+           mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
+        }
+
+        mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
+        mVolumeAdjustSounds.setChecked(Settings.System.getInt(resolver,
+                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
 
         mSilentMode = (ListPreference) findPreference(KEY_SILENT_MODE);
         if (!getResources().getBoolean(R.bool.has_silent_mode)) {
@@ -299,12 +317,32 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
         getActivity().registerReceiver(mReceiver, filter);
 
+        updateState(true);
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mReceiver);
+    }
+
+    // updateState in fact updates the UI to reflect the system state
+    private void updateState(boolean force) {
+        if (getActivity() == null) return;
+        ContentResolver resolver = getContentResolver();
+
+        mSilentMode.setValue(getPhoneSilentModeSettingValue());
+        mSilentMode.setSummary(mSilentMode.getEntry());
+
+        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
+            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
+                    + " " + getString(R.string.quiet_hours_active_to) + " " +
+                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
+        } else {
+            mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
+        }
     }
 
     private void setPhoneSilentSettingValue(String value) {
@@ -328,14 +366,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         }
         // Shouldn't happen
         return SILENT_MODE_OFF;
-    }
-
-    // updateState in fact updates the UI to reflect the system state
-    private void updateState(boolean force) {
-        if (getActivity() == null) return;
-
-        mSilentMode.setValue(getPhoneSilentModeSettingValue());
-        mSilentMode.setSummary(mSilentMode.getEntry());
     }
 
     private void updateRingtoneName(int type, Preference preference, int msg) {
@@ -382,6 +412,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);
+
+        } else if (preference == mVolumeAdjustSounds) {
+            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
+            mVolumeAdjustSounds.isChecked() ? 1 : 0);
 
         } else if (preference == mSoundEffects) {
             if (mSoundEffects.isChecked()) {
@@ -556,6 +590,22 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             return createUndockedMessage();
         }
         return null;
+    }
+
+    private String returnTime(String t) {
+        if (t == null || t.equals("")) {
+            return "";
+        }
+        int hr = Integer.parseInt(t.trim());
+        int mn = hr;
+
+        hr = hr / 60;
+        mn = mn % 60;
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, hr);
+        cal.set(Calendar.MINUTE, mn);
+        Date date = cal.getTime();
+        return DateFormat.getTimeFormat(getActivity().getApplicationContext()).format(date);
     }
 
     private Dialog createUndockedMessage() {
