@@ -125,9 +125,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String SHOW_HW_LAYERS_UPDATES_KEY = "show_hw_layers_udpates";
     private static final String SHOW_HW_OVERDRAW_KEY = "show_hw_overdraw";
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
-    private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
-    private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
-    private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
@@ -191,9 +188,6 @@ public class DevelopmentSettings extends PreferenceFragment
     private CheckBoxPreference mDebugLayout;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
-    private ListPreference mWindowAnimationScale;
-    private ListPreference mTransitionAnimationScale;
-    private ListPreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
     private CheckBoxPreference mKillAppLongpressBack;
@@ -294,9 +288,6 @@ public class DevelopmentSettings extends PreferenceFragment
         mShowHwLayersUpdates = findAndInitCheckboxPref(SHOW_HW_LAYERS_UPDATES_KEY);
         mShowHwOverdraw = findAndInitCheckboxPref(SHOW_HW_OVERDRAW_KEY);
         mDebugLayout = findAndInitCheckboxPref(DEBUG_LAYOUT_KEY);
-        mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
-        mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
-        mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
 
@@ -504,7 +495,6 @@ public class DevelopmentSettings extends PreferenceFragment
         updateShowHwLayersUpdatesOptions();
         updateShowHwOverdrawOptions();
         updateDebugLayoutOptions();
-        updateAnimationScaleOptions();
         updateOverlayDisplayDevicesOptions();
         updateOpenGLTracesOptions();
         updateImmediatelyDestroyActivitiesOptions();
@@ -574,9 +564,6 @@ public class DevelopmentSettings extends PreferenceFragment
         }
         resetDebuggerOptions();
         resetMSOBOptions();
-        writeAnimationScaleOption(0, mWindowAnimationScale, null);
-        writeAnimationScaleOption(1, mTransitionAnimationScale, null);
-        writeAnimationScaleOption(2, mAnimatorDurationScale, null);
         writeOverlayDisplayDevicesOptions(null);
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
@@ -960,42 +947,6 @@ public class DevelopmentSettings extends PreferenceFragment
             getActivity().getContentResolver(), Settings.Global.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
     }
 
-    private void updateAnimationScaleValue(int which, ListPreference pref) {
-        try {
-            float scale = mWindowManager.getAnimationScale(which);
-            if (scale != 1) {
-                mHaveDebugSettings = true;
-            }
-            CharSequence[] values = pref.getEntryValues();
-            for (int i=0; i<values.length; i++) {
-                float val = Float.parseFloat(values[i].toString());
-                if (scale <= val) {
-                    pref.setValueIndex(i);
-                    pref.setSummary(pref.getEntries()[i]);
-                    return;
-                }
-            }
-            pref.setValueIndex(values.length-1);
-            pref.setSummary(pref.getEntries()[0]);
-        } catch (RemoteException e) {
-        }
-    }
-
-    private void updateAnimationScaleOptions() {
-        updateAnimationScaleValue(0, mWindowAnimationScale);
-        updateAnimationScaleValue(1, mTransitionAnimationScale);
-        updateAnimationScaleValue(2, mAnimatorDurationScale);
-    }
-
-    private void writeAnimationScaleOption(int which, ListPreference pref, Object newValue) {
-        try {
-            float scale = newValue != null ? Float.parseFloat(newValue.toString()) : 1;
-            mWindowManager.setAnimationScale(which, scale);
-            updateAnimationScaleValue(which, pref);
-        } catch (RemoteException e) {
-        }
-    }
-
     private void updateOverlayDisplayDevicesOptions() {
         String value = Settings.Global.getString(getActivity().getContentResolver(),
                 Settings.Global.OVERLAY_DISPLAY_DEVICES);
@@ -1268,15 +1219,6 @@ public class DevelopmentSettings extends PreferenceFragment
             SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
             updateHdcpValues();
             pokeSystemProperties();
-            return true;
-        } else if (preference == mWindowAnimationScale) {
-            writeAnimationScaleOption(0, mWindowAnimationScale, newValue);
-            return true;
-        } else if (preference == mTransitionAnimationScale) {
-            writeAnimationScaleOption(1, mTransitionAnimationScale, newValue);
-            return true;
-        } else if (preference == mAnimatorDurationScale) {
-            writeAnimationScaleOption(2, mAnimatorDurationScale, newValue);
             return true;
         } else if (preference == mOverlayDisplayDevices) {
             writeOverlayDisplayDevicesOptions(newValue);
