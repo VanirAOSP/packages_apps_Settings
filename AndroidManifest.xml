@@ -1797,15 +1797,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".fragments.StatusBarToggles"
-            android:label="@string/title_statusbar_toggles" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-        </activity>
 <!--
         <activity
             android:name=".fragments.Vibrations"
@@ -1863,4 +1854,14 @@
               </intent-filter>
           </activity>
     </application>
+
+    <activity
+        android:name=".vanir.AnimationControls"
+        android:label="@string/animation_manager_title">
+        <intent-filter>
+			<action android:name="android.intent.action.MAIN"/>
+
+            <category android:name="com.intent.category.SHORTCUT"/>
+        </intent-filter>
+    </activity>
 </manifest>
