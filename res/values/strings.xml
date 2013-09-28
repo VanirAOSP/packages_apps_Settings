@@ -4112,13 +4112,13 @@
     <string name="track_frame_time">Profile GPU rendering</string>
 
     <!-- UI debug setting: scaling factor for window animations [CHAR LIMIT=25] -->
-    <string name="window_animation_scale_title">Window animation scale</string>
+    <string name="window_animation_scale_title">Default window animation scale</string>
 
     <!-- UI debug setting: scaling factor for transition animations [CHAR LIMIT=25] -->
-    <string name="transition_animation_scale_title">Transition animation scale</string>
+    <string name="transition_animation_scale_title">Default transition animation scale</string>
 
     <!-- UI debug setting: scaling factor for all Animator-based animations [CHAR LIMIT=25] -->
-    <string name="animator_duration_scale_title">Animator duration scale</string>
+    <string name="animator_duration_scale_title">Default animator duration scale</string>
 
     <!-- UI debug setting: simulate secondary display devices using overlays [CHAR LIMIT=25] -->
     <string name="overlay_display_devices_title">Simulate secondary displays</string>
@@ -5695,12 +5695,30 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <string name="statusbar_short_summary">Clock, battery, signal, etc</string>
 
-    <!-- ListView animation -->
+     <!-- Animation Controls -->
+    <string name="general_animation_title">General</string>
+    <string name="apps_and_activities">Apps and activities</string>
+    <string name="animation_manager_title">Animation manager</string>
+    <string name="activity_open_title">Activity Open </string>
+    <string name="activity_close_title">Activity Close </string>
+    <string name="task_open_title">Task Open </string>
+    <string name="task_close_title">Task Close </string>
+    <string name="task_move_to_front_title">Move To Front </string>
+    <string name="task_move_to_back_title">Move To Back </string>
+    <string name="wallpaper_open_title">Wallpaper Open </string>
+    <string name="wallpaper_close_title">Wallpaper Close </string>
+    <string name="wallpaper_intra_open_title">Wallpaper Intra Open </string>
+    <string name="wallpaper_intra_close_title">Wallpaper Intra Close </string>
+    <string name="animation_duration_title">Custom animation duration</string>
+    <string name="title_animation_no_override">Prevent App Overrides</string>
+    <string name="summary_animation_no_override">Prevent apps from overriding transitions.</string>
+    <string name="animation_duration_default">Default</string>
     <string name="listview_animation_title">Alpha listView animation</string>
     <string name="listview_animation_summary">Basic fade-in listview animation during scrolling</string>
-
     <string name="home_wake_title">Home button wake</string>
     <string name="home_wake_summary">Pressing the home button will wake your device</string>
+    <string name="header_summary_vibrations">@null</string>
+    <string name="wallpaper_animations">Wallpaper animations</string>
 
     <!-- GPS Source selection -->
     <string name="location_gps_source_title">GPS source</string>
