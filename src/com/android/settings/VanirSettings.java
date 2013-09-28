@@ -66,11 +66,8 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "VanirSettings";
 
-    private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
-    private static final String KEY_QUIET_HOURS = "quiet_hours";
-    private static final String KEY_VOLUME_ADJUST_SOUNDS = "volume_adjust_sounds";
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_DUAL_PANE = "dual_pane";
@@ -98,11 +95,9 @@ public class VanirSettings extends SettingsPreferenceFragment implements
 
     private Preference mLcdDensity;
     private DensityChanger densityFragment;
-    private ListPreference mVolumeOverlay;
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolBtnMusicCtrl;
-    private CheckBoxPreference mVolumeAdjustSounds;
-    private PreferenceScreen mQuietHours;
+
 
     int newDensityValue;
     private String mCustomLabelText = null;
@@ -191,28 +186,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                         Settings.System.FORCE_DUAL_PANEL, getResources().getBoolean(
                         com.android.internal.R.bool.preferences_prefer_dual_pane)));
 
-        mQuietHours = (PreferenceScreen) findPreference(KEY_QUIET_HOURS);
-        if (Settings.System.getInt(mContentResolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
-                    returnTime(Settings.System.getString(mContentResolver, Settings.System.QUIET_HOURS_START))
-                    + " " + getString(R.string.quiet_hours_active_to) + " " +
-                    returnTime(Settings.System.getString(mContentResolver, Settings.System.QUIET_HOURS_END)));
-        } else {
-           mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
-        }
-
-        mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
-        mVolumeOverlay.setOnPreferenceChangeListener(this);
-        int volumeOverlay = Settings.System.getInt(mContentResolver,
-                Settings.System.MODE_VOLUME_OVERLAY,
-                VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
-        mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
-        mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
-
-        mVolumeAdjustSounds = (CheckBoxPreference) findPreference(KEY_VOLUME_ADJUST_SOUNDS);
-        mVolumeAdjustSounds.setChecked(Settings.System.getInt(mContentResolver,
-                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) != 0);
-
         mVolBtnMusicCtrl = (CheckBoxPreference) findPreference(KEY_VOLBTN_MUSIC_CTRL);
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(mContentResolver,
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 0) != 0);
@@ -252,41 +225,11 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        updateState(true);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    // updateState in fact updates the UI to reflect the system state
-    private void updateState(boolean force) {
-        if (getActivity() == null) return;
-        ContentResolver resolver = getContentResolver();
-
-        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_active_from) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START))
-                    + " " + getString(R.string.quiet_hours_active_to) + " " +
-                    returnTime(Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END)));
-        } else {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
-        }
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mVolumeWake) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_WAKE_SCREEN,
             mVolumeWake.isChecked() ? 1 : 0);
             return true;
-        } else if (preference == mVolumeAdjustSounds) {
-            Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
-            mVolumeAdjustSounds.isChecked() ? 1 : 0);
         } else if (preference == mVolBtnMusicCtrl) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
             mVolBtnMusicCtrl.isChecked() ? 1 : 0);
@@ -372,14 +315,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        if (preference == mVolumeOverlay) {
-            final int value = Integer.valueOf((String) objValue);
-            final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.MODE_VOLUME_OVERLAY, value);
-            mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
-        
-        } else if (preference == mExpandedDesktopPref) {
+        if (preference == mExpandedDesktopPref) {
             int expandedDesktopValue = Integer.valueOf((String) objValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.EXPANDED_DESKTOP_STATUS_BAR_STATE, expandedDesktopValue);
@@ -400,22 +336,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
             return true;
         }
         return true;
-    }
-
-    private String returnTime(String t) {
-        if (t == null || t.equals("")) {
-            return "";
-        }
-        int hr = Integer.parseInt(t.trim());
-        int mn = hr;
-
-        hr = hr / 60;
-        mn = mn % 60;
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, hr);
-        cal.set(Calendar.MINUTE, mn);
-        Date date = cal.getTime();
-        return DateFormat.getTimeFormat(getActivity().getApplicationContext()).format(date);
     }
 
     public static class AdvancedTransparencyDialog extends DialogFragment {

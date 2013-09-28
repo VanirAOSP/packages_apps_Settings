@@ -83,12 +83,23 @@
 
     <!-- Do not nest these, or removals in code will break -->
 
+    <PreferenceScreen
+        android:key="quiet_hours"
+        android:fragment="com.android.settings.vanir.QuietHours"
+        android:title="@string/quiet_hours_title" />
+
     <com.android.settings.DefaultRingtonePreference
         android:key="notification_sound"
         android:title="@string/notification_sound_title"
         android:dialogTitle="@string/notification_sound_dialog_title"
         android:persistent="false"
         android:ringtoneType="notification" />
+
+    <CheckBoxPreference
+        android:key="volume_adjust_sounds"
+        android:title="@string/volume_adjust_sounds_enable_title"
+        android:summary="@string/volume_adjust_sounds_enable_summary"
+        android:persistent="false" />
 
     <CheckBoxPreference
         android:key="dtmf_tone"
