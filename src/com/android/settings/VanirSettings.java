@@ -32,6 +32,7 @@ import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
@@ -125,7 +126,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         mUserModeUI.setOnPreferenceChangeListener(this);
 
         mStatusbar = (CheckBoxPreference) findPreference(TABLET_STATUSBAR);
-        if (Utils.isPhone(getActivity())) {
+        if (Utils.isPhone(mContext)) {
             getPreferenceScreen().removePreference(mStatusbar);
         } else {
             mStatusbar.setChecked(Settings.System.getInt(mContentResolver,
@@ -202,7 +203,9 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                 ServiceManager.getService(Context.WINDOW_SERVICE));
         try {
             if (windowManager.hasNavigationBar()) {
-                getPreferenceScreen().removePreference(findPreference(KEY_HARDWARE_KEYS));
+                PreferenceCategory hardware = (PreferenceCategory) findPreference("buttons");
+                Preference pref = getPreferenceManager().findPreference("hardware_keys");
+                hardware.removePreference(pref);
             }
         } catch (RemoteException e) {
             // Do nothing
