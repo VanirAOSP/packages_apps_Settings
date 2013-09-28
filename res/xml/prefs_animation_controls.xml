@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    android:title="@string/animation_manager_title"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="general"
+        android:title="@string/general_animation_title">
+
+        <CheckBoxPreference
+            android:key="animation_no_override"
+            android:title="@string/title_animation_no_override"
+            android:summary="@string/summary_animation_no_override"
+            android:defaultValue="false"/>
+
+        <ListPreference
+            android:key="listview_animations"
+            android:dialogTitle="@string/listview_animation_title"
+            android:title="@string/listview_animation_title"
+            android:entries="@array/listview_animation_entries"
+            android:entryValues="@array/listview_animation_values"
+            android:defaultValue="1" />
+
+         <ListPreference
+            android:key="listview_interpolator"
+            android:dialogTitle="@string/listview_interpolator_title"
+            android:title="@string/listview_interpolator_title"
+            android:entries="@array/listview_interpolator_entries"
+            android:entryValues="@array/listview_interpolator_values"
+            android:defaultValue="0" />
+            
+        <com.android.settings.vanir.AnimBarPreference
+            android:key="animation_duration"
+            android:title="@string/animation_duration_title" />
+
+        <com.android.settings.vanir.AnimBarPreference
+            android:key="listview_duration"
+            android:title="@string/listview_duration_title" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="multiplier"
+        android:title="@string/multiplier_title" >
+
+        <ListPreference
+            android:key="window_animation_scale"
+            android:title="@string/window_animation_scale_title"
+            android:persistent="false"
+            android:entries="@array/window_animation_scale_entries"
+            android:entryValues="@array/window_animation_scale_values" />
+
+        <ListPreference
+            android:key="transition_animation_scale"
+            android:title="@string/transition_animation_scale_title"
+            android:persistent="false"
+            android:entries="@array/transition_animation_scale_entries"
+            android:entryValues="@array/transition_animation_scale_values" />
+
+        <ListPreference
+            android:key="animator_duration_scale"
+            android:title="@string/animator_duration_scale_title"
+            android:persistent="false"
+            android:entries="@array/animator_duration_scale_entries"
+            android:entryValues="@array/animator_duration_scale_values" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="apps_activities"
+        android:title="@string/apps_and_activities">
+
+        <ListPreference
+            android:key="activity_open"
+            android:title="@string/activity_open_title" />
+
+        <ListPreference
+            android:key="activity_close"
+            android:title="@string/activity_close_title" />
+
+        <ListPreference
+            android:key="task_open"
+            android:title="@string/task_open_title" />
+
+        <ListPreference
+            android:key="task_close"
+            android:title="@string/task_close_title" />
+
+        <ListPreference
+            android:key="task_move_to_front"
+            android:title="@string/task_move_to_front_title" />
+
+        <ListPreference
+            android:key="task_move_to_back"
+            android:title="@string/task_move_to_back_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="wallpaper_animations"
+        android:title="@string/wallpaper_animations" >
+
+        <ListPreference
+            android:key="wallpaper_open"
+            android:title="@string/wallpaper_open_title" />
+
+        <ListPreference
+            android:key="wallpaper_close"
+            android:title="@string/wallpaper_close_title" />
+
+        <ListPreference
+            android:key="wallpaper_intra_open"
+            android:title="@string/wallpaper_intra_open_title" />
+
+        <ListPreference
+            android:key="wallpaper_intra_close"
+            android:title="@string/wallpaper_intra_close_title" />
+    </PreferenceCategory>
+
+    <Preference
+        style="?android:preferenceInformationStyle"
+        android:key="disclaimer"
+        android:summary="@string/disclaimer_summary"
+        android:icon="@drawable/ic_rom_control_animations" /> 
+
+</PreferenceScreen>
+

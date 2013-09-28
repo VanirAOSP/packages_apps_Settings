@@ -72,6 +72,12 @@
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
+        <PreferenceScreen
+            android:id="@+id/animations"
+            android:title="@string/animation_manager_title"
+            android:summary="@string/animation_control_summary"
+            android:fragment="com.android.settings.vanir.AnimationControls" />
+
         <com.android.settings.notification.DropDownPreference
                 android:key="auto_rotate"
                 android:title="@string/display_auto_rotate_title" />
