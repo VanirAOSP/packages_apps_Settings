@@ -47,6 +47,14 @@
         android:title="@string/wallpaper_settings_title"
         android:fragment="com.android.settings.WallpaperTypeSettings" />
 
+    <!-- Active display -->
+    <PreferenceScreen
+        android:key="active_display"
+        android:fragment="com.android.settings.vanir.ActiveDisplaySettings"
+        android:title="@string/ad_settings_title"
+        android:summary="@string/ad_settings_summary">
+    </PreferenceScreen>
+
     <ListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout"

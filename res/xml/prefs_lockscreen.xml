@@ -9,14 +9,6 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/lockscreen_prefs_header">
 
-     <!-- Active display -->
-    <PreferenceScreen
-        android:key="active_display"
-        android:fragment="com.android.settings.vanir.ActiveDisplaySettings"
-        android:title="@string/ad_settings_title"
-        android:summary="@string/ad_settings_summary">
-    </PreferenceScreen>
-
     <CheckBoxPreference
         android:key="allow_rotation"
         android:title="@string/allow_rotate_title"
