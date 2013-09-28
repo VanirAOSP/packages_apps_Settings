@@ -36,11 +36,6 @@
         android:fragment="com.android.settings.vanir.fragments.StatusbarMods" />
 
     <PreferenceScreen
-        android:key="hardware_keys"
-        android:fragment="com.android.settings.vanir.HardwareKeys"
-        android:title="@string/hardware_keys_title" />
-
-    <PreferenceScreen
         android:key="@+id/navbar"
         android:title="@string/title_navbar"
         android:summary="@string/navigation_bar_summary"
@@ -80,6 +75,11 @@
     <PreferenceCategory
         android:key="buttons"
         android:title="@string/vanir_buttons_short">
+
+       <PreferenceScreen
+            android:key="hardware_keys"
+            android:fragment="com.android.settings.vanir.HardwareKeys"
+            android:title="@string/hardware_keys_title" />
 
         <!-- Volume Rocker Wake -->
         <CheckBoxPreference
