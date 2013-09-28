@@ -68,11 +68,12 @@
         android:title="@string/screensaver_settings_title"
         android:fragment="com.android.settings.DreamSettings" />
 
-    <CheckBoxPreference
-         android:key="listview_animation"
-         android:title="@string/listview_animation_title"
-         android:summary="@string/listview_animation_summary"
-         android:defaultValue="true" />
+    <PreferenceScreen
+        android:id="@+id/animations"
+        android:title="@string/animation_manager_title"
+        android:summary="@string/header_summary_vibrations"
+        android:icon="@drawable/ic_rom_control_animations"
+        android:fragment="com.android.settings.vanir.AnimationControls" />
 
     <com.android.settings.WarnedListPreference
         android:key="font_size"
