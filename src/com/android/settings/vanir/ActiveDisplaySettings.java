@@ -39,6 +39,7 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_ENABLED = "ad_enable";
     private static final String KEY_SHOW_TEXT = "ad_text";
     private static final String KEY_ALL_NOTIFICATIONS = "ad_all_notifications";
+    private static final String KEY_HIDE_LOW_PRIORITY = "ad_hide_low_priority";
     private static final String KEY_POCKET_MODE = "ad_pocket_mode";
     private static final String KEY_REDISPLAY = "ad_redisplay";
     private static final String KEY_SHOW_DATE = "ad_show_date";
@@ -50,6 +51,7 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mShowDatePref;
     private CheckBoxPreference mShowAmPmPref;
     private CheckBoxPreference mAllNotificationsPref;
+    private CheckBoxPreference mHideLowPriorityPref;
     private CheckBoxPreference mPocketModePref;
     private ListPreference mRedisplayPref;
     private SeekBarPreference mBrightnessLevel;
@@ -87,6 +89,10 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.ACTIVE_DISPLAY_REDISPLAY, 0);
         mRedisplayPref.setValue(String.valueOf(timeout));
         updateRedisplaySummary(timeout);
+
+        mHideLowPriorityPref = (CheckBoxPreference) findPreference(KEY_HIDE_LOW_PRIORITY);
+			mHideLowPriorityPref.setChecked((Settings.System.getInt(getContentResolver(),
+			Settings.System.ACTIVE_DISPLAY_HIDE_LOW_PRIORITY_NOTIFICATIONS, 0) == 1));
 
         mShowDatePref = (CheckBoxPreference) findPreference(KEY_SHOW_DATE);
         mShowDatePref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -135,6 +141,11 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVE_DISPLAY_ALL_NOTIFICATIONS,
                     value ? 1 : 0);
+        } else if (preference == mHideLowPriorityPref) {
+			value = mHideLowPriorityPref.isChecked();
+			Settings.System.putInt(getContentResolver(),
+			Settings.System.ACTIVE_DISPLAY_HIDE_LOW_PRIORITY_NOTIFICATIONS,
+			value ? 1 : 0);
         } else if (preference == mPocketModePref) {
             value = mPocketModePref.isChecked();
             Settings.System.putInt(getContentResolver(),
