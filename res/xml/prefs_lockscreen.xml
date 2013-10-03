@@ -52,6 +52,11 @@
         android:title="@string/see_through_title"
         android:summary="@string/see_through_summary" />
 
+    <CheckBoxPreference
+        android:key="battery_around_lockscreen_ring"
+        android:title="@string/battery_around_lockscreen_ring"
+        android:defaultValue="true" />
+
      <CheckBoxPreference
         android:key="lockscreen_camera_widget"
         android:title="@string/lockscreen_camera_widget_title"

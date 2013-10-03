@@ -39,6 +39,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_ALLOW_ROTATION = "allow_rotation";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
+    private static final String BATTERY_AROUND_LOCKSCREEN_RING = "battery_around_lockscreen_ring";
 
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
@@ -47,6 +48,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mCameraWidget;
     private CheckBoxPreference mMusicControls;
+    private CheckBoxPreference mLockRingBattery;
     private Context mContext;
 
     private boolean hasButtons() {
@@ -79,9 +81,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mLockscreenUseCarousel.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
 
-		mCameraWidget = (CheckBoxPreference) prefSet.findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
+        mCameraWidget = (CheckBoxPreference) prefSet.findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
         mCameraWidget.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.KG_CAMERA_WIDGET, 0) == 1);
+
+        mLockRingBattery = (CheckBoxPreference) findPreference(BATTERY_AROUND_LOCKSCREEN_RING);
+        mLockRingBattery.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, 0) == 1);
 
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
 
@@ -112,21 +118,26 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-		if (preference == mSeeThrough) {
-			Settings.System.putInt(getActivity().getContentResolver(),
-			        Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
-			        ? 1 : 0);
-		return true;
-		} else if (preference == mCameraWidget) {
+        if (preference == mSeeThrough) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
+                    ? 1 : 0);
+            return true;
+        } else if (preference == mCameraWidget) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.KG_CAMERA_WIDGET, mCameraWidget.isChecked() ? 1 : 0);
             return true;
-		} else if (preference == mLockscreenHideInitialPageHints) {
+        } else if (preference == mLockRingBattery) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.BATTERY_AROUND_LOCKSCREEN_RING, mLockRingBattery.isChecked()
+                    ? 1 : 0);
+            return true;
+        } else if (preference == mLockscreenHideInitialPageHints) {
             Settings.System.putInt(getActivity().getContentResolver(),
                   Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS,
             ((CheckBoxPreference)preference).isChecked() ? 1 : 0);
             adjustYourAttitude();
-        return true;
+            return true;
         } else if (preference == mAllowRotation) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
