@@ -75,7 +75,7 @@
         android:summary="@string/ad_show_ampm_summary"
         android:dependency="ad_enable"/>
 
-    <com.android.settings.vanir.SeekBarPreference
+    <com.android.settings.widget.SeekBarPreference
         android:key="ad_brightness"
         android:persistent="false"
         android:title="@string/ad_brightness_title"

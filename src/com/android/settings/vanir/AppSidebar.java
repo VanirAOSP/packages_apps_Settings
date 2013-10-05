@@ -28,6 +28,7 @@ import android.preference.SwitchPreference;
 import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.widget.SeekBarPreference;
 
 import com.vanir.util.Helpers;
 
@@ -74,24 +75,28 @@ public class AppSidebar extends SettingsPreferenceFragment implements
         mPositionPref.setValue(String.valueOf(position));
         updatePositionSummary(position);
 
+        int trans = Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_SIDEBAR_TRANSPARENCY, 0);
         mTransparencyPref = (SeekBarPreference) findPreference(KEY_TRANSPARENCY);
-        mTransparencyPref.setValue(Settings.System.getInt(getContentResolver(),
-                Settings.System.APP_SIDEBAR_TRANSPARENCY, 0));
+        mTransparencyPref.setInitValue((int) (trans));
         mTransparencyPref.setOnPreferenceChangeListener(this);
 
+        int width = Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_SIDEBAR_TRIGGER_WIDTH, 10);
         mTriggerWidthPref = (SeekBarPreference) findPreference(KEY_TRIGGER_WIDTH);
-        mTriggerWidthPref.setValue(Settings.System.getInt(getContentResolver(),
-                Settings.System.APP_SIDEBAR_TRIGGER_WIDTH, 10));
+        mTriggerWidthPref.setInitValue((int) (width));
         mTriggerWidthPref.setOnPreferenceChangeListener(this);
 
+        int top = Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_SIDEBAR_TRIGGER_TOP, 0);
         mTriggerTopPref = (SeekBarPreference) findPreference(KEY_TRIGGER_TOP);
-        mTriggerTopPref.setValue(Settings.System.getInt(getContentResolver(),
-                Settings.System.APP_SIDEBAR_TRIGGER_TOP, 0));
+        mTriggerTopPref.setInitValue((int) (top));
         mTriggerTopPref.setOnPreferenceChangeListener(this);
 
+        int bottom = Settings.System.getInt(getContentResolver(),
+                Settings.System.APP_SIDEBAR_TRIGGER_HEIGHT, 100);
         mTriggerBottomPref = (SeekBarPreference) findPreference(KEY_TRIGGER_BOTTOM);
-        mTriggerBottomPref.setValue(Settings.System.getInt(getContentResolver(),
-                Settings.System.APP_SIDEBAR_TRIGGER_HEIGHT, 100));
+        mTriggerBottomPref.setInitValue((int) (bottom));
         mTriggerBottomPref.setOnPreferenceChangeListener(this);
 
         findPreference(KEY_SETUP_ITEMS).setOnPreferenceClickListener(this);
@@ -99,22 +104,22 @@ public class AppSidebar extends SettingsPreferenceFragment implements
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mTransparencyPref) {
-            int transparency = ((Integer)newValue).intValue();
+            int transparency = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.APP_SIDEBAR_TRANSPARENCY, transparency);
             return true;
         } else if (preference == mTriggerWidthPref) {
-            int width = ((Integer)newValue).intValue();
+            int width = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.APP_SIDEBAR_TRIGGER_WIDTH, width);
             return true;
         } else if (preference == mTriggerTopPref) {
-            int top = ((Integer)newValue).intValue();
+            int top = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.APP_SIDEBAR_TRIGGER_TOP, top);
             return true;
         } else if (preference == mTriggerBottomPref) {
-            int bottom = ((Integer)newValue).intValue();
+            int bottom = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.APP_SIDEBAR_TRIGGER_HEIGHT, bottom);
             return true;
