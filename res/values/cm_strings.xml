@@ -739,4 +739,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="whisperpush_registration_title">Register</string>
     <string name="whisperpush_registration_summary">Register for WhisperPush to enable encrypted SMS.</string>
     <string name="whisperpush_identitykey_title">Review identity keys</string>
+
+    <!-- GPS download data over wi-fi only -->
+    <string name="gps_download_data_wifi_only">Download GPS assisted data only over Wi-Fi networks</string>
+
 </resources>
