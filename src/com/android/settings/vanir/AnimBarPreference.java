@@ -71,6 +71,7 @@ public class AnimBarPreference extends Preference
             monitorBox.setText(mContext.getResources().getString(R.string.animation_duration_default));
         }
         changer.onPreferenceChange(this, Integer.toString(progress));
+        setInitValue(progress);
     }
 
     @Override
