@@ -85,6 +85,7 @@ public class SeekBarPreference extends Preference
         monitorBox.setText(progress + "%");
         if (changer != null)
             changer.onPreferenceChange(this, Integer.toString(progress));
+        setInitValue(progress);
     }
 
     @Override
