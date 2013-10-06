@@ -118,17 +118,16 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements P
             mPurgeableAssetsPref.setChecked("1".equals(purgeableAssets));
 
             mVanirConfig = (SwitchPreference) prefSet.findPreference(VANIR_CONFIG);
-
             CommandResult cr = new CMDProcessor().sh.runWaitFor("vanir status");
             if (!cr.success())
-                Log.e(TAG, "Failed: vanir status\n\t"+cr.toString());
+                prefSet.removePreference(mVanirConfig);
             else {
                 final boolean enabled = cr.stdout.equals("1");
                 mVanirConfig.setSummary(getResources().getString(enabled ? R.string.vanir_config_enabled_summary : (everenabled ? R.string.vanir_config_just_disabled_summary : R.string.vanir_config_disabled_summary)));
                 mVanirConfig.setChecked(enabled);
                 if (!everenabled) everenabled = enabled;
+                mVanirConfig.setOnPreferenceChangeListener(this);
             }
-            mVanirConfig.setOnPreferenceChangeListener(this);
 
             String useDithering = SystemProperties.get(USE_DITHERING_PERSIST_PROP, USE_DITHERING_DEFAULT);
             mUseDitheringPref = (ListPreference) prefSet.findPreference(USE_DITHERING_PREF);
