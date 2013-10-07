@@ -1670,6 +1670,9 @@
 
         <activity android:name=".vanir.ExcludedAppsActivity" />
 
+        <activity android:name=".vanir.gestureanywhere.GestureAnywhereBuilderActivity" />
+        <activity android:name=".vanir.gestureanywhere.GestureAnywhereCreateGestureActivity" />
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to VanirSettings config -->
         <activity android:name="Settings$VanirSettingsActivity"
                 android:label="@string/vanir_settings_title">
