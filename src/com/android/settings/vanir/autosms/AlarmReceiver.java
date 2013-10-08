@@ -20,21 +20,12 @@ package com.android.settings.vanir.autosms;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.PowerManager;
 import android.util.Log;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String action = intent.getAction();
-
-        if (AutoSmsService.mWakeLock == null) {
-            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            AutoSmsService.mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, AutoSmsService.TAG);
-            if (!AutoSmsService.mWakeLock.isHeld()) {
-                AutoSmsService.mWakeLock.acquire();
-            }
-        }
 
         if (MessagingHelper.START_SMS_SERVICE.equals(action)
                 && MessagingHelper.inQuietHours(context)) {
