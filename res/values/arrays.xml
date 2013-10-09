@@ -467,9 +467,9 @@
 
     <!-- Sound settings for emergency tone. -->
     <string-array name="emergency_tone_entries">
-        <item>Off</item>
-        <item>Alert</item>
-        <item>Vibrate</item>
+        <item>@string/off</item>
+        <item>@string/alert</item>
+        <item>@string/vibrate</item>
     </string-array>
 
     <!-- NFC settings. -->
@@ -940,10 +940,10 @@
 
     <!-- Volume Overlay options. -->
     <string-array name="volume_overlay_entries">
-        <item>Single</item>
-        <item>Expandable</item>
-        <item>Expanded</item>
-        <item>None</item>
+        <item>@string/single</item>
+        <item>@string/expandable</item>
+        <item>@string/expanded</item>
+        <item>@string/hidden</item>
     </string-array>
 
     <!-- Values for Volume Overlay. Do not translate. -->

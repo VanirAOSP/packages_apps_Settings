@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import java.util.List;
-
 import com.android.settings.bluetooth.DockEventReceiver;
 
 import android.app.AlertDialog;
@@ -30,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
@@ -51,11 +50,13 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.widget.Toast;
 
 import android.view.VolumePanel;
 
 import java.util.Date;
 import java.util.Calendar;
+import java.util.List;
 
 public class SoundSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -121,6 +122,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mSafeHeadsetVolume;
     private CheckBoxPreference mVolumeAdjustSounds;
     private PreferenceScreen mQuietHours;
+    private ListPreference emergencyTonePreference;
 
     private Runnable mRingtoneLookupRunnable;
 
@@ -260,11 +262,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         }
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
-            ListPreference emergencyTonePreference =
-                (ListPreference) findPreference(KEY_EMERGENCY_TONE);
-            emergencyTonePreference.setValue(String.valueOf(Settings.Global.getInt(
-                resolver, Settings.Global.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE)));
+            emergencyTonePreference = (ListPreference) findPreference(KEY_EMERGENCY_TONE);
+            int value = (Settings.Global.getInt(
+                resolver, Settings.Global.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE));
+            emergencyTonePreference.setValue(String.valueOf(value));
             emergencyTonePreference.setOnPreferenceChangeListener(this);
+            updateEmergencySummary(value);
         }
 
         mSoundSettings = (PreferenceGroup) findPreference(KEY_SOUND_SETTINGS);
@@ -431,7 +434,14 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                     mHapticFeedback.isChecked() ? 1 : 0);
 
         } else if (preference == mCameraSounds) {
-            SystemProperties.set(PROP_CAMERA_SOUND, mCameraSounds.isChecked() ? "1" : "0");
+
+            if (SystemProperties.getBoolean(PROP_CAMERA_SOUND, true)) {
+                SystemProperties.set(PROP_CAMERA_SOUND, "0");
+                String camera = mContext.getString(R.string.camera_sounds_summary);
+                Toast.makeText(mContext, camera, Toast.LENGTH_SHORT).show();
+            } else {
+                SystemProperties.set(PROP_CAMERA_SOUND, "1");
+            }
 
         } else if (preference == mLockSounds) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
@@ -497,6 +507,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
                 int value = Integer.parseInt((String) objValue);
                 Settings.Global.putInt(getContentResolver(),
                         Settings.Global.EMERGENCY_TONE, value);
+                updateEmergencySummary(value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
@@ -511,6 +522,21 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         }
 
         return true;
+    }
+
+    private void updateEmergencySummary(int value) {
+        Resources res = getResources();
+
+        if (value == 0) {
+            String string = res.getString(R.string.off);
+            emergencyTonePreference.setSummary(res.getString(R.string.summary_emergency, string));
+        } else if (value == 1) {
+            String string = res.getString(R.string.alert);
+            emergencyTonePreference.setSummary(res.getString(R.string.summary_emergency, string));
+        } else if (value == 2) {
+            String string = res.getString(R.string.vibrate);
+            emergencyTonePreference.setSummary(res.getString(R.string.summary_emergency, string));
+        }
     }
 
     @Override

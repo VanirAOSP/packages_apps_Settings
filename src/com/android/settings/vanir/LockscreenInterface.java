@@ -20,6 +20,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
@@ -37,7 +38,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String KEY_ALLOW_ROTATION = "allow_rotation";
     private static final String PREF_LOCKSCREEN_USE_CAROUSEL = "lockscreen_use_widget_container_carousel";
     private static final String KEY_LOCKSCREEN_CAMERA_WIDGET = "lockscreen_camera_widget";
-    private static final String PREF_QUICK_UNLOCK = "lockscreen_quick_unlock_control";
 
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMaximizeWidgets;
@@ -45,10 +45,9 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAllowRotation;
     private CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mCameraWidget;
-    private CheckBoxPreference mQuickUnlock;
     private Context mContext;
 
-    public boolean hasButtons() {
+    private boolean hasButtons() {
         return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
     }
 
@@ -66,10 +65,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mLockscreenHideInitialPageHints = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS);
         mLockscreenHideInitialPageHints.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
               Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false)); 
-
-        mQuickUnlock = (CheckBoxPreference)findPreference(PREF_QUICK_UNLOCK);
-        mQuickUnlock.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
-                Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, false));       
       
         mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
@@ -84,9 +79,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
                 Settings.System.KG_CAMERA_WIDGET, 0) == 1);
 
         mMaximizeWidgets = (CheckBoxPreference)findPreference(KEY_LOCKSCREEN_MAXIMIZE_WIDGETS);
+
         if (Utils.isTablet(getActivity()) || Utils.isHybrid(getActivity())) {
-	        getPreferenceScreen().removePreference(mMaximizeWidgets);
-	        mMaximizeWidgets = null;
+            PreferenceCategory blarrrb = (PreferenceCategory) findPreference("misc");
+            Preference pref = getPreferenceManager().findPreference("lockscreen_maximize_widgets");
+            blarrrb.removePreference(pref);
         } else {
             mMaximizeWidgets.setOnPreferenceChangeListener(this);
         }
@@ -124,11 +121,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_ALLOW_ROTATION, mAllowRotation.isChecked()
                     ? 1 : 0);
-        } else if (preference == mQuickUnlock) {
-            Settings.System.putBoolean(getActivity().getContentResolver(),
-                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL,
-                    ((CheckBoxPreference) preference).isChecked());
-            return true;
          } else if (preference == mLockscreenUseCarousel) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL,
@@ -152,7 +144,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     }
 
     private void adjustYourAttitude() {
-        boolean mode = Settings.System.getInt(mContext.getContentResolver(),
+        boolean mode = Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, 0) == 1;
         if (mode) {
             mLockscreenHideInitialPageHints.setEnabled(false);

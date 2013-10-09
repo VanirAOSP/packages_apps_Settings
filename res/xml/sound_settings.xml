@@ -22,6 +22,7 @@
     <com.android.settings.RingerVolumePreference
         android:key="ring_volume"
         android:title="@string/all_volume_title"
+        android:summary="@string/all_volume_summary"
         android:dialogTitle="@string/all_volume_title"
         android:persistent="false"
         android:streamType="ring" />
@@ -61,22 +62,35 @@
         android:ringtoneType="ringtone" />
 
     <CheckBoxPreference
+        android:key="dtmf_tone"
+        android:title="@string/dtmf_tone_enable_title"
+        android:defaultValue="true" />
+
+    <com.android.settings.IncreasingRingPreference
+        android:key="increasing_ring"
+        android:title="@string/increasing_ring_title"
+        android:summary="@string/increasing_ring_summary"
+        android:dialogTitle="@string/increasing_ring_title"
+        android:persistent="false"
+        android:streamType="ring" />
+
+    <CheckBoxPreference
         android:key="vibrate_when_ringing"
         android:title="@string/vibrate_when_ringing_title"
         android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="notification_vibrate_during_calls"
+        android:title="@string/notification_vibrate_during_calls_title"
+        android:summary="@string/notification_vibrate_during_calls_summary"
+        android:persistent="false"
+        android:defaultValue="false" />
 
     <CheckBoxPreference
         android:key="notification_convert_sound_to_vibration"
         android:title="@string/notification_convert_sound_to_vibration_title"
         android:summary="@string/notification_convert_sound_to_vibration_summary"
         android:defaultValue="false" />
-
-    <com.android.settings.IncreasingRingPreference
-            android:key="increasing_ring"
-            android:title="@string/increasing_ring_title"
-            android:dialogTitle="@string/increasing_ring_title"
-            android:persistent="false"
-            android:streamType="ring" />
 
     <PreferenceCategory
         android:title="@string/sound_category_system_title" />
@@ -95,16 +109,17 @@
         android:persistent="false"
         android:ringtoneType="notification" />
 
+    <ListPreference
+        android:key="emergency_tone"
+        android:title="@string/emergency_tone_title"
+        android:entries="@array/emergency_tone_entries"
+        android:entryValues="@array/emergency_tone_values" />
+
     <CheckBoxPreference
         android:key="volume_adjust_sounds"
         android:title="@string/volume_adjust_sounds_enable_title"
         android:summary="@string/volume_adjust_sounds_enable_summary"
         android:persistent="false" />
-
-    <CheckBoxPreference
-        android:key="dtmf_tone"
-        android:title="@string/dtmf_tone_enable_title"
-        android:defaultValue="true" />
 
     <CheckBoxPreference
         android:key="sound_effects"
@@ -117,28 +132,15 @@
         android:defaultValue="true" />
 
     <CheckBoxPreference
-        android:key="haptic_feedback"
-        android:title="@string/haptic_feedback_enable_title"
+        android:key="camera_sounds"
+        android:title="@string/camera_sounds_title"
         android:defaultValue="true" />
 
-    <ListPreference
-        android:key="emergency_tone"
-        android:title="@string/emergency_tone_title"
-        android:entries="@array/emergency_tone_entries"
-        android:entryValues="@array/emergency_tone_values" />
-
     <CheckBoxPreference
-            android:key="camera_sounds"
-            android:title="@string/camera_sounds_title"
-            android:summary="@string/camera_sounds_summary"
-            android:defaultValue="true" />
-
-    <CheckBoxPreference
-            android:key="notification_vibrate_during_calls"
-            android:title="@string/notification_vibrate_during_calls_title"
-            android:summary="@string/notification_vibrate_during_calls_summary"
-            android:persistent="false"
-            android:defaultValue="false" />
+        android:key="haptic_feedback"
+        android:title="@string/haptic_feedback_enable_title"
+        android:summary="@string/haptic_feedback_enable_summary"
+        android:defaultValue="true" />
 
     <!-- Dock -->
     <PreferenceCategory

@@ -45,6 +45,7 @@
     <PreferenceScreen
         android:key="wallpaper"
         android:title="@string/wallpaper_settings_title"
+        android:summary="@string/wallpaper_settings_summary"
         android:fragment="com.android.settings.WallpaperTypeSettings" />
 
     <!-- Active display -->

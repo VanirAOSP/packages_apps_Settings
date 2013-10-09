@@ -53,7 +53,8 @@
     <CheckBoxPreference
         android:key="pref_purgeable_assets"
         android:title="@string/pref_purgeable_assets_title"
-        android:summary="@string/pref_purgeable_assets_summary" />
+        android:summary="@string/pref_purgeable_assets_summary"
+        android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

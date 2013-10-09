@@ -112,7 +112,19 @@ public class VanirSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefs = getPreferenceScreen();
 
+        boolean torch = mContext.getResources().getBoolean(
+                com.android.settings.R.bool.has_torch);
+
         mFastTorch = (CheckBoxPreference) findPreference(KEY_ENABLE_FAST_TORCH);
+        try {
+            if (!torch) {
+                PreferenceCategory torchThis = (PreferenceCategory) findPreference("buttons");
+                Preference pref = getPreferenceManager().findPreference("enable_fast_torch");
+                torchThis.removePreference(pref);
+            }
+        } catch (NullPointerException e) {
+            // Do nothing..
+        }
 
         mHideExtras = (CheckBoxPreference) findPreference(PREF_HIDE_EXTRAS);
         mHideExtras.setChecked(Settings.System.getBoolean(mContentResolver,
@@ -126,12 +138,18 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         mUserModeUI.setOnPreferenceChangeListener(this);
 
         mStatusbar = (CheckBoxPreference) findPreference(TABLET_STATUSBAR);
-        if (Utils.isPhone(mContext)) {
-            getPreferenceScreen().removePreference(mStatusbar);
-        } else {
-            mStatusbar.setChecked(Settings.System.getInt(mContentResolver,
-                Settings.System.TABLET_STATUSBAR, 0) == 1);
-            getPreferenceScreen().removePreference(mHideExtras);
+
+        try {
+            if (Utils.isPhone(mContext)) {
+                PreferenceCategory status = (PreferenceCategory) findPreference("interface");
+                Preference pref = getPreferenceManager().findPreference("tablet_statusbar");
+                status.removePreference(pref);
+            } else {
+                mStatusbar.setChecked(Settings.System.getInt(mContentResolver,
+                        Settings.System.TABLET_STATUSBAR, 0) == 1);
+            }
+        } catch (NullPointerException e) {
+            // Do nothing..
         }
 
         mDualPane = (CheckBoxPreference) findPreference(KEY_DUAL_PANE);

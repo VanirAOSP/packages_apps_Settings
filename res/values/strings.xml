@@ -689,7 +689,7 @@
     <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
     <string name="owner_info_settings_title">Owner info</string>
     <!-- Text shown for summary of owner info setting [CHAR LIMIT=40]-->
-    <string name="owner_info_settings_summary"></string>
+    <string name="owner_info_settings_summary">Display information on the lockscreen</string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
     <string name="owner_info_settings_edit_text_hint">Type text to display on the lock screen</string>
     <!-- Text shown next to checkbox for showing user info on LockScreen [CHAR LIMIT=50]-->
@@ -1732,6 +1732,7 @@
     <string name="ringtone_summary">""</string>
     <!-- Sound settings screen, volume title -->
     <string name="all_volume_title">Volumes</string>
+    <string name="all_volume_summary">Adjust the system volumes</string>
     <!-- Sound settings screen, music effects title [CHAR LIMIT=30]-->
     <string name="musicfx_title">Music effects</string>
     <!-- Sound settings screen, setting option name -->
@@ -1766,11 +1767,12 @@
     <!-- Sound settings screen, setting check box label -->
     <string name="lock_sounds_enable_title">Screen lock sound</string>
     <!-- Sound settings screen, setting check box label -->
-    <string name="haptic_feedback_enable_title">Vibrate on touch</string>
+    <string name="haptic_feedback_enable_title">Haptic feedback</string>
+    <string name="haptic_feedback_enable_summary">System: vibrate on touch</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="volume_adjust_sounds_enable_title">Volume adjustment sound</string>
+    <string name="volume_adjust_sounds_enable_summary">Play a tone to hear the volume level after a change</string>
     <!-- Sound settings screen, setting check box summary -->
-    <string name="volume_adjust_sounds_enable_summary">Play sound when adjusting volume with volume rocker</string>
     <string name="camera_sounds_title">Camera shutter sound</string>
     <string name="camera_sounds_summary">WARNING: Disabling the camera shutter sound may be illegal in some areas!</string>
     <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
@@ -1859,6 +1861,7 @@
     <string name="screen_timeout_summary">After <xliff:g id="timeout_description">%1$s</xliff:g> of inactivity</string>
     <!-- Wallpaper settings title [CHAR LIMIT=30] -->
     <string name="wallpaper_settings_title">Wallpaper</string>
+    <string name="wallpaper_settings_summary">Change the homescreen wallpaper</string>
     <!-- Wallpaper settings fragment title [CHAR LIMIT=30] -->
     <string name="wallpaper_settings_fragment_title">Choose wallpaper from</string>
     <!-- Display settings screen, trigger for screen saver options -->
@@ -4576,7 +4579,12 @@
 
     <!-- Volume rocker music control -->
     <string name="volbtn_music_controls_title">Volume rocker music controls</string>
-    <string name="volbtn_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
+    <string name="volbtn_music_controls_summary">With the screen off: long-press the volume rockers to seek music tracks</string>
+
+    <string name="off">Off</string>
+    <string name="alert">Alert</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="summary_emergency">%1$s</string>
 
     <!-- Volume Panel -->
     <string name="volume_overlay_title">Volume panel</string>
@@ -4602,8 +4610,8 @@
     <string name="themes_title">Themes</string>
 
     <string name="enable_fast_torch_title">Enable fast torch</string>
-    <string name="enable_fast_torch_summary">While your screen is off, you can long-press the power key to turn the LED light on.
-Letting go of the power button will turn the torch off.</string>
+    <string name="enable_fast_torch_summary">With the screen off, long-press the power key to turn the LED flashlight on.
+Let go to turn it off.</string>
 
     <!-- Performance settings -->
     <string name="performance_settings_title">Performance</string>
@@ -4709,6 +4717,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="vibrator_type_ringer">Calls</string>
     <string name="vibrator_type_notification">Notifications</string>
     <string name="increasing_ring_title">Ascending ringtone</string>
+    <string name="increasing_ring_summary">Increase the ringer volume every iterval</string>
     <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
     <string name="checkbox_increasing_ring">Enable</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the minimum increasing ring volume -->
@@ -4833,6 +4842,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="toggle_default_entries">USER|BRIGHTNESS|SETTINGS|WIFI|SIGNAL|ROTATE|BATTERY|AIRPLANE_MODE|BLUETOOTH</string>
     <!-- Sound settings screen -->
     <string name="volume_overlay_title">Volume panel style</string>
+    <string name="single">Single</string>
+    <string name="expandable">Expandable</string>
+    <string name="expanded">Expanded</string>
+    <string name="hidden">Hidden</string>
     <string name="silent_mode_title">Silent mode</string>
     <string name="volume_ring_only_description">Ringtone</string>
 
@@ -5691,8 +5704,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Status bar brightness slider -->
     <string name="brightness_slider_title">Statusbar brightness slider</string>
-    <string name="brightness_slider_summary">Allow changing the brightness by
-        sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
+    <string name="brightness_slider_summary">Change the brightness by
+        sliding your finger across the Statusbar. Note: not active with auto-brightness on
     </string>
 
     <string name="statusbar_short_summary">Clock, battery, signal, etc</string>
