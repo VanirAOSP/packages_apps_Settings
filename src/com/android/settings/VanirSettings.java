@@ -72,7 +72,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     private static final String KEY_ENABLE_FAST_TORCH = "enable_fast_torch";
     private static final String PREF_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
     private static final String KEY_DUAL_PANE = "dual_pane";
-    private static final String KEY_EXPANDED_DESKTOP = "power_menu_expanded_desktop";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_FORCE_DUAL_PANEL = "force_dualpanel";
     private static final String PREF_USER_MODE_UI = "user_mode_ui";
@@ -84,7 +83,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mFastTorch;
     private CheckBoxPreference mDualPane;
-    private ListPreference mExpandedDesktopPref;
     private Preference mCustomLabel;
     private CheckBoxPreference mDualpane;
     private CheckBoxPreference mHideExtras;
@@ -159,11 +157,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
                 Settings.System.DUAL_PANE_PREFS, (preferDualPane ? 1 : 0)) == 1;
         mDualPane.setChecked(dualPaneMode);
 
-        mExpandedDesktopPref = (ListPreference) findPreference(KEY_EXPANDED_DESKTOP);
-        mExpandedDesktopPref.setOnPreferenceChangeListener(this);
-        int expandedDesktopValue = Settings.System.getInt(mContentResolver, Settings.System.EXPANDED_DESKTOP_STATUS_BAR_STATE, 0);
-        mExpandedDesktopPref.setValue(String.valueOf(expandedDesktopValue));
-        updateExpandedDesktopSummary(expandedDesktopValue);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
@@ -336,13 +329,7 @@ public class VanirSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        if (preference == mExpandedDesktopPref) {
-            int expandedDesktopValue = Integer.valueOf((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.EXPANDED_DESKTOP_STATUS_BAR_STATE, expandedDesktopValue);
-            updateExpandedDesktopSummary(expandedDesktopValue);
-            return true;
-        } else if (preference == mUserModeUI) {
+        if (preference == mUserModeUI) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.USER_UI_MODE, Integer.parseInt((String) objValue));
             Helpers.restartSystemUI();
@@ -536,30 +523,6 @@ public class VanirSettings extends SettingsPreferenceFragment implements
         private void saveSavedLinkedState(boolean v) {
             getActivity().getSharedPreferences("transparency", Context.MODE_PRIVATE).edit()
                     .putBoolean("link", v).commit();
-        }
-    }
-
-    private void updateExpandedDesktopSummary(int value) {
-        Resources res = getResources();
-
-        if (value == 0) {
-			/* full expanded desktop */
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
-            String statusBarPresent = res.getString(R.string.expanded_desktop_summary_status_bar);
-            mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
-        } else if (value == 1) {
-			/* expanded desktop with statusbar only */
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
-            String statusBarPresent = res.getString(R.string.expanded_desktop_summary_no_status_bar);
-            mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
-        } else if (value == 2) {
-			/* expanded desktop deactivated */
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED, 1);
-            String statusBarPresent = res.getString(R.string.expanded_desktop_off);
-            mExpandedDesktopPref.setSummary(res.getString(R.string.summary_expanded_desktop, statusBarPresent));
         }
     }
 
