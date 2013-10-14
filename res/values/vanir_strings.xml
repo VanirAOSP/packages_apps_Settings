@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 VanirAOSP && The Android Open Source Project
+<!-- Copyright (C) 2016 VanirAOSP && The Android Open Source Project
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
 	You may obtain a copy of the License at
@@ -25,5 +25,10 @@
 
     <!-- Clock and Weather  -->
     <string name="clock_settings">Clock and Weather Settings</string>
+
+    <!-- UI debug setting: show CPU info? [CHAR LIMIT=25] -->
+    <string name="show_cpu_info">Show CPU info</string>
+    <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] --> 
+    <string name="show_cpu_info_summary">Screen overlay showing current CPU info</string>
 
 </resources>
