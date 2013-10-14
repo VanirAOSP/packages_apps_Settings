@@ -5047,7 +5047,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lockscreen_quick_unlock_control_title">Quick unlock</string>
     <string name="lockscreen_quick_unlock_control_summary">Unlock password/pin lockscreen without pressing enter button</string>
     <string name="lockscreen_misc">Lockscreen settings</string>
-    <string name="lockscreen_custom_apps">Lockscreen custom Apps</string>
+    <string name="lockscreen_custom_apps">Custom app targets</string>
 
     <!-- MediaScanner behavior on boot -->
     <string name="media_scanner_on_boot_title">MediaScanner behavior on boot</string>
@@ -5778,7 +5778,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="stylus_icon_enabled_summary">Show the pointer icon when hovering or drawing with the stylus</string>
 
     <!-- Power menu enable disable -->
-    <string name="power_menu_title">Power menu buttons</string>
+    <string name="power_menu_title">Power menu entries</string>
+    <string name="power_menu_summary">Expanded desktop, reboot menu, screenshot etc</string>
     <string name="power_menu_reboot_title">Reboot menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_airplane_title">Airplane mode</string>

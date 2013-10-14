@@ -98,6 +98,7 @@
         <PreferenceScreen
         android:key="power_menu"
         android:title="@string/power_menu_title"
+        android:summary="@string/power_menu_summary"
         android:fragment="com.android.settings.vanir.PowerMenu" />
 
         <CheckBoxPreference
