@@ -5030,7 +5030,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="adb_over_network_warning">WARNING: When ADB over network is enabled, your phone is open for intrusions on all connected networks, including GSM data network!\n\nOnly use this feature when you are connected on trusted networks.\n\nDo you really want to enable this function?</string>
 
     <!-- Lock Screen Shortcuts -->
-    <string name="lock_screen_title">Lockscreen customization</string>
+    <string name="lock_screen_title">Lockscreen</string>
     <string name="lock_screen_summary">Custom targets, widgets, etc</string>
     <string name="lockscreen_prefs_header">Lockscreen customization</string>
     <string name="lockscreen_target_info">Drag the slider to targets to assign shortcuts</string>
@@ -5358,7 +5358,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="size_2_dp">2 dp</string>
     <string name="size_3_dp">3 dp</string>
     <string name="size_4_dp">4 dp</string>
-    <string name="transparency_dialog_title">Transparency settings</string>
+    <string name="transparency_dialog_title">Transparency</string>
     <string name="transparency_dialog_summary">Adjust navbar and statusbar transparency</string>
     <string name="transparency_dialog_linked_transparency">Link statusbar &amp; navbar alpha</string>
     <string name="transparency_dialog_transparency_sb_and_nv">Statusbar and navigation bar</string>
@@ -5398,7 +5398,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="storage_rescan_media_complete">Scan completed</string>
 
     <!-- HALO -->
-    <string name="halo_settings_title">HALO settings</string>
+    <string name="halo_settings_title">HALO</string>
     <string name="halo_settings_summary">Adjust the HALO settings</string>
     <string name="halo_enabled_title">Enable HALO</string>
     <string name="halo_enabled_summaryOn">HALO is enabled</string>
@@ -5488,7 +5488,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="expanded_desktop_no_staus_bar">Without status bar</string>
 
     <!-- Pie controls -->
-    <string name="pie_controls_title">Pie controls</string>
+    <string name="pie_controls_title">Pie</string>
     <string name="pie_controls_summary">Adjust the Pie controls</string>
     <string name="pie_enable_title">Enable Pie</string>
     <string name="pie_enable_summaryOn">Nom nom nom nom</string>
@@ -5589,6 +5589,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="system_power_crt_mode_both">Orientation dependent</string>
 
     <!-- Vanir menus -->
+    <string name="vanir_system">System</string>
     <string name="vanir_header">Userspace options</string>
     <string name="vanir_title">Voodoo</string>
     <string name="vanir_settings_title">Vanir Customizations</string>

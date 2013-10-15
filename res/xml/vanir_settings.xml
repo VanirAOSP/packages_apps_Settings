@@ -21,7 +21,7 @@
 
     <PreferenceCategory
         android:key="main"
-        android:title="@string/vanir_header" >
+        android:title="@string/vanir_system" >
 
     <PreferenceScreen
         android:key="@+id/statusbar"
@@ -35,6 +35,12 @@
         android:summary="@string/statusbar_short_summary"
         android:fragment="com.android.settings.vanir.fragments.StatusbarMods" />
 
+     <PreferenceScreen
+        android:id="@+id/lock_screen_settings"
+        android:fragment="com.android.settings.vanir.LockscreenInterface"
+        android:title="@string/lock_screen_title"
+        android:summary="@string/lock_screen_summary" />
+
     <PreferenceScreen
         android:key="@+id/navbar"
         android:title="@string/title_navbar"
@@ -45,6 +51,11 @@
         android:key="transparency_dialog"
         android:title="@string/transparency_dialog_title" 
         android:summary="@string/transparency_dialog_summary" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="secondary"
+        android:title="@string/vanir_header" >
 
     <PreferenceScreen
         android:id="@+id/pie_control"
@@ -63,12 +74,6 @@
         android:fragment="com.android.settings.vanir.AppSidebar"
         android:summary="@string/app_sidebar_title_summary"
         android:title="@string/app_sidebar_title" />
-
-     <PreferenceScreen
-        android:id="@+id/lock_screen_settings"
-        android:fragment="com.android.settings.vanir.LockscreenInterface"
-        android:title="@string/lock_screen_title"
-        android:summary="@string/lock_screen_summary" />
 
     </PreferenceCategory>
 
