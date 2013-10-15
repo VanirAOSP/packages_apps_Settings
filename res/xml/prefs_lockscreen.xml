@@ -31,6 +31,12 @@
             android:title="@string/lockscreen_misc">
 
     <CheckBoxPreference
+        android:key="lockscreen_music_controls"
+        android:persistent="false"
+        android:title="@string/lockscreen_music_controls_title"
+        android:summary="@string/lockscreen_music_controls_summary" /> 
+
+    <CheckBoxPreference
         android:key="allow_rotation"
         android:title="@string/allow_rotate_title"
         android:summary="@string/allow_rotate_summary" 

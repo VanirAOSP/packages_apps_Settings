@@ -33,6 +33,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private static final String TAG = "LockscreenInterface";
     
     private static final String KEY_SEE_TRHOUGH = "see_through";
+    private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
     private static final String KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "lockscreen_maximize_widgets";
     private static final String PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS = "lockscreen_hide_initial_page_hints";
     private static final String KEY_ALLOW_ROTATION = "allow_rotation";
@@ -45,6 +46,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAllowRotation;
     private CheckBoxPreference mLockscreenUseCarousel;
     private CheckBoxPreference mCameraWidget;
+    private CheckBoxPreference mMusicControls;
     private Context mContext;
 
     private boolean hasButtons() {
@@ -61,18 +63,21 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
         mContext = getActivity();
         
         mSeeThrough = (CheckBoxPreference) prefSet.findPreference(KEY_SEE_TRHOUGH);
+
+        mMusicControls = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MUSIC_CONTROLS);
+        mMusicControls.setOnPreferenceChangeListener(this); 
         
         mLockscreenHideInitialPageHints = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS);
         mLockscreenHideInitialPageHints.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
-              Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false)); 
+                Settings.System.LOCKSCREEN_HIDE_INITIAL_PAGE_HINTS, false)); 
       
         mAllowRotation = (CheckBoxPreference) prefSet.findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
+                Settings.System.LOCKSCREEN_ALLOW_ROTATION, 0) == 1);   
 
-         mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
-		 mLockscreenUseCarousel.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
-			                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
+        mLockscreenUseCarousel = (CheckBoxPreference)findPreference(PREF_LOCKSCREEN_USE_CAROUSEL);
+        mLockscreenUseCarousel.setChecked(Settings.System.getBoolean(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_USE_WIDGET_CONTAINER_CAROUSEL, false));
 
 		mCameraWidget = (CheckBoxPreference) prefSet.findPreference(KEY_LOCKSCREEN_CAMERA_WIDGET);
         mCameraWidget.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
@@ -93,6 +98,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        ContentResolver cr = getActivity().getContentResolver();
+        if (mMusicControls != null) {
+            mMusicControls.setChecked(Settings.System.getInt(cr,
+                    Settings.System.LOCKSCREEN_MUSIC_CONTROLS, 1) == 1);
+        }
     }
 
     @Override
@@ -139,7 +149,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements
 			boolean value = (Boolean) objValue;
 			Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MAXIMIZE_WIDGETS, value ? 1 :0);
 			return true;
-	    }
+	    } else if (preference == mMusicControls) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(cr, Settings.System.LOCKSCREEN_MUSIC_CONTROLS, value ? 1 : 0);
+            return true;
+        }
 	    return false;
     }
 
