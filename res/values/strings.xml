@@ -4811,7 +4811,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="toggle_silent">Silent</string>
     <string name="toggle_sync">Sync</string>
     <string name="toggle_torch">Torch</string>
-    <string name="toggle_pie">PIE</string>
+    <string name="toggle_pie">Pie</string>
+    <string name="toggle_halo">Halo</string>
     <string name="toggle_expanded_desktop">Expanded Desktop</string>
     <string name="toggle_2g">2G</string>
     <string name="toggle_usb_tether">USB Tether</string>

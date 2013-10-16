@@ -1316,9 +1316,9 @@
         <item>REBOOTMENU</item>
         <item>QUICKRECORD</item>
         <item>PIE</item>
+        <item>HALO</item>
         <item>EXPANDED_DESKTOP</item>
         <item>IME</item>
-<!--        <item>WEATHER</item>        -->
     </string-array>
 
     <string-array name="available_toggles_values" translatable="false">
@@ -1348,6 +1348,7 @@
         <item>@string/toggle_rebootmenu</item>
         <item>@string/toggle_quickrecord</item>
         <item>@string/toggle_pie</item>
+        <item>@string/toggle_halo</item>
         <item>@string/toggle_expanded_desktop</item>
         <item>@string/toggle_ime</item>
 <!--        <item>@string/toggle_weather</item>        -->
