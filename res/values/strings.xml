@@ -5325,7 +5325,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lastapp">Last app</string>
     <string name="power">Power</string>
     <string name="notifications">Notifications</string>
-    <string name="custom_app">Custom app</string>
+    <string name="custom_app">Custom apps &amp; actions</string>
     <string name="menu_power">Power menu</string>
     <string name="blank">Blank</string>
     <string name="none">None</string>

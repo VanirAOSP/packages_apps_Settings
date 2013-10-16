@@ -1085,10 +1085,10 @@
         <item>IME Switcher</item>
         <item>Kill app</item>
         <item>Power</item>
+        <item>Screenshot</item>
         <item>Notifications</item>
         <item>Custom app</item>
         <item>Blank</item>
-        <item>Null</item>
     </string-array>
 
     <string-array name="navbar_button_values" translatable="false">
@@ -1101,10 +1101,10 @@
         <item>**ime**</item>
         <item>**kill**</item>
         <item>**power**</item>
+        <item>**screenshot**</item>
         <item>**notifications**</item>
         <item>**app**</item>
         <item>**blank**</item>
-        <item>**null**</item>
     </string-array>
 
     <string-array name="navring_dialog_entries" translatable="false">
@@ -1122,7 +1122,7 @@
     </string-array>
     <string-array name="navring_dialog_values" translatable="false">
         <item>**null**</item>
-        <item>**screenshot**</item>
+        <item>**ringshot**</item>
         <item>**ime**</item>
         <item>**ring_vib**</item>
         <item>**ring_silent**</item>
