@@ -894,4 +894,6 @@ public class Settings extends PreferenceActivity
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
     public static class ApnSettingsActivity extends Settings { /* empty */ }
     public static class ApnEditorActivity extends Settings { /* empty */ }
+    public static class PieActivity extends Settings { /* empty */ }
+    public static class HaloActivity extends Settings { /* empty */ }
 }

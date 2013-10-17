@@ -1643,6 +1643,28 @@
                 android:value="com.android.settings.VanirSettings" />
         </activity>
 
+        <!-- Pseudo-activity used to provide an intent-filter entry point to Pie config -->
+        <activity android:name="Settings$PieActivity"
+                android:label="@string/pie_controls_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.vanir.fragments.Pie" />
+        </activity>
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to Halo config -->
+        <activity android:name="Settings$HaloActivity"
+                android:label="@string/halo_settings_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.vanir.fragments.Halo" />
+        </activity>
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:label="@string/crypt_keeper_encrypt_title">
