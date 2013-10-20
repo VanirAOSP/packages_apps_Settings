@@ -45,6 +45,13 @@
         android:summary="@string/ad_all_notifications_summary"
         android:dependency="ad_enable"/>
 
+    <com.android.settings.vanir.AppMultiSelectListPreference
+            android:key="ad_excluded_apps"
+            android:persistent="false"
+            android:title="@string/ad_excluded_apps_title"
+            android:summary="@string/ad_excluded_apps_summary"
+            android:dependency="ad_enable" /> 
+
     <CheckBoxPreference
         android:key="ad_pocket_mode"
         android:persistent="false"
