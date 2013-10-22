@@ -4813,6 +4813,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="toggle_torch">Torch</string>
     <string name="toggle_pie">Pie</string>
     <string name="toggle_halo">Halo</string>
+    <string name="toggle_timeout">Screen Timeout</string>
     <string name="toggle_expanded_desktop">Expanded Desktop</string>
     <string name="toggle_2g">2G</string>
     <string name="toggle_usb_tether">USB Tether</string>
@@ -5805,5 +5806,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="lockscreen_music_controls_summary">Show music widget while music is playing</string>
     <string name="ad_excluded_apps_title">Excluded applications</string>
     <string name="ad_excluded_apps_summary">Excluded applications will not show up in active display</string>
+
+    <string name="timeout_off">Screen timeout off</string>
 
 </resources>
