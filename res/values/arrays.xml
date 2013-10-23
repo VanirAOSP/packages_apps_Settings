@@ -77,7 +77,7 @@
         <!-- Do not translate. -->
         <item>1800000</item>
         <!-- Do not translate. -->
-        <item>2000000</item>
+        <item>0</item>
     </string-array>
     <!-- Display settings.  The delay in inactivity before the dream is shown. These are shown in a list dialog. -->
     <string-array name="dream_timeout_entries">
