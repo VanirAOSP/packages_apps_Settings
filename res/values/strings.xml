@@ -5901,4 +5901,27 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="ad_excluded_apps_title">Excluded applications</string>
     <string name="ad_excluded_apps_summary">Excluded applications will not show up in active display</string>
 
+    <!-- Notification Drawer Style -->
+    <string name="notification_style_title">Notification drawer mods</string>
+    <string name="notification_style_summary">Change your notification drawer style</string>
+
+    <!-- Notification drawer background -->
+    <string name="notification_wallpaper_title">Notification drawer background</string>
+    <string name="notification_wallpaper_landscape_title">Different landscape background</string>
+    <string name="notification_background_color_fill">Color fill</string>
+    <string name="notification_background_custom_image">Custom image</string>
+    <string name="notification_background_default_wallpaper">Default background</string>
+    <string name="notification_drawer_custom_background_dialog_title">Choose color</string>
+    <string name="notif_wallpaper_alpha_title">Notification background transparency</string>
+    <string name="notif_alpha_title">Notification Rows transparency</string>
+
+    <!-- Battery Icon and Bar -->
+    <string name="status_bar_battery_bar_title">Battery bar style</string>
+    <string name="battery_bar">Battery bar location</string>
+    <string name="battery_bar_color">Battery bar color</string>
+    <string name="battery_bar_cat">Battery bar style</string>
+    <string name="battery_bar_style_title">Battery bar alignment</string>
+    <string name="battery_bar_thickness_title">Battery bar thickness</string>
+    <string name="battery_bar_animate_title">Charging animation</string>
+    <string name="battery_bar_animate_summary">The charging animation may result in a poor user experience. Enable at your own discretion.</string>
 </resources>

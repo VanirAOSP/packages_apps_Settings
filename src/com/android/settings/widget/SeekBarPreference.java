@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.preference.Preference;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,8 @@ public class SeekBarPreference extends Preference
 
     public static int maximum = 100;
     public static int interval = 5;
+
+    private String property;
 
     private TextView monitorBox;
     private SeekBar bar;
@@ -54,14 +57,27 @@ public class SeekBarPreference extends Preference
 
         monitorBox = (TextView) layout.findViewById(R.id.monitor_box);
         bar = (SeekBar) layout.findViewById(R.id.seek_bar);
+        int progress;
+        try{
+         progress = (int) (Settings.System.getFloat(getContext().getContentResolver(), property) * 100);
+    }
+    catch (Exception e)
+        {
+        progress = defaultValue;
+    }
         bar.setOnSeekBarChangeListener(this);
-        bar.setProgress(defaultValue);
-
+        bar.setProgress(progress);
+        monitorBox.setText(progress + "%");
         return layout;
     }
 
     public void setInitValue(int progress) {
         defaultValue = progress;
+        if (bar!=null)
+        {
+            bar.setProgress(progress);
+            monitorBox.setText(progress + "%");
+    }
     }
 
     @Override
@@ -83,9 +99,20 @@ public class SeekBarPreference extends Preference
         seekBar.setProgress(progress);
 
         monitorBox.setText(progress + "%");
-        if (changer != null)
+        changer.onPreferenceChange(this, Integer.toString(progress));
+    }
+
+    public void setValue(int progress){
+        if (bar!=null)
+        {
+            bar.setProgress(progress);
+            monitorBox.setText(progress + "%");
             changer.onPreferenceChange(this, Integer.toString(progress));
-        setInitValue(progress);
+        }
+    }
+
+    public void setProperty(String property){
+        this.property = property;
     }
 
     @Override

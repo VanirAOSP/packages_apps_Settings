@@ -63,4 +63,9 @@
         android:summary="@string/status_bar_notif_count_summary"
         android:defaultValue="true" />
 
+    <PreferenceScreen
+        android:fragment="com.android.settings.vanir.fragments.BatteryBar"
+        android:key="battery_style_pref"
+        android:title="@string/status_bar_battery_bar_title" />
+
 </PreferenceScreen>
