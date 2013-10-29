@@ -16,13 +16,10 @@
 
 package com.android.settings.performance;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
-import android.preference.Preference;
 import android.preference.ListPreference;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;

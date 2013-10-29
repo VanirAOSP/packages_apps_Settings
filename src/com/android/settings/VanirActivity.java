@@ -1,4 +1,3 @@
-
 package com.android.settings;
 
 import android.app.Activity;

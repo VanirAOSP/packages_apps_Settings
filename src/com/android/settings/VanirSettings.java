@@ -39,15 +39,10 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
-import android.text.format.DateFormat;
 import android.text.Spannable;
-//import android.util.Log;
 import android.view.IWindowManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.VolumePanel;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -57,9 +52,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.widget.AlphaSeekBar;
 import com.vanir.util.Helpers;
-
-import java.util.Date;
-import java.util.Calendar;
 
 import com.android.settings.vanir.fragments.DensityChanger;
 
