@@ -68,12 +68,12 @@
         android:fragment="com.android.settings.HomeSettings"
         android:title="@string/home_settings" />
 
-    <!-- Lock screen -->
+    <!-- System UI -->
     <header
-        android:id="@+id/lock_screen_settings"
-        android:fragment="com.android.settings.cyanogenmod.LockscreenInterface"
-        android:title="@string/lock_screen_title"
-        android:icon="@drawable/ic_settings_lockscreen" />
+        android:id="@+id/system_settings"
+        android:icon="@drawable/ic_settings_system"
+        android:fragment="com.android.settings.cyanogenmod.SystemUiSettings"
+        android:title="@string/system_settings_title" />
 
     <!-- Themes -->
     <header
@@ -86,12 +86,12 @@
             android:targetClass="com.tmobile.themechooser.ThemeChooser" />
     </header>
 
-    <!-- System UI -->
+    <!-- Performance -->
     <header
-        android:id="@+id/system_settings"
-        android:icon="@drawable/ic_settings_system"
-        android:fragment="com.android.settings.cyanogenmod.SystemUiSettings"
-        android:title="@string/system_settings_title" />
+        android:id="@+id/performance_settings"
+        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
+        android:icon="@drawable/ic_settings_performance"
+        android:title="@string/performance_settings_title" />
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
@@ -217,12 +217,33 @@
     <header android:id="@+id/system_section"
         android:title="@string/header_category_system" />
 
+    <!-- About Device -->
+    <header
+        android:id="@+id/about_settings"
+        android:fragment="com.android.settings.DeviceInfoSettings"
+        android:icon="@drawable/ic_settings_about"
+        android:title="@string/about_settings" />
+
     <!-- Superuser -->
     <header
         android:id="@+id/superuser"
         android:fragment="com.android.settings.cyanogenmod.superuser.PolicyNativeFragment"
         android:icon="@drawable/ic_action_permission"
         android:title="@string/superuser" />
+
+    <!-- Development -->
+    <header
+        android:id="@+id/development_settings"
+        android:fragment="com.android.settings.DevelopmentSettings"
+        android:icon="@drawable/ic_settings_development"
+        android:title="@string/development_settings_title" />
+
+    <!-- Print -->
+    <header
+        android:id="@+id/print_settings"
+        android:fragment="com.android.settings.print.PrintSettingsFragment"
+        android:icon="@*android:drawable/ic_print"
+        android:title="@string/print_settings" />
 
     <!-- Date & Time -->
     <header
@@ -237,33 +258,5 @@
         android:fragment="com.android.settings.accessibility.AccessibilitySettings"
         android:icon="@drawable/ic_settings_accessibility"
         android:title="@string/accessibility_settings" />
-
-    <!-- Print -->
-    <header
-        android:id="@+id/print_settings"
-        android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:icon="@*android:drawable/ic_print"
-        android:title="@string/print_settings" />
-
-    <!-- Development -->
-    <header
-        android:id="@+id/development_settings"
-        android:fragment="com.android.settings.DevelopmentSettings"
-        android:icon="@drawable/ic_settings_development"
-        android:title="@string/development_settings_title" />
-
-    <!-- Performance -->
-    <header
-        android:id="@+id/performance_settings"
-        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
-        android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings_title" />
-
-    <!-- About Device -->
-    <header
-        android:id="@+id/about_settings"
-        android:fragment="com.android.settings.DeviceInfoSettings"
-        android:icon="@drawable/ic_settings_about"
-        android:title="@string/about_settings" />
 
 </preference-headers>
