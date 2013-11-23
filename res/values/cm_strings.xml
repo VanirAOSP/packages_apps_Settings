@@ -218,7 +218,7 @@
     <string name="cyanogenmod_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless CyanogenMod and its contributors from all legal liabilities.</string>
 
     <!-- Quick settings panel  -->
-    <string name="quick_settings_panel_title">Quick Settings panel</string>
+    <string name="quick_settings_panel_title">Quicksettings panel</string>
     <string name="title_static_tiles">Static tiles</string>
     <string name="tile_picker_title">Tiles and layout</string>
     <string name="tile_picker_summary">View, select or change the layout of the displayed tiles</string>
@@ -392,7 +392,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- INTERFACE Settings -->
     <!-- Settings main menu category heading. Interface (Launcher, Themes, System). [CHAR LIMIT=40] -->
-    <string name="header_category_interface">Vanir</string>
+    <string name="header_category_interface">Voodoo</string>
 
     <!-- Themes settings -->
     <string name="themes_settings_title">Themes</string>
