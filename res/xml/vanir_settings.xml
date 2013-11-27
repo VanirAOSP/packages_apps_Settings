@@ -81,6 +81,12 @@
         android:summary="@string/app_sidebar_title_summary"
         android:title="@string/app_sidebar_title" />
 
+    <PreferenceScreen
+        android:key="gesture_anywhere"
+        android:fragment="com.android.settings.vanir.gestureanywhere.GestureAnywhereSettings"
+        android:summary="@string/gesture_anywhere_enabled_summary"
+        android:title="@string/gesture_anywhere_title" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
