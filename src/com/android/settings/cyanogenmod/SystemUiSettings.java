@@ -16,21 +16,30 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.text.Spannable;
 import android.util.Log;
 import android.view.WindowManagerGlobal;
+import android.widget.EditText;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+
+import com.android.settings.vanir.DensityChanger;
 
 public class SystemUiSettings extends SettingsPreferenceFragment  implements
         Preference.OnPreferenceChangeListener {
@@ -43,12 +52,16 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
+    private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
     private PreferenceScreen mPieControl;
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private ListPreference mImmersiveModePref;
     private CheckBoxPreference mImmersiveModeState;
+    private Preference mCustomLabel;
+
+    private String mCustomLabelText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +69,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 
         addPreferencesFromResource(R.xml.system_ui_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
 
         mImmersiveModeState = (CheckBoxPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(), 
@@ -83,6 +98,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 //                prefScreen.removePreference(mExpandedDesktopPref);
 //            }
 //
+
             // Hide navigation bar category on devices without navigation bar
             if (!hasNavBar) {
                 prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
@@ -90,6 +106,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         } catch (RemoteException e) {
             Log.e(TAG, "Error getting navigation bar status");
         }
+
+        updateCustomLabelTextSummary();
         updateImmersiveModeState(immersiveModeValue);
         updateImmersiveModeSummary(immersiveModeValue);
     }
@@ -124,6 +142,42 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         return false;
     }
 
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+
+        if (preference == mCustomLabel) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage(R.string.custom_carrier_label_explain);
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(getActivity());
+            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+            alert.setView(input);
+            alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+ 
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = ((Spannable) input.getText()).toString();
+                    Settings.System.putString(getActivity().getContentResolver(),
+                            Settings.System.CUSTOM_CARRIER_LABEL, value);
+                    updateCustomLabelTextSummary();
+                    Intent i = new Intent();
+                    i.setAction("com.android.settings.LABEL_CHANGED");
+                    mContext.sendBroadcast(i);
+                }
+            });
+            alert.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.show();
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
     private void updateImmersiveModeSummary(int value) {
         Resources res = getResources();
         if (value == 0) {
@@ -136,5 +190,15 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
             String statusBarPresent = res.getString(R.string.immersive_mode_summary_no_status_bar);
             mImmersiveModePref.setSummary(res.getString(R.string.summary_immersive_mode, statusBarPresent));
         }
-    }  
+    }
+
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
+            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
+        } else {
+            mCustomLabel.setSummary(mCustomLabelText);
+        }
+     }   
 }
