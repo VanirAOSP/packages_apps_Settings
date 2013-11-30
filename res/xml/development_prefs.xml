@@ -17,9 +17,15 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/development_settings_title">
 
+    <com.android.settings.BugreportPreference
+            android:key="bugreport"
+            android:title="@*android:string/bugreport_title"
+            android:dialogTitle="@*android:string/bugreport_title" />
+
     <PreferenceScreen
             android:key="development_tools"
             android:title="@string/development_tools_title"
+            android:summary="@string/deveolopment_tools_summary"
             android:persistent="false" >
         <intent
                 android:action="android.settings.development.LAUNCH_TOOLS"
@@ -27,15 +33,11 @@
                 android:targetClass="com.android.development.Development" />
     </PreferenceScreen>
 
-    <com.android.settings.BugreportPreference
-            android:key="bugreport"
-            android:title="@*android:string/bugreport_title"
-            android:dialogTitle="@*android:string/bugreport_title" />
-
     <CheckBoxPreference
         android:key="advanced_reboot"
         android:title="@string/advanced_reboot_title"
-        android:summary="@string/advanced_reboot_summary" />
+        android:summary="@string/advanced_reboot_summary"
+        android:defaultValue="true" />
 
     <PreferenceScreen
             android:key="local_backup_password"
@@ -92,6 +94,11 @@
             android:key="enable_adb"
             android:title="@string/enable_adb"
             android:summary="@string/enable_adb_summary"/>
+
+        <CheckBoxPreference
+            android:key="development_shortcut"
+            android:title="@string/development_shortcut_title"
+            android:summary="@string/development_shortcut_summary" />
 
         <com.android.settings.HostnamePreference
             android:key="device_hostname"

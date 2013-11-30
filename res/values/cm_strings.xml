@@ -466,7 +466,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="advanced_settings_title">Advanced</string>
 
     <!-- Launches Dev Tools -->
-    <string name="development_tools_title">Launch Tools</string>
+    <string name="development_tools_title">Development tools</string>
+    <string name="development_tools_summarY">Extra tools to help test various Android behaviors</string>
 
     <!-- Privacy Guard -->
     <string name="privacy_guard_switch_label">Enable Privacy Guard</string>
@@ -749,4 +750,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_style_hidden">Hidden</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
+
+    <!--  development shortcut -->
+    <string name="development_shortcut_title">Development shortcut</string>
+    <string name="development_shortcut_summary">Enable \'wipe data\' and \'force close\' options in notification area and recent apps list</string>
+
 </resources>
