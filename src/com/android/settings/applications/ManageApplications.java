@@ -169,7 +169,9 @@ public class ManageApplications extends Fragment implements
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
     public static final int SHOW_RUNNING_SERVICES = MENU_OPTIONS_BASE + 6;
     public static final int SHOW_BACKGROUND_PROCESSES = MENU_OPTIONS_BASE + 7;
-    public static final int RESET_APP_PREFERENCES = MENU_OPTIONS_BASE + 8;
+    public static final int APPOPS_PREFERENCES = MENU_OPTIONS_BASE + 8;
+    public static final int RESET_APP_PREFERENCES = MENU_OPTIONS_BASE + 9;
+
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     
@@ -1046,6 +1048,8 @@ public class ManageApplications extends Fragment implements
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(0, APPOPS_PREFERENCES, 4, R.string.appops_settings)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(0, RESET_APP_PREFERENCES, 4, R.string.reset_app_preferences)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         updateOptionsMenu();
@@ -1084,12 +1088,14 @@ public class ManageApplications extends Fragment implements
             mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(false);
             mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
             mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
+            mOptionsMenu.findItem(APPOPS_PREFERENCES).setVisible(false);
             mOptionsMenu.findItem(RESET_APP_PREFERENCES).setVisible(false);
         } else {
             mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
             mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
             mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(false);
             mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(false);
+            mOptionsMenu.findItem(APPOPS_PREFERENCES).setVisible(true);
             mOptionsMenu.findItem(RESET_APP_PREFERENCES).setVisible(true);
         }
     }
@@ -1203,6 +1209,8 @@ public class ManageApplications extends Fragment implements
             if (mCurTab != null && mCurTab.mRunningProcessesView != null) {
                 mCurTab.mRunningProcessesView.mAdapter.setShowBackground(true);
             }
+        } else if (menuId == APPOPS_PREFERENCES) {
+            startActivity(new Intent("android.settings.APP_OPS_SETTINGS"));
         } else if (menuId == RESET_APP_PREFERENCES) {
             buildResetDialog();
         } else {
@@ -1212,7 +1220,7 @@ public class ManageApplications extends Fragment implements
         updateOptionsMenu();
         return true;
     }
-    
+
     public void onItemClick(TabInfo tab, AdapterView<?> parent, View view, int position,
             long id) {
         if (tab.mApplications != null && tab.mApplications.getCount() > position) {
