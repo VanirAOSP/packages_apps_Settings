@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+                                                                                    <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2012-2013 The CyanogenMod Project
 
@@ -407,6 +407,20 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+
+
+    <!-- Volume key cursor control -->
+    <string-array name="volbtn_cursor_control_entries" translatable="false">
+        <item>@string/volbtn_cursor_control_off</item>
+        <item>@string/volbtn_cursor_control_on</item>
+        <item>@string/volbtn_cursor_control_on_reverse</item>
+    </string-array>
+
+    <string-array name="volbtn_cursor_control_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="entries_status_bar_battery" translatable="false">
