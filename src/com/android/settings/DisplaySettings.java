@@ -87,10 +87,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
-    private static final String PREF_ENABLE = "clock_style";
-    private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
-    private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
-
     private DisplayManager mDisplayManager;
 
     private CheckBoxPreference mAccelerometer;
@@ -99,8 +95,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mBatteryPulse;
     private PreferenceScreen mDisplayRotationPreference;
 
-    private ListPreference mStatusBarAmPm;
-    private ListPreference mStatusBarClock;
     private CheckBoxPreference mAdaptiveBacklight;
     private ListPreference mScreenTimeoutPreference;
     
@@ -204,29 +198,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else {
             getPreferenceScreen().removePreference(lightPrefs);
         }
-
-        mStatusBarClock = (ListPreference) findPreference(PREF_ENABLE);
-        mStatusBarClock.setOnPreferenceChangeListener(this);
-        mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
-                .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
-                1)));
-
-        mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
-        try {
-            if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.TIME_12_24) == 24) {
-                mStatusBarAmPm.setEnabled(false);
-                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
-            }
-        } catch (SettingNotFoundException e ) {
-        }
-
-        int statusBarAmPm = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
-                Settings.System.STATUS_BAR_AM_PM, 2);
-        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
-        mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
-        mStatusBarAmPm.setOnPreferenceChangeListener(this);
-
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -493,24 +464,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
-        }
-        if (preference == mStatusBarAmPm) {
-            int statusBarAmPm = Integer.valueOf((String) objValue);
-            int index = mStatusBarAmPm.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    STATUS_BAR_AM_PM, statusBarAmPm);
-            mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntries()[index]);
-            return true;
-        } else if (preference == mStatusBarClock) {
-            int clockStyle = Integer.parseInt((String) objValue);
-            int index = mStatusBarClock.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    STATUS_BAR_CLOCK, clockStyle);
-            mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
-            return true;
-        } else if (KEY_FONT_SIZE.equals(key)) {
-            writeFontSizePreference(objValue);
-            return true;
         }
         return false;
     }
