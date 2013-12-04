@@ -135,10 +135,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.display_settings);
 
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
-        if (RotationPolicy.isRotationLockToggleSupported(getActivity())) {
+        if (mDisplayRotationPreference != null && RotationPolicy.isRotationLockToggleSupported(getActivity())) {
             // If rotation lock is supported, then we do not provide this option in
             // Display settings.  However, is still available in Accessibility settings.
             getPreferenceScreen().removePreference(mDisplayRotationPreference);
+            mDisplayRotationPreference = null;
         }
 	
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
