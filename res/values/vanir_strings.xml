@@ -16,8 +16,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Vanir menus -->
-    <string name="vanir_title">Voodoo</string>
-    <string name="vanir_settings_title">Vanir Customizations</string>
+    <string name="voodoo_title">Voodoo</string>
+    <string name="vanir_settings_title">Vanir Interface</string>
     <string name="ok">OK</string>
     <string name="reset">Reset</string>
     <string name="misc_short">Misc</string>
@@ -244,5 +244,19 @@
     <string name="display_rotation_90_title">90 degrees</string>
     <string name="display_rotation_180_title">180 degrees</string>
     <string name="display_rotation_270_title">270 degrees</string>
+
+    <!-- immersive mode -->
+    <string name="power_menu_immersive_mode">Immersive mode</string>
+    <string name="summary_immersive_mode">%1$s</string>
+    <string name="immersive_mode_summary_status_bar">With status bar</string>
+    <string name="immersive_mode_summary_no_status_bar">Without status bar</string>
+    <string name="immersive_mode_disabled">Disabled</string>
+    <string name="immersive_mode_status_bar">With status bar</string>
+    <string name="immersive_mode_no_status_bar">Without status bar</string>
+    <string name="psx_category_immersive_mode">Immersive mode</string>
+    <string name="immersive_mode_state">Enable mode</string>
+    <string name="immersive_mode_on">Immersive mode enabled</string>
+    <string name="immersive_mode_off">Immersive mode disabled</string>
+    <string name="immersive_mode_style">Immersive style</string>
 
 </resources>
