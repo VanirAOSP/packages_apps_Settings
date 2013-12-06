@@ -25,7 +25,7 @@
     <PreferenceScreen
             android:key="development_tools"
             android:title="@string/development_tools_title"
-            android:summary="@string/deveolopment_tools_summary"
+            android:summary="@string/development_tools_summary"
             android:persistent="false" >
         <intent
                 android:action="android.settings.development.LAUNCH_TOOLS"
