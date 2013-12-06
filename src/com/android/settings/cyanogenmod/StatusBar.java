@@ -27,16 +27,22 @@ import android.provider.Settings.SettingNotFoundException;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
+
 public class StatusBar extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
     private static final String STATUS_BAR_BATTERY = "status_bar_battery";    
 
     private static final String PREF_ENABLE = "clock_style";
     private static final String STATUS_BAR_AM_PM = "status_bar_am_pm";
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
+    private static final String PREF_CLOCK_PICKER = "clock_color";
+    private static final String PREF_EXPANDED_CLOCK_PICKER = "expanded_clock_color";
 
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
     private ListPreference mStatusBarBattery;
+    private ColorPickerPreference mClockPicker;
+    private ColorPickerPreference mExpandedClockPicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,12 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
                 1)));
+
+        mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
+        mClockPicker.setOnPreferenceChangeListener(this);
+
+        mExpandedClockPicker = (ColorPickerPreference) findPreference(PREF_EXPANDED_CLOCK_PICKER);
+        mExpandedClockPicker.setOnPreferenceChangeListener(this);
 
         mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
         try {
@@ -99,6 +111,22 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     STATUS_BAR_CLOCK, clockStyle);
             mStatusBarClock.setSummary(mStatusBarClock.getEntries()[index]);
             return true;
+        } else if (preference == mClockPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_CLOCK_COLOR, intHex);
+            // Log.e("VANIR", "Statusbar: "+intHex + "");
+        } else if (preference == mExpandedClockPicker) {
+            String hex = ColorPickerPreference.convertToARGB(Integer.valueOf(String
+                    .valueOf(newValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUSBAR_EXPANDED_CLOCK_COLOR, intHex);
+            // Log.e("VANIR", "Expanded: "+intHex + "");
         }
         return false;
     }
