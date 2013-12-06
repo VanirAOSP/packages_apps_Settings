@@ -629,7 +629,7 @@ public class Settings extends PreferenceActivity
                     }
                 }
             } else if (id == R.id.development_settings
-                    || id == R.id.performance_settings) {
+                    || id == R.id.performance_controls) {
                 if (!showDev) {
                     target.remove(i);
                 }
@@ -1161,4 +1161,5 @@ public class Settings extends PreferenceActivity
     public static class ApnSettingsActivity extends Settings { /* empty */ }
     public static class ApnEditorActivity extends Settings { /* empty */ }
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
+    public static class PerformanceSettingsActivity extends Settings { /* empty */ }
 }

@@ -86,12 +86,11 @@
             android:targetClass="com.tmobile.themechooser.ThemeChooser" />
     </header>
 
-    <!-- Performance -->
     <header
-        android:id="@+id/performance_settings"
-        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
+        android:id="@+id/performance_controls"
+        android:fragment="com.brewcrewfoo.performance.activities.MainActivity"
         android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings_title" />
+        android:title="@string/performance_settings" />
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"

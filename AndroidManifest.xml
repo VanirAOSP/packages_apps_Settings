@@ -1733,8 +1733,6 @@
 
         <activity android:name=".cyanogenmod.LockscreenTargets" />
 
-        <activity android:name=".cyanogenmod.PerformanceSettings" />
-
         <activity android:name=".ApnEditor" />
 
         <activity android:name=".cyanogenmod.LockscreenInterface" />
@@ -1774,6 +1772,30 @@
                 <category android:name="com.intent.category.SHORTCUT"/>
             </intent-filter>
         </activity>
+
+        <!-- PerformanceControl activities -->
+        <activity android:name="com.brewcrewfoo.performance.activities.MainActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.PCSettings"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.PackActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FlasherActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FileChooser"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.ResidualsActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.iResidualsActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.KSMActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FreezerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.GovSetActivity"/>
+
+        <receiver android:name="com.brewcrewfoo.performance.service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.brewcrewfoo.performance.service.BootService"/>
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
@@ -1918,12 +1940,6 @@
         <receiver android:name=".bluetooth.BluetoothDiscoverableTimeoutReceiver">
             <intent-filter>
                 <action android:name="android.bluetooth.intent.DISCOVERABLE_TIMEOUT" />
-            </intent-filter>
-        </receiver>
-
-        <receiver android:name=".cyanogenmod.BootReceiver" android:enabled="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
