@@ -30,10 +30,12 @@ import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
@@ -46,6 +48,7 @@ import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
 import com.android.settings.Utils;
 import com.android.settings.cyanogenmod.DisplayRotation;
+import com.android.settings.vanir.fragments.DensityChanger;
 
 import org.cyanogenmod.hardware.AdaptiveBacklight;
 
@@ -84,6 +87,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mAdaptiveBacklight;
     private CheckBoxPreference mMembar;
 
+    Preference mLcdDensity;
+    int newDensityValue;
+    DensityChanger densityFragment;
+
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
         @Override
@@ -107,6 +114,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         Resources res = getResources();
 
         addPreferencesFromResource(R.xml.display_settings);
+
+        PreferenceScreen prefs = getPreferenceScreen();
 
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
@@ -168,6 +177,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mMembar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1);
         }
+
+        mLcdDensity = findPreference("lcd_density_setup");
+        String currentProperty = SystemProperties.get("ro.sf.lcd_density");
+        try {
+            newDensityValue = Integer.parseInt(currentProperty);
+        } catch (Exception e) {
+            getPreferenceScreen().removePreference(mLcdDensity);
+        }
+
+        mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
+
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -399,8 +419,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, checked ? 1 : 0);
-                    
+
             Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mLcdDensity) {
+            ((PreferenceActivity) getActivity())
+            .startPreferenceFragment(new DensityChanger(), true);
             return true;
         } else if (preference == mAdaptiveBacklight) {
             return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());

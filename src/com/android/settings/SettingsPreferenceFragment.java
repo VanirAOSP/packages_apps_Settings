@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;

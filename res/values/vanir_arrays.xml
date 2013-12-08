@@ -138,13 +138,13 @@
     </string-array>
 
     <string-array name="lcd_density_stock_entries">
-        <item>213 -- nexus7</item>
+        <item>160 -- mdpi</item>
         <item>240 -- hdpi</item>
-        <item>320 -- xhdpi</item>
+        <item>320 -- xhdpi/nexus7</item>
     </string-array>
 
     <string-array name="lcd_density_stock_values" translatable="false">
-        <item>213</item>
+        <item>160</item>
         <item>240</item>
         <item>320</item>
     </string-array>
