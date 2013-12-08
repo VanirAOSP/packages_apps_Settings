@@ -297,4 +297,8 @@
     <string name="allow_rotate_title">Allow rotation</string>
     <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
 
+    <!-- screen record -->
+    <string name="power_menu_toggle_screenrecord_title">Screen Record</string>
+	<string name="power_menu_toggle_screenrecord_summary">Show screen Record option in Power Menu</string>
+
 </resources>

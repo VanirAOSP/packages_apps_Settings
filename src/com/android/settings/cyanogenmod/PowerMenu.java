@@ -39,6 +39,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
     private static final String KEY_PROFILES = "power_menu_profiles";
     private static final String KEY_USERS = "power_menu_user";
     private static final String KEY_POWERMENU_IMMERSIVE_PREFS = "powermenu_immersive_prefs";
+    private static final String POWER_MENU_SCREENRECORD = "power_menu_screenrecord";
 
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
@@ -47,6 +48,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
     private CheckBoxPreference mProfile;
     private CheckBoxPreference mImmersiveModePref;
     private CheckBoxPreference mUsers;
+    private CheckBoxPreference mScreenrecordPowerMenu;
 
     private boolean tacosauce;
 
@@ -55,6 +57,9 @@ public class PowerMenu extends SettingsPreferenceFragment {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.power_menu_settings);
+
+         boolean mHasScreenRecord = getActivity().getResources().getBoolean(
+			     com.android.internal.R.bool.config_enableScreenrecordChord);
 
         tacosauce = Settings.System.getInt(getContentResolver(), 
                 Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1;
@@ -90,6 +95,14 @@ public class PowerMenu extends SettingsPreferenceFragment {
         mUsers = (CheckBoxPreference) findPreference(KEY_USERS);
         mUsers.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_USER_ENABLED, 1) == 1));
+
+        mScreenrecordPowerMenu = (CheckBoxPreference) findPreference(POWER_MENU_SCREENRECORD);
+        if(mHasScreenRecord) {
+			mScreenrecordPowerMenu.setChecked(Settings.System.getInt(getContentResolver(),
+			        Settings.System.SCREENRECORD_IN_POWER_MENU, 0) == 1);
+        } else {
+			getPreferenceScreen().removePreference(mScreenrecordPowerMenu);
+        }
 
         if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
             getPreferenceScreen().removePreference(
@@ -137,6 +150,11 @@ public class PowerMenu extends SettingsPreferenceFragment {
             Settings.System.putInt(getContentResolver(),
                      Settings.System.POWER_MENU_PROFILES_ENABLED,
                      value ? 1 : 0);
+        } else if (preference == mScreenrecordPowerMenu) {
+			value = mScreenrecordPowerMenu.isChecked();
+			Settings.System.putInt(getContentResolver(),
+                    Settings.System.SCREENRECORD_IN_POWER_MENU,
+                    value ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
