@@ -39,8 +39,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import com.android.settings.vanir.DensityChanger;
-
 public class SystemUiSettings extends SettingsPreferenceFragment  implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
