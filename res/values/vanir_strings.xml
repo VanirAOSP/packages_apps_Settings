@@ -226,7 +226,7 @@
     <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
 
     <!-- AppOps additions -->
-    <string name="appops_settings">Apps permissions</string>
+    <string name="appops_settings">App ops permissions</string>
     <string name="appops_sysapp_beware">Beware!</string>
     <string name="appops_sysapp_warning">"Changing permissions of core Android components might lead to undesired behavior. Change settings here at your own risk!</string>
 
@@ -261,5 +261,8 @@
     <string name="immersive_mode_on">Immersive mode enabled</string>
     <string name="immersive_mode_off">Immersive mode disabled</string>
     <string name="immersive_mode_style">Immersive style</string>
+
+    <string name="app_ops_btn_text">App Ops</string>
+    <string name="app_ops_no_item_text">This app has no changeable permissions.</string>
 
 </resources>
