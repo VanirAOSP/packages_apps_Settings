@@ -51,6 +51,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
     private static final String PREF_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+    private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
 
     private PreferenceScreen mPieControl;
     private ListPreference mExpandedDesktopPref;
@@ -58,6 +59,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private ListPreference mImmersiveModePref;
     private CheckBoxPreference mImmersiveModeState;
     private Preference mCustomLabel;
+    private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
 
     private String mCustomLabelText = null;
 
@@ -79,6 +81,15 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         mImmersiveModePref.setOnPreferenceChangeListener(this);
         int immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0);
         mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
+
+        // Default value for wake-on-plug behavior from config.xml
+        boolean wakeUpWhenPluggedOrUnpluggedConfig = getResources().getBoolean(
+                com.android.internal.R.bool.config_unplugTurnsOnScreen);
+        mWakeWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
+        mWakeWhenPluggedOrUnplugged.setChecked(Settings.Global.getInt(getContentResolver(),
+                Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
+                (wakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0)) == 1);
+
 
         try {
             boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
@@ -172,6 +183,11 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
             });
 
             alert.show();
+        } else if (preference == mWakeWhenPluggedOrUnplugged) {
+            Settings.Global.putInt(getContentResolver(),
+                    Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
+                    mWakeWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
