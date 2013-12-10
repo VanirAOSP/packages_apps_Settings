@@ -581,7 +581,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void updateDevelopmentShortcutOptions() {
-        mAdvancedReboot.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
+        mDevelopmentShortcut.setChecked(Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.DEVELOPMENT_SHORTCUT, 0) != 0);
     }
 
@@ -626,6 +626,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         resetRootAccessOptions();
         resetAdbNotifyOptions();
         resetVerifyAppsOverUsbOptions();
+        resetDevelopmentShortcutOptions();
         writeOverlayDisplayDevicesOptions(null);
         writeAppProcessLimitOptions(null);
         mHaveDebugSettings = false;
