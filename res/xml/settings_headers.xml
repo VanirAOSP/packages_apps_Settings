@@ -59,7 +59,9 @@
         android:icon="@drawable/empty_icon" />
 
     <!-- INTERFACE -->
-    <header android:title="@string/voodoo_title" />
+    <header
+        android:id="@+id/mode"
+        android:title="@string/voodoo_title" />
 
     <!-- Home -->
     <header
