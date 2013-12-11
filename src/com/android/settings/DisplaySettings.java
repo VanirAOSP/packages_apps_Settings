@@ -41,6 +41,7 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.vanir.util.Helpers;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.DreamSettings;
 import com.android.settings.Utils;
@@ -68,6 +69,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_LIGHTS = "lights_prefs";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
+    private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
     private final Configuration mCurConfig = new Configuration();
@@ -80,6 +82,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
     private CheckBoxPreference mAdaptiveBacklight;
+    private CheckBoxPreference mMembar;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -159,6 +162,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(lightPrefs);
         }
         updateDisplayRotationPreferenceDescription();
+
+        mMembar = (CheckBoxPreference) getPreferenceScreen().findPreference(SYSTEMUI_RECENTS_MEM_DISPLAY);
+        if (mMembar != null) {
+        mMembar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1);
+        }
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -386,7 +395,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mAdaptiveBacklight) {
+        if (preference == mMembar) {
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, checked ? 1 : 0);
+                    
+            Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mAdaptiveBacklight) {
             return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
