@@ -76,9 +76,8 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.cyanogenmod.ButtonSettings;
 import com.android.settings.cyanogenmod.LockscreenInterface;
 import com.android.settings.cyanogenmod.MoreDeviceSettings;
-import com.android.settings.cyanogenmod.PerformanceSettings;
 import com.android.settings.cyanogenmod.SystemUiSettings;
-import com.android.settings.cyanogenmod.superuser.PolicyNativeFragment;
+import com.android.settings.vanir.superuser.PolicyNativeFragment;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -366,7 +365,6 @@ public class Settings extends PreferenceActivity
         ButtonSettings.class.getName(),
         MoreDeviceSettings.class.getName(),
         ProfilesSettings.class.getName(),
-        PerformanceSettings.class.getName(),
         PolicyNativeFragment.class.getName()
     };
 
