@@ -95,11 +95,6 @@
             android:title="@string/enable_adb"
             android:summary="@string/enable_adb_summary"/>
 
-        <CheckBoxPreference
-            android:key="development_shortcut"
-            android:title="@string/development_shortcut_title"
-            android:summary="@string/development_shortcut_summary" />
-
         <com.android.settings.HostnamePreference
             android:key="device_hostname"
             android:title="@string/device_hostname"
