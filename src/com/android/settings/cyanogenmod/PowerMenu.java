@@ -16,138 +16,35 @@
 
 package com.android.settings.cyanogenmod;
 
-import android.content.res.Resources;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class PowerMenu extends SettingsPreferenceFragment {
-    private static final String TAG = "PowerMenu";
-
-    private static final String KEY_REBOOT = "power_menu_reboot";
-    private static final String KEY_SCREENSHOT = "power_menu_screenshot";
-    private static final String KEY_AIRPLANE = "power_menu_airplane";
-    private static final String KEY_SILENT = "power_menu_silent";
-    private static final String KEY_PROFILES = "power_menu_profiles";
-    private static final String KEY_USERS = "power_menu_user";
-    private static final String KEY_POWERMENU_IMMERSIVE_PREFS = "powermenu_immersive_prefs";
-
-    private CheckBoxPreference mRebootPref;
-    private CheckBoxPreference mScreenshotPref;
-    private CheckBoxPreference mAirplanePref;
-    private CheckBoxPreference mSilentPref;
-    private CheckBoxPreference mProfile;
-    private CheckBoxPreference mImmersiveModePref;
-    private CheckBoxPreference mUsers;
-
-    private boolean tacosauce;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.power_menu_settings);
 
-        tacosauce = Settings.System.getInt(getContentResolver(), 
-                Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1;
+        final ContentResolver resolver = getContentResolver();
 
-        mRebootPref = (CheckBoxPreference) findPreference(KEY_REBOOT);
-        mRebootPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_REBOOT_ENABLED, 1) == 1));
-
-        mScreenshotPref = (CheckBoxPreference) findPreference(KEY_SCREENSHOT);
-        mScreenshotPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_SCREENSHOT_ENABLED, 0) == 1));
-
-        mAirplanePref = (CheckBoxPreference) findPreference(KEY_AIRPLANE);
-        mAirplanePref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_AIRPLANE_ENABLED, 1) == 1));
-
-        mSilentPref = (CheckBoxPreference) findPreference(KEY_SILENT);
-        mSilentPref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_SILENT_ENABLED, 1) == 1));
-
-        mImmersiveModePref = (CheckBoxPreference) findPreference(KEY_POWERMENU_IMMERSIVE_PREFS);
-        mImmersiveModePref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_IMMERSIVE, 1) == 1));
-
-        mProfile = (CheckBoxPreference) findPreference(KEY_PROFILES);
-        mProfile.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_PROFILES_ENABLED, 1) == 1));
+        // Only enable expanded desktop item if expanded desktop support is also enabled
+        findPreference(Settings.System.POWER_MENU_EXPANDED_DESKTOP_ENABLED).setEnabled(
+                Settings.System.getInt(resolver, Settings.System.EXPANDED_DESKTOP_STYLE, 0) != 0);
 
         // Only enable profiles item if System Profiles are also enabled
-        findPreference(KEY_PROFILES).setEnabled(Settings.System.getInt(getContentResolver(),
-                Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 0);
-
-        mUsers = (CheckBoxPreference) findPreference(KEY_USERS);
-        mUsers.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_USER_ENABLED, 1) == 1));
+        findPreference(Settings.System.POWER_MENU_PROFILES_ENABLED).setEnabled(
+                Settings.System.getInt(resolver, Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 0);
 
         if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
             getPreferenceScreen().removePreference(
                     findPreference(Settings.System.POWER_MENU_USER_ENABLED));
-        }
-        updateImmersive();
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        boolean value;
-
-        if (preference == mScreenshotPref) {
-            value = mScreenshotPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_SCREENSHOT_ENABLED,
-                    value ? 1 : 0);
-        } else if (preference == mRebootPref) {
-            value = mRebootPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_REBOOT_ENABLED,
-                    value ? 1 : 0);
-       } else if (preference == mAirplanePref) {
-            value = mAirplanePref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_AIRPLANE_ENABLED,
-                    value ? 1 : 0);
-       } else if (preference == mSilentPref) {
-            value = mSilentPref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_SILENT_ENABLED,
-                    value ? 1 : 0);
-        } else if (preference == mImmersiveModePref) {
-            value = mImmersiveModePref.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_IMMERSIVE,
-                    value ? 1 : 0);
-        } else if (preference == mUsers) {
-            value = mUsers.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.POWER_MENU_USER_ENABLED,
-                    value ? 1 : 0);
-        } else if (preference == mProfile) {
-            value = mProfile.isChecked();
-            Settings.System.putInt(getContentResolver(),
-                     Settings.System.POWER_MENU_PROFILES_ENABLED,
-                     value ? 1 : 0);
-        } else {
-            return super.onPreferenceTreeClick(preferenceScreen, preference);
-        }
-        return true;
-    }
-
-    private void updateImmersive() {
-        if (tacosauce) {
-            mImmersiveModePref.setEnabled(true);
-        } else {
-            mImmersiveModePref.setEnabled(false);
         }
     }
 }

@@ -20,38 +20,38 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_reboot"
+        android:key="power_menu_reboot_enabled"
         android:title="@string/power_menu_reboot_title"
         android:defaultValue="true" />
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_screenshot"
+        android:key="power_menu_screenshot_enabled"
         android:title="@string/power_menu_screenshot_title"
         android:defaultValue="false" />
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_profiles"
-        android:title="@string/power_menu_profiles_title"
+        android:key="power_menu_expanded_desktop_enabled"
+        android:title="@string/power_menu_expanded_desktop"
         android:defaultValue="false" />
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_airplane"
+        android:key="power_menu_profiles_enabled"
+        android:title="@string/power_menu_profiles_title"
+        android:defaultValue="true" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="power_menu_airplane_enabled"
         android:title="@string/power_menu_airplane_title"
         android:defaultValue="true" />
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_user"
+        android:key="power_menu_user_enabled"
         android:title="@string/power_menu_user_title"
         android:defaultValue="false" />
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_silent"
+        android:key="power_menu_silent_enabled"
         android:title="@string/power_menu_sound_title"
         android:defaultValue="true" />
-
-    <CheckBoxPreference
-        android:key="powermenu_immersive_prefs"
-        android:title="@string/power_menu_immersive_mode"
-        android:defaultValue="true" />   
 
 </PreferenceScreen>
