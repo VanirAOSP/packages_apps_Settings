@@ -274,4 +274,9 @@
     <string name="pref_recents_title">Enhance recents panel</string>
     <string name="pref_recents_summary">Add a memory usage bar to the recents panel</string>
 
+
+    <!-- QuickSettings fliptiles -->
+    <string name="flip_qs_tiles_title">Flip tiles</string>
+    <string name="flip_qs_tiles_summary">Flips the tiles on touch</string>
+
 </resources>
