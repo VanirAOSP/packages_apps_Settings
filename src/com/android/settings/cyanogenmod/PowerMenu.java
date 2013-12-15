@@ -93,7 +93,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
 
         if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
             getPreferenceScreen().removePreference(
-                    findPreference(Settings.System.POWER_MENU_USER_ENABLED));
+                    findPreference("power_menu_user"));
         }
         updateImmersive();
     }
