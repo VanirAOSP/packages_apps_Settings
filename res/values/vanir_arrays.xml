@@ -134,19 +134,27 @@
         <item>300</item>
         <item>320</item>
         <item>340</item>
+        <item>480</item>
+        <item>640</item>
         <item>@string/custom_density</item>
     </string-array>
 
     <string-array name="lcd_density_stock_entries">
+        <item>120 -- ldpi</item>
         <item>160 -- mdpi</item>
         <item>240 -- hdpi</item>
-        <item>320 -- xhdpi/nexus7</item>
+        <item>320 -- xhdpi</item>
+        <item>480 -- xhdpi</item>
+        <item>640 -- xxhdpi</item>
     </string-array>
 
     <string-array name="lcd_density_stock_values" translatable="false">
+        <item>120</item>
         <item>160</item>
         <item>240</item>
         <item>320</item>
+        <item>480</item>
+        <item>640</item>
     </string-array>
 
     <!-- Listview animation -->
