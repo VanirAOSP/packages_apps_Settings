@@ -144,6 +144,7 @@ public class Settings extends PreferenceActivity
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
+    private static boolean mode;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -214,6 +215,8 @@ public class Settings extends PreferenceActivity
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
+        mode = mDevelopmentPreferences.getBoolean(
+                DevelopmentSettings.USER_MODE, true);
 
         getMetaData();
         mInLocalHeaderSwitch = true;
@@ -566,7 +569,7 @@ public class Settings extends PreferenceActivity
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
-        final boolean mode = mDevelopmentPreferences.getBoolean(
+        mode = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.USER_MODE, true);
         int i = 0;
 
@@ -868,7 +871,7 @@ public class Settings extends PreferenceActivity
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
                     || header.id == R.id.profiles_settings
-                    || header.id == R.id.location_settings) {
+                    || (header.id == R.id.location_settings && !mode)) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.security_settings) {
                 return HEADER_TYPE_BUTTON;
@@ -989,7 +992,7 @@ public class Settings extends PreferenceActivity
                         mBluetoothEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.profiles_settings) {
                         mProfileEnabler.setSwitch(holder.switch_);
-                    } else if (header.id == R.id.location_settings) {
+                    } else if ((header.id == R.id.location_settings) && !mode) {
                         mLocationEnabler.setSwitch(holder.switch_);
                     }
                     updateCommonHeaderView(header, holder);
@@ -1065,14 +1068,16 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
             mProfileEnabler.resume();
-            mLocationEnabler.resume();
+            if (mode)
+                mLocationEnabler.resume();
         }
 
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
             mProfileEnabler.pause();
-            mLocationEnabler.pause();
+            if (mode)
+                mLocationEnabler.pause();
         }
     }
 
