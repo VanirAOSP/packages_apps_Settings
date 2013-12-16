@@ -144,7 +144,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
     }
 
     private void updateImmersive() {
-        if (tacosauce) {
+        if (!tacosauce) {
             mImmersiveModePref.setEnabled(true);
         } else {
             mImmersiveModePref.setEnabled(false);
