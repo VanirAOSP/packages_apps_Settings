@@ -56,6 +56,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.TextUtils;
@@ -69,6 +70,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import dalvik.system.VMRuntime;
 
@@ -94,6 +96,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
      * Whether to show the development settings to the user.  Default is false.
      */
     public static final String PREF_SHOW = "show";
+    public static final String USER_MODE = "user_mode";
 
     private static final String ENABLE_ADB = "enable_adb";
     private static final String ADB_NOTIFY = "adb_notify";
@@ -113,7 +116,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BUGREPORT = "bugreport";
     private static final String BUGREPORT_IN_POWER_KEY = "bugreport_in_power";
     private static final String OPENGL_TRACES_PROPERTY = "debug.egl.trace";
-
     private static final String DEBUG_APP_KEY = "debug_app";
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
@@ -136,31 +138,21 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEBUG_DEBUGGING_CATEGORY_KEY = "debug_debugging_category";
     private static final String DEBUG_APPLICATIONS_CATEGORY_KEY = "debug_applications_category";
     private static final String WIFI_DISPLAY_CERTIFICATION_KEY = "wifi_display_certification";
-
     private static final String OPENGL_TRACES_KEY = "enable_opengl_traces";
-
     private static final String ROOT_ACCESS_KEY = "root_access";
     private static final String ROOT_ACCESS_PROPERTY = "persist.sys.root_access";
-
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
             = "immediately_destroy_activities";
     private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
-
     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
-
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
-
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
-
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
-
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
-
     private static final String DEVELOPMENT_TOOLS = "development_tools";
-
     private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
-
     private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
+    private static final String STOCK_MODE = "stock_mode";
 
     private static final int RESULT_DEBUG_APP = 1000;
 
@@ -172,7 +164,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mLastEnabledState;
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
+    private boolean enableStockMode;
 
+    private SwitchPreference mStockMode;
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mAdbNotify;
     private Preference mClearAdbKeys;
@@ -220,7 +214,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private PreferenceScreen mDevelopmentTools;
 
     private CheckBoxPreference mAdvancedReboot;
-
     private CheckBoxPreference mDevelopmentShortcut;
 
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
@@ -262,6 +255,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
+
+        mStockMode = (SwitchPreference) findPreference(STOCK_MODE);
+        mStockMode.setOnPreferenceChangeListener(this);
 
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
         mAdbNotify = (CheckBoxPreference) findPreference(ADB_NOTIFY);
@@ -360,6 +356,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mAllPrefs.add(mRootAccess);
         }
 
+
+        updateSettingsMode();
         mDevelopmentTools = (PreferenceScreen) findPreference(DEVELOPMENT_TOOLS);
         mAllPrefs.add(mDevelopmentTools);
     }
@@ -528,7 +526,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateCheckBox(mBtHciSnoopLog, Settings.Secure.getInt(cr,
                 Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
         updateAdbOverNetwork();
-	updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
+	    updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateRuntimeValue();
         updateHdcpValues();
@@ -1468,6 +1466,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateHdcpValues();
             pokeSystemProperties();
             return true;
+        } else if (preference == mStockMode) {
+            boolean value = ((Boolean)newValue).booleanValue();
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.STOCK_MODE,
+                    value ? 1 : 0);
+            final String stock = mContext.getString(R.string.stock_mode_toast);
+            Toast.makeText(mContext, stock, Toast.LENGTH_SHORT).show();
+            updateSettingsMode();
+            return true;
         } else if (preference == mOverlayDisplayDevices) {
             writeOverlayDisplayDevicesOptions(newValue);
             return true;
@@ -1507,6 +1514,24 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
         return false;
+    }
+
+    private void updateSettingsMode() {
+        enableStockMode = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.STOCK_MODE, 0) == 1;
+
+        if (enableStockMode) {
+            getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
+                    .putInt(USER_MODE, 1)
+                    .apply();
+            resetDevelopmentShortcutOptions();
+            mDevelopmentShortcut.setEnabled(true);
+        } else {
+            getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
+                    .putInt(USER_MODE, 0)
+                    .apply();
+            mDevelopmentShortcut.setEnabled(false);
+        }
     }
 
     private void dismissDialogs() {

@@ -26,6 +26,7 @@ import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -143,7 +144,9 @@ public class Settings extends PreferenceActivity
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
-    private static boolean mode;
+    private static boolean enableStockMode;
+    private static int defaultValue = 0;
+    private static int userValue;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -214,6 +217,7 @@ public class Settings extends PreferenceActivity
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
+        updateUserModePreference();
 
         getMetaData();
         mInLocalHeaderSwitch = true;
@@ -271,6 +275,7 @@ public class Settings extends PreferenceActivity
     @Override
     public void onResume() {
         super.onResume();
+        updateUserModePreference();
 
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -393,6 +398,16 @@ public class Settings extends PreferenceActivity
             mParentHeader = null;
         }
         super.switchToHeader(header);
+    }
+
+    private void updateUserModePreference() {
+        userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
+
+        if (userValue != defaultValue) {
+            enableStockMode = true;
+        } else {
+            enableStockMode = false;
+        }
     }
 
     /**
@@ -566,6 +581,7 @@ public class Settings extends PreferenceActivity
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
+        updateUserModePreference();
         int i = 0;
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -603,19 +619,27 @@ public class Settings extends PreferenceActivity
                 if (!mBatteryPresent) {
                     target.remove(i);
                 }
+            } else if (id == R.id.vanir_voodoo) {
+                if (enableStockMode) {
+                    target.remove(i);
+                }
+            } else if (id == R.id.system_settings || id == R.id.themes_settings) {
+                if (enableStockMode) {
+                    target.remove(i);
+                }
             } else if (id == R.id.display_settings) {
                 final Resources res = getResources();
                 boolean hasLed =
                         res.getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)
                         || res.getBoolean(com.android.internal.R.bool.config_intrusiveBatteryLed);
-                if (hasLed) {
+                if (hasLed && !enableStockMode) {
                     header.titleRes = R.string.display_lights_settings_title;
                 }
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.home_settings) {
-                if (!updateHomeSettingHeaders(header)) {
+                if (!updateHomeSettingHeaders(header) || enableStockMode) {
                     target.remove(i);
                 }
             } else if (id == R.id.user_settings) {
@@ -635,9 +659,16 @@ public class Settings extends PreferenceActivity
                         target.remove(i);
                     }
                 }
-            } else if (id == R.id.development_settings
-                    || id == R.id.performance_controls) {
+            } else if (id == R.id.profiles_settings) {
+                if (enableStockMode) {
+                    target.remove(i);
+                }
+            } else if (id == R.id.development_settings) {
                 if (!showDev) {
+                    target.remove(i);
+                }
+            } else if (id == R.id.performance_controls) {
+                if (!showDev || enableStockMode) {
                     target.remove(i);
                 }
             } else if (id == R.id.account_add) {
@@ -646,6 +677,9 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.superuser) {
                 if (!DevelopmentSettings.isRootForAppsEnabled()) {
+                    target.remove(i);
+                }
+                if (enableStockMode) {
                     target.remove(i);
                 }
             }
@@ -848,7 +882,7 @@ public class Settings extends PreferenceActivity
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
                     || header.id == R.id.profiles_settings
-                    || (header.id == R.id.location_settings && !mode)) {
+                    || (header.id == R.id.location_settings && !enableStockMode)) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.security_settings) {
                 return HEADER_TYPE_BUTTON;
@@ -969,7 +1003,7 @@ public class Settings extends PreferenceActivity
                         mBluetoothEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.profiles_settings) {
                         mProfileEnabler.setSwitch(holder.switch_);
-                    } else if ((header.id == R.id.location_settings) && !mode) {
+                    } else if ((header.id == R.id.location_settings) && !enableStockMode) {
                         mLocationEnabler.setSwitch(holder.switch_);
                     }
                     updateCommonHeaderView(header, holder);
@@ -1045,7 +1079,7 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
             mProfileEnabler.resume();
-            if (mode)
+            if (enableStockMode)
                 mLocationEnabler.resume();
         }
 
@@ -1053,7 +1087,7 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
             mProfileEnabler.pause();
-            if (mode)
+            if (enableStockMode)
                 mLocationEnabler.pause();
         }
     }

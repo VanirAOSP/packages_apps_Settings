@@ -74,9 +74,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
+    private static final String KEY_ANIMATIONS = "animations";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
     private final Configuration mCurConfig = new Configuration();
+
+    private Preference mAnimations;
+    private Preference mAdvanced;
 
     private CheckBoxPreference mStatusbarSliderPreference;
     private CheckBoxPreference mAccelerometer;
@@ -118,6 +122,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.display_settings);
         PreferenceScreen prefs = getPreferenceScreen();
 
+        final boolean USER_MODE = Settings.Secure.getInt(resolver,
+                Settings.Secure.STOCK_MODE, 1) == 1;
+
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
@@ -146,7 +153,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceClickListener(this);
 
         mAdaptiveBacklight = (CheckBoxPreference) findPreference(KEY_ADAPTIVE_BACKLIGHT);
-        if (!isAdaptiveBacklightSupported()) {
+        if (!isAdaptiveBacklightSupported() || USER_MODE) {
             getPreferenceScreen().removePreference(mAdaptiveBacklight);
             mAdaptiveBacklight = null;
         }
@@ -160,17 +167,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_intrusiveBatteryLed);
         PreferenceCategory lightPrefs = (PreferenceCategory) findPreference(CATEGORY_LIGHTS);
 
-        if (hasNotificationLed || hasBatteryLed) {
+        if ((hasNotificationLed || hasBatteryLed) && !USER_MODE) {
             mBatteryPulse = (PreferenceScreen) findPreference(KEY_BATTERY_LIGHT);
             mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
 
             // Battery light is only for primary user
-            if (UserHandle.myUserId() != UserHandle.USER_OWNER || !hasBatteryLed) {
+            if (UserHandle.myUserId() != UserHandle.USER_OWNER || (!hasBatteryLed || USER_MODE)) {
                 lightPrefs.removePreference(mBatteryPulse);
                 mBatteryPulse = null;
             }
 
-            if (!hasNotificationLed) {
+            if (!hasNotificationLed || USER_MODE) {
                 lightPrefs.removePreference(mNotificationPulse);
                 mNotificationPulse = null;
             }
@@ -192,9 +199,23 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } catch (Exception e) {
             getPreferenceScreen().removePreference(mLcdDensity);
         }
-
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
+        mAnimations = getPreferenceScreen().findPreference(KEY_ANIMATIONS);
+        mAdvanced = getPreferenceScreen().findPreference(KEY_ADVANCED_DISPLAY_SETTINGS);
+
+        try {
+            if (USER_MODE) {
+                getPreferenceScreen().removePreference(mLcdDensity);
+                getPreferenceScreen().removePreference(mMembar);
+                getPreferenceScreen().removePreference(mStatusbarSliderPreference);
+                getPreferenceScreen().removePreference(mAnimations);
+                if (mAdvanced != null)
+                    getPreferenceScreen().removePreference(mAdvanced);
+            }
+        } catch (NullPointerException e) {
+            // Do nothing..
+        }
     }
 
     private void updateDisplayRotationPreferenceDescription() {

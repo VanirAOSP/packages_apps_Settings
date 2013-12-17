@@ -278,4 +278,9 @@
     <string name="flip_qs_tiles_title">Flip tiles</string>
     <string name="flip_qs_tiles_summary">Flips the tiles on touch</string>
 
+    <!-- stock mode -->
+    <string name="stock_mode_title">Stock mode</string>
+    <string name="stock_mode_summary">Hide custom ROM preferences and revert to a stock AOSP interface</string>
+    <string name="stock_mode_toast">Restart for all changes to take effect!</string>
+
 </resources>
