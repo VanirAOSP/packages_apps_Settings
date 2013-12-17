@@ -21,6 +21,7 @@
     <string name="ok">OK</string>
     <string name="reset">Reset</string>
     <string name="misc_short">Misc</string>
+    <string name="lockscreen_targets_title">Targets</string>
 
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Power menu</string>
@@ -282,5 +283,11 @@
     <string name="stock_mode_title">Stock mode</string>
     <string name="stock_mode_summary">Hide custom ROM preferences and revert to a stock AOSP interface</string>
     <string name="stock_mode_toast">Restart for all changes to take effect!</string>
+
+    <!--Lockscreen blur-->
+    <string name="blur_behind_title">Blur Lockscreen Background</string>
+    <string name="blur_behind_summary">See through lockscreen with blur effect</string>
+    <string name="blur_radius_title">Blur Radius</string>
+    <string name="blur_radius_summary">Set the blur radius for the blur effect</string>
 
 </resources>

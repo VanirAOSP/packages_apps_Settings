@@ -26,6 +26,8 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SeekBarPreference;
 import android.provider.Settings;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -34,13 +36,17 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-public class LockscreenInterface extends SettingsPreferenceFragment {
+public class LockscreenInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
 
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String LOCKSCREEN_WIDGETS_CATEGORY = "lockscreen_widgets_category";
+    private static final String KEY_BLUR_BEHIND = "blur_behind";
+    private static final String KEY_BLUR_RADIUS = "blur_radius";
 
     private CheckBoxPreference mEnableKeyguardWidgets;
+    private CheckBoxPreference mBlurBehind;
+    private SeekBarPreference mBlurRadius;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private DevicePolicyManager mDPM;
@@ -94,6 +100,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment {
                 mEnableKeyguardWidgets.setEnabled(!disabled);
             }
         }
+
+        mBlurBehind = (CheckBoxPreference) findPreference(KEY_BLUR_BEHIND);
+        mBlurBehind.setChecked(Settings.System.getInt(getContentResolver(), 
+            Settings.System.LOCKSCREEN_BLUR_BEHIND, 0) == 1);
+        mBlurRadius = (SeekBarPreference) findPreference(KEY_BLUR_RADIUS);
+        mBlurRadius.setProgress(Settings.System.getInt(getContentResolver(), 
+            Settings.System.LOCKSCREEN_BLUR_RADIUS, 12));
+        mBlurRadius.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -113,9 +127,22 @@ public class LockscreenInterface extends SettingsPreferenceFragment {
         if (KEY_ENABLE_WIDGETS.equals(key)) {
             lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
             return true;
-        }
 
+        } else if (preference == mBlurBehind) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND,
+                    mBlurBehind.isChecked() ? 1 : 0);
+            return true;
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object value) {
+        if (preference == mBlurRadius) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_BLUR_RADIUS, (Integer)value);
+         }
+
+         return true;
     }
 
     public static class DeviceAdminLockscreenReceiver extends DeviceAdminReceiver {}
