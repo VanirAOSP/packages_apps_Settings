@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012-2013 The CyanogenMod Project
+<!--
+     Copyright (C) 2012-2013 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -707,10 +708,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="keyboard_backlight_seekbar_title">Keyboard brightness</string>
     <string name="backlight_timeout_title">Illumination timeout</string>
     <string name="backlight_timeout_unlimited">Don\'t turn off</string>
-    <plurals name="backlight_timeout_time">
-        <item quantity="one"><xliff:g id="seconds">%d</xliff:g> second</item>
-        <item quantity="other"><xliff:g id="seconds">%d</xliff:g> seconds</item>
-    </plurals>
     <string name="backlight_summary_disabled">Disabled</string>
     <string name="backlight_summary_enabled_with_timeout">Enabled for <xliff:g id="timeout">%s</xliff:g></string>
     <string name="backlight_summary_enabled">Enabled</string>
@@ -721,10 +718,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Status bar  -->
     <string name="status_bar_title">Status bar</string>
     <string name="status_bar_battery_title">Battery status style</string>
-    <string name="status_bar_style_icon">Icon</string>
+    <string name="status_bar_style_icon_portrait">Icon portrait</string>
+    <string name="status_bar_style_icon_landscape">Icon landscape</string>
+    <string name="status_bar_style_circle">Circle</string>
     <string name="status_bar_style_hidden">Hidden</string>
-    <string name="status_bar_battery_status_circle">Circle</string>
-    <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
+    <string name="status_bar_battery_show_percent_title">Show battery status percent</string>
 
     <!--  development shortcut -->
     <string name="development_shortcut_title">Development shortcut</string>
@@ -740,7 +738,15 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="whisperpush_registration_summary">Register for WhisperPush to enable encrypted SMS.</string>
     <string name="whisperpush_identitykey_title">Review identity keys</string>
 
+
     <!-- GPS download data over wi-fi only -->
     <string name="gps_download_data_wifi_only">Download GPS assisted data only over Wi-Fi networks</string>
 
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_dock_ac">(DockAC)</string>
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_dock_usb">(DockUSB)</string>
+
+    <!-- Menu label for reset the battery stats -->
+    <string name="menu_stats_reset">Reset</string>
 </resources>
