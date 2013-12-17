@@ -152,9 +152,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
-        final boolean USER_MODE = Settings.Secure.getInt(resolver,
-                Settings.Secure.STOCK_MODE, 1) == 1;
-
         int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -292,10 +289,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             if (ringtone != null) {
                 mPowerSoundsRingtone.setSummary(ringtone.getTitle(getActivity()));
             }
-        }
-
-        if (USER_MODE) {
-            mSoundSettings.removePreference(mQuietHours);
         }
 
         initDockSettings();

@@ -17,11 +17,9 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SELinux;
@@ -31,7 +29,6 @@ import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 

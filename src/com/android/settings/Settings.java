@@ -26,7 +26,6 @@ import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -215,8 +214,6 @@ public class Settings extends PreferenceActivity
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
-        mode = mDevelopmentPreferences.getBoolean(
-                DevelopmentSettings.USER_MODE, true);
 
         getMetaData();
         mInLocalHeaderSwitch = true;
@@ -569,8 +566,6 @@ public class Settings extends PreferenceActivity
         final boolean showDev = mDevelopmentPreferences.getBoolean(
                 DevelopmentSettings.PREF_SHOW,
                 android.os.Build.TYPE.equals("eng"));
-        mode = mDevelopmentPreferences.getBoolean(
-                DevelopmentSettings.USER_MODE, true);
         int i = 0;
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -608,27 +603,19 @@ public class Settings extends PreferenceActivity
                 if (!mBatteryPresent) {
                     target.remove(i);
                 }
-            } else if (id == R.id.mode) {
-                if (mode) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.system_settings || id == R.id.themes_settings) {
-                if (mode) {
-                    target.remove(i);
-                }
             } else if (id == R.id.display_settings) {
                 final Resources res = getResources();
                 boolean hasLed =
                         res.getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)
                         || res.getBoolean(com.android.internal.R.bool.config_intrusiveBatteryLed);
-                if (hasLed && !mode) {
+                if (hasLed) {
                     header.titleRes = R.string.display_lights_settings_title;
                 }
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.home_settings) {
-                if (!updateHomeSettingHeaders(header) || mode) {
+                if (!updateHomeSettingHeaders(header)) {
                     target.remove(i);
                 }
             } else if (id == R.id.user_settings) {
@@ -648,16 +635,9 @@ public class Settings extends PreferenceActivity
                         target.remove(i);
                     }
                 }
-            } else if (id == R.id.profiles_settings) {
-                if (mode) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.development_settings) {
+            } else if (id == R.id.development_settings
+                    || id == R.id.performance_controls) {
                 if (!showDev) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.performance_controls) {
-                if (!showDev || mode) {
                     target.remove(i);
                 }
             } else if (id == R.id.account_add) {
@@ -666,9 +646,6 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.superuser) {
                 if (!DevelopmentSettings.isRootForAppsEnabled()) {
-                    target.remove(i);
-                }
-                if (mode) {
                     target.remove(i);
                 }
             }
