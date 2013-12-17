@@ -49,6 +49,17 @@
         android:key="lockscreen_misc">
 
         <CheckBoxPreference
+            android:key="allow_rotation"
+            android:title="@string/allow_rotate_title"
+            android:summary="@string/allow_rotate_summary"
+            android:defaultValue="false" />
+
+       <CheckBoxPreference
+            android:key="see_through"
+            android:title="@string/see_through_title"
+            android:summary="@string/see_through_summary" />
+
+        <CheckBoxPreference
             android:key="blur_behind"
             android:title="@string/blur_behind_title"
             android:summary="@string/blur_behind_summary" />

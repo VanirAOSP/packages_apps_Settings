@@ -290,4 +290,11 @@
     <string name="blur_radius_title">Blur Radius</string>
     <string name="blur_radius_summary">Set the blur radius for the blur effect</string>
 
+    <!-- Lock screen see through -->
+    <string name="see_through_title">Transparent lockscreen</string>
+    <string name="see_through_summary">Allows visibility of the application or home screen behind the lock screen.</string>
+    <!-- Allow rotation -->
+    <string name="allow_rotate_title">Allow rotation</string>
+    <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
+
 </resources>

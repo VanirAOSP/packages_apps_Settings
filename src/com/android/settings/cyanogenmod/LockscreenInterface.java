@@ -41,10 +41,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
 
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String LOCKSCREEN_WIDGETS_CATEGORY = "lockscreen_widgets_category";
+    private static final String KEY_ALLOW_ROTATION = "allow_rotation";
+    private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_BLUR_BEHIND = "blur_behind";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
 
     private CheckBoxPreference mEnableKeyguardWidgets;
+    private CheckBoxPreference mSeeThrough;
+    private CheckBoxPreference mAllowRotation;
     private CheckBoxPreference mBlurBehind;
     private SeekBarPreference mBlurRadius;
 
@@ -101,6 +105,12 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
             }
         }
 
+        mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH);
+
+        mAllowRotation = (CheckBoxPreference) findPreference(KEY_ALLOW_ROTATION);
+        mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_ROTATION, 0) == 1); 
+
         mBlurBehind = (CheckBoxPreference) findPreference(KEY_BLUR_BEHIND);
         mBlurBehind.setChecked(Settings.System.getInt(getContentResolver(), 
             Settings.System.LOCKSCREEN_BLUR_BEHIND, 0) == 1);
@@ -126,6 +136,18 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_ENABLE_WIDGETS.equals(key)) {
             lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
+            return true;
+
+        } else if (preference == mSeeThrough) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
+                    ? 1 : 0);
+            return true;
+
+        } else if (preference == mAllowRotation) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_ROTATION, mAllowRotation.isChecked()
+                    ? 1 : 0);
             return true;
 
         } else if (preference == mBlurBehind) {
