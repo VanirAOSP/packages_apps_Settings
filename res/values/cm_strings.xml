@@ -724,13 +724,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_style_hidden">Hidden</string>
     <string name="status_bar_battery_show_percent_title">Show battery status percent</string>
 
-    <!--  development shortcut -->
+    <!-- Development shortcut -->
     <string name="development_shortcut_title">Development shortcut</string>
     <string name="development_shortcut_summary">Enable \'wipe data\' and \'force close\' options in notification area and recent apps list</string>
 
     <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
     <string name="custom_runtime_warning_title">Warning</string>
     <string name="custom_runtime_warning_message">ART is not currently supported. This setting is included for experimentation only and has the potential to cause instability, crashes, data loss or prevent the proper boot of your device. Visit &lt;a href=\"http://source.android.com/devices/tech/dalvik/art.html\"&gt;Introducing ART&lt;/a&gt; for more information.&lt;br/&gt;&lt;br/&gt;We request you do not file bug reports if you have enabled ART as your runtime.&lt;br/&gt;&lt;br/&gt;Are you sure you want to reboot to change runtime from <xliff:g id="old" example="libdvm.so">%1$s</xliff:g> to <xliff:g id="new" example="libart.so">%2$s</xliff:g>?</string>
+    <!-- USB Mass Storage -->
+    <string name="usb_mass_storage_title">Mass storage (UMS)</string>
+    <string name="usb_mass_storage_summary">Lets you transfer any files between your computer and your SD card by mounting it as a flash device</string>
 
     <!-- WhisperPush -->
     <string name="whisperpush_title">WhisperPush</string>
@@ -749,4 +752,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Menu label for reset the battery stats -->
     <string name="menu_stats_reset">Reset</string>
+
+    <!-- CM Legal -->
+    <string name="cmlicense_title">CyanogenMod Legal</string>
+    <string name="settings_cmlicense_activity_title">CyanogenMod Legal</string>
+    <string name="settings_cmlicense_activity_unreachable">You don\'t have a data connection. To view this information now, go to %s from any computer connected to the Internet.</string>
 </resources>
