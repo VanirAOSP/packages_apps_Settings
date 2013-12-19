@@ -79,6 +79,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
     private final Configuration mCurConfig = new Configuration();
 
+    private SharedPreferences mDevelopmentPreferences;
+    private static boolean enableStockMode;
+    private static final int defaultValue = 0;
+    private static int userValue;
+    
     private Preference mAnimations;
     private Preference mAdvanced;
 
@@ -122,8 +127,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.display_settings);
         PreferenceScreen prefs = getPreferenceScreen();
 
-        final boolean USER_MODE = Settings.Secure.getInt(resolver,
-                Settings.Secure.STOCK_MODE, 1) == 1;
+        mDevelopmentPreferences = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                Context.MODE_PRIVATE);
+        updateUserModePreference();
 
         mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
@@ -151,7 +157,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceClickListener(this);
 
         mAdaptiveBacklight = (CheckBoxPreference) findPreference(KEY_ADAPTIVE_BACKLIGHT);
-        if (!isAdaptiveBacklightSupported() || USER_MODE) {
+        if (!isAdaptiveBacklightSupported() || enableStockMode) {
             getPreferenceScreen().removePreference(mAdaptiveBacklight);
             mAdaptiveBacklight = null;
         }
@@ -165,17 +171,17 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 com.android.internal.R.bool.config_intrusiveBatteryLed);
         PreferenceCategory lightPrefs = (PreferenceCategory) findPreference(CATEGORY_LIGHTS);
 
-        if ((hasNotificationLed || hasBatteryLed) && !USER_MODE) {
+        if ((hasNotificationLed || hasBatteryLed) && !enableStockMode) {
             mBatteryPulse = (PreferenceScreen) findPreference(KEY_BATTERY_LIGHT);
             mNotificationPulse = (PreferenceScreen) findPreference(KEY_NOTIFICATION_PULSE);
 
             // Battery light is only for primary user
-            if (UserHandle.myUserId() != UserHandle.USER_OWNER || (!hasBatteryLed || USER_MODE)) {
+            if (UserHandle.myUserId() != UserHandle.USER_OWNER || (!hasBatteryLed || enableStockMode)) {
                 lightPrefs.removePreference(mBatteryPulse);
                 mBatteryPulse = null;
             }
 
-            if (!hasNotificationLed || USER_MODE) {
+            if (!hasNotificationLed || enableStockMode) {
                 lightPrefs.removePreference(mNotificationPulse);
                 mNotificationPulse = null;
             }
@@ -203,7 +209,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mAdvanced = getPreferenceScreen().findPreference(KEY_ADVANCED_DISPLAY_SETTINGS);
 
         try {
-            if (USER_MODE) {
+            if (enableStockMode) {
                 getPreferenceScreen().removePreference(mLcdDensity);
                 getPreferenceScreen().removePreference(mMembar);
                 getPreferenceScreen().removePreference(mStatusbarSliderPreference);
@@ -517,6 +523,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } catch (NoClassDefFoundError e) {
             // Hardware abstraction framework not installed
             return false;
+        }
+    }
+
+    private void updateUserModePreference() {
+        userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
+
+        if (userValue != defaultValue) {
+            enableStockMode = true;
+        } else {
+            enableStockMode = false;
         }
     }
 }
