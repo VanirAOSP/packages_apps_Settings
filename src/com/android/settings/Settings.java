@@ -145,7 +145,7 @@ public class Settings extends PreferenceActivity
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
     private static boolean enableStockMode;
-    private static int defaultValue = 0;
+    private static final int defaultValue = 0;
     private static int userValue;
 
     // Show only these settings for restricted users
