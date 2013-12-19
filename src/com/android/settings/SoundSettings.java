@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
@@ -101,6 +102,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     // Used for power notification uri string if set to silent
     private static final String POWER_NOTIFICATIONS_SILENT_URI = "silent";
 
+    private SharedPreferences mDevelopmentPreferences;
+    private static boolean enableStockMode;
+    private static final int defaultValue = 0;
+    private static int userValue;
+
     private CheckBoxPreference mVibrateWhenRinging;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
@@ -152,14 +158,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
-        final boolean USER_MODE = Settings.Secure.getInt(resolver,
-                Settings.Secure.STOCK_MODE, 1) == 1;
 
         int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         addPreferencesFromResource(R.xml.sound_settings);
+
+        mDevelopmentPreferences = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                Context.MODE_PRIVATE);
+        updateUserModePreference();
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
             // device is not CDMA, do not display CDMA emergency_tone
@@ -294,7 +302,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             }
         }
 
-        if (USER_MODE) {
+        if (enableStockMode) {
             mSoundSettings.removePreference(mQuietHours);
         }
 
@@ -616,6 +624,16 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         ab.setMessage(R.string.dock_not_found_text);
         ab.setPositiveButton(android.R.string.ok, null);
         return ab.create();
+    }
+
+    private void updateUserModePreference() {
+        userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
+
+        if (userValue != defaultValue) {
+            enableStockMode = true;
+        } else {
+            enableStockMode = false;
+        }
     }
 }
 
