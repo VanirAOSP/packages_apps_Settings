@@ -28,6 +28,12 @@
             android:title="@string/halo_settings_title"
             android:summary="@string/halo_settings_summary" />
 
+        <Preference
+            android:fragment="com.android.settings.vanir.NotificationDrawerStyle"
+            android:key="notification_style"
+            android:title="@string/notification_title"
+            android:summary="@string/notification_summary" />
+
         <ListPreference
             android:key="notification_drawer_collapse_on_dismiss"
             android:title="@string/notification_drawer_collapse_on_dismiss_title"
@@ -60,6 +66,7 @@
             android:fragment="com.android.settings.quicksettings.QuickSettingsTiles" >
             <extra android:name="config_ribbon" android:value="true" />
         </PreferenceScreen>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

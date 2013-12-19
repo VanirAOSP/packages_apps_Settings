@@ -1797,6 +1797,8 @@
 
         <!-- CyanogenMod activities End -->
 
+        <activity android:name=".vanir.NotificationDrawerStyle" />
+
         <activity
             android:name=".vanir.AnimationControls"
             android:label="@string/animation_manager_title">
