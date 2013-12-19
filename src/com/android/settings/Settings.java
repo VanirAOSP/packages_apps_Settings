@@ -401,7 +401,23 @@ public class Settings extends PreferenceActivity
     }
 
     private void updateUserModePreference() {
-        userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
+        try {
+            userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
+        } catch(ClassCastException cce) {
+            try {
+                Log.w("StockModeSettings", "Trying to handle stock mode as a boolean, temporarily.\n"+cce);
+                boolean boolvalue = mDevelopmentPreferences.getBoolean(DevelopmentSettings.USER_MODE, false);
+                userValue = boolvalue ? 1 : 0;
+            } catch(ClassCastException cce2) {
+                //**boggle**
+                userValue = 0;
+                Log.e("StockModeSettings", "Tried handling as a boolean, but failed. Setting to false.\n"+cce2);
+            }
+            mDevelopmentPreferences.edit().remove(DevelopmentSettings.USER_MODE)
+                .putInt(DevelopmentSettings.USER_MODE, userValue)
+                .apply();
+            Log.i("StockModeSettings", "Wrote corrected value back after detecting cast taint.");
+        }
 
         if (userValue != defaultValue) {
             enableStockMode = true;
