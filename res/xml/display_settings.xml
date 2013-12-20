@@ -56,16 +56,6 @@
                 android:summary="@string/summary_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
 
-        <CheckBoxPreference
-            android:key="vanir_interface_recents_mem_display"
-            android:title="@string/pref_recents_title"
-            android:summary="@string/pref_recents_summary" />
-
-        <PreferenceScreen
-            android:key="lcd_density_setup"
-            android:title="@string/lcd_density_title"
-            android:summary="@string/lcd_density_summary" />
-
         <PreferenceScreen
             android:id="@+id/animations"
             android:key="animations"

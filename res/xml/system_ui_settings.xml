@@ -104,5 +104,23 @@
         android:title="@string/wake_when_plugged_or_unplugged_title"
         android:summary="@string/wake_when_plugged_or_unplugged_summary"
         android:defaultValue="false" />
+
+    <PreferenceScreen
+        android:key="lcd_density_setup"
+        android:title="@string/lcd_density_title"
+        android:summary="@string/lcd_density_summary" />
+
+    <CheckBoxPreference
+        android:key="vanir_interface_recents_mem_display"
+        android:title="@string/pref_recents_title"
+        android:summary="@string/pref_recents_summary" />
+
+    <ListPreference
+        android:key="system_power_crt_mode"
+        android:dialogTitle="@string/system_power_crt_mode_dialog_title"
+        android:title="@string/system_power_crt_mode_title"
+        android:entries="@array/entries_system_power_crt_mode"
+        android:entryValues="@array/values_system_power_crt_mode" />
+
     </PreferenceCategory>
 </PreferenceScreen>

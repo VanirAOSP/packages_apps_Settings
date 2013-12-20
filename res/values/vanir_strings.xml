@@ -301,4 +301,13 @@
     <string name="power_menu_toggle_screenrecord_title">Screen Record</string>
 	<string name="power_menu_toggle_screenrecord_summary">Show screen Record option in Power Menu</string>
 
+    <!-- Display : CRT options -->
+    <string name="system_power_crt_mode_title">CRT animation </string>
+    <string name="system_power_crt_mode_dialog_title">CRT animation</string>
+    <string name="system_power_crt_mode_off">Don\'t show</string>
+    <string name="system_power_crt_mode_horizontal">Collapse horizontal</string>
+    <string name="system_power_crt_mode_vertical">Collapse vertical</string>
+    <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
+    <string name="system_power_crt_mode_scale">Scale down</string>
+
 </resources>
