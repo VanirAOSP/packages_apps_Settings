@@ -147,6 +147,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
+        updateDisplayRotationPreferenceDescription();
 
         mStatusbarSliderPreference = (CheckBoxPreference) findPreference(STATUS_BAR_BRIGHTNESS);
         mStatusbarSliderPreference.setChecked((Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
