@@ -50,7 +50,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
     private CheckBoxPreference mUsers;
     private CheckBoxPreference mScreenrecordPowerMenu;
 
-    private boolean tacosauce;
+    private int tacosauce;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
 			     com.android.internal.R.bool.config_enableScreenrecordChord);
 
         tacosauce = Settings.System.getInt(getContentResolver(), 
-                Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1;
+                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0);
 
         mRebootPref = (CheckBoxPreference) findPreference(KEY_REBOOT);
         mRebootPref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -162,7 +162,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
     }
 
     private void updateImmersive() {
-        if (!tacosauce) {
+        if (tacosauce != 0) {
             mImmersiveModePref.setEnabled(true);
         } else {
             mImmersiveModePref.setEnabled(false);
