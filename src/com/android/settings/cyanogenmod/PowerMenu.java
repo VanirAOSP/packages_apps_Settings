@@ -50,19 +50,20 @@ public class PowerMenu extends SettingsPreferenceFragment {
     private CheckBoxPreference mUsers;
     private CheckBoxPreference mScreenrecordPowerMenu;
 
-    private int tacosauce;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.power_menu_settings);
 
-         boolean mHasScreenRecord = getActivity().getResources().getBoolean(
-			     com.android.internal.R.bool.config_enableScreenrecordChord);
+        boolean mHasScreenRecord = getActivity().getResources().getBoolean(
+                com.android.internal.R.bool.config_enableScreenrecordChord);
 
-        tacosauce = Settings.System.getInt(getContentResolver(), 
-                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0);
+        // disable immersive if immersive style is disabled
+        mImmersiveModePref.setEnabled(
+                Settings.System.getInt(getContentResolver(),
+                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0)
+                != 0);
 
         mRebootPref = (CheckBoxPreference) findPreference(KEY_REBOOT);
         mRebootPref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -98,17 +99,16 @@ public class PowerMenu extends SettingsPreferenceFragment {
 
         mScreenrecordPowerMenu = (CheckBoxPreference) findPreference(POWER_MENU_SCREENRECORD);
         if(mHasScreenRecord) {
-			mScreenrecordPowerMenu.setChecked(Settings.System.getInt(getContentResolver(),
-			        Settings.System.SCREENRECORD_IN_POWER_MENU, 0) == 1);
+			      mScreenrecordPowerMenu.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.SCREENRECORD_IN_POWER_MENU, 0) == 1);
         } else {
-			getPreferenceScreen().removePreference(mScreenrecordPowerMenu);
+      			getPreferenceScreen().removePreference(mScreenrecordPowerMenu);
         }
 
         if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
             getPreferenceScreen().removePreference(
                     findPreference("power_menu_user"));
         }
-        updateImmersive();
     }
 
     @Override
@@ -151,21 +151,13 @@ public class PowerMenu extends SettingsPreferenceFragment {
                      Settings.System.POWER_MENU_PROFILES_ENABLED,
                      value ? 1 : 0);
         } else if (preference == mScreenrecordPowerMenu) {
-			value = mScreenrecordPowerMenu.isChecked();
-			Settings.System.putInt(getContentResolver(),
+			      value = mScreenrecordPowerMenu.isChecked();
+			      Settings.System.putInt(getContentResolver(),
                     Settings.System.SCREENRECORD_IN_POWER_MENU,
                     value ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
-    }
-
-    private void updateImmersive() {
-        if (tacosauce != 0) {
-            mImmersiveModePref.setEnabled(true);
-        } else {
-            mImmersiveModePref.setEnabled(false);
-        }
     }
 }
