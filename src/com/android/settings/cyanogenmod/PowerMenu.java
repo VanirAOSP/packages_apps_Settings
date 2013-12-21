@@ -59,12 +59,6 @@ public class PowerMenu extends SettingsPreferenceFragment {
         boolean mHasScreenRecord = getActivity().getResources().getBoolean(
                 com.android.internal.R.bool.config_enableScreenrecordChord);
 
-        // disable immersive if immersive style is disabled
-        mImmersiveModePref.setEnabled(
-                Settings.System.getInt(getContentResolver(),
-                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0)
-                != 0);
-
         mRebootPref = (CheckBoxPreference) findPreference(KEY_REBOOT);
         mRebootPref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_REBOOT_ENABLED, 1) == 1));
@@ -84,6 +78,11 @@ public class PowerMenu extends SettingsPreferenceFragment {
         mImmersiveModePref = (CheckBoxPreference) findPreference(KEY_POWERMENU_IMMERSIVE_PREFS);
         mImmersiveModePref.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.POWER_MENU_IMMERSIVE, 1) == 1));
+        // disable immersive if immersive style is disabled
+        mImmersiveModePref.setEnabled(
+                Settings.System.getInt(getContentResolver(),
+                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0)
+                != 0);
 
         mProfile = (CheckBoxPreference) findPreference(KEY_PROFILES);
         mProfile.setChecked((Settings.System.getInt(getContentResolver(),
