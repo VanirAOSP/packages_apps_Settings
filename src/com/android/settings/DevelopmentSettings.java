@@ -1479,6 +1479,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     value ? 1 : 0);
             final String stock = mContext.getString(R.string.stock_mode_toast);
             Toast.makeText(mContext, stock, Toast.LENGTH_SHORT).show();
+            updateRebootDialog();
             updateSettingsMode();
             return true;
         } else if (preference == mOverlayDisplayDevices) {
@@ -1538,6 +1539,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     .apply();
             mDevelopmentShortcut.setEnabled(false);
         }
+    }
+
+    private void updateRebootDialog() {
+        Intent u = new Intent();
+        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 
     private void dismissDialogs() {

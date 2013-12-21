@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -158,6 +159,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
+        updateRebootDialog();
         return true;
     }
 
@@ -168,4 +170,11 @@ public class PowerMenu extends SettingsPreferenceFragment {
             mImmersiveModePref.setEnabled(false);
         }
     }
+
+    private void updateRebootDialog() {
+        Intent u = new Intent();
+        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
+    }
+        
 }
