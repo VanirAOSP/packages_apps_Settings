@@ -276,6 +276,7 @@
     <string name="title_tile_quiet_hours">Quiet hours</string>
     <string name="title_tile_volume">Volume</string>
     <string name="title_tile_expanded_desktop">Expanded desktop</string>
+    <string name="title_tile_music">Music</string>
     <string name="title_tile_network_adb">ADB over network</string>
 
     <string name="title_dynamic_tiles">Dynamic tiles</string>
