@@ -200,6 +200,10 @@ public class ColorPickerPreference extends Preference implements
         mAlphaSliderEnabled = enable;
     }
 
+    public void setNewPreviewColor(int color) {
+        onColorChanged(color);
+    }
+
     /**
      * For custom purposes. Not used by ColorPickerPreferrence
      * 

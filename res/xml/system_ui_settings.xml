@@ -19,6 +19,23 @@
     android:title="@string/vanir_settings_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory
+        android:key="navigation_bar"
+        android:title="@string/navigation_bar_category" >
+
+        <PreferenceScreen
+            android:key="navigation_bar"
+            android:fragment="com.android.settings.cyanogenmod.NavBar"
+            android:title="@string/navigation_bar_title" />
+
+        <PreferenceScreen
+            android:key="navigation_ring"
+            android:fragment="com.android.settings.cyanogenmod.NavRing"
+            android:title="@string/navigation_ring_title" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="userspace_options"
+        android:title="@string/userspace_options_title" >
 
     <!-- Lock screen -->
     <PreferenceScreen
@@ -51,6 +68,7 @@
         android:title="@string/power_menu_title"
         android:fragment="com.android.settings.cyanogenmod.PowerMenu" />
 
+    </PreferenceCategory>
     <!-- Device Specific Touchscreen gestures -->
     <Preference
         android:key="touch_screen_gesture_settings">
@@ -59,22 +77,6 @@
             android:targetPackage="com.cyanogenmod.settings.device"
             android:targetClass="com.cyanogenmod.settings.device.TouchscreenGestureSettings" />
     </Preference>
-
-    <PreferenceCategory
-        android:key="navigation_bar"
-        android:title="@string/navigation_bar_category" >
-
-        <PreferenceScreen
-            android:key="navigation_bar"
-            android:fragment="com.android.settings.cyanogenmod.NavBar"
-            android:title="@string/navigation_bar_title" />
-
-        <PreferenceScreen
-            android:key="navigation_ring"
-            android:fragment="com.android.settings.cyanogenmod.NavRing"
-            android:title="@string/navigation_ring_title" />
-
-    </PreferenceCategory>
 
     <PreferenceCategory
        android:title="@string/psx_category_immersive_mode" >

@@ -32,7 +32,7 @@
     <string name="ring_mode_vibrate">Vibrate</string>
     <string name="ring_mode_mute">Mute</string>
 
-    <string name="lock_screen_title">Lock screen</string>
+    <string name="lock_screen_title">Lockscreen</string>
 
     <string name="increasing_ring_title">Ascending ringtone</string>
     <!-- Sound settings screen, the caption of the checkbox for making incoming calls increase in volume -->
@@ -285,7 +285,7 @@
     <string name="cyanogenmod_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless CyanogenMod and its contributors from all legal liabilities.</string>
 
     <!-- Quick settings panel  -->
-    <string name="quick_settings_panel_title">Quicksettings panel</string>
+    <string name="quick_settings_panel_title">Quicksettings</string>
     <string name="title_static_tiles">Static tiles</string>
     <string name="tile_picker_title">Tiles and layout</string>
     <string name="tile_picker_summary">View, select or change the layout of the displayed tiles</string>
@@ -585,7 +585,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="system_interface_title">System interface</string>
 
     <!-- Notification Drawer  -->
-    <string name="notification_drawer_title">Notification drawer</string>
+    <string name="notification_drawer_title">Notifications</string>
     <string name="notification_drawer_collapse_on_dismiss_title">Auto close behavior</string>
     <string name="collapse_on_dismiss_never">Disabled</string>
     <string name="collapse_on_dismiss_if_empty">If none remaining</string>
@@ -595,7 +595,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="collapse_on_dismiss_if_no_clearable_summary">Close after removing the last removable notification</string>
 
     <!-- Quick access ribbon -->
-    <string name="category_quick_access">Quick Access ribbon</string>
+    <string name="category_quick_access">Quick Access toggles</string>
     <string name="title_quick_access">Show in drawer</string>
     <string name="title_quick_access_linked">Linked layout</string>
     <string name="summary_quick_access_linked">Use the same tiles and layout as the Quick Settings panel</string>
@@ -669,7 +669,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Navigation Bar -->
     <string name="navigation_bar_category">Navigation bar</string>
-    <string name="navigation_bar_title">Buttons and layout</string>
+    <string name="navigation_bar_title">Navigation bar</string>
     <string name="navigation_bar_help_text">1 - To begin editing, tap the lock icon\n\n2 - Tap any button to assign or change functionality\n\n3 - Long press any button to rearrange the order\n\n4 - To save, tap the lock icon again\n\n5 - To restore system default, tap the reset button\n\n</string>
     <string name="navigation_bar_tips">\u2022 Actions can only be assigned to one button at a time\n\n\u2022 The home button cannot be re-assigned\n\n\u2022 Side buttons cannot be rearranged</string>
     <string name="navigation_bar_tips_title">Quick tips</string>
@@ -680,7 +680,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="navigation_bar_menu_locked">Locked</string>
 
     <!-- Navigation ring shortcuts -->
-    <string name="navigation_ring_title">Quick launch shortcuts</string>
+    <string name="navigation_ring_title">Navring shortcuts</string>
     <string name="navring_target_reset_message">Delete all user created navigation bar shortcuts and restore to default?</string>
     <string name="navring_target_reset">Navigation bar shortcuts reset to default</string>
     <string name="navring_action_open_ime_switcher">Open IME Switcher</string>
@@ -709,7 +709,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="power_menu_sound_title">Sound panel</string>
 
     <!-- Hardware keys -->
-    <string name="button_settings">Buttons</string>
+    <string name="button_settings">Hardware keys</string>
     <string name="hardware_keys_enable_custom_title">Allow custom buttons</string>
     <string name="hardware_keys_home_key_title">Home button</string>
     <string name="hardware_keys_menu_key_title">Menu button</string>
@@ -762,7 +762,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="confirm_delete_apn">The APN will be deleted.</string>
 
     <!-- Status bar  -->
-    <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_title">Statusbar mods</string>
     <string name="status_bar_battery_title">Battery status style</string>
     <string name="status_bar_style_icon_portrait">Icon portrait</string>
     <string name="status_bar_style_icon_landscape">Icon landscape</string>
