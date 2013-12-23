@@ -34,6 +34,7 @@
 
     <PreferenceCategory android:key="keyboard_settings_category"
             android:title="@string/keyboard_settings_category">
+
         <PreferenceScreen android:key="current_input_method"
                 android:title="@string/current_input_method" />
     </PreferenceCategory>
@@ -67,6 +68,12 @@
                 android:order="1002"
                 android:persistent="false"/>
     </PreferenceCategory>
+
+    <CheckBoxPreference
+        android:key="ime_switcher"
+        android:title="@string/ime_switcher_title"
+        android:summary="@string/ime_switcher_summary"
+        android:defaultValue="true" />
 
     <PreferenceCategory android:key="voice_category"
             android:title="@string/voice_category" >
