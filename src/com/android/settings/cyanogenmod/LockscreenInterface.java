@@ -98,8 +98,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                 if (disabled) {
                     mEnableKeyguardWidgets.setSummary(
                             R.string.security_enable_widgets_disabled_summary);
-                } else {
-                    mEnableKeyguardWidgets.setSummary(R.string.lockscreen_enable_widgets_summary);
                 }
                 mEnableKeyguardWidgets.setEnabled(!disabled);
             }

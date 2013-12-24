@@ -1153,6 +1153,8 @@
             android:excludeFromRecents="true"
         />
 
+        <activity android:name="ChooseLockPatternSize" android:exported="false"/>
+
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
         <activity android:name="ChooseLockPassword" android:exported="false"
@@ -1396,6 +1398,7 @@
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" />
+                <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
             </intent-filter>
         </receiver>
 
