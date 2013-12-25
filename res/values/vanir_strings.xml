@@ -301,6 +301,9 @@
     <string name="power_menu_toggle_screenrecord_title">Screen Record</string>
 	<string name="power_menu_toggle_screenrecord_summary">Show screen Record option in Power Menu</string>
 
+    <string name="ime_switcher_title">Show IME Switcher</string>
+    <string name="ime_switcher_summary">In Statusbar while typing</string>
+
     <!-- Display : CRT options -->
     <string name="system_power_crt_mode_title">CRT animation </string>
     <string name="system_power_crt_mode_dialog_title">CRT animation</string>
