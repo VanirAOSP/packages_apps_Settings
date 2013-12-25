@@ -1095,16 +1095,14 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
             mProfileEnabler.resume();
-            if (enableStockMode)
-                mLocationEnabler.resume();
+            mLocationEnabler.resume();
         }
 
         public void pause() {
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
             mProfileEnabler.pause();
-            if (enableStockMode)
-                mLocationEnabler.pause();
+            mLocationEnabler.pause();
         }
     }
 
