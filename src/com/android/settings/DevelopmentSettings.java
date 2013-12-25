@@ -96,7 +96,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
      * Whether to show the development settings to the user.  Default is false.
      */
     public static final String PREF_SHOW = "show";
-    public static final String USER_MODE = "user_mode";
 
     private static final String ENABLE_ADB = "enable_adb";
     private static final String ADB_NOTIFY = "adb_notify";
@@ -152,7 +151,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String DEVELOPMENT_TOOLS = "development_tools";
     private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
     private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
-    private static final String STOCK_MODE = "stock_mode";
+    static final String STOCK_MODE = "stock_mode";
 
     private static final int RESULT_DEBUG_APP = 1000;
 
@@ -164,9 +163,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private boolean mLastEnabledState;
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
-    private boolean enableStockMode;
+    private boolean mStockMode;
 
-    private SwitchPreference mStockMode;
+    private SwitchPreference mStockModePreference;
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mAdbNotify;
     private Preference mClearAdbKeys;
@@ -256,8 +255,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
 
-        mStockMode = (SwitchPreference) findPreference(STOCK_MODE);
-        mStockMode.setOnPreferenceChangeListener(this);
+        mStockModePreference = (SwitchPreference) findPreference(STOCK_MODE);
+        mStockModePreference.setOnPreferenceChangeListener(this);
 
         mEnableAdb = findAndInitCheckboxPref(ENABLE_ADB);
         mAdbNotify = (CheckBoxPreference) findPreference(ADB_NOTIFY);
@@ -284,6 +283,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAllPrefs.add(mPassword);
         mAdvancedReboot = findAndInitCheckboxPref(ADVANCED_REBOOT_KEY);
         mDevelopmentShortcut = findAndInitCheckboxPref(DEVELOPMENT_SHORTCUT_KEY);
+        mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
+
+        mStockMode = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).getInt(STOCK_MODE, 0) == 1;
+        writeStockMode();
 
         if (!android.os.Process.myUserHandle().equals(UserHandle.OWNER)) {
             disableForUser(mEnableAdb);
@@ -292,6 +295,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mPassword);
             disableForUser(mAdvancedReboot);
             disableForUser(mDevelopmentShortcut);
+        } else {
+            applyStockMode();
         }
 
         mDebugAppPref = findPreference(DEBUG_APP_KEY);
@@ -336,7 +341,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAllPrefs.add(mShowAllANRs);
         mResetCbPrefs.add(mShowAllANRs);
 
-        mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
 
         Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
         if (selectRuntime != null) {
@@ -356,8 +360,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mAllPrefs.add(mRootAccess);
         }
 
-
-        updateSettingsMode();
         mDevelopmentTools = (PreferenceScreen) findPreference(DEVELOPMENT_TOOLS);
         mAllPrefs.add(mDevelopmentTools);
     }
@@ -374,6 +376,23 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             pref.setEnabled(false);
             mDisabledPrefs.add(pref);
         }
+    }
+
+    private void enableForUser(Preference pref) {
+        if (pref != null) {
+            if (mDisabledPrefs.contains(pref)) {
+                mDisabledPrefs.remove(pref);
+            }
+            pref.setEnabled(true);
+        }
+    }
+
+    private void enableForUser(Preference pref, boolean status) {
+        if (status) {
+            enableForUser(pref);
+            return;
+        }
+        disableForUser(pref);
     }
 
     private CheckBoxPreference findAndInitCheckboxPref(String key) {
@@ -526,7 +545,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateCheckBox(mBtHciSnoopLog, Settings.Secure.getInt(cr,
                 Settings.Secure.BLUETOOTH_HCI_LOG, 0) != 0);
         updateAdbOverNetwork();
-	    updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
+        updateCheckBox(mAllowMockLocation, Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateRuntimeValue();
         updateHdcpValues();
@@ -1472,15 +1491,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateHdcpValues();
             pokeSystemProperties();
             return true;
-        } else if (preference == mStockMode) {
-            boolean value = ((Boolean)newValue).booleanValue();
-            Settings.Secure.putInt(getActivity().getContentResolver(),
-                    Settings.Secure.STOCK_MODE,
-                    value ? 1 : 0);
+        } else if (preference == mStockModePreference) {
+            mStockMode = ((Boolean)newValue).booleanValue();
+            writeStockMode();
             final String stock = mContext.getString(R.string.stock_mode_toast);
             Toast.makeText(mContext, stock, Toast.LENGTH_SHORT).show();
-            updateRebootDialog();
-            updateSettingsMode();
+            applyStockMode();
             return true;
         } else if (preference == mOverlayDisplayDevices) {
             writeOverlayDisplayDevicesOptions(newValue);
@@ -1523,22 +1539,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return false;
     }
 
-    private void updateSettingsMode() {
-        enableStockMode = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.STOCK_MODE, 0) == 1;
+    private void writeStockMode() {
+        Settings.Secure.putInt(getActivity().getContentResolver(), Settings.Secure.STOCK_MODE, mStockMode ? 1 : 0);
+        getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
+                    .putInt(STOCK_MODE, mStockMode ? 1 : 0)
+                    .apply();
+    }
 
-        if (enableStockMode) {
-            getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
-                    .putInt(USER_MODE, 1)
-                    .apply();
-            resetDevelopmentShortcutOptions();
-            mDevelopmentShortcut.setEnabled(true);
-        } else {
-            getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
-                    .putInt(USER_MODE, 0)
-                    .apply();
-            mDevelopmentShortcut.setEnabled(false);
-        }
+    private void applyStockMode() {
+        enableForUser(mAdvancedReboot, !mStockMode);
+        enableForUser(mDevelopmentShortcut, !mStockMode);
+        enableForUser(mKillAppLongpressBack, !mStockMode);
+        enableForUser(mAdbOverNetwork, !mStockMode);
+        updateRebootDialog();
     }
 
     private void updateRebootDialog() {

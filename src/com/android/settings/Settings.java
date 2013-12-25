@@ -144,9 +144,7 @@ public class Settings extends PreferenceActivity
     private Header mCurrentHeader;
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
-    private static boolean enableStockMode;
-    private static final int defaultValue = 0;
-    private static int userValue;
+    private static boolean mStockMode;
 
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
@@ -217,7 +215,6 @@ public class Settings extends PreferenceActivity
 
         mDevelopmentPreferences = getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
-        updateUserModePreference();
 
         getMetaData();
         mInLocalHeaderSwitch = true;
@@ -275,7 +272,6 @@ public class Settings extends PreferenceActivity
     @Override
     public void onResume() {
         super.onResume();
-        updateUserModePreference();
 
         mDevelopmentPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -400,30 +396,8 @@ public class Settings extends PreferenceActivity
         super.switchToHeader(header);
     }
 
-    private void updateUserModePreference() {
-        try {
-            userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
-        } catch(ClassCastException cce) {
-            try {
-                Log.w("StockModeSettings", "Trying to handle stock mode as a boolean, temporarily.\n"+cce);
-                boolean boolvalue = mDevelopmentPreferences.getBoolean(DevelopmentSettings.USER_MODE, false);
-                userValue = boolvalue ? 1 : 0;
-            } catch(ClassCastException cce2) {
-                //**boggle**
-                userValue = 0;
-                Log.e("StockModeSettings", "Tried handling as a boolean, but failed. Setting to false.\n"+cce2);
-            }
-            mDevelopmentPreferences.edit().remove(DevelopmentSettings.USER_MODE)
-                .putInt(DevelopmentSettings.USER_MODE, userValue)
-                .apply();
-            Log.i("StockModeSettings", "Wrote corrected value back after detecting cast taint.");
-        }
-
-        if (userValue != defaultValue) {
-            enableStockMode = true;
-        } else {
-            enableStockMode = false;
-        }
+    private void updateStockMode() {
+        mStockMode = mDevelopmentPreferences.getInt(DevelopmentSettings.STOCK_MODE, 0) == 1;
     }
 
     /**
@@ -595,7 +569,7 @@ public class Settings extends PreferenceActivity
 
     private void updateHeaderList(List<Header> target) {
         final boolean showDev = UserHandle.myUserId() == UserHandle.USER_OWNER;
-        updateUserModePreference();
+        updateStockMode();
         int i = 0;
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
@@ -633,27 +607,19 @@ public class Settings extends PreferenceActivity
                 if (!mBatteryPresent) {
                     target.remove(i);
                 }
-            } else if (id == R.id.vanir_voodoo) {
-                if (enableStockMode) {
-                    target.remove(i);
-                }
-            } else if (id == R.id.system_settings || id == R.id.themes_settings) {
-                if (enableStockMode) {
-                    target.remove(i);
-                }
             } else if (id == R.id.display_settings) {
                 final Resources res = getResources();
                 boolean hasLed =
                         res.getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)
                         || res.getBoolean(com.android.internal.R.bool.config_intrusiveBatteryLed);
-                if (hasLed && !enableStockMode) {
+                if (hasLed && !mStockMode) {
                     header.titleRes = R.string.display_lights_settings_title;
                 }
             } else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
             } else if (id == R.id.home_settings) {
-                if (!updateHomeSettingHeaders(header) || enableStockMode) {
+                if (!updateHomeSettingHeaders(header) || mStockMode) {
                     target.remove(i);
                 }
             } else if (id == R.id.user_settings) {
@@ -673,16 +639,12 @@ public class Settings extends PreferenceActivity
                         target.remove(i);
                     }
                 }
-            } else if (id == R.id.profiles_settings) {
-                if (enableStockMode) {
-                    target.remove(i);
-                }
             } else if (id == R.id.development_settings) {
                 if (!showDev) {
                     target.remove(i);
                 }
             } else if (id == R.id.performance_controls) {
-                if (!showDev || enableStockMode) {
+                if (!showDev || mStockMode) {
                     target.remove(i);
                 }
             } else if (id == R.id.account_add) {
@@ -690,10 +652,14 @@ public class Settings extends PreferenceActivity
                     target.remove(i);
                 }
             } else if (id == R.id.superuser) {
-                if (!DevelopmentSettings.isRootForAppsEnabled()) {
+                if (!DevelopmentSettings.isRootForAppsEnabled() || mStockMode) {
                     target.remove(i);
                 }
-                if (enableStockMode) {
+            } else if (id == R.id.vanir_voodoo ||
+                    id == R.id.system_settings ||
+                    id == R.id.themes_settings ||
+                    id == R.id.profiles_settings) {
+                if (mStockMode) {
                     target.remove(i);
                 }
             }
@@ -896,7 +862,7 @@ public class Settings extends PreferenceActivity
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
                     || header.id == R.id.profiles_settings
-                    || (header.id == R.id.location_settings && !enableStockMode)) {
+                    || (header.id == R.id.location_settings && !mStockMode)) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.security_settings) {
                 return HEADER_TYPE_BUTTON;
@@ -1017,7 +983,7 @@ public class Settings extends PreferenceActivity
                         mBluetoothEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.profiles_settings) {
                         mProfileEnabler.setSwitch(holder.switch_);
-                    } else if ((header.id == R.id.location_settings) && !enableStockMode) {
+                    } else if ((header.id == R.id.location_settings) && !mStockMode) {
                         mLocationEnabler.setSwitch(holder.switch_);
                     }
                     updateCommonHeaderView(header, holder);

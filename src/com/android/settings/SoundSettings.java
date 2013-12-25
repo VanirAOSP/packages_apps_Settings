@@ -103,9 +103,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String POWER_NOTIFICATIONS_SILENT_URI = "silent";
 
     private SharedPreferences mDevelopmentPreferences;
-    private static boolean enableStockMode;
-    private static final int defaultValue = 0;
-    private static int userValue;
+    private boolean mStockMode;
 
     private CheckBoxPreference mVibrateWhenRinging;
     private CheckBoxPreference mDtmfTone;
@@ -167,7 +165,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mDevelopmentPreferences = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
                 Context.MODE_PRIVATE);
-        updateUserModePreference();
+        updateStockMode();
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
             // device is not CDMA, do not display CDMA emergency_tone
@@ -302,7 +300,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             }
         }
 
-        if (enableStockMode) {
+        if (mStockMode) {
             mSoundSettings.removePreference(mQuietHours);
         }
 
@@ -626,14 +624,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         return ab.create();
     }
 
-    private void updateUserModePreference() {
-        userValue = mDevelopmentPreferences.getInt(DevelopmentSettings.USER_MODE, 0);
-
-        if (userValue != defaultValue) {
-            enableStockMode = true;
-        } else {
-            enableStockMode = false;
-        }
+    private void updateStockMode() {
+        mStockMode = mDevelopmentPreferences.getInt(DevelopmentSettings.STOCK_MODE, 0) == 1;
     }
 }
 
