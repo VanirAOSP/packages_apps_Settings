@@ -281,8 +281,8 @@
 
     <!-- stock mode -->
     <string name="stock_mode_title">Stock mode</string>
-    <string name="stock_mode_summary">Hide custom ROM preferences and revert to a stock AOSP interface</string>
-    <string name="stock_mode_toast">Restart for all changes to take effect!</string>
+    <string name="stock_mode_summary">Hide custom ROM preferences</string>
+    <string name="stock_mode_toast">This feature is a work in progress...</string>
 
     <!--Lockscreen blur-->
     <string name="blur_behind_title">Blur Lockscreen Background</string>
