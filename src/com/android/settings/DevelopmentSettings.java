@@ -1281,9 +1281,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     setPrefsEnabledState(mLastEnabledState);
 
                     // Hide development settings from the Settings menu (Android 4.2 behaviour)
-                    getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
+                    /* getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
                         .putBoolean(PREF_SHOW, false)
-                        .apply();
+                        .apply(); */
                 }
             }
         }
