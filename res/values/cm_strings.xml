@@ -611,6 +611,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Custom widgets -->
     <string name="lockscreen_custom_widgets_title">Custom widgets</string>
+    <string name="lockscreen_custom_widgets_summary">Allow multiple widgets to be added and selected on the lockscreen </string>
 
     <!-- Category title for Charging sounds (Power state change) specific Settings.
          [CHAR LIMIT=40] -->

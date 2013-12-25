@@ -19,16 +19,8 @@
     android:title="@string/themes_settings_title" >
 
     <PreferenceCategory
-        android:title="@string/title_general"
+        android:title="@string/lockscreen_targets_title"
         android:key="lockscreen_general_category" >
-
-        <PreferenceScreen
-            android:key="screen_security"
-            android:fragment="com.android.settings.SecuritySettings"
-            android:title="@string/screen_security_category"
-            android:summary="@string/screen_security_summary">
-            <extra android:name="cm_security" android:value="true" />
-        </PreferenceScreen>
 
         <Preference
             android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"
@@ -44,7 +36,8 @@
 
         <CheckBoxPreference
             android:key="keyguard_enable_widgets"
-            android:title="@string/lockscreen_custom_widgets_title" />
+            android:title="@string/lockscreen_custom_widgets_title"
+            android:summary="@string/lockscreen_custom_widgets_summary" />
 
 
         <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
