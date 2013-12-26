@@ -248,7 +248,7 @@
     <string name="display_rotation_180_title">180 degrees</string>
     <string name="display_rotation_270_title">270 degrees</string>
 
-    <!-- immersive mode -->
+    <!-- Immersive Mode -->
     <string name="power_menu_immersive_mode">Immersive mode</string>
     <string name="summary_immersive_mode">%1$s</string>
     <string name="immersive_mode_summary_status_bar">With status bar</string>
@@ -265,7 +265,7 @@
     <string name="app_ops_btn_text">App Ops</string>
     <string name="app_ops_no_item_text">This app has no changeable permissions.</string>
 
-    <!-- custom carrier text -->
+    <!-- Custom Carrier Text -->
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
     <string name="custom_carrier_label_notset">Custom label currently not set</string>
@@ -279,7 +279,7 @@
     <string name="flip_qs_tiles_title">Flip tiles</string>
     <string name="flip_qs_tiles_summary">Flips the tiles on touch</string>
 
-    <!-- stock mode -->
+    <!-- Stock Mode -->
     <string name="stock_mode_title">Stock mode</string>
     <string name="stock_mode_summary">Hide custom ROM preferences and revert to a stock AOSP interface</string>
     <string name="stock_mode_toast">Note: some settings are designed to stay active after they are set!</string>
@@ -293,11 +293,12 @@
     <!-- Lock screen see through -->
     <string name="see_through_title">Transparent lockscreen</string>
     <string name="see_through_summary">Allows visibility of the application or home screen behind the lock screen.</string>
+
     <!-- Allow rotation -->
     <string name="allow_rotate_title">Allow rotation</string>
     <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
 
-    <!-- screen record -->
+    <!-- Screen Record -->
     <string name="power_menu_toggle_screenrecord_title">Screen Record</string>
 	<string name="power_menu_toggle_screenrecord_summary">Show screen Record option in Power Menu</string>
 
@@ -313,11 +314,14 @@
     <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
     <string name="system_power_crt_mode_scale">Scale down</string>
 
+    <!-- Quick Tiles -->
     <string name="button_headsethook_title">Headset</string>
     <string name="button_headsethook_launch_voice_title">Headset launches voice</string>
     <string name="button_headsethook_launch_voice_summary">Pressing the headset button will launch voice controls</string>
 
     <string name="lockscreen_music_controls_title">Music controls</string>
     <string name="lockscreen_music_controls_summary">Show music widget while music is playing</string> 
+
+    <string name="title_tile_quick_record">Quick Record</string>
 
 </resources>
