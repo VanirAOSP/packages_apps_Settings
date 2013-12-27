@@ -39,6 +39,11 @@
             android:title="@string/lockscreen_custom_widgets_title"
             android:summary="@string/lockscreen_custom_widgets_summary" />
 
+        <CheckBoxPreference
+            android:key="lockscreen_music_controls"
+            android:persistent="false"
+            android:title="@string/lockscreen_music_controls_title"
+            android:summary="@string/lockscreen_music_controls_summary" /> 
 
         <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
             android:key="lockscreen_maximize_widgets"
