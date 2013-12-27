@@ -63,13 +63,6 @@
         android:id="@+id/vanir_voodoo"
         android:title="@string/voodoo_title" />
 
-    <!-- Home -->
-    <header
-        android:id="@+id/home_settings"
-        android:icon="@drawable/ic_settings_home"
-        android:fragment="com.android.settings.HomeSettings"
-        android:title="@string/home_settings" />
-
     <!-- System UI -->
     <header
         android:id="@+id/system_settings"
@@ -179,6 +172,13 @@
         android:icon="@drawable/ic_settings_location"
         android:title="@string/location_settings_title"
         android:id="@+id/location_settings" />
+
+    <!-- Home -->
+    <header
+        android:id="@+id/home_settings"
+        android:icon="@drawable/ic_settings_home"
+        android:fragment="com.android.settings.HomeSettings"
+        android:title="@string/home_settings" />
 
     <!-- Security -->
     <header
