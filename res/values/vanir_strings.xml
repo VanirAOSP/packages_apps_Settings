@@ -317,4 +317,7 @@
     <string name="button_headsethook_launch_voice_title">Headset launches voice</string>
     <string name="button_headsethook_launch_voice_summary">Pressing the headset button will launch voice controls</string>
 
+    <string name="lockscreen_music_controls_title">Music controls</string>
+    <string name="lockscreen_music_controls_summary">Show music widget while music is playing</string> 
+
 </resources>

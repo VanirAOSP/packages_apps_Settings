@@ -40,6 +40,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private static final String TAG = "LockscreenInterface";
 
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
+    private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
     private static final String LOCKSCREEN_WIDGETS_CATEGORY = "lockscreen_widgets_category";
     private static final String KEY_ALLOW_ROTATION = "allow_rotation";
     private static final String KEY_SEE_TRHOUGH = "see_through";
@@ -48,6 +49,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
 
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mSeeThrough;
+    private CheckBoxPreference mMusicControls;
     private CheckBoxPreference mAllowRotation;
     private CheckBoxPreference mBlurBehind;
     private SeekBarPreference mBlurRadius;
@@ -109,6 +111,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_ROTATION, 0) == 1); 
 
+        mMusicControls = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MUSIC_CONTROLS);
+        mMusicControls.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.LOCKSCREEN_MUSIC_CONTROLS, 1) == 1);
+        mMusicControls.setOnPreferenceChangeListener(this); 
+
         mBlurBehind = (CheckBoxPreference) findPreference(KEY_BLUR_BEHIND);
         mBlurBehind.setChecked(Settings.System.getInt(getContentResolver(), 
             Settings.System.LOCKSCREEN_BLUR_BEHIND, 0) == 1);
@@ -160,7 +167,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         if (preference == mBlurRadius) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_BLUR_RADIUS, (Integer)value);
-         }
+
+         } else if (preference == mMusicControls) {
+            boolean cube = (Boolean) value;
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.LOCKSCREEN_MUSIC_CONTROLS, cube ? 1 : 0);
+            return true;
+        }
 
          return true;
     }
