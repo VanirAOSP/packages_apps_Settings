@@ -168,6 +168,18 @@
             android:title="@string/swap_volume_buttons_title"
             android:summary="@string/swap_volume_buttons_summary" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="power_key"
+        android:title="@string/button_power_key_title" >
+
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="enable_fast_torch"
+            android:title="@string/fast_torch_title"
+            android:summary="@string/fast_torch_summary"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="button_headsethook"
         android:title="@string/button_headsethook_title" >
