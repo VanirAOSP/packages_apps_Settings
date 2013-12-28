@@ -300,7 +300,7 @@
 
     <!-- Screen Record -->
     <string name="power_menu_toggle_screenrecord_title">Screen Record</string>
-	<string name="power_menu_toggle_screenrecord_summary">Show screen Record option in Power Menu</string>
+    <string name="power_menu_toggle_screenrecord_summary">Show screen Record option in Power Menu</string>
 
     <string name="ime_switcher_title">Show IME Switcher</string>
     <string name="ime_switcher_summary">In Statusbar while typing</string>
@@ -314,14 +314,16 @@
     <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
     <string name="system_power_crt_mode_scale">Scale down</string>
 
-    <!-- Quick Tiles -->
+    <!-- headset button hook -->
     <string name="button_headsethook_title">Headset</string>
     <string name="button_headsethook_launch_voice_title">Headset launches voice</string>
     <string name="button_headsethook_launch_voice_summary">Pressing the headset button will launch voice controls</string>
 
+    <!-- lockscreen music controls -->
     <string name="lockscreen_music_controls_title">Music controls</string>
     <string name="lockscreen_music_controls_summary">Show music widget while music is playing</string> 
 
+    <!-- Quick Tiles -->
     <string name="title_tile_quick_record">Quick Record</string>
 
 </resources>
