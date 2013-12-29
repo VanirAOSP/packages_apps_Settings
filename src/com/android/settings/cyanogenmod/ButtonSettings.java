@@ -18,10 +18,12 @@ package com.android.settings.cyanogenmod;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -49,6 +51,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
     private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
+    private static final String QUICK_CAM = "quick_cam";
 
     private static final String CATEGORY_HOME = "home_key";
     private static final String CATEGORY_MENU = "menu_key";
@@ -87,6 +90,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private ListPreference mVolumeKeyCursorControl;
     private CheckBoxPreference mSwapVolumeButtons;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
+    private CheckBoxPreference mQuickCam;
+
+    private boolean isCameraPresent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -223,8 +229,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(backlight);
         }
 
-        final PreferenceCategory headsethookCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HEADSETHOOK);
+        mQuickCam = (CheckBoxPreference) findPreference(QUICK_CAM);
+        mQuickCam.setChecked(Settings.System.getInt(resolver,
+                Settings.System.POWER_MENU_QUICKCAM, 0) == 1);
 
         mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
         mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
@@ -236,12 +243,26 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final PreferenceCategory powerButtonCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER_BUTTON);
         boolean isTorchSupported = isPackageInstalled(getActivity(), "net.cactii.flash2");
+        cameraHardware();
+
         if (!isTorchSupported) {
             powerButtonCategory.removePreference(findPreference(Settings.System.ENABLE_FAST_TORCH));
         }
-        final boolean hasAnyPowerButtonOptions = isTorchSupported /* || etc. */;
+        if (!isCameraPresent) {
+            powerButtonCategory.removePreference(findPreference(Settings.System.POWER_MENU_QUICKCAM));
+        }
+        final boolean hasAnyPowerButtonOptions = isTorchSupported  || isCameraPresent /* || etc. */;
         if (!hasAnyPowerButtonOptions) {
             prefScreen.removePreference(powerButtonCategory);
+        }
+    }
+
+    private final void cameraHardware() {
+        /** Check if this device has a camera */
+        if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
+            isCameraPresent = true;
+        } else {
+            isCameraPresent = false;
         }
     }
 
@@ -316,6 +337,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
             return true;
+        } else if (preference == mQuickCam) {
+            boolean checked = ((CheckBoxPreference)preference).isChecked();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.POWER_MENU_QUICKCAM, checked ? 1 : 0 );
+            updateRebootDialog();
+            return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -327,5 +354,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } catch (NameNotFoundException e) {
             return false;
         }
+    }
+
+    private void updateRebootDialog() {
+        Intent u = new Intent();
+        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 }

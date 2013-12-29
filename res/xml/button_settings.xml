@@ -178,6 +178,13 @@
             android:title="@string/fast_torch_title"
             android:summary="@string/fast_torch_summary"
             android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="quick_cam"
+            android:title="@string/quick_cam_title"
+            android:summary="@string/quick_cam_summary"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
