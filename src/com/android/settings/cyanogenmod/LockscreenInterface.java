@@ -123,6 +123,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         mBlurRadius.setProgress(Settings.System.getInt(getContentResolver(), 
             Settings.System.LOCKSCREEN_BLUR_RADIUS, 12));
         mBlurRadius.setOnPreferenceChangeListener(this);
+
+        updateBlurPrefs();
     }
 
     @Override
@@ -158,6 +160,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         } else if (preference == mBlurBehind) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND,
                     mBlurBehind.isChecked() ? 1 : 0);
+            updateBlurPrefs();
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -176,6 +179,22 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         }
 
          return true;
+    }
+
+    public void updateBlurPrefs() {
+        // until i get around to digging through the frameworks to find where transparent lockscreen
+        // is breaking the animation for blur lets just be a little dirty dirty dirty...
+        if (mBlurBehind.isChecked()) {
+            mSeeThrough.setEnabled(false);
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 1);
+        } else {
+            mSeeThrough.setEnabled(true);
+            if (mSeeThrough.isChecked()) {
+                Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 1);
+            } else {
+                Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 0);
+            }
+        }
     }
 
     public static class DeviceAdminLockscreenReceiver extends DeviceAdminReceiver {}
