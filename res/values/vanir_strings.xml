@@ -393,4 +393,8 @@
     <string name="halo_main">General</string>
     <string name="halo_appearance">Appearance</string>
 
+    <!-- double tap sleep -->
+    <string name="double_tap_sleep_title">Tap to sleep</string>
+    <string name="double_tap_sleep_summary">Double tap the statusbar to shut the screen off</string>
+
 </resources>
