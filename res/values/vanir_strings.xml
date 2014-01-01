@@ -39,6 +39,9 @@
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_silent_title">Sound panel</string>
 
+    <!-- Notification LED Screen on -->
+    <string name="notification_light_screenon_title">Enable while screen on</string>
+
     <!-- Display settings screen, notification light settings -->
     <string name="display_category_light_options_title">Light options</string>
     <string name="notification_light_general_title">General</string>
