@@ -61,6 +61,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private static final String NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_OFF = "notification_light_pulse_default_led_off";
     private static final String NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE = "notification_light_pulse_custom_enable";
     private static final String NOTIFICATION_LIGHT_PULSE = "notification_light_pulse";
+    private static final String SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
     private static final String NOTIFICATION_LIGHT_PULSE_CALL_COLOR = "notification_light_pulse_call_color";
     private static final String NOTIFICATION_LIGHT_PULSE_CALL_LED_ON = "notification_light_pulse_call_led_on";
     private static final String NOTIFICATION_LIGHT_PULSE_CALL_LED_OFF = "notification_light_pulse_call_led_off";
@@ -68,6 +69,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private static final String NOTIFICATION_LIGHT_PULSE_VMAIL_LED_ON = "notification_light_pulse_vmail_led_on";
     private static final String NOTIFICATION_LIGHT_PULSE_VMAIL_LED_OFF = "notification_light_pulse_vmail_led_off";
     private static final String PULSE_PREF = "pulse_enabled";
+    private static final String SCREENON_PREF = "screen_on_notification_led";
     private static final String DEFAULT_PREF = "default";
     private static final String CUSTOM_PREF = "custom_enabled";
     private static final String MISSED_CALL_PREF = "missed_call";
@@ -76,9 +78,11 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     public static final int ACTION_DELETE = 1;
     private static final int MENU_ADD = 0;
     private static final int DIALOG_APPS = 0;
+
     private int mDefaultColor;
     private int mDefaultLedOn;
     private int mDefaultLedOff;
+    private boolean mScreenOnEnabled;
     private PackageManager mPackageManager;
     private PreferenceGroup mApplicationPrefList;
     private CheckBoxPreference mEnabledPref;
@@ -86,6 +90,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private ApplicationLightPreference mDefaultPref;
     private ApplicationLightPreference mCallPref;
     private ApplicationLightPreference mVoicemailPref;
+    private CheckBoxPreference mScreenOnEnabledPref;
     private Menu mMenu;
     private PackageListAdapter mPackageAdapter;
     private String mPackageList;
@@ -113,6 +118,9 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
         mDefaultPref = (ApplicationLightPreference) findPreference(DEFAULT_PREF);
         mDefaultPref.setOnPreferenceChangeListener(this);
+
+        mScreenOnEnabledPref = (CheckBoxPreference) findPreference(SCREENON_PREF);
+        mScreenOnEnabledPref.setOnPreferenceChangeListener(this);
 
         // Missed call and Voicemail preferences should only show on devices with a voice capabilities
         TelephonyManager tm = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
@@ -184,6 +192,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_ON, mDefaultLedOn);
         int timeOff = Settings.System.getInt(resolver,
                 NOTIFICATION_LIGHT_PULSE_DEFAULT_LED_OFF, mDefaultLedOff);
+        mScreenOnEnabled = Settings.PAC.getInt(
+            resolver, SCREEN_ON_NOTIFICATION_LED, 0) == 1;
 
         mDefaultPref.setAllValues(color, timeOn, timeOff);
 
@@ -368,7 +378,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mEnabledPref || preference == mCustomEnabledPref) {
+        if (preference == mEnabledPref || preference == mCustomEnabledPref || preference == mScreenOnEnabledPref) {
             getActivity().invalidateOptionsMenu();
         } else {
             ApplicationLightPreference lightPref = (ApplicationLightPreference) preference;
