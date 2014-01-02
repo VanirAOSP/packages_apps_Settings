@@ -86,6 +86,10 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
         mStatusBarAmPm.setSummary(mStatusBarAmPm.getEntry());
         mStatusBarAmPm.setOnPreferenceChangeListener(this);
+
+        if(getResources().getBoolean(R.bool.config_noKnockPolicy)) {
+            getPreferenceScreen().removePreference(findPreference(Settings.System.DOUBLE_TAP_SLEEP_GESTURE));
+        }
     }
 
     @Override
