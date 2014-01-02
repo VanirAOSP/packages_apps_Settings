@@ -57,7 +57,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
-    private static final String KEY_DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep";
 
     private PreferenceScreen mPieControl;
     private ListPreference mExpandedDesktopPref;
@@ -68,11 +67,10 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
     private ListPreference mCrtMode;
     private CheckBoxPreference mMembar;
-    private CheckBoxPreference mDoubleTap;
 
-    private Preference mLcdDensity;
-    private int newDensityValue;
-    private DensityChanger densityFragment;
+    Preference mLcdDensity;
+    int newDensityValue;
+    DensityChanger densityFragment;
 
     private String mCustomLabelText = null;
 
@@ -82,7 +80,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 
         addPreferencesFromResource(R.xml.system_ui_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
-        final Resources res = getResources();
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
 
@@ -103,17 +100,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
         mWakeWhenPluggedOrUnplugged.setChecked(Settings.Global.getInt(getContentResolver(),
                 Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
                 (wakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0)) == 1);
-
-        final boolean mTapThat = getResources().getBoolean(R.bool.config_noKnockPolicy);
-        final PreferenceCategory doubleTapCategory =
-                (PreferenceCategory) prefSet.findPreference("misc_ui");
-        if (!mTapThat) {
-            mDoubleTap = (CheckBoxPreference) findPreference(KEY_DOUBLE_TAP_SLEEP_GESTURE);
-            mDoubleTap.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1);
-        } else {
-            doubleTapCategory.removePreference(findPreference("double_tap_sleep"));
-        }
 
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
                 getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
@@ -226,10 +212,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, checked ? 1 : 0);
-            return true;
-        } else if (preference == mDoubleTap) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE, mDoubleTap.isChecked() ? 1 : 0);
             return true;
         } else if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())

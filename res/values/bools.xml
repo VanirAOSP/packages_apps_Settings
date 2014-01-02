@@ -35,7 +35,4 @@
 
     <!-- Whether to show a preference item for mobile plan -->
     <bool name="config_show_mobile_plan">true</bool>
-
-    <!-- Knock on/off support -->
-    <bool name="config_noKnockPolicy">false</bool>
 </resources>

@@ -393,10 +393,6 @@
     <string name="halo_main">General</string>
     <string name="halo_appearance">Appearance</string>
 
-    <!-- double tap sleep -->
-    <string name="double_tap_sleep_title">Tap to sleep</string>
-    <string name="double_tap_sleep_summary">Double tap the statusbar to shut the screen off</string>
-
     <!-- power menu quickcam -->
     <string name="quick_cam_title">Quick Camera</string>
     <string name="quick_cam_summary">From the power reboot menu: longpress the power key a second time to open the camera</string>
