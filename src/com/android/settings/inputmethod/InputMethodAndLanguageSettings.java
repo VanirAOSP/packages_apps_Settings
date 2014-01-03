@@ -180,15 +180,13 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         updateInputDevices();
 
         // Enable or disable mStatusBarImeSwitcher based on boolean value: config_show_IMEswitcher
-        final Preference keyImeSwitcherPref = findPreference(PREF_IME_SWITCHER);
-        if (keyImeSwitcherPref != null) {
-            if (!getResources().getBoolean(com.android.internal.R.bool.config_show_cmIMESwitcher)) {
-                getPreferenceScreen().removePreference(keyImeSwitcherPref);
-            } else {
-                mStatusBarImeSwitcher = (CheckBoxPreference) keyImeSwitcherPref;
-                mStatusBarImeSwitcher.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_IME_SWITCHER, 1) == 1);
-            }
+
+        mStatusBarImeSwitcher = (CheckBoxPreference) findPreference(PREF_IME_SWITCHER);
+        if (!getResources().getBoolean(com.android.internal.R.bool.config_show_cmIMESwitcher)) {
+            getPreferenceScreen().removePreference(mStatusBarImeSwitcher);
+        } else {
+            mStatusBarImeSwitcher.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.STATUS_BAR_IME_SWITCHER, 1) == 1);
         }
 
         mStylusGestures = (PreferenceScreen) findPreference(KEY_STYLUS_GESTURES);
