@@ -69,11 +69,10 @@
                 android:persistent="false"/>
     </PreferenceCategory>
 
-    <CheckBoxPreference
-        android:key="ime_switcher"
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="status_bar_ime_switcher"
         android:title="@string/ime_switcher_title"
-        android:summary="@string/ime_switcher_summary"
-        android:persistent="false" />
+        android:summary="@string/ime_switcher_summary" />
 
     <PreferenceCategory android:key="voice_category"
             android:title="@string/voice_category" >

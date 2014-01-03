@@ -67,7 +67,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
     private static final String KEY_POINTER_SETTINGS_CATEGORY = "pointer_settings_category";
     private static final String KEY_TRACKPAD_SETTINGS = "gesture_pad_settings";
-    private static final String PREF_IME_SWITCHER = "ime_switcher";
     private static final String KEY_STYLUS_ICON_ENABLED = "stylus_icon_enabled";
     private static final String KEY_STYLUS_GESTURES = "stylus_gestures";
 
@@ -95,7 +94,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private final ArrayList<PreferenceScreen> mHardKeyboardPreferenceList =
             new ArrayList<PreferenceScreen>();
     private InputManager mIm;
-    private CheckBoxPreference mStatusBarImeSwitcher;
     private InputMethodManager mImm;
     private boolean mIsOnlyImeSettings;
     private Handler mHandler;
@@ -180,13 +178,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         updateInputDevices();
 
         // Enable or disable mStatusBarImeSwitcher based on boolean value: config_show_IMEswitcher
-
-        mStatusBarImeSwitcher = (CheckBoxPreference) findPreference(PREF_IME_SWITCHER);
         if (!getResources().getBoolean(com.android.internal.R.bool.config_show_cmIMESwitcher)) {
-            getPreferenceScreen().removePreference(mStatusBarImeSwitcher);
-        } else {
-            mStatusBarImeSwitcher.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.STATUS_BAR_IME_SWITCHER, 1) == 1);
+            getPreferenceScreen().removePreference(findPreference(Settings.System.STATUS_BAR_IME_SWITCHER));
         }
 
         mStylusGestures = (PreferenceScreen) findPreference(KEY_STYLUS_GESTURES);
@@ -397,11 +390,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         chkPref.isChecked() ? 1 : 0);
                 return true;
             }
-        } else if (preference == mStatusBarImeSwitcher) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUS_BAR_IME_SWITCHER,
-            mStatusBarImeSwitcher.isChecked() ? 1 : 0);
-            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
