@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
@@ -46,6 +47,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_BLUR_BEHIND = "blur_behind";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
+    private static final String KEY_DISABLE_CAMERA_WIDGET = "disable_camera_widget";
 
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mSeeThrough;
@@ -53,6 +55,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private CheckBoxPreference mAllowRotation;
     private CheckBoxPreference mBlurBehind;
     private SeekBarPreference mBlurRadius;
+    private CheckBoxPreference mCameraWidget;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private DevicePolicyManager mDPM;
@@ -107,6 +110,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
 
         mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH);
 
+        // Lockscreen Camera Widget
+        mCameraWidget = (CheckBoxPreference) findPreference(KEY_DISABLE_CAMERA_WIDGET);
+        mCameraWidget.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.DISABLE_CAMERA_WIDGET, 0) == 1);
+
         mAllowRotation = (CheckBoxPreference) findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.LOCKSCREEN_ROTATION, 0) == 1); 
@@ -156,6 +164,11 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                     Settings.System.LOCKSCREEN_ROTATION, mAllowRotation.isChecked()
                     ? 1 : 0);
             return true;
+
+        } else if (preference == mCameraWidget) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.DISABLE_CAMERA_WIDGET, mCameraWidget.isChecked()
+                    ? 1 : 0);
 
         } else if (preference == mBlurBehind) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND,

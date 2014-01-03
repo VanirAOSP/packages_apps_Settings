@@ -39,16 +39,21 @@
             android:title="@string/lockscreen_custom_widgets_title"
             android:summary="@string/lockscreen_custom_widgets_summary" />
 
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="lockscreen_maximize_widgets"
+            android:summary="@string/lockscreen_maximize_widgets_summary"
+            android:title="@string/lockscreen_maximize_widgets_title" />
+
         <CheckBoxPreference
             android:key="lockscreen_music_controls"
             android:persistent="false"
             android:title="@string/lockscreen_music_controls_title"
             android:summary="@string/lockscreen_music_controls_summary" /> 
 
-        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-            android:key="lockscreen_maximize_widgets"
-            android:summary="@string/lockscreen_maximize_widgets_summary"
-            android:title="@string/lockscreen_maximize_widgets_title" />
+         <CheckBoxPreference
+            android:key="disable_camera_widget"
+            android:title="@string/disable_camera_widget_title"
+            android:summary="@string/disable_camera_widget_summary" />
 
     </PreferenceCategory>
 
