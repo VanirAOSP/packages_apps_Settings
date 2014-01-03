@@ -73,7 +73,7 @@
         android:key="ime_switcher"
         android:title="@string/ime_switcher_title"
         android:summary="@string/ime_switcher_summary"
-        android:defaultValue="true" />
+        android:persistent="false" />
 
     <PreferenceCategory android:key="voice_category"
             android:title="@string/voice_category" >
