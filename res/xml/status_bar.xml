@@ -34,13 +34,13 @@
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="clock_color"
         android:title="@string/clock_color_title"
-        android:defaultValue="@android:color/holo_blue_light"
+        android:defaultValue="@android:color/white"
         alphaSlider="true" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="expanded_clock_color"
         android:title="@string/expanded_clock_color_title"
-        android:defaultValue="@android:color/holo_blue_light"
+        android:defaultValue="@android:color/white"
         alphaSlider="true" />
 
     <ListPreference

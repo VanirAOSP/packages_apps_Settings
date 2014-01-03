@@ -94,7 +94,7 @@
 
 
     <!-- Status bar -->
-    <string name="status_bar_title">Status bar</string>
+    <string name="status_bar_title">Statusbar mods</string>
     <string name="status_bar_style_title">Style</string>
 
     <!-- Status bar | Clock -->
