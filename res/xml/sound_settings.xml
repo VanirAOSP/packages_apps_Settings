@@ -102,7 +102,7 @@
             android:defaultValue="false" />
 
     <PreferenceCategory
-            android:title="@string/sound_category_system_title"/>
+            android:title="@string/sound_category_general_title"/>
 
     <!-- Do not nest these, or removals in code will break -->
 

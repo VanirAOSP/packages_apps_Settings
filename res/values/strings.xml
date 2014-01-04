@@ -4042,7 +4042,7 @@
 
     <!-- Category title for system-wide notification and feedback settings in the Sound Setting.
          [CHAR LIMIT=40] -->
-    <string name="sound_category_system_title">System</string>
+    <string name="sound_category_general_title">General</string>
 
     <!-- Wifi Setup For Setup Wizard with XL screen -->
     <!-- Title shown in Wifi Setup Wizard with XL screen -->
@@ -4930,8 +4930,7 @@
 
     <!-- Status bar brightness slider -->
     <string name="brightness_slider_title">Statusbar brightness slider</string>
-    <string name="brightness_slider_summary">When enabled, this option will allow you to change the brightness by
-        sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
+    <string name="brightness_slider_summary">Change the brightness by sliding across the statusbar. Note: Will not be active when auto-brightness is on
     </string> 
 
     <!-- Partition Info -->
