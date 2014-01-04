@@ -92,8 +92,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mHeadsetHookLaunchVoice;
     private CheckBoxPreference mQuickCam;
 
-    private boolean isCameraPresent;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -242,27 +240,18 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         final PreferenceCategory powerButtonCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER_BUTTON);
-        boolean isTorchSupported = isPackageInstalled(getActivity(), "net.cactii.flash2");
-        cameraHardware();
+        final boolean isTorchSupported = isPackageInstalled(getActivity(), "net.cactii.flash2");
+        final boolean isCameraPresent = mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
 
         if (!isTorchSupported) {
             powerButtonCategory.removePreference(findPreference(Settings.System.ENABLE_FAST_TORCH));
         }
         if (!isCameraPresent) {
-            powerButtonCategory.removePreference(findPreference(Settings.System.POWER_MENU_QUICKCAM));
+            powerButtonCategory.removePreference(mQuickCam);
         }
         final boolean hasAnyPowerButtonOptions = isTorchSupported  || isCameraPresent /* || etc. */;
         if (!hasAnyPowerButtonOptions) {
             prefScreen.removePreference(powerButtonCategory);
-        }
-    }
-
-    private final void cameraHardware() {
-        /** Check if this device has a camera */
-        if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-            isCameraPresent = true;
-        } else {
-            isCameraPresent = false;
         }
     }
 
