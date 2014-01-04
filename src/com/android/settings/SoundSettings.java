@@ -44,6 +44,7 @@ import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
@@ -309,6 +310,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         if (mStockMode) {
             mSoundSettings.removePreference(mQuietHours);
+            mSoundSettings.removePreference(mVolumeOverlay);
+            PreferenceCategory mCategory = (PreferenceCategory) findPreference("category_automation_effects");
+            mSoundSettings.removePreference(mCategory);
         }
 
         initDockSettings();
