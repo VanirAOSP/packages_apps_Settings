@@ -66,9 +66,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                 1)));
 
         mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
+        mClockPicker.setAlphaSliderEnabled(true);
         mClockPicker.setOnPreferenceChangeListener(this);
 
         mExpandedClockPicker = (ColorPickerPreference) findPreference(PREF_EXPANDED_CLOCK_PICKER);
+        mExpandedClockPicker.setAlphaSliderEnabled(true);
         mExpandedClockPicker.setOnPreferenceChangeListener(this);
 
         mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);
