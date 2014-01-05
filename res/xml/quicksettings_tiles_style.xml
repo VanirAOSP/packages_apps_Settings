@@ -16,11 +16,11 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/quicksettings_tiles_style">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-        android:title="@string/quicksettings_tiles_style_additional_options">
+        android:title="@string/quicksettings_tiles_style"
+        android:key="quicksettings_tiles_style_additional_options">
 
         <ListPreference
             android:key="tiles_per_row"

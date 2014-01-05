@@ -24,6 +24,7 @@
     <string name="lockscreen_targets_title">Targets</string>
     <string name="userspace_options_title">Userspace</string>
     <string name="notifications_ux_title">General UX</string>
+    <string name="default_string">Default</string>
 
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Power menu</string>
@@ -444,5 +445,14 @@
 
     <string name="toggles_arrange_instructions">Rearrange by dragging by the handle on the right. Remove by swiping.</string>
     <string name="save">Save</string>
+
+    <!-- QuickSettings style options -->
+    <string name="quicksettings_tiles_style">Style</string>
+    <string name="summary_quicksettings_tiles_style">View or change quick settings style options</string>
+    <string name="quicksettings_tiles_style_additional_options">Additional options</string>
+    <string name="tiles_per_row_title">Tiles per row</string>
+    <string name="tiles_per_row_duplicate_landscape_title">Scale landscape quantity</string>
+    <string name="tiles_per_row_duplicate_landscape_summary">Landscape view doubles tiles per row quantity</string>
+    <string name="qs_style_reset_message">Reset all colors to default?</string>
 
 </resources>

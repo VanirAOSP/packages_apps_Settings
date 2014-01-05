@@ -16,11 +16,9 @@
 
 package com.android.settings.quicksettings;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -29,20 +27,25 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.vanir.util.Helpers;
+import com.android.settings.widget.SeekBarPreference;
+
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
 
-    private static final String PREF_TILES_PER_ROW = "tiles_per_row";
-    private static final String PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE = "tiles_per_row_duplicate_landscape";
+    private static final String TAG = "QuickSettingsTilesStyle";
+
+    private static final String PREF_TILES_PER_ROW =
+            "tiles_per_row";
+    private static final String PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE =
+            "tiles_per_row_duplicate_landscape";
+    private static final String PREF_ADDITIONAL_OPTIONS =
+            "quicksettings_tiles_style_additional_options";
 
     private ListPreference mTilesPerRow;
     private CheckBoxPreference mDuplicateColumnsLandscape;
@@ -67,6 +70,15 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
 
         prefs = getPreferenceScreen();
 
+        PackageManager pm = getPackageManager();
+        Resources systemUiResources;
+        try {
+            systemUiResources = pm.getResourcesForApplication("com.android.systemui");
+        } catch (Exception e) {
+            Log.e(TAG, "can't access systemui resources",e);
+            return null;
+        }
+
         mTilesPerRow = (ListPreference) prefs.findPreference(PREF_TILES_PER_ROW);
         int tilesPerRow = Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.QUICK_TILES_PER_ROW, 3);
@@ -74,27 +86,22 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
         mTilesPerRow.setSummary(mTilesPerRow.getEntry());
         mTilesPerRow.setOnPreferenceChangeListener(this);
 
-        mDuplicateColumnsLandscape = (CheckBoxPreference) findPreference(PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE);
+        mDuplicateColumnsLandscape =
+            (CheckBoxPreference) findPreference(PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE);
         mDuplicateColumnsLandscape.setChecked(Settings.System.getInt(
                 getActivity().getContentResolver(),
                 Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE, 1) == 1);
+        mDuplicateColumnsLandscape.setOnPreferenceChangeListener(this);
 
-        setHasOptionsMenu(true);
+        PreferenceCategory additionalOptions =
+            (PreferenceCategory) findPreference(PREF_ADDITIONAL_OPTIONS);
+        if (!Utils.isPhone(getActivity())) {
+            additionalOptions.removePreference(
+                findPreference(PREF_TILES_PER_ROW_DUPLICATE_LANDSCAPE));
+        }
+
         mCheckPreferences = true;
         return prefs;
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
-        if (preference == mDuplicateColumnsLandscape) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
-            Helpers.restartSystemUI();
-            return true;
-        }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
@@ -109,7 +116,11 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
                     Settings.System.QUICK_TILES_PER_ROW,
                     value);
             mTilesPerRow.setSummary(mTilesPerRow.getEntries()[index]);
-            Helpers.restartSystemUI();
+            return true;
+        } else if (preference == mDuplicateColumnsLandscape) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.QUICK_TILES_PER_ROW_DUPLICATE_LANDSCAPE,
+                    (Boolean) newValue ? 1 : 0);
             return true;
         }
         return false;
@@ -119,5 +130,4 @@ public class QuickSettingsTilesStyle extends SettingsPreferenceFragment implemen
     public void onResume() {
         super.onResume();
     }
-
 }
