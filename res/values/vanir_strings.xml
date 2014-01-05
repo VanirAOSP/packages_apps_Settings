@@ -235,9 +235,7 @@
 
     <!-- Status bar brightness slider -->
     <string name="brightness_slider_title">Statusbar brightness slider</string>
-    <string name="brightness_slider_summary">When enabled, this option will allow you to change the brightness by
-        sliding your finger across the Statusbar. Note: Will not be active when auto-brightness is on
-    </string> 
+    <string name="brightness_slider_summary">Change the brightness by sliding across the statusbar. Note: Will not be active when auto-brightness is on</string> 
 
     <!-- Display Rotation Settings -->
     <string name="display_rotation_title">Rotation Settings</string>
