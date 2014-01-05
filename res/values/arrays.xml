@@ -1192,4 +1192,5 @@
         <item>Saturday</item>
     </string-array>
 
+    <string name="category_navbar">Navigation bar</string>
 </resources>

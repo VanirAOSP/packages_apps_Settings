@@ -46,4 +46,7 @@
     <color name="auto_brightness_preview_foreground">@android:color/white</color>
     <color name="auto_brightness_preview_markers">@android:color/holo_blue_light</color>
     <color name="auto_brightness_preview_grid">#44ffffff</color>
+
+    <color name="extension_list_item_color">#ffc9c9c9</color>
+    <color name="setting_separator">#ff484848</color>
 </resources>

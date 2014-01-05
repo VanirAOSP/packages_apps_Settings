@@ -397,4 +397,52 @@
     <string name="quick_cam_title">Quick Camera</string>
     <string name="quick_cam_summary">From the power reboot menu: longpress the power key a second time to open the camera</string>
 
+    <!-- Lockscreen camera widget toggle -->
+    <string name="disable_camera_widget_title">Enable camera widget</string>
+    <string name="disable_camera_widget_summary">Allow the lockscreen camera widget</string>
+
+    <!-- Nav Ring Targets -->
+    <!-- Navbar targets -->
+    <string name="category_navring">Navigation ring</string>
+    <string name="navbar_ring_cat">Navigation ring Targets</string>
+    <string name="navbar_ring">Custom Ring targets</string>
+    <string name="navring_enable_long">Enable longpress for navigation ring</string>
+    <string name="navring_target_save">Navigation rings saved</string>
+    <string name="navring_target_reset_message">Do you want to reset the navigation ring?</string>
+    <string name="navring_target_reset">Navigation ring targets reset.</string>
+    <string name="choose_action_title">Choose action</string>
+    <string name="choose_action_short_title">Choose short action</string>
+    <string name="choose_action_long_title">Choose long action</string>
+    <string name="action_long_save">set as long action</string>
+    <string name="title_navring_amount">Number of navigation ring targets</string>
+    <string name="summary_navring_amount">Choose number of targets in the navigation ring</string>
+    <string name="interface_navring_settings_title">Navigation ring</string>
+    <string name="interface_navring_settings_summary">@null</string>
+    <string name="navring_target_info">Drag your finger to targets to assign actions</string>
+    <string name="navring_clear">Clear action</string>
+    <string name="action_short">Short action</string>
+    <string name="action_long">Long action</string>
+    <string name="action_double">Double tap action</string>
+    <string name="action_icon">Custom icon</string>
+    <string name="navring_target_amount_text">Current number of targets</string>
+    <string name="navring_target_longpress_text">Longpress actions</string>
+    <string name="description_target_unlock">Unlock</string>
+    <string name="description_direction_up">Slide up for unlock</string>
+    <string name="description_direction_down">Slide down for unlock</string>
+    <string name="description_direction_left">"Slide left for unlock</string>
+    <string name="description_direction_right">Slide right for unlock</string>
+    <string name="one_target">1 target</string>
+    <string name="two_targets">2 targets</string>
+    <string name="three_targets">3 targets</string>
+    <string name="four_targets">4 targets</string>
+    <string name="five_targets">5 targets</string>
+    <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
+    <string name="add_button">Add button</string>
+    <string name="category_navbar">Navigation bar</string>
+    <string name="navbar_tab_arrange">Rearrange</string>
+    <string name="navbar_tab_settings">Settings</string>
+
+    <string name="toggles_arrange_instructions">Rearrange by dragging by the handle on the right. Remove by swiping.</string>
+    <string name="save">Save</string>
+
 </resources>

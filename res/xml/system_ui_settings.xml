@@ -20,24 +20,19 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-        android:key="navigation_bar"
-        android:title="@string/navigation_bar_category" >
-
-        <PreferenceScreen
-            android:key="navigation_bar"
-            android:fragment="com.android.settings.cyanogenmod.NavBar"
-            android:title="@string/navigation_bar_title" />
-
-        <PreferenceScreen
-            android:key="navigation_ring"
-            android:fragment="com.android.settings.cyanogenmod.NavRing"
-            android:title="@string/navigation_ring_title" />
-    </PreferenceCategory>
-    <PreferenceCategory
         android:key="userspace_options"
         android:title="@string/userspace_options_title" >
 
-    <!-- Lock screen -->
+    <PreferenceScreen
+        android:key="navigation_bar"
+        android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
+        android:title="@string/category_navbar" />
+
+    <PreferenceScreen
+        android:key="navigation_bar_ring"
+        android:fragment="com.android.settings.vanir.NavRingTargets"
+        android:title="@string/category_navring" />
+
     <PreferenceScreen
         android:id="@+id/lock_screen_settings"
         android:fragment="com.android.settings.cyanogenmod.LockscreenInterface"

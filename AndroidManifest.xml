@@ -70,6 +70,7 @@
     <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
+    <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
 
     <permission
         android:name="android.permission.REQUEST_SUPERUSER"
@@ -126,6 +127,7 @@
         <!-- Only system/su can open this activity -->
         <!-- This is activity is started in multiuser mode when the user invoking su -->
         <!-- is not the device owner (user id 0). -->
+
         <activity
             android:name=".vanir.superuser.NotifyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -1754,6 +1756,10 @@
         <activity android:name=".QuickSettings" />
 
         <activity android:name=".quicksettings.QuickSettingsTilesStyle" />
+
+        <activity android:name=".vanir.NavRingTargets" />
+
+        <activity android:name=".vanir.navbar.NavbarTabHostFragment" />
 
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">

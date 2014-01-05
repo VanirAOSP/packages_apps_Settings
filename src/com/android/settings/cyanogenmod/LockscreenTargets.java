@@ -423,6 +423,10 @@ public class LockscreenTargets extends Fragment implements
     }
 
     @Override
+    public void onTargetChange(View v, int target) {
+    }
+
+    @Override
     public void onTrigger(View v, final int target) {
         mTargetIndex = target;
 
