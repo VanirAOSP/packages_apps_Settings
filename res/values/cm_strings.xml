@@ -175,7 +175,7 @@
     <string name="volume_overlay_none">None</string>
 
     <!-- Automatation and effects category -->
-    <string name="automation_effects_title">System</string>
+    <string name="automation_effects_title">Automation &amp; Effects</string>
 
     <!-- Convert sound to vibration toggle -->
     <string name="notification_convert_sound_to_vibration_title">Vibrate on notification</string>
