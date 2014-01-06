@@ -31,15 +31,22 @@
         android:entries="@array/entries_status_bar_am_pm"
         android:entryValues="@array/values_status_bar_am_pm" />
 
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="statusbar_clock_custom_colors"
+        android:title="@string/status_bar_clock_custom_colors"
+        android:defaultValue="false" />
+
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="clock_color"
         android:title="@string/clock_color_title"
+        android:dependency="statusbar_clock_custom_colors"
         android:defaultValue="@android:color/white"
         alphaSlider="true" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="expanded_clock_color"
         android:title="@string/expanded_clock_color_title"
+        android:dependency="statusbar_clock_custom_colors"
         android:defaultValue="@android:color/white"
         alphaSlider="true" />
 
