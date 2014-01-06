@@ -396,8 +396,4 @@
     <string name="quick_cam_title">Quick Camera</string>
     <string name="quick_cam_summary">From the power reboot menu: longpress the power key a second time to open the camera</string>
 
-    <!-- Lockscreen camera widget toggle -->
-    <string name="disable_camera_widget_title">Enable camera widget</string>
-    <string name="disable_camera_widget_summary">Allow the lockscreen camera widget</string>
-
 </resources>

@@ -19,7 +19,8 @@ package com.android.settings.cyanogenmod;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
@@ -46,7 +47,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_BLUR_BEHIND = "blur_behind";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
-    private static final String KEY_DISABLE_CAMERA_WIDGET = "disable_camera_widget";
+    private static final String KEY_ENABLE_CAMERA = "keyguard_enable_camera";
 
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mSeeThrough;
@@ -54,7 +55,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private CheckBoxPreference mAllowRotation;
     private CheckBoxPreference mBlurBehind;
     private SeekBarPreference mBlurRadius;
-    private CheckBoxPreference mCameraWidget;
+    private CheckBoxPreference mEnableCameraWidget;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockUtils;
@@ -75,6 +76,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
 
         // Find preferences
         mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
+        mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
 
         // Remove/disable custom widgets based on device RAM and policy
         if (ActivityManager.isLowRamDeviceStatic()) {
@@ -86,6 +88,16 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                     DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL);
         }
 
+        // Enable or disable camera widget based on device and policy
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+                Camera.getNumberOfCameras() == 0) {
+            widgetsCategory.removePreference(mEnableCameraWidget);
+            mEnableCameraWidget = null;
+        } else {
+            checkDisabledByPolicy(mEnableCameraWidget,
+                    DevicePolicyManager.KEYGUARD_DISABLE_SECURE_CAMERA);
+        }
+
         // Remove cLock settings item if not installed
         // Remove maximize widgets on tablets
         if (!Utils.isPhone(getActivity())) {
@@ -94,11 +106,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         }
 
         mSeeThrough = (CheckBoxPreference) findPreference(KEY_SEE_TRHOUGH);
-
-        // Lockscreen Camera Widget
-        mCameraWidget = (CheckBoxPreference) findPreference(KEY_DISABLE_CAMERA_WIDGET);
-        mCameraWidget.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.DISABLE_CAMERA_WIDGET, 0) == 1);
 
         mAllowRotation = (CheckBoxPreference) findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
@@ -124,9 +131,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     public void onResume() {
         super.onResume();
 
-        // Update custom widgets
+        // Update custom widgets and camera
         if (mEnableKeyguardWidgets != null) {
             mEnableKeyguardWidgets.setChecked(mLockUtils.getWidgetsEnabled());
+        }
+
+        if (mEnableCameraWidget != null) {
+            mEnableCameraWidget.setChecked(mLockUtils.getCameraEnabled());
         }
     }
 
@@ -137,11 +148,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         if (KEY_ENABLE_WIDGETS.equals(key)) {
             mLockUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
             return true;
-
-        } else if (preference == mSeeThrough) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
-                    ? 1 : 0);
+        } else if (KEY_ENABLE_CAMERA.equals(key)) {
+            mLockUtils.setCameraEnabled(mEnableCameraWidget.isChecked());
             return true;
 
         } else if (preference == mAllowRotation) {
@@ -149,11 +157,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                     Settings.System.LOCKSCREEN_ROTATION, mAllowRotation.isChecked()
                     ? 1 : 0);
             return true;
-
-        } else if (preference == mCameraWidget) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.DISABLE_CAMERA_WIDGET, mCameraWidget.isChecked()
-                    ? 1 : 0);
 
         } else if (preference == mBlurBehind) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND,

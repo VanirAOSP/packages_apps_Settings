@@ -45,15 +45,14 @@
             android:title="@string/lockscreen_maximize_widgets_title" />
 
         <CheckBoxPreference
+            android:key="keyguard_enable_camera"
+            android:title="@string/lockscreen_enable_camera_title" />
+
+        <CheckBoxPreference
             android:key="lockscreen_music_controls"
             android:persistent="false"
             android:title="@string/lockscreen_music_controls_title"
-            android:summary="@string/lockscreen_music_controls_summary" /> 
-
-         <CheckBoxPreference
-            android:key="disable_camera_widget"
-            android:title="@string/disable_camera_widget_title"
-            android:summary="@string/disable_camera_widget_summary" />
+            android:summary="@string/lockscreen_music_controls_summary" />
 
     </PreferenceCategory>
 
