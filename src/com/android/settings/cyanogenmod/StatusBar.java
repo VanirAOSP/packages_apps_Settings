@@ -21,11 +21,14 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.content.res.Resources;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import android.util.Log;
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
@@ -65,12 +68,25 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                 .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
                 1)));
 
+        int defaultResource = android.R.color.white;
+        try {
+            final Resources res = getActivity().getPackageManager().getResourcesForApplication("com.android.systemui");
+            defaultResource = res.getIdentifier("status_bar_clock_color", "color", null);
+        } catch (Exception e) {
+            Log.e("StatusBarSettings", "OH NOZ!\n"+e.toString());
+        }
+        if (defaultResource == 0) {
+            defaultResource = android.R.color.white;
+        }
+
         mClockPicker = (ColorPickerPreference) findPreference(PREF_CLOCK_PICKER);
         mClockPicker.setAlphaSliderEnabled(true);
+        mClockPicker.setDefaultValue(defaultResource);
         mClockPicker.setOnPreferenceChangeListener(this);
 
         mExpandedClockPicker = (ColorPickerPreference) findPreference(PREF_EXPANDED_CLOCK_PICKER);
         mExpandedClockPicker.setAlphaSliderEnabled(true);
+        mExpandedClockPicker.setDefaultValue(defaultResource);
         mExpandedClockPicker.setOnPreferenceChangeListener(this);
 
         mStatusBarAmPm = (ListPreference) findPreference(STATUS_BAR_AM_PM);

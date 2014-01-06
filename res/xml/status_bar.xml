@@ -40,14 +40,12 @@
         android:key="clock_color"
         android:title="@string/clock_color_title"
         android:dependency="statusbar_clock_custom_colors"
-        android:defaultValue="@android:color/white"
         alphaSlider="true" />
 
     <net.margaritov.preference.colorpicker.ColorPickerPreference
         android:key="expanded_clock_color"
         android:title="@string/expanded_clock_color_title"
         android:dependency="statusbar_clock_custom_colors"
-        android:defaultValue="@android:color/white"
         alphaSlider="true" />
 
     <ListPreference
