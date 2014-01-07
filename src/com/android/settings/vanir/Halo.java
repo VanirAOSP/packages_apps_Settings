@@ -253,6 +253,16 @@ public class Halo extends SettingsPreferenceFragment
     }
 
     private void updateDependency() {
+        mHaloState.setEnabled(mEnabledState);
+        mHaloSize.setEnabled(mEnabledState);
+        mHaloHide.setEnabled(mEnabledState);
+        mHaloReversed.setEnabled(mEnabledState);
+        mHaloPause.setEnabled(mEnabledState);
+        mHaloMsgBox.setEnabled(mEnabledState);
+        mHaloNinja.setEnabled(mEnabledState);
+        mHaloUnlockPing.setEnabled(mEnabledState);
+        mHaloMsgAnimate.setEnabled(mEnabledState);
+        mHaloNotifyCount.setEnabled(mEnabledState);
         mHaloCircleColor.setEnabled(mEnabledState);
         mHaloEffectColor.setEnabled(mEnabledState);
         mHaloNotifTitleColor.setEnabled(mEnabledState);
@@ -274,12 +284,6 @@ public class Halo extends SettingsPreferenceFragment
             updateDependency();
     //        Helpers.restartSystemUI();
         }
-    }
-
-    private void updateEnabledState() {
-        final ContentResolver cr = getActivity().getContentResolver();
-        mEnabledState = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_ENABLED, 0) == 1;
     }
 
     private boolean isHaloPolicyBlack() {
