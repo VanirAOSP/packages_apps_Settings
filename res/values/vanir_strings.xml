@@ -234,6 +234,7 @@
     <string name="appops_sysapp_beware">Beware!</string>
     <string name="appops_sysapp_warning">"Changing permissions of core Android components might lead to undesired behavior. Change settings here at your own risk!</string>
 
+
     <!-- Status bar brightness slider -->
     <string name="brightness_slider_title">Statusbar brightness slider</string>
     <string name="brightness_slider_summary">Change the brightness by sliding across the statusbar. Note: Will not be active when auto-brightness is on</string> 
