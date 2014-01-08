@@ -18,7 +18,6 @@ package com.android.settings.cyanogenmod;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -62,19 +61,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
 
         mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
         mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
-
-        CheckBoxPreference statusBarBrightnessControl = (CheckBoxPreference)
-                prefSet.findPreference(Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL);
-
-        try {
-            if (Settings.System.getInt(resolver, Settings.System.SCREEN_BRIGHTNESS_MODE)
-                    == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                statusBarBrightnessControl.setEnabled(false);
-                statusBarBrightnessControl.setSummary(R.string.status_bar_toggle_info);
-            }
-        } catch (SettingNotFoundException e) {
-            // Do nothing
-        }
 
         int batteryStyle = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_BATTERY, 0);
         mStatusBarBattery.setValue(String.valueOf(batteryStyle));
@@ -135,10 +121,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         if (Utils.isWifiOnly(getActivity())) {
             prefSet.removePreference(mStatusBarCmSignal);
         }
-
-        if (Utils.isTablet(getActivity())) {
-            prefSet.removePreference(statusBarBrightnessControl);
-        }
     }
 
     @Override
@@ -187,7 +169,6 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUSBAR_EXPANDED_CLOCK_COLOR, intHex);
             // Log.e("VANIR", "Expanded: "+intHex + "");
         }
-
         return false;
     }
 }

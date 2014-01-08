@@ -21,6 +21,11 @@
         <com.android.settings.BrightnessPreference
                 android:title="@string/brightness"
                 android:persistent="false"/>
+        <CheckBoxPreference
+            android:key="statusbar_brightness_slider"
+            android:title="@string/brightness_slider_title"
+            android:summary="@string/brightness_slider_summary"
+            android:defaultValue="false" />
 
         <PreferenceScreen
             android:key="display_rotation"
@@ -52,11 +57,6 @@
                 android:dialogTitle="@string/dialog_title_font_size" />
 
         <PreferenceScreen
-                android:key="wifi_display"
-                android:title="@string/wifi_display_settings_title"
-                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
-
-        <PreferenceScreen
             android:id="@+id/animations"
             android:key="animations"
             android:title="@string/animation_manager_title"
@@ -79,6 +79,11 @@
                 android:targetClass="com.cyanogenmod.settings.device.DisplaySettings" />
         </Preference>
 
+        <PreferenceScreen
+                android:key="wifi_display"
+                android:title="@string/wifi_display_settings_title"
+                android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
+
         <PreferenceCategory
             android:key="lights_prefs"
             android:title="@string/lights_category_title">
@@ -94,5 +99,4 @@
                 android:fragment="com.android.settings.notificationlight.BatteryLightSettings" />
 
         </PreferenceCategory>
-
 </PreferenceScreen>
