@@ -34,6 +34,7 @@
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Power menu</string>
     <string name="power_menu_summary">Enables reboot, screenshot, airplane mode, and sound panel for the power menu</string>
+    <string name="lockscreen_enable_power_menu_title">Enable on lockscreen</string>
     <string name="power_menu_reboot_title">Reboot menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
