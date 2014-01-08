@@ -48,6 +48,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
     private static final String CATEGORY_NAVBAR = "navigation_bar";
+    private static final String CATEGORY_NAVRING = "navigation_bar_ring";
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
@@ -80,6 +81,9 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 
         addPreferencesFromResource(R.xml.system_ui_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        final int deviceKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
 
@@ -137,8 +141,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
-        try {
-            boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
+//        try {
+//            boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
 
 //            lets keep this around so i can modify it to act accordingly with hardware key only devices
 //             Hide no-op "Status bar visible" mode on devices without navigation bar
@@ -155,12 +159,10 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
 //
 
             // Hide navigation bar category on devices without navigation bar
-            if (!hasNavBar) {
+            if (deviceKeys > 0) {
                 prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
+                prefSet.removePreference(findPreference(CATEGORY_NAVRING));
             }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Error getting navigation bar status");
-        }
 
         updateCustomLabelTextSummary();
         updateImmersiveModeState(immersiveModeValue);
