@@ -101,6 +101,13 @@
             android:summary="@string/notification_vibrate_during_calls_summary"
             android:defaultValue="false" />
 
+    <ListPreference
+            android:key="camera_click_sound"
+            android:title="@string/camera_sounds_title"
+            android:entries="@array/camera_sounds_entries"
+            android:entryValues="@array/camera_sounds_values" 
+            android:defaultValue="1" />
+
     <PreferenceCategory
             android:title="@string/sound_category_system_title"/>
 

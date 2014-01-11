@@ -454,4 +454,10 @@
     <string name="tiles_per_row_duplicate_landscape_summary">Landscape view doubles tiles per row quantity</string>
     <string name="qs_style_reset_message">Reset all colors to default?</string>
 
+    <!-- Sound settings screen, setting check box label -->
+    <string name="camera_sounds_title">Camera shutter sound</string>
+    <string name="camera_sounds_entry_stock">Default (bloop)</string>
+    <string name="camera_sounds_entry_realistic">Realistic (click)</string>
+    <string name="camera_sounds_entry_off">Disabled (ILLEGAL in some areas)</string>
+
 </resources>
