@@ -41,11 +41,6 @@
             android:entries="@array/notification_drawer_collapse_on_dismiss_entries"
             android:entryValues="@array/notification_drawer_collapse_on_dismiss_values" />
 
-        <PreferenceScreen
-            android:title="@string/Lockscreen_notifications_header"
-            android:summary="@string/lockscreen_notifications_summary"
-            android:fragment="com.android.settings.LockscreenNotifications" />
-
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/category_quick_access" >

@@ -61,7 +61,7 @@
 
     <PreferenceScreen
         android:key="additional_options"
-        android:fragment="com.android.settings.vanir.ActiveDisplaySettings"
+        android:fragment="com.android.settings.vanir.ActiveNotificationSettings"
         android:title="@string/additional_settings_title" />
     
     <PreferenceCategory

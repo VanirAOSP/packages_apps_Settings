@@ -606,7 +606,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="system_interface_title">System interface</string>
 
     <!-- Notification Drawer  -->
-    <string name="notification_drawer_title">Notifications</string>
+    <string name="notification_drawer_title">Notification drawer</string>
     <string name="notification_drawer_collapse_on_dismiss_title">Auto close behavior</string>
     <string name="collapse_on_dismiss_never">Disabled</string>
     <string name="collapse_on_dismiss_if_empty">If none remaining</string>

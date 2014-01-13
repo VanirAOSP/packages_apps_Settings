@@ -26,6 +26,7 @@
     <string name="notifications_ux_title">General UX</string>
     <string name="default_string">Default</string>
     <string name="performance_settings">Performance</string>
+    <string name="controls">Controls</string>
 
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Power menu</string>
@@ -518,6 +519,8 @@
     <string name="offset_top">Offset to the top of the screen:</string>
     <string name="privacy_mode">Privacy Mode</string>
     <string name="privacy_mode_summary">Disables notifications from beeing shown and dismissed. This way, you just see the icons of your notifications.</string>
+    <string name="excluded_apps_title">Excluded applications</string>
+    <string name="excluded_apps_summary">Excluded applications will not show up as lockscreen notifications</string>
     <!-- Active Display -->
     <string name="ad_settings_title">Active display</string>
     <string name="ad_enable_summary">Active display style notifications</string>

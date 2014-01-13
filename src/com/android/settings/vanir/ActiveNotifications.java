@@ -30,7 +30,7 @@ import com.android.settings.R;
 
 import static android.hardware.Sensor.TYPE_PROXIMITY;
 
-public class LockscreenNotifications extends SettingsPreferenceFragment implements
+public class ActiveNotifications extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener,
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
@@ -101,7 +101,7 @@ public class LockscreenNotifications extends SettingsPreferenceFragment implemen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.lockscreen_notifications);
+        addPreferencesFromResource(R.xml.active_notifications);
         PreferenceScreen prefs = getPreferenceScreen();
         final ContentResolver cr = getActivity().getContentResolver();
 

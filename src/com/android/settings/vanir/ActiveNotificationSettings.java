@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
+public class ActiveNotificationSettings extends SettingsPreferenceFragment implements
         OnPreferenceChangeListener {
     private static final String TAG = "ActiveDisplaySettings";
 
@@ -52,6 +52,7 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_EXPANDED_VIEW = "expanded_view";
     private static final String KEY_FORCE_EXPANDED_VIEW = "force_expanded_view";
     private static final String KEY_NOTIFICATIONS_HEIGHT = "notifications_height";
+    private static final String KEY_EXCLUDED_NOTIF_APPS = "excluded_apps";
 
     private CheckBoxPreference mShowTextPref;
     private CheckBoxPreference mShowDatePref;
@@ -65,12 +66,13 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mExpandedView;
     private CheckBoxPreference mForceExpandedView;
     private NumberPickerPreference mNotificationsHeight;
+    private AppMultiSelectListPreference mNotifAppsPref;		
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.active_display_settings);
+        addPreferencesFromResource(R.xml.active_notification_settings);
 
         mShowTextPref = (CheckBoxPreference) findPreference(KEY_SHOW_TEXT);
         mShowTextPref.setChecked((Settings.System.getInt(getContentResolver(),
@@ -93,7 +95,7 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.ACTIVE_DISPLAY_SHOW_AMPM, 0) == 1));
 
         int level = Settings.System.getInt(getContentResolver(),
-                Settings.System.ACTIVE_DISPLAY_BRIGHTNESS, 100);
+                Settings.System.ACTIVE_DISPLAY_BRIGHTNESS, 0);
         mBrightnessLevel = (SeekBarPreference) findPreference(KEY_BRIGHTNESS);
         mBrightnessLevel.setProgress((int) (level));
         mBrightnessLevel.setOnPreferenceChangeListener(this);
@@ -116,6 +118,11 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
         Set<String> excludedApps = getExcludedApps();
         if (excludedApps != null) mExcludedAppsPref.setValues(excludedApps);
         mExcludedAppsPref.setOnPreferenceChangeListener(this);
+
+        mNotifAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_NOTIF_APPS);
+        Set<String> excludedNotifApps = getExcludedNotifApps();
+        if (excludedApps != null) mExcludedAppsPref.setValues(excludedNotifApps);
+        mNotifAppsPref.setOnPreferenceChangeListener(this);
 
         mOffsetTop = (SeekBarPreference) findPreference(KEY_OFFSET_TOP);
         mOffsetTop.setProgress((int)(Settings.System.getFloat(getContentResolver(),
@@ -172,6 +179,9 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
         } else if (preference == mExcludedAppsPref) {
             storeExcludedApps((Set<String>) newValue);
             return true;
+        } else if (preference == mNotifAppsPref) {
+			storeExcludedApps((Set<String>) newValue);
+			return true;
         } else if (preference == mOffsetTop) {
             Settings.System.putFloat(getContentResolver(), Settings.System.LOCKSCREEN_NOTIFICATIONS_OFFSET_TOP,
                     (Integer)newValue / 100f);
@@ -262,5 +272,25 @@ public class ActiveDisplaySettings extends SettingsPreferenceFragment implements
         }
         Settings.System.putString(getContentResolver(),
                 Settings.System.ACTIVE_DISPLAY_EXCLUDED_APPS, builder.toString());
+    }
+
+    private Set<String> getExcludedNotifApps() {
+        String excluded = Settings.System.getString(getContentResolver(),
+        Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS);
+        if (TextUtils.isEmpty(excluded)) return null;
+
+        return new HashSet<String>(Arrays.asList(excluded.split("\\|")));
+    }
+
+    private void storeExcludedNotifApps(Set<String> values) {
+        StringBuilder builder = new StringBuilder();
+        String delimiter = "";
+        for (String value : values) {
+			builder.append(delimiter);
+			builder.append(value);
+			delimiter = "|";
+        }
+        Settings.System.putString(getContentResolver(),
+			Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS, builder.toString());
     }
 }

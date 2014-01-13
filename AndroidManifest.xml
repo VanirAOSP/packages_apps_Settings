@@ -1851,7 +1851,7 @@
         <activity android:name=".vanir.Halo" />
 
         <activity
-            android:name=".LockscreenNotifications"
+            android:name=".ActiveNotifications"
             android:label="@string/Lockscreen_notifications_header" >
         </activity>
 

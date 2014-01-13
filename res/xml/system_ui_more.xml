@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 VanirAOSP && the Android Open Source Project
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/vanir_settings_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+ <PreferenceCategory
+        android:title="@string/misc_short"/>
+
+    <Preference
+        android:key="custom_carrier_label"
+        android:title="@string/custom_carrier_label_title" />
+
+    <CheckBoxPreference
+        android:key="wake_when_plugged_or_unplugged"
+        android:title="@string/wake_when_plugged_or_unplugged_title"
+        android:summary="@string/wake_when_plugged_or_unplugged_summary"
+        android:defaultValue="false" />
+
+    <PreferenceScreen
+        android:key="lcd_density_setup"
+        android:title="@string/lcd_density_title"
+        android:summary="@string/lcd_density_summary" />
+
+    <CheckBoxPreference
+        android:key="vanir_interface_recents_mem_display"
+        android:title="@string/pref_recents_title"
+        android:summary="@string/pref_recents_summary" />
+
+    <ListPreference
+        android:key="system_power_crt_mode"
+        android:dialogTitle="@string/system_power_crt_mode_dialog_title"
+        android:title="@string/system_power_crt_mode_title"
+        android:entries="@array/entries_system_power_crt_mode"
+        android:entryValues="@array/values_system_power_crt_mode" />
+</PreferenceScreen>
