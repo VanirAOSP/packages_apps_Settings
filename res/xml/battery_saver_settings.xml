@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  Copyright (C) 2013 The OmniROM Project
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="interface_battery_saver_key"
+        android:title="@string/battery_saver_title"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <SwitchPreference
+        android:key="pref_battery_saver_enable"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_enable_title"
+        android:summary="@string/pref_battery_saver_enable_summary"  />
+
+    <com.android.settings.cyanogenmod.TimeRangePreference
+        android:key="pref_battery_saver_timerange"
+        android:dependency="pref_battery_saver_enable" />
+
+    <CheckBoxPreference
+        android:key="pref_battery_saver_mode_data"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_data_title"
+        android:summary="@string/pref_battery_saver_data_summary"
+        android:dependency="pref_battery_saver_enable"/>
+
+    <CheckBoxPreference
+        android:key="pref_battery_saver_mode_wifi"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_wifi_title"
+        android:summary="@string/pref_battery_saver_wifi_summary"
+        android:dependency="pref_battery_saver_enable"/>
+
+    <com.android.settings.vanir.SeekBarPreference
+        android:key="pref_battery_saver_mode_change_delay"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_mode_change_delay_title"
+        android:summary="@string/pref_battery_saver_mode_change_delay_summary"
+        android:max="60"
+        settings:minimum="0"
+        settings:interval="1"
+        settings:unitsLeft=""
+        settings:unitsRight=" s"
+        android:defaultValue="5"
+        android:dependency="pref_battery_saver_enable" />
+
+    <ListPreference
+        android:key="pref_battery_saver_normal_gsm_mode"
+        android:dependency="pref_battery_saver_enable"
+        android:title="@string/pref_battery_saver_normal_mode_title"
+        android:entries="@array/enabled_networks_gsm_choices"
+        android:entryValues="@array/enabled_networks_gsm_values"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="pref_battery_saver_power_saving_gsm_mode"
+        android:dependency="pref_battery_saver_enable"
+        android:title="@string/pref_battery_saver_power_saving_mode_title"
+        android:entries="@array/enabled_networks_gsm_choices"
+        android:entryValues="@array/enabled_networks_gsm_values"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="pref_battery_saver_normal_cdma_mode"
+        android:dependency="pref_battery_saver_enable"
+        android:title="@string/pref_battery_saver_normal_mode_title"
+        android:entries="@array/enabled_networks_cdma_choices"
+        android:entryValues="@array/enabled_networks_cdma_values"
+        android:persistent="false" />
+
+    <ListPreference
+        android:key="pref_battery_saver_power_saving_cdma_mode"
+        android:dependency="pref_battery_saver_enable"
+        android:title="@string/pref_battery_saver_power_saving_mode_title"
+        android:entries="@array/enabled_networks_cdma_choices"
+        android:entryValues="@array/enabled_networks_cdma_values"
+        android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="pref_battery_saver_screen_off"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_screen_off_title"
+        android:summary="@string/pref_battery_saver_screen_off_summary"
+        android:dependency="pref_battery_saver_enable"/>
+
+    <CheckBoxPreference
+        android:key="pref_battery_saver_ignore_locked"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_ignore_locked_title"
+        android:summary="@string/pref_battery_saver_ignore_locked_summary"
+        android:dependency="pref_battery_saver_enable"/>
+
+    <CheckBoxPreference
+        android:key="pref_battery_saver_mode_battery"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_battery_title"
+        android:summary="@string/pref_battery_saver_battery_summary"
+        android:dependency="pref_battery_saver_enable"/>
+
+    <com.android.settings.vanir.SeekBarPreference
+        android:key="pref_battery_saver_mode_battery_level"
+        android:persistent="false"
+        android:title="@string/pref_battery_saver_mode_battery_level_title"
+        android:summary="@string/pref_battery_saver_mode_battery_level_summary"
+        android:max="100"
+        settings:minimum="0"
+        settings:interval="5"
+        settings:unitsLeft=""
+        settings:unitsRight=" %"
+        android:defaultValue="20"
+        android:dependency="pref_battery_saver_mode_battery" />
+
+</PreferenceScreen>

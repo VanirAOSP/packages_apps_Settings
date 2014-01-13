@@ -41,6 +41,8 @@ import com.android.settings.vanir.fragments.DensityChanger;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+import com.android.settings.vanir.BatterySaverHelper;
+
 public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "AdditionalSystemUI";
@@ -52,7 +54,9 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String RECENTS_CLEAR_ALL = "recents_clear_all";
+    private static final String BATTERY_SAVER = "interface_battery_saver";
 
+    private PreferenceScreen mBatterySaver;
     private Preference mCustomLabel;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
     private ListPreference mCrtMode;
@@ -72,7 +76,13 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.system_ui_more);
+        Context context = getActivity();
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mBatterySaver = (PreferenceScreen) prefSet.findPreference(BATTERY_SAVER);
+        if (!BatterySaverHelper.deviceSupportsMobileData(context)) {
+            prefSet.removePreference(mBatterySaver);
+        }
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
 

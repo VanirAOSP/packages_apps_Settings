@@ -608,4 +608,36 @@
     <string name="recents_clear_all_br">bottom right</string>
     <string name="recents_clear_all_bl">bottom left</string>
 
+    <!-- Toggle switch title for enabling battery saver connections. [CHAR LIMIT=32] -->
+    <string name="data_usage_enable_batterysaver">Battery saver</string>
+
+    <!-- Battery saver mode -->
+    <string name="network_3G_only">3G Only</string>
+    <string name="network_3G_auto">2G/3G Auto</string>
+    <string name="network_3G">2G/3G Preferred</string>
+    <string name="network_2G">2G Only</string>
+    <string name="network_1x">1x</string>
+    <string name="network_global">Global</string>
+    <string name="battery_saver_action_undefined">Undefined</string>
+    <string name="battery_saver_title">Battery saver mode</string>
+    <string name="pref_battery_saver_enable_title">Battery saver</string>
+    <string name="pref_battery_saver_enable_summary">This will automatically switch your network to user-defined power saving mode or normal mode depending on mobile data and WiFi connection states</string>
+    <string name="pref_battery_saver_normal_mode_title">Normal network mode</string>
+    <string name="pref_battery_saver_power_saving_mode_title">Power saving network mode</string>
+    <string name="pref_battery_saver_screen_off_title">When screen turns off</string>
+    <string name="pref_battery_saver_screen_off_summary">Activate power saving mode when screen turns off</string>
+    <string name="pref_battery_saver_ignore_locked_title">Ignore while locked</string>
+    <string name="pref_battery_saver_ignore_locked_summary">When screen turns on, power saving mode won\'t be deactivated until keyguard is unlocked</string>
+    <string name="pref_battery_saver_mode_change_delay_title">Change mode delay</string>
+    <string name="pref_battery_saver_mode_change_delay_summary">Delays changing of power saving mode by specified number of seconds</string>
+    <string name="pref_battery_saver_battery_title">When battery low</string>
+    <string name="pref_battery_saver_battery_summary">Activate power saving mode when battery low</string>
+    <string name="pref_battery_saver_mode_battery_level_title">Battery level</string>
+    <string name="pref_battery_saver_mode_battery_level_summary">Changing power saving mode at the specified battery level</string>
+    <string name="pref_battery_saver_data_title">Disable mobile data</string>
+    <string name="pref_battery_saver_data_summary">Disable mobile data connection when power saving activated</string>
+    <string name="pref_battery_saver_enable_no_mobiledata_summary">This will automatically manage your device battery usage to user-defined</string>
+    <string name="pref_battery_saver_wifi_title">Disable WiFi</string>
+    <string name="pref_battery_saver_wifi_summary">Disable wifi connection when power saving activated</string>
+
 </resources>
