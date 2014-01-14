@@ -42,9 +42,15 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String STATUS_BAR_CLOCK = "status_bar_show_clock";
     private static final String PREF_CLOCK_PICKER = "clock_color";
     private static final String PREF_EXPANDED_CLOCK_PICKER = "expanded_clock_color";
+    private static final String STATUS_BAR_BATTERY_SHOW_PERCENT = "status_bar_battery_show_percent";
+
+    private static final String STATUS_BAR_STYLE_HIDDEN = "4";
+    private static final String STATUS_BAR_STYLE_TEXT = "6";
 
     private ListPreference mStatusBarAmPm;
     private ListPreference mStatusBarClock;
+    private SystemSettingCheckBoxPreference mStatusBarBatteryShowPercent;
+
     private ListPreference mStatusBarBattery;
     private ColorPickerPreference mClockPicker;
     private ColorPickerPreference mExpandedClockPicker;
@@ -59,7 +65,9 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         PreferenceScreen prefSet = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
 
-        mStatusBarBattery = (ListPreference) prefSet.findPreference(STATUS_BAR_BATTERY);
+        mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY);
+        mStatusBarBatteryShowPercent =
+                (SystemSettingCheckBoxPreference) findPreference(STATUS_BAR_BATTERY_SHOW_PERCENT);
         mStatusBarCmSignal = (ListPreference) prefSet.findPreference(STATUS_BAR_SIGNAL);
 
         int batteryStyle = Settings.System.getInt(resolver, Settings.System.STATUS_BAR_BATTERY, 0);
@@ -121,6 +129,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         if (Utils.isWifiOnly(getActivity())) {
             prefSet.removePreference(mStatusBarCmSignal);
         }
+
+        enableStatusBarBatteryDependents(mStatusBarBattery.getValue());
     }
 
     @Override
@@ -131,6 +141,8 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             int index = mStatusBarBattery.findIndexOfValue((String) newValue);
             Settings.System.putInt(resolver, Settings.System.STATUS_BAR_BATTERY, batteryStyle);
             mStatusBarBattery.setSummary(mStatusBarBattery.getEntries()[index]);
+
+            enableStatusBarBatteryDependents((String)newValue);
             return true;
         } else if (preference == mStatusBarAmPm) {
             int statusBarAmPm = Integer.valueOf((String) newValue);
@@ -170,5 +182,11 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             // Log.e("VANIR", "Expanded: "+intHex + "");
         }
         return false;
+    }
+
+    private void enableStatusBarBatteryDependents(String value) {
+        boolean enabled = !(value.equals(STATUS_BAR_STYLE_TEXT)
+                || value.equals(STATUS_BAR_STYLE_HIDDEN));
+        mStatusBarBatteryShowPercent.setEnabled(enabled);
     }
 }
