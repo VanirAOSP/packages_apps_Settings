@@ -34,7 +34,7 @@
 
 	<PreferenceScreen
             android:title="@string/lockscreen_notifications"
-            android:fragment="com.android.settings.LockscreenNotifications" />
+            android:fragment="com.android.settings.ActiveNotifications" />
 
     </PreferenceCategory>
 
