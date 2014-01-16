@@ -121,7 +121,7 @@ public class ActiveNotificationSettings extends SettingsPreferenceFragment imple
 
         mNotifAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_NOTIF_APPS);
         Set<String> excludedNotifApps = getExcludedNotifApps();
-        if (excludedApps != null) mExcludedAppsPref.setValues(excludedNotifApps);
+        if (excludedNotifApps != null) mNotifAppsPref.setValues(excludedNotifApps);
         mNotifAppsPref.setOnPreferenceChangeListener(this);
 
         mOffsetTop = (SeekBarPreference) findPreference(KEY_OFFSET_TOP);
@@ -275,22 +275,22 @@ public class ActiveNotificationSettings extends SettingsPreferenceFragment imple
     }
 
     private Set<String> getExcludedNotifApps() {
-        String excluded = Settings.System.getString(getContentResolver(),
+        String excludedNotif = Settings.System.getString(getContentResolver(),
         Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS);
-        if (TextUtils.isEmpty(excluded)) return null;
+        if (TextUtils.isEmpty(excludedNotif)) return null;
 
-        return new HashSet<String>(Arrays.asList(excluded.split("\\|")));
+        return new HashSet<String>(Arrays.asList(excludedNotif.split("\\|")));
     }
 
     private void storeExcludedNotifApps(Set<String> values) {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder Notifbuilder = new StringBuilder();
         String delimiter = "";
         for (String value : values) {
-			builder.append(delimiter);
-			builder.append(value);
+			Notifbuilder.append(delimiter);
+			Notifbuilder.append(value);
 			delimiter = "|";
         }
         Settings.System.putString(getContentResolver(),
-			Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS, builder.toString());
+			Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS, Notifbuilder.toString());
     }
 }
