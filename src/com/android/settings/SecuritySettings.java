@@ -130,7 +130,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private boolean mIsPrimary;
 
     private CheckBoxPreference mLockNotifications;
-    private CheckBoxPreference vibratePref;
     private CheckBoxPreference mQuickUnlockScreen;
     private ListPreference mSmsSecurityCheck;
     private ListPreference mSlideLockTimeoutDelay;
@@ -267,8 +266,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     findPreference(Settings.System.HOME_UNLOCK_SCREEN);
             CheckBoxPreference cameraUnlock = (CheckBoxPreference)
                     findPreference(Settings.System.CAMERA_UNLOCK_SCREEN);
-            CheckBoxPreference vibratePref = (CheckBoxPreference)
-                    findPreference(Settings.System.LOCKSCREEN_VIBRATE_ENABLED);
 
             final int deviceKeys = res.getInteger(
                     com.android.internal.R.integer.config_deviceHardwareKeys);
@@ -278,13 +275,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
             // hide all lock options if lock screen set to NONE
             if (mLockPatternUtils.isLockScreenDisabled()) {
                 root.removePreference(additionalPrefs);
-            // hide the quick unlock and vibrate if using Pattern
+            // hide the quick unlock if using Pattern
             } else if (mLockPatternUtils.isLockPatternEnabled()) {
-                additionalPrefs.removePreference(vibratePref);
-            // hide vibrate on unlock options if using PIN/password
-            // as primary lock screen or as backup to biometric
-            } else if (mLockPatternUtils.isLockPasswordEnabled()) {
-                additionalPrefs.removePreference(vibratePref);
             // hide the quick unlock if its not using PIN/password
             // as a primary lock screen or as a backup to biometric
             }
@@ -737,10 +729,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (KEY_VISIBLE_DOTS.equals(key)) {
             lockPatternUtils.setVisibleDotsEnabled(isToggled(preference));
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
-            lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
-        } else if (preference == vibratePref) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_VIBRATE_ENABLED, isToggled(preference) ? 1 : 0);
+            lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));        
         } else if (preference == mQuickUnlockScreen) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, isToggled(preference) ? 1 : 0);
