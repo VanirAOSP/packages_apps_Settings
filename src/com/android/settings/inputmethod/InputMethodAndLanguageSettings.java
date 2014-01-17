@@ -177,11 +177,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mIm = (InputManager)getActivity().getSystemService(Context.INPUT_SERVICE);
         updateInputDevices();
 
-        // Enable or disable mStatusBarImeSwitcher based on boolean value: config_show_IMEswitcher
-        if (!getResources().getBoolean(com.android.internal.R.bool.config_show_cmIMESwitcher)) {
-            getPreferenceScreen().removePreference(findPreference(Settings.System.STATUS_BAR_IME_SWITCHER));
-        }
-
         PreferenceCategory pointerSettingsCategory = (PreferenceCategory)
                         findPreference(KEY_POINTER_SETTINGS_CATEGORY);
         mStylusGestures = (PreferenceScreen) findPreference(KEY_STYLUS_GESTURES);
@@ -198,6 +193,14 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             if (pointerSettingsCategory.getPreferenceCount() == 0) {
                 getPreferenceScreen().removePreference(pointerSettingsCategory);
             }
+        }
+
+        // Enable or disable mStatusBarImeSwitcher based on boolean: config_show_cmIMESwitcher
+        boolean showCmImeSwitcher = getResources().getBoolean(
+                com.android.internal.R.bool.config_show_cmIMESwitcher);
+        if (!showCmImeSwitcher) {
+            getPreferenceScreen().removePreference(
+                    findPreference(Settings.System.STATUS_BAR_IME_SWITCHER));
         }
 
         // Spell Checker

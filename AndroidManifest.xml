@@ -1772,6 +1772,8 @@
 
         <activity android:name=".cyanogenmod.LockscreenTargets" />
 
+        <activity android:name=".cyanogenmod.LockscreenButtons" />
+
         <activity android:name=".ApnEditor" />
 
         <activity android:name=".cyanogenmod.LockscreenInterface" />
@@ -1800,6 +1802,8 @@
         </activity>
 
         <activity android:name=".cyanogenmod.PowerMenu" />
+
+        <activity android:name=".cyanogenmod.PrivacySettings" />
 
         <!-- CyanogenMod activities End -->
 

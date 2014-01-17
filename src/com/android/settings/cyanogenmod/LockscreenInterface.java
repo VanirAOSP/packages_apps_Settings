@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2012-2014 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,14 @@ package com.android.settings.cyanogenmod;
 
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
@@ -40,7 +42,10 @@ import com.android.settings.Utils;
 public class LockscreenInterface extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
     private static final String TAG = "LockscreenInterface";
 
+    private static final String LOCKSCREEN_GENERAL_CATEGORY = "lockscreen_general_category";
     private static final String LOCKSCREEN_WIDGETS_CATEGORY = "lockscreen_widgets_category";
+    private static final String KEY_BATTERY_STATUS = "lockscreen_battery_status";
+    private static final String KEY_LOCKSCREEN_BUTTONS = "lockscreen_buttons";
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
     private static final String KEY_ALLOW_ROTATION = "allow_rotation";
@@ -49,6 +54,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private static final String KEY_BLUR_RADIUS = "blur_radius";
     private static final String KEY_ENABLE_CAMERA = "keyguard_enable_camera";
 
+    private ListPreference mBatteryStatus;
     private CheckBoxPreference mEnableKeyguardWidgets;
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMusicControls;
@@ -71,12 +77,24 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         // Find categories
+        PreferenceCategory generalCategory = (PreferenceCategory)
+                findPreference(LOCKSCREEN_GENERAL_CATEGORY);
         PreferenceCategory widgetsCategory = (PreferenceCategory)
                 findPreference(LOCKSCREEN_WIDGETS_CATEGORY);
 
         // Find preferences
         mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
         mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
+
+        mBatteryStatus = (ListPreference) findPreference(KEY_BATTERY_STATUS);
+        if (mBatteryStatus != null) {
+            mBatteryStatus.setOnPreferenceChangeListener(this);
+        }
+
+        // Remove lockscreen button actions if device doesn't have hardware keys
+        if (!hasButtons()) {
+            generalCategory.removePreference(findPreference(KEY_LOCKSCREEN_BUTTONS));
+        }
 
         // Remove/disable custom widgets based on device RAM and policy
         if (ActivityManager.isLowRamDeviceStatic()) {
@@ -139,6 +157,15 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         if (mEnableCameraWidget != null) {
             mEnableCameraWidget.setChecked(mLockUtils.getCameraEnabled());
         }
+
+        // Update battery status
+        if (mBatteryStatus != null) {
+            ContentResolver cr = getActivity().getContentResolver();
+            int batteryStatus = Settings.System.getInt(cr,
+                    Settings.System.LOCKSCREEN_BATTERY_VISIBILITY, 0);
+            mBatteryStatus.setValueIndex(batteryStatus);
+            mBatteryStatus.setSummary(mBatteryStatus.getEntries()[batteryStatus]);
+        }
     }
 
     @Override
@@ -167,19 +194,26 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         if (preference == mBlurRadius) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_BLUR_RADIUS, (Integer)value);
-
+            return true;
          } else if (preference == mMusicControls) {
             boolean cube = (Boolean) value;
             Settings.System.putInt(getContentResolver(),
                     Settings.System.LOCKSCREEN_MUSIC_CONTROLS, cube ? 1 : 0);
             return true;
+         } else if (preference == mBatteryStatus) {
+            int intValue = Integer.valueOf((String) value);
+            int index = mBatteryStatus.findIndexOfValue((String) value);
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BATTERY_VISIBILITY, intValue);
+            mBatteryStatus.setSummary(mBatteryStatus.getEntries()[index]);
+            return true;
         }
 
-         return true;
+         return false;
     }
 
     public void updateBlurPrefs() {
@@ -196,6 +230,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                 Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 0);
             }
         }
+    }
+
+    /**
+     * Checks if the device has hardware buttons.
+     * @return has Buttons
+     */
+    public boolean hasButtons() {
+        return !getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
     }
 
     /**
