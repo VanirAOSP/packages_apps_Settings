@@ -18,7 +18,8 @@
         android:title="@string/about_settings">
 
     <PreferenceScreen android:key="logo1"
-        android:layout="@layout/logo_row" />
+        android:layout="@layout/logo_row"
+        android:selectable="false" />
 
         <!-- Updater -->
         <PreferenceScreen android:key="vanir_updates"
