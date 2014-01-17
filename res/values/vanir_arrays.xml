@@ -554,4 +554,9 @@
         <item>@string/telo_radio_2g_20min</item>
     </string-array>
 
+    <string-array name="slimsizer_profile_array">
+        <item >Load Profile</item>
+        <item >Save Profile</item>
+    </string-array>
+
 </resources>

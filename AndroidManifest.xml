@@ -184,6 +184,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.android.settings.vanir.SystemappRemover"
+            android:label="@string/sizer_title"
+            android:parentActivityName="Settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myfirstapp.MainActivity" />
+        </activity>
+
         <activity android:name=".SubSettings"
                 android:taskAffinity="com.android.settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
