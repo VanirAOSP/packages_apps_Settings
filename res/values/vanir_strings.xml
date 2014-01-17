@@ -607,4 +607,7 @@
     <string name="force_dualpanel_title">Dual panel mode</string>
     <string name="force_dualpanel_summary">Use tablet-style dual panel settings if available</string> 
 
+    <!-- allow multiuser -->
+    <string name="multiuser_preference_title">Multiuser support</string>
+
 </resources>
