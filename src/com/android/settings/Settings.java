@@ -172,7 +172,12 @@ public class Settings extends PreferenceActivity
             R.id.accessibility_settings,
             R.id.print_settings,
             R.id.nfc_payment_settings,
-            R.id.home_settings
+            R.id.home_settings,
+            R.id.vanir_voodoo,
+            R.id.lock_screen_settings,
+            R.id.system_settings,
+            R.id.privacy_settings_cyanogenmod,
+            R.id.button_settings
     };
 
     private SharedPreferences mDevelopmentPreferences;
@@ -368,7 +373,8 @@ public class Settings extends PreferenceActivity
         ButtonSettings.class.getName(),
         MoreDeviceSettings.class.getName(),
         ProfilesSettings.class.getName(),
-        PolicyNativeFragment.class.getName()
+        PolicyNativeFragment.class.getName(),
+        com.android.settings.cyanogenmod.PrivacySettings.class.getName()
     };
 
     @Override
