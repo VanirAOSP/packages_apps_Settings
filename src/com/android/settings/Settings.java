@@ -176,7 +176,6 @@ public class Settings extends PreferenceActivity
             R.id.vanir_voodoo,
             R.id.lock_screen_settings,
             R.id.system_settings,
-            R.id.privacy_settings_cyanogenmod,
             R.id.button_settings
     };
 
@@ -374,7 +373,6 @@ public class Settings extends PreferenceActivity
         MoreDeviceSettings.class.getName(),
         ProfilesSettings.class.getName(),
         PolicyNativeFragment.class.getName(),
-        com.android.settings.cyanogenmod.PrivacySettings.class.getName()
     };
 
     @Override
