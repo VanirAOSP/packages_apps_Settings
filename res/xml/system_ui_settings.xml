@@ -85,7 +85,7 @@
     <PreferenceScreen
         android:id="@+id/system_ui_more"
         android:fragment="com.android.settings.vanir.AdditionalSystemUI"
-        android:title="@string/wifi_more" />
+        android:title="@string/more_device_controls_title" />
 
     <PreferenceCategory
        android:title="@string/psx_category_immersive_mode" >
