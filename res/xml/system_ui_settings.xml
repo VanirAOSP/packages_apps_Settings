@@ -73,7 +73,7 @@
         android:title="@string/notification_drawer_title" />
 
     </PreferenceCategory>
-    <!-- Device Specific Touchscreen gestures -->
+    <!-- Device Specific Touchscreen gestures. Avoid duplicating CMHW functionality, please -->
     <Preference
         android:key="touch_screen_gesture_settings">
         <intent
