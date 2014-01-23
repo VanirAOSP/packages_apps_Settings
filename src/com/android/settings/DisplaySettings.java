@@ -72,8 +72,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_ANIMATIONS = "animations";
-    private static final String KEY_SCREEN_ANIMATION_OFF = "screen_off_animation";
-    private static final String KEY_SCREEN_ANIMATION_STYLE = "screen_animation_style";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
     private final Configuration mCurConfig = new Configuration();
