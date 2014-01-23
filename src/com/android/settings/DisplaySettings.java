@@ -195,6 +195,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mStockMode) {
             getPreferenceScreen().removePreference(mStatusbarSliderPreference);
             getPreferenceScreen().removePreference(mAnimations);
+            if (mTapToWake != null)
+                getPreferenceScreen().removePreference(mTapToWake);
             if (mAdvanced != null)
                 getPreferenceScreen().removePreference(mAdvanced);
         }

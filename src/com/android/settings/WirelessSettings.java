@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -83,6 +84,9 @@ public class WirelessSettings extends RestrictedSettingsFragment
 
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
+
+    private SharedPreferences mDevelopmentPreferences;
+    private boolean mStockMode;
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
@@ -261,6 +265,10 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
         log("onCreate: mManageMobilePlanMessage=" + mManageMobilePlanMessage);
 
+        mDevelopmentPreferences = getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
+                Context.MODE_PRIVATE);
+        updateStockMode();
+
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         mTm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
@@ -332,7 +340,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
 
         // Remove Connection Manager on CDMA devices
-        if (mTm.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
+        if (mTm.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA || mStockMode) {
             removePreference(KEY_CONNECTION_MANAGER);
         }
 
@@ -476,5 +484,9 @@ public class WirelessSettings extends RestrictedSettingsFragment
             return true;
         }
         return false;
+    }
+
+    private void updateStockMode() {
+        mStockMode = mDevelopmentPreferences.getInt(DevelopmentSettings.STOCK_MODE, 0) == 1;
     }
 }

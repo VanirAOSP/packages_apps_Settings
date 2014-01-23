@@ -662,6 +662,7 @@ public class Settings extends PreferenceActivity
             } else if (id == R.id.vanir_voodoo ||
                     id == R.id.system_settings ||
                     id == R.id.themes_settings ||
+                    id == R.id.more_device_settings ||
                     id == R.id.profiles_settings) {
                 if (mStockMode) {
                     target.remove(i);
