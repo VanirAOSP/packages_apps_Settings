@@ -43,7 +43,12 @@ public class QuietHours extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.quiet_hours_settings);
+        try {
+            addPreferencesFromResource(R.xml.quiet_hours_settings);
+        } catch (java.lang.ClassCastException cce) {
+            this.getPreferenceManager().getSharedPreferences().edit().remove("quiet_hours_ringer").apply();
+            addPreferencesFromResource(R.xml.quiet_hours_settings);
+        }
         Resources res = getResources();
         ContentResolver resolver = getContentResolver();
 
