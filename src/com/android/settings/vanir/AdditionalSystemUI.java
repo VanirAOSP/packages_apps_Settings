@@ -49,11 +49,13 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
+    private static final String KEY_DUAL_PANEL = "force_dualpanel";
 
     private Preference mCustomLabel;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
     private ListPreference mCrtMode;
     private CheckBoxPreference mMembar;
+    private CheckBoxPreference mDualPanel;
 
     Preference mLcdDensity;
     int newDensityValue;
@@ -101,6 +103,10 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
                 Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1);
         }
 
+        mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
+        mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(),
+                Settings.System.FORCE_DUAL_PANEL, false));
+
         mLcdDensity = findPreference("lcd_density_setup");
         String currentProperty = SystemProperties.get("ro.sf.lcd_density");
         try {
@@ -139,6 +145,10 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
+        } else if (preference == mDualPanel) {
+			Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL,
+                    mDualPanel.isChecked() ? true : false);
+			return true;
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
