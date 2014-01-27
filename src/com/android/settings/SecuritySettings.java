@@ -309,6 +309,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (securityCategory != null && mVisibleGesture != null) {
                 securityCategory.removePreference(root.findPreference(KEY_VISIBLE_GESTURE));
             }
+            }
         }
 
         // Append the rest of the settings
