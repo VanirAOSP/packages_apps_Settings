@@ -54,12 +54,6 @@
             android:title="@string/lockscreen_quick_unlock_control_title"
             android:summary="@string/lockscreen_quick_unlock_control_summary" />
 
-        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-            android:key="lockscreen.vibrate_enabled"
-            android:title="@string/lockscreen_vibrate_enabled_title"
-            android:summary="@string/lockscreen_vibrate_enabled_head"
-            android:defaultValue="true" />
-
     </PreferenceCategory>
 
 </PreferenceScreen>
