@@ -469,10 +469,10 @@
     <string name="lockscreen_quick_unlock_control_summary">Unlock automatically when the correct PIN/password is entered</string>
 
     <!-- Notification drawer background -->		
-	<string name="notification_title">Notification drawer</string>		
-	<string name="notification_summary">Notification drawer tweaks</string>		
-	<string name="notification_wallpaper_title">Background</string>		
-	<string name="notification_wallpaper_landscape_title">Different landscape background</string>		
+	<string name="notification_title">Backgrounds</string>		
+	<string name="notification_summary">Customize the panel backgrounds</string>		
+	<string name="notification_wallpaper_title">Portrait background</string>		
+	<string name="notification_wallpaper_landscape_title">Landscape background</string>		
 	<string name="notification_background_color_fill">Color fill</string>		
 	<string name="notification_background_custom_image">Custom image</string>		
 	<string name="notification_background_default_wallpaper">Default background</string>		
