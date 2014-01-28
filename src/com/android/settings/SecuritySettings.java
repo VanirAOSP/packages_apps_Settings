@@ -404,6 +404,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
                         root.findPreference(KEY_APP_SECURITY_CATEGORY);
                 appCategory.removePreference(mBlacklist);
                 appCategory.removePreference(mSmsSecurityCheck);
+                root.removePreference(appCategory);
             }
 
             // WhisperPush
