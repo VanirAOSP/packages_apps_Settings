@@ -584,9 +584,10 @@
     <string name="telo_radio_go_3g_unlock_summary">When device is unlocked network mode switches to 3G again.</string>
 
     <!-- SlimSizer  -->
-    <string name="system_app_remover">Systemapp Remover</string>
+    <string name="system_app_remover_title">System app remover</string>
+    <string name="system_app_remover_summary">Choose from a list to permanently remove system apps</string>
     <string name="listsystem">list</string>
-    <string name="sizer_title">Systemapp Remover</string>
+    <string name="sizer_title">System App Remover</string>
     <string name="caution">Caution!</string>
     <string name="sizer_message_startup">This tool allows you to delete system apps. Use with caution and only delete apps you know are safe to be removed.</string>
     <string name="cancel">Cancel</string>

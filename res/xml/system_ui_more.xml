@@ -58,6 +58,7 @@
     <PreferenceScreen
         android:id="@+id/system_app_remover"
         android:fragment="com.android.settings.vanir.SystemappRemover"
-        android:title="@string/system_app_remover" />
+        android:title="@string/system_app_remover_title"
+        android:summary="@string/system_app_remover_summary" />
 
 </PreferenceScreen>
