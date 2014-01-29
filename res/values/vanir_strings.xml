@@ -619,4 +619,8 @@
     <!-- allow multiuser -->
     <string name="multiuser_preference_title">Multiuser support</string>
 
+    <!-- system logging -->
+    <string name="system_logging_title">Disable system logging</string>
+    <string name="system_logging_summary">Turn off logcat and dmesg buffers after boot to reduce kernel overhead</string>
+
 </resources>

@@ -18,6 +18,7 @@ package com.android.settings.vanir;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -56,6 +57,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private ListPreference mCrtMode;
     private CheckBoxPreference mMembar;
     private CheckBoxPreference mDualPanel;
+    private CheckBoxPreference mSystemLogging;
 
     Preference mLcdDensity;
     int newDensityValue;

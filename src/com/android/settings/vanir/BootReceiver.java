@@ -17,6 +17,7 @@
 package com.android.settings.vanir;
 
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 
@@ -27,11 +28,22 @@ import com.android.settings.hardware.DisplayColor;
 import com.android.settings.hardware.DisplayGamma;
 import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.DevelopmentSettings;
+
+import java.io.File;
 
 public class BootReceiver extends BroadcastReceiver {
 
+    private static final String LOG_PATH = "/sys/module/logger/parameters/log_enabled";
+
     @Override
     public void onReceive(Context ctx, Intent intent) {
+
+        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+            if (exists(LOG_PATH)) {
+                DevelopmentSettings.updateLogging(ctx);
+            }
+        }
 
         /* Restore hardware tunable values */
         DisplayColor.restore(ctx);
@@ -39,5 +51,14 @@ public class BootReceiver extends BroadcastReceiver {
         VibratorIntensity.restore(ctx);
         DisplaySettings.restore(ctx);
         LocationSettings.restore(ctx);
+    }
+
+    private static boolean exists(String string) {
+        File f = new File(string);
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

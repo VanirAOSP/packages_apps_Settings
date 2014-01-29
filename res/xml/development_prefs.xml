@@ -107,6 +107,13 @@
             android:dependency="enable_adb"/>
 
         <CheckBoxPreference
+            android:key="disable_logging_set_on_boot"
+            android:title="@string/system_logging_title"
+            android:summary="@string/system_logging_summary"
+            android:dependency="enable_adb"
+            android:persistent="true" />
+
+        <CheckBoxPreference
             android:key="development_shortcut"
             android:title="@string/development_shortcut_title"
             android:summary="@string/development_shortcut_summary"
