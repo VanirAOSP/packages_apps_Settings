@@ -36,6 +36,10 @@
             android:title="@string/unlock_camera_unlock_title"
             android:summary="@string/unlock_camera_unlock_summary" />
 
+        <CheckBoxPreference
+            android:key="allow_multiuser"
+            android:title="@string/multiuser_preference_title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

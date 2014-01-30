@@ -287,6 +287,7 @@ public class Settings extends PreferenceActivity
         mDevelopmentPreferences.registerOnSharedPreferenceChangeListener(
                 mDevelopmentPreferencesListener);
 
+
         ListAdapter listAdapter = getListAdapter();
         if (listAdapter instanceof HeaderAdapter) {
             ((HeaderAdapter) listAdapter).resume();
@@ -401,7 +402,7 @@ public class Settings extends PreferenceActivity
         super.switchToHeader(header);
     }
 
-    private void updateStockMode() {
+    private void updateUserPreferences() {
         mStockMode = mDevelopmentPreferences.getInt(DevelopmentSettings.STOCK_MODE, 0) == 1;
     }
 
@@ -574,7 +575,7 @@ public class Settings extends PreferenceActivity
 
     private void updateHeaderList(List<Header> target) {
         final boolean showDev = UserHandle.myUserId() == UserHandle.USER_OWNER;
-        updateStockMode();
+        updateUserPreferences();
         int i = 0;
 
         final UserManager um = (UserManager) getSystemService(Context.USER_SERVICE);
