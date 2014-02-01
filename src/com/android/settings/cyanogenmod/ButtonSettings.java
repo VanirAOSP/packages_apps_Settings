@@ -340,29 +340,33 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        boolean checked = false;
+        if (preference instanceof CheckBoxPreference) {
+            checked = ((CheckBoxPreference)preference).isChecked();
+        }
         if (preference == mSwapVolumeButtons) {
-            int value = mSwapVolumeButtons.isChecked()
-                    ? (Utils.isTablet(getActivity()) ? 2 : 1) : 0;
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION, value);
+                    Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION,
+                    checked ? (Utils.isTablet(getActivity()) ? 2 : 1) : 0);
             return true;
         } else if (preference == mHeadsetHookLaunchVoice) {
-            boolean checked = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
+                    Settings.System.HEADSETHOOK_LAUNCH_VOICE,
+                    checked ? 1 : 0);
             updateHeadsetButtonSummary();
             return true;
         } else if (preference == mCameraWake) {
-            // Disable camera music controls if camera wake is enabled
-            boolean isCameraWakeEnabled = mCameraWake.isChecked();
-            mCameraMusicControls.setEnabled(!isCameraWakeEnabled);
-            mCameraSleepOnRelease.setEnabled(isCameraWakeEnabled);
+            mCameraMusicControls.setEnabled(!checked);
+            mCameraSleepOnRelease.setEnabled(checked);
             return true;
         } else if (preference == mQuickCam) {
-            boolean checked = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.POWER_MENU_QUICKCAM, checked ? 1 : 0 );
-            updateRebootDialog();
+                    Settings.System.POWER_MENU_QUICKCAM,
+                    checked ? 1 : 0 );
+            // update reboot dialog
+            Intent u = new Intent();
+            u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+            mContext.sendBroadcastAsUser(u, UserHandle.ALL);
             return true;
         }
 
@@ -381,11 +385,5 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } catch (NameNotFoundException e) {
             return false;
         }
-    }
-
-    private void updateRebootDialog() {
-        Intent u = new Intent();
-        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
-        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 }
