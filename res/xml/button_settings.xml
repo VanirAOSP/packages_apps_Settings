@@ -205,7 +205,7 @@
         <CheckBoxPreference
             android:key="button_headsethook_launch_voice"
             android:title="@string/button_headsethook_launch_voice_title"
-            android:summary="@string/button_headsethook_launch_voice_summary"
+            android:summary="@string/button_headsethook_launch_voice_checked_summary"
             android:persistent="false" />
 
     </PreferenceCategory>

@@ -257,6 +257,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
         mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HEADSETHOOK_LAUNCH_VOICE, 1) == 1);
+        updateHeadsetButtonSummary();
 
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
                 getPreferenceScreen(), KEY_BLUETOOTH_INPUT_SETTINGS);
@@ -348,6 +349,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             boolean checked = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.HEADSETHOOK_LAUNCH_VOICE, checked ? 1:0);
+            updateHeadsetButtonSummary();
             return true;
         } else if (preference == mCameraWake) {
             // Disable camera music controls if camera wake is enabled
@@ -364,6 +366,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    private void updateHeadsetButtonSummary() {
+        mHeadsetHookLaunchVoice.setSummary(mHeadsetHookLaunchVoice.isChecked() ?
+                R.string.button_headsethook_launch_voice_checked_summary :
+                R.string.button_headsethook_launch_voice_unchecked_summary);
     }
 
     private static boolean isPackageInstalled(Context context, String packageName) {
