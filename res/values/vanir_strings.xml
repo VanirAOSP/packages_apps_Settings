@@ -319,6 +319,11 @@
     <string name="system_power_crt_mode_both">Collapse orientation dependent</string>
     <string name="system_power_crt_mode_scale">Scale down</string>
 
+    <!-- headset button hook -->
+    <string name="button_headsethook_title">Headset</string>
+    <string name="button_headsethook_launch_voice_title">Headset launches voice</string>
+    <string name="button_headsethook_launch_voice_summary">Pressing the headset button will launch voice controls</string>
+
     <!-- lockscreen music controls -->
     <string name="lockscreen_music_controls_title">Music controls</string>
     <string name="lockscreen_music_controls_summary">Show music widget while music is playing</string> 
