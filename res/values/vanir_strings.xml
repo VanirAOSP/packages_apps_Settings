@@ -504,6 +504,7 @@
     <string name="lockscreen_notifications_dialog_title">Lockscreen is secured!</string>
     <string name="lockscreen_notifications_dialog_message">Allow notifications to be shown on the secure lockscreen?</string>
     <string name="pocket_mode_title">Pocket mode</string>
+    <string name="notification_color">Notification background color</string>
     <string name="pocket_mode_summary">Show active notifications when you take the device out of your pocket.</string>
 
     <string name="show_always">Show always</string>
