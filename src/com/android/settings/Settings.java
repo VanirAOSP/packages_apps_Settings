@@ -375,6 +375,7 @@ public class Settings extends PreferenceActivity
         MoreDeviceSettings.class.getName(),
         ProfilesSettings.class.getName(),
         PolicyNativeFragment.class.getName(),
+        com.android.settings.quicksettings.QuickSettingsTiles.class.getName()
     };
 
     @Override
@@ -1215,4 +1216,5 @@ public class Settings extends PreferenceActivity
     public static class ApnEditorActivity extends Settings { /* empty */ }
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
     public static class SystemSettingsActivity extends Settings { /* empty */ }
+    public static class QuickSettingsConfigActivity extends Settings { /* empty */ }
 }
