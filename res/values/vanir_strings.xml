@@ -263,9 +263,6 @@
     <string name="immersive_mode_off">Immersive mode disabled</string>
     <string name="immersive_mode_style">Immersive style</string>
 
-    <string name="app_ops_btn_text">App Ops</string>
-    <string name="app_ops_no_item_text">This app has no changeable permissions.</string>
-
     <!-- Custom Carrier Text -->
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
