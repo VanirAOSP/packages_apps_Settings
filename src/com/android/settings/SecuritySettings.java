@@ -98,7 +98,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String SLIDE_LOCK_TIMEOUT_DELAY = "slide_lock_timeout_delay";
     private static final String SLIDE_LOCK_SCREENOFF_DELAY = "slide_lock_screenoff_delay";
     private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
-    private static final String KEY_LOCKSCREEN_NOTIFICATIONS = "lockscreen_notifications_allowed";
     private static final String CATEGORY_ADDITIONAL = "additional_options";
 
     public static final String ALLOW_MULTIUSER = "allow_multiuser";
@@ -132,7 +131,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     private boolean mIsPrimary;
 
-    private CheckBoxPreference mLockNotifications;
     private CheckBoxPreference mQuickUnlockScreen;
     private ListPreference mSmsSecurityCheck;
     private ListPreference mSlideLockTimeoutDelay;
@@ -424,13 +422,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     && isPackageInstalled("org.whispersystems.whisperpush")) {
                 addPreferencesFromResource(R.xml.security_settings_whisperpush);
             }
-
-        mLockNotifications = (CheckBoxPreference) root.findPreference(KEY_LOCKSCREEN_NOTIFICATIONS);
-        if (mLockNotifications != null) {
-            mLockNotifications.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_ALLOWED, 0) == 1);
-            mLockNotifications.setOnPreferenceChangeListener(this);
-        }
 
         mQuickUnlockScreen = (CheckBoxPreference) root.findPreference(LOCKSCREEN_QUICK_UNLOCK_CONTROL);
         if (mQuickUnlockScreen  != null) {
@@ -745,9 +736,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         } else if (preference == mQuickUnlockScreen) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, isToggled(preference) ? 1 : 0);
-        } else if (preference == mLockNotifications) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_NOTIFICATIONS_ALLOWED, isToggled(preference) ? 1 : 0);
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
