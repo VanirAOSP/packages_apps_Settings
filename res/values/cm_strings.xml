@@ -881,7 +881,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
 
     <!-- Development shortcut -->
-    <string name="development_shortcut_title">Development shortcut</string>
+    <string name="development_shortcut_title">Development shortcuts</string>
     <string name="development_shortcut_summary">Enable \'wipe data\' and \'force close\' options in notification area and recent apps list</string>
 
     <!-- Message of dialog confirming that user wants to restart their device with a new runtime -->
