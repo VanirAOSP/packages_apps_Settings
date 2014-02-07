@@ -617,7 +617,9 @@
     <string name="force_dualpanel_summary">Use tablet-style dual panel settings if available</string> 
 
     <!-- allow multiuser -->
+    <string name="custom_security_category">Security customizations</string>
     <string name="multiuser_preference_title">Multiuser support</string>
+    <string name="multiuser_preference_summary">Allows phones to support multiple users like tablets do</string>
 
     <!-- system logging -->
     <string name="system_logging_title">Disable system logging</string>

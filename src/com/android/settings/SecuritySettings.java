@@ -92,12 +92,12 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_NOTIFICATION_ACCESS = "manage_notification_access";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 
+    private static final String KEY_CUSTOM_SECURITY = "custom_security";
     private static final String KEY_APP_SECURITY_CATEGORY = "app_security";
     private static final String KEY_BLACKLIST = "blacklist";
     private static final String KEY_SMS_SECURITY_CHECK_PREF = "sms_security_check_limit";
     private static final String SLIDE_LOCK_TIMEOUT_DELAY = "slide_lock_timeout_delay";
     private static final String SLIDE_LOCK_SCREENOFF_DELAY = "slide_lock_screenoff_delay";
-    private static final String LOCKSCREEN_QUICK_UNLOCK_CONTROL = "lockscreen_quick_unlock_control";
     private static final String CATEGORY_ADDITIONAL = "additional_options";
 
     public static final String ALLOW_MULTIUSER = "allow_multiuser";
@@ -131,7 +131,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
     private boolean mIsPrimary;
 
-    private CheckBoxPreference mQuickUnlockScreen;
     private ListPreference mSmsSecurityCheck;
     private ListPreference mSlideLockTimeoutDelay;
     private ListPreference mSlideLockScreenOffDelay;
@@ -258,51 +257,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     KEY_POWER_INSTANTLY_LOCKS);
             checkPowerInstantLockDependency();
 
-            // Add the additional CyanogenMod settings
-            addPreferencesFromResource(R.xml.security_settings_cyanogenmod);
-
-            CheckBoxPreference menuUnlock = (CheckBoxPreference)
-                    findPreference(Settings.System.MENU_UNLOCK_SCREEN);
-            CheckBoxPreference homeUnlock = (CheckBoxPreference)
-                    findPreference(Settings.System.HOME_UNLOCK_SCREEN);
-            CheckBoxPreference cameraUnlock = (CheckBoxPreference)
-                    findPreference(Settings.System.CAMERA_UNLOCK_SCREEN);
-
-            final int deviceKeys = res.getInteger(
-                    com.android.internal.R.integer.config_deviceHardwareKeys);
-            final PreferenceGroup additionalPrefs =
-                    (PreferenceGroup) findPreference(CATEGORY_ADDITIONAL);
-
-            // hide all lock options if lock screen set to NONE
-            if (mLockPatternUtils.isLockScreenDisabled()) {
-                root.removePreference(additionalPrefs);
-            // hide the quick unlock if using Pattern
-            } else if (mLockPatternUtils.isLockPatternEnabled()) {
-            // hide the quick unlock if its not using PIN/password
-            // as a primary lock screen or as a backup to biometric
-            }
-
-            // Hide the MenuUnlock setting if no menu button is available
-            if ((deviceKeys & ButtonSettings.KEY_MASK_MENU) == 0) {
-                additionalPrefs.removePreference(menuUnlock);
-            }
-            // Hide the HomeUnlock setting if no home button is available
-            if ((deviceKeys & ButtonSettings.KEY_MASK_HOME) == 0) {
-                additionalPrefs.removePreference(homeUnlock);
-            }
-            // Hide the CameraUnlock setting if no camera button is available
-            if ((deviceKeys & ButtonSettings.KEY_MASK_CAMERA) == 0) {
-                additionalPrefs.removePreference(cameraUnlock);
-            }
-
-            mAllowMultiuserPreference = (CheckBoxPreference) findPreference(ALLOW_MULTIUSER);
-			mAllowMultiuserPreference.setEnabled(UserHandle.myUserId() == UserHandle.USER_OWNER);
-            mAllowMultiuserPreference.setChecked(Settings.System.getIntForUser(getContentResolver(),
-			         Settings.System.ALLOW_MULTIUSER, 0, UserHandle.USER_OWNER) == 1);
-            if (Utils.isTablet(getActivity())) {
-                additionalPrefs.removePreference(mAllowMultiuserPreference);
-            }
-
         // biometric weak liveliness
         mBiometricWeakLiveliness =
                 (CheckBoxPreference) root.findPreference(KEY_BIOMETRIC_WEAK_LIVELINESS);
@@ -336,6 +290,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
 
             // Append the rest of the settings
             addPreferencesFromResource(R.xml.security_settings_misc);
+
+            mAllowMultiuserPreference = (CheckBoxPreference) root.findPreference(ALLOW_MULTIUSER);
+            mAllowMultiuserPreference.setEnabled(UserHandle.myUserId() == UserHandle.USER_OWNER);
+            mAllowMultiuserPreference.setChecked(Settings.System.getIntForUser(getContentResolver(),
+			         Settings.System.ALLOW_MULTIUSER, 0, UserHandle.USER_OWNER) == 1);
+            if (Utils.isTablet(getActivity())) {
+                root.removePreference(root.findPreference(KEY_CUSTOM_SECURITY));
+            }
 
             // Do not display SIM lock for devices without an Icc card
             TelephonyManager tm = TelephonyManager.getDefault();
@@ -422,13 +384,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     && isPackageInstalled("org.whispersystems.whisperpush")) {
                 addPreferencesFromResource(R.xml.security_settings_whisperpush);
             }
-
-        mQuickUnlockScreen = (CheckBoxPreference) root.findPreference(LOCKSCREEN_QUICK_UNLOCK_CONTROL);
-        if (mQuickUnlockScreen  != null) {
-            mQuickUnlockScreen.setChecked(Settings.System.getInt(getContentResolver(), 
-                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, 0) == 1);
-            mQuickUnlockScreen.setOnPreferenceChangeListener(this);
-        }
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         if (mNotificationAccess != null) {
@@ -733,9 +688,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setVisibleDotsEnabled(isToggled(preference));
         } else if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));        
-        } else if (preference == mQuickUnlockScreen) {
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.LOCKSCREEN_QUICK_UNLOCK_CONTROL, isToggled(preference) ? 1 : 0);
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
