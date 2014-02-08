@@ -51,6 +51,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
+    private static final String RECENTS_CLEAR_ALL = "recents_clear_all";
 
     private Preference mCustomLabel;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
@@ -58,6 +59,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private CheckBoxPreference mMembar;
     private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mSystemLogging;
+    private ListPreference mClearAll;
 
     Preference mLcdDensity;
     int newDensityValue;
@@ -99,7 +101,14 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             prefSet.removePreference(animationOptions);
         }
 
-        mMembar = (CheckBoxPreference) getPreferenceScreen().findPreference(SYSTEMUI_RECENTS_MEM_DISPLAY);
+        mClearAll = (ListPreference) prefSet.findPreference(RECENTS_CLEAR_ALL);
+        int value = Settings.System.getInt(getContentResolver(),
+                Settings.System.CLEAR_RECENTS_BUTTON_LOCATION, 3);
+        mClearAll.setValue(String.valueOf(value));
+        mClearAll.setSummary(mClearAll.getEntry());
+        mClearAll.setOnPreferenceChangeListener(this);
+
+        mMembar = (CheckBoxPreference) prefSet.findPreference(SYSTEMUI_RECENTS_MEM_DISPLAY);
         if (mMembar != null) {
         mMembar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1);
@@ -130,6 +139,14 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
                     Settings.System.SYSTEM_POWER_CRT_MODE,
                     value);
             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
+            return true;
+        } else if (RECENTS_CLEAR_ALL.equals(key)) {
+            int value = Integer.parseInt((String) objValue);
+            int index = mClearAll.findIndexOfValue((String) objValue);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.CLEAR_RECENTS_BUTTON_LOCATION,
+                    value);
+            mClearAll.setSummary(mClearAll.getEntries()[index]);
             return true;
         }
         return false;
