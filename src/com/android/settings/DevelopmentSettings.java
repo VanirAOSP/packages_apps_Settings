@@ -54,7 +54,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -251,9 +250,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         mDpm = (DevicePolicyManager)getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        final int deviceKeys = getResources().getInteger(
-                com.android.internal.R.integer.config_deviceHardwareKeys);
-
         if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER) {
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
@@ -293,13 +289,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAllPrefs.add(mPassword);
         mAdvancedReboot = findAndInitCheckboxPref(ADVANCED_REBOOT_KEY);
         mDevelopmentShortcut = findAndInitCheckboxPref(DEVELOPMENT_SHORTCUT_KEY);
-
-        final PreferenceCategory appDebug = (PreferenceCategory)
-                findPreference(DEBUG_APPLICATIONS_CATEGORY_KEY);
         mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
-        if (deviceKeys == 0) {
-            appDebug.removePreference(mKillAppLongpressBack);
-        }
 
         mStockMode = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).getInt(STOCK_MODE, 0) == 1;
         writeStockMode();
@@ -538,7 +528,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnabledSwitch.setChecked(mLastEnabledState);
             setPrefsEnabledState(mLastEnabledState);
         }
-        if (mKillAppLongpressBack != null) updateKillAppLongpressBackOptions();
+
+        updateKillAppLongpressBackOptions();
     }
 
     void updateCheckBox(CheckBoxPreference checkBox, boolean value) {
@@ -1591,8 +1582,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void applyStockMode() {
         enableForUser(mAdvancedReboot, !mStockMode);
         enableForUser(mDevelopmentShortcut, !mStockMode);
-        if (mKillAppLongpressBack != null)
-            enableForUser(mKillAppLongpressBack, !mStockMode);
+        enableForUser(mKillAppLongpressBack, !mStockMode);
         enableForUser(mAdbOverNetwork, !mStockMode);
         enableForUser(mSystemLogging, !mStockMode);
         updateRebootDialog();
