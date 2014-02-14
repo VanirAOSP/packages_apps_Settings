@@ -18,6 +18,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
 import android.text.Editable;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,12 +35,9 @@ public class DensityChanger extends SettingsPreferenceFragment implements
 
     private static final String TAG = "DensityChanger";
 
-    ListPreference mStockDensity;
-    Preference mReboot;
-    Preference mClearMarketData;
-    Preference mRebootClearData;
-    Preference mOpenMarket;
-    ListPreference mCustomDensity;
+    private ListPreference mStockDensity;
+    private Preference mClearMarketData;
+    private ListPreference mCustomDensity;
 
     private static final int MSG_DATA_CLEARED = 500;
 
@@ -70,18 +68,31 @@ public class DensityChanger extends SettingsPreferenceFragment implements
         mStockDensity = (ListPreference) findPreference("stock_density");
         mStockDensity.setOnPreferenceChangeListener(this);
 
-        mReboot = findPreference("reboot");
         mClearMarketData = findPreference("clear_market_data");
-        mRebootClearData = findPreference("reboot_cleardata");
-        mOpenMarket = findPreference("open_market");
 
         mCustomDensity = (ListPreference) findPreference("lcd_density");
+        try {
+            newDensityValue = Integer.parseInt(currentDensity);
+        } catch (Exception e) {
+        }
+        mCustomDensity.setSummary(getResources().getString(R.string.current_lcd_density) + " " + currentDensity);
         mCustomDensity.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        String currentDensity = SystemProperties.get("ro.sf.lcd_density");
+
+        try {
+            newDensityValue = Integer.parseInt(currentDensity);
+        } catch (Exception e) {
+        }
+
+        if (mCustomDensity != null) {
+            mCustomDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentDensity);
+        }
     }
 
     @Override
@@ -91,35 +102,9 @@ public class DensityChanger extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mReboot) {
-            PowerManager pm = (PowerManager) getActivity()
-                    .getSystemService(Context.POWER_SERVICE);
-            pm.reboot("Resetting density");
-            return true;
-
-        } else if (preference == mClearMarketData) {
+        if (preference == mClearMarketData) {
 
             new ClearMarketDataTask().execute("");
-            return true;
-
-        } else if (preference == mRebootClearData) {
-            PowerManager pm = (PowerManager) getActivity()
-                    .getSystemService(Context.POWER_SERVICE);
-            pm.reboot("Clear market data");
-            return true;
-
-        } else if (preference == mOpenMarket) {
-            Intent openMarket = new Intent(Intent.ACTION_MAIN)
-                    .addCategory(Intent.CATEGORY_APP_MARKET)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            ComponentName activityName = openMarket.resolveActivity(getActivity()
-                    .getPackageManager());
-            if (activityName != null) {
-                mContext.startActivity(openMarket);
-            } else {
-                preference
-                        .setSummary(getResources().getString(R.string.open_market_summary_could_not_open));
-            }
             return true;
 
         }
@@ -209,6 +194,7 @@ public class DensityChanger extends SettingsPreferenceFragment implements
                 showDialog(DIALOG_WARN_DENSITY);
                 return true;
             }
+            
         } else if (preference == mStockDensity) {
             newDensityValue = Integer.parseInt((String) newValue);
             setLcdDensity(newDensityValue);

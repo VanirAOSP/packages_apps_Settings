@@ -79,9 +79,7 @@
     </string-array>
 
  <string-array name="lcd_density_entries" translatable="false">
-        <item>160</item>
-        <item>182</item>
-        <item>200</item>
+        <item>@string/custom_density</item>
         <item>220</item>
         <item>240</item>
         <item>241</item>
@@ -92,7 +90,6 @@
         <item>340</item>
         <item>480</item>
         <item>640</item>
-        <item>@string/custom_density</item>
     </string-array>
 
     <string-array name="lcd_density_stock_entries">
