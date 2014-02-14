@@ -365,7 +365,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
             // Determine options based on device telephony support
             if (pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
-                mSmsSecurityCheck = (ListPreference) root.findPreference(KEY_SMS_SECURITY_CHECK_PREF);
                 mSmsSecurityCheck.setOnPreferenceChangeListener(this);
                 int smsSecurityCheck = Integer.valueOf(mSmsSecurityCheck.getValue());
                 updateSmsSecuritySummary(smsSecurityCheck);
@@ -375,7 +374,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
                         root.findPreference(KEY_APP_SECURITY_CATEGORY);
                 appCategory.removePreference(mBlacklist);
                 appCategory.removePreference(mSmsSecurityCheck);
-                root.removePreference(appCategory);
             }
 
             // WhisperPush
