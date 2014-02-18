@@ -608,6 +608,8 @@
     <string name="data_usage_enable_batterysaver">Battery saver</string>
 
     <!-- Battery saver mode -->
+    <string name="network_lte">LTE (recommended)</string>
+    <string name="network_4G">4G (recommended)</string>
     <string name="network_3G_only">3G Only</string>
     <string name="network_3G_auto">2G/3G Auto</string>
     <string name="network_3G">2G/3G Preferred</string>
@@ -629,7 +631,7 @@
     <string name="pref_battery_saver_battery_title">When battery low</string>
     <string name="pref_battery_saver_battery_summary">Activate power saving mode when battery low</string>
     <string name="pref_battery_saver_mode_battery_level_title">Battery level</string>
-    <string name="pref_battery_saver_mode_battery_level_summary">Changing power saving mode at the specified battery level</string>
+    <string name="pref_battery_saver_mode_battery_level_summary">Change to power saving mode at: </string>
     <string name="pref_battery_saver_data_title">Disable mobile data</string>
     <string name="pref_battery_saver_data_summary">Disable mobile data connection when power saving activated</string>
     <string name="pref_battery_saver_enable_no_mobiledata_summary">This will automatically manage your device battery usage to user-defined</string>

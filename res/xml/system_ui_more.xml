@@ -56,11 +56,6 @@
         android:title="@string/system_app_remover_title"
         android:summary="@string/system_app_remover_summary" />
 
-    <PreferenceScreen
-        android:key="interface_battery_saver"
-        android:fragment="com.android.settings.vanir.BatterySaverSettings"
-        android:title="@string/battery_saver_title" />
-
     <PreferenceCategory
         android:title="@string/recents" />
 

@@ -18,10 +18,13 @@ package com.android.settings.vanir;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import com.android.internal.telephony.PhoneConstants;
 
 import java.util.Calendar;
 
@@ -48,12 +51,33 @@ public class BatterySaverHelper {
         return cm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
     }
 
+    public static boolean deviceSupportsLteCdma(Context context) {
+        final TelephonyManager tm =
+            (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return (tm.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE);
+    }
+
+    public static boolean deviceSupportsLteGsm(Context context) {
+        final TelephonyManager tm =
+            (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return (tm.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE) || (tm.getLteOnGsmMode() != 0);
+    }
+
+    public static void setBatterySaverActive(Context context, int value) {
+        final ContentResolver resolver = context.getContentResolver();
+        Settings.Global.putInt(resolver,
+                     Settings.Global.BATTERY_SAVER_OPTION, value);
+    }
+
     public static void scheduleService(Context context) {
-        boolean batterySaverEnabled = Settings.Global.getInt(context.getContentResolver(),
-                Settings.Global.BATTERY_SAVER_OPTION, 0) != 0;
-        int batterySaverStart = Settings.Global.getInt(context.getContentResolver(),
+        final ContentResolver resolver = context.getContentResolver();
+        final int batterySaverActive = Settings.Global.getInt(resolver,
+                Settings.Global.BATTERY_SAVER_OPTION, 0);
+        final boolean batterySaverEnabled = batterySaverActive != 0;
+        final boolean batterySaverStopped = batterySaverActive == 2;
+        final int batterySaverStart = Settings.Global.getInt(resolver,
                 Settings.Global.BATTERY_SAVER_START, 0);
-        int batterySaverEnd = Settings.Global.getInt(context.getContentResolver(),
+        final int batterySaverEnd = Settings.Global.getInt(resolver,
                 Settings.Global.BATTERY_SAVER_END, 0);
         Intent serviceTriggerIntent = (new Intent())
                    .setClassName("com.android.systemui", "com.android.systemui.batterysaver.BatterySaverService");
@@ -71,6 +95,9 @@ public class BatterySaverHelper {
 
         if (batterySaverStart == batterySaverEnd) {
             // 24 hours, start without stop
+            if (batterySaverStopped) {
+                setBatterySaverActive(context, 1);
+            }
             context.startService(serviceTriggerIntent);
             return;
         }
@@ -113,9 +140,13 @@ public class BatterySaverHelper {
         }
 
         if (inBatterySaver) {
+            if (batterySaverStopped) {
+                setBatterySaverActive(context, 1);
+            }
             context.startService(serviceTriggerIntent);
-        } else {
+        } else if (!batterySaverStopped) {
             context.stopService(serviceTriggerIntent);
+            setBatterySaverActive(context, 2);
         }
 
         if (serviceStartMinutes >= 0) {

@@ -72,6 +72,11 @@
         android:fragment="com.android.settings.cyanogenmod.NotificationDrawer"
         android:title="@string/notification_drawer_title" />
 
+    <PreferenceScreen
+        android:key="interface_battery_saver"
+        android:fragment="com.android.settings.vanir.BatterySaverSettings"
+        android:title="@string/battery_saver_title" />
+
     </PreferenceCategory>
     <!-- Device Specific Touchscreen gestures. Avoid duplicating CMHW functionality, please -->
     <Preference
