@@ -93,12 +93,21 @@
         android:title="@string/more_device_controls_title" />
 
     <PreferenceCategory
-       android:title="@string/psx_category_immersive_mode" >
+       android:title="@string/vanir_immersive_desktop" >
     
-       <CheckBoxPreference android:key="immersive_mode_state"
-            android:title="@string/immersive_mode_state"
-            android:summaryOn="@string/immersive_mode_on"
-            android:summaryOff="@string/immersive_mode_off" />    
+       <SwitchPreference
+            android:key="immersive_mode_state"
+            android:title="@string/immersive_mode_state" />    
+
+       <CheckBoxPreference
+            android:key="expanded_desktop"
+            android:title="@string/expanded_desktop_title"
+            android:summary="@string/expanded_desktop_summary" />
+
+       <CheckBoxPreference
+            android:key="immersive_mode_lol_profile"
+            android:title="@string/immersive_mode_lol_profile_title"
+            android:summary="@string/immersive_mode_lol_on" />
        
        <ListPreference
             android:key="immersive_mode_style"

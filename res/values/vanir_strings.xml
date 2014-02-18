@@ -243,18 +243,21 @@
     <string name="display_rotation_270_title">270 degrees</string>
 
     <!-- Immersive Mode -->
-    <string name="power_menu_immersive_mode">Immersive mode</string>
+    <string name="power_menu_immersive_mode">Immersive desktop</string>
     <string name="summary_immersive_mode">%1$s</string>
     <string name="immersive_mode_summary_status_bar">With status bar</string>
     <string name="immersive_mode_summary_no_status_bar">Without status bar</string>
+    <string name="immersive_mode_navbar_only">Show navbar only</string>
     <string name="immersive_mode_disabled">Disabled</string>
     <string name="immersive_mode_status_bar">With status bar</string>
     <string name="immersive_mode_no_status_bar">Without status bar</string>
-    <string name="psx_category_immersive_mode">Immersive mode</string>
-    <string name="immersive_mode_state">Enable mode</string>
-    <string name="immersive_mode_on">Immersive mode enabled</string>
-    <string name="immersive_mode_off">Immersive mode disabled</string>
+    <string name="vanir_immersive_desktop">Immersive desktop</string>
+    <string name="immersive_mode_state">Enable</string>
     <string name="immersive_mode_style">Immersive style</string>
+    <string name="expanded_desktop_title">Expanded desktop</string>
+    <string name="expanded_desktop_summary">Disable the immersive ui swipe gestures</string>
+    <string name="immersive_mode_lol_profile_title">Low profile mode</string>
+    <string name="immersive_mode_lol_on">Hide the statusbar and dim the navbar when applicable</string>
 
     <!-- Custom Carrier Text -->
     <string name="custom_carrier_label_title">Custom carrier label</string>
