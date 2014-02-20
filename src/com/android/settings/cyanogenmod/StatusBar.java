@@ -80,6 +80,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mStatusBarClock.setValue(Integer.toString(Settings.System.getInt(getActivity()
                 .getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
                 0)));
+        mStatusBarClock.setSummary(mStatusBarClock.getEntry());
 
         int defaultResource = android.R.color.white;
         try {
