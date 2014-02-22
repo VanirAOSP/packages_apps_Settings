@@ -1,14 +1,20 @@
 package com.android.settings.vanir.navbar;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.BaseSetting;
@@ -18,7 +24,8 @@ import com.android.settings.SingleChoiceSetting;
 
 import com.vanir.util.DeviceUtils;
 
-public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBarChangeListener,
+        CompoundButton.OnCheckedChangeListener {
 
     private static final String NAVIGATION_BAR_HEIGHT = "navigation_bar_height";
     private static final String NAVIGATION_BAR_HEIGHT_LANDSCAPE = "navigation_bar_height_landscape";
@@ -31,6 +38,9 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private TextView mBarHeightLandscape_Text;
     private TextView mBarWidth_Text;
 
+    private Switch mEnabledSwitch;
+    private static int deviceKeys = 0;
+
     private static int HValue;
     private static int LValue;
     private static int WValue;
@@ -40,6 +50,50 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private static boolean firstShot = true;
 
     public NavbarSettingsFragment() {
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        deviceKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        if (deviceKeys > 0) {
+            final Activity activity = getActivity();
+            mEnabledSwitch = new Switch(activity);
+
+            final int padding = activity.getResources().getDimensionPixelSize(
+                    R.dimen.action_bar_switch_padding);
+            mEnabledSwitch.setPaddingRelative(0, 0, padding, 0);
+            mEnabledSwitch.setOnCheckedChangeListener(this);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (deviceKeys > 0) {
+            final Activity activity = getActivity();
+            activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                    ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(mEnabledSwitch, new ActionBar.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    ActionBar.LayoutParams.WRAP_CONTENT,
+                    Gravity.CENTER_VERTICAL | Gravity.END));
+            mEnabledSwitch.setChecked((Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.ENABLE_NAVIGATION_BAR, 0) == 1));
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (deviceKeys > 0) {
+            final Activity activity = getActivity();
+            activity.getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
+            activity.getActionBar().setCustomView(null);
+        }
     }
 
     @Override
@@ -92,6 +146,16 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         }
         
         return v;
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (buttonView == mEnabledSwitch) {
+            boolean value = ((Boolean)isChecked).booleanValue();
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.ENABLE_NAVIGATION_BAR,
+                    value ? 1 : 0);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.android.settings.vanir.navbar;
 
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v13.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -23,10 +24,20 @@ public class NavbarTabHostFragment extends Fragment implements OnTabChangeListen
         mTabHost = new FragmentTabHost(getActivity());
         mTabHost.setup(getActivity(), getChildFragmentManager(), R.id.container);
 
-        mTabHost.addTab(mTabHost.newTabSpec("rearrange").setIndicator(getString(R.string.navbar_tab_arrange)),
-                ArrangeNavbarFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("settings").setIndicator(getString(R.string.navbar_tab_settings)),
-                NavbarSettingsFragment.class, null);
+        final int deviceKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+
+        if (deviceKeys == 0) {
+            mTabHost.addTab(mTabHost.newTabSpec("rearrange").setIndicator(getString(R.string.navbar_tab_arrange)),
+                    ArrangeNavbarFragment.class, null);
+            mTabHost.addTab(mTabHost.newTabSpec("settings").setIndicator(getString(R.string.navbar_tab_settings)),
+                    NavbarSettingsFragment.class, null);
+        } else {
+            mTabHost.addTab(mTabHost.newTabSpec("settings").setIndicator(getString(R.string.navbar_tab_settings)),
+                    NavbarSettingsFragment.class, null);
+            mTabHost.addTab(mTabHost.newTabSpec("rearrange").setIndicator(getString(R.string.navbar_tab_arrange)),
+                    ArrangeNavbarFragment.class, null);
+        }
 
         mTabHost.setOnTabChangedListener(this);
         return mTabHost;

@@ -33,10 +33,6 @@
         android:title="@string/power_menu_title"
         android:fragment="com.android.settings.cyanogenmod.PowerMenu" />
 
-    <CheckBoxPreference
-        android:key="navigation_bar_toggle"
-        android:title="@string/toggle_navbar_title" />
-
     <PreferenceScreen
         android:key="navigation_bar"
         android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
@@ -99,7 +95,7 @@
     <PreferenceCategory
        android:title="@string/vanir_immersive_desktop" >
     
-       <CheckBoxPreference
+       <SwitchPreference
             android:key="immersive_mode_state"
             android:title="@string/immersive_mode_state" />    
 

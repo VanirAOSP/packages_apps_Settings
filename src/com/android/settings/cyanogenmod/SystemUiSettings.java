@@ -47,8 +47,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "SystemSettings";
 
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
-    private static final String CATEGORY_NAVBAR = "navigation_bar";
-    private static final String KEY_NAVBAR_TOGGLE = "navigation_bar_toggle";
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
@@ -59,11 +57,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private ListPreference mImmersiveModePref;
     private CheckBoxPreference mImmersiveLOL;
     private CheckBoxPreference mExpandedDesktop;
-    private CheckBoxPreference mImmersiveModeState;
-    private PreferenceScreen mNavbarPref;
-    private CheckBoxPreference mNavbarToggle;
+    private SwitchPreference mImmersiveModeState;
 
-    private boolean navbarToggleState;
     private int immersiveModeValue;
 
     @Override
@@ -76,7 +71,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         final int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
 
-        mImmersiveModeState = (CheckBoxPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
+        mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(), 
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1);
         mImmersiveModeState.setOnPreferenceChangeListener(this);        
@@ -93,23 +88,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
                 getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
-
-        mNavbarPref = (PreferenceScreen)findPreference(CATEGORY_NAVBAR);
-        mNavbarToggle = (CheckBoxPreference)findPreference(KEY_NAVBAR_TOGGLE);
-
-        if (deviceKeys == 0) {
-            prefSet.removePreference(mNavbarToggle);
-            mNavbarToggle = null;
-            navbarToggleState = true;
-        } else {
-            navbarToggleState = Settings.System.getInt(getContentResolver(),
-                    Settings.System.ENABLE_NAVIGATION_BAR, 0) == 1;
-            mNavbarToggle.setChecked(navbarToggleState);
-            mNavbarPref.setEnabled(navbarToggleState);
-            mNavbarToggle.setOnPreferenceChangeListener(this);
-        }
-
-        
+    
         mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
         immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
         setImmersiveModeEntries();
@@ -121,6 +100,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
     private void setImmersiveModeEntries() {
         final Resources res = getResources();
+        boolean navbarToggleState = Settings.System.getInt(getContentResolver(), Settings.System.ENABLE_NAVIGATION_BAR, 0) == 1;
+        
         mImmersiveModePref.setEntries(res.getStringArray(navbarToggleState ? R.array.immersive_mode_entries : R.array.immersive_mode_entries_no_navbar));
         mImmersiveModePref.setEntryValues(res.getStringArray(navbarToggleState ? R.array.immersive_mode_values : R.array.immersive_mode_values_no_navbar));
         if (immersiveModeValue >= mImmersiveModePref.getEntries().length) {
@@ -139,6 +120,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        
     }
 
     @Override
@@ -170,13 +152,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE,
                     (Boolean) objValue ? 1 : 0);
-            return true;
-        } else if (preference == mNavbarToggle) {
-            navbarToggleState = (Boolean)objValue;
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.ENABLE_NAVIGATION_BAR, navbarToggleState ? 1 : 0);
-            mNavbarPref.setEnabled(navbarToggleState);
-            setImmersiveModeEntries();
             return true;
         }
         return false;
