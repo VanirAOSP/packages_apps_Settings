@@ -437,6 +437,7 @@
     <string name="navigation_bar_height_text">Bar height in portrait</string>
     <string name="navigation_bar_height_landscape_text">Bar height in landscape</string>
     <string name="navigation_bar_width_text">Bar width in landscape</string>
+    <string name="toggle_navbar_title">Show navigation bar</string>
 
     <string name="toggles_arrange_instructions">Rearrange by dragging by the handle on the right. Remove by swiping.</string>
     <string name="save">Save</string>

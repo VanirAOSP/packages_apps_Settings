@@ -32,6 +32,7 @@ import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
@@ -47,7 +48,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String CATEGORY_NAVBAR = "navigation_bar";
-    private static final String CATEGORY_NAVRING = "navigation_bar_ring";
+    private static final String KEY_NAVBAR_TOGGLE = "navigation_bar_toggle";
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
@@ -58,7 +59,12 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private ListPreference mImmersiveModePref;
     private CheckBoxPreference mImmersiveLOL;
     private CheckBoxPreference mExpandedDesktop;
-    private SwitchPreference mImmersiveModeState;
+    private CheckBoxPreference mImmersiveModeState;
+    private PreferenceScreen mNavbarPref;
+    private CheckBoxPreference mNavbarToggle;
+
+    private boolean navbarToggleState;
+    private int immersiveModeValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +76,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         final int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
 
-        mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
+        mImmersiveModeState = (CheckBoxPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(), 
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1);
         mImmersiveModeState.setOnPreferenceChangeListener(this);        
@@ -84,51 +90,50 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         mExpandedDesktop.setChecked(Settings.System.getInt(getContentResolver(), 
                     Settings.System.EXPANDED_DESKTOP, 0) == 1);
         mExpandedDesktop.setOnPreferenceChangeListener(this);
-        
-        mImmersiveModePref = (ListPreference) prefSet.findPreference(KEY_IMMERSIVE_MODE_STYLE);
-        mImmersiveModePref.setOnPreferenceChangeListener(this);
-        int immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0);
-        mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
 
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
                 getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
 
-        // hardware button compatibility
-        if (deviceKeys > 0) {
-            // hide the navbar preferences
-            prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
-            prefSet.removePreference(findPreference(CATEGORY_NAVRING));
+        mNavbarPref = (PreferenceScreen)findPreference(CATEGORY_NAVBAR);
+        mNavbarToggle = (CheckBoxPreference)findPreference(KEY_NAVBAR_TOGGLE);
 
-            CharSequence[] values = {"0", "1"};
-            mImmersiveModePref.setEntries(entries());
-            mImmersiveModePref.setEntryValues(values);
-            immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0);
+        if (deviceKeys == 0) {
+            prefSet.removePreference(mNavbarToggle);
+            mNavbarToggle = null;
+            navbarToggleState = true;
+        } else {
+            navbarToggleState = Settings.System.getInt(getContentResolver(),
+                    Settings.System.ENABLE_NAVIGATION_BAR, 0) == 1;
+            mNavbarToggle.setChecked(navbarToggleState);
+            mNavbarPref.setEnabled(navbarToggleState);
+            mNavbarToggle.setOnPreferenceChangeListener(this);
+        }
+
+        
+        mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
+        immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
+        setImmersiveModeEntries();
+        mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
+        updateImmersiveModeSummary();
+        updateImmersiveModeState();
+        mImmersiveModePref.setOnPreferenceChangeListener(this);
+    }
+
+    private void setImmersiveModeEntries() {
+        final Resources res = getResources();
+        mImmersiveModePref.setEntries(res.getStringArray(navbarToggleState ? R.array.immersive_mode_entries : R.array.immersive_mode_entries_no_navbar));
+        mImmersiveModePref.setEntryValues(res.getStringArray(navbarToggleState ? R.array.immersive_mode_values : R.array.immersive_mode_values_no_navbar));
+        if (immersiveModeValue >= mImmersiveModePref.getEntries().length) {
+            Log.w("ImmersiveModePreferences", "Selected value is outside of entries range. Using default == 2");
+            immersiveModeValue = 2;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, immersiveModeValue);
             mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
         }
-
-        updateImmersiveModeState(immersiveModeValue);
-        updateImmersiveModeSummary(immersiveModeValue);
     }
 
-    private CharSequence[] entries() {
-        final Resources res = getResources();
-        List<String> listItems = new ArrayList<String>();
-
-        listItems.add(res.getString(R.string.immersive_mode_disabled));
-        listItems.add(res.getString(R.string.immersive_mode_summary_status_bar));
-        listItems.add(res.getString(R.string.immersive_mode_summary_no_status_bar));
-
-        return listItems.toArray(new CharSequence[listItems.size()]);
-    }
-
-    private void updateImmersiveModeState(int value) {
-        boolean immersive = (value >= 1);
-
-        if (immersive) {
-            mExpandedDesktop.setEnabled(true);
-        } else {
-            mExpandedDesktop.setEnabled(false);
-        }
+    private void updateImmersiveModeState() {
+        mExpandedDesktop.setEnabled(immersiveModeValue > 0);
     }
 
     @Override
@@ -136,15 +141,16 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         super.onResume();
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
 
         if (preference == mImmersiveModePref) {
-            int immersiveModeValue = Integer.valueOf((String) objValue);
+            immersiveModeValue = Integer.valueOf((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, immersiveModeValue);
-            updateImmersiveModeSummary(immersiveModeValue);
-            updateImmersiveModeState(immersiveModeValue);
+            updateImmersiveModeSummary();
+            updateImmersiveModeState();
             updateRebootDialog();
             return true;
 
@@ -165,25 +171,34 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE,
                     (Boolean) objValue ? 1 : 0);
             return true;
+        } else if (preference == mNavbarToggle) {
+            navbarToggleState = (Boolean)objValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.ENABLE_NAVIGATION_BAR, navbarToggleState ? 1 : 0);
+            mNavbarPref.setEnabled(navbarToggleState);
+            setImmersiveModeEntries();
+            return true;
         }
         return false;
     }
 
-    private void updateImmersiveModeSummary(int value) {
+    private void updateImmersiveModeSummary() {
         Resources res = getResources();
-        if (value == 0) {
-            /* expanded desktop deactivated */
-            mImmersiveModePref.setSummary(res.getString(R.string.immersive_mode_disabled));
-        } else if (value == 1) {
-            String statusBarPresent = res.getString(R.string.immersive_mode_summary_status_bar);
-            mImmersiveModePref.setSummary(res.getString(R.string.summary_immersive_mode, statusBarPresent));
-        } else if (value == 2) {
-            String noStatusBarPresent = res.getString(R.string.immersive_mode_summary_no_status_bar);
-            mImmersiveModePref.setSummary(res.getString(R.string.summary_immersive_mode, noStatusBarPresent));
-        } else if (value == 3) {
-            String navbarOnly = res.getString(R.string.immersive_mode_summary_no_status_bar);
-            mImmersiveModePref.setSummary(res.getString(R.string.summary_immersive_mode, navbarOnly));
+        String summary = "Microwave your phone on HIGH for 30 minutes";
+        switch (immersiveModeValue) {
+            case 0: summary = res.getString(R.string.immersive_mode_disabled);
+                break;
+            case 1: summary = res.getString(R.string.summary_immersive_mode,
+                                  res.getString(R.string.immersive_mode_summary_status_bar));
+                break;
+            case 2: summary = res.getString(R.string.summary_immersive_mode,
+                                  res.getString(R.string.immersive_mode_summary_no_status_bar));
+                break;
+            case 3: summary = res.getString(R.string.summary_immersive_mode,
+                                  res.getString(R.string.immersive_mode_summary_no_status_bar));
+                break;
         }
+        mImmersiveModePref.setSummary(summary);
     }
 
     private void updateRebootDialog() {

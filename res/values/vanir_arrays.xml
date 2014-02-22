@@ -205,9 +205,16 @@
         <item>3</item>
     </string-array>
 
-    <string-array name="immersive_mode_other_entries" translatable="false">
+    <string-array name="immersive_mode_entries_no_navbar" translatable="false">
         <item>@string/immersive_mode_disabled</item>
+        <item>@string/immersive_mode_status_bar</item>
         <item>@string/immersive_mode_no_status_bar</item>
+    </string-array>
+
+    <string-array name="immersive_mode_values_no_navbar" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <!-- CRT off animation mode -->
