@@ -81,6 +81,7 @@ import com.android.settings.cyanogenmod.LockscreenInterface;
 import com.android.settings.cyanogenmod.MoreDeviceSettings;
 import com.android.settings.cyanogenmod.SystemUiSettings;
 import com.android.settings.vanir.superuser.PolicyNativeFragment;
+import com.android.settings.vanir.HeaderCompatCheck;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -139,6 +140,8 @@ public class Settings extends PreferenceActivity
     static final int DIALOG_ONLY_ONE_HOME = 1;
 
     private static boolean sShowNoHomeNotice = false;
+
+    private HeaderCompatCheck mHeaderCompatCheck;
 
     private String mFragmentClass;
     private int mTopLevelHeaderId;
@@ -214,6 +217,9 @@ public class Settings extends PreferenceActivity
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
+
+        Context context = getApplicationContext();
+        mHeaderCompatCheck = new HeaderCompatCheck(context);
 
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
@@ -577,6 +583,7 @@ public class Settings extends PreferenceActivity
 
     private void updateHeaderList(List<Header> target) {
         final boolean showDev = UserHandle.myUserId() == UserHandle.USER_OWNER;
+        final boolean compatibility = mHeaderCompatCheck.hasCompatibility();
         updateUserPreferences();
         int i = 0;
 
@@ -588,6 +595,10 @@ public class Settings extends PreferenceActivity
             int id = (int) header.id;
             if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
+            } else if (id == R.id.more_device_settings) {
+                if (!compatibility) {
+                    target.remove(i);
+                }
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {

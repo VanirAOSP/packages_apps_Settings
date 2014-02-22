@@ -49,9 +49,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
     private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
-    private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
-    private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
     private static final String QUICK_CAM = "quick_cam";
+    private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
 
     private static final String CATEGORY_HOME = "home_key";
     private static final String CATEGORY_MENU = "menu_key";
@@ -61,6 +60,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_VOLUME = "volume_keys";
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
     private static final String CATEGORY_POWER_BUTTON = "power_key";
+    private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
 
     // Available custom actions to perform on a key press.
     // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
@@ -95,8 +95,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mCameraMusicControls;
     private ListPreference mVolumeKeyCursorControl;
     private CheckBoxPreference mSwapVolumeButtons;
-    private CheckBoxPreference mHeadsetHookLaunchVoice;
     private CheckBoxPreference mQuickCam;
+    private CheckBoxPreference mHeadsetHookLaunchVoice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -254,13 +254,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         mQuickCam.setChecked(Settings.System.getInt(resolver,
                 Settings.System.POWER_MENU_QUICKCAM, 0) == 1);
 
+        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
+                getPreferenceScreen(), KEY_BLUETOOTH_INPUT_SETTINGS);
+
         mHeadsetHookLaunchVoice = (CheckBoxPreference) findPreference(BUTTON_HEADSETHOOK_LAUNCH_VOICE);
         mHeadsetHookLaunchVoice.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HEADSETHOOK_LAUNCH_VOICE, 1) == 1);
         updateHeadsetButtonSummary();
-
-        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                getPreferenceScreen(), KEY_BLUETOOTH_INPUT_SETTINGS);
 
         final PreferenceCategory powerButtonCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER_BUTTON);
@@ -349,12 +349,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION,
                     checked ? (Utils.isTablet(getActivity()) ? 2 : 1) : 0);
             return true;
-        } else if (preference == mHeadsetHookLaunchVoice) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HEADSETHOOK_LAUNCH_VOICE,
-                    checked ? 1 : 0);
-            updateHeadsetButtonSummary();
-            return true;
         } else if (preference == mCameraWake) {
             mCameraMusicControls.setEnabled(!checked);
             mCameraSleepOnRelease.setEnabled(checked);
@@ -368,15 +362,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
             mContext.sendBroadcastAsUser(u, UserHandle.ALL);
             return true;
+        } else if (preference == mHeadsetHookLaunchVoice) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.HEADSETHOOK_LAUNCH_VOICE,
+                    mHeadsetHookLaunchVoice.isChecked() ? 1 : 0);
+            updateHeadsetButtonSummary();
+            return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    private void updateHeadsetButtonSummary() {
-        mHeadsetHookLaunchVoice.setSummary(mHeadsetHookLaunchVoice.isChecked() ?
-                R.string.button_headsethook_launch_voice_checked_summary :
-                R.string.button_headsethook_launch_voice_unchecked_summary);
     }
 
     private static boolean isPackageInstalled(Context context, String packageName) {
@@ -385,5 +379,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } catch (NameNotFoundException e) {
             return false;
         }
+    }
+
+    private void updateHeadsetButtonSummary() {
+        mHeadsetHookLaunchVoice.setSummary(mHeadsetHookLaunchVoice.isChecked() ?
+                R.string.button_headsethook_launch_voice_checked_summary :
+                R.string.button_headsethook_launch_voice_unchecked_summary);
     }
 }

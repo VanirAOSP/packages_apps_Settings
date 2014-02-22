@@ -199,8 +199,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="button_headsethook"
-        android:title="@string/button_headsethook_title" >
+        android:title="@string/headset_category_title" >
+
+        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+            android:key="headset_connect_player"
+            android:title="@string/headset_connect_player_title"
+            android:summary="@string/headset_connect_player_summary"
+            android:defaultValue="false" />
 
         <CheckBoxPreference
             android:key="button_headsethook_launch_voice"
@@ -209,5 +214,4 @@
             android:persistent="false" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>

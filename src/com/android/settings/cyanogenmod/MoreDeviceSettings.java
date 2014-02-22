@@ -16,7 +16,6 @@
 
 package com.android.settings.cyanogenmod;
 
-import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,12 +27,10 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
-import com.android.settings.hardware.DisplayColor;
-import com.android.settings.hardware.DisplayGamma;
-import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.vanir.HeaderCompatCheck;
 
 public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static final String TAG = "MoreDeviceSettings";
@@ -44,8 +41,11 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static final String KEY_DISPLAY_GAMMA = "gamma_tuning";
     private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
     private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
+    private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
 
     private CheckBoxPreference mForceHighEndGfx;
+
+    private HeaderCompatCheck mHeaderCompatCheck;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,32 +54,34 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.more_device_settings);
         ContentResolver resolver = getContentResolver();
 
-        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (!VibratorIntensity.isSupported() || vibrator == null || !vibrator.hasVibrator()) {
-            removePreference(KEY_SENSORS_MOTORS_CATEGORY);
-        }
-
         final PreferenceGroup calibrationCategory =
                 (PreferenceGroup) findPreference(KEY_DISPLAY_CALIBRATION_CATEGORY);
 
-        if (!DisplayColor.isSupported() && !DisplayGamma.isSupported()) {
-            getPreferenceScreen().removePreference(calibrationCategory);
-        } else {
-            if (!DisplayColor.isSupported()) {
-                calibrationCategory.removePreference(findPreference(KEY_DISPLAY_COLOR));
-            }
-            if (!DisplayGamma.isSupported()) {
-                calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
-            }
+        if (!mHeaderCompatCheck.hasVibratorIntensity()) {
+            removePreference(KEY_SENSORS_MOTORS_CATEGORY);
         }
 
-        if (ActivityManager.isLowRamDeviceStatic()) {
+        boolean colors = mHeaderCompatCheck.modifiableDisplayColors();
+        boolean gamma = mHeaderCompatCheck.modifiableDisplayGamma();
+
+        if (!gamma && !colors) {
+            getPreferenceScreen().removePreference(calibrationCategory);
+        } else if (!gamma) {
+            calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
+        } else if (!colors) {
+            calibrationCategory.removePreference(findPreference(KEY_DISPLAY_COLOR));
+        }
+
+        if (mHeaderCompatCheck.isLowRam()) {
             mForceHighEndGfx = (CheckBoxPreference) findPreference(FORCE_HIGHEND_GFX_PREF);
             String forceHighendGfx = SystemProperties.get(FORCE_HIGHEND_GFX_PERSIST_PROP, "false");
             mForceHighEndGfx.setChecked("true".equals(forceHighendGfx));
         } else {
             getPreferenceScreen().removePreference(findPreference(FORCE_HIGHEND_GFX_PREF));
         }
+        
+        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
+                getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
     }
 
     @Override

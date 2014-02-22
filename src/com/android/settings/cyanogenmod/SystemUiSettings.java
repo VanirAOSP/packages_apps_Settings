@@ -37,7 +37,6 @@ import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,9 +84,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         mExpandedDesktop.setChecked(Settings.System.getInt(getContentResolver(), 
                     Settings.System.EXPANDED_DESKTOP, 0) == 1);
         mExpandedDesktop.setOnPreferenceChangeListener(this);
-
-        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
     
         mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
         immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
