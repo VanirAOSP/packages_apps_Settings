@@ -1885,7 +1885,6 @@
         </activity-alias>
 
         <!-- Vanir activities start -->
-
         <activity android:name=".vanir.gesturepanel.CreateGestureActivity" />
         <activity android:name=".vanir.gesturepanel.GestureBuilderActivity"
                 android:launchMode="singleTop"
@@ -1896,7 +1895,6 @@
                 <category android:name="android.intent.category.SHORTCUT" />
             </intent-filter>
         </activity>
-
         <!-- Vanir activities End -->
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
@@ -2381,6 +2379,17 @@
                 <category android:name="com.android.systemui.SHORTCUT" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="com.android.settings.vanir.activities.ScreenRecordActivity"
+            android:label="@string/screen_recorder_activity"
+            android:icon="@drawable/ic_screen_record"
+            android:theme="@*android:style/Theme.Material.Light.Dialog.Alert"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

@@ -142,6 +142,12 @@
             android:title="@string/development_shortcut_title"
             android:summary="@string/development_shortcut_summary" />
 
+        <PreferenceScreen
+            android:key="screen_recorder"
+            android:title="@string/screen_recorder_title"
+            android:summary="@string/screen_recorder_summary"
+            android:fragment="com.android.settings.vanir.ScreenRecorderSettings" />
+
         <SwitchPreference
                 android:key="debug_view_attributes"
                 android:title="@string/debug_view_attributes" />
