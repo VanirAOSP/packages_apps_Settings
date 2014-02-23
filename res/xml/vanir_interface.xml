@@ -47,6 +47,11 @@
          android:summary="@string/lcd_density_summary" 
          android:fragment="com.android.settings.vanir.DensityChanger" />
 
+    <PreferenceScreen
+        android:key="screen_recorder"
+        android:title="@string/screen_recorder_title"
+        android:fragment="com.android.settings.vanir.ScreenRecorderSettings" />
+
     <PreferenceCategory
        android:title="@string/vanir_immersive_desktop" >
 
