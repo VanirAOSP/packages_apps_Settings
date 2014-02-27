@@ -13,10 +13,11 @@ import android.preference.CheckBoxPreference;
 import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.IWindowManager;
+import android.widget.Toast;
+
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.vanir.AnimBarPreference;
 import com.android.settings.R;
-
 import com.vanir.util.VanirAnimationHelper;
 
 import java.util.Arrays;
@@ -40,7 +41,8 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
     private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
     private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
     private static final String ANIMATOR_DURATION_SCALE_KEY = "animator_duration_scale";
-    private static final String LISTVIEW_INTERPOLATOR = "listview_interpolator"; 
+    private static final String LISTVIEW_INTERPOLATOR = "listview_interpolator";
+    private static final String KEY_TOAST_ANIMATION = "toast_animation";
 
     private CheckBoxPreference mAnimNoOverride;
     private ListPreference mWindowAnimationScale;
@@ -60,6 +62,7 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
     private ListPreference mWallpaperClose;
     private ListPreference mWallpaperIntraOpen;
     private ListPreference mWallpaperIntraClose;
+    private ListPreference mToastAnimation;
 
     private int[] mAnimations;
     private String[] mAnimationsStrings;
@@ -184,6 +187,13 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
         mAnimationDuration.setInitValue((int) (defaultDuration));
         mAnimationDuration.setOnPreferenceChangeListener(this);
 
+        mToastAnimation = (ListPreference) findPreference(KEY_TOAST_ANIMATION);
+        mToastAnimation.setSummary(mToastAnimation.getEntry());
+        int CurrentToastAnimation = Settings.System.getInt(getContentResolver(), Settings.System.ACTIVITY_ANIMATION_CONTROLS[10], 1);
+        mToastAnimation.setValueIndex(CurrentToastAnimation); //set to index of default value
+        mToastAnimation.setSummary(mToastAnimation.getEntries()[CurrentToastAnimation]);
+        mToastAnimation.setOnPreferenceChangeListener(this);
+
         updateAnimationScaleOptions();
     }
 
@@ -206,60 +216,70 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[0], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mActivityClosePref) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[1], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mTaskOpenPref) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[2], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mTaskClosePref) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[3], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mTaskMoveToFrontPref) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[4], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mTaskMoveToBackPref) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[5], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mWallpaperOpen) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[6], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mWallpaperClose) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[7], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mWallpaperIntraOpen) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[8], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mWallpaperIntraClose) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACTIVITY_ANIMATION_CONTROLS[9], val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mAnimationDuration) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
@@ -267,6 +287,7 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
                     val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mListViewDuration) {
             int val = Integer.parseInt((String) newValue);
             Settings.System.putInt(getContentResolver(),
@@ -274,6 +295,7 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
                     val);
             preference.setSummary(getProperSummary(preference));
             return true;
+
         } else if (preference == mListViewAnimation) {
             int listviewanimation = Integer.valueOf((String) newValue);
             int index = mListViewAnimation.findIndexOfValue((String) newValue);
@@ -282,6 +304,7 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
                     listviewanimation);
             mListViewAnimation.setSummary(mListViewAnimation.getEntries()[index]);
             return true;
+
         } else if (preference == mListViewInterpolator) {
             int listviewinterpolator = Integer.valueOf((String) newValue);
            int index = mListViewInterpolator.findIndexOfValue((String) newValue);
@@ -290,6 +313,14 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
                     listviewinterpolator);
             mListViewInterpolator.setSummary(mListViewInterpolator.getEntries()[index]);
             return true;
+
+       } else if (preference == mToastAnimation) {
+            int index = mToastAnimation.findIndexOfValue((String) newValue);
+            Settings.System.putString(getContentResolver(), Settings.System.ACTIVITY_ANIMATION_CONTROLS[10], (String) newValue);
+            mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
+            Toast.makeText(mContext, "Toast Test", Toast.LENGTH_SHORT).show();
+            return true;
+
         } else if (preference == mWindowAnimationScale) {
             writeAnimationScaleOption(0, mWindowAnimationScale, newValue);
             return true;
