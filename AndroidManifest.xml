@@ -1886,12 +1886,8 @@
         <activity android:name=".vanir.NotificationDrawerStyle" />
 
         <activity
-            android:name=".vanir.AnimationControls"
-            android:label="@string/animation_manager_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.intent.category.SHORTCUT"/>
-            </intent-filter>
+            android:name=".AnimationControls"
+            android:label="@string/animation_manager_title" >
         </activity>
 
         <!-- LCD changer -->

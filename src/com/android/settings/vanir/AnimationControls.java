@@ -50,7 +50,7 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.prefs_animation_controls);
+        addPreferencesFromResource(R.xml.animation_controls);
 
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
 
@@ -105,12 +105,19 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
                                          Preference preference) {
        if (preference == mAnimNoOverride) {
             Settings.System.putBoolean(getContentResolver(),
                     Settings.System.ANIMATION_CONTROLS_NO_OVERRIDE,
                         mAnimNoOverride.isChecked());
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return true;
     } 

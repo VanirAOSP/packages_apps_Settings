@@ -58,7 +58,6 @@
 
         <PreferenceScreen
             android:id="@+id/animations"
-            android:key="animations"
             android:title="@string/animation_manager_title"
             android:summary="@string/animation_control_summary"
             android:fragment="com.android.settings.vanir.AnimationControls" />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2014 VanirAOSP && the Android Open Source Project
+     Copyright (C) 2013 OmniKang
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -15,8 +16,9 @@
  -->
 
 <PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/animation_manager_title"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
         android:key="general"
@@ -163,6 +165,11 @@
             android:persistent="false" />
 
     </PreferenceCategory>
+
+    <PreferenceScreen
+        android:key="progressbar_settings"
+        android:fragment="com.android.settings.vanir.ProgressBar"
+        android:title="@string/progressbar_title" />
 
     <Preference
         style="?android:preferenceInformationStyle"
