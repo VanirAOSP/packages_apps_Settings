@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD:res/xml/prefs_animation_controls.xml
-=======
 <!-- Copyright (C) 2014 VanirAOSP && the Android Open Source Project
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +14,6 @@
  limitations under the License.
  -->
 
->>>>>>> 296a2cf... revamp animation control:res/xml/animation_controls.xml
 <PreferenceScreen
     android:title="@string/animation_manager_title"
     xmlns:android="http://schemas.android.com/apk/res/android">
