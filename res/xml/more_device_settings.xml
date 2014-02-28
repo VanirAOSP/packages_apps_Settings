@@ -51,6 +51,11 @@
 
     </PreferenceCategory>
 
+    <CheckBoxPreference
+        android:key="pref_force_highend_gfx"
+        android:title="@string/pref_force_highend_gfx_title"
+        android:summary="@string/pref_force_highend_gfx_summary" />
+
     <PreferenceCategory
         android:title="@string/headset_category_title" >
 

@@ -16,19 +16,24 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.Vibrator;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.hardware.DisplayColor;
 import com.android.settings.hardware.DisplayGamma;
 import com.android.settings.hardware.VibratorIntensity;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static final String TAG = "MoreDeviceSettings";
@@ -37,6 +42,10 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static final String KEY_DISPLAY_CALIBRATION_CATEGORY = "display_calibration_category";
     private static final String KEY_DISPLAY_COLOR = "color_calibration";
     private static final String KEY_DISPLAY_GAMMA = "gamma_tuning";
+    private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
+    private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
+
+    private CheckBoxPreference mForceHighEndGfx;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,5 +72,26 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
                 calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
             }
         }
+
+        if (ActivityManager.isLowRamDeviceStatic()) {
+            mForceHighEndGfx = (CheckBoxPreference) findPreference(FORCE_HIGHEND_GFX_PREF);
+            String forceHighendGfx = SystemProperties.get(FORCE_HIGHEND_GFX_PERSIST_PROP, "false");
+            mForceHighEndGfx.setChecked("true".equals(forceHighendGfx));
+        } else {
+            getPreferenceScreen().removePreference(findPreference(FORCE_HIGHEND_GFX_PREF));
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mForceHighEndGfx) {
+            SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
+                    mForceHighEndGfx.isChecked() ? "true" : "false");
+        } else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+
+        return true;
     }
 }
