@@ -190,8 +190,12 @@
     <string name="title_animation_no_override">Prevent App Overrides</string>
     <string name="summary_animation_no_override">Prevent apps from overriding transitions.</string>
     <string name="animation_duration_default">Default</string>
-    <string name="disclaimer_summary">Note: wallpaper animations involve animations performed from the launcher. Wallpaper closing is for moving away from viewing the wallpaper such as opening an app.</string>
-    <string name="multiplier_title">Default multiplier scales</string>
+    <string name="disclaimer_summary">Note: Wallpaper animations involve animations performed from the launcher. Wallpaper closing is for moving away from viewing the wallpaper such as opening an app.</string>
+    <string name="multiplier_title">Scales and durations</string>
+    <string name="activity_animations_title">Transition animations</string>
+    <string name="activity_animations_summary">Set the animations for activities, apps, tasks etc</string>
+    <string name="animation_settings_reset_message">Reset all animation settings to default?</string>
+    
     <!-- ListView animation -->
     <string name="listview_animation_title">ListView scrolling animation</string>
     <string name="listview_off">Off</string>
@@ -221,6 +225,19 @@
     <string name="home_wake_summary">Pressing the home button will wake your device</string>
     <string name="header_summary_vibrations">@null</string>
     <string name="wallpaper_animations">Wallpaper animations</string>
+
+    <!-- Scrolling Animation Controls -->
+    <string name="scrolling_title">Scrolling modifiers</string>
+    <string name="scrolling_summary">View or change scrolling animations</string>
+    <string name="animation_fling_velocity_title">Fling velocity</string>
+    <string name="animation_scroll_friction_title">Scroll friction</string>
+    <string name="animation_overscroll_distance_title">Overscroll distance</string>
+    <string name="animation_overfling_distance_title">Overfling distance</string>
+    <string name="animation_duration_summary">Set duration</string>
+    <string name="animation_no_scroll_title">Customized scrolling modifiers</string>
+    <string name="animation_no_scroll_summary_on">Enabled</string>
+    <string name="animation_no_scroll_summary_off">Disabled</string>
+    <string name="scroll_disclaimer_summary">Note: Most apps need to be restarted for custom values to take effect</string>
 
     <!-- CLOCK -->
     <string name="status_bar_clock_title">Clock style</string>
@@ -643,7 +660,7 @@
     <string name="pref_battery_saver_wifi_summary">Disable wifi connection when power saving activated</string>
 
     <!-- Toast Animation -->
-    <string name="toast_animation_title">Toast Animation</string>
+    <string name="toast_animation_title">Toast animation</string>
     <string name="toast_none_animation">None</string>
     <string name="toast_default_animation">Default</string>
     <string name="toast_fade_animation">Fade Animation</string>
@@ -660,6 +677,30 @@
     <string name="toast_Translucent_animation">Translucent Animation</string>
     <string name="toast_SlideLeftRight_animation">Slide Left To Right Animation</string>
     <string name="toast_SlideRightLeft_animation">Slide Right To Left Animation</string>
+
+    <!-- Smooth ProgressBar -->
+    <string name="progressbar_title">Progress bars</string>
+    <string name="progressbar_summary">Change the color, speed, animation etc for progress bars</string>
+    <string name="progressbar_mirror_title">Mirror Mode</string>
+    <string name="progressbar_reverse_title">Reversed</string>
+    <string name="progressbar_speed_title">Speed</string>
+    <string name="progressbar_width_title">Stroke Width</string>
+    <string name="progressbar_length_title">Separator length</string>
+    <string name="progressbar_count_title">Sections Count</string>
+    <string name="progressbar_color_1_title">Color1</string>
+    <string name="progressbar_color_2_title">Color2</string>
+    <string name="progressbar_color_3_title">Color3</string>
+    <string name="progressbar_color_4_title">Color4</string>
+    <string name="sample_progressbar_text">ProgressBar : Preview</string>
+    <string name="progressbar_interpolator">Interpolator</string>
+    <string name="progressbar_none">None</string>
+    <string name="progressbar_acclerate">Accelerate</string>
+    <string name="progressbar_linear">Linear</string>
+    <string name="progressbar_acceleratedecelerate">AccelerateDecelerate</string>
+    <string name="progressbar_decelerate">Decelerate</string>
+    <string name="progressbar_reset_message">Reset progress bar style to default?</string>
+    <string name="ram_bar_button_reset">Reset colors</string>
+    <string name="ram_bar_reset">Reset</string>
 
     <!-- Lockscreen background -->
     <string name="lockscreen_background">Background</string>
