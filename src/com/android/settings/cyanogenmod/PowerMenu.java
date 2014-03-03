@@ -17,6 +17,7 @@
 package com.android.settings.cyanogenmod;
 
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -78,7 +79,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
 
         mImmersiveModePref = (CheckBoxPreference) findPreference(KEY_POWERMENU_IMMERSIVE_PREFS);
         mImmersiveModePref.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_IMMERSIVE, 1) == 1));
+                Settings.System.POWER_MENU_IMMERSIVE, 0) == 1));
         // disable immersive if immersive style is disabled
         mImmersiveModePref.setEnabled(
                 Settings.System.getInt(getContentResolver(),
@@ -95,7 +96,8 @@ public class PowerMenu extends SettingsPreferenceFragment {
 
         mUsers = (CheckBoxPreference) findPreference(KEY_USERS);
         mUsers.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_USER_ENABLED, 1) == 1));
+                Settings.System.POWER_MENU_USER_ENABLED, 0) == 1));
+        setUsersEnabled();
 
         mScreenrecordPowerMenu = (CheckBoxPreference) findPreference(POWER_MENU_SCREENRECORD);
         if(mHasScreenRecord) {
@@ -160,6 +162,19 @@ public class PowerMenu extends SettingsPreferenceFragment {
         }
         updateRebootDialog();
         return true;
+    }
+
+    private void setUsersEnabled() {
+        List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE))
+                .getUsers();
+
+        if (mUsers != null) {
+            if (users.size() > 1) {
+                mUsers.setEnabled(true);
+            } else {
+                mUsers.setEnabled(false);
+            }
+        }
     }
 
     private void updateRebootDialog() {
