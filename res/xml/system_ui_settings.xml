@@ -76,8 +76,8 @@
         android:id="@+id/system_ui_more"
         android:fragment="com.android.settings.vanir.AdditionalSystemUI"
         android:title="@string/more_device_controls_title" />
-
     </PreferenceCategory>
+
     <PreferenceCategory
        android:title="@string/vanir_immersive_desktop" >
     
