@@ -260,7 +260,8 @@
     <string name="display_rotation_270_title">270 degrees</string>
 
     <!-- Immersive Mode -->
-    <string name="power_menu_immersive_mode">Immersive desktop</string>
+    <string name="power_menu_immersive_mode">Immersive mode</string>
+    <string name="power_menu_expanded_mode">Expanded desktop</string>
     <string name="summary_immersive_mode">%1$s</string>
     <string name="immersive_mode_summary_status_bar">With status bar</string>
     <string name="immersive_mode_summary_no_status_bar">Without status bar</string>

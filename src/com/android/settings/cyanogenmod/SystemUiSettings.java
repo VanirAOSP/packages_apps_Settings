@@ -142,6 +142,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.EXPANDED_DESKTOP,
                     (Boolean) objValue ? 1 : 0);
+            updateRebootDialog();
             return true;
 
         } else if (preference == mImmersiveModeState) {
@@ -155,7 +156,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
     private void updateImmersiveModeSummary() {
         Resources res = getResources();
-        String summary = "Microwave your phone on HIGH for 30 minutes";
+        String summary = "Microwaving your phone on HIGH for 30 minutes";
         switch (immersiveModeValue) {
             case 0: summary = res.getString(R.string.immersive_mode_disabled);
                 break;

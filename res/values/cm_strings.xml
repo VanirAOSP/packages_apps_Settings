@@ -812,6 +812,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_user_title">User switcher</string>
     <string name="power_menu_sound_title">Sound panel</string>
+    <string name="default_power_menu_options">Default options</string>
+    <string name="custom_power_menu_title">Custom options</string>
 
     <!-- Hardware keys -->
     <string name="button_settings">Hardware keys</string>

@@ -16,6 +16,7 @@
 
 package com.android.settings.cyanogenmod;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
@@ -30,6 +31,8 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import java.util.List;
 
 public class PowerMenu extends SettingsPreferenceFragment {
     private static final String TAG = "PowerMenu";
@@ -85,10 +88,11 @@ public class PowerMenu extends SettingsPreferenceFragment {
                 Settings.System.getInt(getContentResolver(),
                 Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0)
                 != 0);
+        setImmersiveSummary();
 
         mProfile = (CheckBoxPreference) findPreference(KEY_PROFILES);
         mProfile.setChecked((Settings.System.getInt(getContentResolver(),
-                Settings.System.POWER_MENU_PROFILES_ENABLED, 1) == 1));
+                Settings.System.POWER_MENU_PROFILES_ENABLED, 0) == 1));
 
         // Only enable profiles item if System Profiles are also enabled
         findPreference(KEY_PROFILES).setEnabled(Settings.System.getInt(getContentResolver(),
@@ -114,6 +118,12 @@ public class PowerMenu extends SettingsPreferenceFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        setImmersiveSummary();
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean value;
 
@@ -122,41 +132,49 @@ public class PowerMenu extends SettingsPreferenceFragment {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_SCREENSHOT_ENABLED,
                     value ? 1 : 0);
+
         } else if (preference == mRebootPref) {
             value = mRebootPref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_REBOOT_ENABLED,
                     value ? 1 : 0);
+
        } else if (preference == mAirplanePref) {
             value = mAirplanePref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_AIRPLANE_ENABLED,
                     value ? 1 : 0);
+
        } else if (preference == mSilentPref) {
             value = mSilentPref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_SILENT_ENABLED,
                     value ? 1 : 0);
+
         } else if (preference == mImmersiveModePref) {
             value = mImmersiveModePref.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_IMMERSIVE,
                     value ? 1 : 0);
+
         } else if (preference == mUsers) {
             value = mUsers.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.POWER_MENU_USER_ENABLED,
                     value ? 1 : 0);
+
         } else if (preference == mProfile) {
             value = mProfile.isChecked();
             Settings.System.putInt(getContentResolver(),
                      Settings.System.POWER_MENU_PROFILES_ENABLED,
                      value ? 1 : 0);
+
         } else if (preference == mScreenrecordPowerMenu) {
 			      value = mScreenrecordPowerMenu.isChecked();
 			      Settings.System.putInt(getContentResolver(),
                     Settings.System.SCREENRECORD_IN_POWER_MENU,
                     value ? 1 : 0);
+
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -174,6 +192,17 @@ public class PowerMenu extends SettingsPreferenceFragment {
             } else {
                 mUsers.setEnabled(false);
             }
+        }
+    }
+
+    private void setImmersiveSummary() {
+        boolean expanded = Settings.System.getInt(getContentResolver(),
+                Settings.System.EXPANDED_DESKTOP, 0) == 1;
+        
+        if (!expanded) {
+            mImmersiveModePref.setTitle(R.string.power_menu_immersive_mode);
+        } else {
+            mImmersiveModePref.setTitle(R.string.power_menu_expanded_mode);
         }
     }
 

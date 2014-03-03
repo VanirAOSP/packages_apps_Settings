@@ -19,10 +19,38 @@
     android:title="@string/power_menu_title"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory
+        android:key="default_power_menu"
+        android:title="@string/default_power_menu_options" />
+
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
         android:key="power_menu_reboot"
         android:title="@string/power_menu_reboot_title"
         android:defaultValue="true" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="power_menu_airplane"
+        android:title="@string/power_menu_airplane_title"
+        android:defaultValue="true" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="power_menu_silent"
+        android:title="@string/power_menu_sound_title"
+        android:defaultValue="true" />
+
+    <PreferenceCategory
+        android:key="custom_power_menu"
+        android:title="@string/custom_power_menu_title" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="power_menu_profiles"
+        android:title="@string/power_menu_profiles_title"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="powermenu_immersive_prefs"
+        android:title="@string/power_menu_immersive_mode"
+        android:defaultValue="true" />   
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
         android:key="power_menu_screenshot"
@@ -36,28 +64,8 @@
 			android:defaultValue="false" />
 
     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_profiles"
-        android:title="@string/power_menu_profiles_title"
-        android:defaultValue="false" />
-
-    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_airplane"
-        android:title="@string/power_menu_airplane_title"
-        android:defaultValue="true" />
-
-    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
         android:key="power_menu_user"
         android:title="@string/power_menu_user_title"
         android:defaultValue="false" />
-
-    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-        android:key="power_menu_silent"
-        android:title="@string/power_menu_sound_title"
-        android:defaultValue="true" />
-
-    <CheckBoxPreference
-        android:key="powermenu_immersive_prefs"
-        android:title="@string/power_menu_immersive_mode"
-        android:defaultValue="true" />   
 
 </PreferenceScreen>
