@@ -46,7 +46,6 @@
             android:entryValues="@array/listview_interpolator_values"
             android:defaultValue="0" />
 
-
         <PreferenceScreen
             android:key="activity_animations"
             android:title="@string/activity_animations_title"
@@ -71,6 +70,11 @@
             android:fragment="com.android.settings.vanir.ScrollAnimationInterfaceSettings"
             android:title="@string/scrolling_title"
             android:summary="@string/scrolling_summary" />
+
+        <PreferenceScreen
+            android:key="progressbar_settings"
+            android:fragment="com.android.settings.vanir.ProgressBar"
+            android:title="@string/progressbar_title" />
 
     </PreferenceCategory>
     <PreferenceCategory
@@ -107,74 +111,4 @@
             android:entryValues="@array/animator_duration_scale_values" />
 
     </PreferenceCategory>
-    <PreferenceCategory
-        android:key="apps_activities"
-        android:title="@string/apps_and_activities">
-
-        <ListPreference
-            android:key="activity_open"
-            android:title="@string/activity_open_title" />
-
-        <ListPreference
-            android:key="activity_close"
-            android:title="@string/activity_close_title" />
-
-        <ListPreference
-            android:key="task_open"
-            android:title="@string/task_open_title" />
-
-        <ListPreference
-            android:key="task_close"
-            android:title="@string/task_close_title" />
-
-        <ListPreference
-            android:key="task_move_to_front"
-            android:title="@string/task_move_to_front_title" />
-
-        <ListPreference
-            android:key="task_move_to_back"
-            android:title="@string/task_move_to_back_title" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="wallpaper_animations"
-        android:title="@string/wallpaper_animations" >
-
-        <ListPreference
-            android:key="wallpaper_open"
-            android:title="@string/wallpaper_open_title" />
-
-        <ListPreference
-            android:key="wallpaper_close"
-            android:title="@string/wallpaper_close_title" />
-
-        <ListPreference
-            android:key="wallpaper_intra_open"
-            android:title="@string/wallpaper_intra_open_title" />
-
-        <ListPreference
-            android:key="wallpaper_intra_close"
-            android:title="@string/wallpaper_intra_close_title" />
-
-        <ListPreference
-            android:key="toast_animation"
-            android:title="@string/toast_animation_title"
-            android:entries="@array/toast_animation_entries"
-            android:entryValues="@array/toast_animation_values"
-            android:persistent="false" />
-
-    </PreferenceCategory>
-
-    <PreferenceScreen
-        android:key="progressbar_settings"
-        android:fragment="com.android.settings.vanir.ProgressBar"
-        android:title="@string/progressbar_title" />
-
-    <Preference
-        style="?android:preferenceInformationStyle"
-        android:key="disclaimer"
-        android:summary="@string/disclaimer_summary"
-        android:icon="@drawable/ic_rom_control_animations" /> 
-
 </PreferenceScreen>

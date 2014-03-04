@@ -101,7 +101,6 @@ public class ProgressBar extends SettingsPreferenceFragment implements
 		                            Settings.System.PROGRESSBAR_COUNT, 6));
 		mprogressbar_count.setOnPreferenceChangeListener(this);
 
-		int defaultColor = Color.rgb(255, 255, 255);
 		mprogressbar_color_1 = (ColorPickerPreference) findPreference(PROGRESSBAR_COLOR_1);
 		int intColor1 = Settings.System.getInt(getActivity().getContentResolver(), Settings.System.PROGRESSBAR_COLOR_1, defaultColor);
 		mprogressbar_color_1.setNewPreviewColor(intColor1);
