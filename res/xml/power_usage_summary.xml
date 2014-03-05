@@ -17,6 +17,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/battery_since_unplugged"
         android:key="app_list">
+
+    <com.android.settings.vanir.BatterySaverPreference
+        android:key="interface_battery_saver_key"
+        android:defaultValue="false"
+        android:fragment="com.android.settings.vanir.BatterySaverSettings"
+        android:title="@string/battery_saver_title"
+        android:widgetLayout="@layout/listview_embedded_switchpreference" />
+
     <Preference
         style="?android:attr/preferenceInformationStyle"
         android:key="battery_status"

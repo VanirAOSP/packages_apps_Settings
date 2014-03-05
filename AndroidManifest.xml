@@ -2079,6 +2079,11 @@
             </intent-filter>
         </receiver>
 
+        <activity
+             android:name=".vanir.BatterySaverSettings"
+             android:label="@string/data_usage_enable_batterysaver" >
+        </activity>
+
         <receiver
             android:name="com.android.settings.vanir.BatterySaverReceiver">
             <intent-filter>

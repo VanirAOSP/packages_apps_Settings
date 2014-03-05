@@ -68,11 +68,6 @@
         android:title="@string/notification_drawer_title" />
 
     <PreferenceScreen
-        android:key="interface_battery_saver"
-        android:fragment="com.android.settings.vanir.BatterySaverSettings"
-        android:title="@string/battery_saver_title" />
-
-    <PreferenceScreen
         android:id="@+id/system_ui_more"
         android:fragment="com.android.settings.vanir.AdditionalSystemUI"
         android:title="@string/more_device_controls_title" />
