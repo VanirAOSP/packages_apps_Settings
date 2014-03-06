@@ -71,11 +71,6 @@
             android:title="@string/scrolling_title"
             android:summary="@string/scrolling_summary" />
 
-        <PreferenceScreen
-            android:key="progressbar_settings"
-            android:fragment="com.android.settings.vanir.ProgressBar"
-            android:title="@string/progressbar_title" />
-
     </PreferenceCategory>
     <PreferenceCategory
         android:key="multiplier"
