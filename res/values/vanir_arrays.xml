@@ -671,4 +671,16 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="disable_bootanimation_entries">
+        <item>@string/disable_bootanimation_default</item>
+        <item>@string/disable_bootanimation_minimal</item>
+        <item>@string/disable_bootanimation_off</item>
+    </string-array>
+
+    <string-array name="disable_bootanimation_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>
