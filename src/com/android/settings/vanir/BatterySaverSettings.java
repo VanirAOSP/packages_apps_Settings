@@ -50,14 +50,17 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
     private static final String PREF_KEY_BATTERY_SAVER_POWER_SAVING_GSM_MODE = "pref_battery_saver_power_saving_gsm_mode";
     private static final String PREF_KEY_BATTERY_SAVER_NORMAL_CDMA_MODE = "pref_battery_saver_normal_cdma_mode";
     private static final String PREF_KEY_BATTERY_SAVER_POWER_SAVING_CDMA_MODE = "pref_battery_saver_power_saving_cdma_mode";
-    private static final String PREF_KEY_BATTERY_SAVER_SCREEN_OFF = "pref_battery_saver_screen_off";
-    private static final String PREF_KEY_BATTERY_SAVER_IGNORE_LOCKED = "pref_battery_saver_ignore_locked";
     private static final String PREF_KEY_BATTERY_SAVER_MODE_CHANGE_DELAY = "pref_battery_saver_mode_change_delay";
-    private static final String PREF_KEY_BATTERY_SAVER_MODE_BATTERY = "pref_battery_saver_mode_battery";
     private static final String PREF_KEY_BATTERY_SAVER_MODE_BATTERY_LEVEL = "pref_battery_saver_mode_battery_level";
     private static final String PREF_KEY_BATTERY_SAVER_MODE_DATA = "pref_battery_saver_mode_data";
-    private static final String PREF_KEY_BATTERY_SAVER_MODE_WIFI = "pref_battery_saver_mode_wifi";
+    private static final String PREF_KEY_BATTERY_SAVER_MODE_NETWORK = "pref_battery_saver_mode_network";
+    private static final String PREF_KEY_BATTERY_SAVER_MODE_NOSIGNAL = "pref_battery_saver_mode_nosignal";
     private static final String PREF_KEY_BATTERY_SAVER_TIMERANGE = "pref_battery_saver_timerange";
+
+    private static final String CATEGORY_RADIO = "category_battery_saver_radio";
+    private static final String CATEGORY_NETWORK = "category_battery_saver_network";
+    private static final String CATEGORY_NETWORK_GSM = "category_battery_saver_network_gsm";
+    private static final String CATEGORY_NETWORK_CDMA = "category_battery_saver_network_cdma";
 
     private ContentResolver mResolver;
     private Context mContext;
@@ -72,12 +75,10 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
     private ListPreference mPowerSavingCdmaPreferredNetworkMode;
     private SwitchPreference mBatterySaverEnabled;
     private SeekBarPreference mBatterySaverDelay;
-    private CheckBoxPreference mBatterySaverScreenOff;
-    private CheckBoxPreference mBatterySaverIgnoreLocked;
-    private CheckBoxPreference mSmartBatteryEnabled;
     private SeekBarPreference mLowBatteryLevel;
     private CheckBoxPreference mSmartDataEnabled;
-    private CheckBoxPreference mSmartWifiEnabled;
+    private CheckBoxPreference mSmartNoSignalEnabled;
+    private ListPreference mUserCheckIntervalTime;
     private TimeRangePreference mBatterySaverTimeRange;
 
     @Override
@@ -95,10 +96,9 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-
         mBatterySaverEnabled = (SwitchPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_ENABLE);
         mBatterySaverEnabled.setChecked(Settings.Global.getInt(mResolver,
-                Settings.Global.BATTERY_SAVER_OPTION, 0) != 0);
+                    Settings.Global.BATTERY_SAVER_OPTION, 0) != 0);
         mBatterySaverEnabled.setOnPreferenceChangeListener(this);
 
         mBatterySaverTimeRange = (TimeRangePreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_TIMERANGE);
@@ -107,11 +107,17 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
                     Settings.Global.getInt(mResolver, Settings.Global.BATTERY_SAVER_END, 0));
         mBatterySaverTimeRange.setOnPreferenceChangeListener(this);
 
-        mSmartDataEnabled = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_DATA);
-        mNormalGsmPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_NORMAL_GSM_MODE);
-        mPowerSavingGsmPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_POWER_SAVING_GSM_MODE);
-        mNormalCdmaPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_NORMAL_CDMA_MODE);
-        mPowerSavingCdmaPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_POWER_SAVING_CDMA_MODE);
+        mBatterySaverDelay = (SeekBarPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_CHANGE_DELAY);
+        mBatterySaverDelay.setValue(Settings.Global.getInt(mResolver,
+                     Settings.Global.BATTERY_SAVER_MODE_CHANGE_DELAY, 5));
+        mBatterySaverDelay.setOnPreferenceChangeListener(this);
+
+        mLowBatteryLevel = (SeekBarPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_BATTERY_LEVEL);
+        int lowBatteryLevels = mContext.getResources().getInteger(
+                        com.android.internal.R.integer.config_lowBatteryWarningLevel);
+        mLowBatteryLevel.setValue(Settings.Global.getInt(mResolver,
+                     Settings.Global.BATTERY_SAVER_BATTERY_LEVEL, lowBatteryLevels));
+        mLowBatteryLevel.setOnPreferenceChangeListener(this);
 
         if (BatterySaverHelper.deviceSupportsMobileData(mContext)) {
             TelephonyManager telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
@@ -119,13 +125,27 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
             int defaultNetwork = Settings.Global.getInt(mResolver,
                     Settings.Global.PREFERRED_NETWORK_MODE, Phone.PREFERRED_NT_MODE);
 
+            mSmartDataEnabled = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_DATA);
             mSmartDataEnabled.setChecked(Settings.Global.getInt(mResolver,
                      Settings.Global.BATTERY_SAVER_DATA_MODE, 1) == 1);
             mSmartDataEnabled.setOnPreferenceChangeListener(this);
 
+            mUserCheckIntervalTime = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_NETWORK);
+            long intervalTime = Settings.Global.getLong(mResolver,
+                         Settings.Global.BATTERY_SAVER_NETWORK_INTERVAL_MODE, 0);
+            mUserCheckIntervalTime.setValue(String.valueOf(intervalTime));
+            mUserCheckIntervalTime.setSummary(mUserCheckIntervalTime.getEntry());
+            mUserCheckIntervalTime.setOnPreferenceChangeListener(this);
+
+            mSmartNoSignalEnabled = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_NOSIGNAL);
+            mSmartNoSignalEnabled.setChecked(Settings.Global.getInt(mResolver,
+                     Settings.Global.BATTERY_SAVER_NOSIGNAL_MODE, 0) == 1);
+            mSmartNoSignalEnabled.setOnPreferenceChangeListener(this);
+
             if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
-                prefSet.removePreference(mNormalGsmPreferredNetworkMode);
-                prefSet.removePreference(mPowerSavingGsmPreferredNetworkMode);
+                prefSet.removePreference(findPreference(CATEGORY_NETWORK_GSM));
+                mNormalCdmaPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_NORMAL_CDMA_MODE);
+                mPowerSavingCdmaPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_POWER_SAVING_CDMA_MODE);
                 if (BatterySaverHelper.deviceSupportsLteCdma(mContext)) {
                     mNormalCdmaPreferredNetworkMode.setEntries(
                             R.array.enabled_networks_cdma_lte_choices);
@@ -147,6 +167,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
                 mPowerSavingCdmaPreferredNetworkMode.setSummary(mPowerSavingCdmaPreferredNetworkMode.getEntry());
                 mPowerSavingCdmaPreferredNetworkMode.setOnPreferenceChangeListener(this);
             } else if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
+                    mNormalGsmPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_NORMAL_GSM_MODE);
+                mPowerSavingGsmPreferredNetworkMode = (ListPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_POWER_SAVING_GSM_MODE);
                 if (!mIs2gSupport && !mIsEnabledLte) {
                     mNormalGsmPreferredNetworkMode.setEntries(
                             R.array.enabled_networks_except_gsm_lte_choices);
@@ -196,48 +218,15 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
                 mPowerSavingGsmPreferredNetworkMode.setValue(String.valueOf(savingNetwork));
                 mPowerSavingGsmPreferredNetworkMode.setSummary(mPowerSavingGsmPreferredNetworkMode.getEntry());
                 mPowerSavingGsmPreferredNetworkMode.setOnPreferenceChangeListener(this);
-                prefSet.removePreference(mNormalCdmaPreferredNetworkMode);
-                prefSet.removePreference(mPowerSavingCdmaPreferredNetworkMode);
+                prefSet.removePreference(findPreference(CATEGORY_NETWORK_CDMA));
             }
         } else {
             mBatterySaverEnabled.setSummary(R.string.pref_battery_saver_enable_no_mobiledata_summary);
-            prefSet.removePreference(mSmartDataEnabled);
-            prefSet.removePreference(mNormalGsmPreferredNetworkMode);
-            prefSet.removePreference(mPowerSavingGsmPreferredNetworkMode);
-            prefSet.removePreference(mNormalCdmaPreferredNetworkMode);
-            prefSet.removePreference(mPowerSavingCdmaPreferredNetworkMode);
+            prefSet.removePreference(findPreference(CATEGORY_RADIO));
+            prefSet.removePreference(findPreference(CATEGORY_NETWORK_GSM));
+            prefSet.removePreference(findPreference(CATEGORY_NETWORK_CDMA));
+            prefSet.removePreference(findPreference(CATEGORY_NETWORK));
         }
-
-        mBatterySaverDelay = (SeekBarPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_CHANGE_DELAY);
-        mBatterySaverDelay.setValue(Settings.Global.getInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_MODE_CHANGE_DELAY, 5));
-        mBatterySaverDelay.setOnPreferenceChangeListener(this);
-
-        mBatterySaverScreenOff = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_SCREEN_OFF);
-        mBatterySaverScreenOff.setChecked(Settings.Global.getInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_SCREEN_OFF, 1) == 1);
-        mBatterySaverScreenOff.setOnPreferenceChangeListener(this);
-
-        mBatterySaverIgnoreLocked = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_IGNORE_LOCKED);
-        mBatterySaverIgnoreLocked.setChecked(Settings.Global.getInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_IGNORE_LOCKED, 1) == 1);
-        mBatterySaverIgnoreLocked.setOnPreferenceChangeListener(this);
-        mSmartWifiEnabled = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_WIFI);
-        mSmartWifiEnabled.setChecked(Settings.Global.getInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_WIFI_MODE, 0) == 1);
-        mSmartWifiEnabled.setOnPreferenceChangeListener(this);
-
-        mSmartBatteryEnabled = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_BATTERY);
-        mSmartBatteryEnabled.setChecked(Settings.Global.getInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_BATTERY_MODE, 0) == 1);
-        mSmartBatteryEnabled.setOnPreferenceChangeListener(this);
-
-        mLowBatteryLevel = (SeekBarPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_BATTERY_LEVEL);
-        int lowBatteryLevels = mContext.getResources().getInteger(
-                        com.android.internal.R.integer.config_lowBatteryWarningLevel);
-        mLowBatteryLevel.setValue(Settings.Global.getInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_BATTERY_LEVEL, lowBatteryLevels));
-        mLowBatteryLevel.setOnPreferenceChangeListener(this);
     }
 
     private boolean getItemFromApplications(String packagename, String name, String type, boolean val) {
@@ -274,22 +263,24 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
             Settings.Global.putInt(mResolver, Settings.Global.BATTERY_SAVER_END,
                     mBatterySaverTimeRange.getEndTime());
             BatterySaverHelper.scheduleService(mContext);
-        } else if (preference == mBatterySaverScreenOff) {
-            boolean value = (Boolean) newValue;
-            Settings.Global.putInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_SCREEN_OFF, value ? 1 : 0);
-        } else if (preference == mBatterySaverIgnoreLocked) {
-            boolean value = (Boolean) newValue;
-            Settings.Global.putInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_IGNORE_LOCKED, value ? 1 : 0);
         } else if (preference == mSmartDataEnabled) {
             boolean value = (Boolean) newValue;
             Settings.Global.putInt(mResolver,
                      Settings.Global.BATTERY_SAVER_DATA_MODE, value ? 1 : 0);
+        } else if (preference == mSmartNoSignalEnabled) {
+            boolean value = (Boolean) newValue;
+            Settings.Global.putInt(mResolver,
+                     Settings.Global.BATTERY_SAVER_NOSIGNAL_MODE, value ? 1 : 0);
         } else if (preference == mBatterySaverDelay) {
             int val = ((Integer)newValue).intValue();
             Settings.Global.putInt(mResolver,
                      Settings.Global.BATTERY_SAVER_MODE_CHANGE_DELAY, val);
+        } else if (preference == mUserCheckIntervalTime) {
+            int val = Integer.parseInt((String) newValue);
+            int index = mUserCheckIntervalTime.findIndexOfValue((String) newValue);
+            Settings.Global.putInt(mResolver,
+                Settings.Global.BATTERY_SAVER_NETWORK_INTERVAL_MODE, val);
+            mUserCheckIntervalTime.setSummary(mUserCheckIntervalTime.getEntries()[index]);
         } else if (preference == mNormalGsmPreferredNetworkMode) {
             int val = Integer.parseInt((String) newValue);
             int index = mNormalGsmPreferredNetworkMode.findIndexOfValue((String) newValue);
@@ -313,29 +304,16 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
             int index = mPowerSavingCdmaPreferredNetworkMode.findIndexOfValue((String) newValue);
             Settings.Global.putInt(mResolver,
                 Settings.Global.BATTERY_SAVER_POWER_SAVING_MODE, val);
-            mPowerSavingCdmaPreferredNetworkMode.setSummary(mPowerSavingCdmaPreferredNetworkMode.getEntries()[index]);
-        } else if (preference == mSmartBatteryEnabled) {
-            boolean value = (Boolean) newValue;
-            Settings.Global.putInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_BATTERY_MODE, value ? 1 : 0);
+            mPowerSavingCdmaPreferredNetworkMode.setSummary(mPowerSavingCdmaPreferredNetworkMode.getEntries()[index]);;
         } else if (preference == mLowBatteryLevel) {
             int val = ((Integer)newValue).intValue();
             Settings.Global.putInt(mResolver,
                      Settings.Global.BATTERY_SAVER_BATTERY_LEVEL, val);
-        } else if (preference == mSmartWifiEnabled) {
-            boolean value = (Boolean) newValue;
-            Settings.Global.putInt(mResolver,
-                     Settings.Global.BATTERY_SAVER_WIFI_MODE, value ? 1 : 0);
         } else {
             return false;
         }
 
         return true;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override

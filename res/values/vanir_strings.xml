@@ -642,7 +642,7 @@
     <string name="battery_saver_action_undefined">Undefined</string>
     <string name="battery_saver_title">Battery saver mode</string>
     <string name="pref_battery_saver_enable_title">Battery saver</string>
-    <string name="pref_battery_saver_enable_summary">This will automatically switch your network to user-defined power saving mode or normal mode depending on mobile data and WiFi connection states</string>
+    <string name="pref_battery_saver_enable_summary">This will automatically manage your device battery usage and switch your network to user-defined power saving mode or normal mode depending on mobile data and Wi-Fi connection states</string>
     <string name="pref_battery_saver_normal_mode_title">Normal network mode</string>
     <string name="pref_battery_saver_power_saving_mode_title">Power saving network mode</string>
     <string name="pref_battery_saver_screen_off_title">When screen turns off</string>
@@ -658,8 +658,20 @@
     <string name="pref_battery_saver_data_title">Disable mobile data</string>
     <string name="pref_battery_saver_data_summary">Disable mobile data connection when power saving activated</string>
     <string name="pref_battery_saver_enable_no_mobiledata_summary">This will automatically manage your device battery usage to user-defined</string>
-    <string name="pref_battery_saver_wifi_title">Disable WiFi</string>
-    <string name="pref_battery_saver_wifi_summary">Disable wifi connection when power saving activated</string>
+    <string name="pref_battery_saver_wifi_title">Disable Wi-Fi</string>
+    <string name="pref_battery_saver_wifi_summary">Disable Wi-Fi connection when power saving activated</string>
+   <string name="pref_battery_saver_network_title">Smart network change</string>
+    <string name="pref_battery_saver_network_summary">Allow changing network to normal mode with specific interval time after screen turn off and power saving mode enabled</string>
+    <string name="pref_battery_saver_nosignal_title">Smart network signal</string>
+    <string name="pref_battery_saver_nosignal_summary">Activate Airplane mode when no network signal after 5 minutes</string>
+    <string name="pref_battery_saver_toast_title">Show toast</string>
+    <string name="pref_battery_saver_toast_summary">Allow to showing toast message when battery saver changing device configuration</string>
+    <string name="battery_saver_battery_title">Battery options</string>
+    <string name="battery_saver_radio_title">Radio options</string>
+    <string name="battery_saver_network_title">Other Network options</string>
+    <string name="battery_saver_network_gsm_title">GSM Networks</string>
+    <string name="battery_saver_network_cdma_title">CDMA Networks</string>
+    <string name="battery_saver_system_title">System options</string>
 
     <!-- Toast Animation -->
     <string name="toast_animation_title">Toast animation</string>

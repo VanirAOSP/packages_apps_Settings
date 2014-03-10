@@ -45,9 +45,7 @@ public class BootReceiver extends BroadcastReceiver {
             }
         }
 
-        if (BatterySaverHelper.deviceSupportsMobileData(ctx)) {
             BatterySaverHelper.scheduleService(ctx);
-        }
 
         /* Restore hardware tunable values */
         DisplayColor.restore(ctx);

@@ -29,20 +29,6 @@
         android:key="pref_battery_saver_timerange"
         android:dependency="pref_battery_saver_enable" />
 
-    <CheckBoxPreference
-        android:key="pref_battery_saver_mode_data"
-        android:persistent="false"
-        android:title="@string/pref_battery_saver_data_title"
-        android:summary="@string/pref_battery_saver_data_summary"
-        android:dependency="pref_battery_saver_enable"/>
-
-    <CheckBoxPreference
-        android:key="pref_battery_saver_mode_wifi"
-        android:persistent="false"
-        android:title="@string/pref_battery_saver_wifi_title"
-        android:summary="@string/pref_battery_saver_wifi_summary"
-        android:dependency="pref_battery_saver_enable"/>
-
     <com.android.settings.vanir.SeekBarPreference
         android:key="pref_battery_saver_mode_change_delay"
         android:persistent="false"
@@ -56,55 +42,122 @@
         android:defaultValue="5"
         android:dependency="pref_battery_saver_enable" />
 
-    <ListPreference
-        android:key="pref_battery_saver_normal_gsm_mode"
-        android:dependency="pref_battery_saver_enable"
-        android:title="@string/pref_battery_saver_normal_mode_title"
-        android:entries="@array/enabled_networks_gsm_choices"
-        android:entryValues="@array/enabled_networks_gsm_values"
-        android:persistent="false" />
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="battery_saver_show_toast"
+        android:defaultValue="true"
+        android:title="@string/pref_battery_saver_toast_title"
+        android:summary="@string/pref_battery_saver_toast_summary"
+        android:dependency="pref_battery_saver_enable"/>
 
-    <ListPreference
-        android:key="pref_battery_saver_power_saving_gsm_mode"
-        android:dependency="pref_battery_saver_enable"
-        android:title="@string/pref_battery_saver_power_saving_mode_title"
-        android:entries="@array/enabled_networks_gsm_choices"
-        android:entryValues="@array/enabled_networks_gsm_values"
-        android:persistent="false" />
-
-    <ListPreference
-        android:key="pref_battery_saver_normal_cdma_mode"
-        android:dependency="pref_battery_saver_enable"
-        android:title="@string/pref_battery_saver_normal_mode_title"
-        android:entries="@array/enabled_networks_cdma_choices"
-        android:entryValues="@array/enabled_networks_cdma_values"
-        android:persistent="false" />
-
-    <ListPreference
-        android:key="pref_battery_saver_power_saving_cdma_mode"
-        android:dependency="pref_battery_saver_enable"
-        android:title="@string/pref_battery_saver_power_saving_mode_title"
-        android:entries="@array/enabled_networks_cdma_choices"
-        android:entryValues="@array/enabled_networks_cdma_values"
-        android:persistent="false" />
-
-    <CheckBoxPreference
-        android:key="pref_battery_saver_screen_off"
-        android:persistent="false"
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="battery_saver_screen_off"
+        android:defaultValue="true"
         android:title="@string/pref_battery_saver_screen_off_title"
         android:summary="@string/pref_battery_saver_screen_off_summary"
         android:dependency="pref_battery_saver_enable"/>
 
-    <CheckBoxPreference
-        android:key="pref_battery_saver_ignore_locked"
-        android:persistent="false"
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="battery_saver_ignore_locked"
+        android:defaultValue="true"
         android:title="@string/pref_battery_saver_ignore_locked_title"
         android:summary="@string/pref_battery_saver_ignore_locked_summary"
         android:dependency="pref_battery_saver_enable"/>
 
-    <CheckBoxPreference
-        android:key="pref_battery_saver_mode_battery"
-        android:persistent="false"
+    <PreferenceCategory
+            android:key="category_battery_saver_network_gsm"
+            android:title="@string/battery_saver_network_gsm_title" >
+
+        <ListPreference
+             android:key="pref_battery_saver_normal_gsm_mode"
+             android:dependency="pref_battery_saver_enable"
+             android:title="@string/pref_battery_saver_normal_mode_title"
+             android:entries="@array/enabled_networks_gsm_choices"
+             android:entryValues="@array/enabled_networks_gsm_values"
+             android:persistent="false" />
+
+        <ListPreference
+             android:key="pref_battery_saver_power_saving_gsm_mode"
+             android:dependency="pref_battery_saver_enable"
+             android:title="@string/pref_battery_saver_power_saving_mode_title"
+             android:entries="@array/enabled_networks_gsm_choices"
+             android:entryValues="@array/enabled_networks_gsm_values"
+             android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="category_battery_saver_network_cdma"
+            android:title="@string/battery_saver_network_cdma_title" >
+
+        <ListPreference
+             android:key="pref_battery_saver_normal_cdma_mode"
+             android:dependency="pref_battery_saver_enable"
+             android:title="@string/pref_battery_saver_normal_mode_title"
+             android:entries="@array/enabled_networks_cdma_choices"
+             android:entryValues="@array/enabled_networks_cdma_values"
+             android:persistent="false" />
+
+        <ListPreference
+             android:key="pref_battery_saver_power_saving_cdma_mode"
+             android:dependency="pref_battery_saver_enable"
+             android:title="@string/pref_battery_saver_power_saving_mode_title"
+             android:entries="@array/enabled_networks_cdma_choices"
+             android:entryValues="@array/enabled_networks_cdma_values"
+             android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="category_battery_saver_radio"
+            android:title="@string/battery_saver_radio_title" >
+
+        <CheckBoxPreference
+             android:key="pref_battery_saver_mode_data"
+             android:persistent="false"
+             android:title="@string/pref_battery_saver_data_title"
+             android:summary="@string/pref_battery_saver_data_summary"
+             android:dependency="pref_battery_saver_enable"/>
+
+        <CheckBoxPreference
+             android:key="pref_battery_saver_mode_nosignal"
+             android:persistent="false"
+             android:title="@string/pref_battery_saver_nosignal_title"
+             android:summary="@string/pref_battery_saver_nosignal_summary"
+             android:dependency="pref_battery_saver_enable"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="category_battery_saver_system"
+            android:title="@string/battery_saver_system_title"/>
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="battery_saver_wifi_mode"
+        android:title="@string/pref_battery_saver_wifi_title"
+        android:summary="@string/pref_battery_saver_wifi_summary"
+        android:dependency="pref_battery_saver_enable" />
+
+    <PreferenceCategory
+            android:key="category_battery_saver_network"
+            android:title="@string/battery_saver_network_title" >
+
+        <ListPreference
+             android:key="pref_battery_saver_mode_network"
+             android:dependency="pref_battery_saver_enable"
+             android:title="@string/pref_battery_saver_network_title"
+             android:summary="@string/pref_battery_saver_network_summary"
+             android:entries="@array/ad_redisplay_entries"
+             android:entryValues="@array/ad_redisplay_values"
+             android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="category_battery_saver_battery"
+            android:title="@string/battery_saver_battery_title" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="battery_saver_battery_mode"
         android:title="@string/pref_battery_saver_battery_title"
         android:summary="@string/pref_battery_saver_battery_summary"
         android:dependency="pref_battery_saver_enable"/>
@@ -115,11 +168,11 @@
         android:title="@string/pref_battery_saver_mode_battery_level_title"
         android:summary="@string/pref_battery_saver_mode_battery_level_summary"
         android:max="100"
-        settings:minimum="0"
+        settings:min="0"
         settings:interval="5"
         settings:unitsLeft=""
-        settings:unitsRight=" %"
+        settings:unitsRight="%"
         android:defaultValue="20"
-        android:dependency="pref_battery_saver_mode_battery" />
+        android:dependency="battery_saver_battery_mode" />
 
 </PreferenceScreen>
