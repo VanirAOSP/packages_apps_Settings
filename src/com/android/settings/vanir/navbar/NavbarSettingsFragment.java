@@ -35,9 +35,9 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private SeekBar mNavigationBarHeight;
     private SeekBar mNavigationBarHeightLandscape;
     private SeekBar mNavigationBarWidth;
-    private TextView mBarHeight_Text;
-    private TextView mBarHeightLandscape_Text;
-    private TextView mBarWidth_Text;
+    private TextView mBarHeightValue;
+    private TextView mBarHeightLandscapeValue;
+    private TextView mBarWidthValue;
 
     private Switch mEnabledSwitch;
     private int deviceKeys = 0;
@@ -105,9 +105,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     @Override
     public void onResume() {
         super.onResume();
-        mNavigationBarHeight.setProgress(HValue);
-        mNavigationBarHeightLandscape.setProgress(LValue);
-        mNavigationBarWidth.setProgress(WValue);
     }
 
     @Override
@@ -125,16 +122,13 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         View v = inflater.inflate(R.layout.fragment_navbar_settings, container, false);
 
         mNavigationBarHeight = (SeekBar) v.findViewById(R.id.navigation_bar_height); // make seekbar object
-        mBarHeight_Text = (TextView) v.findViewById(R.id.navigation_bar_height_text);
-        mBarHeight_Text.setText(getString(R.string.navigation_bar_height_text));
+        mBarHeightValue = (TextView) v.findViewById(R.id.navigation_bar_height_value);
 
         mNavigationBarHeightLandscape = (SeekBar) v.findViewById(R.id.navigation_bar_height_landscape); // make seekbar object
-        mBarHeightLandscape_Text = (TextView) v.findViewById(R.id.navigation_bar_height_landscape_text);
-        mBarHeightLandscape_Text.setText(getString(R.string.navigation_bar_height_landscape_text));
+        mBarHeightLandscapeValue = (TextView) v.findViewById(R.id.navigation_bar_height_landscape_value);
 
         mNavigationBarWidth = (SeekBar) v.findViewById(R.id.navigation_bar_width); // make seekbar object
-        mBarWidth_Text = (TextView) v.findViewById(R.id.navigation_bar_width_text);
-        mBarWidth_Text.setText(getString(R.string.navigation_bar_width_text));
+        mBarWidthValue = (TextView) v.findViewById(R.id.navigation_bar_width_value);
 
         if (firstShot) {
             final Resources res = getActivity().getResources();
@@ -159,18 +153,20 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
                 ( WValue - MIN_WIDTH_SCALAR * mDefaultWidth) /
                 ( MAX_WIDTH_SCALAR * mDefaultWidth - MIN_WIDTH_SCALAR * mDefaultWidth ));
 
-        mNavigationBarHeight.setProgress(currentHeightPercent);
         mNavigationBarHeight.setOnSeekBarChangeListener(this);
-        mNavigationBarHeightLandscape.setProgress(currentHeightLandscapePercent);
+        mNavigationBarHeight.setProgress(currentHeightPercent);
         mNavigationBarHeightLandscape.setOnSeekBarChangeListener(this);
-        mNavigationBarWidth.setProgress(currentWidthPercent);
+        mNavigationBarHeightLandscape.setProgress(currentHeightLandscapePercent);
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
-
+        mNavigationBarWidth.setProgress(currentWidthPercent);
+ 
         if (DeviceUtils.isPhone(getActivity())) {
-            mBarHeightLandscape_Text.setVisibility(View.GONE);
+            v.findViewById(R.id.navigation_bar_height_landscape_text).setVisibility(View.GONE);
+            mBarHeightLandscapeValue.setVisibility(View.GONE);
             mNavigationBarHeightLandscape.setVisibility(View.GONE);
         } else {
-            mBarWidth_Text.setVisibility(View.GONE);
+            v.findViewById(R.id.navigation_bar_width_text).setVisibility(View.GONE);
+            mBarWidthValue.setVisibility(View.GONE);
             mNavigationBarWidth.setVisibility(View.GONE);
         }
         
@@ -189,26 +185,31 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
     @Override
     public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
-        if (fromUser) {
-            double min = 0;
-            double max = 0;
+        double min = 0;
+        double max = 0;
+        double proportion = 1.0;
 
-            if (seekbar == mNavigationBarWidth) {
-                min = MIN_WIDTH_SCALAR * mDefaultWidth;
-                max = MAX_WIDTH_SCALAR * mDefaultWidth;
-                WValue = (int)(min + ((double)progress/100.0)*(max - min));
-                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_WIDTH, WValue);
-            } else if (seekbar == mNavigationBarHeight) {
-                min = MIN_HEIGHT_SCALAR * mDefaultHeight;
-                max = MAX_HEIGHT_SCALAR * mDefaultHeight;
-                HValue = (int)(min + ((double)progress/100.0)*(max - min));
-                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT, HValue);
-            } else if (seekbar == mNavigationBarHeightLandscape) {
-                min = MIN_HEIGHT_SCALAR * mDefaultHeightLandscape;
-                max = MAX_HEIGHT_SCALAR * mDefaultHeightLandscape;
-                LValue = (int)(min + ((double)progress/100.0)*(max - min));
-                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, LValue);
-            }
+        if (seekbar == mNavigationBarWidth) {
+            min = MIN_WIDTH_SCALAR * mDefaultWidth;
+            max = MAX_WIDTH_SCALAR * mDefaultWidth;
+            proportion = (((double)progress/100.0) - MIN_WIDTH_SCALAR)/(MAX_WIDTH_SCALAR - MIN_WIDTH_SCALAR);
+            mBarWidthValue.setText(String.valueOf(((int)(proportion*100.0)))+"%");
+            WValue = (int)(min + ((double)progress/100.0)*(max - min));
+            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_WIDTH, WValue);
+        } else if (seekbar == mNavigationBarHeight) {
+            min = MIN_HEIGHT_SCALAR * mDefaultHeight;
+            max = MAX_HEIGHT_SCALAR * mDefaultHeight;
+            proportion = (((double)progress/100.0) - MIN_HEIGHT_SCALAR)/(MAX_HEIGHT_SCALAR - MIN_HEIGHT_SCALAR);
+            mBarHeightValue.setText(String.valueOf(((int)(proportion*100.0)))+"%");
+            HValue = (int)(min + ((double)progress/100.0)*(max - min));
+            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT, HValue);
+        } else if (seekbar == mNavigationBarHeightLandscape) {
+            min = MIN_HEIGHT_SCALAR * mDefaultHeightLandscape;
+            max = MAX_HEIGHT_SCALAR * mDefaultHeightLandscape;
+            proportion = (((double)progress/100.0) - MIN_HEIGHT_SCALAR)/(MAX_HEIGHT_SCALAR - MIN_HEIGHT_SCALAR);
+            mBarHeightLandscapeValue.setText(String.valueOf(((int)(proportion*100.0)))+"%");
+            LValue = (int)(min + ((double)progress/100.0)*(max - min));
+            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, LValue);
         }
     }
 
