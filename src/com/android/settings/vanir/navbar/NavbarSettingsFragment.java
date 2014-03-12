@@ -50,10 +50,10 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private static int mDefaultHeightLandscape;
     private static int mDefaultWidth;
 
-    private static final double MIN_HEIGHT_SCALAR = 0.25;
-    private static final double MAX_HEIGHT_SCALAR = 3.0;
-    private static final double MIN_WIDTH_SCALAR = 0.5;
-    private static final double MAX_WIDTH_SCALAR = 1.0;
+    private static final double MIN_HEIGHT_SCALAR = 0.666;
+    private static final double MAX_HEIGHT_SCALAR = 1.5;
+    private static final double MIN_WIDTH_SCALAR = 0.6;
+    private static final double MAX_WIDTH_SCALAR = 1.5;
 
     public NavbarSettingsFragment() {
     }
