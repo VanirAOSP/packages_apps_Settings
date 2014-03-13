@@ -44,7 +44,7 @@
                         android:layout_marginLeft="17dp"
                         android:layout_marginRight="17dp"
                         android:max="100" />
-            </LinearLayout>
+           </LinearLayout>
 
             <TextView
                     android:id="@+id/navigation_bar_height_landscape_text"

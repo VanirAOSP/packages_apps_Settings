@@ -47,4 +47,9 @@
     <!-- Show Expanded Desktop preference -->
     <bool name="config_show_expandedDesktop">false</bool>
 
+    <integer name="navigation_bar_height_min_percent">66</integer>
+    <integer name="navigation_bar_height_max_percent">150</integer>
+    <integer name="navigation_bar_width_min_percent">66</integer>
+    <integer name="navigation_bar_width_max_percent">150</integer>
+
 </resources>
