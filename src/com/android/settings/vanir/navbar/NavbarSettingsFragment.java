@@ -170,12 +170,12 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         Log.e("NAVBARHEIGHT", String.valueOf(currentHeightPercent));
 
         mNavigationBarHeight.setOnSeekBarChangeListener(this);
-        mNavigationBarHeight.setProgress(currentHeightPercent - MIN_HEIGHT_PERCENT);
-        mBarHeightValue.setText(String.valueOf(currentHeightPercent)+"%");
+        mNavigationBarHeight.setProgress(currentHeightPercent);
+        mBarHeightValue.setText(String.valueOf(currentHeightPercent + MIN_HEIGHT_PERCENT)+"%");
 
         mNavigationBarHeightLandscape.setOnSeekBarChangeListener(this);
-        mNavigationBarHeightLandscape.setProgress(currentHeightLandscapePercent - MIN_HEIGHT_PERCENT);
-        mBarHeightLandscapeValue.setText(String.valueOf(currentHeightLandscapePercent)+"%");
+        mNavigationBarHeightLandscape.setProgress(currentHeightLandscapePercent);
+        mBarHeightLandscapeValue.setText(String.valueOf(currentHeightLandscapePercent + MIN_HEIGHT_PERCENT)+"%");
 
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
         mNavigationBarWidth.setProgress(currentWidthPercent);
