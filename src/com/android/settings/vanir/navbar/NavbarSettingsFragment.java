@@ -4,7 +4,9 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
@@ -46,7 +48,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private static int HValue;
     private static int LValue;
     private static int WValue;
-    private static boolean firstShot = true;
     private static int mDefaultHeight;
     private static int mDefaultHeightLandscape;
     private static int mDefaultWidth;
@@ -129,42 +130,39 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         mNavigationBarWidth = (SeekBar) v.findViewById(R.id.navigation_bar_width); // make seekbar object
         mBarWidthValue = (TextView) v.findViewById(R.id.navigation_bar_width_value);
 
-        if (firstShot) {
-            final Resources res = getActivity().getResources();
-            mDefaultHeight = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height);
-            mDefaultHeightLandscape = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height_landscape);
-            mDefaultWidth = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_width);
-            firstShot = false;
-        }
+        final Resources res = getActivity().getResources();
+        mDefaultHeight = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height);
+        mDefaultHeightLandscape = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height_landscape);
+        mDefaultWidth = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_width);
 
-        Resources res = getResources();
         final int MAX_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_max_percent);
         final int MAX_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_max_percent);
-
         MIN_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_min_percent);
         MIN_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_min_percent);
-
-        mNavigationBarHeight.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
-        mNavigationBarHeightLandscape.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
-        mNavigationBarWidth.setMax(MAX_WIDTH_PERCENT - MIN_WIDTH_PERCENT);
-
         final double MAX_WIDTH_SCALAR = MAX_WIDTH_PERCENT/100.0;
         final double MIN_WIDTH_SCALAR = MIN_WIDTH_PERCENT/100.0;
         final double MAX_HEIGHT_SCALAR = MAX_HEIGHT_PERCENT/100.0;
         final double MIN_HEIGHT_SCALAR = MIN_HEIGHT_PERCENT/100.0;
+
+        mNavigationBarHeight.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
+        mNavigationBarHeightLandscape.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
+        mNavigationBarWidth.setMax(MAX_WIDTH_PERCENT - MIN_WIDTH_PERCENT);
         
         final ContentResolver cr = getActivity().getContentResolver();
         HValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT, mDefaultHeight);
         LValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, mDefaultHeightLandscape);
         WValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_WIDTH, mDefaultWidth);
 
-        final int currentHeightPercent = (int)(100.0 * ( HValue - MIN_HEIGHT_SCALAR * mDefaultHeight) /
-                ( MAX_HEIGHT_SCALAR * mDefaultHeight - MIN_HEIGHT_SCALAR * mDefaultHeight ));
-        final int currentHeightLandscapePercent = (int)(100.0 * ( LValue - MIN_HEIGHT_SCALAR * mDefaultHeightLandscape) /
-                ( MAX_HEIGHT_SCALAR * mDefaultHeightLandscape - MIN_HEIGHT_SCALAR * mDefaultHeightLandscape ));
-        final int currentWidthPercent = (int)(100.0 * ( WValue - MIN_WIDTH_SCALAR * mDefaultWidth) /
-                ( MAX_WIDTH_SCALAR * mDefaultWidth - MIN_WIDTH_SCALAR * mDefaultWidth ));
-        Log.e("NAVBARHEIGHT", String.valueOf(currentHeightPercent));
+        SharedPreferences prefs = getActivity().getSharedPreferences("last_slider_values", Context.MODE_PRIVATE);
+        final int currentHeightPercent = prefs.getInt("heightPercent",
+                (int)(100.0 * ( HValue - MIN_HEIGHT_SCALAR * mDefaultHeight) /
+                ( MAX_HEIGHT_SCALAR * mDefaultHeight - MIN_HEIGHT_SCALAR * mDefaultHeight )));
+        final int currentHeightLandscapePercent = prefs.getInt("heightLandscapePercent",
+                (int)(100.0 * ( LValue - MIN_HEIGHT_SCALAR * mDefaultHeightLandscape) /
+                ( MAX_HEIGHT_SCALAR * mDefaultHeightLandscape - MIN_HEIGHT_SCALAR * mDefaultHeightLandscape )));
+        final int currentWidthPercent = prefs.getInt("widthPercent",
+                (int)(100.0 * ( WValue - MIN_WIDTH_SCALAR * mDefaultWidth) /
+                ( MAX_WIDTH_SCALAR * mDefaultWidth - MIN_WIDTH_SCALAR * mDefaultWidth )));
 
         mNavigationBarHeight.setOnSeekBarChangeListener(this);
         mNavigationBarHeight.setProgress(currentHeightPercent);
@@ -233,6 +231,9 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        // time to write the values..
+        SharedPreferences prefs = getActivity().getSharedPreferences("last_slider_values", Context.MODE_PRIVATE);
+        prefs.edit().putInt("heightPercent", mNavigationBarHeight.getProgress())
+                    .putInt("heightLandscapePercent", mNavigationBarHeightLandscape.getProgress())
+                    .putInt("widthPercent", mNavigationBarWidth.getProgress()).commit();
     }
 }
