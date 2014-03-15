@@ -51,8 +51,8 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private static int mDefaultHeightLandscape;
     private static int mDefaultWidth;
 
-    int MIN_HEIGHT_PERCENT = 35;
-    int MIN_WIDTH_PERCENT = 35;
+    int MIN_HEIGHT_PERCENT;
+    int MIN_WIDTH_PERCENT;
 
     public NavbarSettingsFragment() {
     }
@@ -141,11 +141,8 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         final int MAX_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_max_percent);
         final int MAX_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_max_percent);
 
-        if (deviceKeys > 0) {
-            // devices with navbars have a much smaller dead zone than hardware key devices
-            MIN_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_min_percent);
-            MIN_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_min_percent);
-        }
+        MIN_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_min_percent);
+        MIN_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_min_percent);
 
         mNavigationBarHeight.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
         mNavigationBarHeightLandscape.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
