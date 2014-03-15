@@ -22,4 +22,16 @@
 	<string name="vanirupdate_settings_alternate_title">System updates</string>
 	<string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
 
+    <!-- On-The-Go Mode -->
+    <string name="title_tile_onthego">On-The-Go</string>
+    <string name="power_menu_onthego_title">On-The-Go Mode</string>
+    <string name="power_menu_onthego_summary">Show the camera overlay under all windows</string>
+
+    <!--boot animation -->
+    <string name="disable_bootanimation_title">Boot animation</string>
+    <string name="disable_bootanimation_off">Off: Displays the Google splash screen only</string>
+    <string name="disable_bootanimation_minimal">Minimal: Displays the default android animation</string>
+    <string name="disable_bootanimation_default">Default: Displays the Vanir boot animation</string>
+    <string name="toast_disabled">Boot animation is disabled!</string>
+
 </resources>
