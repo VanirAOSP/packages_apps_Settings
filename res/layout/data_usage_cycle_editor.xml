@@ -19,7 +19,6 @@
     android:gravity="center"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    
 
      <LinearLayout
         android:id="@+id/cycle_length_editor"
@@ -48,6 +47,7 @@
         android:id="@+id/cycle_day_editor"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
@@ -67,6 +67,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:visibility="gone" />
+
         <NumberPicker
             android:id="@+id/cycle_weekday"
             android:layout_width="wrap_content"
