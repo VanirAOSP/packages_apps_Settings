@@ -71,7 +71,8 @@ public class ProfileConfig extends SettingsPreferenceFragment
     private NamePreference mNamePreference;
 
     private ListPreference mScreenLockModePreference;
-
+    private ListPreference mImmersiveDesktopModePreference;
+   
     // constant value that can be used to check return code from sub activity.
     private static final int PROFILE_GROUP_DETAILS = 1;
 
@@ -273,6 +274,20 @@ public class ProfileConfig extends SettingsPreferenceFragment
             }
 
             systemPrefs.addPreference(mScreenLockModePreference);
+
+            // Immersive Desktop
+            mImmersiveDesktopModePreference = new ListPreference(getActivity());
+            mImmersiveDesktopModePreference.setTitle(R.string.power_menu_immersive_desktop);
+            mImmersiveDesktopModePreference.setEntries(R.array.profile_immersive_desktop_entries);
+            mImmersiveDesktopModePreference.setEntryValues(R.array.profile_immersive_desktop_values);
+            mImmersiveDesktopModePreference.setPersistent(false);
+            mImmersiveDesktopModePreference.setSummary(getResources().getStringArray(
+                    R.array.profile_immersive_desktop_entries)[mProfile.getImmersiveDesktopMode()]);
+            mImmersiveDesktopModePreference.setValue(String.valueOf(mProfile
+                    .getImmersiveDesktopMode()));
+            mImmersiveDesktopModePreference.setOnPreferenceChangeListener(this);
+
+            systemPrefs.addPreference(mImmersiveDesktopModePreference);
         }
 
         // Populate the audio streams list
@@ -357,6 +372,10 @@ public class ProfileConfig extends SettingsPreferenceFragment
             mRingMode.mSettings.setOverride((Boolean) newValue);
         } else if (preference == mAirplaneMode.mCheckbox) {
             mAirplaneMode.mSettings.setOverride((Boolean) newValue);
+        } else if (preference == mImmersiveDesktopModePreference) {
+            mProfile.setImmersiveDesktopMode(Integer.valueOf((String) newValue));
+            mImmersiveDesktopModePreference.setSummary(getResources().getStringArray(
+                    R.array.profile_immersive_desktop_entries)[mProfile.getImmersiveDesktopMode()]);
         } else if (preference == mNamePreference) {
             String name = mNamePreference.getName().toString();
             if (!name.equals(mProfile.getName())) {

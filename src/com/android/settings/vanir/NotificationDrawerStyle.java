@@ -65,8 +65,8 @@ public class NotificationDrawerStyle extends SettingsPreferenceFragment implemen
 
     private ListPreference mNotificationWallpaper;
     private ListPreference mNotificationWallpaperLandscape;
-    SeekBarPreference mWallpaperAlpha;
-    SeekBarPreference mNotificationAlpha;
+    private SeekBarPreference mWallpaperAlpha;
+    private SeekBarPreference mNotificationAlpha;
 
     private File mImageTmp;
 

@@ -656,6 +656,20 @@
         <item>4</item>
     </string-array>
 
+    <!-- Profile immersive desktop mode options. Do not translate. -->
+    <string-array name="profile_immersive_desktop_entries" translatable="false">
+        <item>@string/profile_lockmode_default</item>
+        <item>@string/connection_state_enabled</item>
+        <item>@string/connection_state_disabled</item>
+    </string-array>
+
+    <!-- Values for profile immersive desktop mode. Do not translate. -->
+    <string-array name="profile_immersive_desktop_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <!-- Custom lock screen background-->
     <string-array name="lockscreen_background_entries" translatable="false">
         <item>@string/background_color_fill</item>
