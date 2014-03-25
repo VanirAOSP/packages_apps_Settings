@@ -48,6 +48,7 @@ import static com.android.internal.util.cm.QSConstants.TILE_WIFI;
 import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.cm.QSConstants.TILE_QUICKRECORD;
 import static com.android.internal.util.cm.QSConstants.TILE_ONTHEGO;
+import static com.android.internal.util.cm.QSConstants.TILE_POWERMENU;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -90,6 +91,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                  TILE_CAMERA, R.string.title_tile_camera,
                 "com.android.systemui:drawable/ic_qs_camera"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_POWERMENU, R.string.title_tile_powermenu,
+                "com.android.systemui:drawable/ic_qs_reboot"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_EXPANDEDDESKTOP, R.string.title_tile_expanded_desktop,
                 "com.android.systemui:drawable/ic_qs_expanded_desktop_neutral"));
