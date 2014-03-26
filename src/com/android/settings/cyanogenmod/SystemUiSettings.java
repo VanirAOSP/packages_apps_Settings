@@ -59,6 +59,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mImmersiveModeState;
 
     private int immersiveModeValue;
+    private int deviceKeys;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,9 +67,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.system_ui_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
-
-        final int deviceKeys = getResources().getInteger(
-                com.android.internal.R.integer.config_deviceHardwareKeys);
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(), 
@@ -87,11 +85,16 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     
         mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
         immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
-        setImmersiveModeEntries();
         mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
         updateImmersiveModeSummary();
         updateImmersiveModeState();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
+
+        deviceKeys = getResources().getInteger(
+                com.android.internal.R.integer.config_deviceHardwareKeys);
+        if (deviceKeys > 0) {
+            setImmersiveModeEntries();
+        }
     }
 
     private void setImmersiveModeEntries() {
@@ -116,7 +119,9 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        
+        if (deviceKeys > 0) {
+            setImmersiveModeEntries();
+        }
     }
 
     @Override
