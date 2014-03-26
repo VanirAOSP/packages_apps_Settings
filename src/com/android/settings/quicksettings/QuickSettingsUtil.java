@@ -92,9 +92,6 @@ public class QuickSettingsUtil {
                  TILE_CAMERA, R.string.title_tile_camera,
                 "com.android.systemui:drawable/ic_qs_camera"));
         registerTile(new QuickSettingsUtil.TileInfo(
-                TILE_POWERMENU, R.string.title_tile_powermenu,
-                "com.android.systemui:drawable/ic_qs_reboot"));
-        registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_EXPANDEDDESKTOP, R.string.title_tile_expanded_desktop,
                 "com.android.systemui:drawable/ic_qs_expanded_desktop_neutral"));
         registerTile(new QuickSettingsUtil.TileInfo(
@@ -169,6 +166,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_ONTHEGO, R.string.title_tile_onthego,
                 "com.android.systemui:drawable/ic_qs_onthego"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_POWERMENU, R.string.title_tile_powermenu,
+                "com.android.systemui:drawable/ic_qs_powermenu"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
