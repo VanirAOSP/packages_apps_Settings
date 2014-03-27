@@ -94,8 +94,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mDisplayRotationPreference;
     private PreferenceScreen mScreenColorSettings;
 
-    private final Configuration mCurConfig = new Configuration();
-
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
     private CheckBoxPreference mAdaptiveBacklight;
