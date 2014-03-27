@@ -903,7 +903,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- WhisperPush -->
     <string name="whisperpush_title">WhisperPush</string>
-    <string name="whisperpush_summary">Manage secure SMS settings.</string>
+    <string name="whisperpush_summary">Manage secure SMS settings</string>
 
 
     <!-- GPS download data over wi-fi only -->
