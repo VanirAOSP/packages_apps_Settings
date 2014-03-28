@@ -38,10 +38,11 @@
         android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
         android:title="@string/category_navbar" />
 
-    <PreferenceScreen
+    <com.android.settings.vanir.NavringPreferenceSwitch
         android:key="navigation_bar_ring"
         android:fragment="com.android.settings.vanir.NavRingTargets"
-        android:title="@string/category_navring" />
+        android:title="@string/category_navring"
+        android:widgetLayout="@layout/listview_embedded_switchpreference" />
 
     <PreferenceCategory
         android:key="userspace_options"

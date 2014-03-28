@@ -37,6 +37,7 @@ import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.vanir.NavringPreferenceSwitch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
     private static final String KEY_IMMERSIVE_LOL = "immersive_mode_lol_profile";
+    private static final String KEY_NAVRING_SWITCH = "navigation_bar_ring";
 
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
@@ -58,8 +60,9 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mExpandedDesktop;
     private SwitchPreference mImmersiveModeState;
 
+    private NavringPreferenceSwitch mNavringPreference;
+
     private int immersiveModeValue;
-    private int deviceKeys;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.system_ui_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mNavringPreference = (NavringPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(), 
@@ -90,11 +95,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         updateImmersiveModeState();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
 
-        deviceKeys = getResources().getInteger(
-                com.android.internal.R.integer.config_deviceHardwareKeys);
-        if (deviceKeys > 0) {
-            setImmersiveModeEntries();
-        }
+        setImmersiveModeEntries();
     }
 
     private void setImmersiveModeEntries() {
@@ -119,9 +120,15 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        if (deviceKeys > 0) {
-            setImmersiveModeEntries();
+        setImmersiveModeEntries();
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mNavringPreference) {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     @Override
