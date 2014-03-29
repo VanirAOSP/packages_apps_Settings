@@ -16,39 +16,7 @@
 
 package com.android.settings.quicksettings;
 
-import static com.android.internal.util.cm.QSConstants.TILES_DEFAULT;
-import static com.android.internal.util.cm.QSConstants.TILE_AIRPLANE;
-import static com.android.internal.util.cm.QSConstants.TILE_AUTOROTATE;
-import static com.android.internal.util.cm.QSConstants.TILE_BATTERY;
-import static com.android.internal.util.cm.QSConstants.TILE_BLUETOOTH;
-import static com.android.internal.util.cm.QSConstants.TILE_BRIGHTNESS;
-import static com.android.internal.util.cm.QSConstants.TILE_CAMERA;
-import static com.android.internal.util.cm.QSConstants.TILE_DELIMITER;
-import static com.android.internal.util.cm.QSConstants.TILE_IMMERSIVE;
-import static com.android.internal.util.cm.QSConstants.TILE_GPS;
-import static com.android.internal.util.cm.QSConstants.TILE_LOCKSCREEN;
-import static com.android.internal.util.cm.QSConstants.TILE_LTE;
-import static com.android.internal.util.cm.QSConstants.TILE_MOBILEDATA;
-import static com.android.internal.util.cm.QSConstants.TILE_MUSIC;
-import static com.android.internal.util.cm.QSConstants.TILE_NETWORKADB;
-import static com.android.internal.util.cm.QSConstants.TILE_NETWORKMODE;
-import static com.android.internal.util.cm.QSConstants.TILE_NFC;
-import static com.android.internal.util.cm.QSConstants.TILE_PROFILE;
-import static com.android.internal.util.cm.QSConstants.TILE_PERFORMANCE_PROFILE;
-import static com.android.internal.util.cm.QSConstants.TILE_QUIETHOURS;
-import static com.android.internal.util.cm.QSConstants.TILE_RINGER;
-import static com.android.internal.util.cm.QSConstants.TILE_SCREENTIMEOUT;
-import static com.android.internal.util.cm.QSConstants.TILE_SETTINGS;
-import static com.android.internal.util.cm.QSConstants.TILE_SLEEP;
-import static com.android.internal.util.cm.QSConstants.TILE_SYNC;
-import static com.android.internal.util.cm.QSConstants.TILE_TORCH;
-import static com.android.internal.util.cm.QSConstants.TILE_USER;
-import static com.android.internal.util.cm.QSConstants.TILE_VOLUME;
-import static com.android.internal.util.cm.QSConstants.TILE_WIFI;
-import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
-import static com.android.internal.util.cm.QSConstants.TILE_QUICKRECORD;
-import static com.android.internal.util.cm.QSConstants.TILE_ONTHEGO;
-import static com.android.internal.util.cm.QSConstants.TILE_POWERMENU;
+import static com.android.internal.util.cm.QSConstants.*;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -169,6 +137,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_POWERMENU, R.string.title_tile_powermenu,
                 "com.android.systemui:drawable/ic_qs_powermenu"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_UPDATE, R.string.title_tile_update,
+                "com.android.systemui:drawable/ic_qs_update"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
