@@ -97,8 +97,5 @@
     <dimen name="list_toggle_width">320dp</dimen>
     <dimen name="toggle_rearrange_dialog_title_height">68dp</dimen>
 
-    <!-- Minimal notification row height used to calculate max notification count -->
-    <dimen name="notification_row_min_height">70dp</dimen>
     <dimen name="navigation_bar_height_default">40dp</dimen>
-
 </resources>

@@ -23,12 +23,6 @@
         android:title="@string/notifications_ux_title">
 
         <PreferenceScreen
-            android:id="@+id/active_notifications"
-            android:title="@string/Lockscreen_notifications_header"
-            android:summary="@string/active_notifications_summary"
-            android:fragment="com.android.settings.ActiveNotifications" />
-
-        <PreferenceScreen
             android:id="@+id/halo_settings"
             android:fragment="com.android.settings.vanir.Halo"
             android:title="@string/halo_settings_title"

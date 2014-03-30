@@ -18,7 +18,6 @@
 -keep class com.android.settings.cyanogenmod.*Settings
 -keep class com.koushikdutta.**
 -keep class com.android.settings.vanir.superuser.**
--keep class com.android.settings.vanir.*Settings
 
 # Keep click responders
 -keepclassmembers class com.android.settings.inputmethod.UserDictionaryAddWordActivity {
