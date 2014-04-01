@@ -30,6 +30,8 @@ import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.DevelopmentSettings;
 
+import com.android.settings.util.HardwareKeyNavbarHelper;
+
 import java.io.File;
 
 public class BootReceiver extends BroadcastReceiver {
@@ -53,6 +55,7 @@ public class BootReceiver extends BroadcastReceiver {
         VibratorIntensity.restore(ctx);
         DisplaySettings.restore(ctx);
         LocationSettings.restore(ctx);
+        HardwareKeyNavbarHelper.restoreKeyDisabler(ctx);
     }
 
     private static boolean exists(String string) {

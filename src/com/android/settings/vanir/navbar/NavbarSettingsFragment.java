@@ -28,6 +28,8 @@ import com.android.settings.SingleChoiceSetting;
 
 import com.vanir.util.DeviceUtils;
 
+import com.android.settings.util.HardwareKeyNavbarHelper;
+
 public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBarChangeListener,
         CompoundButton.OnCheckedChangeListener {
 
@@ -43,7 +45,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private TextView mBarWidthValue;
 
     private Switch mEnabledSwitch;
-    private int deviceKeys = 0;
 
     private static int HValue;
     private static int LValue;
@@ -62,9 +63,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        deviceKeys = getResources().getInteger(com.android.internal.R.integer.config_deviceHardwareKeys);
-
-        if (deviceKeys > 0) {
+        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
             mEnabledSwitch = new Switch(getActivity());
 
             final int padding = getActivity().getResources().getDimensionPixelSize(R.dimen.action_bar_switch_padding);
@@ -76,7 +75,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     @Override
     public void onStart() {
         super.onStart();
-        if (deviceKeys > 0) {
+        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
             getActivity().getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
                     ActionBar.DISPLAY_SHOW_CUSTOM);
             getActivity().getActionBar().setCustomView(mEnabledSwitch, new ActionBar.LayoutParams(
@@ -91,7 +90,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     @Override
     public void onStop() {
         super.onStop();
-        if (deviceKeys > 0) {
+        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
             getActivity().getActionBar().setDisplayOptions(0, ActionBar.DISPLAY_SHOW_CUSTOM);
             getActivity().getActionBar().setCustomView(null);
         }
@@ -193,9 +192,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == mEnabledSwitch) {
             boolean value = ((Boolean)isChecked).booleanValue();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.ENABLE_NAVIGATION_BAR,
-                    value ? 1 : 0);
+            HardwareKeyNavbarHelper.writeDisableNavkeysOption(getActivity(), value);
         }
     }
 

@@ -35,6 +35,9 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+import org.cyanogenmod.hardware.KeyDisabler;
+import com.android.settings.util.HardwareKeyNavbarHelper;
+
 public class ButtonSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String KEY_HOME_LONG_PRESS = "hardware_keys_home_long_press";
@@ -51,6 +54,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
     private static final String QUICK_CAM = "quick_cam";
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
+    private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
 
     private static final String CATEGORY_HOME = "home_key";
     private static final String CATEGORY_MENU = "menu_key";
@@ -97,6 +101,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mSwapVolumeButtons;
     private CheckBoxPreference mQuickCam;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
+    private CheckBoxPreference mDisableNavigationKeys;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,6 +115,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         final int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
+
         final boolean hasHomeKey = (deviceKeys & KEY_MASK_HOME) != 0;
         final boolean hasMenuKey = (deviceKeys & KEY_MASK_MENU) != 0;
         final boolean hasAssistKey = (deviceKeys & KEY_MASK_ASSIST) != 0;
@@ -129,6 +135,19 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_CAMERA);
         final PreferenceCategory volumeCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_VOLUME);
+
+        // Force Navigation bar related options
+        mDisableNavigationKeys = (CheckBoxPreference) findPreference(DISABLE_NAV_KEYS);
+
+        // Only visible on devices that does not have a navigation bar already,
+        // and don't even try unless the existing keys can be disabled
+        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
+            // Remove keys that can be provided by the navbar
+            updateDisableNavkeysOption();
+        } else {
+            prefScreen.removePreference(mDisableNavigationKeys);
+        }
+
 
         if (hasHomeKey) {
             if (!res.getBoolean(R.bool.config_show_homeWake)) {
@@ -338,6 +357,50 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         return false;
     }
 
+    private void updateDisableNavkeysOption() {
+        boolean enabled = Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.ENABLE_NAVIGATION_BAR, 0) != 0;
+
+        mDisableNavigationKeys.setChecked(enabled);
+
+        if (!KeyDisabler.isSupported()) {
+            return;
+        }
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        /* Disable hw-key options if they're disabled */
+        final PreferenceCategory homeCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HOME);
+        final PreferenceCategory menuCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_MENU);
+        final PreferenceCategory assistCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_ASSIST);
+        final PreferenceCategory appSwitchCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_APPSWITCH);
+        final ButtonBacklightBrightness backlight =
+                (ButtonBacklightBrightness) prefScreen.findPreference(KEY_BUTTON_BACKLIGHT);
+
+        /* Toggle backlight control depending on navbar state, force it to
+           off if enabling */
+        if (backlight != null) {
+            backlight.setEnabled(!enabled);
+        }
+
+        /* Toggle hardkey control availability depending on navbar state */
+        if (homeCategory != null) {
+            homeCategory.setEnabled(!enabled);
+        }
+        if (menuCategory != null) {
+            menuCategory.setEnabled(!enabled);
+        }
+        if (assistCategory != null) {
+            assistCategory.setEnabled(!enabled);
+        }
+        if (appSwitchCategory != null) {
+            appSwitchCategory.setEnabled(!enabled);
+        }
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         boolean checked = false;
@@ -368,6 +431,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                     mHeadsetHookLaunchVoice.isChecked() ? 1 : 0);
             updateHeadsetButtonSummary();
             return true;
+        } else if (preference == mDisableNavigationKeys) {
+            HardwareKeyNavbarHelper.writeDisableNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
+            updateDisableNavkeysOption();
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
