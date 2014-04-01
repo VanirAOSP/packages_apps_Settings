@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -56,6 +57,8 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     int MIN_HEIGHT_PERCENT;
     int MIN_WIDTH_PERCENT;
 
+    private Handler mHandler;
+
     public NavbarSettingsFragment() {
     }
 
@@ -65,7 +68,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
         if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
             mEnabledSwitch = new Switch(getActivity());
-
+            mHandler = new Handler();
             final int padding = getActivity().getResources().getDimensionPixelSize(R.dimen.action_bar_switch_padding);
             mEnabledSwitch.setPaddingRelative(0, 0, padding, 0);
             mEnabledSwitch.setOnCheckedChangeListener(this);
@@ -191,8 +194,17 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (buttonView == mEnabledSwitch) {
-            boolean value = ((Boolean)isChecked).booleanValue();
-            HardwareKeyNavbarHelper.writeDisableNavkeysOption(getActivity(), value);
+            mEnabledSwitch.setEnabled(false);
+            HardwareKeyNavbarHelper.writeDisableNavkeysOption(getActivity(), mEnabledSwitch.isChecked());
+            mEnabledSwitch.setChecked(
+                Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.ENABLE_NAVIGATION_BAR, 0) != 0);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mEnabledSwitch.setEnabled(true);
+                }
+            }, 1000);
         }
     }
 
