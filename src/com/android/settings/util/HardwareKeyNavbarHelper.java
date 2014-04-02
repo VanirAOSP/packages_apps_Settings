@@ -41,6 +41,15 @@ public class HardwareKeyNavbarHelper {
         return false;
     }
 
+    public static boolean hasNavbar() {
+        try {
+            final IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            return wm.hasNavigationBar();
+        } catch (RemoteException e) {
+        }
+        return false;
+    }
+
     public static void restoreKeyDisabler(Context context) {
         writeDisableNavkeysOption(context, Settings.System.getInt(context.getContentResolver(),
                 Settings.System.ENABLE_NAVIGATION_BAR, 0) != 0);

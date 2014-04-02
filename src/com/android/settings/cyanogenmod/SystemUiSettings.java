@@ -42,6 +42,8 @@ import com.android.settings.vanir.NavringPreferenceSwitch;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.settings.util.HardwareKeyNavbarHelper;
+
 public class SystemUiSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
@@ -100,10 +102,10 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
     private void setImmersiveModeEntries() {
         final Resources res = getResources();
-        boolean navbarToggleState = Settings.System.getInt(getContentResolver(), Settings.System.ENABLE_NAVIGATION_BAR, 0) == 1;
+        boolean navbar = HardwareKeyNavbarHelper.hasNavbar();
         
-        mImmersiveModePref.setEntries(res.getStringArray(navbarToggleState ? R.array.immersive_mode_entries : R.array.immersive_mode_entries_no_navbar));
-        mImmersiveModePref.setEntryValues(res.getStringArray(navbarToggleState ? R.array.immersive_mode_values : R.array.immersive_mode_values_no_navbar));
+        mImmersiveModePref.setEntries(res.getStringArray(navbar ? R.array.immersive_mode_entries : R.array.immersive_mode_entries_no_navbar));
+        mImmersiveModePref.setEntryValues(res.getStringArray(navbar ? R.array.immersive_mode_values : R.array.immersive_mode_values_no_navbar));
         if (immersiveModeValue >= mImmersiveModePref.getEntries().length) {
             Log.w("ImmersiveModePreferences", "Selected value is outside of entries range. Using default == 2");
             immersiveModeValue = 2;
