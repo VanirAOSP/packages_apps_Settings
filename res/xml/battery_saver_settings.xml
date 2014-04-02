@@ -146,8 +146,8 @@
              android:dependency="pref_battery_saver_enable"
              android:title="@string/pref_battery_saver_network_title"
              android:summary="@string/pref_battery_saver_network_summary"
-             android:entries="@array/batterysaver_danyoulazyfuck_entries"
-             android:entryValues="@array/batterysaver_danyoulazyfuck_values"
+             android:entries="@array/ad_redisplay_entries"
+             android:entryValues="@array/ad_redisplay_values"
              android:persistent="false" />
 
     </PreferenceCategory>
