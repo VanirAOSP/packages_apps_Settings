@@ -36,7 +36,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import org.cyanogenmod.hardware.KeyDisabler;
 import com.android.settings.util.HardwareKeyNavbarHelper;
 
 public class ButtonSettings extends SettingsPreferenceFragment implements
@@ -146,7 +145,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         // Only visible on devices that does not have a navigation bar already,
         // and don't even try unless the existing keys can be disabled
-        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
+        if (HardwareKeyNavbarHelper.shouldShowHardwareNavkeyToggle(getActivity())) {
             // Remove keys that can be provided by the navbar
             updateDisableNavkeysOption();
         } else {
@@ -363,14 +362,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     }
 
     private void updateDisableNavkeysOption() {
-        boolean enabled = Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.ENABLE_NAVIGATION_BAR, 0) != 0;
+
+        boolean enabled = HardwareKeyNavbarHelper.getDisableHardwareNavkeysOption(getActivity());
 
         mDisableNavigationKeys.setChecked(enabled);
 
-        if (!KeyDisabler.isSupported()) {
-            return;
-        }
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
         /* Disable hw-key options if they're disabled */
@@ -438,7 +434,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             return true;
         } else if (preference == mDisableNavigationKeys) {
             mDisableNavigationKeys.setEnabled(false);
-            HardwareKeyNavbarHelper.writeDisableNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
+            HardwareKeyNavbarHelper.writeDisableHardwareNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
             updateDisableNavkeysOption();
             mHandler.postDelayed(new Runnable() {
                 @Override

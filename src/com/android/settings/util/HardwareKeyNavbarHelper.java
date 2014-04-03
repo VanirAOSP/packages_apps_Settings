@@ -41,6 +41,10 @@ public class HardwareKeyNavbarHelper {
         return false;
     }
 
+    public static boolean shouldShowHardwareNavkeyToggle(Context context) {
+        return KeyDisabler.isSupported() && getNavbarForceEnabled(context);
+    }
+
     public static boolean hasNavbar() {
         try {
             final IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
@@ -50,24 +54,39 @@ public class HardwareKeyNavbarHelper {
         return false;
     }
 
-    public static void restoreKeyDisabler(Context context) {
-        writeDisableNavkeysOption(context, Settings.System.getInt(context.getContentResolver(),
-                Settings.System.ENABLE_NAVIGATION_BAR, 0) != 0);
+    public static boolean getNavbarForceEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(), Settings.System.ENABLE_NAVIGATION_BAR, 0) != 0;
     }
 
-    public static void writeDisableNavkeysOption(Context context, boolean enabled) {
+    public static void writeEnableNavbarOption(Context context, boolean enabled) {
         Settings.System.putInt(context.getContentResolver(),
                 Settings.System.ENABLE_NAVIGATION_BAR, enabled ? 1 : 0);
-        if (!KeyDisabler.isSupported()) {
+    }
+
+    public static void restoreKeyDisabler(Context context) {
+        // note: enabled == disabling of the navkeys IS ON
+        writeDisableHardwareNavkeysOption(context, getDisableHardwareNavkeysOption(context));
+    }
+
+    public static boolean getDisableHardwareNavkeysOption(Context context) {
+        return shouldShowHardwareNavkeyToggle(context) && context.getApplicationContext().getSharedPreferences("hardware_key_prefs", Context.MODE_PRIVATE).getInt("hardware_keys_disabled", 0) != 0;
+    }
+
+    // enabled==true == disabling of navkeys is on
+    public static void writeDisableHardwareNavkeysOption(Context context, boolean enabled) {
+        if (!shouldShowHardwareNavkeyToggle(context)) {
             return;
         }
 
-        final SharedPreferences prefs = context.getApplicationContext().getSharedPreferences("previous_button_baclkight_values", Context.MODE_PRIVATE);
+        final SharedPreferences prefs = context.getApplicationContext().getSharedPreferences("hardware_key_prefs", Context.MODE_PRIVATE);
+
         final int defaultBrightness = context.getResources().getInteger(
                 com.android.internal.R.integer.config_buttonBrightnessSettingDefault);
 
         /* Save/restore button timeouts to disable them in softkey mode */
         Editor editor = prefs.edit();
+
+        editor.putInt("hardware_keys_disabled", enabled ? 1 : 0);
 
         if (enabled) {
             int currentBrightness = Settings.System.getInt(context.getContentResolver(),
