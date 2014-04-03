@@ -147,7 +147,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         // and don't even try unless the existing keys can be disabled
         if (HardwareKeyNavbarHelper.shouldShowHardwareNavkeyToggle(getActivity())) {
             // Remove keys that can be provided by the navbar
-            updateDisableNavkeysOption();
+            updateDisableNavkeysOption(true);
         } else {
             prefScreen.removePreference(mDisableNavigationKeys);
         }
@@ -361,11 +361,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         return false;
     }
 
-    private void updateDisableNavkeysOption() {
+    private void updateDisableNavkeysOption(boolean shouldSetChecked) {
 
         boolean enabled = HardwareKeyNavbarHelper.getDisableHardwareNavkeysOption(getActivity());
 
-        mDisableNavigationKeys.setChecked(enabled);
+        if (shouldSetChecked) {
+            mDisableNavigationKeys.setChecked(enabled);
+        }
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
 
@@ -435,7 +437,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         } else if (preference == mDisableNavigationKeys) {
             mDisableNavigationKeys.setEnabled(false);
             HardwareKeyNavbarHelper.writeDisableHardwareNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
-            updateDisableNavkeysOption();
+            updateDisableNavkeysOption(false);
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {

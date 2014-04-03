@@ -196,7 +196,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         if (buttonView == mEnabledSwitch) {
             mEnabledSwitch.setEnabled(false);
             HardwareKeyNavbarHelper.writeEnableNavbarOption(getActivity(), mEnabledSwitch.isChecked());
-            mEnabledSwitch.setChecked(HardwareKeyNavbarHelper.getNavbarForceEnabled(getActivity()));
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
