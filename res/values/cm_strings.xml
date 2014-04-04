@@ -854,6 +854,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="button_settings">Hardware keys</string>
     <string name="hardware_keys_home_key_title">Home button</string>
     <string name="hardware_keys_menu_key_title">Menu button</string>
+    <string name="hardware_keys_back_key_title">Back button</string>
     <string name="hardware_keys_assist_key_title">Search button</string>
     <string name="hardware_keys_appswitch_key_title">Recents button</string>
     <string name="hardware_keys_camera_key_title">Camera button</string>
@@ -868,6 +869,13 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="hardware_keys_action_voice_search">Voice search</string>
     <string name="hardware_keys_action_in_app_search">In-app search</string>
     <string name="hardware_keys_action_launch_camera">Launch Camera</string>
+    <string name="hardware_keys_action_kill">Kill target</string>
+    <string name="hardware_keys_action_back">Navigate back</string>
+    <string name="hardware_keys_action_home">Navigate home</string>
+    <string name="hardware_keys_action_lastapp">Last app</string>
+    <string name="hardware_keys_action_ime">IME switcher</string>
+    <string name="hardware_keys_action_powermenu">Power menu</string>
+    <string name="hardware_keys_action_navbar">Toggle the navbar</string>
     <string name="home_wake_title">Home button wake</string>
     <string name="home_wake_summary">Pressing the home button will wake your device</string>
     <string name="camera_wake_title">Camera button wake</string>

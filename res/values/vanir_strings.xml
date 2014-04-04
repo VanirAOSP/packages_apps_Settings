@@ -28,6 +28,8 @@
     <string name="performance_settings">Performance</string>
     <string name="controls">Controls</string>
     <string name="recents">Recents panel</string>
+    <string name="general">General preferences</string>
+    <string name="kill_app_navbar_summary">To enable longpress back to kill set a longpress target in Navigation bar settings</string>
 
     <!-- Power menu enable disable -->
     <string name="power_menu_title">Power menu</string>
@@ -501,7 +503,6 @@
 	<string name="shortcut_image_not_valid">The chosen app did not return a valid icon or does not support image cropping.</string>
 
     <!-- Active Notifications --> 
-    <string name="general">General</string>
     <string name="privacy">Privacy</string>
     <string name="additional_settings_title">More options...</string>
     <string name="active_quiet_hours_title">Quiet hours</string>
@@ -741,6 +742,9 @@
     <string name="title_tile_onthego">On-The-Go</string>
     <string name="power_menu_onthego_title">On-The-Go Mode</string>
     <string name="power_menu_onthego_summary">Show the camera overlay under all windows</string>
+
+    <!-- Hardware button switches -->
+    <string name="key_enabled">Enable key</string>
 
     <!--boot animation -->
     <string name="disable_bootanimation_title">Boot animation</string>
