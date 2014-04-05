@@ -390,7 +390,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
         }
 
         // Remove Voice+ option if Google Voice is not installed or Voice+ is not installed
-        if (!isPackageInstalled(GOOGLE_VOICE_PACKAGE) || !isPackageInstalled("org.cyanogenmod.voiceplus")) {
+        if (!Utils.isPackageInstalled(getActivity(), GOOGLE_VOICE_PACKAGE) || !Utils.isPackageInstalled(getActivity(), "org.cyanogenmod.voiceplus")) {
             removePreference(KEY_VOICE_PLUS_ACCOUNT);
         }
 
