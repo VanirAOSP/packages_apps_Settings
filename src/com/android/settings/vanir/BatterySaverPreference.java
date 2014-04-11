@@ -52,7 +52,7 @@ public class BatterySaverPreference extends Preference implements OnCheckedChang
         super.onBindView(view);
         mSwitch = (Switch) view.findViewById(R.id.mswitch);
         mSwitch.setChecked(Settings.Global.getInt(getContext().getContentResolver(),
-                Settings.Global.BATTERY_SAVER_OPTION, 1) != 0);
+                Settings.Global.BATTERY_SAVER_OPTION, 0) != 0);
         mSwitch.setOnCheckedChangeListener(this);
     }
 
