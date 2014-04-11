@@ -88,7 +88,7 @@ public class PowerMenu extends SettingsPreferenceFragment {
         // disable immersive if immersive style is disabled
         mImmersiveModePref.setEnabled(
                 Settings.System.getInt(getContentResolver(),
-                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 0)
+                Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2)
                 != 0);
         setImmersiveSummary();
 
