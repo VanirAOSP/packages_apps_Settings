@@ -181,9 +181,9 @@
     <!-- Expanded desktop -->
     <string-array name="immersive_mode_entries" translatable="false">
         <item>@string/immersive_mode_disabled</item>
-        <item>@string/immersive_mode_status_bar</item>
-        <item>@string/immersive_mode_no_status_bar</item>
-        <item>@string/immersive_mode_navbar_only</item>
+        <item>@string/immersive_mode_hide_navbar</item>
+        <item>@string/immersive_mode_hide_both</item>
+        <item>@string/immersive_mode_hide_statusbar</item>
     </string-array>
 
     <string-array name="immersive_mode_values" translatable="false">
@@ -195,13 +195,11 @@
 
     <string-array name="immersive_mode_entries_no_navbar" translatable="false">
         <item>@string/immersive_mode_disabled</item>
-        <item>@string/immersive_mode_status_bar</item>
-        <item>@string/immersive_mode_no_status_bar</item>
+        <item>@string/immersive_mode_hide_statusbar</item>
     </string-array>
 
     <string-array name="immersive_mode_values_no_navbar" translatable="false">
         <item>0</item>
-        <item>1</item>
         <item>2</item>
     </string-array>
 

@@ -92,12 +92,11 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     
         mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
         immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
+        setImmersiveModeEntries();
         mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
         updateImmersiveModeSummary();
         updateImmersiveModeState();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
-
-        setImmersiveModeEntries();
     }
 
     private void setImmersiveModeEntries() {
@@ -117,6 +116,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
     private void updateImmersiveModeState() {
         mExpandedDesktop.setEnabled(immersiveModeValue > 0);
+        mImmersiveModeState.setEnabled(immersiveModeValue > 0);
     }
 
     @Override
@@ -169,27 +169,16 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     }
 
     private void updateImmersiveModeSummary() {
-        Resources res = getResources();
-        String summary = "Microwaving your phone on HIGH for 30 minutes";
-        switch (immersiveModeValue) {
-            case 0: summary = res.getString(R.string.immersive_mode_disabled);
-                break;
-            case 1: summary = res.getString(R.string.summary_immersive_mode,
-                                  res.getString(R.string.immersive_mode_summary_status_bar));
-                break;
-            case 2: summary = res.getString(R.string.summary_immersive_mode,
-                                  res.getString(R.string.immersive_mode_summary_no_status_bar));
-                break;
-            case 3: summary = res.getString(R.string.summary_immersive_mode,
-                                  res.getString(R.string.immersive_mode_summary_no_status_bar));
-                break;
-        }
-        mImmersiveModePref.setSummary(summary);
+        smartSummary(mImmersiveModePref, String.valueOf(immersiveModeValue));
     }
 
     private void updateRebootDialog() {
         Intent u = new Intent();
         u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
         mContext.sendBroadcastAsUser(u, UserHandle.ALL);
+    }
+
+    private void smartSummary(final ListPreference pref, final String value) {
+        pref.setSummary(pref.getEntries()[pref.findIndexOfValue(value)]);
     }
 }
