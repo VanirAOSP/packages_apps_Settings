@@ -274,6 +274,11 @@
     <string name="expanded_desktop_summary">Disable the immersive ui swipe gestures</string>
     <string name="immersive_mode_lol_profile_title">Low profile mode</string>
     <string name="immersive_mode_lol_on">Hide the statusbar and dim the navbar when applicable</string>
+    <string name="immersive_orientation_title">Orientation</string>
+    <string name="immersive_orientation_dialog_title">Select dependency:</string>
+    <string name="landscape_immersive">Landscape only</string>
+    <string name="portrait_immersive">Portrait only</string>
+    <string name="orientation_disabled">Default</string>
 
     <!-- Custom Carrier Text -->
     <string name="custom_carrier_label_title">Custom carrier label</string>

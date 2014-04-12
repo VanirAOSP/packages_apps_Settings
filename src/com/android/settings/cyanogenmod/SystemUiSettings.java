@@ -53,18 +53,22 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
     private static final String KEY_IMMERSIVE_LOL = "immersive_mode_lol_profile";
+    private static final String KEY_IMMERSIVE_ORIENTATION = "immersive_orientation";
     private static final String KEY_NAVRING_SWITCH = "navigation_bar_ring";
 
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
+    private ListPreference mImmersiveOrientation;
     private ListPreference mImmersiveModePref;
     private CheckBoxPreference mImmersiveLOL;
     private CheckBoxPreference mExpandedDesktop;
     private SwitchPreference mImmersiveModeState;
 
     private NavringPreferenceSwitch mNavringPreference;
-
     private int immersiveModeValue;
+
+    // in case the user rotates when in system ui settings...
+    private boolean GROSS = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,33 +93,53 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         mExpandedDesktop.setChecked(Settings.System.getInt(getContentResolver(), 
                     Settings.System.EXPANDED_DESKTOP, 0) == 1);
         mExpandedDesktop.setOnPreferenceChangeListener(this);
+
+        mImmersiveOrientation = (ListPreference) findPreference(KEY_IMMERSIVE_ORIENTATION);
+        int orientationValue = Settings.System.getInt(getContentResolver(), Settings.System.IMMERSIVE_ORIENTATION, 0);
+        final String strValueOrientation = String.valueOf(orientationValue);
+        mImmersiveOrientation.setValue(strValueOrientation);
+        smartSummary(mImmersiveOrientation, strValueOrientation);
+        mImmersiveOrientation.setOnPreferenceChangeListener(this);
     
         mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
-        immersiveModeValue = Settings.System.getInt(getContentResolver(), Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
+        immersiveModeValue = Settings.System.getInt(getContentResolver(),
+                    Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
+        final String strValueMode = String.valueOf(immersiveModeValue);
         setImmersiveModeEntries();
-        mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
-        updateImmersiveModeSummary();
+        mImmersiveModePref.setValue(strValueMode);
+        smartSummary(mImmersiveModePref, strValueMode);
         updateImmersiveModeState();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
     }
 
+    // GROSS
     private void setImmersiveModeEntries() {
+        if (GROSS) return;
+        GROSS = true;
+
         final Resources res = getResources();
         boolean navbar = HardwareKeyNavbarHelper.hasNavbar();
-        
-        mImmersiveModePref.setEntries(res.getStringArray(navbar ? R.array.immersive_mode_entries : R.array.immersive_mode_entries_no_navbar));
-        mImmersiveModePref.setEntryValues(res.getStringArray(navbar ? R.array.immersive_mode_values : R.array.immersive_mode_values_no_navbar));
-        if (immersiveModeValue >= mImmersiveModePref.getEntries().length) {
+
+        mImmersiveModePref.setEntries(res.getStringArray(
+                navbar ? R.array.immersive_mode_entries : R.array.immersive_mode_entries_no_navbar));
+        mImmersiveModePref.setEntryValues(res.getStringArray(
+                navbar ? R.array.immersive_mode_values : R.array.immersive_mode_values_no_navbar));
+
+        // we only need to disabled and no statusbar here unless there's a navbar..
+        if (navbar && (immersiveModeValue == 1 || immersiveModeValue == 3 )) {
             Log.w("ImmersiveModePreferences", "Selected value is outside of entries range. Using default == 2");
             immersiveModeValue = 2;
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, immersiveModeValue);
-            mImmersiveModePref.setValue(String.valueOf(immersiveModeValue));
         }
+        final String strValue = String.valueOf(immersiveModeValue);
+        mImmersiveModePref.setValue(strValue);
+        smartSummary(mImmersiveModePref, strValue);
     }
 
     private void updateImmersiveModeState() {
         mExpandedDesktop.setEnabled(immersiveModeValue > 0);
+        mImmersiveOrientation.setEnabled(immersiveModeValue > 0);
         mImmersiveModeState.setEnabled(immersiveModeValue > 0);
     }
 
@@ -138,12 +162,21 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         final String key = preference.getKey();
 
         if (preference == mImmersiveModePref) {
-            immersiveModeValue = Integer.valueOf((String) objValue);
+            final String strValue = (String) objValue;
+            immersiveModeValue = Integer.valueOf(strValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, immersiveModeValue);
-            updateImmersiveModeSummary();
             updateImmersiveModeState();
+            smartSummary(mImmersiveModePref, strValue);
             updateRebootDialog();
+            return true;
+
+        } else if (preference == mImmersiveOrientation) {
+            final String strValue = (String)objValue;
+            int value = Integer.valueOf(strValue);
+            Settings.System.putInt(getContentResolver(), Settings.System.IMMERSIVE_ORIENTATION,
+                    value);
+            smartSummary(mImmersiveOrientation, strValue);
             return true;
 
         } else if (preference == mImmersiveLOL) {
@@ -166,10 +199,6 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
             return true;
         }
         return false;
-    }
-
-    private void updateImmersiveModeSummary() {
-        smartSummary(mImmersiveModePref, String.valueOf(immersiveModeValue));
     }
 
     private void updateRebootDialog() {

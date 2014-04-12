@@ -81,21 +81,28 @@
             android:key="immersive_mode_state"
             android:title="@string/immersive_mode_state" />    
 
-       <CheckBoxPreference
-            android:key="expanded_desktop"
-            android:title="@string/expanded_desktop_title"
-            android:summary="@string/expanded_desktop_summary" />
-
-       <CheckBoxPreference
-            android:key="immersive_mode_lol_profile"
-            android:title="@string/immersive_mode_lol_profile_title"
-            android:summary="@string/immersive_mode_lol_on" />
-       
        <ListPreference
             android:key="immersive_mode_style"
             android:title="@string/immersive_mode_style"
             android:entries="@array/immersive_mode_entries"
             android:entryValues="@array/immersive_mode_values" />
+
+       <ListPreference
+            android:key="immersive_orientation"
+            android:dialogTitle="@string/immersive_orientation_title"
+            android:title="@string/immersive_orientation_title"
+            android:entries="@array/immersive_orientation_entries"
+            android:entryValues="@array/immersive_orientation_values" />
+
+       <CheckBoxPreference
+            android:key="immersive_mode_lol_profile"
+            android:title="@string/immersive_mode_lol_profile_title"
+            android:summary="@string/immersive_mode_lol_on" />
+
+       <CheckBoxPreference
+            android:key="expanded_desktop"
+            android:title="@string/expanded_desktop_title"
+            android:summary="@string/expanded_desktop_summary" />
 
     </PreferenceCategory>
 </PreferenceScreen>
