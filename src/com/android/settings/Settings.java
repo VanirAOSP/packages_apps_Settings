@@ -147,8 +147,6 @@ public class Settings extends PreferenceActivity
 
     private static boolean sShowNoHomeNotice = false;
 
-    private HeaderCompatCheck mHeaderCompatCheck;
-
     private String mFragmentClass;
     private int mTopLevelHeaderId;
     private Header mFirstHeader;
@@ -225,7 +223,6 @@ public class Settings extends PreferenceActivity
         }
 
         Context context = getApplicationContext();
-        mHeaderCompatCheck = new HeaderCompatCheck(context);
 
         mAuthenticatorHelper = new AuthenticatorHelper();
         mAuthenticatorHelper.updateAuthDescriptions(this);
@@ -590,7 +587,7 @@ public class Settings extends PreferenceActivity
 
     private void updateHeaderList(List<Header> target) {
         final boolean showDev = UserHandle.myUserId() == UserHandle.USER_OWNER;
-        final boolean compatibility = mHeaderCompatCheck.hasCompatibility();
+        final boolean compatibility = HeaderCompatCheck.hasCompatibility(getApplicationContext());
         updateUserPreferences();
         int i = 0;
 

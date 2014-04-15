@@ -17,94 +17,71 @@
 package com.android.settings.vanir;
 
 import android.app.ActivityManager;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
-import android.os.Bundle;
+
 import android.os.Vibrator;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
-import android.provider.Settings;
 
 import com.android.settings.hardware.DisplayColor;
 import com.android.settings.hardware.DisplayGamma;
 import com.android.settings.hardware.VibratorIntensity;
-import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.cyanogenmod.MoreDeviceSettings;
 
 public class HeaderCompatCheck {
 
-    private static Context mContext;
+    private static boolean hasvib;
+    private static boolean hascolors;
+    private static boolean hasgamma;
+    private static boolean hasdeviceprefs;
+    private static boolean haslowram;
+    private static boolean hasANYTHING;
+    private static boolean wasinit;
 
-    private static Vibrator vibrates;
-
-    private static boolean vibrator;
-    private static boolean compatibility = false;
-
-    public HeaderCompatCheck(Context context) {
-        mContext = context;
-        vibrates = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-
-        boolean vibrator = hasVibratorIntensity();
-        boolean colors = modifiableDisplayColors();
-        boolean gamma = modifiableDisplayGamma();
-        boolean devicepreferences = hasDevicePreferenceActivity();
-        boolean lowRam = isLowRam();
-
-        if (vibrator || colors || gamma || devicepreferences || lowRam) compatibility = true;
-    }
-
-    public static boolean hasCompatibility() {
-        if (compatibility) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean hasVibratorIntensity() {
-        if (VibratorIntensity.isSupported() && vibrates != null && vibrates.hasVibrator()) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean modifiableDisplayColors() {
-        return (DisplayColor.isSupported() ? true : false);
-    }
-
-    public static boolean modifiableDisplayGamma() {
-        return (DisplayGamma.isSupported() ? true : false);
-    }
-
-    public static boolean isLowRam() {
-        if (ActivityManager.isLowRamDeviceStatic()) {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean hasDevicePreferenceActivity() {
-        if(isPackageExisted("com.cyanogenmod.settings.device")) {
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isPackageExisted(String targetPackage){
-        PackageManager pm = mContext.getPackageManager();
+    private static void init(Context context) {
+        wasinit = true;
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        hasvib = VibratorIntensity.isSupported() && vibrator != null && vibrator.hasVibrator();
+        hascolors = DisplayColor.isSupported();
+        hasgamma = DisplayColor.isSupported();
+        hasdeviceprefs = true;
+        PackageManager pm = context.getPackageManager();
         try {
-            PackageInfo info = pm.getPackageInfo(targetPackage,PackageManager.GET_META_DATA);
+            PackageInfo info = pm.getPackageInfo("com.cyanogenmod.settings.device",PackageManager.GET_META_DATA);
         } catch (NameNotFoundException e) {
-            return false;
+            hasdeviceprefs = false;
         }
-        return true;
+        haslowram = ActivityManager.isLowRamDeviceStatic();
+        hasANYTHING = (hasvib || hascolors || hasgamma || hasdeviceprefs || haslowram);
+    }
+
+    public static boolean hasCompatibility(Context context) {
+        if (!wasinit) init(context);
+        return hasANYTHING;
+    }
+
+    public static boolean hasVibratorIntensity(Context context) {
+        if (!wasinit) init(context);
+        return hasvib;
+    }
+
+    public static boolean modifiableDisplayColors(Context context) {
+        if (!wasinit) init(context);
+        return hascolors;
+    }
+
+    public static boolean modifiableDisplayGamma(Context context) {
+        if (!wasinit) init(context);
+        return hasgamma;
+    }
+
+    public static boolean isLowRam(Context context) {
+        if (!wasinit) init(context);
+        return haslowram;
+    }
+
+    private static boolean hasDevicePreferenceActivity(Context context) {
+        if (!wasinit) init(context);
+        return hasdeviceprefs;
     }
 }

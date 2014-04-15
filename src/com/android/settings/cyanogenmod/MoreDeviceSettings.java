@@ -20,7 +20,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
-import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
@@ -45,8 +44,6 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
 
     private CheckBoxPreference mForceHighEndGfx;
 
-    private HeaderCompatCheck mHeaderCompatCheck;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +54,12 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         final PreferenceGroup calibrationCategory =
                 (PreferenceGroup) findPreference(KEY_DISPLAY_CALIBRATION_CATEGORY);
 
-        if (!mHeaderCompatCheck.hasVibratorIntensity()) {
+        if (!HeaderCompatCheck.hasVibratorIntensity(getActivity())) {
             removePreference(KEY_SENSORS_MOTORS_CATEGORY);
         }
 
-        boolean colors = mHeaderCompatCheck.modifiableDisplayColors();
-        boolean gamma = mHeaderCompatCheck.modifiableDisplayGamma();
+        boolean colors = HeaderCompatCheck.modifiableDisplayColors(getActivity());
+        boolean gamma = HeaderCompatCheck.modifiableDisplayGamma(getActivity());
 
         if (!gamma && !colors) {
             getPreferenceScreen().removePreference(calibrationCategory);
@@ -72,7 +69,7 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
             calibrationCategory.removePreference(findPreference(KEY_DISPLAY_COLOR));
         }
 
-        if (mHeaderCompatCheck.isLowRam()) {
+        if (HeaderCompatCheck.isLowRam(getActivity())) {
             mForceHighEndGfx = (CheckBoxPreference) findPreference(FORCE_HIGHEND_GFX_PREF);
             String forceHighendGfx = SystemProperties.get(FORCE_HIGHEND_GFX_PERSIST_PROP, "false");
             mForceHighEndGfx.setChecked("true".equals(forceHighendGfx));
