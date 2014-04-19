@@ -749,4 +749,7 @@
     <string name="disable_bootanimation_default">Default: Displays the Vanir boot animation</string>
     <string name="toast_disabled">Boot animation is disabled!</string>
 
+    <!-- Navbar Toggle QS -->
+    <string name="title_navbar_tile">Navbar toggle</string>
+
 </resources>

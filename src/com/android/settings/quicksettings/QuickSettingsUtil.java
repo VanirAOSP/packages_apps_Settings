@@ -34,6 +34,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.android.settings.util.HardwareKeyNavbarHelper;
+
 public class QuickSettingsUtil {
     private static final String TAG = "QuickSettingsUtil";
 
@@ -140,6 +142,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_UPDATE, R.string.title_tile_update,
                 "com.android.systemui:drawable/ic_qs_update"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_NAVBAR, R.string.title_navbar_tile,
+                "com.android.systemui:drawable/ic_qs_navbar_on"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
@@ -200,6 +205,11 @@ public class QuickSettingsUtil {
         // Don't show the performance profiles tile if is not available for the device
         if (!QSUtils.deviceSupportsPerformanceProfiles(context)) {
             removeTile(TILE_PERFORMANCE_PROFILE);
+        }
+
+        // Don't show the navbar tile on devices that really have a navbar
+        if (!HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
+            removeTile(TILE_NAVBAR);
         }
     }
 
