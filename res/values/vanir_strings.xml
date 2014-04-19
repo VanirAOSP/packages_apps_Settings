@@ -734,6 +734,9 @@
     <string name="pref_force_highend_gfx_title">Force high-end graphics</string>
     <string name="pref_force_highend_gfx_summary">Enables high-end visual effects such as transparent status/navigation bar (requires reboot)</string>
 
+    <!-- update tile -->
+    <string name="title_tile_update">Vanir Updates</string>
+
     <!-- On-The-Go Mode -->
     <string name="title_tile_onthego">On-The-Go</string>
     <string name="power_menu_onthego_title">On-The-Go Mode</string>
