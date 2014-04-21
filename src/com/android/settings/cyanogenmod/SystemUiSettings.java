@@ -104,10 +104,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         mImmersiveModePref = (ListPreference) findPreference(KEY_IMMERSIVE_MODE_STYLE);
         immersiveModeValue = Settings.System.getInt(getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
-        final String strValueMode = String.valueOf(immersiveModeValue);
         setImmersiveModeEntries();
-        mImmersiveModePref.setValue(strValueMode);
-        smartSummary(mImmersiveModePref, strValueMode);
         updateImmersiveModeState();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
     }
