@@ -614,11 +614,6 @@ public class Settings extends PreferenceActivity
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
                     target.remove(i);
                 }
-            } else if (id == R.id.mobile_network_settings) {
-                // Remove mobile network settings if the device doesn't have telephony
-                if (Utils.isWifiOnly(this)) {
-                    target.remove(i);
-                }
             } else if (id == R.id.data_usage_settings) {
                 // Remove data usage when kernel module not enabled
                 final INetworkManagementService netManager = INetworkManagementService.Stub
@@ -922,7 +917,7 @@ public class Settings extends PreferenceActivity
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
                     || (header.id == R.id.profiles_settings && !mStockMode)
-                    || (header.id == R.id.mobile_network_settings && !mStockMode)
+                    || header.id == R.id.data_usage_settings
                     || (header.id == R.id.voice_wakeup_settings && !mStockMode)
                     || (header.id == R.id.location_settings && !mStockMode)) {
                 return HEADER_TYPE_SWITCH;
@@ -1045,7 +1040,7 @@ public class Settings extends PreferenceActivity
                         mWifiEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.bluetooth_settings) {
                         mBluetoothEnabler.setSwitch(holder.switch_);
-                    } else if (header.id == R.id.mobile_network_settings) {
+                    } else if (header.id == R.id.data_usage_settings) {
                         mMobileDataEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.profiles_settings) {
                         mProfileEnabler.setSwitch(holder.switch_);
