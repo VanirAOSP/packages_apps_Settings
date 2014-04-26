@@ -34,7 +34,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -672,8 +671,8 @@ public class Settings extends PreferenceActivity
                 if (!showDev) {
                     target.remove(i);
                 }
-            } else if (id == R.id.performance_control) {
-                if (!showDev || mStockMode || !isPackageExisted("com.brewcrewfoo.performance")) {
+            } else if (id == R.id.performance_settings) {
+                if (!showDev || mStockMode) {
                     target.remove(i);
                 }
             } else if (id == R.id.account_add) {
@@ -828,16 +827,6 @@ public class Settings extends PreferenceActivity
             Log.w(LOG_TAG, "Problem looking up home activity!", e);
         }
 
-        return true;
-    }
-
-    public boolean isPackageExisted(String targetPackage){
-        PackageManager pm=getPackageManager();
-        try {
-            PackageInfo info=pm.getPackageInfo(targetPackage,PackageManager.GET_META_DATA);
-        } catch (NameNotFoundException e) {
-            return false;
-        }
         return true;
     }
 
