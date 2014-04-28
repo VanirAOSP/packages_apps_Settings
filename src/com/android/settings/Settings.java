@@ -911,7 +911,7 @@ public class Settings extends PreferenceActivity
             } else if (header.id == R.id.wifi_settings
                     || header.id == R.id.bluetooth_settings
                     || (header.id == R.id.profiles_settings && !mStockMode)
-                    || (header.id == R.id.mobile_network_settings && !mStockMode)
+                    || (header.id == R.id.mobile_network_settings) //stockmode doesn't move this back to stock location, so GNex users can cry about this existing until I finish SSPM
                     || (header.id == R.id.voice_wakeup_settings && !mStockMode)
                     || (header.id == R.id.location_settings && !mStockMode)) {
                 return HEADER_TYPE_SWITCH;
@@ -1148,6 +1148,28 @@ public class Settings extends PreferenceActivity
                 return;
             } catch(ActivityNotFoundException e) {
                  // Do nothing, we will launch the submenu
+            }
+        }
+
+        // show old fashioned network settings by default
+        // unless multisim is enabled
+        if (header.id == R.id.mobile_network_settings) {
+            try {
+                Intent intent = new Intent();
+                intent.setClassName("com.android.phone",
+                        "com.android.phone.MSimMobileNetworkSubSettings");
+                // only show the activity chooser with an option to open
+                // SelectSubscription for msim when msim is enabled
+                if (MSimTelephonyManager.getDefault().isMultiSimEnabled()) {
+                    intent.setAction("android.settings.DATA_ROAMING_SETTINGS");
+                }
+                startActivity(intent);
+                return;
+            } catch(ActivityNotFoundException e) {
+                // HOW DID YOU INSTALL ANDROID ON YOUR PAGER?!
+                // HOW DO YOU FIND A PAYPHONE TO CALL BACK WHEN YOU ARE PAGED?!
+                // HOW DO YOU SLEEP AT NIGHT WITH THE KNOWLEDGE THAT YOU OWN A PAGER?!
+                return;
             }
         }
 
