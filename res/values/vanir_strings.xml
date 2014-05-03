@@ -990,4 +990,8 @@
 
     <string name="network_settings_title">Mobile</string>
     <string name="phone_call_settings_title">Call settings</string>
+
+    <!-- QuickSettings haptic feedback -->
+    <string name="haptic_qs_tiles_title">Vibrate on touch</string>
+    <string name="haptic_qs_tiles_summary">Vibrate when touching tiles</string>
 </resources>
