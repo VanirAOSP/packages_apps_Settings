@@ -1068,6 +1068,7 @@
         </activity>
 
         <activity android:name="SetFullBackupPassword"
+                android:label="@string/local_backup_password_title"
                 android:theme="@style/Theme.DialogWhenLarge"
                 android:exported="false"
                 android:parentActivityName="Settings$DevelopmentSettingsActivity">
