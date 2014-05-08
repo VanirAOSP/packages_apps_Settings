@@ -71,12 +71,19 @@
 			android:title="@string/lockscreen_background">
 
         <ListPreference
-			android:key="lockscreen_background_style"
-			android:persistent="false"
-			android:dialogTitle="@string/lockscreen_background_style_title"
-			android:title="@string/lockscreen_background_style_title"
-			android:entries="@array/lockscreen_background_entries"
-			android:entryValues="@array/lockscreen_background_values" />
+                       android:key="lockscreen_background_style"
+                       android:persistent="false"
+                       android:dialogTitle="@string/lockscreen_background_style_title"
+                       android:title="@string/lockscreen_background_style_title"
+                       android:entries="@array/lockscreen_background_entries"
+                       android:entryValues="@array/lockscreen_background_values" />
+
+        <Preference
+            android:key="lockscreen_wallpaper_settings"
+            android:title="@string/lockscreen_wallpaper_settings_title">
+            <intent android:targetPackage="com.android.wallpapercropper"
+                    android:targetClass="com.android.wallpapercropper.LockWallpaperPickerActivity" />
+        </Preference>
 
         <net.margaritov.preference.colorpicker.ColorPickerPreference
 			android:key="lockscreen_background_color_fill"
@@ -100,7 +107,6 @@
             android:summary="@string/blur_radius_summary"
             android:max="25"
             android:defaultValue="12" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
