@@ -387,7 +387,8 @@ public class Settings extends PreferenceActivity
         PolicyNativeFragment.class.getName(),
         com.android.settings.quicksettings.QuickSettingsTiles.class.getName(),
         com.android.settings.cyanogenmod.QuietHours.class.getName(),
-        com.android.settings.vanir.navbar.NavbarTabHostFragment.class.getName()
+        com.android.settings.vanir.navbar.NavbarTabHostFragment.class.getName(),
+        ThemeSettings.class.getName()
     };
 
     @Override
