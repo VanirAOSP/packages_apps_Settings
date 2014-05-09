@@ -1069,7 +1069,8 @@
 
         <activity android:name="SetFullBackupPassword"
                 android:theme="@style/Theme.DialogWhenLarge"
-                android:exported="false">
+                android:exported="false"
+                android:parentActivityName="Settings$DevelopmentSettingsActivity">
         </activity>
 
         <activity android:name="CredentialStorage"
@@ -1131,7 +1132,8 @@
         <activity android:name="IccLockSettings"
                 android:label="@string/sim_lock_settings"
                 android:theme="@style/Theme.DialogWhenLarge"
-                android:process="com.android.phone">
+                android:process="com.android.phone"
+                android:parentActivityName="Settings$SecuritySettingsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1276,7 +1278,8 @@
         </activity>
 
         <activity android:name=".deviceinfo.MiscFilesHandler"
-                android:theme="@style/Theme.DialogWhenLarge"/>
+                android:theme="@style/Theme.DialogWhenLarge"
+                android:parentActivityName="Settings$StorageSettingsActivity" />
 
         <activity android:name="Settings$ApnEditorActivity"
                 android:label="@string/apn_edit"

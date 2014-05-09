@@ -16,12 +16,14 @@
 
 package com.android.settings;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.backup.IBackupManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -80,6 +82,11 @@ Log.i(TAG, "failure; password mismatch?");
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        ActionBar mActionBar = getActionBar();
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         mBackupManager = IBackupManager.Stub.asInterface(ServiceManager.getService("backup"));
 
         setContentView(R.layout.set_backup_pw);
@@ -93,6 +100,15 @@ Log.i(TAG, "failure; password mismatch?");
 
         mCancel.setOnClickListener(mButtonListener);
         mSet.setOnClickListener(mButtonListener);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return false;
     }
 
     private boolean setBackupPassword(String currentPw, String newPw) {
