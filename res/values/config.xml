@@ -52,6 +52,10 @@
     <integer name="navigation_bar_width_min_percent">35</integer>
     <integer name="navigation_bar_width_max_percent">135</integer>
 
+    <!-- Multi SIM Tune Away/Priority Subscription Support. Some device RILs do not support this.
+         Setting to false will disable Tune Away/Priority Subscription support -->
+    <bool name="config_HasTuneAway">false</bool>
+
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 
     <!-- This used to define screen color's Hue progress bar minimum value -->
