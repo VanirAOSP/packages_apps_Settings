@@ -31,6 +31,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.vanir.HeaderCompatCheck;
 
+import org.cyanogenmod.hardware.DisplayGammaCalibration;
+
 public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static final String TAG = "MoreDeviceSettings";
 
@@ -60,6 +62,7 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
 
         boolean colors = HeaderCompatCheck.modifiableDisplayColors(getActivity());
         boolean gamma = HeaderCompatCheck.modifiableDisplayGamma(getActivity());
+        boolean WTF = DisplayGammaCalibration.getNumberOfControls() == 0;
 
         if (!gamma && !colors) {
             getPreferenceScreen().removePreference(calibrationCategory);
@@ -67,6 +70,11 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
             calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
         } else if (!colors) {
             calibrationCategory.removePreference(findPreference(KEY_DISPLAY_COLOR));
+        }
+
+        if (WTF) {
+            // yay lets submit half-finished code and rely on the community to do the rest of the work
+            calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
         }
 
         if (HeaderCompatCheck.isLowRam(getActivity())) {
