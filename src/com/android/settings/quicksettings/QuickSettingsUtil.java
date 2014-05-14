@@ -17,6 +17,7 @@
 package com.android.settings.quicksettings;
 
 import static com.android.internal.util.cm.QSConstants.*;
+import static com.android.internal.util.cm.QSConstants.TILE_COMPASS;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -64,6 +65,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_IMMERSIVE, R.string.title_tile_immersive_desktop,
                 "com.android.systemui:drawable/ic_qs_immersive_desktop_tile"));
+        registerTile(new QuickSettingsUtil.TileInfo( 
+                TILE_COMPASS, R.string.title_tile_compass,
+                "com.android.systemui:drawable/ic_qs_compass_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_sleep,
                 "com.android.systemui:drawable/ic_qs_sleep"));
@@ -205,6 +209,11 @@ public class QuickSettingsUtil {
         // Don't show the performance profiles tile if is not available for the device
         if (!QSUtils.deviceSupportsPerformanceProfiles(context)) {
             removeTile(TILE_PERFORMANCE_PROFILE);
+        }
+
+        // Don't show the Compass tile if the device has no orientation sensor
+        if (!QSUtils.deviceSupportsCompass(context)) {
+            removeTile(TILE_COMPASS);
         }
 
         // Don't show the navbar tile on devices that really have a navbar
