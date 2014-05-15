@@ -19,9 +19,11 @@ package com.android.settings.vanir;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.INotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -341,6 +343,19 @@ public class Halo extends SettingsPreferenceFragment
             } catch (android.os.RemoteException ex) {
                 // System dead
             }
+
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle(R.string.halo_blacklist_info_title);
+            alertDialog.setMessage(getResources().getString(R.string.halo_blacklist_info));
+            alertDialog.setCancelable(false);
+            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+            getResources().getString(com.android.internal.R.string.ok),
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    return;
+                }
+            });
+            alertDialog.show();
             return true;
         } else if (preference == mHaloMsgAnimate) {
             int haloMsgAnimation = Integer.valueOf((String) newValue);
