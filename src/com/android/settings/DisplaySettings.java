@@ -160,7 +160,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
 
         mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
-        if (!isTapToWakeSupported()) {
+        if (!isTapToWakeSupported() || mStockMode) {
             getPreferenceScreen().removePreference(mTapToWake);
             mTapToWake = null;
         }
@@ -198,10 +198,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mAdvanced = getPreferenceScreen().findPreference(KEY_ADVANCED_DISPLAY_SETTINGS);
 
         if (mStockMode) {
-            getPreferenceScreen().removePreference(mStatusbarSliderPreference);
-            getPreferenceScreen().removePreference(mAnimations);
-            if (mTapToWake != null)
-                getPreferenceScreen().removePreference(mTapToWake);
+            if (mAnimations != null)
+                getPreferenceScreen().removePreference(mAnimations);
+            if (mStatusbarSliderPreference != null)
+                getPreferenceScreen().removePreference(mStatusbarSliderPreference);
             if (mAdvanced != null)
                 getPreferenceScreen().removePreference(mAdvanced);
         }

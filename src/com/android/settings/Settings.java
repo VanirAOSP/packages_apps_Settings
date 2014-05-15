@@ -616,7 +616,7 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.mobile_network_settings) {
                 // Remove mobile network settings if the device doesn't have telephony
-                if (Utils.isWifiOnly(this)) {
+                if (Utils.isWifiOnly(this) || mStockMode) {
                     target.remove(i);
                 }
             } else if (id == R.id.data_usage_settings) {

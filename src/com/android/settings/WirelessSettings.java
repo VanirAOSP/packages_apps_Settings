@@ -371,6 +371,11 @@ public class WirelessSettings extends RestrictedSettingsFragment
             removePreference(KEY_MOBILE_NETWORK_SETTINGS);
             removePreference(KEY_MANAGE_MOBILE_PLAN);
         }
+
+        if (!mStockMode) {
+            removePreference(KEY_MOBILE_NETWORK_SETTINGS);
+        }
+
         // Remove Mobile Network Settings and Manage Mobile Plan
         // if config_show_mobile_plan sets false.
         boolean isMobilePlanEnabled = this.getResources().getBoolean(
