@@ -109,12 +109,13 @@
         android:icon="@drawable/ic_action_permission"
         android:title="@string/superuser" />
 
-    <!-- Performance -->
+    <!-- Other device controls -->
     <header
-        android:id="@+id/performance_settings"
-        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
-        android:icon="@drawable/ic_settings_performance"
-        android:title="@string/performance_settings_title" />
+        android:id="@+id/more_device_settings"
+        android:title="@string/more_device_settings_title"
+        android:breadCrumbTitle="@string/more_device_settings_title"
+        android:fragment="com.android.settings.cyanogenmod.MoreDeviceSettings"
+        android:icon="@drawable/ic_hardware" />
 
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
@@ -171,14 +172,6 @@
         android:id="@+id/manufacturer_settings">
         <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
     </header>
-
-    <!-- Other device controls -->
-    <header
-        android:id="@+id/more_device_settings"
-        android:title="@string/more_device_controls_title"
-        android:breadCrumbTitle="@string/more_device_settings_title"
-        android:fragment="com.android.settings.cyanogenmod.MoreDeviceSettings"
-        android:icon="@drawable/empty_icon" />
 
     <!-- PERSONAL -->
     <header android:id="@+id/personal_section"
