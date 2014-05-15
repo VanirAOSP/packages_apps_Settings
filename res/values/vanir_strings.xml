@@ -738,6 +738,14 @@
     <string name="power_menu_onthego_title">On-The-Go Mode</string>
     <string name="power_menu_onthego_summary">Show the camera overlay under all windows</string>
 
+    <!-- Hardware settings -->
+    <string name="performance_settings_title">Kernel performance</string>
+    <string name="button_settings_title">Navigation keys</string>
+    <string name="button_navigation_title">Navigation key actions</string>
+    <string name="button_settings">General button options</string>
+    <string name="fast_charge_title">USB fast charge</string>
+    <string name="fast_charge_summary">Draw more current to charge faster. Warning: this may damage the device.</string>
+
     <!-- Hardware button switches -->
     <string name="key_enabled">Enable key</string>
 
