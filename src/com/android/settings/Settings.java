@@ -92,7 +92,7 @@ import com.android.settings.cyanogenmod.LockscreenInterface;
 import com.android.settings.cyanogenmod.MoreDeviceSettings;
 import com.android.settings.cyanogenmod.SystemUiSettings;
 import com.android.settings.vanir.superuser.PolicyNativeFragment;
-import com.android.settings.vanir.HeaderCompatCheck;
+import com.android.settings.vanir.ButtonNavigation;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -474,6 +474,7 @@ public class Settings extends PreferenceActivity
         LockscreenInterface.class.getName(),
         SystemUiSettings.class.getName(),
         ButtonSettings.class.getName(),
+        ButtonNavigation.class.getName(),
         MoreDeviceSettings.class.getName(),
         ProfilesSettings.class.getName(),
         PolicyNativeFragment.class.getName(),
@@ -701,7 +702,6 @@ public class Settings extends PreferenceActivity
 
     private void updateHeaderList(List<Header> target) {
         final boolean showDev = UserHandle.myUserId() == UserHandle.USER_OWNER;
-        final boolean compatibility = HeaderCompatCheck.hasCompatibility(getApplicationContext());
         updateUserPreferences();
         int i = 0;
 
@@ -713,10 +713,6 @@ public class Settings extends PreferenceActivity
             int id = (int) header.id;
             if (id == R.id.operator_settings || id == R.id.manufacturer_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
-            } else if (id == R.id.more_device_settings) {
-                if (!compatibility) {
-                    target.remove(i);
-                }
             } else if (id == R.id.wifi_settings) {
                 // Remove WiFi Settings if WiFi service is not available.
                 if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {

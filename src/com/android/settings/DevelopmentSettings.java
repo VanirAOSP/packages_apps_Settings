@@ -159,8 +159,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String ADVANCED_REBOOT_KEY = "advanced_reboot";
     private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
 
-    public static final String LOG_PREF = "disable_logging_set_on_boot";
-    private static final String LOG_PATH = "/sys/module/logger/parameters/log_enabled";
     static final String STOCK_MODE = "stock_mode";
 
     private static final int RESULT_DEBUG_APP = 1000;
@@ -178,7 +176,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private SwitchPreference mStockModePreference;
     private CheckBoxPreference mEnableAdb;
-    private static CheckBoxPreference mSystemLogging;
     private CheckBoxPreference mAdbNotify;
     private Preference mClearAdbKeys;
     private CheckBoxPreference mEnableTerminal;
@@ -318,7 +315,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             disableForUser(mAdvancedReboot);
             disableForUser(mDevelopmentShortcut);
             disableForUser(mQuickBoot);
-            disableForUser(mSystemLogging);
         } else {
             applyStockMode();
         }
@@ -357,11 +353,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWifiDisplayCertification = findAndInitCheckboxPref(WIFI_DISPLAY_CERTIFICATION_KEY);
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
-
-        mSystemLogging = (CheckBoxPreference) findPreference(LOG_PREF);
-        if (!exists(LOG_PATH)) {
-            debugDebuggingCategory.removePreference(mSystemLogging);
-        }
 
         mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -682,7 +673,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         resetDebuggerOptions();
         resetRootAccessOptions();
         resetAdbNotifyOptions();
-        updateSystemLoggingOptions(0);
         resetVerifyAppsOverUsbOptions();
         resetDevelopmentShortcutOptions();
         writeOverlayDisplayDevicesOptions(null);
@@ -763,7 +753,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ADB_ENABLED, 1);
         }
-        updateSystemLoggingOptions(Integer.valueOf(newValue.toString()));
         updateRootAccessOptions();
     }
 
@@ -1205,23 +1194,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Global.SHOW_PROCESSES, 0) != 0);
     }
 
-    private void writeSystemLoggingOptions() {
-
-        if (mSystemLogging.isChecked()) {
-            new CMDProcessor().su.runWaitFor("busybox echo 0 > /sys/module/logger/parameters/log_enabled");
-        } else {
-            new CMDProcessor().su.runWaitFor("busybox echo 1 > /sys/module/logger/parameters/log_enabled");
-        }
-    }
-
-    private void updateSystemLoggingOptions(int value) {
-        if (value == 0) {
-            mSystemLogging.setEnabled(false);
-        } else {
-            mSystemLogging.setEnabled(true);
-        }
-    }
-
     private void writeCpuUsageOptions() {
         boolean value = mShowCpuUsage.isChecked();
         Settings.Global.putInt(getActivity().getContentResolver(),
@@ -1450,8 +1422,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                         Settings.Secure.ADB_PORT, -1);
                 updateAdbOverNetwork();
             }
-        } else if (preference == mSystemLogging) {
-            writeSystemLoggingOptions();
         } else if (preference == mKeepScreenOn) {
             Settings.Global.putInt(getActivity().getContentResolver(),
                     Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
@@ -1625,7 +1595,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         enableForUser(mDevelopmentShortcut, !mStockMode);
         enableForUser(mKillAppLongpressBack, !mStockMode);
         enableForUser(mAdbOverNetwork, !mStockMode);
-        enableForUser(mSystemLogging, !mStockMode);
         updateRebootDialog();
     }
 
@@ -1765,27 +1734,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 }
             }
             return null;
-        }
-    }
-
-    public static void updateLogging(Context ctx) {
-        if (mSystemLogging == null) return;
-        boolean bool = mSystemLogging.isChecked();
-
-        if (!bool) {
-            return;
-        } else {
-            Log.i(TAG, "Setting logging to disabled by user preference");
-            new CMDProcessor().su.runWaitFor("busybox echo 0 > /sys/module/logger/parameters/log_enabled");
-        }
-    }
-
-    private static boolean exists(String string) {
-        File f = new File(string);
-        if (f.exists()) {
-            return true;
-        } else {
-            return false;
         }
     }
 }

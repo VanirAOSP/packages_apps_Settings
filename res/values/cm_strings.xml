@@ -510,9 +510,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="bootanim_settings_title">Boot animations</string>
     <string name="soundpack_settings_title">Sound packs</string>
 
-    <!-- Performance settings -->
-    <string name="performance_settings_title">Performance</string>
-
     <!-- Performance Settings : Warning dialog -->
     <string name="performance_settings_warning_title">Proceed with caution</string>
     <string name="performance_settings_warning">These settings are experimental and any applied changes have the potential to cause instability, crashes, data loss or hardware failures.\n\nWe request that you do not file bug reports if any settings are changed from their defaults.</string>
@@ -660,7 +657,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!--  Other device settings -->
     <string name="more_device_controls_title">More\u2026</string>
-    <string name="more_device_settings_title">Other device options</string>
+    <string name="more_device_settings_title">Hardware</string>
     <string name="sensors_motors_title">Sensors &amp; motors</string>
     <string name="display_calibration_title">Display calibration</string>
 
@@ -836,7 +833,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="custom_power_menu_title">Custom options</string>
 
     <!-- Hardware keys -->
-    <string name="button_settings">Hardware keys</string>
     <string name="hardware_keys_power_key_title">Power button</string>
     <string name="hardware_keys_home_key_title">Home button</string>
     <string name="hardware_keys_menu_key_title">Menu button</string>

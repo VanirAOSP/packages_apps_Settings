@@ -52,81 +52,19 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
     private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
 
-    private static final String KEY_HOME_SWITCH = "home_switch";
-    private static final String KEY_HOME_SHORT_PRESS = "hardware_keys_home_press";
-    private static final String KEY_HOME_LONG_PRESS = "hardware_keys_home_long_press";
-    private static final String KEY_HOME_DOUBLE_TAP = "hardware_keys_home_double_tap";
-    private static final String KEY_BACK_SWITCH = "back_switch";
-    private static final String KEY_BACK_PRESS = "hardware_keys_back_press";
-    private static final String KEY_BACK_LONG_PRESS = "hardware_keys_back_long_press";
-    private static final String KEY_MENU_SWITCH = "menu_switch";
-    private static final String KEY_MENU_PRESS = "hardware_keys_menu_press";
-    private static final String KEY_MENU_LONG_PRESS = "hardware_keys_menu_long_press";
-    private static final String KEY_ASSIST_SWITCH = "assist_switch";
-    private static final String KEY_ASSIST_PRESS = "hardware_keys_assist_press";
-    private static final String KEY_ASSIST_LONG_PRESS = "hardware_keys_assist_long_press";
-    private static final String KEY_APP_SWITCH_SWITCH = "app_switch_switch";
-    private static final String KEY_APP_SWITCH_PRESS = "hardware_keys_app_switch_press";
-    private static final String KEY_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
     private static final String KEY_POWER_END_CALL = "power_end_call";
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
-
     private static final String CATEGORY_GENERAL = "category_general";
-    private static final String CATEGORY_POWER = "power_key";
-    private static final String CATEGORY_HOME = "home_key";
-    private static final String CATEGORY_MENU = "menu_key";
-    private static final String CATEGORY_BACK = "back_key";
-    private static final String CATEGORY_ASSIST = "assist_key";
-    private static final String CATEGORY_APPSWITCH = "app_switch_key";
     private static final String CATEGORY_CAMERA = "camera_key";
     private static final String CATEGORY_VOLUME = "volume_keys";
     private static final String CATEGORY_BACKLIGHT = "key_backlight";
+    private static final String CATEGORY_HOME = "home_key_button";
     private static final String CATEGORY_POWER_BUTTON = "power_key";
     private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
-
-    // Available custom actions to perform on a key press.
-    // Must match values for KEY_HOME_LONG_PRESS_ACTION in:
-    // frameworks/base/core/java/android/provider/Settings.java
-    private static final int ACTION_NOTHING = 0;
-    private static final int ACTION_MENU = 1;
-    private static final int ACTION_APP_SWITCH = 2;
-    private static final int ACTION_SEARCH = 3;
-    private static final int ACTION_VOICE_SEARCH = 4;
-    private static final int ACTION_IN_APP_SEARCH = 5;
-    private static final int ACTION_LAUNCH_CAMERA = 6;
-    private static final int ACTION_KILL_TARGET = 7;
-    private static final int ACTION_IME = 8;
-    private static final int ACTION_POWERMENU = 9;
-    private static final int ACTION_FIST_YOURMOM = 10;
-    private static final int ACTION_HOME = 11;
-    private static final int ACTION_BACK = 12;
-    private static final int ACTION_LASTAPP = 13;
-
-    // Masks for checking presence of hardware keys.
-    // Must match values in frameworks/base/core/res/res/values/config.xml
+    
     public static final int KEY_MASK_HOME = 0x01;
-    public static final int KEY_MASK_BACK = 0x02;
-    public static final int KEY_MASK_MENU = 0x04;
-    public static final int KEY_MASK_ASSIST = 0x08;
-    public static final int KEY_MASK_APP_SWITCH = 0x10;
     public static final int KEY_MASK_CAMERA = 0x20;
 
-    private ListPreference mHomePressAction;
-    private ListPreference mHomeLongPressAction;
-    private ListPreference mHomeDoubleTapAction;
-    private CheckBoxPreference mHomeSwitch;
-    private ListPreference mBackPressAction;
-    private ListPreference mBackLongPressAction;
-    private CheckBoxPreference mBackSwitch;
-    private ListPreference mMenuPressAction;
-    private ListPreference mMenuLongPressAction;
-    private CheckBoxPreference mMenuSwitch;
-    private ListPreference mAssistPressAction;
-    private ListPreference mAssistLongPressAction;
-    private CheckBoxPreference mAssistSwitch;
-    private ListPreference mAppSwitchPressAction;
-    private ListPreference mAppSwitchLongPressAction;
-    private CheckBoxPreference mAppSwitchSwitch; // lulz
     private CheckBoxPreference mCameraWake;
     private CheckBoxPreference mCameraSleepOnRelease;
     private CheckBoxPreference mCameraMusicControls;
@@ -153,29 +91,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final int deviceKeys = getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
 
-        final boolean hasPowerKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER);
         final boolean hasHomeKey = (deviceKeys & KEY_MASK_HOME) != 0;
-        final boolean hasMenuKey = (deviceKeys & KEY_MASK_MENU) != 0;
-        final boolean hasBackKey = (deviceKeys & KEY_MASK_BACK) != 0;
-        final boolean hasAssistKey = (deviceKeys & KEY_MASK_ASSIST) != 0;
-        final boolean hasAppSwitchKey = (deviceKeys & KEY_MASK_APP_SWITCH) != 0;
         final boolean hasCameraKey = (deviceKeys & KEY_MASK_CAMERA) != 0;
 
         boolean hasAnyBindableKey = false;
-        final PreferenceCategory powerCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER);
-        final PreferenceCategory homeCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HOME);
         final PreferenceCategory generalCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_GENERAL);
-        final PreferenceCategory menuCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_MENU);
-        final PreferenceCategory backCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_BACK);
-        final PreferenceCategory assistCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_ASSIST);
-        final PreferenceCategory appSwitchCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_APPSWITCH);
         final PreferenceCategory cameraCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_CAMERA);
         final PreferenceCategory volumeCategory =
@@ -201,141 +122,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(mDisableNavigationKeys);
         }
 
-        if (hasPowerKey) {
-            if (!Utils.isVoiceCapable(getActivity())) {
-                powerCategory.removePreference(mPowerEndCall);
-                mPowerEndCall = null;
-            }
-        } else {
-            prefScreen.removePreference(powerCategory);
-        }
-
-        if (hasHomeKey) {
-            if (!res.getBoolean(R.bool.config_show_homeWake)) {
-                homeCategory.removePreference(findPreference(Settings.System.HOME_WAKE_SCREEN));
-            }
-
-            mHomeSwitch = (CheckBoxPreference) homeCategory.findPreference(KEY_HOME_SWITCH);
-            mHomeSwitch.setChecked(Settings.System.getInt(resolver, 
-                    Settings.System.KEY_HOME_ENABLED, 1) == 1);
-
-            int defaultShortPressAction = ACTION_HOME;
-            if (!Utils.isVoiceCapable(getActivity())) {
-                homeCategory.removePreference(mHomeAnswerCall);
-                mHomeAnswerCall = null;
-            }
-
-
-            int defaultLongPressAction = res.getInteger(
-                    com.android.internal.R.integer.config_longPressOnHomeBehavior);
-            if (defaultLongPressAction < ACTION_NOTHING ||
-                    defaultLongPressAction > ACTION_IN_APP_SEARCH) {
-                defaultLongPressAction = ACTION_NOTHING;
-            }
-
-            int defaultDoubleTapAction = res.getInteger(
-                    com.android.internal.R.integer.config_doubleTapOnHomeBehavior);
-            if (defaultDoubleTapAction < ACTION_NOTHING ||
-                    defaultDoubleTapAction > ACTION_IN_APP_SEARCH) {
-                defaultDoubleTapAction = ACTION_NOTHING;
-            }
-
-            int shortPressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_HOME_ACTION, defaultShortPressAction);
-            mHomePressAction = initActionList(KEY_HOME_SHORT_PRESS, shortPressAction);
-
-            int longPressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_HOME_LONG_PRESS_ACTION,
-                    defaultLongPressAction);
-            mHomeLongPressAction = initActionList(KEY_HOME_LONG_PRESS, longPressAction);
-
-            int doubleTapAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_HOME_DOUBLE_TAP_ACTION,
-                    defaultDoubleTapAction);
-            mHomeDoubleTapAction = initActionList(KEY_HOME_DOUBLE_TAP, doubleTapAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(homeCategory);
-        }
-
-        if (hasBackKey) {
-
-            mBackSwitch = (CheckBoxPreference) backCategory.findPreference(KEY_BACK_SWITCH);
-            mBackSwitch.setChecked(Settings.System.getInt(resolver, 
-                    Settings.System.KEY_BACK_ENABLED, 1) == 1);
-            
-            int pressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_BACK_ACTION, ACTION_BACK);
-            mBackPressAction = initActionList(KEY_BACK_PRESS, pressAction);
-
-            int longPressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_BACK_LONG_PRESS_ACTION, ACTION_NOTHING);
-            mBackLongPressAction = initActionList(KEY_BACK_LONG_PRESS, longPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(backCategory);
-        }
-
-        if (hasMenuKey) {
-
-            mMenuSwitch = (CheckBoxPreference) menuCategory.findPreference(KEY_MENU_SWITCH);
-            mMenuSwitch.setChecked(Settings.System.getInt(resolver, 
-                    Settings.System.KEY_MENU_ENABLED, 1) == 1);
-            
-            int pressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_MENU_ACTION, ACTION_MENU);
-            mMenuPressAction = initActionList(KEY_MENU_PRESS, pressAction);
-
-            int longPressAction = Settings.System.getInt(resolver,
-                        Settings.System.KEY_MENU_LONG_PRESS_ACTION,
-                        hasAssistKey ? ACTION_SEARCH : ACTION_NOTHING);
-            mMenuLongPressAction = initActionList(KEY_MENU_LONG_PRESS, longPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(menuCategory);
-        }
-
-        if (hasAssistKey) {
-
-            mAssistSwitch = (CheckBoxPreference) assistCategory.findPreference(KEY_ASSIST_SWITCH);
-            mAssistSwitch.setChecked(Settings.System.getInt(resolver, 
-                    Settings.System.KEY_ASSIST_ENABLED, 1) == 1);
-            
-            int pressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_ASSIST_ACTION, ACTION_SEARCH);
-            mAssistPressAction = initActionList(KEY_ASSIST_PRESS, pressAction);
-
-            int longPressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_ASSIST_LONG_PRESS_ACTION, ACTION_VOICE_SEARCH);
-            mAssistLongPressAction = initActionList(KEY_ASSIST_LONG_PRESS, longPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(assistCategory);
-        }
-
-        if (hasAppSwitchKey) {
-
-            mAppSwitchSwitch = (CheckBoxPreference) appSwitchCategory.findPreference(KEY_APP_SWITCH_SWITCH);
-            mAppSwitchSwitch.setChecked(Settings.System.getInt(resolver, 
-                    Settings.System.KEY_APPSWITCH_ENABLED, 1) == 1);
-            
-            int pressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_APP_SWITCH_ACTION, ACTION_APP_SWITCH);
-            mAppSwitchPressAction = initActionList(KEY_APP_SWITCH_PRESS, pressAction);
-
-            int longPressAction = Settings.System.getInt(resolver,
-                    Settings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION, ACTION_NOTHING);
-            mAppSwitchLongPressAction = initActionList(KEY_APP_SWITCH_LONG_PRESS, longPressAction);
-
-            hasAnyBindableKey = true;
-        } else {
-            prefScreen.removePreference(appSwitchCategory);
-        }
-
         if (hasCameraKey) {
             mCameraWake = (CheckBoxPreference)
                 prefScreen.findPreference(Settings.System.CAMERA_WAKE_SCREEN);
@@ -354,7 +140,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             prefScreen.removePreference(cameraCategory);
         }
 
-        if (!hasCameraKey && !hasAppSwitchKey && !hasAssistKey && !hasMenuKey && !hasBackKey && !hasHomeKey) {
+        if (!hasCameraKey) {
             prefScreen.removePreference(generalCategory);
         }
 
@@ -397,6 +183,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
         final PreferenceCategory powerButtonCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_POWER_BUTTON);
+        final PreferenceCategory homeCategory =
+                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HOME);
         final boolean isTorchSupported = isPackageInstalled(getActivity(), "net.cactii.flash2");
         final boolean isCameraPresent = mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
 
@@ -409,6 +197,17 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         final boolean hasAnyPowerButtonOptions = isTorchSupported  || isCameraPresent /* || etc. */;
         if (!hasAnyPowerButtonOptions) {
             prefScreen.removePreference(powerButtonCategory);
+            if (!Utils.isVoiceCapable(getActivity())) {
+                powerButtonCategory.removePreference(mPowerEndCall);
+                mPowerEndCall = null;
+           }
+        }
+
+        if (!hasHomeKey || !Utils.isVoiceCapable(getActivity())) {
+            if (!res.getBoolean(R.bool.config_show_homeWake)) {
+                prefScreen.removePreference(homeCategory);
+                mHomeAnswerCall = null;
+            }
         }
     }
 
@@ -455,128 +254,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mHomePressAction) {
-            handleActionListChange(mHomePressAction, newValue,
-                    Settings.System.KEY_HOME_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mHomeLongPressAction) {
-            handleActionListChange(mHomeLongPressAction, newValue,
-                    Settings.System.KEY_HOME_LONG_PRESS_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mHomeDoubleTapAction) {
-            handleActionListChange(mHomeDoubleTapAction, newValue,
-                    Settings.System.KEY_HOME_DOUBLE_TAP_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mBackPressAction) {
-            handleActionListChange(mBackPressAction, newValue,
-                    Settings.System.KEY_BACK_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mBackLongPressAction) {
-            handleActionListChange(mBackLongPressAction, newValue,
-                    Settings.System.KEY_BACK_LONG_PRESS_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mMenuPressAction) {
-            handleActionListChange(mMenuPressAction, newValue,
-                    Settings.System.KEY_MENU_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mMenuLongPressAction) {
-            handleActionListChange(mMenuLongPressAction, newValue,
-                    Settings.System.KEY_MENU_LONG_PRESS_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mAssistPressAction) {
-            handleActionListChange(mAssistPressAction, newValue,
-                    Settings.System.KEY_ASSIST_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mAssistLongPressAction) {
-            handleActionListChange(mAssistLongPressAction, newValue,
-                    Settings.System.KEY_ASSIST_LONG_PRESS_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mAppSwitchPressAction) {
-            handleActionListChange(mAppSwitchPressAction, newValue,
-                    Settings.System.KEY_APP_SWITCH_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mAppSwitchLongPressAction) {
-            handleActionListChange(mAppSwitchLongPressAction, newValue,
-                    Settings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mVolumeKeyCursorControl) {
+        if (preference == mVolumeKeyCursorControl) {
             handleActionListChange(mVolumeKeyCursorControl, newValue,
                     Settings.System.VOLUME_KEY_CURSOR_CONTROL);
             return true;
         }
 
         return false;
-    }
-
-    private void sendUpdateBroadcast() {
-        Intent u = new Intent();
-        u.setAction(Intent.ACTION_UPDATE_KEYS);
-        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
-    }
-
-    private void updateDisableNavkeysOption(boolean shouldSetChecked) {
-
-        boolean enabled = HardwareKeyNavbarHelper.getDisableHardwareNavkeysOption(getActivity());
-
-        if (shouldSetChecked) {
-            mDisableNavigationKeys.setChecked(enabled);
-        }
-
-        final PreferenceScreen prefScreen = getPreferenceScreen();
-
-        /* Disable hw-key options if they're disabled */
-        final PreferenceCategory homeCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HOME);
-        final PreferenceCategory menuCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_MENU);
-        final PreferenceCategory assistCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_ASSIST);
-        final PreferenceCategory appSwitchCategory =
-                (PreferenceCategory) prefScreen.findPreference(CATEGORY_APPSWITCH);
-        final ButtonBacklightBrightness backlight =
-                (ButtonBacklightBrightness) prefScreen.findPreference(KEY_BUTTON_BACKLIGHT);
-
-        /* Toggle backlight control depending on navbar state, force it to
-           off if enabling */
-        if (backlight != null) {
-            backlight.setEnabled(!enabled);
-        }
-
-        /* Toggle hardkey control availability depending on navbar state */
-        if (homeCategory != null) {
-            homeCategory.setEnabled(!enabled);
-        }
-        if (menuCategory != null) {
-            menuCategory.setEnabled(!enabled);
-        }
-        if (assistCategory != null) {
-            assistCategory.setEnabled(!enabled);
-        }
-        if (appSwitchCategory != null) {
-            appSwitchCategory.setEnabled(!enabled);
-        }
     }
 
     @Override
@@ -586,42 +270,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             checked = ((CheckBoxPreference)preference).isChecked();
         }
 
-        
-        if (preference == mHomeSwitch) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.KEY_HOME_ENABLED,
-                    checked ? 1 : 0);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mBackSwitch) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.KEY_BACK_ENABLED,
-                    checked ? 1 : 0);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mMenuSwitch) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.KEY_MENU_ENABLED,
-                    checked ? 1 : 0);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mAssistSwitch) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.KEY_ASSIST_ENABLED,
-                    checked ? 1 : 0);
-            sendUpdateBroadcast();
-            return true;
-
-        } else if (preference == mAppSwitchSwitch) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.KEY_APPSWITCH_ENABLED,
-                    checked ? 1 : 0);
-            sendUpdateBroadcast();
-            return true;
-        } else if (preference == mSwapVolumeButtons) {
+        if (preference == mSwapVolumeButtons) {
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SWAP_VOLUME_KEYS_ON_ROTATION,
                     checked ? (Utils.isTablet(getActivity()) ? 2 : 1) : 0);
@@ -675,6 +324,26 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             return context.getPackageManager().getPackageInfo(packageName, 0) != null;
         } catch (NameNotFoundException e) {
             return false;
+        }
+    }
+
+    private void updateDisableNavkeysOption(boolean shouldSetChecked) {
+
+        boolean enabled = HardwareKeyNavbarHelper.getDisableHardwareNavkeysOption(getActivity());
+
+        final PreferenceScreen prefScreen = getPreferenceScreen();
+
+        final ButtonBacklightBrightness backlight =
+                (ButtonBacklightBrightness) prefScreen.findPreference(KEY_BUTTON_BACKLIGHT);
+
+        if (shouldSetChecked) {
+            mDisableNavigationKeys.setChecked(enabled);
+        }
+
+        /* Toggle backlight control depending on navbar state, force it to
+        off if enabling */
+        if (backlight != null) {
+            backlight.setEnabled(!enabled);
         }
     }
 

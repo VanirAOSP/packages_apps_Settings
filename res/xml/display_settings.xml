@@ -28,16 +28,6 @@
             android:defaultValue="false" />
 
         <PreferenceScreen
-            android:persistent="false"
-            android:key="screencolor_settings"
-            android:title="@string/screencolor">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.ScreenColorSettings" />
-        </PreferenceScreen>
-
-        <PreferenceScreen
             android:key="display_rotation"
             android:fragment="com.android.settings.cyanogenmod.DisplayRotation"
             android:title="@string/display_rotation_title" />
@@ -75,37 +65,10 @@
             android:summary="@string/animation_control_summary"
             android:fragment="com.android.settings.vanir.AnimationControls" />
 
-        <CheckBoxPreference
-                android:key="adaptive_backlight"
-                android:title="@string/adaptive_backlight_title"
-                android:summary="@string/adaptive_backlight_summary"
-                android:defaultValue="true" />
-
-        <CheckBoxPreference
-                android:key="color_enhancement"
-                android:title="@string/color_enhancement_title"
-                android:summary="@string/color_enhancement_summary"
-                android:defaultValue="true" />
-
-        <!-- DeviceParts Device Specific Display settings -->
-        <Preference
-            android:key="advanced_display_settings"
-            android:title="@string/advanced_settings_title">
-            <intent
-                android:action="com.cyanogenmod.action.LAUNCH_DEVICE_SETTINGS"
-                android:targetPackage="com.cyanogenmod.settings.device"
-                android:targetClass="com.cyanogenmod.settings.device.DisplaySettings" />
-        </Preference>
-
         <PreferenceScreen
                 android:key="wifi_display"
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
-
-        <CheckBoxPreference
-            android:key="double_tap_wake_gesture"
-            android:title="@string/double_tap_to_wake_title"
-            android:defaultValue="false" />
 
         <PreferenceCategory
             android:key="lights_prefs"
