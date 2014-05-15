@@ -71,4 +71,10 @@
             android:summary="@string/pref_force_highend_gfx_summary" />
     </PreferenceCategory>
 
+    <CheckBoxPreference
+        android:key="disable_logging_set_on_boot"
+        android:title="@string/system_logging_title"
+        android:summary="@string/system_logging_summary"
+        android:persistent="true" />
+
 </PreferenceScreen>
