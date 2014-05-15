@@ -32,9 +32,13 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.vanir.util.CMDProcessor;
+
+import java.io.File;
 
 /**
  * Performance Settings
@@ -54,10 +58,13 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
 
     private static final String FORCE_HIGHEND_GFX_PREF = "pref_force_highend_gfx";
     private static final String FORCE_HIGHEND_GFX_PERSIST_PROP = "persist.sys.force_highendgfx";
+    public static final String LOG_PREF = "disable_logging_set_on_boot";
+    private static final String LOG_PATH = "/sys/module/logger/parameters/enabled";
 
     private ListPreference mPerfProfilePref;
     private CheckBoxPreference mUse16bppAlphaPref;
     private CheckBoxPreference mForceHighEndGfx;
+    private static CheckBoxPreference mSystemLogging;
 
     private String[] mPerfProfileEntries;
     private String[] mPerfProfileValues;
@@ -123,6 +130,12 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
             category.removePreference(findPreference(FORCE_HIGHEND_GFX_PREF));
         }
 
+        // this kernel module is required for this feature
+        // https://github.com/jimsth/vanir_hammerhead/commit/138cba1c61f364c5c31fd5999e738cbbea03d0d9
+        mSystemLogging = (CheckBoxPreference) findPreference(LOG_PREF);
+        if (!exists(LOG_PATH)) {
+            getPreferenceScreen().removePreference(mSystemLogging);
+        }
     }
 
     @Override
@@ -153,6 +166,8 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
         } else if (preference == mForceHighEndGfx) {
             SystemProperties.set(FORCE_HIGHEND_GFX_PERSIST_PROP,
                     mForceHighEndGfx.isChecked() ? "true" : "false");
+        } else if (preference == mSystemLogging) {
+            writeSystemLoggingOptions();
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -191,5 +206,44 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
     private void setCurrentValue() {
         mPerfProfilePref.setValue(mPowerManager.getPowerProfile());
         setCurrentPerfProfileSummary();
+    }
+
+    private String getCurrentPerformanceProfile() {
+        String value = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.Secure.PERFORMANCE_PROFILE);
+        if (TextUtils.isEmpty(value)) {
+            value = mPerfProfileDefaultEntry;
+        }
+        return value;
+    }
+
+    private void writeSystemLoggingOptions() {
+
+        if (mSystemLogging.isChecked()) {
+            new CMDProcessor().su.runWaitFor("busybox echo 0 > /sys/module/logger/parameters/log_enabled");
+        } else {
+            new CMDProcessor().su.runWaitFor("busybox echo 1 > /sys/module/logger/parameters/log_enabled");
+        }
+    }
+
+    private static boolean exists(String string) {
+        File f = new File(string);
+        if (f.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void updateLogging(Context ctx) {
+        if (mSystemLogging == null) return;
+        boolean bool = mSystemLogging.isChecked();
+
+        if (!bool) {
+            return;
+        } else {
+            Log.i(TAG, "Setting logging to disabled by user preference");
+            new CMDProcessor().su.runWaitFor("busybox echo 0 > /sys/module/logger/parameters/log_enabled");
+        }
     }
 }

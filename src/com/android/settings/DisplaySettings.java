@@ -24,8 +24,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -48,10 +46,6 @@ import com.android.settings.DreamSettings;
 import com.android.settings.Utils;
 import com.android.settings.cyanogenmod.DisplayRotation;
 
-import org.cyanogenmod.hardware.AdaptiveBacklight;
-import org.cyanogenmod.hardware.ColorEnhancement;
-import org.cyanogenmod.hardware.TapToWake;
-
 import java.util.ArrayList;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
@@ -67,17 +61,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_SCREEN_SAVER = "screensaver";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
-    private static final String KEY_ADAPTIVE_BACKLIGHT = "adaptive_backlight";
-    private static final String KEY_COLOR_ENHANCEMENT = "color_enhancement";
-    private static final String KEY_ADVANCED_DISPLAY_SETTINGS = "advanced_display_settings";
-    private static final String KEY_TAP_TO_WAKE = "double_tap_wake_gesture";
-    private static final String KEY_PROXIMITY_WAKE = "proximity_on_wake";
 
     private static final String CATEGORY_LIGHTS = "lights_prefs";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
     private static final String KEY_ANIMATIONS = "animations";
-    private static final String KEY_SCREEN_COLOR_SETTINGS = "screencolor_settings";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
     private final Configuration mCurConfig = new Configuration();
@@ -86,7 +74,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private boolean mStockMode;
 
     private Preference mAnimations;
-    private Preference mAdvanced;
 
     private CheckBoxPreference mStatusbarSliderPreference;
     private CheckBoxPreference mAccelerometer;
@@ -95,13 +82,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
     private PreferenceScreen mDisplayRotationPreference;
-    private PreferenceScreen mScreenColorSettings;
 
     private ListPreference mScreenTimeoutPreference;
     private Preference mScreenSaverPreference;
-    private CheckBoxPreference mAdaptiveBacklight;
-    private CheckBoxPreference mColorEnhancement;
-    private CheckBoxPreference mTapToWake;
 
     private ContentObserver mAccelerometerRotationObserver =
             new ContentObserver(new Handler()) {
@@ -157,36 +140,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
 
-        mAdaptiveBacklight = (CheckBoxPreference) findPreference(KEY_ADAPTIVE_BACKLIGHT);
-        if (!isAdaptiveBacklightSupported() || mStockMode) {
-            getPreferenceScreen().removePreference(mAdaptiveBacklight);
-            mAdaptiveBacklight = null;
-        }
-
-        mColorEnhancement = (CheckBoxPreference) findPreference(KEY_COLOR_ENHANCEMENT);
-        if (!isColorEnhancementSupported()) {
-            getPreferenceScreen().removePreference(mColorEnhancement);
-            mColorEnhancement = null;
-        }
-
-        mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
-
-        if (!isTapToWakeSupported() || mStockMode) {
-            getPreferenceScreen().removePreference(mTapToWake);
-            mTapToWake = null;
-        }
-
-        boolean proximityCheckOnWait = res.getBoolean(
-                com.android.internal.R.bool.config_proximityCheckOnWake) || mStockMode;
-        if (!proximityCheckOnWait) {
-            getPreferenceScreen().removePreference(findPreference(KEY_PROXIMITY_WAKE));
-            Settings.System.putInt(getContentResolver(), Settings.System.PROXIMITY_ON_WAKE, 1);
-        }
-
-
-        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                getPreferenceScreen(), KEY_ADVANCED_DISPLAY_SETTINGS);
-
         boolean hasNotificationLed = res.getBoolean(
                 com.android.internal.R.bool.config_intrusiveNotificationLed);
         boolean hasBatteryLed = res.getBoolean(
@@ -213,20 +166,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         updateDisplayRotationPreferenceDescription();
 
         mAnimations = getPreferenceScreen().findPreference(KEY_ANIMATIONS);
-        mAdvanced = getPreferenceScreen().findPreference(KEY_ADVANCED_DISPLAY_SETTINGS);
 
         if (mStockMode) {
-            if (mAnimations != null)
-                getPreferenceScreen().removePreference(mAnimations);
-            if (mStatusbarSliderPreference != null)
-                getPreferenceScreen().removePreference(mStatusbarSliderPreference);
-            if (mAdvanced != null)
-                getPreferenceScreen().removePreference(mAdvanced);
-        }
-
-        mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
-        if (!isPostProcessingSupported()) {
-            getPreferenceScreen().removePreference(mScreenColorSettings);
+            getPreferenceScreen().removePreference(mStatusbarSliderPreference);
+            getPreferenceScreen().removePreference(mAnimations);
         }
     }
 
@@ -360,20 +303,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
                 mAccelerometerRotationObserver);
 
-        if (mAdaptiveBacklight != null) {
-            mAdaptiveBacklight.setChecked(AdaptiveBacklight.isEnabled());
-        }
-
-        if (mColorEnhancement != null) {
-            mColorEnhancement.setChecked(ColorEnhancement.isEnabled());
-        }
-
-        if (mTapToWake != null) {
-            final SharedPreferences prefs =
-                    PreferenceManager.getDefaultSharedPreferences(getActivity());
-            mTapToWake.setChecked(prefs.getBoolean(KEY_TAP_TO_WAKE, true));
-        }
-
         updateState();
     }
 
@@ -465,21 +394,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mAdaptiveBacklight) {
-            return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
 
-        } else if (preference == mColorEnhancement) {
-            return ColorEnhancement.setEnabled(mColorEnhancement.isChecked());
-
-        } else if (preference == mStatusbarSliderPreference) {
+        if (preference == mStatusbarSliderPreference) {
             Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.STATUSBAR_BRIGHTNESS_SLIDER, mStatusbarSliderPreference.isChecked() ? 1 : 0);
-            return true; 
-        } else if (preference == mTapToWake) {
-            final SharedPreferences prefs =
-                    PreferenceManager.getDefaultSharedPreferences(getActivity());
-            prefs.edit().putBoolean(KEY_TAP_TO_WAKE, mTapToWake.isChecked()).commit();
-            return TapToWake.setEnabled(mTapToWake.isChecked());
+            return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -516,78 +435,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         return false;
     }
 
-    /**
-     * Restore the properties associated with this preference on boot
-     * @param ctx A valid context
-     */
-    public static void restore(Context ctx) {
-        if (isAdaptiveBacklightSupported()) {
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-            final boolean enabled = prefs.getBoolean(KEY_ADAPTIVE_BACKLIGHT, true);
-            if (!AdaptiveBacklight.setEnabled(enabled)) {
-                Log.e(TAG, "Failed to restore adaptive backlight settings.");
-            } else {
-                Log.d(TAG, "Adaptive backlight settings restored.");
-            }
-        }
-        if (isColorEnhancementSupported()) {
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-            final boolean enabled = prefs.getBoolean(KEY_COLOR_ENHANCEMENT, true);
-            if (!ColorEnhancement.setEnabled(enabled)) {
-                Log.e(TAG, "Failed to restore color enhancement settings.");
-            } else {
-                Log.d(TAG, "Color enhancement settings restored.");
-            }
-        }
-        if (isTapToWakeSupported()) {
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-            final boolean enabled = prefs.getBoolean(KEY_TAP_TO_WAKE, true);
-            if (!TapToWake.setEnabled(enabled)) {
-                Log.e(TAG, "Failed to restore tap-to-wake settings.");
-            } else {
-                Log.d(TAG, "Tap-to-wake settings restored.");
-            }
-        }
-    }
-
-    private boolean isPostProcessingSupported() {
-        boolean ret = true;
-        final PackageManager pm = getPackageManager();
-        try {
-            pm.getPackageInfo("com.qualcomm.display", PackageManager.GET_META_DATA);
-        } catch (NameNotFoundException e) {
-            ret = false;
-        }
-        return ret;
-    }
-
-    private static boolean isAdaptiveBacklightSupported() {
-        try {
-            return AdaptiveBacklight.isSupported();
-        } catch (NoClassDefFoundError e) {
-            // Hardware abstraction framework not installed
-            return false;
-        }
-    }
-
-    private static boolean isColorEnhancementSupported() {
-        try {
-            return ColorEnhancement.isSupported();
-        } catch (NoClassDefFoundError e) {
-            // Hardware abstraction framework not installed
-            return false;
-        }
-    }
 
     private void updateStockMode() {
         mStockMode = mDevelopmentPreferences.getInt(DevelopmentSettings.STOCK_MODE, 0) == 1;
-    }
-    private static boolean isTapToWakeSupported() {
-        try {
-            return TapToWake.isSupported();
-        } catch (NoClassDefFoundError e) {
-            // Hardware abstraction framework not installed
-            return false;
-        }
     }
 }

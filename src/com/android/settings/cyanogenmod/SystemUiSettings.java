@@ -55,6 +55,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private static final String KEY_IMMERSIVE_LOL = "immersive_mode_lol_profile";
     private static final String KEY_IMMERSIVE_ORIENTATION = "immersive_orientation";
     private static final String KEY_NAVRING_SWITCH = "navigation_bar_ring";
+    private static final String KEY_BUTTON_NAVIGATION = "old_buttons_navigation";
 
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
@@ -63,6 +64,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mImmersiveLOL;
     private CheckBoxPreference mExpandedDesktop;
     private SwitchPreference mImmersiveModeState;
+    private Preference mNavigation;
 
     private NavringPreferenceSwitch mNavringPreference;
     private int immersiveModeValue;
@@ -76,6 +78,11 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.system_ui_settings);
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        mNavigation = (Preference) findPreference(KEY_BUTTON_NAVIGATION);
+        if (!getResources().getBoolean(R.bool.config_userWantsLegacyFormat)) {
+            getPreferenceScreen().removePreference(mNavigation);
+        }
 
         mNavringPreference = (NavringPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
 
