@@ -38,4 +38,7 @@
 
     <!-- Knock on/off support -->
     <bool name="config_noKnockPolicy">false</bool>
+
+    <!-- moves hardware key settings back to interface, even though these settings were isolated by physical type and compatibility -->
+    <bool name="config_userWantsLegacyFormat">false</bool>
 </resources>

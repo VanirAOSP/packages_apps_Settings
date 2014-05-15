@@ -24,14 +24,14 @@ import android.os.SystemProperties;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.android.settings.DisplaySettings;
+import com.android.settings.cyanogenmod.MoreDeviceSettings;
+import com.android.settings.cyanogenmod.PerformanceSettings;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.hardware.DisplayColor;
 import com.android.settings.hardware.DisplayGamma;
 import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.DevelopmentSettings;
 
 import java.util.Arrays;
 import java.util.List;
@@ -85,7 +85,7 @@ public class BootReceiver extends BroadcastReceiver {
 
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
             if (exists(LOG_PATH)) {
-                DevelopmentSettings.updateLogging(ctx);
+                PerformanceSettings.updateLogging(ctx);
             }
         }
 
@@ -95,7 +95,7 @@ public class BootReceiver extends BroadcastReceiver {
         DisplayColor.restore(ctx);
         DisplayGamma.restore(ctx);
         VibratorIntensity.restore(ctx);
-        DisplaySettings.restore(ctx);
+        MoreDeviceSettings.restore(ctx);
         LocationSettings.restore(ctx);
         HardwareKeyNavbarHelper.restoreKeyDisabler(ctx);
     }
