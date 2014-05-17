@@ -27,6 +27,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
@@ -68,12 +69,14 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    private static final String KEY_CALL_SETTINGS = "phone_call_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_VOICE_PLUS_ACCOUNT = "voice_plus";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
 
+    private static final String PHONE_PACKAGE = "com.android.phone";
     private static final String GOOGLE_VOICE_PACKAGE = "com.google.android.apps.googlevoice";
     private static final ComponentName VOICE_PLUS_SETUP =
             new ComponentName("org.cyanogenmod.voiceplus", "org.cyanogenmod.voiceplus.VoicePlusSetup");
@@ -86,6 +89,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
     private NsdEnabler mNsdEnabler;
+    private Preference mCallSettings;
 
     private ConnectivityManager mCm;
     private TelephonyManager mTm;
@@ -397,6 +401,10 @@ public class WirelessSettings extends RestrictedSettingsFragment
         // Remove Voice+ option if Google Voice is not installed or Voice+ is not installed
         if (!Utils.isPackageInstalled(getActivity(), GOOGLE_VOICE_PACKAGE) || !Utils.isPackageInstalled(getActivity(), "org.cyanogenmod.voiceplus")) {
             removePreference(KEY_VOICE_PLUS_ACCOUNT);
+        }
+
+        if (!Utils.isPackageInstalled(getActivity(), PHONE_PACKAGE) || mStockMode) {
+            removePreference(KEY_CALL_SETTINGS);
         }
 
         // Remove Airplane Mode settings if it's a stationary device such as a TV.
