@@ -26,6 +26,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -55,6 +56,8 @@ import com.android.settings.nfc.NfcEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import com.vanir.util.DeviceUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -72,11 +75,14 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    private static final String KEY_CALL_SETTINGS = "phone_call_settings";
     private static final String KEY_MANAGE_MOBILE_PLAN = "manage_mobile_plan";
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_NFC_PAYMENT_SETTINGS = "nfc_payment_settings";
+
+    private static final String PHONE_PACKAGE = "com.android.phone";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -362,6 +368,10 @@ public class WirelessSettings extends SettingsPreferenceFragment
         // Remove SMS Application if the device does not support SMS
         if (!isSmsSupported()) {
             removePreference(KEY_SMS_APPLICATION);
+        }
+
+        if (!DeviceUtils.isPackageInstalled(getActivity(), PHONE_PACKAGE) || DeviceUtils.isWifiOnly(getActivity())) {
+            removePreference(KEY_CALL_SETTINGS);
         }
 
         // Remove Airplane Mode settings if it's a stationary device such as a TV.

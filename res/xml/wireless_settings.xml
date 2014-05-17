@@ -83,6 +83,15 @@
         android:title="@string/proxy_settings_title" />
 
     <PreferenceScreen
+        android:key="phone_call_settings"
+        android:title="@string/phone_call_settings_title" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.phone"
+            android:targetClass="com.android.phone.CallFeaturesSetting" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
         android:key="cell_broadcast_settings"
         android:title="@string/cell_broadcast_settings" >
         <intent

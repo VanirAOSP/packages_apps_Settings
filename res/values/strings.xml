@@ -2582,6 +2582,8 @@
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile networks</string>
 
+    <string name="phone_call_settings_title">Call settings</string>
+
     <!-- Mobile plan [CHAR LIMIT=35]-->
     <string name="manage_mobile_plan_title" translatable="true">Mobile plan</string>
 
