@@ -724,14 +724,7 @@
 
     <!-- Lockscreen background -->
     <string name="lockscreen_background">Background</string>
-    <string name="lockscreen_background_style_title">Custom background type</string>
-    <string name="background_color_fill_title">Background color</string>
-    <string name="background_default">Default wallpaper</string>
-    <string name="background_color_fill">Color fill</string>
-    <string name="background_wallpaper">Custom wallpaper</string>
-    <string name="transparency">Background transparency</string>
-    <string name="background_result_successful">Background changed</string>
-    <string name="background_result_not_successful">Background not changed</string>
+    <string name="background_wallpaper">Choose background image</string>
 
     <!-- Performance : Force high-end graphics -->
     <string name="pref_force_highend_gfx_title">Force high-end graphics</string>

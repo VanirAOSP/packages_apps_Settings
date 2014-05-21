@@ -67,16 +67,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-			android:key="lockscreen_background"
-			android:title="@string/lockscreen_background">
-
-        <ListPreference
-                       android:key="lockscreen_background_style"
-                       android:persistent="false"
-                       android:dialogTitle="@string/lockscreen_background_style_title"
-                       android:title="@string/lockscreen_background_style_title"
-                       android:entries="@array/lockscreen_background_entries"
-                       android:entryValues="@array/lockscreen_background_values" />
+            android:key="lockscreen_background"
+            android:title="@string/lockscreen_background">
 
         <Preference
             android:key="lockscreen_wallpaper_settings"
@@ -84,12 +76,6 @@
             <intent android:targetPackage="com.android.wallpapercropper"
                     android:targetClass="com.android.wallpapercropper.LockWallpaperPickerActivity" />
         </Preference>
-
-        <net.margaritov.preference.colorpicker.ColorPickerPreference
-			android:key="lockscreen_background_color_fill"
-			android:title="@string/background_color_fill_title"
-			android:defaultValue="0xff000000"
-			alphaSlider="true" />
 
        <CheckBoxPreference
             android:key="see_through"
