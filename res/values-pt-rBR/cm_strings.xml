@@ -369,7 +369,7 @@
   <string name="styles_settings_title">Estilos</string>
   <string name="icons_settings_title">Ícones</string>
   <string name="fonts_settings_title">Fontes</string>
-  <string name="wallpaper_settings_title">Papéis de parede</string>
+  <string name="wallpaper_settings_title_cm">Papéis de parede</string>
   <string name="performance_settings_title">Desempenho</string>
   <string name="performance_settings_warning_title">Proceda com cautela</string>
   <string name="performance_set_on_boot">Definir na inicialização</string>

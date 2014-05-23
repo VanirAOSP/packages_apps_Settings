@@ -368,7 +368,7 @@
   <string name="styles_settings_title">Estilos</string>
   <string name="icons_settings_title">Iconos</string>
   <string name="fonts_settings_title">Fontes</string>
-  <string name="wallpaper_settings_title">Fondos de pantalla</string>
+  <string name="wallpaper_settings_title_cm">Fondos de pantalla</string>
   <string name="performance_settings_title">Rindimientu</string>
   <string name="performance_settings_warning_title">Procede con curiáu</string>
   <string name="performance_set_on_boot">Afitar al aniciar</string>

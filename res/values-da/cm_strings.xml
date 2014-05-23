@@ -368,7 +368,7 @@
   <string name="styles_settings_title">Stilarter</string>
   <string name="icons_settings_title">Ikoner</string>
   <string name="fonts_settings_title">Fonte</string>
-  <string name="wallpaper_settings_title">Baggrunde</string>
+  <string name="wallpaper_settings_title_cm">Baggrunde</string>
   <string name="performance_settings_title">Ydeevne</string>
   <string name="performance_settings_warning_title">Fortsæt med forsigtighed</string>
   <string name="performance_set_on_boot">Indstil ved opstart</string>

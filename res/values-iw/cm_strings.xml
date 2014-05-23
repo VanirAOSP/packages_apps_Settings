@@ -392,7 +392,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
   <string name="styles_settings_title">סגנונות</string>
   <string name="icons_settings_title">סמלים</string>
   <string name="fonts_settings_title">גופנים</string>
-  <string name="wallpaper_settings_title">רקעים</string>
+  <string name="wallpaper_settings_title_cm">רקעים</string>
   <string name="performance_settings_title">ביצועים</string>
   <string name="performance_settings_warning_title">המשך בזהירות</string>
   <string name="performance_set_on_boot">קבע כל אתחול</string>
