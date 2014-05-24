@@ -17,7 +17,6 @@
 package com.android.settings.vanir;
 
 import android.content.Context;
-import android.content.Intent;
 import android.preference.Preference;
 import android.provider.Settings;
 import android.util.AttributeSet;

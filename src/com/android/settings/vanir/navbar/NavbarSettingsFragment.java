@@ -10,22 +10,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.settings.BaseSetting;
-import com.android.settings.BaseSetting.OnSettingChangedListener;
 import com.android.settings.R;
-import com.android.settings.SingleChoiceSetting;
 
 import com.vanir.util.DeviceUtils;
 

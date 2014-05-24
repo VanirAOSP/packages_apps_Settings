@@ -23,7 +23,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -34,19 +33,16 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.Spannable;
 import android.util.Log;
-import android.view.WindowManagerGlobal;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.vanir.fragments.DensityChanger;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 
 import com.vanir.util.AbstractAsyncSuCMDProcessor;
 import com.vanir.util.CMDProcessor;
 import com.vanir.util.CMDProcessor.CommandResult;
-import com.vanir.util.Helpers;
 
 import java.io.File;
 

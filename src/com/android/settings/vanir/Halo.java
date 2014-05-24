@@ -30,21 +30,19 @@ import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Toast;
+// import android.widget.Toast;  // commented out in the code further down
+                                 // as well, so leave this one here for now
 import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.vanir.util.Helpers;
+//import com.vanir.util.Helpers; // commented out in the code further down
+                                 // as well, so leave this one here for now
 
 import net.margaritov.preference.colorpicker.ColorPickerPreference;
 

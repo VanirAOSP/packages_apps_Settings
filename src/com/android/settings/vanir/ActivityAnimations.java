@@ -3,24 +3,14 @@ package com.android.settings.vanir;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceScreen;
-import android.preference.CheckBoxPreference;
-import android.preference.SwitchPreference;
 import android.provider.Settings;
-import android.view.IWindowManager;
-import android.widget.Toast;
-
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.vanir.AnimBarPreference;
 import com.android.settings.R;
 import com.vanir.util.VanirAnimationHelper;
-
-import java.util.Arrays;
 
 public class ActivityAnimations extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
