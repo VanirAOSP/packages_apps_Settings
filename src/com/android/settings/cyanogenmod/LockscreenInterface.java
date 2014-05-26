@@ -306,10 +306,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         //only enable cropper if not transparent
         mBackgroundCropper.setEnabled(!mSeeThrough.isChecked());
 
-        //only enable blurry if transparent
-        mBlurBehind.setEnabled(mSeeThrough.isChecked());
-        //only enable blur radius if blurry
-        mBlurRadius.setEnabled(mBlurBehind.isChecked());
+        // ** COMING BACK SOON **
+        mBlurBehind.setEnabled(false);
+        mBlurBehind.setSummary("Coming back soon");
+        mBlurRadius.setEnabled(false);
+        ////only enable blurry if transparent
+        //mBlurBehind.setEnabled(mSeeThrough.isChecked());
+        ////only enable blur radius if blurry
+        //mBlurRadius.setEnabled(mBlurBehind.isChecked());
     }
 
     /**
