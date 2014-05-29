@@ -235,6 +235,9 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         if (mLockscreenTargets != null) {
             mLockscreenTargets.setEnabled(enabled);
         }
+        if (mBatteryStatus != null) {
+            mBatteryStatus.setEnabled(enabled);
+        }
     }
 
     @Override
