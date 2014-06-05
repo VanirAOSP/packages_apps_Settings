@@ -52,6 +52,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
     private static final String PREF_KEY_BATTERY_SAVER_MODE_DATA = "pref_battery_saver_mode_data";
     private static final String PREF_KEY_BATTERY_SAVER_MODE_NETWORK = "pref_battery_saver_mode_network";
     private static final String PREF_KEY_BATTERY_SAVER_MODE_NOSIGNAL = "pref_battery_saver_mode_nosignal";
+    private static final String PREF_KEY_BATTERY_SAVER_MODE_TOAST = "battery_saver_show_toast";
     private static final String PREF_KEY_BATTERY_SAVER_TIMERANGE = "pref_battery_saver_timerange";
 
     private static final String CATEGORY_RADIO = "category_battery_saver_radio";
@@ -74,6 +75,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
     private SeekBarPreference mBatterySaverDelay;
     private SeekBarPreference mLowBatteryLevel;
     private CheckBoxPreference mSmartDataEnabled;
+    private CheckBoxPreference mShowToast;
     private CheckBoxPreference mSmartNoSignalEnabled;
     private ListPreference mUserCheckIntervalTime;
     private TimeRangePreference mBatterySaverTimeRange;
@@ -138,6 +140,11 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
             mSmartNoSignalEnabled.setChecked(Settings.Global.getInt(mResolver,
                      Settings.Global.BATTERY_SAVER_NOSIGNAL_MODE, 0) == 1);
             mSmartNoSignalEnabled.setOnPreferenceChangeListener(this);
+
+            mShowToast = (CheckBoxPreference) prefSet.findPreference(PREF_KEY_BATTERY_SAVER_MODE_TOAST);
+            mShowToast.setChecked(Settings.Global.getInt(mResolver,
+                     Settings.Global.BATTERY_SAVER_SHOW_TOAST, 0) == 1);
+            mShowToast.setOnPreferenceChangeListener(this);
 
             if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
                 prefSet.removePreference(findPreference(CATEGORY_NETWORK_GSM));
@@ -268,6 +275,10 @@ public class BatterySaverSettings extends SettingsPreferenceFragment implements
             boolean value = (Boolean) newValue;
             Settings.Global.putInt(mResolver,
                      Settings.Global.BATTERY_SAVER_NOSIGNAL_MODE, value ? 1 : 0);
+        } else if (preference == mShowToast) {
+            boolean value = (Boolean) newValue;
+            Settings.Global.putInt(mResolver,
+                     Settings.Global.BATTERY_SAVER_SHOW_TOAST, value ? 1 : 0);
         } else if (preference == mBatterySaverDelay) {
             int val = ((Integer)newValue).intValue();
             Settings.Global.putInt(mResolver,
