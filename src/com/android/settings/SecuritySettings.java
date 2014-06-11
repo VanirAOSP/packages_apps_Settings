@@ -101,8 +101,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_APP_SECURITY_CATEGORY = "app_security";
     private static final String KEY_BLACKLIST = "blacklist";
     private static final String KEY_SMS_SECURITY_CHECK_PREF = "sms_security_check_limit";
-    private static final String SLIDE_LOCK_TIMEOUT_DELAY = "slide_lock_timeout_delay";
-    private static final String SLIDE_LOCK_SCREENOFF_DELAY = "slide_lock_screenoff_delay";
     private static final String CATEGORY_ADDITIONAL = "additional_options";
 
     public static final String ALLOW_MULTIUSER = "allow_multiuser";
@@ -139,8 +137,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private boolean mIsPrimary;
 
     private ListPreference mSmsSecurityCheck;
-    private ListPreference mSlideLockTimeoutDelay;
-    private ListPreference mSlideLockScreenOffDelay;
 
     public SecuritySettings() {
         super(null /* Don't ask for restrictions pin on creation. */);
@@ -242,24 +238,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (mLockAfter != null) {
             setupLockAfterPreference();
             updateLockAfterPreferenceSummary();
-        } else if (!mLockPatternUtils.isLockScreenDisabled()) {
-            addPreferencesFromResource(R.xml.security_settings_slide_delay_cyanogenmod);
-
-            mSlideLockTimeoutDelay = (ListPreference) root
-                    .findPreference(SLIDE_LOCK_TIMEOUT_DELAY);
-            int slideTimeoutDelay = Settings.System.getInt(resolver,
-                    Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, 5000);
-            mSlideLockTimeoutDelay.setValue(String.valueOf(slideTimeoutDelay));
-            updateSlideAfterTimeoutSummary();
-            mSlideLockTimeoutDelay.setOnPreferenceChangeListener(this);
-
-            mSlideLockScreenOffDelay = (ListPreference) root
-                    .findPreference(SLIDE_LOCK_SCREENOFF_DELAY);
-            int slideScreenOffDelay = Settings.System.getInt(resolver,
-                    Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, 0);
-            mSlideLockScreenOffDelay.setValue(String.valueOf(slideScreenOffDelay));
-            updateSlideAfterScreenOffSummary();
-            mSlideLockScreenOffDelay.setOnPreferenceChangeListener(this);
         }
 
             // lock instantly on power key press
@@ -547,38 +525,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
         }
     }
 
-    private void updateSlideAfterTimeoutSummary() {
-        // Update summary message with current value
-        long currentTimeout = Settings.System.getInt(getContentResolver(),
-                Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, 5000);
-        final CharSequence[] entries = mSlideLockTimeoutDelay.getEntries();
-        final CharSequence[] values = mSlideLockTimeoutDelay.getEntryValues();
-        int best = 0;
-        for (int i = 0; i < values.length; i++) {
-            long timeout = Long.valueOf(values[i].toString());
-            if (currentTimeout >= timeout) {
-                best = i;
-            }
-        }
-        mSlideLockTimeoutDelay.setSummary(entries[best]);
-    }
-
-    private void updateSlideAfterScreenOffSummary() {
-        // Update summary message with current value
-        long currentTimeout = Settings.System.getInt(getContentResolver(),
-                Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, 0);
-        final CharSequence[] entries = mSlideLockScreenOffDelay.getEntries();
-        final CharSequence[] values = mSlideLockScreenOffDelay.getEntryValues();
-        int best = 0;
-        for (int i = 0; i < values.length; i++) {
-            long timeout = Long.valueOf(values[i].toString());
-            if (currentTimeout >= timeout) {
-                best = i;
-            }
-        }
-        mSlideLockScreenOffDelay.setSummary(entries[best]);
-    }
-
     private void updateSmsSecuritySummary(int selection) {
         String message = selection > 0
                 ? getString(R.string.sms_security_check_limit_summary, selection)
@@ -813,16 +759,6 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
             updateLockAfterPreferenceSummary();
             checkPowerInstantLockDependency();
-        } else if (preference == mSlideLockTimeoutDelay) {
-            int slideTimeoutDelay = Integer.valueOf((String) value);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.SCREEN_LOCK_SLIDE_TIMEOUT_DELAY, slideTimeoutDelay);
-            updateSlideAfterTimeoutSummary();
-        } else if (preference == mSlideLockScreenOffDelay) {
-            int slideScreenOffDelay = Integer.valueOf((String) value);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.SCREEN_LOCK_SLIDE_SCREENOFF_DELAY, slideScreenOffDelay);
-            updateSlideAfterScreenOffSummary();
         } else if (preference == mSmsSecurityCheck) {
             int smsSecurityCheck = Integer.valueOf((String) value);
             Settings.Global.putInt(getContentResolver(),

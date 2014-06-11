@@ -26,7 +26,7 @@
             android:summary="@string/unlock_set_unlock_mode_none"
             android:persistent="false"/>
 
-       <ListPreference
+        <ListPreference
             android:key="lock_after_timeout"
             android:title="@string/lock_after_timeout"
             android:summary="@string/lock_after_timeout_summary"
