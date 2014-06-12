@@ -93,6 +93,15 @@
             <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
         </PreferenceScreen>
 
+        <!-- Vanir Additional Info -->
+        <PreferenceScreen android:key="additionalinfo"
+                android:title="@string/vaniradditionalinfo"
+                android:summary="@string/vaniradditionalinfo_summary">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.vanir.additionalinfo.MainActivity" />
+        </PreferenceScreen>
+
         <!-- Device hardware model -->
         <Preference android:key="device_model"
                 style="?android:preferenceInformationStyle"

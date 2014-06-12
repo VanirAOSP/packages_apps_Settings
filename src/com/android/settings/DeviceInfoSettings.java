@@ -54,7 +54,6 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
     private static final String FILENAME_MSV = "/sys/board_properties/soc/msv";
     private static final String FILENAME_PROC_MEMINFO = "/proc/meminfo";
     private static final String FILENAME_PROC_CPUINFO = "/proc/cpuinfo";
-
     private static final String KEY_CONTAINER = "container";
     private static final String KEY_TEAM = "team";
     private static final String KEY_CONTRIBUTORS = "contributors";
