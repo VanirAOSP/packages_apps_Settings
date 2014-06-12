@@ -93,6 +93,15 @@
             <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
         </PreferenceScreen>
 
+        <!-- Detailed Device Info -->
+        <PreferenceScreen android:key="detaileddeviceinfo"
+                android:title="@string/detaileddeviceinfo"
+                android:summary="@string/detaileddeviceinfo_summary">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.vanir.detaileddeviceinfo.MainActivity" />
+        </PreferenceScreen>
+
         <!-- Device hardware model -->
         <Preference android:key="device_model"
                 style="?android:preferenceInformationStyle"
