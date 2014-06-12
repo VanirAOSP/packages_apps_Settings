@@ -882,6 +882,10 @@
     <string name="five">Five</string>
     <string name="six">Six</string>
 
+    <!-- Vanir Additional Info -->
+    <string name="vaniradditionalinfo">Detailed device information</string>
+    <string name="vaniradditionalinfo_summary">Display detailed info for cpu, display, etc</string>
+
     <!-- Quiet hours -->
     <string name="quiet_hours_title">Quiet hours</string>
     <string name="quiet_hours_summary">Configure the hours the device should be quiet</string>
