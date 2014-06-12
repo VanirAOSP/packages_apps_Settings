@@ -641,7 +641,6 @@
   <string name="background_result_successful">Baggrund ændret</string>
   <string name="background_result_not_successful">Baggrund ikke ændret</string>
   <string name="setting_lockscreen_background">Anvender baggrund</string>
-  <string name="accessibility_home_button_answers_call_prerefence_title">Startknap besvarer opkald</string>
   <string name="confirm_delete_apn">APN\'en vil blive slettet.</string>
   <string name="status_bar_title">Statuslinje</string>
   <string name="status_bar_show_clock_title">Vis ur</string>
