@@ -2218,6 +2218,14 @@
             </intent-filter>
         </receiver>
 
+        <!-- Detailed Device info -->
+        <activity android:name="com.android.settings.vanir.detaileddeviceinfo.MainActivity"
+                  android:theme="@android:style/Theme.Holo.Dialog.NoActionBar.MinWidth">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <!-- Watch for ContactsContract.Profile changes and update the user's photo.  -->
         <receiver android:name=".users.ProfileUpdateReceiver">
             <intent-filter>
