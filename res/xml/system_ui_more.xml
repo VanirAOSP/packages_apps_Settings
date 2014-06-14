@@ -67,6 +67,36 @@
     <PreferenceCategory
         android:title="@string/recents" />
 
+        <ListPreference
+            android:key="custom_recent_mode"
+            android:title="@string/new_recents_screen_title"
+            android:dialogTitle="@string/new_recents_screen_dialog_title"
+            android:entries="@array/custom_recent_mode_entries"
+            android:entryValues="@array/custom_recent_mode_values"
+            android:defaultValue="0" 
+            android:persistent="true" />
+
+        <ListPreference
+            android:key="recent_panel_expanded_mode"
+            android:entries="@array/recent_panel_expanded_mode_entries"
+            android:entryValues="@array/recent_panel_expanded_mode_values"
+            android:title="@string/recent_panel_expanded_mode_title"
+            android:summary="@string/recent_panel_expanded_mode_summary"
+            android:persistent="false" />
+
+        <CheckBoxPreference
+            android:key="recent_panel_lefty_mode"
+            android:title="@string/recent_panel_lefty_mode_title"
+            android:summary="@string/recent_panel_lefty_mode_summary"
+            android:persistent="true" />
+
+        <ListPreference
+            android:key="recent_panel_scale"
+            android:entries="@array/recent_panel_scale_entries"
+            android:entryValues="@array/recent_panel_scale_values"
+            android:title="@string/recent_panel_scale_title"
+            android:persistent="false" />
+
         <CheckBoxPreference
             android:key="vanir_interface_recents_mem_display"
             android:title="@string/pref_recents_title"

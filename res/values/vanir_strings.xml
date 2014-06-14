@@ -823,4 +823,28 @@
     <string name="hover_settings_summary">Allow hover notifications in place of the default statusbar ticker or Halo</string>
     <string name="blacklist_button_title">Blacklist from Hover</string>
 
+    <!-- Recents -->
+    <string name="new_recents_screen_title">Recents style</string>
+    <string name="new_recents_screen_dialog_title">Choose recents style</string>
+    <string name="recents_style_default">Default AOSP</string>
+    <string name="recents_style_sidebar">Sidebar style</string>
+    <string name="recents_style_omniswitch">Omniswitch</string>
+    <string name="recent_panel_scale_title">Panel size</string>
+    <string name="recent_panel_100">100 percent (default)</string>
+    <string name="recent_panel_85">85 percent</string>
+    <string name="recent_panel_70">70 percent</string>
+    <string name="recent_panel_expanded_mode_title">Expanded mode</string>
+    <string name="recent_panel_expanded_mode_summary">Recent tasks expanded preview mode</string>
+    <string name="recent_panel_expanded_mode_auto">Auto (default)</string>
+    <string name="recent_panel_expanded_mode_always">Always</string>
+    <string name="recent_panel_expanded_mode_never">Never</string>
+    <string name="omniswitch_warning_title">Warning</string>
+    <string name="omniswitch_not_installed_summary">OmniSwitch is not installed</string>
+    <string name="omniswitch_not_installed_message">OmniSwitch is not installed</string>
+    <string name="omniswitch_enabled_message">Please turn OmniSwitch on and configure it to start on boot.</string>
+
+    <!-- ATTENTION: RTL languages need to replace left with right -->
+    <string name="recent_panel_lefty_mode_title">Show on the left edge</string>
+    <string name="recent_panel_lefty_mode_summary">Show recent apps panel on the left edge.</string>
+
 </resources>
