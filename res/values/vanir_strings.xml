@@ -23,7 +23,7 @@
     <string name="misc_short">Misc</string>
     <string name="lockscreen_targets_title">Targets</string>
     <string name="userspace_options_title">Userspace</string>
-    <string name="notifications_ux_title">General UX</string>
+    <string name="notifications_ux_title">Notifications UI</string>
     <string name="default_string">Default</string>
     <string name="performance_settings">Performance</string>
     <string name="controls">Controls</string>
@@ -492,8 +492,8 @@
     <string name="lockscreen_quick_unlock_control_summary">Unlock automatically when the correct PIN/password is entered</string>
 
     <!-- Notification drawer background -->		
-	<string name="notification_title">Panel backgrounds</string>	
-	<string name="notification_summary">Customize the panel backgrounds</string>		
+	<string name="notification_title">Panel background</string>	
+	<string name="notification_summary">Customize the notification panel background</string>		
 	<string name="notification_wallpaper_title">Portrait background</string>		
 	<string name="notification_wallpaper_landscape_title">Landscape background</string>		
 	<string name="notification_background_color_fill">Color fill</string>		
@@ -817,5 +817,10 @@
 
     <!-- Summary for "Configure lockscreen" when security gesture is enabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_gesture">Gesture</string>
+
+    <!-- Hover -->
+    <string name="hover_settings_title">Hover</string>
+    <string name="hover_settings_summary">Allow hover notifications in place of the default statusbar ticker or Halo</string>
+    <string name="blacklist_button_title">Blacklist from Hover</string>
 
 </resources>

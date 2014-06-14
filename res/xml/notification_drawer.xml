@@ -22,6 +22,13 @@
     <PreferenceCategory
         android:title="@string/notifications_ux_title">
 
+
+        <SwitchPreference
+            android:key="hover_switch"
+            android:title="@string/hover_settings_title"
+            android:summary="@string/hover_settings_summary"
+            android:defaultValue="false" />
+
         <PreferenceScreen
             android:id="@+id/active_notifications"
             android:title="@string/Lockscreen_notifications_header"
@@ -29,7 +36,7 @@
             android:fragment="com.android.settings.ActiveNotifications" />
 
         <PreferenceScreen
-            android:id="@+id/halo_settings"
+            android:key="halo_settings"
             android:fragment="com.android.settings.vanir.Halo"
             android:title="@string/halo_settings_title"
             android:summary="@string/halo_settings_summary" />

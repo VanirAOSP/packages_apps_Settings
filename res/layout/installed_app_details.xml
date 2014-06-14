@@ -77,6 +77,13 @@
                 android:layout_gravity="start"
                 android:layout_marginTop="4dip" />
 
+            <CheckBox
+                android:id="@+id/hover_blacklist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="4dip" />
+
         </LinearLayout>
 
         <TextView

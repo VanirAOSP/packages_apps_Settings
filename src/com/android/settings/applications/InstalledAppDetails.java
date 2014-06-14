@@ -144,7 +144,7 @@ public class InstalledAppDetails extends Fragment
     private Button mClearDataButton;
     private Button mMoveAppButton;
     private CompoundButton mPrivacyGuardSwitch;
-    private CompoundButton mNotificationSwitch, mHaloState;
+    private CompoundButton mNotificationSwitch, mHaloState, mHoverBlacklist;
 
     private PackageMoveObserver mPackageMoveObserver;
     private AppOpsManager mAppOps;
@@ -404,16 +404,22 @@ public class InstalledAppDetails extends Fragment
     private void initNotificationButton() {
         boolean enabled = true; // default on
         boolean allowedForHalo = true; // default on
+        boolean allowedForHover = true; // default on
         try {
             enabled = mNotificationManager.areNotificationsEnabledForPackage(mAppEntry.info.packageName,
                     mAppEntry.info.uid);
             allowedForHalo = mNotificationManager.isPackageAllowedForHalo(mAppEntry.info.packageName);
+            allowedForHover = mNotificationManager.isPackageAllowedForHover(mAppEntry.info.packageName);
         } catch (android.os.RemoteException ex) {
             // this does not bode well
         }
         mNotificationSwitch.setChecked(enabled);
         mHaloState.setChecked((mHaloPolicyIsBlack ? !allowedForHalo : allowedForHalo));
         mHaloState.setOnCheckedChangeListener(this);
+
+        mHoverBlacklist.setChecked(!allowedForHover);
+        mHoverBlacklist.setOnCheckedChangeListener(this);
+
         if (isThisASystemPackage()) {
             mNotificationSwitch.setEnabled(false);
         } else {
@@ -521,6 +527,9 @@ public class InstalledAppDetails extends Fragment
 
         mHaloState = (CompoundButton) view.findViewById(R.id.halo_state);
         mHaloState.setText((mHaloPolicyIsBlack ? R.string.app_halo_label_black : R.string.app_halo_label_white));
+
+        mHoverBlacklist = (CompoundButton) view.findViewById(R.id.hover_blacklist);
+        mHoverBlacklist.setText(R.string.blacklist_button_title);
 
         return view;
     }
@@ -1413,6 +1422,14 @@ public class InstalledAppDetails extends Fragment
         }
     }
 
+    private void setHoverState(boolean state) {
+        try {
+            mNotificationManager.setHoverBlacklistStatus(mAppEntry.info.packageName, state);
+        } catch (android.os.RemoteException ex) {
+            mHoverBlacklist.setChecked(!state); // revert
+        }
+    }
+
     private int getPremiumSmsPermission(String packageName) {
         try {
             if (mSmsManager != null) {
@@ -1518,6 +1535,8 @@ public class InstalledAppDetails extends Fragment
             }
         } else if (buttonView == mHaloState) {
             setHaloState(isChecked);
+        } else if (buttonView == mHoverBlacklist) {
+            setHoverState(isChecked);
         }
     }
 }
