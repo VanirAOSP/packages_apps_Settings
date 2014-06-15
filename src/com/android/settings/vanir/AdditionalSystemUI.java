@@ -48,6 +48,7 @@ import com.vanir.util.AbstractAsyncSuCMDProcessor;
 import com.vanir.util.CMDProcessor;
 import com.vanir.util.CMDProcessor.CommandResult;
 import com.vanir.util.Helpers;
+import com.vanir.util.RecentsConstants;
 
 import java.io.File;
 
@@ -71,7 +72,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     public static final String OMNISWITCH_PACKAGE_NAME = "org.omnirom.omniswitch";
 
     public static Intent INTENT_OMNISWITCH_SETTINGS = new Intent(Intent.ACTION_MAIN)
-			.setClassName(OMNISWITCH_PACKAGE_NAME, OMNISWITCH_PACKAGE_NAME + ".SettingsActivity");
+            .setClassName(OMNISWITCH_PACKAGE_NAME, OMNISWITCH_PACKAGE_NAME + ".SettingsActivity");
 
     private Preference mCustomLabel;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
@@ -290,9 +291,9 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
         } else if (preference == mDualPanel) {
-			Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL,
+            Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL,
                     mDualPanel.isChecked() ? true : false);
-			return true;
+            return true;
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
@@ -333,34 +334,13 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
 
     private void updateRecentsDependencies() {
         int mRecentsStyle = Settings.System.getInt(getActivity().getContentResolver(),
-                                Settings.System.CUSTOM_RECENTS, 0);
-        switch (mRecentsStyle) {
-            // Default recents
-            case 0:
-                mClearAll.setEnabled(true);
-                mMembar.setEnabled(true);
-                mRecentPanelLeftyMode.setEnabled(false);
-                mRecentPanelScale.setEnabled(false);
-                mRecentPanelExpandedMode.setEnabled(false);
-                break;
-            // Sidebar recents
-            case 1:
-                mClearAll.setEnabled(false);
-                mMembar.setEnabled(false);
-                mRecentPanelLeftyMode.setEnabled(true);
-                mRecentPanelScale.setEnabled(true);
-                mRecentPanelExpandedMode.setEnabled(true);
-                break;
-            // OmniSwitch recents
-            case 2:
-                if (!isOmniSwitchInstalled()) return;
-                mClearAll.setEnabled(false);
-                mMembar.setEnabled(false);
-                mRecentPanelLeftyMode.setEnabled(false);
-                mRecentPanelScale.setEnabled(false);
-                mRecentPanelExpandedMode.setEnabled(false);
-                break;
-        }
+                                Settings.System.CUSTOM_RECENTS, RecentsConstants.RECENTS_AOSP);
+
+        mClearAll.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_AOSP);
+        mMembar.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_AOSP);
+        mRecentPanelLeftyMode.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
+        mRecentPanelScale.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
+        mRecentPanelExpandedMode.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
     }
 
     private void resetBootAnimationSummary() {
@@ -469,8 +449,8 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         .setTitle(getResources().getString(R.string.omniswitch_warning_title))
         .setMessage(getResources().getString(R.string.omniswitch_not_installed_message))
         .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-			}
+            public void onClick(DialogInterface dialog, int whichButton) {
+            }
         }).show();
     }
 
@@ -479,17 +459,17 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         .setTitle(getResources().getString(R.string.omniswitch_warning_title))
         .setMessage(getResources().getString(R.string.omniswitch_enabled_message))
         .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
+            public void onClick(DialogInterface dialog, int whichButton) {
                 startActivity(INTENT_OMNISWITCH_SETTINGS);
-			}
+            }
         }).show();
     }
 
     private boolean isOmniSwitchInstalled() {
         final PackageManager pm = getPackageManager();
         try {
-			pm.getPackageInfo(OMNISWITCH_PACKAGE_NAME, PackageManager.GET_ACTIVITIES);
-			return true;
+            pm.getPackageInfo(OMNISWITCH_PACKAGE_NAME, PackageManager.GET_ACTIVITIES);
+            return true;
         } catch (NameNotFoundException e) {
             return false;
         }
