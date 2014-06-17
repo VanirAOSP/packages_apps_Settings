@@ -81,6 +81,12 @@
                 android:summary="@string/adaptive_backlight_summary"
                 android:defaultValue="true" />
 
+        <CheckBoxPreference
+                android:key="color_enhancement"
+                android:title="@string/color_enhancement_title"
+                android:summary="@string/color_enhancement_summary"
+                android:defaultValue="true" />
+
         <!-- DeviceParts Device Specific Display settings -->
         <Preference
             android:key="advanced_display_settings"
