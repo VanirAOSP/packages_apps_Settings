@@ -405,7 +405,7 @@ public class WirelessSettings extends RestrictedSettingsFragment
             removePreference(KEY_VOICE_PLUS_ACCOUNT);
         }
 
-        if (!Utils.isPackageInstalled(getActivity(), PHONE_PACKAGE) || mStockMode) {
+        if (Utils.isWifiOnly(getActivity()) || !Utils.isPackageInstalled(getActivity(), PHONE_PACKAGE) || mStockMode) {
             removePreference(KEY_CALL_SETTINGS);
         }
 
