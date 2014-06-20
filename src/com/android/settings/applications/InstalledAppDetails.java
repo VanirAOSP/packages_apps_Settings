@@ -34,6 +34,7 @@ import android.app.INotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -60,6 +61,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceActivity;
+import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
@@ -87,6 +89,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.android.settings.cyanogenmod.ProtectedAppsReceiver;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -1484,14 +1490,6 @@ public class InstalledAppDetails extends Fragment
         }
     }
 
-    private void setHoverState(boolean state) {
-        try {
-            mNotificationManager.setHoverBlacklistStatus(mAppEntry.info.packageName, state);
-        } catch (android.os.RemoteException ex) {
-            mHoverBlacklist.setChecked(!state); // revert
-        }
-    }
-
     private int getPremiumSmsPermission(String packageName) {
         try {
             if (mSmsManager != null) {
@@ -1598,8 +1596,66 @@ public class InstalledAppDetails extends Fragment
         } else if (buttonView == mHaloState) {
             setHaloState(isChecked);
         } else if (buttonView == mHoverBlacklist) {
-            setHoverState(isChecked);
+            new updateExcludedAppsAsyncTask().execute("");
         }
+    }
+
+    public Set<String> getExcludedApps() {
+        String excluded = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.HOVER_EXCLUDED_APPS);
+
+        if (TextUtils.isEmpty(excluded)) return null;
+        return new HashSet<String>(Arrays.asList(excluded.split("\\|")));
+    }
+
+    private class updateExcludedAppsAsyncTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Set<String> excludedApps = getExcludedApps();
+            String packageName = mAppEntry.info.packageName;
+            boolean isExcluded = mHoverBlacklist.isChecked();
+
+            StringBuilder builder = new StringBuilder();
+            String delimiter = "";
+            if (excludedApps != null) {
+                for (String excludedApp : excludedApps) {
+                    builder.append(delimiter);
+                    builder.append(excludedApp);
+                    delimiter = "|";
+                }
+            }
+
+            if (isExcluded) {
+                builder.append(packageName);
+                delimiter = "|";
+            } else if (!isExcluded) {
+                int i = builder.indexOf(packageName);
+                if (i != -1) {
+                    builder.delete(i, i + packageName.length());
+                }
+            }
+
+            Settings.System.putString(getActivity().getContentResolver(),
+                    Settings.System.HOVER_EXCLUDED_APPS, builder.toString());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            boolean isExcluded = mHoverBlacklist.isChecked();
+            try {
+                mNotificationManager.setHoverBlacklistStatus(mAppEntry.info.packageName, isExcluded);
+            } catch (android.os.RemoteException ex) {
+                mHoverBlacklist.setChecked(!isExcluded); // revert
+            }
+        }
+
+        @Override
+        protected void onPreExecute() { }
+
+        @Override
+        protected void onProgressUpdate(Void... values) { }
     }
 }
 

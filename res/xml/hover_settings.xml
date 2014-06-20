@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 OmniKang
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/hover_settings_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <CheckBoxPreference
+        android:key="hover_floating_mode"
+        android:persistent="true"
+        android:title="@string/hover_floating_title"
+        android:summary="@string/hover_floating_summary"
+        android:defaultValue="false" />
+
+    <com.android.settings.vanir.HoverSeekBar
+        android:key="hover_duration"
+        android:title="@string/hover_duration"
+        android:defaultValue="5000" />
+
+    <CheckBoxPreference
+        android:key="hover_require_fullscreen"
+        android:persistent="true"
+        android:title="@string/hover_require_fullscreen"
+        android:summary="@string/hover_require_fullscreen_summary"
+        android:defaultValue="false" />
+
+    <CheckBoxPreference
+        android:key="hover_exclude_foreground"
+        android:persistent="true"
+        android:title="@string/hover_exclude_foreground"
+        android:summary="@string/hover_exclude_foreground_summary"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="hover_force_removable"
+        android:persistent="true"
+        android:title="@string/hover_force_removable"
+        android:summary="@string/hover_force_removable_summary"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="hover_non_clearable"
+        android:persistent="true"
+        android:title="@string/hide_non_clearable"
+        android:summary="@string/hide_non_clearable_summary"
+        android:defaultValue="true" />
+
+    <CheckBoxPreference
+        android:key="hover_low_priority"
+        android:persistent="true"
+        android:title="@string/hide_low_priority"
+        android:summary="@string/hide_low_priority_summary"
+        android:defaultValue="true" />
+
+    <com.android.settings.vanir.AppMultiSelectListPreference
+        android:key="hover_excluded_apps"
+        android:persistent="false"
+        android:title="@string/hover_excluded_apps_title"
+        android:summary="@string/hover_excluded_apps_summary" />
+
+</PreferenceScreen>
