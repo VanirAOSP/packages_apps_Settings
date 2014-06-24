@@ -17,6 +17,7 @@
 package com.android.settings.cyanogenmod;
 
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
@@ -25,6 +26,8 @@ import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+
+import com.android.settings.cyanogenmod.SystemSettingSwitchPreference;
 
 public class NotificationDrawer extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -36,6 +39,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
 
     private ListPreference mCollapseOnDismiss;
     private SwitchPreference mHover;
+    private SystemSettingSwitchPreference mSwitchPreference;
     private Preference mHalo;
 
     @Override
@@ -47,8 +51,12 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
 
         mHover = (SwitchPreference) findPreference(KEY_HOVER_SWITCH);
         mHover.setChecked(Settings.System.getInt(getContentResolver(), 
-                    Settings.System.HOVER_ENABLED, 0) == 1);
+                Settings.System.HOVER_ENABLED, 0) == 1);
         mHover.setOnPreferenceChangeListener(this);
+        
+        mSwitchPreference = (SystemSettingSwitchPreference)
+                findPreference(Settings.System.HEADS_UP_NOTIFICATION);
+
 
         mHalo = (PreferenceScreen) findPreference(KEY_HALO);
 
@@ -65,6 +73,10 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        boolean headsUpEnabled = Settings.System.getIntForUser(
+                getActivity().getContentResolver(),
+                Settings.System.HEADS_UP_NOTIFICATION, 0, UserHandle.USER_CURRENT) == 1;
+        mSwitchPreference.setChecked(headsUpEnabled);
         updateHaloPreference();
     }
 
