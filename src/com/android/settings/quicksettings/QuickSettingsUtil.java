@@ -18,6 +18,7 @@ package com.android.settings.quicksettings;
 
 import static com.android.internal.util.cm.QSConstants.*;
 import static com.android.internal.util.cm.QSConstants.TILE_COMPASS;
+import static com.android.internal.util.cm.QSConstants.TILE_HEADS_UP;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -60,7 +61,7 @@ public class QuickSettingsUtil {
                 TILE_BRIGHTNESS, R.string.title_tile_brightness,
                 "com.android.systemui:drawable/ic_qs_brightness_auto_off"));
         registerTile(new QuickSettingsUtil.TileInfo(
-                 TILE_CAMERA, R.string.title_tile_camera,
+                TILE_CAMERA, R.string.title_tile_camera,
                 "com.android.systemui:drawable/ic_qs_camera"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_IMMERSIVE, R.string.title_tile_immersive_desktop,
@@ -68,6 +69,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo( 
                 TILE_COMPASS, R.string.title_tile_compass,
                 "com.android.systemui:drawable/ic_qs_compass_on"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_HEADS_UP, R.string.title_tile_heads_up,
+                "com.android.systemui:drawable/ic_qs_heads_up_on"));
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_SLEEP, R.string.title_tile_sleep,
                 "com.android.systemui:drawable/ic_qs_sleep"));
