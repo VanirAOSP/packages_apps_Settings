@@ -28,6 +28,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
@@ -52,7 +53,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HeadsUpSettings extends SettingsPreferenceFragment
-        implements AdapterView.OnItemLongClickListener, Preference.OnPreferenceClickListener {
+        implements AdapterView.OnItemLongClickListener, Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
     private static final int DIALOG_DND_APPS = 0;
     private static final int DIALOG_BLACKLIST_APPS = 1;
@@ -63,11 +64,13 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
     private PreferenceGroup mBlacklistPrefList;
     private Preference mAddDndPref;
     private Preference mAddBlacklistPref;
+    private CheckBoxPreference mWhitelistModePref;
 
     private String mDndPackageList;
     private String mBlacklistPackageList;
     private Map<String, Package> mDndPackages;
     private Map<String, Package> mBlacklistPackages;
+    private boolean mWhitelistMode;
 
     private Switch mActionBarSwitch;
     private HeadsUpEnabler mHeadsUpEnabler;
@@ -96,12 +99,15 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
         mBlacklistPrefList = (PreferenceGroup) findPreference("blacklist_applications");
         mBlacklistPrefList.setOrderingAsAdded(false);
 
+        mWhitelistModePref = (CheckBoxPreference)findPreference("whitelist_mode");
+
         mDndPackages = new HashMap<String, Package>();
         mBlacklistPackages = new HashMap<String, Package>();
 
         mAddDndPref = findPreference("add_dnd_packages");
         mAddBlacklistPref = findPreference("add_blacklist_packages");
 
+        mWhitelistModePref.setOnPreferenceChangeListener(this);
         mAddDndPref.setOnPreferenceClickListener(this);
         mAddBlacklistPref.setOnPreferenceClickListener(this);
     }
@@ -156,6 +162,12 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
         if (mHeadsUpEnabler != null) {
             mHeadsUpEnabler.resume();
         }
+
+        mWhitelistMode = updateListMode(Settings.System.getInt(
+                getContentResolver(),
+                Settings.System.HEADS_UP_WHITELIST_MODE, 0) != 0);
+        mWhitelistModePref.setChecked(mWhitelistMode);
+
         refreshCustomApplicationPrefs();
         getListView().setOnItemLongClickListener(this);
         getActivity().invalidateOptionsMenu();
@@ -299,6 +311,20 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
         return true;
     }
 
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+        if (preference == mWhitelistModePref) {
+            final boolean newMode = (Boolean)objValue;
+            if (newMode != mWhitelistMode) {
+                mWhitelistMode = updateListMode(newMode);
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.HEADS_UP_WHITELIST_MODE,
+                        mWhitelistMode ? 1 : 0);
+            }
+        }
+        return true;
+    }
+
     private void addCustomApplicationPref(String packageName, Map<String,Package> map) {
         Package pkg = map.get(packageName);
         if (pkg == null) {
@@ -394,6 +420,16 @@ public class HeadsUpSettings extends SettingsPreferenceFragment
                 Settings.System.HEADS_UP_NOTIFICATION, 0) != 0;
         mPrefsContainer.setVisibility(enabled ? View.VISIBLE : View.GONE);
         mDisabledText.setVisibility(enabled ? View.GONE : View.VISIBLE);
+    }
+
+    private boolean updateListMode(boolean white) {
+        mBlacklistPrefList.setTitle(white ? R.string.heads_up_whitelist_title
+                : R.string.heads_up_blacklist_title);
+        mAddBlacklistPref.setSummary(white ? R.string.add_heads_up_whitelist_summary
+                : R.string.add_heads_up_blacklist_summary);
+        mWhitelistModePref.setSummary(white ? R.string.heads_up_whitelist_mode_summary_on
+                : R.string.heads_up_whitelist_mode_summary_off);
+        return white;
     }
 
     @Override
