@@ -27,8 +27,6 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.android.settings.cyanogenmod.SystemSettingSwitchPreference;
-
 public class NotificationDrawer extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "NotificationDrawer";
@@ -39,7 +37,7 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
 
     private ListPreference mCollapseOnDismiss;
     private SwitchPreference mHover;
-    private SystemSettingSwitchPreference mSwitchPreference;
+    private Preference mHeadsUp;
     private Preference mHalo;
 
     @Override
@@ -47,16 +45,13 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.notification_drawer);
-        PreferenceScreen prefScreen = getPreferenceScreen();
 
         mHover = (SwitchPreference) findPreference(KEY_HOVER_SWITCH);
         mHover.setChecked(Settings.System.getInt(getContentResolver(), 
                 Settings.System.HOVER_ENABLED, 0) == 1);
         mHover.setOnPreferenceChangeListener(this);
         
-        mSwitchPreference = (SystemSettingSwitchPreference)
-                findPreference(Settings.System.HEADS_UP_NOTIFICATION);
-
+        mHeadsUp = findPreference(Settings.System.HEADS_UP_NOTIFICATION);
 
         mHalo = (PreferenceScreen) findPreference(KEY_HALO);
 
@@ -73,10 +68,11 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        boolean headsUpEnabled = Settings.System.getIntForUser(
-                getActivity().getContentResolver(),
-                Settings.System.HEADS_UP_NOTIFICATION, 0, UserHandle.USER_CURRENT) == 1;
-        mSwitchPreference.setChecked(headsUpEnabled);
+
+        boolean headsUpEnabled = Settings.System.getInt(
+                getContentResolver(), Settings.System.HEADS_UP_NOTIFICATION, 0) == 1;
+        mHeadsUp.setSummary(headsUpEnabled
+                ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
         updateHaloPreference();
     }
 
