@@ -942,4 +942,9 @@
     <string name="quiet_hours_alarm_dialog_title">QUIETHOURS BYPASSED</string>
     <string name="quiet_hours_alarm_message">" met the requirements to bypass Quiet Hours!"</string>
     <string name="title_tile_quiet_hours">Quiet hours</string>
+
+    <!-- Heads-up customizations -->
+    <string name="heads_up_floating_window">Launch in floating window</string>
+    <string name="heads_up_style_title">Notification style</string>
+
 </resources>

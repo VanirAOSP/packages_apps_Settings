@@ -875,4 +875,7 @@ Extra opties zijn beschikbaar door een regel lang aan te raken. Door \'Aanpassen
   <string name="menu_hidden_apps_reset_lock">Patroon opnieuw instellen</string>
   <string name="protected_apps">Beschermde apps</string>
   <string name="saving_protected_components">Opslaan\u2026</string>
+  <!-- Heads-up customizations -->
+  <string name="heads_up_floating_window">Open in zwevend venster</string>
+  <string name="heads_up_style_title">Notificatie stijl</string>
 </resources>
