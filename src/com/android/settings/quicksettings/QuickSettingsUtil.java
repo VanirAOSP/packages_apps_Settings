@@ -17,8 +17,6 @@
 package com.android.settings.quicksettings;
 
 import static com.android.internal.util.cm.QSConstants.*;
-import static com.android.internal.util.cm.QSConstants.TILE_COMPASS;
-import static com.android.internal.util.cm.QSConstants.TILE_HEADS_UP;
 
 import android.content.ContentResolver;
 import android.content.Context;
