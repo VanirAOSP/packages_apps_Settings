@@ -55,6 +55,7 @@
             android:entryValues="@array/notification_drawer_collapse_on_dismiss_values" />
 
     </PreferenceCategory>
+            settings:includeXmlForSearch="@xml/quick_settings_panel"
     <Preference
             android:key="heads_up_enabled"
             android:fragment="com.android.settings.headsup.HeadsUpSettings"

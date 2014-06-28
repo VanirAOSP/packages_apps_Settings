@@ -102,6 +102,11 @@
         <attr name="digits" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="SearchableInfo">
+        <attr name="includeXmlForSearch" format="reference" />
+        <attr name="excludeFromSearch" format="boolean" />
+    </declare-styleable>
+
     <declare-styleable name="DragSortListView">
         <attr name="collapsed_height" format="dimension" />
         <attr name="drag_scroll_start" format="float" />
