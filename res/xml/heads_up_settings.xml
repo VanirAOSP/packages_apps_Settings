@@ -26,14 +26,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:title="@string/heads_up_blackwhite_category_title"
-            android:key="blackwhite_category_title">
-        <CheckBoxPreference
-                android:title="@string/heads_up_whitelist_mode_title"
-                android:key="whitelist_mode"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
             android:title="@string/heads_up_blacklist_title"
             android:key="blacklist_applications">
         <Preference
