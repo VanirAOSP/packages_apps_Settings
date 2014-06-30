@@ -823,6 +823,10 @@
     <string name="hover_settings_summary">Allow hover notifications in place of the default statusbar ticker or Halo</string>
     <string name="blacklist_button_title">Blacklist from Hover</string>
 
+    <!-- navbar sidekeys -->
+    <string name="enable_sidekeys">Allow legacy menu keys</string>
+    <string name="enable_sidekeys_summary">Add a space to allow the side menu keys in the navigation bar.</string>
+
     <!-- Recents -->
     <string name="new_recents_screen_title">Recents style</string>
     <string name="new_recents_screen_dialog_title">Choose recents style</string>
