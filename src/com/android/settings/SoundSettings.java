@@ -212,7 +212,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         }
 
         mQuietHours = (PreferenceScreen) findPreference(KEY_QUIET_HOURS);
-        updateQuietHoursSummary();
+        setQuietHoursSummary();
 
         mSoundEffects = (CheckBoxPreference) findPreference(KEY_SOUND_EFFECTS);
 
@@ -337,6 +337,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
         getActivity().registerReceiver(mReceiver, filter);
 
+        setQuietHoursSummary();
     }
 
     @Override
@@ -375,19 +376,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mRingMode.setValue(getPhoneRingModeSettingValue());
         mRingMode.setSummary(mRingMode.getEntry());
-        updateQuietHoursSummary();
-    }
-
-    private void updateQuietHoursSummary() {
-        ContentResolver resolver = getContentResolver();
-        if (Settings.System.getInt(resolver, Settings.System.QUIET_HOURS_ENABLED, 0) == 1) {
-            String start = Settings.System.getString(resolver, Settings.System.QUIET_HOURS_START);
-            String end = Settings.System.getString(resolver, Settings.System.QUIET_HOURS_END);
-            mQuietHours.setSummary(getString(R.string.quiet_hours_active_period,
-                    returnTime(start), returnTime(end)));
-        } else {
-            mQuietHours.setSummary(getString(R.string.quiet_hours_summary));
-        }
     }
 
     private void updateRingtoneName(int type, Preference preference, int msg) {
@@ -671,6 +659,21 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private void updateStockMode() {
         mStockMode = mDevelopmentPreferences.getInt(DevelopmentSettings.STOCK_MODE, 0) == 1;
+    }
+
+    private void setQuietHoursSummary() {
+        int mQuietMode = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QUIET_HOURS_ENABLED, 0);
+        String someSummary = "DIAF";
+        // Don't judge. I used these strings for translations. YAHTZEE!!
+        if (mQuietMode == 0) {
+            // Disabled
+            someSummary = getString(R.string.notification_light_disabled);
+        } else {
+            // Enabled
+            someSummary = getString(R.string.notification_light_enabled);
+        }
+        if (mQuietHours != null) mQuietHours.setSummary(someSummary);
     }
 }
 

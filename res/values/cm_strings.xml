@@ -348,7 +348,6 @@
     <string name="title_tile_networkmode">Network mode</string>
     <string name="title_tile_nfc">NFC</string>
     <string name="title_tile_screen_timeout">Screen timeout</string>
-    <string name="title_tile_quiet_hours">Quiet hours</string>
     <string name="title_tile_volume">Volume</string>
     <string name="title_tile_immersive_desktop">Immersive desktop</string>
     <string name="title_tile_music">Music</string>
@@ -473,29 +472,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="root_access_all">Apps and ADB</string>
 
     <string name="ok">OK</string>
-
-    <!-- Quiet hours -->
-    <string name="quiet_hours_title">Quiet hours</string>
-    <string name="quiet_hours_summary">Configure the hours the device should be quiet</string>
-    <string name="quiet_hours_enabled">Enforce quiet hours</string>
-    <string name="quiet_hours_ringer">Phone ringer</string>
-    <string name="quiet_hours_mute">Notifications</string>
-    <string name="quiet_hours_mute_summary">Mute notifications</string>
-    <string name="quiet_hours_system">System sounds</string>
-    <string name="quiet_hours_system_summary">Disable system sounds</string>
-    <string name="quiet_hours_still">Vibrations</string>
-    <string name="quiet_hours_still_summary">Disable vibrations</string>
-    <string name="quiet_hours_dim">Notification light</string>
-    <string name="quiet_hours_dim_summary">Disable notification light</string>
-    <string name="quiet_hours_haptic">Haptic feedback</string>
-    <string name="quiet_hours_haptic_summary">Disable haptic feedback</string>
-    <string name="quiet_hours_active_period">Active from <xliff:g id="start">%1$s</xliff:g> to <xliff:g id="end">%2$s</xliff:g></string>
-
-    <!-- Ringer mute options -->
-    <string name="quiet_hours_ringer_allow_all">Ring for all callers</string>
-    <string name="quiet_hours_ringer_allow_contacts">Ring for all contacts</string>
-    <string name="quiet_hours_ringer_allow_starred">Ring for favorite contacts</string>
-    <string name="quiet_hours_ringer_mute_all">Mute ringer for all callers</string>
 
     <!-- time range preference -->
     <string name="start_time_title">Start</string>

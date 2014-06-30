@@ -717,4 +717,62 @@
         <item>2</item>
     </string-array>
 
+    <!-- QuietHours Mode -->
+    <string-array name="quiet_hours_mode_entries">
+        <item>@string/quiet_hours_off</item>
+        <item>@string/quiet_hours_timed</item>
+        <item>@string/quiet_hours_forced</item>
+    </string-array>
+
+    <string-array name="quiet_hours_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- QuietHours Incoming Contact -->
+    <string-array name="incoming_contact_entries">
+        <item>@string/quiet_hours_auto_disabled</item>
+        <item>@string/quiet_hours_auto_enabled</item>
+        <item>@string/quiet_hours_auto_contacts</item>
+        <item>@string/quiet_hours_auto_starred</item>
+    </string-array>
+
+    <string-array name="incoming_contact_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- QuietHours Calls Required -->
+    <string-array name="incoming_call_number_entries">
+        <item>@string/two</item>
+        <item>@string/three</item>
+        <item>@string/four</item>
+        <item>@string/five</item>
+        <item>@string/six</item>
+    </string-array>
+
+    <string-array name="incoming_call_number_values" translatable="false">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <!-- Quiet hours auto switch -->
+    <string-array name="quiet_hours_auto_entries">
+        <item>@string/disabled</item>
+        <item>@string/quiet_hours_auto_silent</item>
+        <item>@string/quiet_hours_auto_vibrate</item>
+    </string-array>
+
+    <string-array name="quiet_hours_auto_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

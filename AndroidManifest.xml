@@ -68,6 +68,8 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
     <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
@@ -230,6 +232,38 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- QuietHours SmsCall Service -->
+
+        <service android:name=".vanir.service.SmsCallService"/>
+        <service android:name=".vanir.service.AlarmService"/>
+
+        <receiver
+            android:name=".vanir.service.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+                <action android:name="android.intent.action.TIME_CHANGED"/>
+                <action android:name="android.intent.action.DATE_CHANGED"/>
+                <action android:name="com.android.settings.vanir.service.UPDATE_QUIET_HOURS_MODES"/>
+                <action android:name="com.android.settings.vanir.service.SCHEDULE_SERVICE_COMMAND"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".vanir.service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".vanir.service.BypassAlarm"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.android.settings.vanir.service.BypassAlarm"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <!-- Wireless Controls -->
 
@@ -1951,7 +1985,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.cyanogenmod.QuietHours" />
+                       android:value="com.android.settings.vanir.QuietHours" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                        android:resource="@id/sound_settings" />
         </activity>
