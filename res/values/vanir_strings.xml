@@ -304,8 +304,8 @@
     <!--Lockscreen blur-->
     <string name="blur_behind_title">Blur Lockscreen Background</string>
     <string name="blur_behind_summary">See through lockscreen with blur effect</string>
-    <string name="blur_radius_title">Blur Radius</string>
-    <string name="blur_radius_summary">Set the blur radius for the blur effect</string>
+    <string name="blur_radius_title">Blur intensity</string>
+    <string name="blur_radius_summary">Change the amount of blur</string>
 
     <!-- Lock screen see through -->
     <string name="see_through_title">Transparent lockscreen</string>

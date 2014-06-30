@@ -220,7 +220,6 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         if (mEnableModLock == null) {
             return;
         }
-
         boolean enabled = !mEnableModLock.isChecked();
         if (mEnableKeyguardWidgets != null) {
             // Enable or disable lockscreen widgets based on policy
@@ -247,26 +246,32 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         if (KEY_ENABLE_WIDGETS.equals(key)) {
             mLockUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
             return true;
+
         } else if (KEY_ENABLE_CAMERA.equals(key)) {
             mLockUtils.setCameraEnabled(mEnableCameraWidget.isChecked());
             return true;
 
-        } else if (preference == mSeeThrough) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.LOCKSCREEN_SEE_THROUGH, mSeeThrough.isChecked()
+        } else if (preference == mAllowRotation) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_ROTATION,
+                    mAllowRotation.isChecked()
                     ? 1 : 0);
-            updateVisiblePreferences();
             return true;
 
-        } else if (preference == mAllowRotation) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.LOCKSCREEN_ROTATION, mAllowRotation.isChecked()
+        } else if (preference == mSeeThrough) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
+                    mSeeThrough.isChecked()
                     ? 1 : 0);
+            // Disable lockscreen blur
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND, 0);
+            updateVisiblePreferences();
             return true;
 
         } else if (preference == mBlurBehind) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_BLUR_BEHIND,
-                    mBlurBehind.isChecked() ? 1 : 0);
+                    mBlurBehind.isChecked()
+                    ? 1 : 0);
+            // Disable lockscreen transparency
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH, 0);
             updateVisiblePreferences();
             return true;
         }
@@ -306,17 +311,33 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     }
 
     private void updateVisiblePreferences() {
-        //only enable cropper if not transparent
-        mBackgroundCropper.setEnabled(!mSeeThrough.isChecked());
+        boolean seeThrough = mSeeThrough.isChecked();
+        boolean blurBehind = mBlurBehind.isChecked();
+        boolean enableGFX = ActivityManager.isHighEndGfx();
 
-        // ** COMING BACK SOON **
-        mBlurBehind.setEnabled(false);
-        mBlurBehind.setSummary("Coming back soon");
-        mBlurRadius.setEnabled(false);
-        ////only enable blurry if transparent
-        //mBlurBehind.setEnabled(mSeeThrough.isChecked());
-        ////only enable blur radius if blurry
-        //mBlurRadius.setEnabled(mBlurBehind.isChecked());
+        //disable preferences accordingly
+        if (seeThrough) {
+            mBlurBehind.setChecked(!seeThrough);
+            mBlurBehind.setEnabled(!seeThrough);
+        } else if (blurBehind) {
+            mSeeThrough.setChecked(!blurBehind);
+            mSeeThrough.setEnabled(!blurBehind);
+        } else {
+            mBlurBehind.setEnabled(true);
+            mSeeThrough.setEnabled(true);
+        }
+
+        //only enable cropper if not transparent
+        mBackgroundCropper.setEnabled(!seeThrough && !blurBehind);
+
+        //only enable blur radius if blurry
+        mBlurRadius.setEnabled(blurBehind);
+
+        if (!enableGFX) {
+            mBlurBehind.setChecked(false);
+            mLockscreenBackground.removePreference(mBlurBehind);
+            mLockscreenBackground.removePreference(mBlurRadius);
+        }
     }
 
     /**
