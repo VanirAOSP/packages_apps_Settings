@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.preference.PreferenceActivity.Header;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,14 +46,32 @@ public class SettingsSearchFilterAdapter extends ArrayAdapter<SearchInfo> implem
     private Resources mResources;
     private Drawable mDefaultIcon;
 
+    private SparseArray<Drawable> mIconCache = new SparseArray<Drawable>();
+
     public static class SearchInfo {
-        public Header header;
-        public int level;
-        public String fragment;
-        public String title;
-        public int iconRes;
-        public int parentTitle;
-        public String key;
+        public final Header header;
+        public final int level;
+        public final String fragment;
+        public final String title;
+        public final int iconRes;
+        public final int parentTitle;
+        public final String key;
+        private String mNormalizedTitle;
+
+        public SearchInfo(Header header, int level, String fragment, String title,
+                int iconRes, int parentTitle, String key) {
+            this.header = header;
+            this.level = level;
+            this.fragment = fragment;
+            this.title = title;
+            this.iconRes = iconRes;
+            this.parentTitle = parentTitle;
+            this.key = key;
+
+            mNormalizedTitle = removeNonAlphaNumeric(title.toLowerCase());
+            mMatchStart = -1;
+            mMatchEnd = -1;
+        }
     }
 
     public SettingsSearchFilterAdapter(Context context, int resourceId,
@@ -85,9 +104,10 @@ public class SettingsSearchFilterAdapter extends ArrayAdapter<SearchInfo> implem
         SearchInfo info = mObjects.get(position);
         if (info != null) {
             if (holder.imageView != null) {
-                Drawable d = null;
+                Drawable d = mIconCache.get(info.iconRes);
                 if (info.iconRes != 0) {
                     d = mResources.getDrawable(info.iconRes);
+                    mIconCache.put(info.iconRes, d);
                 }
                 if (d == null) {
                     d = mDefaultIcon;
@@ -157,8 +177,8 @@ public class SettingsSearchFilterAdapter extends ArrayAdapter<SearchInfo> implem
 
                 for (int i = 0; i < mOriginalValues.size(); i++) {
                     SearchInfo item = mOriginalValues.get(i);
-                    String title = item.title.toString().toLowerCase();
-                    String filteredTitle = removeNonAlphaNumeric(title);
+                    String title = item.title.toLowerCase();
+                    String filteredTitle = item.mNormalizedTitle;
                     if (title.contains(actualConstraint) ||
                             filteredTitle.contains(filteredConstraint)) {
                         newValues.add(item);
