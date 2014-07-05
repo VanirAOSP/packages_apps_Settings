@@ -14,7 +14,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -39,6 +41,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private TextView mBarHeightValue;
     private TextView mBarHeightLandscapeValue;
     private TextView mBarWidthValue;
+    private CheckBox mSideKeys;
 
     private Switch mEnabledSwitch;
 
@@ -172,7 +175,17 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
         mNavigationBarWidth.setProgress(currentWidthPercent);
         mBarWidthValue.setText(String.valueOf(currentWidthPercent + MIN_WIDTH_PERCENT)+"%");
- 
+
+        mSideKeys = (CheckBox) v.findViewById(R.id.sidekey_checkbox);
+        mSideKeys.setChecked(Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_SIDEKEYS, 1) == 1);
+        mSideKeys.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = ((CheckBox) v).isChecked();
+                Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_SIDEKEYS, isChecked ? 1 : 0);
+            }
+        });
+
         if (DeviceUtils.isPhone(getActivity())) {
             v.findViewById(R.id.navigation_bar_height_landscape_text).setVisibility(View.GONE);
             mBarHeightLandscapeValue.setVisibility(View.GONE);
@@ -202,26 +215,33 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
     @Override
     public void onProgressChanged(SeekBar seekbar, int rawprogress, boolean fromUser) {
+        ContentResolver cr = getActivity().getContentResolver();
         double proportion = 1.0;
+
         if (fromUser) {
             if (seekbar == mNavigationBarWidth) {
                 final int progress = rawprogress + MIN_WIDTH_PERCENT;
                 proportion = ((double)progress/100.0);
                 mBarWidthValue.setText(String.valueOf(progress)+"%");
                 WValue = (int)(proportion*mDefaultWidth);
-                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_WIDTH, WValue);
+                Settings.System.putInt(cr,
+                        Settings.System.NAVIGATION_BAR_WIDTH, WValue);
+
             } else if (seekbar == mNavigationBarHeight) {
                 final int progress = rawprogress + MIN_HEIGHT_PERCENT;
                 proportion = ((double)progress/100.0);
                 mBarHeightValue.setText(String.valueOf(progress)+"%");
                 HValue = (int)(proportion*mDefaultHeight);
-                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT, HValue);
+                Settings.System.putInt(cr,
+                        Settings.System.NAVIGATION_BAR_HEIGHT, HValue);
+
             } else if (seekbar == mNavigationBarHeightLandscape) {
                 final int progress = rawprogress + MIN_HEIGHT_PERCENT;
                 proportion = ((double)progress/100.0);
                 mBarHeightLandscapeValue.setText(String.valueOf(progress)+"%");
                 LValue = (int)(proportion*mDefaultHeightLandscape);
-                Settings.System.putInt(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, LValue);
+                Settings.System.putInt(cr,
+                        Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, LValue);
             }
         }
     }
