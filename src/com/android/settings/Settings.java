@@ -76,6 +76,8 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleAccessibilityServicePreferenceFragment;
+import com.android.settings.accessibility.ToggleGlobalGesturePreferenceFragment;
+import com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.AuthenticatorHelper;
 import com.android.settings.accounts.ManageAccountsSettings;
@@ -107,6 +109,7 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintServiceSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.privacyguard.PrivacyGuardPrefs;
 import com.android.settings.profiles.AppGroupConfig;
 import com.android.settings.profiles.ProfileConfig;
 import com.android.settings.profiles.ProfileEnabler;
@@ -283,7 +286,7 @@ public class Settings extends PreferenceActivity
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
-        if (getIntent().hasExtra(EXTRA_DISABLE_SEARCH)) {
+        if (getIntent().hasExtra(EXTRA_DISABLE_SEARCH) != onIsMultiPane()) {
             mDisableSearchIcon = getIntent().getBooleanExtra(EXTRA_DISABLE_SEARCH, false);
         }
 
@@ -673,6 +676,11 @@ public class Settings extends PreferenceActivity
                 ManageApplications.class.getName().equals(fragmentName) ||
                 com.android.settings.vanir.navbar.NavbarTabHostFragment.class.getName().equals(fragmentName) ||
                 PaymentSettings.class.getName().equals(fragmentName) ||
+                CaptionPropertiesFragment.class.getName().equals(fragmentName) ||
+                ToggleScreenMagnificationPreferenceFragment.class.getName().equals(fragmentName) ||
+                ToggleGlobalGesturePreferenceFragment.class.getName().equals(fragmentName) ||
+                PrivacyGuardPrefs.class.getName().equals(fragmentName) ||
+                DevelopmentSettings.class.getName().equals(fragmentName) ||
                 WifiDisplaySettings.class.getName().equals(fragmentName)) {
             // Should force disable search options
             intent.putExtra(EXTRA_DISABLE_SEARCH, true);
