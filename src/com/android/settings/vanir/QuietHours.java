@@ -165,7 +165,8 @@ public class QuietHours extends SettingsPreferenceFragment implements
             // Set the preference state and listeners where applicable
             updateQuietMode();
             mQuietHoursEnabled.setValue(String.valueOf(mQuietMode));
-            mQuietHoursEnabled.setSummary(mQuietHoursEnabled.getEntry());
+            mQuietHoursEnabled.setSummary(mQuietHoursEnabled.getEntries()
+                    [mQuietMode]);
             mQuietHoursEnabled.setOnPreferenceChangeListener(this);
             final int ringerMode = Settings.System.getInt(resolver,
                     Settings.System.QUIET_HOURS_RINGER, 0);
@@ -574,6 +575,8 @@ public class QuietHours extends SettingsPreferenceFragment implements
                 mQuietHoursEnabled.setValue(String.valueOf(mQuietMode));
                 mQuietHoursEnabled.setSummary(mQuietHoursEnabled.getEntry());
                 shouldEnablePrefs();
+                mQuietHoursEnabled.setSummary(mQuietHoursEnabled.getEntries()
+                        [mQuietMode]);
             }
         }
     }
