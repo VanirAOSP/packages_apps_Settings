@@ -710,8 +710,7 @@ public class Settings extends PreferenceActivity
                 PowerUsageSummary.class.getName().equals(fragmentName) ||
                 ThemeSettings.class.getName().equals(fragmentName) ||
                 ManageApplications.class.getName().equals(fragmentName) ||
-                NavBar.class.getName().equals(fragmentName) ||
-                NavRing.class.getName().equals(fragmentName) ||
+                com.android.settings.vanir.navbar.NavbarTabHostFragment.class.getName().equals(fragmentName) ||
                 PaymentSettings.class.getName().equals(fragmentName) ||
                 WifiDisplaySettings.class.getName().equals(fragmentName)) {
             // Should force disable search options
