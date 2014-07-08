@@ -4915,7 +4915,6 @@
     <string name="help_url_security" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false">https://support.google.com/nexus/answer/3470787?p=settings_nfcpayment&amp;rd=1</string>
-
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
     <string name="help_url_remote_display" translatable="false"></string>
 
