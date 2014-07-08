@@ -22,12 +22,16 @@
     <PreferenceCategory
         android:title="@string/notifications_ux_title">
 
-
         <SwitchPreference
             android:key="hover_switch"
             android:title="@string/hover_settings_title"
             android:summary="@string/hover_settings_summary"
             android:defaultValue="false" />
+
+        <Preference
+            android:key="heads_up_enabled"
+            android:fragment="com.android.settings.headsup.HeadsUpSettings"
+            android:title="@string/category_heads_up" />
 
         <PreferenceScreen
             android:id="@+id/active_notifications"
@@ -56,10 +60,6 @@
 
     </PreferenceCategory>
             settings:includeXmlForSearch="@xml/quick_settings_panel"
-    <Preference
-            android:key="heads_up_enabled"
-            android:fragment="com.android.settings.headsup.HeadsUpSettings"
-            android:title="@string/category_heads_up" />
 
     <PreferenceCategory
         android:title="@string/category_quick_access" >
