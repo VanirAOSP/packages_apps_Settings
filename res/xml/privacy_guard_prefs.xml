@@ -23,4 +23,25 @@
         android:summary="@string/privacy_guard_default_summary"
         android:persistent="false" />
 
+    <CheckBoxPreference
+        android:key="privacy_guard_notification"
+        android:title="@string/privacy_guard_notification_title"
+        android:defaultValue="true"
+	android:persistent="false" />
+
+    <CheckBoxPreference
+        android:key="privacy_guard_notification_icon"
+        android:title="@string/privacy_guard_notification_icon_title"
+        android:defaultValue="true"
+	android:persistent="false"
+	android:dependency="privacy_guard_notification" />
+
+    <CheckBoxPreference
+        android:key="privacy_guard_notification_dismiss"
+        android:title="@string/privacy_guard_notification_dismiss_title"
+        android:summary="@string/privacy_guard_notification_dismiss_summary"
+        android:defaultValue="false"
+	android:persistent="false"
+	android:dependency="privacy_guard_notification" />
+
 </PreferenceScreen>
