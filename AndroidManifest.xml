@@ -1955,6 +1955,8 @@
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
 
+        <activity android:name=".cyanogenmod.SpamList" />
+
          <!-- "Blacklist settings" UI, used only on voice-capable phone devices. -->
         <activity android:name="Settings$BlacklistSettingsActivity"
                 android:theme="@style/Theme.DialogWhenLarge"
