@@ -529,11 +529,11 @@
     <string name="show_always">Show always</string>
     <string name="show_always_summary">Always turn screen on when pulled out of pocket, even when there are no notifications pending</string>
     <string name="hide_low_priority">Hide low priority</string>
-    <string name="hide_low_priority_summary">Hide low priority notifications such as google now weather notifications</string>
-    <string name="hide_non_clearable">Hide non clearable</string>
-    <string name="hide_non_clearable_summary">Hide all non clearable notifications</string>
+    <string name="hide_low_priority_summary">Hide items flagged low priority such as google now weather notifications</string>
+    <string name="hide_non_clearable">Hide non-clearable</string>
+    <string name="hide_non_clearable_summary">Hide all non-clearable notifications</string>
     <string name="dismiss_all">Allow dismissing all notifications</string>
-    <string name="dismiss_all_summary">Allow dismissing even non clearable notifications. Of course, they\'re just hidden from lockscreen and not from the notification panel.</string>
+    <string name="dismiss_all_summary">Allow dismissing even non-clearable notifications. Of course, they\'re just hidden from lockscreen and not from the notification panel.</string>
     <string name="expanded_view">Expanded notification view</string>
     <string name="expanded_view_summary">Show notifications expanded when possible</string>
     <string name="force_expanded_view">Force expanded view</string>
@@ -822,6 +822,19 @@
     <string name="hover_settings_title">Hover</string>
     <string name="hover_settings_summary">Allow hover notifications in place of the default statusbar ticker or Halo</string>
     <string name="blacklist_button_title">Blacklist from Hover</string>
+    <string name="hover_floating_title">Floating mode</string>
+    <string name="hover_floating_summary">If the notification is not from a foreground app set it to be launched in floating mode.</string>
+    <string name="hover_excluded_apps_title">Blacklisted apps</string>
+    <string name="hover_excluded_apps_summary">Select apps to be blacklisted from hover notifications.</string>
+    <string name="hover_duration">Hover duration:</string>
+    <string name="hover_duration_long">Expanded hover duration</string>
+    <string name="seconds">seconds</string>
+    <string name="hover_require_fullscreen">Require fullscreen</string>
+    <string name="hover_require_fullscreen_summary">Require fullscreen immersive state for hover to display</string>
+    <string name="hover_force_removable">Clear any item</string>
+    <string name="hover_force_removable_summary">Allow swiping to clear non-removable or persistent notifications</string>
+    <string name="hover_exclude_foreground">Exclude foreground app</string>
+    <string name="hover_exclude_foreground_summary">Exclude notifications from apps running in the foreground.</string>
 
     <!-- navbar sidekeys -->
     <string name="enable_sidekeys">Allow legacy menu keys</string>

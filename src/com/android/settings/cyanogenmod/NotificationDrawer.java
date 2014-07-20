@@ -32,11 +32,9 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
     private static final String TAG = "NotificationDrawer";
 
     private static final String UI_COLLAPSE_BEHAVIOUR = "notification_drawer_collapse_on_dismiss";
-    private static final String KEY_HOVER_SWITCH = "hover_switch";
     private static final String KEY_HALO = "halo_settings";
 
     private ListPreference mCollapseOnDismiss;
-    private SwitchPreference mHover;
     private Preference mHeadsUp;
     private Preference mHalo;
 
@@ -46,11 +44,6 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.notification_drawer);
 
-        mHover = (SwitchPreference) findPreference(KEY_HOVER_SWITCH);
-        mHover.setChecked(Settings.System.getInt(getContentResolver(), 
-                Settings.System.HOVER_ENABLED, 0) == 1);
-        mHover.setOnPreferenceChangeListener(this);
-        
         mHeadsUp = findPreference(Settings.System.HEADS_UP_NOTIFICATION);
 
         mHalo = (PreferenceScreen) findPreference(KEY_HALO);
@@ -73,7 +66,6 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
                 getContentResolver(), Settings.System.HEADS_UP_NOTIFICATION, 0) == 1;
         mHeadsUp.setSummary(headsUpEnabled
                 ? R.string.summary_heads_up_enabled : R.string.summary_heads_up_disabled);
-        updateHaloPreference();
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
@@ -83,25 +75,8 @@ public class NotificationDrawer extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_COLLAPSE_ON_DISMISS, value);
             updateCollapseBehaviourSummary(value);
             return true;
-        } else if (preference == mHover) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.HOVER_ENABLED, (Boolean) objValue ? 1 : 0);
-            updateHaloPreference();
-            return true;
         }
         return false;
-    }
-
-    private void updateHaloPreference() {
-        boolean value = Settings.System.getInt(getContentResolver(), 
-                    Settings.System.HOVER_ENABLED, 0) == 1;
-        if (value) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.HALO_ENABLED, 0);
-            mHalo.setEnabled(false);
-        } else {
-            mHalo.setEnabled(true);
-        }
     }
 
     private void updateCollapseBehaviourSummary(int setting) {

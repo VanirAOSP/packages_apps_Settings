@@ -22,11 +22,11 @@
     <PreferenceCategory
         android:title="@string/notifications_ux_title">
 
-        <SwitchPreference
+        <PreferenceScreen
             android:key="hover_switch"
+            android:fragment="com.android.settings.vanir.HoverSettings"
             android:title="@string/hover_settings_title"
-            android:summary="@string/hover_settings_summary"
-            android:defaultValue="false" />
+            android:summary="@string/hover_settings_summary" />
 
         <Preference
             android:key="heads_up_enabled"
