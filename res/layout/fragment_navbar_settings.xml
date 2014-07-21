@@ -23,7 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
-                    android:paddingTop="5dp"
+                    android:paddingTop="4dp"
                     android:text="@string/navigation_bar_height_text"
                     android:textSize="16sp"/>
             <LinearLayout
@@ -42,8 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="17dp"
-                        android:layout_marginRight="17dp"
-                        android:max="100" />
+                        android:layout_marginRight="17dp" />
            </LinearLayout>
 
             <TextView
@@ -71,8 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="17dp"
-                        android:layout_marginRight="17dp"
-                        android:max="100" />
+                        android:layout_marginRight="17dp" />
             </LinearLayout>
 
             <TextView
@@ -99,13 +97,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="17dp"
-                        android:layout_marginRight="17dp"
-                        android:max="100" />
+                        android:layout_marginRight="17dp" />
             </LinearLayout>
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/darker_gray"/>
 
@@ -123,7 +120,7 @@
                     android:text="@string/enable_sidekeys"
                     android:defaultValue="true" />
                 <TextView
-                    android:id="@+id/navigation_bar_width_value"
+                    android:id="@+id/sidekey_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -133,8 +130,36 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:paddingBottom="6dp"
+                android:layout_height="1dp"
+                android:paddingBottom="2dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                style="@style/settingsFragmentStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <CheckBox
+                    android:id="@+id/arrows_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/enable_ime_layout"
+                    android:defaultValue="true" />
+                <TextView
+                    android:id="@+id/arrows_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="12sp"
+                    android:text="@string/enable_ime_layout_summary" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:paddingBottom="2dp"
                 android:background="@android:color/darker_gray"/>
         </LinearLayout>
     </LinearLayout>
