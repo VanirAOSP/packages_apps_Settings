@@ -42,7 +42,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private TextView mBarHeightLandscapeValue;
     private TextView mBarWidthValue;
     private CheckBox mSideKeys;
-    private CheckBox mArrows;
 
     private Switch mEnabledSwitch;
 
@@ -184,16 +183,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             public void onClick(View v) {
                 boolean isChecked = ((CheckBox) v).isChecked();
                 Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_SIDEKEYS, isChecked ? 1 : 0);
-            }
-        });
-
-        mArrows = (CheckBox) v.findViewById(R.id.arrows_checkbox);
-        mArrows.setChecked(Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, 0) == 1);
-        mArrows.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isChecked = ((CheckBox) v).isChecked();
-                Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, isChecked ? 1 : 0);
             }
         });
 

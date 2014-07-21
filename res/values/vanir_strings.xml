@@ -839,8 +839,6 @@
     <!-- navbar sidekeys -->
     <string name="enable_sidekeys">Allow legacy menu keys</string>
     <string name="enable_sidekeys_summary">Add a space to allow the side menu keys in the navigation bar.</string>
-    <string name="enable_ime_layout">Enable IME layout</string>
-    <string name="enable_ime_layout_summary">Switch to a button layout including the dpad keys when the keyboard is open</string>
 
     <!-- Recents -->
     <string name="new_recents_screen_title">Recents style</string>
