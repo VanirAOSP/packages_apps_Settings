@@ -841,6 +841,10 @@
     <string name="enable_sidekeys_summary">Add a space to allow the side menu keys in the navigation bar.</string>
     <string name="enable_ime_layout">Enable IME layout</string>
     <string name="enable_ime_layout_summary">Switch to a button layout including the dpad keys when the keyboard is open</string>
+    <string name="customize_ime_layout_dialog_title">Customize IME key layout</string>
+    <string name="ime_layout_ime">IME switcher</string>
+    <string name="ime_layout_home">home button</string>
+    <string name="ime_layout_blank">blank space before dpad keys</string>
 
     <!-- Recents -->
     <string name="new_recents_screen_title">Recents style</string>
