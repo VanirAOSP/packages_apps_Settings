@@ -170,11 +170,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
 
         mTapToWake = (CheckBoxPreference) findPreference(KEY_TAP_TO_WAKE);
+
         if (!isTapToWakeSupported() || mStockMode) {
             getPreferenceScreen().removePreference(mTapToWake);
             mTapToWake = null;
-        } else {
-            advancedPrefs.removePreference(findPreference(KEY_PROXIMITY_WAKE));
+        }
+        if (isTapToWakeSupported() || mStockMode) {
+            getPreferenceScreen().removePreference(findPreference(KEY_PROXIMITY_WAKE));
             Settings.System.putInt(getContentResolver(), Settings.System.PROXIMITY_ON_WAKE, 1);
         }
 
