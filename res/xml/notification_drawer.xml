@@ -61,6 +61,10 @@
     </PreferenceCategory>
             settings:includeXmlForSearch="@xml/quick_settings_panel"
 
+    <PreferenceScreen
+        android:title="@string/block_notifications_title"
+        android:fragment="com.android.settings.cyanogenmod.SpamList" />
+
     <PreferenceCategory
         android:title="@string/category_quick_access" >
 
