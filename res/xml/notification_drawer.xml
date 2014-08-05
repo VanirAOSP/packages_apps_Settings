@@ -59,7 +59,6 @@
             android:entryValues="@array/notification_drawer_collapse_on_dismiss_values" />
 
     </PreferenceCategory>
-            settings:includeXmlForSearch="@xml/quick_settings_panel"
 
     <PreferenceScreen
         android:title="@string/block_notifications_title"
