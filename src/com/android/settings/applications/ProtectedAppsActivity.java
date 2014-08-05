@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -297,6 +298,11 @@ public class ProtectedAppsActivity extends Activity {
             launch = parentView.findViewById(R.id.launch_app);
             checkBox = (CheckBox) parentView.findViewById(R.id.checkbox);
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     public class AppsAdapter extends ArrayAdapter<AppEntry> {
