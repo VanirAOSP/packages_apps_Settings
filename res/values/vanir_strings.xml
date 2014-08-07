@@ -457,6 +457,8 @@
     <string name="five_targets">5 targets</string>
     <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
     <string name="add_button">Add button</string>
+    <string name="change_layouts_title"> Layout </string>
+    <string name="change_layouts_dialog_title">Select a layout to edit</string>
     <string name="category_navbar">Navigation bar</string>
     <string name="navbar_tab_arrange">Rearrange</string>
     <string name="navbar_tab_settings">Settings</string>
@@ -854,6 +856,13 @@
     <string name="ime_layout_ime">IME switcher</string>
     <string name="ime_layout_home">home button</string>
     <string name="ime_layout_blank">blank space before dpad keys</string>
+    <string name="alternate_key_layouts">Number of enabled layouts</string>
+    <string name="alternate_key_layouts_summary">Enable the layout changer keys and set the number of enabled layouts</string>
+    <string name="alternate_key_layouts_enabled_summary">navigation bar layouts are currently enabled</string>
+    <string name="alternate_key_layouts_enabled_partial_summary">out of 5</string>
+    <string name="alternate_key_layouts_all_enabled_summary">All 5 navigation bar layouts are currently enabled</string>
+    <string name="alternate_menu_summary">Allow legacy menu key to replace layout switch when requested</string>
+    <string name="layouts_dialog_title">Number of enabled layouts</string>
 
     <!-- Recents -->
     <string name="new_recents_screen_title">Recents style</string>
