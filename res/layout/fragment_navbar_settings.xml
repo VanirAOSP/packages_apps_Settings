@@ -159,7 +159,38 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:paddingBottom="2dp"
+                android:paddingBottom="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:id="@+id/alternate_layouts"
+                style="@style/settingsFragmentStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clickable="true" >
+
+                <TextView
+                    android:id="@+id/alternate_layout_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
+                    android:text="@string/alternate_key_layouts" />
+                <TextView
+                    android:id="@+id/alternate_layout_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="12sp"
+                    android:text="@string/alternate_key_layouts_summary" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:paddingBottom="1dp"
                 android:background="@android:color/darker_gray"/>
         </LinearLayout>
     </LinearLayout>
