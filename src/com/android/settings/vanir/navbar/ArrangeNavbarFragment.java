@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -66,6 +67,8 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     AwesomeButtonInfo mSelectedButton;
     private String[] mActions;
     private String[] mActionCodes;
+    int mCurrentLayout = 1;
+    private TextView mLayoutInfo;
 
     public static enum DialogConstant {
         ICON_ACTION {
@@ -133,24 +136,29 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
+            case R.id.change_navbar_number:
+                openLayoutPreferenceDialog();
+                break;
             case R.id.menu_add_button:
                 mNavButtons.add(new AwesomeButtonInfo(null, null, null, null));
                 saveUserConfig();
                 mAdapter.notifyDataSetChanged();
-                return true;
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        // Get NavRing Actions
+        // Get Navbar actions
         mActionCodes = NavBarHelpers.getNavBarActions();
         mActions = new String[mActionCodes.length];
         int actionqty = mActions.length;
@@ -162,8 +170,6 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         mPicker = new ShortcutPickerHelper(this, this);
         readUserConfig();
     }
-
-
 
     @Override
     public void onResume() {
@@ -180,6 +186,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)
                 inflater.inflate(R.layout.fragment_arrange_toggles, container, false);
+   //     mLayoutInfo = (TextView) rootView.findViewById(R.id.navbar_arrange_info);
 
         mListView = (DragSortListView) rootView.findViewById(android.R.id.list);
 
@@ -481,6 +488,25 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         return "navbar_icon_" + index + ".png";
     }
 
+    private void openLayoutPreferenceDialog() {
+        final CharSequence[] items = {" 1 - Primary "," 2 "," 3 "," 4 ", " 5 "};
+        AlertDialog dialog;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.change_layouts_dialog_title);
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                mCurrentLayout = item +1;
+                readUserConfig();
+                mAdapter.notifyDataSetChanged();
+          //      updateLayoutInfo(item +1);
+                dialog.dismiss();
+            }
+        });
+        dialog = builder.create();
+        dialog.show();
+    }
+
     private class ConfigurationDragSortController extends DragSortController {
 
         public ConfigurationDragSortController() {
@@ -514,44 +540,59 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
                 s.append("|");
             }
         }
-        Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS, s.toString());
+        switch (mCurrentLayout) {
+            case 1:
+                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS, s.toString());
+                break;
+            case 2:
+                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_TWO, s.toString());
+                break;
+            case 3:
+                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_THREE, s.toString());
+                break;
+            case 4:
+                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_FOUR, s.toString());
+                break;
+            case 5:
+                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_FIVE, s.toString());
+                break;
+        }
     }
 
     private void readUserConfig() {
+        final ContentResolver cr = getActivity().getContentResolver();
+        String buttons = AwesomeConstants.defaultNavbarLayout(getActivity());
         mNavButtons.clear();
-        String buttons = Settings.System.getString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS);
+        switch (mCurrentLayout) {
+            case 1:
+                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS);
+                break;
+            case 2:
+                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_TWO);
+                break;
+            case 3:
+                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_THREE);
+                break;
+            case 4:
+                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_FOUR);
+                break;
+            case 5:
+                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_FIVE);
+                break;
+        }
         if (buttons == null || buttons.isEmpty()) {
-            // use default buttons
-            mNavButtons.add(new AwesomeButtonInfo(
-                    AwesomeConstant.ACTION_BACK.value(),    /* short press */
-                    null,                                   /* double press */
-                    null,                                   /* long press */
-                    null                                    /* icon */
-            ));
-            mNavButtons.add(new AwesomeButtonInfo(
-                    AwesomeConstant.ACTION_HOME.value(),           /* short press */
-                    null,                                          /* double press */
-                    null,                                          /* long press */
-                    null                                           /* icon */
-            ));
-            mNavButtons.add(new AwesomeButtonInfo(
-                    AwesomeConstant.ACTION_RECENTS.value(),        /* short press */
-                    null,                                          /* double press */
-                    null,                                          /* long press */
-                    null                                           /* icon */
-            ));
-        } else {
-            /**
-             * Format:
-             *
-             * singleTapAction,doubleTapAction,longPressAction,iconUri|singleTap...
-             */
-            String[] userButtons = buttons.split("\\|");
-            if (userButtons != null) {
-                for (String button : userButtons) {
-                    String[] actions = button.split(",", 4);
-                    mNavButtons.add(new AwesomeButtonInfo(actions[0], actions[1], actions[2], actions[3]));
-                }
+            buttons = AwesomeConstants.defaultNavbarLayout(getActivity());
+        }
+        /**
+        * Format:
+        *
+        * singleTapAction,doubleTapAction,longPressAction,iconUri|singleTap...
+        */
+        String[] userButtons = buttons.split("\\|");
+        if (userButtons != null) {
+            for (String button : userButtons) {
+                String[] actions = button.split(",", 4);
+                mNavButtons.add(new AwesomeButtonInfo(actions[0], actions[1], actions[2], actions[3]));
             }
         }
     }

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/add_button" android:id="@+id/menu_add_button" android:showAsAction="always|withText"/>
+    <item android:title="@string/add_button"
+        android:id="@+id/menu_add_button"
+        android:icon="@drawable/ic_menu_add_dark"
+        android:showAsAction="always|withText"
+        android:orderInCategory="1"/>
+    <item android:title="@string/change_layouts_title"
+        android:id="@+id/change_navbar_number"
+        android:showAsAction="always|withText"
+        android:orderInCategory="9999"/>
 </menu>
