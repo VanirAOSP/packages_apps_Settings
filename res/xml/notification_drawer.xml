@@ -37,7 +37,7 @@
             android:id="@+id/active_notifications"
             android:title="@string/Lockscreen_notifications_header"
             android:summary="@string/active_notifications_summary"
-            android:fragment="com.android.settings.ActiveNotifications" />
+            android:fragment="com.android.settings.vanir.ActiveNotifications" />
 
         <PreferenceScreen
             android:key="halo_settings"
