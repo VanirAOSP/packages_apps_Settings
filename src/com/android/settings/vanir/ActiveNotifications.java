@@ -1,4 +1,4 @@
-package com.android.settings;
+package com.android.settings.vanir;
 
 import android.app.ActionBar;
 import android.app.Activity;
