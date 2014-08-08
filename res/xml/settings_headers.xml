@@ -118,6 +118,7 @@
         android:icon="@drawable/ic_action_permission"
         android:title="@string/superuser" />
 
+        settings:includeXmlForSearch="@xml/more_device_settings"
     <!-- DEVICE -->
     <header android:id="@+id/device_section"
         android:title="@string/header_category_device" />
