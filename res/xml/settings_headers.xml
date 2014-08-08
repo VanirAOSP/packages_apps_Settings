@@ -111,6 +111,7 @@
 
     <!-- Other device controls -->
     <header
+        settings:includeXmlForSearch="@xml/more_device_settings"
         android:id="@+id/more_device_settings"
         android:title="@string/more_device_settings_title"
         android:breadCrumbTitle="@string/more_device_settings_title"
