@@ -29,11 +29,13 @@
         android:title="@string/button_navigation_title" />
 
     <PreferenceScreen
+        settings:includeXmlForSearch="@xml/button_settings"
         android:id="@+id/button_settings"
         android:fragment="com.android.settings.cyanogenmod.ButtonSettings"
         android:title="@string/button_settings" />
 
     <Preference
+        settings:includeXmlForSearch="@xml/performance_settings"
         android:id="@+id/performance_settings"
         android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
         android:title="@string/performance_settings_title" />
