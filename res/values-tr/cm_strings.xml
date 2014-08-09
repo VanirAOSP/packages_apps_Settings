@@ -75,6 +75,9 @@
   <string name="profile_networkmode_2g">2G</string>
   <string name="profile_networkmode_3g">3G</string>
   <string name="profile_networkmode_2g3g">2G/3G</string>
+  <string name="settings_search_action_bar_button">Arama</string>
+  <string name="settings_search_autocompleteview_hint">Arama ayarları</string>
+  <string name="settings_search_loading_text">Arama verisi yükleniyor\u2026</string>
   <string name="profile_connectionoverrides_title">Bağlantı zorlamaları</string>
   <string name="profile_volumeoverrides_title">Ses düzeyi zorlamaları</string>
   <string name="connection_state_disabled">Devre dışı bırak</string>
@@ -148,6 +151,7 @@
   <string name="icon_picker_pack_title">Simge paketi</string>
   <string name="display_lights_settings_title">Ekran ve ışıklar</string>
   <string name="lights_category_title">Işıklar</string>
+  <string name="notification_light_title">Bildirim ışığı</string>
   <string name="notification_light_general_title">Genel</string>
   <string name="notification_light_applist_title">Uygulamalar</string>
   <string name="notification_light_phonelist_title">Telefon</string>
@@ -438,12 +442,12 @@ parlaklık seviyesini ayarlayabilir hem de istediğiniz parlaklık düzeyini ell
   <string name="pref_force_highend_gfx_summary">Saydam durum/navigasyon çubuğu gibi gelişmiş görsel efektleri etkinleştirir (yeniden başlatma gerektirir)</string>
   <string name="kill_app_longpress_back">Uygulama sonlandırıcı geri tuşu</string>
   <string name="kill_app_longpress_back_summary">Geri tuşuna uzun dokunarak ön plandaki uygulamayı sonlandır</string>
-  <string name="changelog_title">Değişiklik kaydını görüntüle</string>
+  <string name="changelog_title">Değişiklik kaydı</string>
   <string name="changelog_loading">Değişiklik kaydı yükleniyor\u2026</string>
   <string name="changelog_error">Değişiklik kaydı yüklenemedi</string>
   <string name="changelog_unknown">Bilinmeyen</string>
   <string name="changelog_version">Sürüm</string>
-  <string name="contributor_cloud_title">Katkıda bulunanları görüntüle</string>
+  <string name="contributor_cloud_title">Katkıda bulunanlar</string>
   <string name="cmupdate_settings_title">CyanogenMod güncellemeleri</string>
   <string name="cmupdate_settings_summary">Güncellemeleri denetleyin, görüntüleyin ve yükleyin</string>
   <string name="advanced_settings_title">Gelişmiş</string>
@@ -514,8 +518,6 @@ parlaklık seviyesini ayarlayabilir hem de istediğiniz parlaklık düzeyini ell
   <string name="adb_over_network_summary">Ağ arayüzleri (Wi-Fi, USB ağları) üzerinde TCP/IP hata ayıklamayı etkinleştir. Bu ayar yeniden başlatılmada sıfırlanır</string>
   <string name="adb_over_network_warning">UYARI: ADB üzerinden ağ aktifken telefonunuz GSM veri ağı dahil tüm bağlı ağlar üzerinden kötüye kullanımlara açık olacaktır!\n\nBu özelliği sadece güvenlir ağlara bağlıyken kullanın.\n\nBu özellik açılsın mı?</string>
   <string name="device_hostname">Cihaz hostname\'i</string>
-  <string name="system_settings_title">Arayüz</string>
-  <string name="system_interface_title">Sistem arayüzü</string>
   <string name="notification_drawer_title">Bildirim çekmecesi</string>
   <string name="notification_drawer_collapse_on_dismiss_title">Otomatik kapanma davranışı</string>
   <string name="collapse_on_dismiss_never">Devre dışı</string>
@@ -525,8 +527,11 @@ parlaklık seviyesini ayarlayabilir hem de istediğiniz parlaklık düzeyini ell
   <string name="collapse_on_dismiss_if_empty_summary">En son bildirimi sildikten sonra kapat</string>
   <string name="collapse_on_dismiss_if_no_clearable_summary">En son kaldırılabilir bildirimi sildikten sonra kapat</string>
   <string name="double_tap_to_wake_title">Uyanmak için çift dokun</string>
+  <string name="proximity_wake_title">Yanlış uyandırmaları önle</string>
+  <string name="proximity_wake_summary">Ekranı açmadan önce yakınlık sensörünü kontrol et</string>
   <string name="category_quick_access">Hızlı Erişim çubuğu</string>
   <string name="title_quick_access">Çekmecede göster</string>
+  <string name="title_quick_access_size">Şerit çubuğu boyutu</string>
   <string name="title_quick_access_linked">Bağlantılı arayüz</string>
   <string name="summary_quick_access_linked">Hızlı Ayarlar paneli ile aynı kareleri ve düzeni kullan</string>
   <string name="font_size_sample">Örnek</string>
@@ -609,6 +614,8 @@ parlaklık seviyesini ayarlayabilir hem de istediğiniz parlaklık düzeyini ell
   <string name="navigation_bar_reset_toast">Navigasyon çubuğu varsayılana döndürüldü</string>
   <string name="navigation_bar_menu_editable">Düzenelenebilir</string>
   <string name="navigation_bar_menu_locked">Kilitli</string>
+  <string name="navigation_bar_arrow_keys_title">Yazarken ok tuşları</string>
+  <string name="navigation_bar_arrow_keys_summary">Yazı yazarken sol ve sağ imleç tuşlarını gösterir</string>
   <string name="navigation_ring_title">Hızlı başlatma kısayolları</string>
   <string name="navring_target_reset_message">Kullanıcı tarafından oluşturulan dolaşım çubuğu kısayolları silinip varsayılana dönülsün mü?</string>
   <string name="navring_target_reset">Navigasyon çubuğu varsayılanlara ayarlandı</string>
@@ -654,7 +661,7 @@ parlaklık seviyesini ayarlayabilir hem de istediğiniz parlaklık düzeyini ell
   <string name="hardware_keys_action_search">Arama yardımcısı</string>
   <string name="hardware_keys_action_voice_search">Sesli arama</string>
   <string name="hardware_keys_action_in_app_search">Uygulama içi arama</string>
-  <string name="hardware_keys_action_launch_camera">Kamerayı aç</string>
+  <string name="hardware_keys_action_launch_camera">Kamerayı başlat</string>
   <string name="power_end_call_title">Çağrıyı Sonlandır</string>
   <string name="power_end_call_summary">Güç tuşuna basmak mevcut çağrıyı sonlandıracak</string>
   <string name="button_wake_title">Uyan</string>
@@ -902,4 +909,17 @@ parlaklık seviyesini ayarlayabilir hem de istediğiniz parlaklık düzeyini ell
   <string name="pa_login_submit_button">Giriş Yap</string>
   <string name="pa_login_checking_password">Hesap kontrol ediliyor\u2026</string>
   <string name="pa_login_incorrect_login">Hatalı giriş</string>
+  <string name="keep_screen_on_summary_cm">Telefon şarjda iken ekran hiç kapanmayacak</string>
+  <plurals name="show_dev_countdown_cm">
+    <item quantity="other">Geliştirici seçeneklerinin etkinleştirilmesi için <xliff:g id="step_count">%1$d</xliff:g> adım kaldı.</item>
+  </plurals>
+  <string name="show_dev_on_cm">Geliştirici seçeneklerini etkinleştirdiniz!</string>
+  <string name="show_dev_already_cm">Zaten geliştirici seçeneklerini etkinleştirmişsiniz.</string>
+  <string name="enable_adb_cm">Android hata ayıklama</string>
+  <string name="enable_adb_summary_cm">Android Hata Ayıklama (adb) arayüzünü etkinleştir</string>
+  <string name="spam_added_title">%1$s eklendi</string>
+  <string name="spam_last_blocked_title">En son %1$s engellendi</string>
+  <string name="block_notifications_title">Filtre bildirimleri</string>
+  <string name="block_notifications_summary">Yoksayılan bildirimleri ve filtreleri yönet</string>
+  <string name="no_filters_title">Hiçbir filtre ayarlanmadı</string>
 </resources>

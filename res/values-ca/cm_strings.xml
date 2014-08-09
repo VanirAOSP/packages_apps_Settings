@@ -75,6 +75,9 @@
   <string name="profile_networkmode_2g">2G</string>
   <string name="profile_networkmode_3g">3G</string>
   <string name="profile_networkmode_2g3g">2G/3G</string>
+  <string name="settings_search_action_bar_button">Cerca</string>
+  <string name="settings_search_autocompleteview_hint">Configuració de la cerca</string>
+  <string name="settings_search_loading_text">S\'estan carregant les dades de cerca\u2026</string>
   <string name="profile_connectionoverrides_title">Substitueix Connexió</string>
   <string name="profile_volumeoverrides_title">Substitueix Volum</string>
   <string name="connection_state_disabled">Desactiva</string>
@@ -148,6 +151,7 @@
   <string name="icon_picker_pack_title">Paquet d\'icones</string>
   <string name="display_lights_settings_title">Pantalla i llums</string>
   <string name="lights_category_title">Llums</string>
+  <string name="notification_light_title">Llum de notificació</string>
   <string name="notification_light_general_title">General</string>
   <string name="notification_light_applist_title">Apps</string>
   <string name="notification_light_phonelist_title">Telèfon</string>
@@ -425,12 +429,12 @@ Hi ha disponibles opcions addicionals apretant llargament sobre la línia. Selec
   <string name="pref_force_highend_gfx_summary">Habilita els efectes visuals d\'alta gamma com ara la barra d\'estat/navegació transparent (necessita reiniciar)</string>
   <string name="kill_app_longpress_back">Mata amb la tecla enrera l\'app</string>
   <string name="kill_app_longpress_back_summary">Mata l\'app en primer pla fent una pulsació llarga del botó enrera</string>
-  <string name="changelog_title">Veure el registre de canvis</string>
+  <string name="changelog_title">Registre de canvis</string>
   <string name="changelog_loading">S\'està carregant el registre de canvis\u2026</string>
   <string name="changelog_error">No s\'ha pogut carregar el registre de canvis</string>
   <string name="changelog_unknown">Desconegut</string>
   <string name="changelog_version">Versió</string>
-  <string name="contributor_cloud_title">Veure els contribuidors</string>
+  <string name="contributor_cloud_title">Contribuïdors</string>
   <string name="cmupdate_settings_title">Actualitzacions CyanogenMod</string>
   <string name="cmupdate_settings_summary">Verifica, mostra o instal·la les actualitzacions disponibles</string>
   <string name="advanced_settings_title">Avançat</string>
@@ -501,8 +505,6 @@ Hi ha disponibles opcions addicionals apretant llargament sobre la línia. Selec
   <string name="adb_over_network_summary">Activa la depuració TCP/IP sobre interfícies de xarxa (Wi-Fi, xarxes USB). Aquest ajustament es desactiva en reiniciar</string>
   <string name="adb_over_network_warning">ALERTA: Quan està activat l\'ADB sobre la xarxa, el teu telèfon està obert a intrusions en totes les xarxes connectades, incloent la xarxa de dades GSM!\n\nUtilitza només aquesta característica quan estiguis connectar a xarxes de confiança.\n\nRealment vols activar aquesta funció?</string>
   <string name="device_hostname">Hostname del dipositiu</string>
-  <string name="system_settings_title">Interfície</string>
-  <string name="system_interface_title">Interfície del Sistema</string>
   <string name="notification_drawer_title">Calaix de notificacions</string>
   <string name="notification_drawer_collapse_on_dismiss_title">Comportament d\'Autotanca</string>
   <string name="collapse_on_dismiss_never">Desactivat</string>
@@ -512,8 +514,11 @@ Hi ha disponibles opcions addicionals apretant llargament sobre la línia. Selec
   <string name="collapse_on_dismiss_if_empty_summary">Tanca la safata de notificacions quan es tregui la darrera notificació</string>
   <string name="collapse_on_dismiss_if_no_clearable_summary">Tanca la safata de notificacions quan es tregui la darrera notificació removible</string>
   <string name="double_tap_to_wake_title">Pica doblement per encendre</string>
+  <string name="proximity_wake_title">Evita l\'encesa accidental</string>
+  <string name="proximity_wake_summary">Comprova el sensor de proximitat abans d\'encendre la pantalla</string>
   <string name="category_quick_access">Accés ràpid a la cinta</string>
   <string name="title_quick_access">Mostra al calaix</string>
+  <string name="title_quick_access_size">Mida de la barra de cinta</string>
   <string name="title_quick_access_linked">Disposició vinculada</string>
   <string name="summary_quick_access_linked">Utilitza les mateixes cel·les i disposicions que en el panell d\'ajustos ràpids</string>
   <string name="font_size_sample">Mostra</string>
@@ -596,6 +601,8 @@ Hi ha disponibles opcions addicionals apretant llargament sobre la línia. Selec
   <string name="navigation_bar_reset_toast">Reinicia als valors predeterminats de la barra de navegació</string>
   <string name="navigation_bar_menu_editable">Editable</string>
   <string name="navigation_bar_menu_locked">Bloquejat</string>
+  <string name="navigation_bar_arrow_keys_title">Tecles de direcció mentre s\'escriu</string>
+  <string name="navigation_bar_arrow_keys_summary">Mostra els botons de cursor a esquerra i dreta mentre s\'escriu</string>
   <string name="navigation_ring_title">Dreceres de llançament ràpid</string>
   <string name="navring_target_reset_message">Vols esborrar totes les dreceres de la barra de navegació creades per l\'usuari i restaurar les predeterminades?</string>
   <string name="navring_target_reset">Reinicia les dreceres de la barra de navegació a les predeterminades</string>
@@ -889,4 +896,18 @@ Hi ha disponibles opcions addicionals apretant llargament sobre la línia. Selec
   <string name="pa_login_submit_button">Inicia la sessió</string>
   <string name="pa_login_checking_password">S\'està comprovant el compte\u2026</string>
   <string name="pa_login_incorrect_login">Connexió incorrecta</string>
+  <string name="keep_screen_on_summary_cm">La pantalla no mai es posarà en repòs mentre estigui endollat</string>
+  <plurals name="show_dev_countdown_cm">
+    <item quantity="one">Ara ets a <xliff:g id="step_count">%1$d</xliff:g> pas d\'habilitar les opcions de desenvolupament.</item>
+    <item quantity="other">Ara ets a <xliff:g id="step_count">%1$d</xliff:g> passos d\'habilitar les opcions de desenvolupament.</item>
+  </plurals>
+  <string name="show_dev_on_cm">Has habilitat les opcions desenvolupament!</string>
+  <string name="show_dev_already_cm">No fa falta, ja has activat opcions de desenvolupament.</string>
+  <string name="enable_adb_cm">Depuració Android</string>
+  <string name="enable_adb_summary_cm">Habilita la interfície del pont de depuració d\'Android (adb)</string>
+  <string name="spam_added_title">Afegit %1$s</string>
+  <string name="spam_last_blocked_title">Darrera vegada bloquejat %1$s</string>
+  <string name="block_notifications_title">Filtra les notificacions</string>
+  <string name="block_notifications_summary">Gestiona les notificacions i filtres ignorats</string>
+  <string name="no_filters_title">Sense filtres establerts</string>
 </resources>
