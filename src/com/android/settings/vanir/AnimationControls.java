@@ -65,7 +65,7 @@ public class AnimationControls extends SettingsPreferenceFragment implements OnP
         //ListView Animations
         mListViewAnimation = (ListPreference) findPreference(LISTVIEW_ANIMATIONS);
         int listviewanimation = Settings.System.getInt(getActivity().getContentResolver(),
-            Settings.System.LISTVIEW_ANIMATIONS, 1);
+            Settings.System.LISTVIEW_ANIMATIONS, 0);
         mListViewAnimation.setValue(String.valueOf(listviewanimation));
         mListViewAnimation.setSummary(mListViewAnimation.getEntry());
         mListViewAnimation.setOnPreferenceChangeListener(this);
