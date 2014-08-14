@@ -7,6 +7,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.SharedPreferences;
+import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -58,6 +59,29 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
     private Handler mHandler;
 
+    private SettingsObserver mSettingsObserver;
+
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = getActivity().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.ENABLE_NAVIGATION_BAR), false, this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            final ContentResolver resolver = getActivity().getContentResolver();
+
+            boolean enabled = Settings.System.getInt(resolver,
+                         Settings.System.ENABLE_NAVIGATION_BAR, 0) == 1;
+            mEnabledSwitch.setChecked(enabled);
+        }
+    }
+
     public NavbarSettingsFragment() {
     }
 
@@ -106,11 +130,22 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     @Override
     public void onResume() {
         super.onResume();
+        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
+            if (mSettingsObserver == null) {
+                mSettingsObserver = new SettingsObserver(new Handler());
+                mSettingsObserver.observe();
+            }
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        if (mSettingsObserver != null) {
+            ContentResolver resolver = getActivity().getContentResolver();
+            resolver.unregisterContentObserver(mSettingsObserver);
+            mSettingsObserver = null;
+        }
     }
 
     @Override
