@@ -1256,6 +1256,10 @@ public class Settings extends PreferenceActivity
             revert = true;
         }
 
+        if (header.id == R.id.profiles_settings) {
+            updateRebootDialog();
+        }
+
         // a temp hack while we prepare to switch
         // to the new theme chooser.
         if (header.id == R.id.theme_settings) {
@@ -1323,6 +1327,12 @@ public class Settings extends PreferenceActivity
 
     public static void requestHomeNotice() {
         sShowNoHomeNotice = true;
+    }
+
+    private void updateRebootDialog() {
+        Intent u = new Intent();
+        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+        sendBroadcastAsUser(u, UserHandle.ALL);
     }
 
     /*
