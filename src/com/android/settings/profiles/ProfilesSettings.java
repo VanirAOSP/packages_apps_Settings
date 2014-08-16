@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.support.v4.view.PagerTabStrip;
@@ -300,6 +301,10 @@ public class ProfilesSettings extends SettingsPreferenceFragment {
 
         mViewPager.setVisibility(mEnabled ? View.VISIBLE : View.GONE);
         mEmptyText.setVisibility(mEnabled ? View.GONE : View.VISIBLE);
+        
+        Intent u = new Intent();
+        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 
     class ProfilesPagerAdapter extends FragmentStatePagerAdapter {
