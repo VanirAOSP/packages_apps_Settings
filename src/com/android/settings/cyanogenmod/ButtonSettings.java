@@ -50,7 +50,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
     private static final String QUICK_CAM = "quick_cam";
     private static final String BUTTON_HEADSETHOOK_LAUNCH_VOICE = "button_headsethook_launch_voice";
-    private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
 
     private static final String KEY_POWER_END_CALL = "power_end_call";
     private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
@@ -72,7 +71,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mSwapVolumeButtons;
     private CheckBoxPreference mQuickCam;
     private CheckBoxPreference mHeadsetHookLaunchVoice;
-    private CheckBoxPreference mDisableNavigationKeys;
     private CheckBoxPreference mPowerEndCall;
     private CheckBoxPreference mHomeAnswerCall;
 
@@ -109,18 +107,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         mHomeAnswerCall = (CheckBoxPreference) findPreference(KEY_HOME_ANSWER_CALL);
 
         mHandler = new Handler();
-
-        // Force Navigation bar related options
-        mDisableNavigationKeys = (CheckBoxPreference) findPreference(DISABLE_NAV_KEYS);
-
-        // Only visible on devices that does not have a navigation bar already,
-        // and don't even try unless the existing keys can be disabled
-        if (HardwareKeyNavbarHelper.shouldShowHardwareNavkeyToggle(getActivity())) {
-            // Remove keys that can be provided by the navbar
-            updateDisableNavkeysOption(true);
-        } else {
-            prefScreen.removePreference(mDisableNavigationKeys);
-        }
 
         if (hasCameraKey) {
             mCameraWake = (CheckBoxPreference)
@@ -298,16 +284,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             updateHeadsetButtonSummary();
             return true;
 
-        } else if (preference == mDisableNavigationKeys) {
-            mDisableNavigationKeys.setEnabled(false);
-            HardwareKeyNavbarHelper.writeDisableHardwareNavkeysOption(getActivity(), mDisableNavigationKeys.isChecked());
-            updateDisableNavkeysOption(false);
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mDisableNavigationKeys.setEnabled(true);
-                }
-            }, 1000);
         } else if (preference == mPowerEndCall) {
             handleTogglePowerButtonEndsCallPreferenceClick();
             return true;
@@ -324,26 +300,6 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             return context.getPackageManager().getPackageInfo(packageName, 0) != null;
         } catch (NameNotFoundException e) {
             return false;
-        }
-    }
-
-    private void updateDisableNavkeysOption(boolean shouldSetChecked) {
-
-        boolean enabled = HardwareKeyNavbarHelper.getDisableHardwareNavkeysOption(getActivity());
-
-        final PreferenceScreen prefScreen = getPreferenceScreen();
-
-        final ButtonBacklightBrightness backlight =
-                (ButtonBacklightBrightness) prefScreen.findPreference(KEY_BUTTON_BACKLIGHT);
-
-        if (shouldSetChecked) {
-            mDisableNavigationKeys.setChecked(enabled);
-        }
-
-        /* Toggle backlight control depending on navbar state, force it to
-        off if enabling */
-        if (backlight != null) {
-            backlight.setEnabled(!enabled);
         }
     }
 
