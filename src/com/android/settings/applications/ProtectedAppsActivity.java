@@ -3,16 +3,16 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -157,6 +157,23 @@ public class ProtectedAppsActivity extends Activity {
 
     private void reset() {
         ArrayList<ComponentName> componentsList = new ArrayList<ComponentName>();
+
+        // Check to see if any components that have been protected that aren't present in
+        // the ListView. This can happen if there are components which have been protected
+        // but do not respond to the queryIntentActivities for Launcher Category
+        ContentResolver resolver = getContentResolver();
+        String hiddenComponents = Settings.Secure.getString(resolver,
+                Settings.Secure.PROTECTED_COMPONENTS);
+
+        if (hiddenComponents != null && !hiddenComponents.equals("")) {
+            for (String flattened : hiddenComponents.split("\\|")) {
+                ComponentName cmp = ComponentName.unflattenFromString(flattened);
+
+                if (!componentsList.contains(cmp)) {
+                    componentsList.add(cmp);
+                }
+            }
+        }
 
         AppProtectList list = new AppProtectList(componentsList,
                 PackageManager.COMPONENT_VISIBLE_STATUS);
