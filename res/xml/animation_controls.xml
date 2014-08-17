@@ -71,7 +71,14 @@
             android:title="@string/scrolling_title"
             android:summary="@string/scrolling_summary" />
 
+        <PreferenceScreen
+            android:key="overscroll_effects"
+            android:title="@string/ui_overscroll_title"
+            android:layout="@layout/preference_overscroll"
+            android:fragment="com.android.settings.vanir.OverscrollEffects" />
+
     </PreferenceCategory>
+
     <PreferenceCategory
         android:key="multiplier"
         android:title="@string/multiplier_title" >
