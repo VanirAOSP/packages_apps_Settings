@@ -2016,6 +2016,10 @@
             android:label="@string/animation_manager_title" >
         </activity>
 
+        <activity 
+            android:name=".vanir.OverscrollEffects" />
+        </activity>
+
         <!-- LCD changer -->
         <activity android:name=".vanir.fragments.UserInterface" />
 
