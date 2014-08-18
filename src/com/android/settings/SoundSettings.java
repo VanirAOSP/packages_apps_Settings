@@ -68,7 +68,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
 
-    private static final String KEY_VOLUME_OVERLAY = "volume_overlay";
     private static final String KEY_RING_MODE = "ring_mode";
     private static final String KEY_VIBRATE = "vibrate_when_ringing";
     private static final String KEY_RING_VOLUME = "ring_volume";
@@ -122,7 +121,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private SharedPreferences mDevelopmentPreferences;
     private boolean mStockMode;
 
-    private ListPreference mVolumeOverlay;
     private ListPreference mRingMode;
     private CheckBoxPreference mSoundEffects;
     private ListPreference mCameraSounds;
@@ -189,14 +187,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             // device is not CDMA, do not display CDMA emergency_tone
             getPreferenceScreen().removePreference(findPreference(KEY_EMERGENCY_TONE));
         }
-
-        mVolumeOverlay = (ListPreference) findPreference(KEY_VOLUME_OVERLAY);
-        mVolumeOverlay.setOnPreferenceChangeListener(this);
-        int volumeOverlay = Settings.System.getInt(getContentResolver(),
-                Settings.System.MODE_VOLUME_OVERLAY,
-                VolumePanel.VOLUME_OVERLAY_EXPANDABLE);
-        mVolumeOverlay.setValue(Integer.toString(volumeOverlay));
-        mVolumeOverlay.setSummary(mVolumeOverlay.getEntry());
 
         mRingMode = (ListPreference) findPreference(KEY_RING_MODE);
         if (!getResources().getBoolean(R.bool.has_silent_mode)) {
@@ -316,7 +306,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         if (mStockMode) {
             mSoundSettings.removePreference(mQuietHours);
-            mSoundSettings.removePreference(mVolumeOverlay);
             PreferenceCategory mCategory = (PreferenceCategory) findPreference("category_automation_effects");
             mSoundSettings.removePreference(mCategory);
         }
@@ -484,12 +473,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             }
         } else if (preference == mRingMode) {
             setPhoneRingModeValue(objValue.toString());
-        } else if (preference == mVolumeOverlay) {
-            final int value = Integer.valueOf((String) objValue);
-            final int index = mVolumeOverlay.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.MODE_VOLUME_OVERLAY, value);
-            mVolumeOverlay.setSummary(mVolumeOverlay.getEntries()[index]);
         } else if (preference == mCameraSounds) {
             final int value = Integer.valueOf((String)objValue);
             final int index = mCameraSounds.findIndexOfValue((String) objValue);

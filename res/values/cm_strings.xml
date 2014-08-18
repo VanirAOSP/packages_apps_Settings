@@ -187,13 +187,6 @@
     <string name="ring_mode_vibrate">Vibrate</string>
     <string name="ring_mode_mute">Mute</string>
 
-    <!-- Volume panel style -->
-    <string name="volume_overlay_title">Volume panel style</string>
-    <string name="volume_overlay_single">Single</string>
-    <string name="volume_overlay_expandable">Expandable</string>
-    <string name="volume_overlay_expanded">Expanded</string>
-    <string name="volume_overlay_none">None</string>
-
     <!-- Automatation and effects category -->
     <string name="automation_effects_title">Automation &amp; Effects</string>
 

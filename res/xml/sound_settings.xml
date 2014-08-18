@@ -35,12 +35,6 @@
             android:entries="@array/ring_mode_entries"
             android:entryValues="@array/ring_mode_values" />
 
-    <ListPreference
-            android:key="volume_overlay"
-            android:title="@string/volume_overlay_title"
-            android:entries="@array/volume_overlay_entries"
-            android:entryValues="@array/volume_overlay_values" />
-
     <PreferenceCategory
             android:key="category_automation_effects"
             android:title="@string/automation_effects_title"/>
