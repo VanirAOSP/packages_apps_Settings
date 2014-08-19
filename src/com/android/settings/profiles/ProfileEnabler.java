@@ -19,6 +19,7 @@ package com.android.settings.profiles;
 import android.app.ProfileManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -76,6 +77,9 @@ public class ProfileEnabler implements CompoundButton.OnCheckedChangeListener  {
                           ProfileManager.PROFILES_STATE_DISABLED);
         mContext.sendBroadcast(intent);
 
+        // update the reboot dialog state
+        Intent u = new Intent();
+        u.setAction("com.android.powermenu.ACTION_UPDATE_REBOOT_DIALOG");
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
-
 }
