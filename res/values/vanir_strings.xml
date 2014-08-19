@@ -141,6 +141,10 @@
     <string name="clock_color_title">Clock color</string>
     <string name="expanded_clock_color_title">Expanded Notification Clock color</string>
 
+    <!-- Status bar signal -->
+    <string name="status_bar_signal_style_icon_default">Icon (default)</string>
+    <string name="status_bar_signal_style_icon_6bars">Icon (6 bar)</string>
+
     <!-- LCD Density -->
     <string name="lcd_density_title">LCD Density</string>
     <string name="lcd_density_summary">unknown</string>
