@@ -141,6 +141,10 @@
     <string name="clock_color_title">Clock color</string>
     <string name="expanded_clock_color_title">Expanded Notification Clock color</string>
 
+    <!-- Status bar | 6 bars signal -->
+    <string name="status_bar_six_bar_signal_title">Enable Six Bar Signal</string>
+    <string name="status_bar_six_bar_signal_summary">Enable to show six bar signal in statusbar/qs</string>
+
     <!-- LCD Density -->
     <string name="lcd_density_title">LCD Density</string>
     <string name="lcd_density_summary">unknown</string>
