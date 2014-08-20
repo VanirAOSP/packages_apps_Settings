@@ -775,4 +775,25 @@
         <item>2</item>
     </string-array>
 
+    <!-- GPS Region -->
+    <string-array name="entries_gps_region">
+        <item>@string/region_africa</item>
+        <item>@string/region_asia</item>
+        <item>@string/region_europa</item>
+        <item>@string/region_north_america</item>
+        <item>@string/region_oceania</item>
+        <item>@string/region_south_america</item>
+        <item>@string/region_default</item>
+    </string-array>
+
+    <string-array name="values_gps_region" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
 </resources>

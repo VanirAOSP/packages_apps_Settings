@@ -990,4 +990,16 @@
 
     <string name="network_settings_title">Mobile</string>
     <string name="phone_call_settings_title">Call settings</string>
+
+    <!-- gps : region options -->
+    <string name="region_africa">Africa</string>
+    <string name="region_asia">Asia</string>
+    <string name="region_europa">Europa</string>
+    <string name="region_north_america">North America</string>
+    <string name="region_oceania">Oceania</string>
+    <string name="region_south_america">Sound America</string>
+    <string name="region_default">Default</string>
+    <string name="gps_region_title">Select a custom GPS region</string>
+    <string name="gps_region_cat">GPS region</string>
+    <string name="gps_region_summary">A reboot is needed for the changes to take effect</string>
 </resources>

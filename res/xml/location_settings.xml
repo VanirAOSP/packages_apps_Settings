@@ -34,4 +34,20 @@
             android:key="location_services"
             android:title="@string/location_category_location_services" />
 
+        <PreferenceCategory
+            android:key="gps_region_title"
+            android:title="@string/gps_region_cat" />
+        <Preference
+            style="?android:preferenceInformationStyle"
+            android:selectable="false"
+            android:summary="@string/gps_region_summary"
+            android:title="@string/dynamic_tiles_note_title" />
+
+        <ListPreference
+            android:key="gps_region"
+            android:dialogTitle="@string/gps_region_cat"
+            android:title="@string/gps_region_title"
+            android:entries="@array/entries_gps_region"
+            android:entryValues="@array/values_gps_region" />
+
 </PreferenceScreen>

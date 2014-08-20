@@ -30,6 +30,7 @@ import android.location.LocationManager;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
@@ -52,6 +53,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.vanir.util.AbstractAsyncSuCMDProcessor;
+import com.vanir.util.CMDProcessor;
+import com.vanir.util.CMDProcessor.CommandResult;
+import com.vanir.util.Helpers;
+
+import java.io.File;
+
 /**
  * Location access settings.
  */
@@ -68,6 +76,7 @@ public class LocationSettings extends LocationSettingsBase
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
     /** Key for preference category "Location services" */
     private static final String KEY_LOCATION_SERVICES = "location_services";
+    private static final CharSequence PREF_GPS_REGION = "gps_region";
 
     private Switch mSwitch;
     private boolean mValidListener;
@@ -76,6 +85,7 @@ public class LocationSettings extends LocationSettingsBase
     private PreferenceCategory mCategoryRecentLocationRequests;
     /** Receives UPDATE_INTENT  */
     private BroadcastReceiver mReceiver;
+    private ListPreference mGpsRegion;
 
     public LocationSettings() {
         mValidListener = false;
@@ -88,6 +98,9 @@ public class LocationSettings extends LocationSettingsBase
         mSwitch.setOnCheckedChangeListener(this);
         mValidListener = true;
         createPreferenceHierarchy();
+        if (mGpsRegion != null) {
+            mGpsRegion.setSummary(mGpsRegion.getEntry());
+        }
     }
 
     @Override
@@ -123,6 +136,9 @@ public class LocationSettings extends LocationSettingsBase
         }
         addPreferencesFromResource(R.xml.location_settings);
         root = getPreferenceScreen();
+
+        mGpsRegion = (ListPreference) findPreference(PREF_GPS_REGION);
+        mGpsRegion.setOnPreferenceChangeListener(this);
 
         mLocationMode = root.findPreference(KEY_LOCATION_MODE);
         mLocationMode.setOnPreferenceClickListener(
@@ -182,6 +198,7 @@ public class LocationSettings extends LocationSettingsBase
         setHasOptionsMenu(true);
 
         refreshLocationMode();
+        resetGpsLocationSummary();
         return root;
     }
 
@@ -286,10 +303,19 @@ public class LocationSettings extends LocationSettingsBase
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        final String key = preference.getKey();
+
         if (mGpsDownloadDataWifiOnly != null && preference.equals(mGpsDownloadDataWifiOnly)) {
             updateLtoServiceStatus(getActivity(), isLocationModeEnabled(getActivity()));
+            return true;
+        } else if (PREF_GPS_REGION.equals(key)) {
+            int value = Integer.parseInt((String) newValue);
+            int index = mGpsRegion.findIndexOfValue((String) newValue);
+            mGpsRegion.setSummary(mGpsRegion.getEntries()[index]);
+            postGpsRegionPreference(index);
+            return true;
         }
-        return true;
+        return false;
     }
 
     private static void updateLtoServiceStatus(Context context, boolean start) {
@@ -348,5 +374,57 @@ public class LocationSettings extends LocationSettingsBase
             // Hardware abstraction framework isn't installed
             return false;
         }
+    }
+
+    private void resetGpsLocationSummary() {
+        if (!new File("/system/etc/gps.conf.bak").exists()) {
+           mGpsRegion.setValueIndex(6);
+        }
+    }
+
+    private void postGpsRegionPreference(int index) {
+        String backup = "/system/etc/gps.conf.bak";
+        String defaultLocation = "/system/etc/gps.conf";
+        String cmd = "";
+
+        if (!new File(backup).exists()) {
+            String saveDefault = ("cp " + defaultLocation + " " + backup);
+            new AbstractAsyncSuCMDProcessor(true) {
+                @Override
+                protected void onPostExecute(String result) {
+                }
+            }.execute(saveDefault);
+        }
+
+        switch (index) {
+            case 0:
+                cmd = (". /system/etc/africa");
+                break;
+            case 1:
+                cmd = (". /system/etc/gpsscripts/asia");
+                break;
+            case 2:
+                cmd = (". /system/etc/gpsscripts/europa");
+                break;
+            case 3:
+                cmd = (". /system/etc/gpsscripts/northamerica");
+                break;
+            case 4:
+                cmd = (". /system/etc/gpsscripts/oceania");
+                break;
+            case 5:
+                cmd = (". /system/etc/gpsscripts/southamerica");
+                break;
+            case 6:
+                cmd = (". /system/etc/gpsscripts/default");
+                break;
+        }
+
+        AbstractAsyncSuCMDProcessor processor = new AbstractAsyncSuCMDProcessor(true) {
+            @Override
+            protected void onPostExecute(String result) {
+            }
+        };
+        processor.execute(cmd);
     }
 }
