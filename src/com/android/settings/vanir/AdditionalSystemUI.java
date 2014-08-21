@@ -129,7 +129,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
 
         mClearAll = (ListPreference) prefSet.findPreference(RECENTS_CLEAR_ALL);
         int value = Settings.System.getInt(getContentResolver(),
-                Settings.System.CLEAR_RECENTS_BUTTON_LOCATION, 4);
+                Settings.System.CLEAR_RECENTS_BUTTON_LOCATION, 1);
         mClearAll.setValue(String.valueOf(value));
         mClearAll.setSummary(mClearAll.getEntry());
         mClearAll.setOnPreferenceChangeListener(this);
