@@ -43,6 +43,7 @@ import com.vanir.util.CMDProcessor;
 import org.cyanogenmod.hardware.AdaptiveBacklight;
 import org.cyanogenmod.hardware.ColorEnhancement;
 import org.cyanogenmod.hardware.DisplayGammaCalibration;
+import org.cyanogenmod.hardware.SunlightEnhancement;
 import org.cyanogenmod.hardware.TapToWake;
 
 import java.io.File;
@@ -55,6 +56,7 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static final String KEY_DISPLAY_COLOR = "color_calibration";
     private static final String KEY_DISPLAY_GAMMA = "gamma_tuning";
     private static final String KEY_ADAPTIVE_BACKLIGHT = "adaptive_backlight";
+    private static final String KEY_SUNLIGHT_ENHANCEMENT = "sunlight_enhancement";
     private static final String KEY_COLOR_ENHANCEMENT = "color_enhancement";
     private static final String KEY_SCREEN_COLOR_SETTINGS = "screencolor_settings";
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
@@ -68,6 +70,7 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private CheckBoxPreference mTapToWake;
     private static CheckBoxPreference mFastCharge;
     private CheckBoxPreference mAdaptiveBacklight;
+    private CheckBoxPreference mSunlightEnhancement;
     private CheckBoxPreference mColorEnhancement;
 
     private Preference mAdvanced;
@@ -125,6 +128,12 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         boolean gamma = DisplayGamma.isSupported();
         boolean WTF = DisplayGammaCalibration.getNumberOfControls() == 0;
 
+        mSunlightEnhancement = (CheckBoxPreference) findPreference(KEY_SUNLIGHT_ENHANCEMENT);
+        if (!isSunlightEnhancementSupported()) {
+            calibrationCategory.removePreference(mSunlightEnhancement);
+            mSunlightEnhancement = null;
+        }
+
         if (!gamma || WTF) {
             calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
         }
@@ -153,7 +162,8 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         if ((!gamma || WTF) && !colors
                 && !isAdaptiveBacklightSupported()
                 && !isColorEnhancementSupported()
-                && !isPostProcessingSupported()) {
+                && !isPostProcessingSupported()
+                && !!isSunlightEnhancementSupported()) {
             getPreferenceScreen().removePreference(calibrationCategory);
         }
     }
@@ -171,12 +181,27 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         if (mColorEnhancement != null) {
             mColorEnhancement.setChecked(ColorEnhancement.isEnabled());
         }
+        if (mSunlightEnhancement != null) {
+            if (SunlightEnhancement.isAdaptiveBacklightRequired() &&
+                    !AdaptiveBacklight.isEnabled()) {
+                mSunlightEnhancement.setEnabled(false);
+            } else {
+                mSunlightEnhancement.setChecked(SunlightEnhancement.isEnabled());
+            }
+        }
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mAdaptiveBacklight) {
+            if (mSunlightEnhancement != null &&
+                    SunlightEnhancement.isAdaptiveBacklightRequired()) {
+                mSunlightEnhancement.setEnabled(mAdaptiveBacklight.isChecked());
+            }
             return AdaptiveBacklight.setEnabled(mAdaptiveBacklight.isChecked());
+
+        } else if (preference == mSunlightEnhancement) {
+            return SunlightEnhancement.setEnabled(mSunlightEnhancement.isChecked());
 
         } else if (preference == mColorEnhancement) {
             return ColorEnhancement.setEnabled(mColorEnhancement.isChecked());
@@ -254,6 +279,21 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
                 Log.d(TAG, "Adaptive backlight settings restored.");
             }
         }
+
+        if (isSunlightEnhancementSupported()) {
+            final boolean enabled = prefs.getBoolean(KEY_SUNLIGHT_ENHANCEMENT, true);
+            if (SunlightEnhancement.isAdaptiveBacklightRequired() &&
+                    !AdaptiveBacklight.isEnabled()) {
+                SunlightEnhancement.setEnabled(false);
+                Log.d(TAG, "SRE requires CABC, disabled");
+            } else {
+                if (!SunlightEnhancement.setEnabled(enabled)) {
+                    Log.e(TAG, "Failed to restore SRE settings.");
+                } else {
+                    Log.d(TAG, "SRE settings restored.");
+                }
+            }
+        }
     }
     
     private boolean isPostProcessingSupported() {
@@ -270,6 +310,15 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
     private static boolean isAdaptiveBacklightSupported() {
         try {
             return AdaptiveBacklight.isSupported();
+        } catch (NoClassDefFoundError e) {
+            // Hardware abstraction framework not installed
+            return false;
+        }
+    }
+
+    private static boolean isSunlightEnhancementSupported() {
+        try {
+            return SunlightEnhancement.isSupported();
         } catch (NoClassDefFoundError e) {
             // Hardware abstraction framework not installed
             return false;
