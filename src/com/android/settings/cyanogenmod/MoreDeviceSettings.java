@@ -150,11 +150,6 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
         getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
 
-        boolean emptyList = mColorEnhancement == null
-                && mScreenColorSettings == null
-                && mAdaptiveBacklight == null
-                && mAdvanced == null;
-
         if ((!gamma || WTF) && !colors
                 && !isAdaptiveBacklightSupported()
                 && !isColorEnhancementSupported()
