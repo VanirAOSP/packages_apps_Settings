@@ -39,15 +39,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManagerGlobal;
 
+import com.android.settings.quicksettings.QuickSettingsUtil;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.util.HardwareKeyNavbarHelper;
 import com.android.settings.vanir.NavringPreferenceSwitch;
 import com.android.settings.vanir.gesturepanel.GestureBuilderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.android.settings.util.HardwareKeyNavbarHelper;
+import com.android.internal.util.aokp.AwesomeConstants;
+import static com.android.internal.util.cm.QSConstants.TILE_GESTUREPANEL;
 
 public class SystemUiSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -74,6 +77,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mExpandedDesktop;
     private SwitchPreference mImmersiveModeState;
     private Preference mNavigation;
+    private Preference mGestures;
 
     private NavringPreferenceSwitch mNavringPreference;
     private int immersiveModeValue;
@@ -117,8 +121,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
         mNavringPreference = (NavringPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
 
-        Preference pref = findPreference(KEY_GESTURES);
-        pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        mGestures = findPreference(KEY_GESTURES);
+        mGestures.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 startActivity(new Intent(getActivity(), GestureBuilderActivity.class));
@@ -168,6 +172,16 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
                 mSettingsObserver.onChange(true);
             }
         }
+
+        String buttons = Settings.System.getString(mContext.getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS);
+
+        if (QuickSettingsUtil.isTileAvailable(TILE_GESTUREPANEL)
+            || (b = buttons.indexOf(AwesomeConstants.AwesomeConstant.GESTURE_ACTIONS.value()) > 0)) {
+            mGestures.setEnabled(true);
+        } else {
+            mGestures.setEnabled(false);
+        }
+            
     }
 
     @Override
