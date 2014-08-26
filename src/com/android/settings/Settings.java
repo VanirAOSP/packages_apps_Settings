@@ -93,6 +93,8 @@ import com.android.settings.cyanogenmod.MoreDeviceSettings;
 import com.android.settings.cyanogenmod.SystemUiSettings;
 import com.android.settings.vanir.superuser.PolicyNativeFragment;
 import com.android.settings.vanir.ButtonNavigation;
+import com.android.settings.vanir.gesturepanel.GestureBuilderActivity;
+import com.android.settings.vanir.gesturepanel.CreateGestureActivity;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -477,6 +479,8 @@ public class Settings extends PreferenceActivity
         ButtonSettings.class.getName(),
         ButtonNavigation.class.getName(),
         MoreDeviceSettings.class.getName(),
+        GestureBuilderActivity.class.getName(),
+        CreateGestureActivity.class.getName(),
         ProfilesSettings.class.getName(),
         PolicyNativeFragment.class.getName(),
         com.android.settings.quicksettings.QuickSettingsTiles.class.getName(),
