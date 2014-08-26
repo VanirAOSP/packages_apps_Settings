@@ -73,6 +73,10 @@
         android:fragment="com.android.settings.cyanogenmod.NotificationDrawer"
         android:title="@string/notification_drawer_title" />
 
+    <Preference
+        android:key="gesture_panel_gestures"
+        android:title="@string/gesture_panel_title" />
+
     <PreferenceScreen
         settings:includeXmlForSearch="@xml/system_ui_more"
         android:id="@+id/system_ui_more"

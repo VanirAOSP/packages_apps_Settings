@@ -219,6 +219,9 @@
                 android:value="com.example.myfirstapp.MainActivity" />
         </activity>
 
+        <activity android:name=".vanir.gesturepanel.GestureBuilderActivity" />
+        <activity android:name=".vanir.gesturepanel.CreateGestureActivity" />
+
         <activity android:name=".SubSettings"
                 android:taskAffinity="com.android.settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"
