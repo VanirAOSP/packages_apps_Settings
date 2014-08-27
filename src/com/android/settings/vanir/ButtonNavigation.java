@@ -83,6 +83,7 @@ public class ButtonNavigation extends SettingsPreferenceFragment implements
     private static final int ACTION_HOME = 11;
     private static final int ACTION_BACK = 12;
     private static final int ACTION_LASTAPP = 13;
+    private static final int GESTURE_PANEL = 14;
 
     // Masks for checking presence of hardware keys.
     // Must match values in frameworks/base/core/res/res/values/config.xml
