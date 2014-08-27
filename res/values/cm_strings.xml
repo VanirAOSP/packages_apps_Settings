@@ -872,6 +872,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="hardware_keys_action_home">Navigate home</string>
     <string name="hardware_keys_action_lastapp">Last app</string>
     <string name="hardware_keys_action_ime">IME switcher</string>
+    <string name="hardware_keys_action_gesture_panel">Gesture panel</string>
     <string name="hardware_keys_action_powermenu">Power menu</string>
     <string name="hardware_keys_action_navbar">Toggle the navbar</string>
     <string name="home_wake_title">Home button wake</string>

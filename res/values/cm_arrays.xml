@@ -468,6 +468,7 @@
         <item>@string/hardware_keys_action_ime</item>
         <item>@string/hardware_keys_action_powermenu</item>
         <item>@string/hardware_keys_action_navbar</item>
+        <item>@string/hardware_keys_action_gesture_panel</item>
     </string-array>
 
     <!-- item numbers are out of order to preserve original settings after reordering the dialog -->
@@ -486,6 +487,7 @@
         <item>8</item>
         <item>9</item>
         <item>10</item>
+        <item>11</item>
     </string-array>
 
     <!-- Volume key cursor control -->
