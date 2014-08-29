@@ -82,7 +82,7 @@
 
     <PreferenceCategory
        android:title="@string/vanir_immersive_desktop" >
-    
+
        <SwitchPreference
             android:key="immersive_mode_state"
             android:title="@string/immersive_mode_state" />    

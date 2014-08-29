@@ -42,6 +42,7 @@ import android.view.WindowManagerGlobal;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.vanir.NavringPreferenceSwitch;
+import com.android.settings.vanir.gesturepanel.GestureBuilderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,14 +54,12 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "SystemSettings";
 
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
-    private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
     private static final String KEY_IMMERSIVE_LOL = "immersive_mode_lol_profile";
     private static final String KEY_IMMERSIVE_ORIENTATION = "immersive_orientation";
     private static final String KEY_NAVRING_SWITCH = "navigation_bar_ring";
     private static final String KEY_BUTTON_NAVIGATION = "old_buttons_navigation";
-
     private static final String HARDWARE_IMMERSIVE_STYLE = "hardware_immersive_style";
     private static final String IMMERSIVE_ENABLED = "immersive_enabled";
     private static final String IMMERSIVE_DISABLED = "immersive_disabled";
@@ -117,17 +116,17 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
         mNavringPreference = (NavringPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
-        mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(), 
+        mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1);
-        mImmersiveModeState.setOnPreferenceChangeListener(this);        
+        mImmersiveModeState.setOnPreferenceChangeListener(this);
 
         mImmersiveLOL = (CheckBoxPreference) findPreference(KEY_IMMERSIVE_LOL);
-        mImmersiveLOL.setChecked(Settings.System.getInt(getContentResolver(), 
+        mImmersiveLOL.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.IMMERSIVE_LOL_PROFILE, 0) == 1);
-        mImmersiveLOL.setOnPreferenceChangeListener(this);  
+        mImmersiveLOL.setOnPreferenceChangeListener(this);
 
         mExpandedDesktop = (CheckBoxPreference) findPreference(KEY_EXPANDED_DESKTOP);
-        mExpandedDesktop.setChecked(Settings.System.getInt(getContentResolver(), 
+        mExpandedDesktop.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.EXPANDED_DESKTOP, 0) == 1);
         mExpandedDesktop.setOnPreferenceChangeListener(this);
 
