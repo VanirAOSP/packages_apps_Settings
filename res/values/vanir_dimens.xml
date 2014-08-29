@@ -33,4 +33,7 @@
 	<dimen name="list_toggle_width">320dp</dimen>
 	<dimen name="toggle_rearrange_dialog_title_height">68dp</dimen>
 
+    <!-- Shortcut picker -->
+    <dimen name="shortcut_picker_left_padding">70dip</dimen>
+
 </resources>
