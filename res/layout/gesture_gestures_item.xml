@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<!-- Copyright (C) 2014 VanirAOSP && the Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,12 +14,18 @@
      limitations under the License.
 -->
 
-<resources>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
-    <!-- Minimum prediction score required to pass a gesture as recognized -->
-    <integer name="min_gesture_prediction_score">2</integer>
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
 
-    <!-- Gesture panel -->
-    <color name="gesture_color">#c0999999</color>
+    android:drawablePadding="12dip"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
 
-</resources>
+    android:ellipsize="marquee"
+    android:singleLine="true"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
