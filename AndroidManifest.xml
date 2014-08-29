@@ -219,6 +219,17 @@
                 android:value="com.example.myfirstapp.MainActivity" />
         </activity>
 
+        <activity android:name=".vanir.gesturepanel.CreateGestureActivity" />
+        <activity android:name=".vanir.gesturepanel.GestureBuilderActivity"
+                android:launchMode="singleTop"
+                android:excludeFromRecents="true" 
+                android:label="@string/gesture_panel_title" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".SubSettings"
                 android:taskAffinity="com.android.settings"
                 android:configChanges="orientation|keyboardHidden|screenSize"

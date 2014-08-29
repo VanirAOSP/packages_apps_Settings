@@ -151,6 +151,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_NAVBAR, R.string.title_navbar_tile,
                 "com.android.systemui:drawable/ic_qs_navbar_on"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_GESTUREPANEL, R.string.title_gesturepanel_tile,
+                "com.android.systemui:drawable/ic_qs_gesture"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
