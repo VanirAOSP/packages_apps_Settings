@@ -56,13 +56,11 @@
         android:entries="@array/entries_system_power_crt_mode"
         android:entryValues="@array/values_system_power_crt_mode" />
 
-    <ListPreference
-        android:key="customize_bootanimation"
-        android:dialogTitle="@string/disable_bootanimation_title"
+    <CheckBoxPreference
+        android:key="disable_bootanimation"
         android:title="@string/disable_bootanimation_title"
-        android:entries="@array/disable_bootanimation_entries"
-        android:entryValues="@array/disable_bootanimation_values"
-        android:defaultValue="0" />
+        android:defaultValue="true"
+        android:persistent="true" />
 
     <PreferenceCategory
         android:title="@string/recents" />

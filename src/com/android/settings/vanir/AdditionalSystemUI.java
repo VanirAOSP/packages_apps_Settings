@@ -62,7 +62,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
     private static final String RECENTS_CLEAR_ALL = "recents_clear_all";
-    private static final CharSequence PREF_DISABLE_BOOTANIM = "customize_bootanimation";
+    private static final String PREF_DISABLE_BOOTANIM = "disable_bootanimation";
     private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
     private static final String RECENT_PANEL_LEFTY_MODE = "recent_panel_lefty_mode";
     private static final String RECENT_PANEL_SCALE = "recent_panel_scale";
@@ -80,7 +80,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mSystemLogging;
     private ListPreference mClearAll;
-    private ListPreference mBootAnimation;
+    private CheckBoxPreference mBootAnimation;
     private ListPreference mRecentsCustom;
     private CheckBoxPreference mRecentPanelLeftyMode;
     private ListPreference mRecentPanelScale;
@@ -89,7 +89,6 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     Preference mLcdDensity;
     int newDensityValue;
     DensityChanger densityFragment;
-    private boolean mBootAnimationState = true;
 
     private String mCustomLabelText = null;
 
@@ -153,8 +152,8 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         }
         mLcdDensity.setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
-        mBootAnimation = (ListPreference) findPreference(PREF_DISABLE_BOOTANIM);
-        mBootAnimation.setOnPreferenceChangeListener(this);
+        mBootAnimation = (CheckBoxPreference) findPreference(PREF_DISABLE_BOOTANIM);
+        updateBootAnimationSummary(true);
 
         mRecentsCustom = (ListPreference) findPreference(CUSTOM_RECENT_MODE);
         mRecentsCustom.setSummary(mRecentsCustom.getEntry());
@@ -179,16 +178,11 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         mRecentPanelExpandedMode.setOnPreferenceChangeListener(this);
 
         updateCustomLabelTextSummary();
-        resetBootAnimationSummary();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        if (mBootAnimation != null) {
-            mBootAnimation.setSummary(mBootAnimation.getEntry());
-        }
         updateRecentsDependencies();
     }
 
@@ -218,13 +212,6 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
                     Settings.System.SYSTEM_POWER_CRT_MODE,
                     value);
             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
-            return true;
-
-        } else if (PREF_DISABLE_BOOTANIM.equals(key)) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mBootAnimation.findIndexOfValue((String) objValue);
-            mBootAnimation.setSummary(mBootAnimation.getEntries()[index]);
-            postBootAnimationPreference(index);
             return true;
 
         } else if (RECENTS_CLEAR_ALL.equals(key)) {
@@ -285,14 +272,22 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, checked ? 1 : 0);
             return true;
+
+        } else if (preference == mBootAnimation) {
+            boolean checked = ((CheckBoxPreference) preference).isChecked();
+            postBootAnimationPreference(checked);
+            return true;
+
         } else if (preference == mLcdDensity) {
             ((PreferenceActivity) getActivity())
             .startPreferenceFragment(new DensityChanger(), true);
             return true;
+
         } else if (preference == mDualPanel) {
             Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL,
                     mDualPanel.isChecked() ? true : false);
             return true;
+
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
@@ -322,6 +317,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             });
 
             alert.show();
+
         } else if (preference == mWakeWhenPluggedOrUnplugged) {
             Settings.Global.putInt(getContentResolver(),
                     Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
@@ -342,87 +338,53 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         mRecentPanelExpandedMode.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
     }
 
-    private void resetBootAnimationSummary() {
-        if (!new File("/system/media/bootanimation.backup").exists()) {
-           mBootAnimation.setValueIndex(0);
-        }
-    }
-
-    /**
-     * ListPreference index for boot animation preferences
-     * 0 = Default
-     * 1 = minimal
-     * 2 = disabled
-    */
-    private void postBootAnimationPreference(int index) {
-        String backup = "/system/media/bootanimation.backup";
-        String defaultLocation = "/system/media/bootanimation.zip";
-        String minimalLocation = "/system/media/bootanimation.minimal";
-        String chmod = "chmod 644 /system/media/bootanimation.zip";
-        String cmd = "";
-
-        // make a backup of the default animation if one doesn't exist.  Do this to make it
-        // possible to restore the default animation later when custom animation preference is added
-        if (!new File(backup).exists()) {
-            String saveDefault = ("cp " + defaultLocation + " " + backup);
-            new AbstractAsyncSuCMDProcessor(true) {
-                @Override
-                protected void onPostExecute(String result) {
-                }
-            }.execute(saveDefault);
-        }
-
-        switch (index) {
-            case 0:  // DEFAULT
-                enableBootAnimation(true);
-                cmd = ("cp " + backup + " " + defaultLocation);
-                break;
-
-            case 1:  // MINIMAL
-                enableBootAnimation(true);
-                cmd = ("mv " + defaultLocation + " " + minimalLocation);
-                break;
-
-            case 2:  // DISABLED
-                enableBootAnimation(false);
-                String cheese = getString(R.string.toast_disabled);
-                Toast.makeText(mContext, cheese, Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-        AbstractAsyncSuCMDProcessor processor = new AbstractAsyncSuCMDProcessor(true) {
-            @Override
-            protected void onPostExecute(String result) {
-            }
-        };
-
-        if (index == 0) {
-            processor.execute(cmd, chmod);
+    private void postBootAnimationPreference(boolean isChecked) {
+        if (isChecked) {
+            enableBootAnimation(true);
         } else {
-            processor.execute(cmd);
+            enableBootAnimation(false);
+            String cheese = getString(R.string.toast_disabled);
+            Toast.makeText(mContext, cheese, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void enableBootAnimation(boolean myPreference) {
-        if (mBootAnimationState != myPreference) {
-            String cmd =  "";
+        String cmd =  "";
+        CommandResult cr = new CMDProcessor().su.runWaitFor(
+                "grep -q \"debug.sf.nobootanimation\" /system/build.prop");
+
+        if (myPreference) {
+            if (cr.success()) {
+                cmd = ("busybox sed -i 's|debug.sf.nobootanimation=.*||' /system/build.prop");
+            }
+        } else {
+            if (!cr.success()) {
+                cmd = ("echo debug.sf.nobootanimation=1 >> /system/build.prop");
+            }
+        }
+
+        new AbstractAsyncSuCMDProcessor(true) {
+            @Override
+            protected void onPostExecute(String result) {
+                updateBootAnimationSummary(false);
+            }
+        }.execute(cmd);
+    }
+
+    protected void updateBootAnimationSummary(boolean init) {
+        boolean enabled;
+        if (init) {
             CommandResult cr = new CMDProcessor().su.runWaitFor(
                     "grep -q \"debug.sf.nobootanimation\" /system/build.prop");
-
-            if (cr.success()) {
-                cmd = ("busybox sed -i 's|debug.sf.nobootanimation=.*|"
-                + "debug.sf.nobootanimation" + "=" + (myPreference ? "0" : "1") + "|' " + "/system/build.prop");
-            } else {
-                cmd = ("echo debug.sf.nobootanimation=" + (myPreference ? "0" : "1") + " >> /system/build.prop");
-            }
-
-            new AbstractAsyncSuCMDProcessor(true) {
-                @Override
-                protected void onPostExecute(String result) {
-                }
-            }.execute(cmd);
-            mBootAnimationState = myPreference;
+            enabled = !cr.success();
+            mBootAnimation.setChecked(enabled);
+        } else {
+            enabled = mBootAnimation.isChecked();
         }
+
+        mBootAnimation.setSummary(enabled
+                ? getResources().getString(R.string.disable_bootanimation_default)
+                : getResources().getString(R.string.disable_bootanimation_off));
     }
 
     private void updateCustomLabelTextSummary() {
