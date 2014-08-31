@@ -87,7 +87,7 @@
                 android:key="sunlight_enhancement"
                 android:title="@string/sunlight_enhancement_title"
                 android:summary="@string/sunlight_enhancement_summary"
-                android:defaultValue="true" />
+                android:defaultValue="false" />
 
         <CheckBoxPreference
                 android:key="color_enhancement"
