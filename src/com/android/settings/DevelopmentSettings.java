@@ -219,7 +219,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mAppProcessLimit;
 
     private CheckBoxPreference mShowAllANRs;
-    private CheckBoxPreference mKillAppLongpressBack;
 
     private ListPreference mRootAccess;
     private Object mSelectedRootValue;
@@ -303,11 +302,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAdvancedReboot = findAndInitCheckboxPref(ADVANCED_REBOOT_KEY);
         mUpdateRecovery = findAndInitCheckboxPref(UPDATE_RECOVERY_KEY);
         mDevelopmentShortcut = findAndInitCheckboxPref(DEVELOPMENT_SHORTCUT_KEY);
-
-        mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
-        if (navbar) {
-            mKillAppLongpressBack.setSummary(R.string.kill_app_navbar_summary);
-        }
 
         mStockMode = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).getInt(STOCK_MODE, 0) == 1;
         writeStockMode();
@@ -546,8 +540,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnabledSwitch.setChecked(mLastEnabledState);
             setPrefsEnabledState(mLastEnabledState);
         }
-
-        updateKillAppLongpressBackOptions();
     }
 
     void updateCheckBox(CheckBoxPreference checkBox, boolean value) {
@@ -797,25 +789,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             hdcpChecking.setValue(values[index]);
             hdcpChecking.setSummary(summaries[index]);
             hdcpChecking.setOnPreferenceChangeListener(this);
-        }
-    }
-
-    private void writeKillAppLongpressBackOptions() {
-        Settings.System.putInt(getActivity().getContentResolver(),
-                Settings.System.KEY_BACK_LONG_PRESS_ACTION,
-                mKillAppLongpressBack.isChecked() ? 7 : 0);
-        Intent u = new Intent();
-        u.setAction(Intent.ACTION_UPDATE_KEYS);
-        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
-    }
-
-    private void updateKillAppLongpressBackOptions() {
-        mKillAppLongpressBack.setChecked(Settings.System.getInt(
-            getActivity().getContentResolver(), Settings.System.KEY_BACK_LONG_PRESS_ACTION, 0) == 7);
-        if (!navbar) {
-            mKillAppLongpressBack.setEnabled(true);
-        } else {
-            mKillAppLongpressBack.setEnabled(false);
         }
     }
 
@@ -1497,8 +1470,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeAdvancedRebootOptions();
         } else if (preference == mDevelopmentShortcut) {
             writeDevelopmentShortcutOptions();
-        } else if (preference == mKillAppLongpressBack) {
-            writeKillAppLongpressBackOptions();
         } else if (preference == mUpdateRecovery) {
             writeUpdateRecoveryOptions();
         } else {
@@ -1611,7 +1582,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private void applyStockMode() {
         enableForUser(mAdvancedReboot, !mStockMode);
         enableForUser(mDevelopmentShortcut, !mStockMode);
-        enableForUser(mKillAppLongpressBack, !mStockMode);
         enableForUser(mAdbOverNetwork, !mStockMode);
         updateRebootDialog();
     }
