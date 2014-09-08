@@ -313,7 +313,11 @@
 
     <!-- Allow rotation -->
     <string name="allow_rotate_title">Allow rotation</string>
-    <string name="allow_rotate_summary">Enables landscape mode on lockscreen.</string>
+    <string name="allow_rotate_summary">Enables landscape mode on lockscreen</string>
+
+    <!-- Allow power menu -->
+    <string name="allow_power_menu_title">Disable powermenu</string>
+    <string name="allow_power_menu_summary">Disable powermenu on lockscreen</string>
 
     <!-- Screen Record -->
     <string name="power_menu_toggle_screenrecord_title">Screen Record</string>
