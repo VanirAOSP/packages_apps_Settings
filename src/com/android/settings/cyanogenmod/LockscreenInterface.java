@@ -65,6 +65,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private static final String KEY_LOCKSCREEN_MODLOCK_ENABLED = "lockscreen_modlock_enabled";
     private static final String KEY_LOCKSCREEN_TARGETS = "lockscreen_targets";
     private static final String KEY_ALLOW_ROTATION = "allow_rotation";
+    private static final String KEY_ALLOW_POWER_MENU = "allow_power_menu";
     private static final String KEY_SEE_TRHOUGH = "see_through";
     private static final String KEY_BLUR_BEHIND = "blur_behind";
     private static final String KEY_BLUR_RADIUS = "blur_radius";
@@ -76,6 +77,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private CheckBoxPreference mSeeThrough;
     private CheckBoxPreference mMusicControls;
     private CheckBoxPreference mAllowRotation;
+    private CheckBoxPreference mAllowPM;
     private CheckBoxPreference mBlurBehind;
     private SeekBarPreference mBlurRadius;
     private CheckBoxPreference mEnableCameraWidget;
@@ -165,16 +167,20 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                 Settings.System.LOCKSCREEN_SEE_THROUGH, 0) == 1);
 
         mBlurBehind = (CheckBoxPreference) findPreference(KEY_BLUR_BEHIND);
-        mBlurBehind.setChecked(Settings.System.getInt(getContentResolver(), 
+        mBlurBehind.setChecked(Settings.System.getInt(getContentResolver(),
             Settings.System.LOCKSCREEN_BLUR_BEHIND, 0) == 1);
         mBlurRadius = (SeekBarPreference) findPreference(KEY_BLUR_RADIUS);
-        mBlurRadius.setProgress(Settings.System.getInt(getContentResolver(), 
+        mBlurRadius.setProgress(Settings.System.getInt(getContentResolver(),
             Settings.System.LOCKSCREEN_BLUR_RADIUS, 12));
         mBlurRadius.setOnPreferenceChangeListener(this);
 
         mAllowRotation = (CheckBoxPreference) findPreference(KEY_ALLOW_ROTATION);
         mAllowRotation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.LOCKSCREEN_ROTATION, 0) == 1); 
+                Settings.System.LOCKSCREEN_ROTATION, 0) == 1);
+
+        mAllowPM = (CheckBoxPreference) findPreference(KEY_ALLOW_POWER_MENU);
+        mAllowPM.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_ENABLE_POWER_MENU, 0) == 1);
 
         mMusicControls = (CheckBoxPreference) findPreference(KEY_LOCKSCREEN_MUSIC_CONTROLS);
         mMusicControls.setChecked(Settings.System.getInt(getContentResolver(),
@@ -256,6 +262,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                     mAllowRotation.isChecked()
                     ? 1 : 0);
             return true;
+
+        } else if (preference == mAllowPM) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_ENABLE_POWER_MENU,
+                    mAllowPM.isChecked()
+                    ? 1 : 0);
+            return true;
+
 
         } else if (preference == mSeeThrough) {
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SEE_THROUGH,
