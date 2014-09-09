@@ -151,7 +151,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         setHasOptionsMenu(true);
 
         // Get NavRing Actions
-        mActionCodes = NavBarHelpers.getNavBarActions();
+        mActionCodes = NavBarHelpers.getNavBarActions(getActivity());
         mActions = new String[mActionCodes.length];
         int actionqty = mActions.length;
         for (int i = 0; i < actionqty; i++) {
