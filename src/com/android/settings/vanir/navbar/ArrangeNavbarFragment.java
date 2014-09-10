@@ -31,7 +31,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.android.internal.util.vanir.AwesomeConstants;
 import com.android.internal.util.vanir.AwesomeConstants.AwesomeConstant;
-import com.android.internal.util.aokp.NavBarHelpers;
+import com.android.internal.util.vanir.NavBarHelpers;
 import com.android.settings.R;
 import com.android.settings.util.ShortcutPickerHelper;
 import com.android.settings.util.ShortcutPickerHelper.OnPickListener;
@@ -235,18 +235,19 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
 
                 final String[] entries = getActivity().getResources()
                         .getStringArray(R.array.navbar_dialog_entries);
+                AwesomeAction sa = AwesomeConstant.fromAction(mSelectedButton.singleAction);
+                AwesomeAction la = AwesomeAction.fromAction(mSelectedButton.longPressAction);
+                AwesomeAction da = AwesomeAction.fromAction(mSelectedButton.doubleTapAction);
+
                 entries[0] = entries[0]
                         + "  :  "
-                        + NavBarHelpers.getProperSummary(getActivity(),
-                        mSelectedButton.singleAction);
+                        + sa.getProperName(getActivity());
                 entries[1] = entries[1]
                         + "  :  "
-                        + NavBarHelpers.getProperSummary(getActivity(),
-                        mSelectedButton.longPressAction);
+                        + la.getProperName(getActivity());
                 entries[2] = entries[2]
                         + "  :  "
-                        + NavBarHelpers.getProperSummary(getActivity(),
-                        mSelectedButton.doubleTapAction);
+                        + da.getProperName(getActivity());
 
                 final DialogInterface.OnClickListener l = new DialogInterface.OnClickListener() {
                     @Override
@@ -355,13 +356,12 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
             TextView titleView = (TextView) convertView.findViewById(android.R.id.text1);
 
             AwesomeButtonInfo button = getItem(position);
-            String text = NavBarHelpers.getProperSummary(getContext(), button.singleAction);
+            String text = AwesomeConstant.fromAction(button.singleAction).getProperName(getContext());
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             DragGripView dragGripView = (DragGripView) convertView.findViewById(R.id.drag_handle);
 
             titleView.setText(text);
-            image.setImageDrawable(NavBarHelpers.getIconImage(getContext(),
-                    button.iconUri.isEmpty() ? button.singleAction : button.iconUri));
+            image.setImageDrawable(AwesomeConstant.fromAction(button.iconUri.isEmpty() ? button.singleAction : button.iconUri).getDrawable(getContext()));
 
 
             return convertView;

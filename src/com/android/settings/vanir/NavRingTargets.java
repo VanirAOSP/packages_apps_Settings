@@ -53,7 +53,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 import com.android.internal.util.vanir.AwesomeConstants;
-import com.android.internal.util.aokp.NavRingHelpers;
+import com.android.internal.util.vanir.NavRingHelpers;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.TargetDrawable;
 import com.android.settings.R;
