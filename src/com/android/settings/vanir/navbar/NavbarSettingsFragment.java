@@ -28,7 +28,7 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.internal.util.aokp.AwesomeConstants.AwesomeConstant;
+import com.android.internal.util.vanir.AwesomeConstants.AwesomeConstant;
 import com.android.settings.R;
 import com.android.settings.util.HardwareKeyNavbarHelper;
 import com.vanir.util.DeviceUtils;

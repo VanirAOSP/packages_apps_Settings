@@ -52,7 +52,7 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
-import com.android.internal.util.aokp.AwesomeConstants;
+import com.android.internal.util.vanir.AwesomeConstants;
 import com.android.internal.util.aokp.NavRingHelpers;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.TargetDrawable;
@@ -64,8 +64,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import static com.android.internal.util.aokp.AwesomeConstants.ASSIST_ICON_METADATA_NAME;
-import static com.android.internal.util.aokp.AwesomeConstants.AwesomeConstant;
+import static com.android.internal.util.vanir.AwesomeConstants.ASSIST_ICON_METADATA_NAME;
+import static com.android.internal.util.vanir.AwesomeConstants.AwesomeConstant;
 
 public class NavRingTargets extends Fragment implements
         ShortcutPickerHelper.OnPickListener, GlowPadView.OnTriggerListener {
