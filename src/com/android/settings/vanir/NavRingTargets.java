@@ -164,7 +164,7 @@ public class NavRingTargets extends Fragment implements
         cr = mContext.getContentResolver();
 
         // Get NavRing Actions
-        mActionCodes = NavRingHelpers.getNavRingActions();
+        mActionCodes = NavRingHelpers.getNavRingActions(getActivity());
         mActions = new String[mActionCodes.length];
         int actionqty = mActions.length;
         for (int i = 0; i < actionqty; i++) {
