@@ -53,7 +53,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 import com.android.internal.util.vanir.AwesomeConstants;
-import com.android.internal.util.aokp.NavRingHelpers;
+import com.android.internal.util.vanir.NavRingHelpers;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.TargetDrawable;
 import com.android.settings.R;
@@ -164,7 +164,7 @@ public class NavRingTargets extends Fragment implements
         cr = mContext.getContentResolver();
 
         // Get NavRing Actions
-        mActionCodes = NavRingHelpers.getNavRingActions(getActivity());
+        mActionCodes = new NavRingHelpers().getActions(getActivity());
         mActions = new String[mActionCodes.length];
         int actionqty = mActions.length;
         for (int i = 0; i < actionqty; i++) {
