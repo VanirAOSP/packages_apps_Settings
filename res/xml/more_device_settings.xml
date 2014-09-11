@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-        android:key="supported_hareware_preferences"
+        android:key="supported_hardware_preferences"
         android:title="@string/supported_hardware_preferences" />
 
     <Preference
