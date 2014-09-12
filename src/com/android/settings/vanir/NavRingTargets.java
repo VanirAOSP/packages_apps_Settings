@@ -67,17 +67,12 @@ import java.util.ArrayList;
 import static com.android.internal.util.vanir.AwesomeConstants.ASSIST_ICON_METADATA_NAME;
 import static com.android.internal.util.vanir.AwesomeConstants.AwesomeConstant;
 
-public class NavRingTargets extends Fragment implements
-        ShortcutPickerHelper.OnPickListener, GlowPadView.OnTriggerListener {
+public class NavRingTargets extends Fragment implements GlowPadView.OnTriggerListener {
     private static final String TAG = "NavRing";
     private static final boolean DEBUG = false;
 
     public static final int REQUEST_PICK_CUSTOM_ICON = 200;
     public static final int REQUEST_PICK_LANDSCAPE_ICON = 201;
-
-    private Context mContext;
-
-    private ContentResolver cr;
 
     private GlowPadView mGlowPadView;
     private Spinner mTargetNumAmount;
@@ -89,68 +84,14 @@ public class NavRingTargets extends Fragment implements
     private String[] customIcons = new String[5];
     private ViewGroup mContainer;
 
-    private String[] mActions;
-    private String[] mActionCodes;
-
     private int mTargetIndex = 0;
     private int startPosOffset;
     private int endPosOffset;
     private int mNavRingAmount;
     private boolean mBoolLongPress;
-    private int mTarget = 0;
 
-    public static enum DialogConstant {
-        ICON_ACTION {
-            @Override
-            public String value() {
-                return "**icon**";
-            }
-        },
-        LONG_ACTION {
-            @Override
-            public String value() {
-                return "**long**";
-            }
-        },
-        SHORT_ACTION {
-            @Override
-            public String value() {
-                return "**short**";
-            }
-        },
-        CUSTOM_APP {
-            @Override
-            public String value() {
-                return "**app**";
-            }
-        },
-        NOT_IN_ENUM {
-            @Override
-            public String value() {
-                return "**notinenum**";
-            }
-        };
-
-        public String value() {
-            return this.value();
-        }
-    }
-
-    public static DialogConstant funcFromString(String string) {
-        DialogConstant[] allTargs = DialogConstant.values();
-        for (int i = 0; i < allTargs.length; i++) {
-            if (string.equals(allTargs[i].value())) {
-                return allTargs[i];
-            }
-        }
-        // not in ENUM must be custom
-        return DialogConstant.NOT_IN_ENUM;
-    }
-
-    private String mString;
-
-    private static final int MENU_RESET = Menu.FIRST;
-    private static final int MENU_SAVE = Menu.FIRST + 1;
+    //for onActivityResult handling
+    private NavRingClickerer mCurrentClickerer;
 
     private ArrayList<Integer> intentList = new ArrayList<Integer>();
     private int intentCounter;
@@ -159,20 +100,7 @@ public class NavRingTargets extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mContainer = container;
-        setHasOptionsMenu(true);
-        mContext = getActivity();
-        cr = mContext.getContentResolver();
 
-        // Get NavRing Actions
-        mActionCodes = NavRingHelpers.getNavRingActions(getActivity());
-        mActions = new String[mActionCodes.length];
-        int actionqty = mActions.length;
-        for (int i = 0; i < actionqty; i++) {
-            mActions[i] = AwesomeConstants.getProperName(mContext,
-                    mActionCodes[i]);
-        }
-
-        mPicker = new ShortcutPickerHelper(this, this);
         return inflater.inflate(R.layout.navigation_ring_targets, container,
                 false);
     }
@@ -210,13 +138,12 @@ public class NavRingTargets extends Fragment implements
                     @Override
                     public void onCheckedChanged(CompoundButton v,
                             boolean checked) {
-                        Settings.System.putBoolean(cr,
+                        Settings.System.putBoolean(getActivity().getContentResolver(),
                                 Settings.System.SYSTEMUI_NAVRING_LONG_ENABLE,
                                 checked);
-                        updateDrawables();
+                        mBoolLongPress = checked;
                     }
                 });
-        updateDrawables();
     }
 
     public class AmountListener implements OnItemSelectedListener {
@@ -224,9 +151,9 @@ public class NavRingTargets extends Fragment implements
                 long id) {
             final String[] values = getResources().getStringArray(
                     R.array.pref_navring_amount_values);
-            int val = Integer.parseInt((String) values[pos]);
-            Settings.System.putInt(cr, Settings.System.SYSTEMUI_NAVRING_AMOUNT, val);
-            updateDrawables();
+            mNavRingAmount = Integer.parseInt((String) values[pos]);
+            Settings.System.putInt(getActivity().getContentResolver(), Settings.System.SYSTEMUI_NAVRING_AMOUNT, mNavRingAmount);
+            setDrawables();
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
@@ -235,7 +162,6 @@ public class NavRingTargets extends Fragment implements
     }
 
     private void setDrawables() {
-        final Context context = getActivity();
         intentCounter = 0;
         intentList.clear();
         mTargetNumAmount.setSelection(mNavRingAmount - 1);
@@ -247,7 +173,7 @@ public class NavRingTargets extends Fragment implements
         int endPosOffset = 0;
         int middleBlanks = 0;
 
-        if (isScreenPortrait()) { // NavRing on Bottom
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { // NavRing on Bottom
             startPosOffset = 1;
             endPosOffset = (mNavRingAmount) + 1;
 
@@ -268,16 +194,16 @@ public class NavRingTargets extends Fragment implements
         // Add Initial Place Holder Targets
         for (int i = 0; i < startPosOffset; i++) {
             intentList.add(-1);
-            storedDraw.add(NavRingHelpers.getTargetDrawable(context, null));
+            storedDraw.add(NavRingHelpers.getTargetDrawable(getActivity(), null));
         }
         // Add User Targets
         for (int i = 0; i < middleStart; i++) {
             TargetDrawable drawable;
             if (!TextUtils.isEmpty(customIcons[i])) {
-                drawable = NavRingHelpers.getCustomDrawable(mContext,
+                drawable = NavRingHelpers.getCustomDrawable(getActivity(),
                         customIcons[i]);
             } else {
-                drawable = NavRingHelpers.getTargetDrawable(mContext,
+                drawable = NavRingHelpers.getTargetDrawable(getActivity(),
                         targetActivities[i]);
             }
             drawable.setEnabled(true);
@@ -289,7 +215,7 @@ public class NavRingTargets extends Fragment implements
         // Add middle Place Holder Targets
         for (int j = 0; j < middleBlanks; j++) {
             intentList.add(-1);
-            storedDraw.add(NavRingHelpers.getTargetDrawable(context, null));
+            storedDraw.add(NavRingHelpers.getTargetDrawable(getActivity(), null));
         }
 
         // Add Rest of User Targets for leftys
@@ -297,10 +223,10 @@ public class NavRingTargets extends Fragment implements
             TargetDrawable drawable;
             int i = j + middleStart;
             if (!TextUtils.isEmpty(customIcons[i])) {
-                drawable = NavRingHelpers.getCustomDrawable(mContext,
+                drawable = NavRingHelpers.getCustomDrawable(getActivity(),
                         customIcons[i]);
             } else {
-                drawable = NavRingHelpers.getTargetDrawable(mContext,
+                drawable = NavRingHelpers.getTargetDrawable(getActivity(),
                         targetActivities[i]);
             }
             drawable.setEnabled(true);
@@ -312,137 +238,28 @@ public class NavRingTargets extends Fragment implements
         // Add End Place Holder Targets
         for (int i = 0; i < endPosOffset; i++) {
             intentList.add(-1);
-            storedDraw.add(NavRingHelpers.getTargetDrawable(context, null));
+            storedDraw.add(NavRingHelpers.getTargetDrawable(getActivity(), null));
         }
 
         mGlowPadView.setTargetResources(storedDraw);
-        maybeSwapSearchIcon();
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, MENU_RESET, 0, R.string.reset)
-                .setIcon(R.drawable.ic_settings_backup)
-                .setAlphabeticShortcut('r')
-                .setShowAsAction(
-                        MenuItem.SHOW_AS_ACTION_IF_ROOM
-                                | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        menu.add(0, MENU_SAVE, 0, R.string.save)
-                .setIcon(R.drawable.ic_menu_save)
-                .setAlphabeticShortcut('s')
-                .setShowAsAction(
-                        MenuItem.SHOW_AS_ACTION_IF_ROOM
-                                | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case MENU_RESET:
-                resetAll();
-                return true;
-            case MENU_SAVE:
-                saveAll();
-                Toast.makeText(getActivity(), R.string.navring_target_save,
-                        Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return false;
+        //maybe swap search icon
+        Intent intent = ((SearchManager) getActivity()
+                .getSystemService(Context.SEARCH_SERVICE)).getAssistIntent(
+                getActivity(), true, UserHandle.USER_CURRENT);
+        if (intent != null) {
+            ComponentName component = intent.getComponent();
+            if (component == null
+                    || !mGlowPadView
+                            .replaceTargetDrawablesIfPresent(
+                                    component,
+                                    ASSIST_ICON_METADATA_NAME,
+                                    com.android.internal.R.drawable.ic_action_assist_generic)) {
+                if (DEBUG) {
+                    Log.v(TAG, "Couldn't grab icon for component " + component);
+                }
+            }
         }
-    }
-
-    /**
-     * Resets the target layout to stock
-     */
-    private void resetAll() {
-        final AlertDialog d = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.reset)
-                .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setMessage(R.string.navring_target_reset_message)
-                .setPositiveButton(R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                for (int i = 0; i < 5; i++) {
-                                    Settings.System.putString(cr,
-                                            Settings.System.SYSTEMUI_NAVRING[i],
-                                            null);
-                                    Settings.System.putString(
-                                                    cr,
-                                                    Settings.System.SYSTEMUI_NAVRING_LONG[i],
-                                                    null);
-                                    Settings.System.putString(
-                                                    cr,
-                                                    Settings.System.SYSTEMUI_NAVRING_ICON[i],
-                                                    null);
-
-                                }
-                                Settings.System.putString(cr,
-                                        Settings.System.SYSTEMUI_NAVRING[0],
-                                        AwesomeConstant.ACTION_ASSIST.value());
-                                Settings.System.putInt(cr,
-                                        Settings.System.SYSTEMUI_NAVRING_AMOUNT,
-                                        1);
-                                updateDrawables();
-                                Toast.makeText(getActivity(),
-                                        R.string.navring_target_reset,
-                                        Toast.LENGTH_LONG).show();
-                                updateStringIntent();
-                            }
-                        }).setNegativeButton(R.string.cancel, null).create();
-
-        d.show();
-    }
-
-    /**
-     * Save targets to settings provider
-     */
-    private void saveAll() {
-        for (int i = 0; i < 5; i++) {
-            Settings.System.putString(cr, Settings.System.SYSTEMUI_NAVRING[i],
-                    targetActivities[i]);
-            Settings.System.putString(cr, Settings.System.SYSTEMUI_NAVRING_LONG[i],
-                    longActivities[i]);
-            Settings.System.putString(cr, Settings.System.SYSTEMUI_NAVRING_ICON[i],
-                    customIcons[i]);
-        }
-        updateDrawables();
-        updateStringIntent();
-    }
-
-    @Override
-    public void shortcutPicked(String uri, String friendlyName, Bitmap bmp,
-            boolean isApplication) {
-        switch (mTarget) {
-            case 0:
-                targetActivities[mTargetIndex] = uri;
-                break;
-            case 1:
-                longActivities[mTargetIndex] = uri;
-                Toast.makeText(
-                        getActivity(),
-                        AwesomeConstants.getProperName(mContext, uri)
-                                + "  "
-                                + getResources().getString(
-                                        R.string.action_long_save),
-                        Toast.LENGTH_LONG).show();
-                break;
-            default:
-                break;
-        }
-
-        setDrawables();
-    }
-
-    private void updateStringIntent() {
-        Intent ring = new Intent();
-        ring.setAction("com.android.navring.ACTION_UPDATE");
-        mContext.sendBroadcastAsUser(ring, UserHandle.ALL);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -450,21 +267,23 @@ public class NavRingTargets extends Fragment implements
             if (requestCode == ShortcutPickerHelper.REQUEST_PICK_SHORTCUT
                     || requestCode == ShortcutPickerHelper.REQUEST_PICK_APPLICATION
                     || requestCode == ShortcutPickerHelper.REQUEST_CREATE_SHORTCUT) {
-                mPicker.onActivityResult(requestCode, resultCode, data);
+                if (mCurrentClickerer != null) //it shouldn't be, but let's check anyways
+                    mCurrentClickerer.onActivityResult(requestCode, resultCode, data);
 
             } else if ((requestCode == REQUEST_PICK_CUSTOM_ICON)
                     || (requestCode == REQUEST_PICK_LANDSCAPE_ICON)) {
 
-                String iconName = getIconFileName(mTargetIndex);
+                String iconName = "navring_icon_" + mTargetIndex + ".png";
                 FileOutputStream iconStream = null;
                 try {
-                    iconStream = mContext.openFileOutput(iconName,
+                    iconStream = getActivity().openFileOutput(iconName,
                             Context.MODE_WORLD_READABLE);
                 } catch (FileNotFoundException e) {
                     return; // NOOOOO
                 }
 
-                Uri selectedImageUri = getTempFileUri();
+                Uri selectedImageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                        "tmp_icon_" + mTargetIndex + ".png"));
                 try {
                     Log.e(TAG,
                             "Selected image path: "
@@ -478,71 +297,71 @@ public class NavRingTargets extends Fragment implements
                     return;
                 }
                 customIcons[mTargetIndex] = Uri.fromFile(
-                        new File(mContext.getFilesDir(), iconName)).getPath();
+                        new File(getActivity().getFilesDir(), iconName)).getPath();
 
                 File f = new File(selectedImageUri.getPath());
                 if (f.exists()) {
                     f.delete();
                 }
-
-                Toast.makeText(
-                        getActivity(),
-                        mTargetIndex
-                                + getResources().getString(
-                                        R.string.custom_app_icon_successfully),
-                        Toast.LENGTH_LONG).show();
                 setDrawables();
+                Settings.System.putString(getActivity().getContentResolver(), Settings.System.SYSTEMUI_NAVRING_ICON[mTargetIndex],customIcons[mTargetIndex]);
             }
-        } else if (resultCode == Activity.RESULT_CANCELED && data != null) {
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void updateDrawables() {
-        for (int i = 0; i < 5; i++) {
-            targetActivities[i] = Settings.System.getString(cr,
-                    Settings.System.SYSTEMUI_NAVRING[i]);
-            longActivities[i] = Settings.System.getString(cr,
-                    Settings.System.SYSTEMUI_NAVRING_LONG[i]);
-            customIcons[i] = Settings.System.getString(cr,
-                    Settings.System.SYSTEMUI_NAVRING_ICON[i]);
-        }
-        mBoolLongPress = (Settings.System.getBoolean(cr,
-                Settings.System.SYSTEMUI_NAVRING_LONG_ENABLE, false));
+    @Override
+    public void onTrigger(View v, final int target) {
+        mTargetIndex = intentList.get(target);
 
-        mNavRingAmount = Settings.System.getInt(cr,
-                Settings.System.SYSTEMUI_NAVRING_AMOUNT, 1);
-        // Not using getBoolean here, because CURRENT_UI_MODE can be 0,1 or 2
-        setDrawables();
+        final int entRes = mBoolLongPress ? R.array.navring_long_dialog_entries : R.array.navring_short_dialog_entries;
+        final int valRes = mBoolLongPress ? R.array.navring_long_dialog_values : R.array.navring_short_dialog_values;
+        
+        final String[] values = getActivity().getResources().getStringArray(valRes);
+
+        values[0] += "  :  " + AwesomeConstants.getProperName(getActivity(), targetActivities[mTargetIndex]);
+        if (mBoolLongPress) {
+            values[1] += "  :  " + AwesomeConstants.getProperName(getActivity(), longActivities[mTargetIndex]);
+        }
+
+        new AlertDialog.Builder(getActivity()).setTitle(getResources().getString(R.string.choose_action_title)).setItems(
+                getActivity().getResources().getStringArray(entRes),
+                new NavRingSettingTypeClickerer(this, values)).show();
     }
 
-    public void onValueChange(String uri) {
-        DialogConstant mFromString = funcFromString(uri);
-        switch (mFromString) {
-            case CUSTOM_APP:
-                mPicker.pickShortcut();
-                break;
-            case SHORT_ACTION:
-                mTarget = 0;
-                mString = Settings.System.SYSTEMUI_NAVRING[mTargetIndex];
-                createDialog(
-                        getResources()
-                                .getString(R.string.choose_action_short_title),
-                        mActions, mActionCodes);
-                break;
-            case LONG_ACTION:
-                mTarget = 1;
-                mString = Settings.System.SYSTEMUI_NAVRING_LONG[mTargetIndex];
-                createDialog(
-                        getResources().getString(R.string.choose_action_long_title),
-                        mActions, mActionCodes);
-                break;
-            case ICON_ACTION:
-                int width = 85;
-                int height = width;
+    //this handles the short/icon or short/long/icon selection
+    private class NavRingSettingTypeClickerer implements DialogInterface.OnClickListener {
 
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        private final String[] vals;
+
+        private static final String T_ICON = "**icon**";
+        private static final String T_SHORT = "**short**";
+        private static final String T_LONG = "**long**";
+        private final Fragment mParent;
+
+
+        private final String[] mActionNames;
+        static {
+            /*will be cleaned up during aciton launcher stuff rewrite*/
+            final String[] acts = NavRingHelper.getNavRingActions();
+            final int l = acts.length();
+            mActionNames = new String[l];
+            for(int i=0;i<l;i++)
+                mActionNames[i] = AwesomeConstant.getProperName(getActivity(), acts[i]);
+        }
+
+        public NavRingSettingTypeClickerer(final Fragment p, final String[] v) {
+            vals = v;
+            mParent = p;
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int item) {
+            if (T_ICON.equals(vals[item])) {
+                final int width = 85;
+                final int height = width;
+
+                final Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
                 intent.setType("image/*");
                 intent.putExtra("crop", "true");
                 intent.putExtra("aspectX", width);
@@ -550,68 +369,62 @@ public class NavRingTargets extends Fragment implements
                 intent.putExtra("outputX", width);
                 intent.putExtra("outputY", height);
                 intent.putExtra("scale", true);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, getTempFileUri());
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"tmp_icon_" + mTargetIndex + ".png")));
                 intent.putExtra("outputFormat",
                         Bitmap.CompressFormat.PNG.toString());
-                Log.i(TAG, "started for result, should output to: "
-                        + getTempFileUri());
                 startActivityForResult(intent, REQUEST_PICK_CUSTOM_ICON);
-                break;
-            case NOT_IN_ENUM:
-                switch (mTarget) {
-                    case 0:
-                        targetActivities[mTargetIndex] = uri;
-                        break;
-                    case 1:
-                        longActivities[mTargetIndex] = uri;
-                        Toast.makeText(
-                                getActivity(),
-                                AwesomeConstants.getProperName(mContext, uri)
-                                        + "  "
-                                        + getResources().getString(
-                                                R.string.action_long_save),
-                                Toast.LENGTH_LONG).show();
-                        break;
-                    default:
-                        break;
-                }
-                break;
-
+            } else {
+                //handle short and long press options
+                final boolean isLong = T_LONG.equals(vals[item]);
+                final int titleRes = isLong ? R.string.choose_action_long_title : R.string.choose_action_short_title;
+                new AlertDialog.Builder(getActivity()).setTitle(getResources().getString(R.string.choose_action_title))
+                        .setItems(mActionNames,
+                                (mCurrentClickerer = new NavRingClickerer(mParent, isLong)))
+                        .show();
+            }
+            setDrawables();
         }
-        setDrawables();
     }
 
-    @Override
-    public void onTrigger(View v, final int target) {
-        mTargetIndex = intentList.get(target);
-        if (mBoolLongPress) {
-            final String[] stringArray = mContext.getResources()
-                    .getStringArray(R.array.navring_long_dialog_entries);
-            stringArray[0] = stringArray[0]
-                    + "  :  "
-                    + AwesomeConstants.getProperName(mContext,
-                            targetActivities[mTargetIndex]);
-            stringArray[1] = stringArray[1]
-                    + "  :  "
-                    + AwesomeConstants.getProperName(mContext,
-                            longActivities[mTargetIndex]);
-            createDialog(
-                    getResources().getString(R.string.choose_action_title),
-                    stringArray,
-                    getResources().getStringArray(
-                            R.array.navring_long_dialog_values));
-        } else {
-            final String[] stringArray = mContext.getResources()
-                    .getStringArray(R.array.navring_short_dialog_entries);
-            stringArray[0] = stringArray[0]
-                    + "  :  "
-                    + AwesomeConstants.getProperName(mContext,
-                            targetActivities[mTargetIndex]);
-            createDialog(
-                    getResources().getString(R.string.choose_action_title),
-                    stringArray,
-                    getResources().getStringArray(
-                            R.array.navring_short_dialog_values));
+    //displays action list, etc.
+    private class NavRingClickerer implements DialogInterface.OnClickListener {
+
+        private boolean isLong = false;
+        private final ShortcutPickerHelper.OnPickListener mPicker;
+        private final String 
+
+        private static final String T_APP = "**app**";
+
+        public NavRingClickerer(Fragment f, boolean l) {
+            isLong = l;
+            mPicker = new ShortcutPickerHelper(f, this);
+        }
+
+        public void onActivityResult(int req, int res, Intent i) {
+            mPicker.onActivityResult(req, res, i);
+        }
+
+        @Override
+        public void shortcutPicked(String uri, String friendlyName, Bitmap bmp, boolean isApplication) {
+            if (isLong)
+                longActivities[mTargetIndex] = AwesomeConstants.getProperName(getActivity(), uri);
+            else
+                targetActivities[mTargetIndex] = AwesomeConstants.getProperName(getActivity(), uri);
+            setDrawables();
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int item) {
+            String act = NavRingHelpers.getNavRingActions(getActivity())[item];
+            if (T_APP.equals(act)) {
+                mPicker.pickShortcut();
+            } else {
+                if (isLong)
+                    longActivities[mTargetIndex] = AwesomeConstants.getProperName(getActivity(), act);
+                else
+                    targetActivities[mTargetIndex] = AwesomeConstants.getProperName(getActivity(), act);
+            }
+            setDrawables();
         }
     }
 
@@ -629,65 +442,6 @@ public class NavRingTargets extends Fragment implements
 
     public void onTargetChange(View v, final int target) {
     }
-
-    public void createDialog(final String title, final String[] entries,
-            final String[] values) {
-        final DialogInterface.OnClickListener l = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                onValueChange(values[item]);
-                dialog.dismiss();
-            }
-        };
-
-        final AlertDialog dialog = new AlertDialog.Builder(mContext)
-                .setTitle(title).setItems(entries, l).create();
-
-        dialog.show();
-    }
-
-    private void maybeSwapSearchIcon() {
-        final Context context = getActivity();
-        Intent intent = ((SearchManager) context
-                .getSystemService(Context.SEARCH_SERVICE)).getAssistIntent(
-                context, true, UserHandle.USER_CURRENT);
-        if (intent != null) {
-            ComponentName component = intent.getComponent();
-            if (component == null
-                    || !mGlowPadView
-                            .replaceTargetDrawablesIfPresent(
-                                    component,
-                                    ASSIST_ICON_METADATA_NAME,
-                                    com.android.internal.R.drawable.ic_action_assist_generic)) {
-                if (DEBUG) {
-                    Log.v(TAG, "Couldn't grab icon for component " + component);
-                }
-            }
-        }
-    }
-
-    public boolean isScreenPortrait() {
-        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-    }
-
-    private Uri getTempFileUri() {
-        return Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                "tmp_icon_" + mTargetIndex + ".png"));
-
-    }
-
-    private String getIconFileName(int index) {
-        return "navring_icon_" + index + ".png";
-    }
-
-    private class H extends Handler {
-        public void handleMessage(Message m) {
-            switch (m.what) {
-            }
-        }
-    }
-
-    private H mHandler = new H();
 
     @Override
     public void onFinishFinalAnimation() {
