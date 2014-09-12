@@ -27,7 +27,7 @@
     <string name="default_string">Default</string>
     <string name="performance_settings">Performance</string>
     <string name="controls">Controls</string>
-    <string name="recents">Recents panel</string>
+    <string name="recents_settings_title">Recents panel</string>
     <string name="general">General preferences</string>
     <string name="kill_app_navbar_summary">To enable longpress back to kill set a longpress target in Navigation bar settings</string>
 
@@ -873,7 +873,8 @@
     <string name="omniswitch_warning_title">Warning</string>
     <string name="omniswitch_not_installed_summary">OmniSwitch is not installed</string>
     <string name="omniswitch_not_installed_message">OmniSwitch is not installed</string>
-    <string name="omniswitch_enabled_message">Please turn OmniSwitch on and configure it to start on boot.</string>
+    <string name="omniswitch_enabled_message">For proper functionality, OmniSwitch must be enabled and configured to start on boot.
+Would you like to be taken to OmniSwitch settings now?</string>
 
     <!-- ATTENTION: RTL languages need to replace left with right -->
     <string name="recent_panel_lefty_mode_title">Show on the left edge</string>
@@ -1011,4 +1012,6 @@
 
     <string name="network_settings_title">Mobile</string>
     <string name="phone_call_settings_title">Call settings</string>
+
+    <string name="random_crap_title">Vanir\'s home for wayward features</string>
 </resources>

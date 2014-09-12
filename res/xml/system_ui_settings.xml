@@ -74,6 +74,12 @@
         android:title="@string/notification_drawer_title" />
 
     <PreferenceScreen
+        settings:includeXmlForSearch="@xml/recents_settings"
+        android:key="recents_settings"
+        android:fragment="com.android.settings.vanir.RecentsSettings"
+        android:title="@string/recents_settings_title" />
+
+    <PreferenceScreen
         settings:includeXmlForSearch="@xml/system_ui_more"
         android:id="@+id/system_ui_more"
         android:fragment="com.android.settings.vanir.AdditionalSystemUI"

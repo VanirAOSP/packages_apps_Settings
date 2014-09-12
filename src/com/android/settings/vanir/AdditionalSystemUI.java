@@ -59,32 +59,15 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
     private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
     private static final String KEY_ANIMATION_OPTIONS = "category_animation_options";
     private static final String KEY_POWER_CRT_MODE = "system_power_crt_mode";
-    private static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "vanir_interface_recents_mem_display";
     private static final String KEY_DUAL_PANEL = "force_dualpanel";
-    private static final String RECENTS_CLEAR_ALL = "recents_clear_all";
     private static final String PREF_DISABLE_BOOTANIM = "disable_bootanimation";
-    private static final String CUSTOM_RECENT_MODE = "custom_recent_mode";
-    private static final String RECENT_PANEL_LEFTY_MODE = "recent_panel_lefty_mode";
-    private static final String RECENT_PANEL_SCALE = "recent_panel_scale";
-    private static final String RECENT_PANEL_EXPANDED_MODE = "recent_panel_expanded_mode";
-
-    public static final String OMNISWITCH_PACKAGE_NAME = "org.omnirom.omniswitch";
-
-    public static Intent INTENT_OMNISWITCH_SETTINGS = new Intent(Intent.ACTION_MAIN)
-            .setClassName(OMNISWITCH_PACKAGE_NAME, OMNISWITCH_PACKAGE_NAME + ".SettingsActivity");
 
     private Preference mCustomLabel;
     private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
     private ListPreference mCrtMode;
-    private CheckBoxPreference mMembar;
+    private CheckBoxPreference mBootAnimation;
     private CheckBoxPreference mDualPanel;
     private CheckBoxPreference mSystemLogging;
-    private ListPreference mClearAll;
-    private CheckBoxPreference mBootAnimation;
-    private ListPreference mRecentsCustom;
-    private CheckBoxPreference mRecentPanelLeftyMode;
-    private ListPreference mRecentPanelScale;
-    private ListPreference mRecentPanelExpandedMode;
 
     Preference mLcdDensity;
     int newDensityValue;
@@ -126,19 +109,6 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             prefSet.removePreference(animationOptions);
         }
 
-        mClearAll = (ListPreference) prefSet.findPreference(RECENTS_CLEAR_ALL);
-        int value = Settings.System.getInt(getContentResolver(),
-                Settings.System.CLEAR_RECENTS_BUTTON_LOCATION, 1);
-        mClearAll.setValue(String.valueOf(value));
-        mClearAll.setSummary(mClearAll.getEntry());
-        mClearAll.setOnPreferenceChangeListener(this);
-
-        mMembar = (CheckBoxPreference) prefSet.findPreference(SYSTEMUI_RECENTS_MEM_DISPLAY);
-        if (mMembar != null) {
-        mMembar.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1);
-        }
-
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
         mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(),
                 Settings.System.FORCE_DUAL_PANEL, false));
@@ -155,57 +125,14 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
         mBootAnimation = (CheckBoxPreference) findPreference(PREF_DISABLE_BOOTANIM);
         updateBootAnimationSummary(true);
 
-        mRecentsCustom = (ListPreference) findPreference(CUSTOM_RECENT_MODE);
-        mRecentsCustom.setSummary(mRecentsCustom.getEntry());
-        mRecentsCustom.setOnPreferenceChangeListener(this);
-
-        mRecentPanelLeftyMode = (CheckBoxPreference) findPreference(RECENT_PANEL_LEFTY_MODE);
-        mRecentPanelLeftyMode.setOnPreferenceChangeListener(this);
-
-        mRecentPanelScale = (ListPreference) findPreference(RECENT_PANEL_SCALE);
-        String recentPanelScale = Settings.System.getString(getActivity().getContentResolver(), Settings.System.RECENT_PANEL_SCALE_FACTOR);
-        if (recentPanelScale != null) {
-            mRecentPanelScale.setValue(recentPanelScale);
-        }
-        mRecentPanelScale.setOnPreferenceChangeListener(this);
-
-        mRecentPanelExpandedMode = (ListPreference) findPreference(RECENT_PANEL_EXPANDED_MODE);
-        String recentPanelExpandedMode = Settings.System.getString(getActivity().getContentResolver(), Settings.System.RECENT_PANEL_EXPANDED_MODE);
-        if (recentPanelExpandedMode != null) {
-            mRecentPanelExpandedMode.setValue(recentPanelExpandedMode);
-            mRecentPanelScale.setSummary(mRecentPanelScale.getEntry());
-        }
-        mRecentPanelExpandedMode.setOnPreferenceChangeListener(this);
-
         updateCustomLabelTextSummary();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateRecentsDependencies();
-    }
-
-    private void updatePreference() {
-        boolean customRecent = Settings.System.getBoolean(getActivity().getContentResolver(),
-                Settings.System.CUSTOM_RECENTS, false);
-
-        if (customRecent == false) {
-            mRecentPanelLeftyMode.setEnabled(false);
-            mRecentPanelScale.setEnabled(false);
-            mRecentPanelExpandedMode.setEnabled(false);
-        } else {
-            mRecentPanelLeftyMode.setEnabled(true);
-            mRecentPanelScale.setEnabled(true);
-            mRecentPanelExpandedMode.setEnabled(true);
-        }
-    }
-
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        final String key = preference.getKey();
         ContentResolver resolver = getActivity().getContentResolver();
 
-        if (KEY_POWER_CRT_MODE.equals(key)) {
+        if (KEY_POWER_CRT_MODE.equals(preference.getKey())) {
             int value = Integer.parseInt((String) objValue);
             int index = mCrtMode.findIndexOfValue((String) objValue);
             Settings.System.putInt(getContentResolver(),
@@ -213,67 +140,15 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
                     value);
             mCrtMode.setSummary(mCrtMode.getEntries()[index]);
             return true;
-
-        } else if (RECENTS_CLEAR_ALL.equals(key)) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mClearAll.findIndexOfValue((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.CLEAR_RECENTS_BUTTON_LOCATION,
-                    value);
-            mClearAll.setSummary(mClearAll.getEntries()[index]);
-            return true;
-
-        } else if (preference == mRecentsCustom) {
-            int value = Integer.parseInt((String) objValue);
-            int index = mRecentsCustom.findIndexOfValue((String) objValue);
-
-            if (value == 2 && !isOmniSwitchInstalled()) {
-                openOmniSwitchNotInstalledWarning();
-                return true;
-            }
-
-            Settings.System.putInt(resolver,
-                    Settings.System.CUSTOM_RECENTS, value);
-            mRecentsCustom.setSummary(mRecentsCustom.getEntries()[index]);
-            updateRecentsDependencies();
-
-            if (value == 2) {
-                openOmniSwitchEnabledWarning();
-            }
-            return true;
-
-        } else if (preference == mRecentPanelScale) {
-            int value = Integer.parseInt((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
-            updateRecentPanelScaleOptions(objValue);
-            return true;
-
-        } else if (preference == mRecentPanelLeftyMode) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.RECENT_PANEL_GRAVITY,
-                    ((Boolean) objValue) ? Gravity.LEFT : Gravity.RIGHT);
-            return true;
-
-        } else if (preference == mRecentPanelExpandedMode) {
-            int value = Integer.parseInt((String) objValue);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.RECENT_PANEL_EXPANDED_MODE, value);
-            return true;
         }
+
         return false;
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
-        if (preference == mMembar) {
-            boolean checked = ((CheckBoxPreference) preference).isChecked();
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, checked ? 1 : 0);
-            return true;
-
-        } else if (preference == mBootAnimation) {
+        if (preference == mBootAnimation) {
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             postBootAnimationPreference(checked);
             return true;
@@ -325,17 +200,6 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    private void updateRecentsDependencies() {
-        int mRecentsStyle = Settings.System.getInt(getActivity().getContentResolver(),
-                                Settings.System.CUSTOM_RECENTS, RecentsConstants.RECENTS_AOSP);
-
-        mClearAll.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_AOSP);
-        mMembar.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_AOSP);
-        mRecentPanelLeftyMode.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
-        mRecentPanelScale.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
-        mRecentPanelExpandedMode.setEnabled(mRecentsStyle == RecentsConstants.RECENTS_SLIM);
     }
 
     private void postBootAnimationPreference(boolean isChecked) {
@@ -394,45 +258,6 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
             mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
         } else {
             mCustomLabel.setSummary(mCustomLabelText);
-        }
-    }
-
-    private void updateRecentPanelScaleOptions(Object objValue) {
-        int index = mRecentPanelScale.findIndexOfValue((String) objValue);
-        int value = Integer.valueOf((String) objValue);
-        Settings.Secure.putInt(getActivity().getContentResolver(),
-                Settings.System.RECENT_PANEL_SCALE_FACTOR, value);
-        mRecentPanelScale.setSummary(mRecentPanelScale.getEntries()[index]);
-    }
-
-     private void openOmniSwitchNotInstalledWarning() {
-        new AlertDialog.Builder(getActivity())
-        .setTitle(getResources().getString(R.string.omniswitch_warning_title))
-        .setMessage(getResources().getString(R.string.omniswitch_not_installed_message))
-        .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
-        }).show();
-    }
-
-    private void openOmniSwitchEnabledWarning() {
-        new AlertDialog.Builder(getActivity())
-        .setTitle(getResources().getString(R.string.omniswitch_warning_title))
-        .setMessage(getResources().getString(R.string.omniswitch_enabled_message))
-        .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                startActivity(INTENT_OMNISWITCH_SETTINGS);
-            }
-        }).show();
-    }
-
-    private boolean isOmniSwitchInstalled() {
-        final PackageManager pm = getPackageManager();
-        try {
-            pm.getPackageInfo(OMNISWITCH_PACKAGE_NAME, PackageManager.GET_ACTIVITIES);
-            return true;
-        } catch (NameNotFoundException e) {
-            return false;
         }
     }
 }
