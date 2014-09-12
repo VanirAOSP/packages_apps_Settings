@@ -27,7 +27,7 @@
     <string name="default_string">Default</string>
     <string name="performance_settings">Performance</string>
     <string name="controls">Controls</string>
-    <string name="recents">Recents panel</string>
+    <string name="recents_settings_title">Recents panel</string>
     <string name="general">General preferences</string>
     <string name="kill_app_navbar_summary">To enable longpress back to kill set a longpress target in Navigation bar settings</string>
 
@@ -1011,4 +1011,6 @@
 
     <string name="network_settings_title">Mobile</string>
     <string name="phone_call_settings_title">Call settings</string>
+
+    <string name="random_crap_title">Vanir\'s home for wayward features</string>
 </resources>
