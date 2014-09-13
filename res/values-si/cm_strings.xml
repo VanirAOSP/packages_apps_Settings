@@ -378,7 +378,7 @@
   <string name="quiet_hours_ringer_mute_all">සියලුම අමතන්නන් සඳහා නදවනය නිශ්ශබ්දයි</string>
   <string name="start_time_title">ආරම්භය</string>
   <string name="end_time_title">අවසානය</string>
-  <string name="mod_version">CyanogenMod අනුවාදය</string>
+  <string name="mod_version">Vanir අනුවාදය</string>
   <string name="mod_version_default">නොදනී</string>
   <string name="build_date">නිමැවූ දිනය</string>
   <string name="cpu_info">මධ්‍යම සැකසුම් ඒකකය</string>
