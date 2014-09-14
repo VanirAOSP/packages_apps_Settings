@@ -34,10 +34,11 @@
         android:fragment="com.android.settings.vanir.ButtonNavigation"
         android:title="@string/button_navigation_title" />
 
-    <PreferenceScreen
+    <com.android.settings.vanir.VanirPreferenceSwitch
         android:key="navigation_bar"
         android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
-        android:title="@string/category_navbar" />
+        android:title="@string/category_navbar"
+        android:widgetLayout="@layout/listview_embedded_switchpreference" />
 
     <com.android.settings.vanir.VanirPreferenceSwitch
         android:key="navigation_bar_ring"
