@@ -39,7 +39,7 @@
         android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
         android:title="@string/category_navbar" />
 
-    <com.android.settings.vanir.NavringPreferenceSwitch
+    <com.android.settings.vanir.VanirPreferenceSwitch
         android:key="navigation_bar_ring"
         android:fragment="com.android.settings.vanir.NavRingTargets"
         android:title="@string/category_navring"

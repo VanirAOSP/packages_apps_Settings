@@ -41,7 +41,7 @@ import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.vanir.NavringPreferenceSwitch;
+import com.android.settings.vanir.VanirPreferenceSwitch;
 import com.android.settings.vanir.gesturepanel.GestureBuilderActivity;
 
 import java.util.ArrayList;
@@ -59,6 +59,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private static final String KEY_IMMERSIVE_LOL = "immersive_mode_lol_profile";
     private static final String KEY_IMMERSIVE_ORIENTATION = "immersive_orientation";
     private static final String KEY_NAVRING_SWITCH = "navigation_bar_ring";
+    private static final String KEY_NAVBAR_SWITCH = "navigation_bar";
     private static final String KEY_BUTTON_NAVIGATION = "old_buttons_navigation";
     private static final String HARDWARE_IMMERSIVE_STYLE = "hardware_immersive_style";
     private static final String IMMERSIVE_ENABLED = "immersive_enabled";
@@ -73,7 +74,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private SwitchPreference mImmersiveModeState;
     private Preference mNavigation;
 
-    private NavringPreferenceSwitch mNavringPreference;
+    private VanirPreferenceSwitch mNavringPreference;
     private int immersiveModeValue;
     private int deviceKeys;
 
@@ -113,7 +114,8 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
             getPreferenceScreen().removePreference(mNavigation);
         }
 
-        mNavringPreference = (NavringPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
+        mNavringPreference = (VanirPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
+        mNavringPreference.setSettingToWatch(Settings.System.ENABLE_NAVIGATION_RING, 1);
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(),
