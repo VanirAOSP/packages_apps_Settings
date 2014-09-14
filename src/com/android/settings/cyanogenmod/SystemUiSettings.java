@@ -75,6 +75,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
     private Preference mNavigation;
 
     private VanirPreferenceSwitch mNavringPreference;
+    private VanirPreferenceSwitch mNavbarPreference;
     private int immersiveModeValue;
     private int deviceKeys;
 
@@ -116,6 +117,10 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
         mNavringPreference = (VanirPreferenceSwitch) findPreference(KEY_NAVRING_SWITCH);
         mNavringPreference.setSettingToWatch(Settings.System.ENABLE_NAVIGATION_RING, 1);
+
+        mNavbarPreference = (VanirPreferenceSwitch) findPreference(KEY_NAVBAR_SWITCH);
+        if (HardwareKeyNavbarHelper.shouldShowNavbarToggle())
+            mNavbarPreference.setSettingToWatch(Settings.System.ENABLE_NAVIGATION_BAR);
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(),
@@ -173,7 +178,7 @@ public class SystemUiSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mNavringPreference) {
+        if (preference == mNavringPreference || preference == mNavbarPreference) {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
