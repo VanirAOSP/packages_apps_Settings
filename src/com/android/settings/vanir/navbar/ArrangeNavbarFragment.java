@@ -54,6 +54,10 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     public static final int REQUEST_PICK_CUSTOM_ICON = 200;
     public static final int REQUEST_PICK_LANDSCAPE_ICON = 201;
 
+    private static final String[] buttonSettingsStrings = new String[] {
+        Settings.System.NAVIGATION_BAR_BUTTONS,Settings.System.NAVIGATION_BAR_BUTTONS_TWO,Settings.System.NAVIGATION_BAR_BUTTONS_THREE,Settings.System.NAVIGATION_BAR_BUTTONS_FOUR
+    };
+
     DragSortListView mListView;
     NavbarButtonsAdapter mAdapter;
     DragSortController mDragSortController;
@@ -568,46 +572,14 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
                 s.append("|");
             }
         }
-        switch (mCurrentLayout) {
-            case 1:
-                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS, s.toString());
-                break;
-            case 2:
-                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_TWO, s.toString());
-                break;
-            case 3:
-                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_THREE, s.toString());
-                break;
-            case 4:
-                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_FOUR, s.toString());
-                break;
-            case 5:
-                Settings.System.putString(getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_BUTTONS_FIVE, s.toString());
-                break;
-        }
+        Settings.System.putString(getActivity().getContentResolver(), buttonSettingsStrings[mCurrentLayout-1], s.toString());
     }
 
     private void readUserConfig() {
         final ContentResolver cr = getActivity().getContentResolver();
         String buttons = "";
         mNavButtons.clear();
-        switch (mCurrentLayout) {
-            case 1:
-                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS);
-                break;
-            case 2:
-                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_TWO);
-                break;
-            case 3:
-                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_THREE);
-                break;
-            case 4:
-                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_FOUR);
-                break;
-            case 5:
-                buttons = Settings.System.getString(cr, Settings.System.NAVIGATION_BAR_BUTTONS_FIVE);
-                break;
-        }
+        buttons = Settings.System.getString(cr, buttonSettingsStrings[mCurrentLayout-1]);
         if (buttons == null || buttons.isEmpty()) {
             buttons = AwesomeConstants.defaultNavbarLayout(getActivity());
         }
