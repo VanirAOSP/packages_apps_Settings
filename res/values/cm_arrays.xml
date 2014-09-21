@@ -519,6 +519,7 @@
 
     <string-array name="entries_status_bar_signal" translatable="false">
         <item>@string/status_bar_signal_style_icon</item>
+        <item>@string/status_bar_six_bar_signal_icon</item>
         <item>@string/status_bar_signal_style_text</item>
         <item>@string/status_bar_style_hidden</item>
     </string-array>
@@ -527,6 +528,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <!-- Stylus Gestures -->
