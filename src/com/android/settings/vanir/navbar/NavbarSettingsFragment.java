@@ -60,8 +60,10 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private static int mDefaultHeightLandscape;
     private static int mDefaultWidth;
 
-    int MIN_HEIGHT_PERCENT;
-    int MIN_WIDTH_PERCENT;
+    int mMinHeightPercent;
+    int mMinWidthPercent;
+    int mMaxHeightPercent;
+    int mMaxWidthPercent;
 
     boolean imebutton;
     boolean homebutton;
@@ -150,11 +152,25 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Resources res = getActivity().getResources();
+        final ContentResolver cr = getActivity().getContentResolver();
 
         items = new CharSequence[3];
         items[0] = res.getString(R.string.ime_layout_ime);
         items[1] = res.getString(R.string.ime_layout_home);
         items[2] = res.getString(R.string.ime_layout_blank);
+
+        mMinHeightPercent = res.getInteger(R.integer.navigation_bar_height_min_percent);
+        mMinWidthPercent = res.getInteger(R.integer.navigation_bar_width_min_percent);
+        mMaxHeightPercent = res.getInteger(R.integer.navigation_bar_height_max_percent);
+        mMaxWidthPercent = res.getInteger(R.integer.navigation_bar_width_max_percent);
+        mDefaultHeight = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height);
+        mDefaultHeightLandscape = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height_landscape);
+        mDefaultWidth = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_width);
+
+        // load user settings
+        HValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT, mDefaultHeight);
+        LValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, mDefaultHeightLandscape);
+        WValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_WIDTH, mDefaultWidth);
     }
 
     @Override
@@ -189,63 +205,39 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_navbar_settings, container, false);
+        final View view = v;
 
         final Activity activity = getActivity();
-        final Resources res = activity.getResources();
         final ContentResolver cr = activity.getContentResolver();
-
-        mDefaultHeight = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height);
-        mDefaultHeightLandscape = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_height_landscape);
-        mDefaultWidth = res.getDimensionPixelSize(com.android.internal.R.dimen.navigation_bar_width);
-
-        final int MAX_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_max_percent);
-        final int MAX_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_max_percent);
-        MIN_HEIGHT_PERCENT = res.getInteger(R.integer.navigation_bar_height_min_percent);
-        MIN_WIDTH_PERCENT = res.getInteger(R.integer.navigation_bar_width_min_percent);
-        final double MAX_WIDTH_SCALAR = MAX_WIDTH_PERCENT/100.0;
-        final double MIN_WIDTH_SCALAR = MIN_WIDTH_PERCENT/100.0;
-        final double MAX_HEIGHT_SCALAR = MAX_HEIGHT_PERCENT/100.0;
-        final double MIN_HEIGHT_SCALAR = MIN_HEIGHT_PERCENT/100.0;
-
-        // load user settings
-        HValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT, mDefaultHeight);
-        LValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, mDefaultHeightLandscape);
-        WValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_WIDTH, mDefaultWidth);
-
-        // load previous bar states
-        SharedPreferences prefs = activity.getSharedPreferences("last_slider_values", Context.MODE_PRIVATE);
-        final int currentHeightPercent = prefs.getInt("heightPercent",
-                (int)(100.0 * ( HValue - MIN_HEIGHT_SCALAR * mDefaultHeight) /
-                ( MAX_HEIGHT_SCALAR * mDefaultHeight - MIN_HEIGHT_SCALAR * mDefaultHeight )));
-        final int currentHeightLandscapePercent = prefs.getInt("heightLandscapePercent",
-                (int)(100.0 * ( LValue - MIN_HEIGHT_SCALAR * mDefaultHeightLandscape) /
-                ( MAX_HEIGHT_SCALAR * mDefaultHeightLandscape - MIN_HEIGHT_SCALAR * mDefaultHeightLandscape )));
-        final int currentWidthPercent = prefs.getInt("widthPercent",
-                (int)(100.0 * ( WValue - MIN_WIDTH_SCALAR * mDefaultWidth) /
-                ( MAX_WIDTH_SCALAR * mDefaultWidth - MIN_WIDTH_SCALAR * mDefaultWidth )));
+        final int currentHeightPercent =
+                getSharedPreferenceValue("heightPercent", mDefaultHeight, HValue);
+        final int currentHeightLandscapePercent =
+                getSharedPreferenceValue("heightLandscapePercent", mDefaultHeightLandscape, LValue);
+        final int currentWidthPercent =
+                getSharedPreferenceValue("widthPercent", mDefaultWidth, WValue);
 
         // Navbar height
         mNavigationBarHeight = (SeekBar) v.findViewById(R.id.navigation_bar_height);
         mBarHeightValue = (TextView) v.findViewById(R.id.navigation_bar_height_value);
-        mNavigationBarHeight.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
+        mNavigationBarHeight.setMax(mMaxHeightPercent - mMinHeightPercent);
         mNavigationBarHeight.setProgress(currentHeightPercent);
-        mBarHeightValue.setText(String.valueOf(currentHeightPercent + MIN_HEIGHT_PERCENT)+"%");
+        mBarHeightValue.setText(String.valueOf(currentHeightPercent + mMinHeightPercent)+"%");
         mNavigationBarHeight.setOnSeekBarChangeListener(this);
 
         // Navbar height landscape seekbar (tablets only)
         mNavigationBarHeightLandscape = (SeekBar) v.findViewById(R.id.navigation_bar_height_landscape);
         mBarHeightLandscapeValue = (TextView) v.findViewById(R.id.navigation_bar_height_landscape_value);
-        mNavigationBarHeightLandscape.setMax(MAX_HEIGHT_PERCENT - MIN_HEIGHT_PERCENT);
+        mNavigationBarHeightLandscape.setMax(mMaxHeightPercent - mMinHeightPercent);
         mNavigationBarHeightLandscape.setProgress(currentHeightLandscapePercent);
-        mBarHeightLandscapeValue.setText(String.valueOf(currentHeightLandscapePercent + MIN_HEIGHT_PERCENT)+"%");
+        mBarHeightLandscapeValue.setText(String.valueOf(currentHeightLandscapePercent + mMinHeightPercent)+"%");
         mNavigationBarHeightLandscape.setOnSeekBarChangeListener(this);
 
         // Navbar width (phones only)
         mNavigationBarWidth = (SeekBar) v.findViewById(R.id.navigation_bar_width);
         mBarWidthValue = (TextView) v.findViewById(R.id.navigation_bar_width_value);
-        mNavigationBarWidth.setMax(MAX_WIDTH_PERCENT - MIN_WIDTH_PERCENT);
+        mNavigationBarWidth.setMax(mMaxWidthPercent - mMinWidthPercent);
         mNavigationBarWidth.setProgress(currentWidthPercent);
-        mBarWidthValue.setText(String.valueOf(currentWidthPercent + MIN_WIDTH_PERCENT)+"%");
+        mBarWidthValue.setText(String.valueOf(currentWidthPercent + mMinWidthPercent)+"%");
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
 
         // Legacy side menu keys
@@ -266,28 +258,63 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             @Override
             public void onClick(View v) {
                 boolean isChecked = ((CheckBox) v).isChecked();
-                modifyIMELayoutDialog(isChecked);
+                if (isChecked) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setTitle(getString(R.string.customize_ime_layout_dialog_title));
+                    builder.setMultiChoiceItems(items, null,
+                            new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
+                                    if (isChecked) {
+                                        selectedItems.add(indexSelected);
+                                    } else if (selectedItems.contains(indexSelected)) {
+                                        selectedItems.remove(Integer.valueOf(indexSelected));
+                                    }
+                                    imebutton = selectedItems.contains(0);
+                                    homebutton = selectedItems.contains(1);
+                                    blankspace = selectedItems.contains(2);
+                                }
+                            })
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    mHandler.post(updateLayoutRunnable);
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog dialog = builder.create(); //AlertDialog dialog; create like this outside onClick
+                    dialog.setOnDismissListener(new OnDismissListener() {
+                        public void onDismiss(DialogInterface dialog) {
+                        }
+                    });
+                    dialog.show();
+                }
                 Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, isChecked ? 1 : 0);
             }
         });
 
-        final View finalV = v;
         // Alternate key layouts
         mLayouts = (LinearLayout) v.findViewById(R.id.alternate_layouts);
         mLayouts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int layoutnumber = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, 1);
-                final CharSequence[] items = {" 1 "," 2 "," 3 "," 4 ", " 5 "};
+                final CharSequence[] items = {" 1 "," 2 "," 3 "," 4 "," 5 "};
                 AlertDialog dialog;
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                 builder.setTitle(R.string.layouts_dialog_title);
                 builder.setSingleChoiceItems(items, layoutnumber - 1, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, item+1);
                         dialog.dismiss();
-                        updatePreferenceSummaries(finalV);
+                        updatePreferenceSummaries(view);
                     }
                 });
                 dialog = builder.create();
@@ -304,50 +331,16 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             mBarWidthValue.setVisibility(View.GONE);
             mNavigationBarWidth.setVisibility(View.GONE);
         }
-        updatePreferenceSummaries(v);
+        updatePreferenceSummaries(view);
         return v;
     }
 
-    private void modifyIMELayoutDialog(boolean optionEnabled) {
-        Activity activity = getActivity();
-
-        if (optionEnabled) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle(getString(R.string.customize_ime_layout_dialog_title));
-            builder.setMultiChoiceItems(items, null,
-                    new DialogInterface.OnMultiChoiceClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
-                            if (isChecked) {
-                                selectedItems.add(indexSelected);
-                            } else if (selectedItems.contains(indexSelected)) {
-                                selectedItems.remove(Integer.valueOf(indexSelected));
-                            }
-                            imebutton = selectedItems.contains(0);
-                            homebutton = selectedItems.contains(1);
-                            blankspace = selectedItems.contains(2);
-                        }
-                    })
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            mHandler.post(updateLayoutRunnable);
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog dialog = builder.create(); //AlertDialog dialog; create like this outside onClick
-            dialog.setOnDismissListener(new OnDismissListener() {
-                public void onDismiss(DialogInterface dialog) {
-                }
-            });
-            dialog.show();
-        }
+    private int getSharedPreferenceValue(String string, int value, int storedValue) {
+        // loads previous bar states per type
+        SharedPreferences prefs = getActivity().getSharedPreferences("last_slider_values", Context.MODE_PRIVATE);
+        return prefs.getInt(string,
+                (int)(100.0 * ( storedValue - (mMinHeightPercent/100.0) * value) /
+                ( (mMaxHeightPercent/100.0) * value - (mMinHeightPercent/100.0) * value )));
     }
 
     private Runnable updateLayoutRunnable = new Runnable() {
@@ -403,7 +396,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
         if (fromUser) {
             if (seekbar == mNavigationBarWidth) {
-                final int progress = rawprogress + MIN_WIDTH_PERCENT;
+                final int progress = rawprogress + mMinWidthPercent;
                 proportion = ((double)progress/100.0);
                 mBarWidthValue.setText(String.valueOf(progress)+"%");
                 WValue = (int)(proportion*mDefaultWidth);
@@ -411,7 +404,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
                         Settings.System.NAVIGATION_BAR_WIDTH, WValue);
 
             } else if (seekbar == mNavigationBarHeight) {
-                final int progress = rawprogress + MIN_HEIGHT_PERCENT;
+                final int progress = rawprogress + mMinHeightPercent;
                 proportion = ((double)progress/100.0);
                 mBarHeightValue.setText(String.valueOf(progress)+"%");
                 HValue = (int)(proportion*mDefaultHeight);
@@ -419,7 +412,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
                         Settings.System.NAVIGATION_BAR_HEIGHT, HValue);
 
             } else if (seekbar == mNavigationBarHeightLandscape) {
-                final int progress = rawprogress + MIN_HEIGHT_PERCENT;
+                final int progress = rawprogress + mMinHeightPercent;
                 proportion = ((double)progress/100.0);
                 mBarHeightLandscapeValue.setText(String.valueOf(progress)+"%");
                 LValue = (int)(proportion*mDefaultHeightLandscape);
