@@ -923,7 +923,8 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_battery_show_percent_title">Show battery status percent</string>
     <string name="status_bar_double_tap_to_sleep_title">Double-tap to sleep</string>
     <string name="status_bar_signal_text_title">Signal status style</string>
-    <string name="status_bar_signal_style_icon">Icon</string>
+    <string name="status_bar_signal_style_icon">Default icon</string>
+    <string name="status_bar_six_bar_signal_icon">Six bar icon</string>
     <string name="status_bar_signal_style_text">Text</string>
     <string name="status_bar_notif_count_title">Show notification count</string>
     <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
