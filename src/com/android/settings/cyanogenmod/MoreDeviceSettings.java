@@ -163,7 +163,7 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
                 && !isAdaptiveBacklightSupported()
                 && !isColorEnhancementSupported()
                 && !isPostProcessingSupported()
-                && !!isSunlightEnhancementSupported()) {
+                && !isSunlightEnhancementSupported()) {
             getPreferenceScreen().removePreference(calibrationCategory);
         }
     }
