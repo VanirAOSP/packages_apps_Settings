@@ -114,7 +114,10 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
             getPreferenceScreen().removePreference(mTapToWake);
             mTapToWake = null;
         }
-        if (isTapToWakeSupported()) {
+
+        boolean proximityCheckOnWait = getResources().getBoolean(
+                com.android.internal.R.bool.config_proximityCheckOnWake);
+        if (!proximityCheckOnWait) {
             getPreferenceScreen().removePreference(findPreference(KEY_PROXIMITY_WAKE));
             Settings.System.putInt(resolver, Settings.System.PROXIMITY_ON_WAKE, 1);
         }
