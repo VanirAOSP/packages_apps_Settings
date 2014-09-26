@@ -225,6 +225,10 @@ public class QuickSettingsUtil {
         if (!HardwareKeyNavbarHelper.shouldShowNavbarToggle()) {
             removeTile(TILE_NAVBAR);
         }
+        // Don't show the updater tile on devices that not have vanirupdator
+        if (!QSUtils.deviceSupportsUpdater()) {
+            removeTile(TILE_UPDATE);
+        }
     }
 
     private static synchronized void refreshAvailableTiles(Context context) {
