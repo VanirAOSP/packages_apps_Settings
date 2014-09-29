@@ -266,7 +266,7 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
         }
 
         if (isColorEnhancementSupported()) {
-            final boolean enabled = prefs.getBoolean(KEY_COLOR_ENHANCEMENT, true);
+            final boolean enabled = prefs.getBoolean(KEY_COLOR_ENHANCEMENT, ColorEnhancement.isEnabled());
             if (!ColorEnhancement.setEnabled(enabled)) {
                 Log.e(TAG, "Failed to restore color enhancement settings.");
             } else {
