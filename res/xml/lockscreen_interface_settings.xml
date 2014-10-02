@@ -65,6 +65,11 @@
             android:title="@string/lockscreen_music_controls_title"
             android:summary="@string/lockscreen_music_controls_summary" />
 
+        <CheckBoxPreference
+                android:key="keyguard_enable_application_widget"
+                android:title="@string/lockscreen_enable_application_widget_title"
+                android:summary="@string/lockscreen_application_widget_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -61,6 +61,8 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String KEY_LOCKSCREEN_MUSIC_CONTROLS = "lockscreen_music_controls";
     private static final String WALLPAPER_NAME = "lockscreen_wallpaper";
+    private static final String KEY_ENABLE_APPLICATION_WIDGET =
+            "keyguard_enable_application_widget";
     private static final String KEY_ENABLE_MAXIMIZE_WIGETS = "lockscreen_maximize_widgets";
     private static final String KEY_LOCKSCREEN_MODLOCK_ENABLED = "lockscreen_modlock_enabled";
     private static final String KEY_LOCKSCREEN_TARGETS = "lockscreen_targets";
@@ -81,7 +83,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
     private CheckBoxPreference mBlurBehind;
     private SeekBarPreference mBlurRadius;
     private CheckBoxPreference mEnableCameraWidget;
-
+    private CheckBoxPreference mEnableApplicationWidget;
     private CheckBoxPreference mEnableModLock;
     private CheckBoxPreference mEnableMaximizeWidgets;
 
@@ -110,6 +112,7 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
         // Find preferences
         mEnableKeyguardWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_WIDGETS);
         mEnableCameraWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_CAMERA);
+        mEnableApplicationWidget = (CheckBoxPreference) findPreference(KEY_ENABLE_APPLICATION_WIDGET);
         mEnableMaximizeWidgets = (CheckBoxPreference) findPreference(KEY_ENABLE_MAXIMIZE_WIGETS);
         mLockscreenTargets = findPreference(KEY_LOCKSCREEN_TARGETS);
 
@@ -207,6 +210,10 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
             mEnableKeyguardWidgets.setChecked(mLockUtils.getWidgetsEnabled());
         }
 
+        if (mEnableApplicationWidget != null) {
+            mEnableApplicationWidget.setChecked(mLockUtils.getApplicationWidgetEnabled());
+        }
+
         if (mEnableCameraWidget != null) {
             mEnableCameraWidget.setChecked(mLockUtils.getCameraEnabled());
         }
@@ -242,6 +249,13 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                 mEnableKeyguardWidgets.setEnabled(enabled);
             }
         }
+        if (mEnableApplicationWidget != null) {
+            // Enable or disable application widgets based on policy
+            if (!checkDisabledByPolicy(mEnableApplicationWidget,
+                    DevicePolicyManager.KEYGUARD_DISABLE_APPLICATION_WIDGET)) {
+                mEnableApplicationWidget.setEnabled(enabled);
+            }
+        }
         if (mEnableMaximizeWidgets != null) {
             mEnableMaximizeWidgets.setEnabled(enabled);
         }
@@ -263,6 +277,9 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
 
         } else if (KEY_ENABLE_CAMERA.equals(key)) {
             mLockUtils.setCameraEnabled(mEnableCameraWidget.isChecked());
+            return true;
+        } else if (KEY_ENABLE_APPLICATION_WIDGET.equals(key)) {
+            mLockUtils.setApplicationWidgetEnabled(mEnableApplicationWidget.isChecked());
             return true;
 
         } else if (preference == mAllowRotation) {
