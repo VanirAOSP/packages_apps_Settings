@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2014 VanirAOSP && The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.android.settings.vanir.navbar;
 
 import android.app.Activity;
@@ -22,16 +37,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.android.internal.util.vanir.AwesomeConstants;
 import com.android.internal.util.vanir.AwesomeConstants.AwesomeConstant;
+import com.android.internal.util.vanir.KeyButtonInfo;
 import com.android.internal.util.aokp.NavBarHelpers;
 import com.android.settings.R;
 import com.android.settings.util.ShortcutPickerHelper;
@@ -61,20 +79,23 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     DragSortListView mListView;
     NavbarButtonsAdapter mAdapter;
     DragSortController mDragSortController;
+    CheckBox mNxOption;
 
-    private ArrayList<AwesomeButtonInfo> mNavButtons = new ArrayList<AwesomeButtonInfo>();
+    private ArrayList<KeyButtonInfo> mNavButtons = new ArrayList<KeyButtonInfo>();
 
     private ShortcutPickerHelper mPicker;
     private int mTargetIndex = 0;
     private int mTarget = 0;
     DialogConstant mActionTypeToChange;
-    AwesomeButtonInfo mSelectedButton;
+    KeyButtonInfo mSelectedButton;
     private String[] mActions;
     private String[] mActionCodes;
     CharSequence[] items;
     int mCurrentLayout = 1;
     TextView mLayoutInfo;
     ViewGroup rootView;
+    int mLayoutNumber;
+    String mLayoutConfig;
 
     public static enum DialogConstant {
         ICON_ACTION {
@@ -137,12 +158,9 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.navbar_setup, menu);
-        final ContentResolver cr = getActivity().getContentResolver();
-        final int layoutnumber = Settings.System.getInt(cr,
-                Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, 1);
         MenuItem item = menu.findItem(R.id.change_navbar_number);
 
-        if (layoutnumber == 1) {
+        if (mLayoutNumber == 1) {
             item.setVisible(false);
         } else {
             item.setVisible(true);
@@ -157,7 +175,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
                 openLayoutPreferenceDialog();
                 break;
             case R.id.menu_add_button:
-                mNavButtons.add(new AwesomeButtonInfo(null, null, null, null));
+                mNavButtons.add(new KeyButtonInfo(null, null, null, null));
                 saveUserConfig();
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -172,6 +190,15 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        final ContentResolver cr = getActivity().getContentResolver();
+        mLayoutNumber = Settings.System.getInt(cr,
+                Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, 1);
+        mLayoutConfig = Settings.System.getString(cr,
+                Settings.System.NAVIGATION_BAR_NX_LAYOUTS);
+        if (mLayoutConfig == null) {
+            mLayoutConfig = "0-0-0-0-0";
+        }
 
         // Get NavBar Actions
         mActionCodes = NavBarHelpers.getNavBarActions(getActivity());
@@ -189,6 +216,10 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     @Override
     public void onResume() {
         super.onResume();
+        final ContentResolver cr = getActivity().getContentResolver();
+        mLayoutNumber = Settings.System.getInt(cr,
+                Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, 1);
+        if (mLayoutNumber == 1) mNxOption.setVisibility(View.GONE);
         updateLayoutInfo();
     }
 
@@ -204,6 +235,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         mLayoutInfo = (TextView) rootView.findViewById(R.id.navbar_arrange_info);
 
         mListView = (DragSortListView) rootView.findViewById(android.R.id.list);
+        mNxOption = (CheckBox) rootView.findViewById(R.id.nx_bar_style);
 
         return rootView;
     }
@@ -212,11 +244,41 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mNxOption.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringBuilder s = new StringBuilder();
+                String[] layouts = mLayoutConfig.split("-", 5);
+                for (int i = 0; i <= 4; i++) {
+                    if (i == mCurrentLayout - 1) {
+                        if (mNxOption.isChecked()) {
+                            s.append("1");
+                        } else {
+                            s.append("0");
+                        }
+                    } else {
+                        s.append(layouts[i]);
+                    }
+                    if (i != 4) s.append("-");
+                }
+                Settings.System.putString(
+                        getActivity().getContentResolver(), Settings.System.NAVIGATION_BAR_NX_LAYOUTS, s.toString());
+
+                if (mNxOption.isChecked()) {
+                    mListView.setEnabled(false);
+                    mListView.setVisibility(View.INVISIBLE);
+                } else {
+                    mListView.setEnabled(true);
+                    mListView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         mListView.setDropListener(new DragSortListView.DropListener() {
             @Override
             public void drop(int from, int to) {
                 if (from != to) {
-                    AwesomeButtonInfo remove = mNavButtons.remove(from);
+                    KeyButtonInfo remove = mNavButtons.remove(from);
                     mNavButtons.add(to, remove);
                     saveUserConfig();
                     mAdapter.notifyDataSetChanged();
@@ -302,6 +364,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
 
     public void onValueChange(String uri) {
         DialogConstant dConstant = funcFromString(uri);
+
         switch (dConstant) {
             case CUSTOM_APP:
                 mPicker.pickShortcut();
@@ -310,9 +373,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
             case LONG_ACTION:
             case DOUBLE_TAP_ACTION:
                 mActionTypeToChange = dConstant;
-                createDialog(
-                        getResources()
-                                .getString(R.string.choose_action_short_title),
+                createDialog(getTitleForTargetType(dConstant),
                         mActions, mActionCodes);
                 break;
             case ICON_ACTION:
@@ -358,11 +419,31 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         }
     }
 
-    private class NavbarButtonsAdapter extends ArrayAdapter<AwesomeButtonInfo> {
+    private String getTitleForTargetType(final DialogConstant constant) {
+        String title = "";
+        int stringRes = R.string.choose_action_double_tap_title;
+        switch (constant) {
+            case SHORT_ACTION:
+                stringRes = R.string.choose_action_short_title;
+                break;
+            case LONG_ACTION:
+                stringRes = R.string.choose_action_long_title;
+                break;
+            case DOUBLE_TAP_ACTION:
+                stringRes = R.string.choose_action_double_tap_title;
+                break;
+            default:
+                break;
+        }
+        title = getString(stringRes);
+        return title;
+    }
+
+    private class NavbarButtonsAdapter extends ArrayAdapter<KeyButtonInfo> {
 
         boolean mShowDragGrips = true;
 
-        public NavbarButtonsAdapter(Context context, ArrayList<AwesomeButtonInfo> toggles) {
+        public NavbarButtonsAdapter(Context context, ArrayList<KeyButtonInfo> toggles) {
             super(context, android.R.id.text1, toggles);
         }
 
@@ -376,7 +457,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
 
             TextView titleView = (TextView) convertView.findViewById(android.R.id.text1);
 
-            AwesomeButtonInfo button = getItem(position);
+            KeyButtonInfo button = getItem(position);
             String text = NavBarHelpers.getProperSummary(getContext(), button.singleAction);
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             DragGripView dragGripView = (DragGripView) convertView.findViewById(R.id.drag_handle);
@@ -504,12 +585,8 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     }
 
     private void openLayoutPreferenceDialog() {
-        final ContentResolver cr = getActivity().getContentResolver();
-        final int layoutnumber = Settings.System.getInt(cr,
-                Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, 1);
-
-        items = new CharSequence[layoutnumber];
-        for (int i = 0; i < layoutnumber; i++) {
+        items = new CharSequence[mLayoutNumber];
+        for (int i = 0; i < mLayoutNumber; i++) {
             items[i] = Integer.toString(i + 1);
         }
 
@@ -529,10 +606,24 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
     }
 
     private void updateLayoutInfo() {
-         final ContentResolver cr = getActivity().getContentResolver();
-        int numberLayouts = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_ALTERNATE_LAYOUTS, 1);
+        String[] layouts = mLayoutConfig.split("-", 5);
+        mNxOption.setChecked(false);
+        for (int i = 0; i <= 4; i++) {
+            if (Integer.parseInt(layouts[i]) == 1 && i == mCurrentLayout - 1) {
+                mNxOption.setChecked(true);
+            }
+        }
+
+        if (mNxOption.isChecked()) {
+            mListView.setEnabled(false);
+            mListView.setVisibility(View.INVISIBLE);
+        } else {
+            mListView.setEnabled(true);
+            mListView.setVisibility(View.VISIBLE);
+        }
+            
         String string = (getString(R.string.change_layouts_title)+ " " + mCurrentLayout);
-        if (numberLayouts != 1) {
+        if (mLayoutNumber != 1) {
             mLayoutInfo.setText(string + ": " + getString(R.string.toggles_arrange_instructions));
         } else {
             mLayoutInfo.setText(getString(R.string.toggles_arrange_instructions));
@@ -567,10 +658,14 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < mNavButtons.size(); i++) {
-            s.append(mNavButtons.get(i).toString());
-            if (i != mNavButtons.size() - 1) {
-                s.append("|");
-            }
+     //       if (mNxOption.isChecked()) {
+                // will probably use 4 regular key button infos here
+     //       } else {
+                s.append(mNavButtons.get(i).toString());
+                if (i != mNavButtons.size() - 1) {
+                    s.append("|");
+                }
+     //       }
         }
         Settings.System.putString(getActivity().getContentResolver(), buttonSettingsStrings[mCurrentLayout-1], s.toString());
     }
@@ -592,38 +687,8 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         if (userButtons != null) {
             for (String button : userButtons) {
                 String[] actions = button.split(",", 4);
-                mNavButtons.add(new AwesomeButtonInfo(actions[0], actions[1], actions[2], actions[3]));
+                mNavButtons.add(new KeyButtonInfo(actions[0], actions[1], actions[2], actions[3]));
             }
-        }
-    }
-
-    public static class AwesomeButtonInfo {
-        String singleAction, doubleTapAction, longPressAction, iconUri;
-
-        public AwesomeButtonInfo(String singleTap, String doubleTap, String longPress, String uri) {
-            this.singleAction = singleTap;
-            this.doubleTapAction = doubleTap;
-            this.longPressAction = longPress;
-            this.iconUri = uri;
-
-            if (singleAction == null) {
-                singleAction = "";
-            }
-            if (doubleTapAction == null) {
-                doubleTapAction = "";
-            }
-            if (longPressAction == null) {
-                longPressAction = "";
-            }
-
-            if (iconUri == null) {
-                iconUri = "";
-            }
-        }
-
-        @Override
-        public String toString() {
-            return singleAction + "," + doubleTapAction + "," + longPressAction + "," + iconUri;
         }
     }
 }

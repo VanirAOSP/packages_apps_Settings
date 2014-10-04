@@ -1,5 +1,6 @@
 <!--
   Copyright 2013 AOKP
+  Copyright 2014 VanirAOSP && the Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -19,7 +20,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               >
-
+        
     <TextView
             android:id="@+id/navbar_arrange_info"
             android:text="@string/toggles_arrange_instructions"
@@ -31,9 +32,20 @@
             style="@style/defaultSize"/>
 
     <com.mobeta.android.dslv.DragSortListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
+    <com.android.settings.aokp.widgets.CategorySeparator
+            style="@style/defaultSize"/>
+    <CheckBox
+            style="?android:attr/actionBarStyle"
+            android:id="@+id/nx_bar_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/set_nx_bar"
+            android:defaultValue="false" />
 </LinearLayout>
