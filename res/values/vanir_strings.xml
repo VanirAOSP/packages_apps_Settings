@@ -1022,5 +1022,7 @@ Would you like to be taken to OmniSwitch settings now?</string>
     <string name="network_settings_title">Mobile</string>
     <string name="phone_call_settings_title">Call settings</string>
 
+    <string name="set_nx_bar">Use an NX style bar for this layout</string>
+
     <string name="random_crap_title">Vanir\'s home for wayward features</string>
 </resources>

@@ -19,7 +19,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               >
-
+        
     <TextView
             android:id="@+id/navbar_arrange_info"
             android:text="@string/toggles_arrange_instructions"
@@ -36,4 +36,20 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
+    <LinearLayout
+            style="@style/settingsFragmentStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom" >
+        <com.android.settings.aokp.widgets.CategorySeparator
+                style="@style/defaultSize"/>
+        <CheckBox
+                android:id="@+id/nx_bar_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/set_nx_bar"
+                android:defaultValue="true" />
+    </LinearLayout>
 </LinearLayout>
