@@ -1024,4 +1024,7 @@ Would you like to be taken to OmniSwitch settings now?</string>
     <string name="phone_call_settings_title">Call settings</string>
 
     <string name="random_crap_title">Vanir\'s home for wayward features</string>
+
+    <!-- Fuel Gauge -->
+    <string name="battery_disable_low_dialog_title">Disable low battery dialogs</string>
 </resources>

@@ -32,6 +32,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -55,6 +56,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private static final String TAG = "PowerUsageSummary";
 
+    private static final String URI_DISABLE_LOW_BATTERY_DIALOG = "vanir_disable_low_battery_dialog";
+
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_STATUS = "battery_status";
     private static final String KEY_POWER_SAVER = "interface_battery_saver_key";
@@ -63,6 +66,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
     private static final int MENU_STATS_RESET = Menu.FIRST + 2;
     private static final int MENU_HELP = Menu.FIRST + 3;
+    private static final int MENU_DISABLE_WARNING = Menu.FIRST + 4;
 
     private PreferenceGroup mAppListGroup;
     private Preference mBatteryStatusPref;
@@ -176,6 +180,7 @@ public class PowerUsageSummary extends PreferenceFragment {
                     .setIcon(com.android.internal.R.drawable.ic_menu_info_details)
                     .setAlphabeticShortcut('t');
         }
+
         MenuItem refresh = menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
                 .setIcon(R.drawable.ic_menu_refresh_holo_dark)
                 .setAlphabeticShortcut('r');
@@ -186,6 +191,13 @@ public class PowerUsageSummary extends PreferenceFragment {
                 .setAlphabeticShortcut('d');
         reset.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        boolean warningEnabled = Settings.System.getBoolean(getActivity().getContentResolver(),
+                URI_DISABLE_LOW_BATTERY_DIALOG, false);
+        menu.add(Menu.NONE, MENU_DISABLE_WARNING, 0, R.string.battery_disable_low_dialog_title)
+                .setCheckable(true)
+                .setChecked(warningEnabled)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
         String helpUrl;
         if (!TextUtils.isEmpty(helpUrl = getResources().getString(R.string.help_url_battery))) {
@@ -213,6 +225,12 @@ public class PowerUsageSummary extends PreferenceFragment {
                 mStatsHelper.resetStatistics();
                 mStatsHelper.clearStats();
                 refreshStats();
+                return true;
+            case MENU_DISABLE_WARNING:
+                item.setChecked(!item.isChecked());
+                Settings.System.putBoolean(getActivity().getContentResolver(),
+                        URI_DISABLE_LOW_BATTERY_DIALOG,
+                        item.isChecked());
                 return true;
             default:
                 return false;
