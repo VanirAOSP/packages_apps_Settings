@@ -21,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -41,12 +42,25 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         CompoundButton.OnCheckedChangeListener {
     private static final String TAG = NavbarSettingsFragment.class.getSimpleName();
 
+    private static final String SOFTKEY_LONG_PRESS_TIMEOUT_URI = "vanir_softkey_longpress_timeout";
+    // default value is also our max value
+    private static final int SOFTKEY_LONG_PRES_DEF_VALUE = ViewConfiguration.getLongPressTimeout();
+    // 200 (single press timeout set in KBV) + 25 (good measure)
+    private static final int SOFTKEY_LONG_PRESS_TIMEOUT_MIN_VAL = 225;
+    // shift by minimum value for seekbar values
+    private static final int SOFTKEY_LONG_PRESS_TIMEOUT_MAX_VAL = SOFTKEY_LONG_PRES_DEF_VALUE
+            - SOFTKEY_LONG_PRESS_TIMEOUT_MIN_VAL;
+    // value stored in SettingsProvider
+    private static int LPValue;
+
     private SeekBar mNavigationBarHeight;
     private SeekBar mNavigationBarHeightLandscape;
     private SeekBar mNavigationBarWidth;
+    private SeekBar mSoftkeyLongPress;
     private TextView mBarHeightValue;
     private TextView mBarHeightLandscapeValue;
     private TextView mBarWidthValue;
+    private TextView mSoftkeyLongPressValue;
     private CheckBox mSideKeys;
     private CheckBox mArrows;
     private LinearLayout mLayouts;
@@ -171,6 +185,14 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         HValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT, mDefaultHeight);
         LValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, mDefaultHeightLandscape);
         WValue = Settings.System.getInt(cr, Settings.System.NAVIGATION_BAR_WIDTH, mDefaultWidth);
+
+        // longpress value handling for seekbar
+        // provider values = 25 (min val) to 500 (system longpress value)
+        // -- use unadjusted value for setting seekbar text
+        // -- subtract min value when setting seekbar progress
+        // seekbar values = 0 to 475 (system longpress value - 25)
+        // -- add min val when commiting to provider
+        LPValue = Settings.System.getInt(cr, SOFTKEY_LONG_PRESS_TIMEOUT_URI, SOFTKEY_LONG_PRES_DEF_VALUE);
     }
 
     @Override
@@ -239,6 +261,14 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         mNavigationBarWidth.setProgress(currentWidthPercent);
         mBarWidthValue.setText(String.valueOf(currentWidthPercent + mMinWidthPercent)+"%");
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
+
+        // Softkey longpress timeout
+        mSoftkeyLongPress = (SeekBar) v.findViewById(R.id.navigation_bar_longpress_timeout);
+        mSoftkeyLongPressValue = (TextView) v.findViewById(R.id.navigation_bar_longpress_timeout_value);
+        mSoftkeyLongPress.setMax(SOFTKEY_LONG_PRESS_TIMEOUT_MAX_VAL);
+        mSoftkeyLongPress.setProgress(LPValue - SOFTKEY_LONG_PRESS_TIMEOUT_MIN_VAL);
+        mSoftkeyLongPressValue.setText(String.valueOf(LPValue) + "ms");
+        mSoftkeyLongPress.setOnSeekBarChangeListener(this);
 
         // Legacy side menu keys
         mSideKeys = (CheckBox) v.findViewById(R.id.sidekey_checkbox);
@@ -418,6 +448,12 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
                 LValue = (int)(proportion*mDefaultHeightLandscape);
                 Settings.System.putInt(cr,
                         Settings.System.NAVIGATION_BAR_HEIGHT_LANDSCAPE, LValue);
+
+            } else if (seekbar == mSoftkeyLongPress) {
+                final int val = rawprogress + SOFTKEY_LONG_PRESS_TIMEOUT_MIN_VAL;
+                mSoftkeyLongPressValue.setText(String.valueOf(val) + "ms");
+                Settings.System.putInt(cr,
+                        SOFTKEY_LONG_PRESS_TIMEOUT_URI, val);
             }
         }
     }
