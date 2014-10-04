@@ -302,6 +302,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
 
     public void onValueChange(String uri) {
         DialogConstant dConstant = funcFromString(uri);
+
         switch (dConstant) {
             case CUSTOM_APP:
                 mPicker.pickShortcut();
@@ -310,9 +311,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
             case LONG_ACTION:
             case DOUBLE_TAP_ACTION:
                 mActionTypeToChange = dConstant;
-                createDialog(
-                        getResources()
-                                .getString(R.string.choose_action_short_title),
+                createDialog(getTitleForTargetType(dConstant),
                         mActions, mActionCodes);
                 break;
             case ICON_ACTION:
@@ -356,6 +355,26 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
                 mAdapter.notifyDataSetChanged();
                 break;
         }
+    }
+
+    private String getTitleForTargetType(final DialogConstant constant) {
+        String title = "";
+        int stringRes = R.string.choose_action_double_tap_title;
+        switch (constant) {
+            case SHORT_ACTION:
+                stringRes = R.string.choose_action_short_title;
+                break;
+            case LONG_ACTION:
+                stringRes = R.string.choose_action_long_title;
+                break;
+            case DOUBLE_TAP_ACTION:
+                stringRes = R.string.choose_action_double_tap_title;
+                break;
+            default:
+                break;
+        }
+        title = getString(stringRes);
+        return title;
     }
 
     private class NavbarButtonsAdapter extends ArrayAdapter<AwesomeButtonInfo> {

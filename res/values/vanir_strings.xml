@@ -434,8 +434,9 @@
     <string name="navring_target_reset_message">Do you want to reset the navigation ring?</string>
     <string name="navring_target_reset">Navigation ring targets reset.</string>
     <string name="choose_action_title">Choose action</string>
-    <string name="choose_action_short_title">Choose short action</string>
-    <string name="choose_action_long_title">Choose long action</string>
+    <string name="choose_action_short_title">Choose short press action</string>
+    <string name="choose_action_long_title">Choose long press action</string>
+    <string name="choose_action_double_tap_title">Choose double tap action</string>
     <string name="action_long_save">set as long action</string>
     <string name="title_navring_amount">Number of navigation ring targets</string>
     <string name="summary_navring_amount">Choose number of targets in the navigation ring</string>
