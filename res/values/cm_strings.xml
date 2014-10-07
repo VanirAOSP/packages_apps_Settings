@@ -856,6 +856,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="hardware_keys_action_launch_camera">Launch camera</string>
     <string name="hardware_keys_action_kill">Kill target</string>
     <string name="hardware_keys_action_back">Navigate back</string>
+	<string name="hardware_keys_action_screen_off">Screen off"</string>
     <string name="power_end_call_title">End call</string>
     <string name="power_end_call_summary">Pressing the power button will end the current call</string>
     <string name="hardware_keys_action_home">Navigate home</string>
