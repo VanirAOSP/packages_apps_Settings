@@ -181,7 +181,7 @@ public class AdditionalSystemUI extends SettingsPreferenceFragment implements
                             Settings.System.CUSTOM_CARRIER_LABEL, value);
                     updateCustomLabelTextSummary();
                     Intent i = new Intent();
-                    i.setAction("com.android.settings.LABEL_CHANGED");
+                    i.setAction("com.vanir.UPDATE_NETWORK_PREFERENCES");
                     mContext.sendBroadcast(i);
                 }
             });
