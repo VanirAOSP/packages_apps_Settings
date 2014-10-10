@@ -1010,6 +1010,13 @@ Would you like to be taken to OmniSwitch settings now?</string>
     <string name="gestures_rename_label">Gesture name</string>
     <string name="gestures_error_loading">Could not load %s. Make sure you have storage available.</string> 
 
+    <!-- notify changed networks -->
+    <string name="wifi_notify_changed_networks">Wifi connected notification</string>
+    <string name="notify_changed_networks_default">Default - off</string>
+    <string name="notify_changed_networks_toast">Toast</string>
+    <string name="notify_changed_networks_notification">Notification</string>
+    <string name="notify_changed_networks_notification_sound">Notification with sound</string>
+
     <!-- Partition Info -->
     <string name="partition_info_title">Partition info</string>
     <string name="partition_info_system">/system</string>
