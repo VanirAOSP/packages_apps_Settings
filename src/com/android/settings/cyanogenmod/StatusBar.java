@@ -45,6 +45,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String PREF_CLOCK_PICKER = "clock_color";
     private static final String PREF_EXPANDED_CLOCK_PICKER = "expanded_clock_color";
     private static final String STATUS_BAR_BATTERY_SHOW_PERCENT = "status_bar_battery_show_percent";
+    private static final String TICKER = "ticker_disabled";
 
     private static final String STATUS_BAR_STYLE_HIDDEN = "4";
     private static final String STATUS_BAR_STYLE_TEXT = "6";
@@ -56,6 +57,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private ColorPickerPreference mClockPicker;
     private ColorPickerPreference mExpandedClockPicker;
     private ListPreference mStatusBarCmSignal;
+    private CheckBoxPreference mTicker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +135,9 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             prefSet.removePreference(mStatusBarCmSignal);
         }
 
+        mTicker = (CheckBoxPreference) findPreference(TICKER);
+        mTicker.setChecked(Settings.System.getInt(resolver, Settings.System.TICKER_DISABLED, 0) == 1);
+
         enableStatusBarBatteryDependents(mStatusBarBattery.getValue());
     }
 
@@ -185,6 +190,20 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             // Log.e("VANIR", "Expanded: "+intHex + "");
         }
         return false;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        boolean value;
+        if (preference == mTicker) {
+            value = mTicker.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.TICKER_DISABLED,
+                    value ? 1 : 0);
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+        return true;
     }
 
     private void enableStatusBarBatteryDependents(String value) {
