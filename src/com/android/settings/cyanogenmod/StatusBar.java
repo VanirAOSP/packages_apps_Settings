@@ -46,6 +46,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private static final String PREF_EXPANDED_CLOCK_PICKER = "expanded_clock_color";
     private static final String STATUS_BAR_BATTERY_SHOW_PERCENT = "status_bar_battery_show_percent";
     private static final String TICKER = "ticker_disabled";
+    private static final String ALARM_ICON = "alarm_icon_preference";
 
     private static final String STATUS_BAR_STYLE_HIDDEN = "4";
     private static final String STATUS_BAR_STYLE_TEXT = "6";
@@ -58,6 +59,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
     private ColorPickerPreference mExpandedClockPicker;
     private ListPreference mStatusBarCmSignal;
     private CheckBoxPreference mTicker;
+    private CheckBoxPreference mAlarmIconDisabled;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,9 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mTicker = (CheckBoxPreference) findPreference(TICKER);
         mTicker.setChecked(Settings.System.getInt(resolver, Settings.System.TICKER_DISABLED, 0) == 1);
 
+        mAlarmIconDisabled = (CheckBoxPreference) findPreference(ALARM_ICON);
+        mAlarmIconDisabled.setChecked(Settings.System.getInt(resolver, Settings.System.ALARM_ICON_PREFERENCE, 0) == 1);
+
         enableStatusBarBatteryDependents(mStatusBarBattery.getValue());
     }
 
@@ -200,6 +205,13 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
             Settings.System.putInt(getContentResolver(),
                     Settings.System.TICKER_DISABLED,
                     value ? 1 : 0);
+
+        } else if (preference == mAlarmIconDisabled) {
+            value = mAlarmIconDisabled.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.ALARM_ICON_PREFERENCE,
+                    value ? 1 : 0);
+
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
