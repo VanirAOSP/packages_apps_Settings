@@ -1022,6 +1022,11 @@ Would you like to be taken to OmniSwitch settings now?</string>
     <string name="notify_changed_networks_notification">Notification</string>
     <string name="notify_changed_networks_notification_sound">Notification with sound</string>
 
+    <!-- Status bar categories -->
+    <string name="clock_category_title">Clock</string>
+    <string name="system_category_title">System icons</string>
+    <string name="other_status_bar_category_title">Notifications, etc</string>
+
     <!-- ticker preference -->
     <string name="ticker_disabled_title">Disable notification ticker</string>
     <string name="ticker_disabled_summary">Don\'t scroll text from incoming notifications in the status bar</string>
