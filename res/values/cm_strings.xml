@@ -917,7 +917,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="status_bar_six_bar_signal_icon">Six bar icon</string>
     <string name="status_bar_signal_style_text">Text</string>
     <string name="status_bar_notif_count_title">Show notification count</string>
-    <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
+    <string name="status_bar_notif_count_summary">Display the number of pending notifications per icon</string>
 
     <!-- Development shortcut -->
     <string name="development_shortcut_title">Development shortcuts</string>
