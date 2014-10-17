@@ -1020,6 +1020,10 @@ Would you like to be taken to OmniSwitch settings now?</string>
     <string name="system_category_title">System icons</string>
     <string name="other_status_bar_category_title">Notifications, etc</string>
 
+    <!-- Status bar: alarm icon preference -->
+    <string name="alarm_icon_preference_title">Disable alarm icon</string>
+    <string name="alarm_icon_preference_summary">If an alarm is set remove its icon from the system icons</string>
+
     <!-- ticker preference -->
     <string name="ticker_disabled_title">Disable notification ticker</string>
     <string name="ticker_disabled_summary">Don\'t scroll text from incoming notifications in the status bar</string>
