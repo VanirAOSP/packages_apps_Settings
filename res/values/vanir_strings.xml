@@ -22,4 +22,8 @@
 	<string name="vanirupdate_settings_alternate_title">System updates</string>
 	<string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
 
+    <!-- Status bar: alarm icon preference -->
+    <string name="alarm_icon_preference_title">Disable alarm icon</string>
+    <string name="alarm_icon_preference_summary">If an alarm is set remove its icon from the system icons</string>
+
 </resources>
