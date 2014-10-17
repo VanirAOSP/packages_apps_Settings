@@ -1022,6 +1022,10 @@ Would you like to be taken to OmniSwitch settings now?</string>
     <string name="notify_changed_networks_notification">Notification</string>
     <string name="notify_changed_networks_notification_sound">Notification with sound</string>
 
+    <!-- ticker preference -->
+    <string name="ticker_disabled_title">Disable notification ticker</string>
+    <string name="ticker_disabled_summary">Don\'t scroll text from incoming notifications in the status bar</string>
+
     <!-- Partition Info -->
     <string name="partition_info_title">Partition info</string>
     <string name="partition_info_system">/system</string>
