@@ -141,7 +141,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         mTicker.setChecked(Settings.System.getInt(resolver, Settings.System.TICKER_DISABLED, 0) == 1);
 
         mAlarmIconDisabled = (CheckBoxPreference) findPreference(ALARM_ICON);
-        mAlarmIconDisabled.setChecked(Settings.System.getInt(resolver, Settings.System.ALARM_ICON_PREFERENCE, 0) == 1);
+        mAlarmIconDisabled.setChecked(Settings.System.getInt(resolver, Settings.System.STATUS_BAR_HIDE_ALARM_ICON, 0) == 1);
 
         enableStatusBarBatteryDependents(mStatusBarBattery.getValue());
     }
@@ -209,7 +209,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
         } else if (preference == mAlarmIconDisabled) {
             value = mAlarmIconDisabled.isChecked();
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.ALARM_ICON_PREFERENCE,
+                    Settings.System.STATUS_BAR_HIDE_ALARM_ICON,
                     value ? 1 : 0);
 
         } else {
