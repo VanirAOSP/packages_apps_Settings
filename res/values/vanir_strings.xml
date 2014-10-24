@@ -514,6 +514,7 @@
 
     <!-- Active Notifications --> 
     <string name="privacy">Privacy</string>
+    <string name="notification_styles">Notification styles</string>
     <string name="additional_settings_title">More options...</string>
     <string name="active_quiet_hours_title">Quiet hours</string>
     <string name="active_quiet_hours_summary">Observe quiet hours settings</string>
@@ -521,6 +522,14 @@
     <string name="lockscreen_notifications">Active notifications</string>
     <string name="active_notifications_summary">Configure active display and lockscreen notifications</string>
     <string name="excluded_apps_category">Excluded applications</string>
+
+    <!-- Flash Notifications -->
+    <string name="flash_notifications_title">Flash notifications</string>
+    <string name="flash_notifications_summary">Trigger the camera flash when a notification is received</string>
+    <string name="excluded_flash_apps_title">Flash notifications blacklist</string>
+    <string name="excluded_flash_apps_summary">Excluded applications will not trigger flash notifications</string>
+    <string name="allow_flash_with_screen_on_title">Flash with screen on</string>
+    <string name="allow_flash_with_screen_on_summary">Allow flash notifications with the screen on</string>
 
     <!-- Lockscreen Notifications -->
     <string name="lockscreen_notifications_title">Lockscreen notifications</string>

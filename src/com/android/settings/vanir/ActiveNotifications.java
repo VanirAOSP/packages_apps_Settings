@@ -39,14 +39,17 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
 
     private static final String KEY_ENABLED = "ad_enable";
     private static final String KEY_LOCKSCREEN_NOTIFICATIONS = "lock_enable";
+    private static final String KEY_FLASH_NOTIFICATIONS = "flash_notifications";
     private static final String KEY_POCKET_MODE = "pocket_mode";
     private static final String KEY_HIDE_LOW_PRIORITY = "hide_low_priority";
     private static final String KEY_HIDE_NON_CLEARABLE = "hide_non_clearable";
+    private static final String KEY_ALLOW_WITH_SCREEN_ON = "allow_with_screen_on";
     private static final String KEY_PRIVACY_MODE = "privacy_mode";
     private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_ADDITIONAL = "additional_options";
     private static final String KEY_EXCLUDED_APPS = "ad_excluded_apps";
     private static final String KEY_EXCLUDED_NOTIF_APPS = "excluded_apps";
+    private static final String KEY_EXCLUDED_FLASH_APPS = "excluded_flash_apps";
 
     private Switch mEnabledSwitch;
     private Preference mAdditional;
@@ -56,12 +59,15 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
     private Dialog mEnableDialog;
 
     private CheckBoxPreference mEnabledPref;
+    private CheckBoxPreference mFlashNotifications;
     private CheckBoxPreference mLockNotif;
     private ListPreference mPocketModePref;
+    private CheckBoxPreference mAllowWithScreenOn;
     private CheckBoxPreference mHideLowPriority;
     private CheckBoxPreference mHideNonClearable;
     private AppMultiSelectListPreference mExcludedAppsPref;
     private AppMultiSelectListPreference mNotifAppsPref;
+    private AppMultiSelectListPreference mFlashAppsPref;
     private CheckBoxPreference mPrivacyMode;
     private CheckBoxPreference mQuietHours;
 
@@ -116,6 +122,10 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
         mLockNotif.setChecked((Settings.System.getInt(cr,
                 Settings.System.LOCKSCREEN_NOTIFICATIONS, 0) == 1));
 
+        mFlashNotifications = (CheckBoxPreference) prefs.findPreference(KEY_FLASH_NOTIFICATIONS);
+        mFlashNotifications.setChecked((Settings.System.getInt(cr,
+                Settings.System.FLASH_NOTIFICATIONS, 0) == 1));
+
         mPocketModePref = (ListPreference) prefs.findPreference(KEY_POCKET_MODE);
         mPocketModePref.setOnPreferenceChangeListener(this);
         int mode = Settings.System.getInt(cr,
@@ -129,6 +139,10 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
         mHideLowPriority = (CheckBoxPreference) prefs.findPreference(KEY_HIDE_LOW_PRIORITY);
         mHideLowPriority.setChecked(Settings.System.getInt(cr,
                     Settings.System.ACTIVE_NOTIFICATIONS_HIDE_LOW_PRIORITY, 0) == 1);
+
+        mAllowWithScreenOn = (CheckBoxPreference) prefs.findPreference(KEY_ALLOW_WITH_SCREEN_ON);
+        mAllowWithScreenOn.setChecked(Settings.System.getInt(cr,
+                    Settings.System.FLASH_NOTIFICATIONS_ALLOW_WITH_SCREEN_ON, 1) == 1);
 
         mHideNonClearable = (CheckBoxPreference) prefs.findPreference(KEY_HIDE_NON_CLEARABLE);
         mHideNonClearable.setChecked(Settings.System.getInt(cr,
@@ -148,6 +162,9 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
         mNotifAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_NOTIF_APPS);
         mNotifAppsPref.setOnPreferenceChangeListener(this);
 
+        mFlashAppsPref = (AppMultiSelectListPreference) findPreference(KEY_EXCLUDED_FLASH_APPS);
+        mFlashAppsPref.setOnPreferenceChangeListener(this);
+
         AsyncTask.execute(new Runnable() {
             public void run() {
                 // Active display
@@ -156,6 +173,9 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
                 // Lockscreen notifications
                 Set<String> excludedNotifApps = getExcludedNotifApps(Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS);
                 if (excludedNotifApps != null) mNotifAppsPref.setValues(excludedNotifApps);
+                // Flash notifications
+                Set<String> excludedFlashApps = getExcludedNotifApps(Settings.System.FLASH_NOTIFICATIONS_EXCLUDED_APPS);
+                if (excludedFlashApps != null) mFlashAppsPref.setValues(excludedFlashApps);
             }
         });
 
@@ -173,16 +193,21 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
     private void updateDependency() {
         mActiveNotifications = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.ACTIVE_NOTIFICATIONS, 0) == 1;
-        mPocketModePref.setEnabled(mActiveNotifications);
+        boolean isPossible = mLockNotif.isChecked() || mEnabledPref.isChecked();
+
         mLockNotif.setEnabled(mActiveNotifications);
+        mFlashNotifications.setEnabled(mActiveNotifications);
         mEnabledPref.setEnabled(mActiveNotifications);
         mHideLowPriority.setEnabled(mActiveNotifications);
         mHideNonClearable.setEnabled(mActiveNotifications);
         mQuietHours.setEnabled(mActiveNotifications);
-        mPrivacyMode.setEnabled(mActiveNotifications);
-        mAdditional.setEnabled(mActiveNotifications);
         mNotifAppsPref.setEnabled(mActiveNotifications);
         mExcludedAppsPref.setEnabled(mActiveNotifications);
+
+		mAllowWithScreenOn.setEnabled(mActiveNotifications && mFlashNotifications.isChecked());
+        mPocketModePref.setEnabled(mActiveNotifications && isPossible);
+        mPrivacyMode.setEnabled(mActiveNotifications && isPossible);
+        mAdditional.setEnabled(mActiveNotifications && isPossible);
     }
         
     @Override
@@ -190,10 +215,15 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
         if (preference == mEnabledPref) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.ENABLE_ACTIVE_DISPLAY, mEnabledPref.isChecked() ? 1 : 0);
-
+			updateDependency();
         } else if (preference == mLockNotif) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.LOCKSCREEN_NOTIFICATIONS, mLockNotif.isChecked() ? 1 : 0);
+            updateDependency();
+        } else if (preference == mFlashNotifications) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.FLASH_NOTIFICATIONS, mFlashNotifications.isChecked() ? 1 : 0);
+            updateDependency();
 
         } else if (preference == mHideLowPriority) {
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.ACTIVE_NOTIFICATIONS_HIDE_LOW_PRIORITY,
@@ -202,6 +232,10 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
         } else if (preference == mHideNonClearable) {
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.LOCKSCREEN_NOTIFICATIONS_HIDE_NON_CLEARABLE,
                     mHideNonClearable.isChecked() ? 1 : 0);
+
+		} else if (preference == mAllowWithScreenOn) {
+			Settings.System.putInt(mContext.getContentResolver(), Settings.System.FLASH_NOTIFICATIONS_ALLOW_WITH_SCREEN_ON,
+					mAllowWithScreenOn.isChecked() ? 1 : 0);
 
         } else if (preference == mPrivacyMode) {
             Settings.System.putInt(mContext.getContentResolver(), Settings.System.ACTIVE_NOTIFICATIONS_PRIVACY_MODE,
@@ -227,6 +261,9 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
             return true;
         } else if (pref == mNotifAppsPref) {
 			storeExcludedNotifApps((Set<String>) value, Settings.System.LOCKSCREEN_NOTIFICATIONS_EXCLUDED_APPS);
+			return true;
+		} else if (pref == mFlashAppsPref) {
+			storeExcludedNotifApps((Set<String>) value, Settings.System.FLASH_NOTIFICATIONS_EXCLUDED_APPS);
 			return true;
         } else {
             return false;
@@ -291,8 +328,7 @@ public class ActiveNotifications extends SettingsPreferenceFragment implements
 
     Set<String> getExcludedNotifApps(String setting) {
         String excludedNotif = Settings.System.getString(getContentResolver(), setting);
-        if (TextUtils.isEmpty(excludedNotif)) return null;
-
+        if (TextUtils.isEmpty(excludedNotif) || excludedNotif == null) return null;
         return new HashSet<String>(Arrays.asList(excludedNotif.split("\\|")));
     }
 

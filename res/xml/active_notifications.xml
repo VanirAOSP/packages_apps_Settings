@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-        android:title="@string/general" >
+        android:title="@string/notification_styles" />
 
     <CheckBoxPreference
         android:key="ad_enable"
@@ -34,6 +34,14 @@
         android:title="@string/lockscreen_notifications_title"
         android:summary="@string/lock_summary"/> 
 
+    <CheckBoxPreference
+        android:key="flash_notifications"
+        android:title="@string/flash_notifications_title"
+        android:summary="@string/flash_notifications_summary" />
+
+    <PreferenceCategory
+        android:title="@string/general" >
+
         <ListPreference
             android:key="pocket_mode"
             android:persistent="false"
@@ -41,6 +49,12 @@
             android:summary="@string/pocket_mode_summary"
             android:entries="@array/pocket_mode_entries"
             android:entryValues="@array/pocket_mode_values" />
+
+        <CheckBoxPreference
+            android:key="allow_with_screen_on"
+            android:title="@string/allow_flash_with_screen_on_title"
+            android:summary="@string/allow_flash_with_screen_on_summary" 
+            android:defaultValue="true" />
 
         <CheckBoxPreference
             android:key="hide_low_priority"
@@ -79,14 +93,17 @@
         
         <com.android.settings.vanir.AppMultiSelectListPreference
             android:key="ad_excluded_apps"
-            android:persistent="false"
             android:title="@string/ad_excluded_apps_title"
             android:summary="@string/ad_excluded_apps_summary" />
 
         <com.android.settings.vanir.AppMultiSelectListPreference
 			android:key="excluded_apps"
-			android:persistent="false"
 			android:title="@string/excluded_apps_title"
 			android:summary="@string/excluded_apps_summary" />
+
+        <com.android.settings.vanir.AppMultiSelectListPreference
+			android:key="excluded_flash_apps"
+			android:title="@string/excluded_flash_apps_title"
+			android:summary="@string/excluded_flash_apps_summary" />
 
 </PreferenceScreen>
