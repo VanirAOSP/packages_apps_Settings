@@ -189,6 +189,7 @@
     <string name="volume_overlay_single">Single</string>
     <string name="volume_overlay_expandable">Expandable</string>
     <string name="volume_overlay_expanded">Expanded</string>
+    <string name="volume_in_status_bar">Show in status bar</string>
     <string name="volume_overlay_none">None</string>
 
     <!-- Automatation and effects category -->

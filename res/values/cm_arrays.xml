@@ -246,6 +246,7 @@
         <item>@string/volume_overlay_single</item>
         <item>@string/volume_overlay_expandable</item>
         <item>@string/volume_overlay_expanded</item>
+        <item>@string/volume_in_status_bar</item>
         <item>@string/volume_overlay_none</item>
     </string-array>
 
@@ -254,6 +255,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>4</item>
         <item>3</item>
     </string-array>
 
