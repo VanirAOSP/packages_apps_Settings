@@ -68,7 +68,7 @@ public class RingModeItem implements Item {
 
     public static int getModeString(RingModeSettings settings) {
         if (settings == null) {
-            return R.string.ring_mode_normal;
+            return R.string.ring_mode_noaction;
         }
         if (settings.isOverride()) {
             if (settings.getValue().equals("vibrate")) {
@@ -79,7 +79,7 @@ public class RingModeItem implements Item {
                 return R.string.ring_mode_mute;
             }
         } else {
-            return R.string.ring_mode_normal;
+            return R.string.ring_mode_noaction;
         }
     }
 

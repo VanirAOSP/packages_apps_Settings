@@ -341,17 +341,17 @@ public class SetupActionsFragment extends SettingsPreferenceFragment
 
     private void requestRingModeDialog(final RingModeSettings setting) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        final String[] values = getResources().getStringArray(R.array.ring_mode_values);
-        final String[] names = getResources().getStringArray(R.array.ring_mode_entries);
+        final String[] values = getResources().getStringArray(R.array.profile_ring_mode_values);
+        final String[] names = getResources().getStringArray(R.array.profile_ring_mode_entries);
 
         int defaultIndex = 0; // normal by default
         if (setting.isOverride()) {
-            if (setting.getValue().equals(values[1] /* vibrate */)) {
+            if (setting.getValue().equals(values[1] /* enabled */)) {
                 defaultIndex = 1; // enabled
-            } else if (setting.getValue().equals(values[2] /* mute */)) {
-                defaultIndex = 2; // mute
-            } else {
-                defaultIndex = 1; // disabled
+            } else if (setting.getValue().equals(values[2] /* vibrate */)) {
+                defaultIndex = 2; // vibrate
+            } else if (setting.getValue().equals(values[3] /* mute */)) {
+                defaultIndex = 3; // vibrate
             }
         }
 
@@ -360,18 +360,11 @@ public class SetupActionsFragment extends SettingsPreferenceFragment
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                switch (item) {
-                    case 0: // disable override
-                        setting.setOverride(false);
-                        break;
-                    case 1: // enable override, disable
-                        setting.setOverride(true);
-                        setting.setValue(values[1]);
-                        break;
-                    case 2: // enable override, enable
-                        setting.setOverride(true);
-                        setting.setValue(values[2]);
-                        break;
+                if (item == 0) {                
+                    setting.setOverride(false);
+                } else {
+                    setting.setOverride(true);
+                    setting.setValue(values[item]);
                 }
                 mProfile.setRingMode(setting);
                 mAdapter.notifyDataSetChanged();
