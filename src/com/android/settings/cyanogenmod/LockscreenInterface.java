@@ -138,6 +138,14 @@ public class LockscreenInterface extends SettingsPreferenceFragment implements O
                     DevicePolicyManager.KEYGUARD_DISABLE_SECURE_CAMERA);
         }
 
+        // Enable or disable application widget based on policy
+        if (mEnableApplicationWidget != null) {
+            if (!checkDisabledByPolicy(mEnableApplicationWidget,
+                    DevicePolicyManager.KEYGUARD_DISABLE_APPLICATION_WIDGET)) {
+                mEnableApplicationWidget.setEnabled(true);
+            }
+        }
+
         boolean canEnableModLockscreen = false;
         final Bundle keyguard_metadata = Utils.getApplicationMetadata(
                 getActivity(), "com.android.keyguard");
