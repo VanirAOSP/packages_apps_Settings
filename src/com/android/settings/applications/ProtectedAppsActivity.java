@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,6 +28,7 @@ import com.android.settings.cyanogenmod.ProtectedAppsReceiver;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,6 +48,8 @@ public class ProtectedAppsActivity extends Activity {
     private ArrayList<ComponentName> mProtect;
 
     private boolean mWaitUserAuth = false;
+
+    private HashSet<ComponentName> mProtectedApps = new HashSet<ComponentName>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,23 @@ public class ProtectedAppsActivity extends Activity {
         refreshAppsTask.execute(null, null, null);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Update Protected Apps list
+        updateProtectedComponentsList();
+    }
+
+    private void updateProtectedComponentsList() {
+        String protectedComponents = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.PROTECTED_COMPONENTS);
+        protectedComponents = protectedComponents == null ? "" : protectedComponents;
+        String [] flattened = protectedComponents.split("\\|");
+        mProtectedApps = new HashSet<ComponentName>(flattened.length);
+        for (String flat : flattened) {
+            ComponentName cmp = ComponentName.unflattenFromString(flat);
+            if (cmp != null) {
+                mProtectedApps.add(cmp);
+            }
+        }
     }
 
     @Override
@@ -104,13 +123,7 @@ public class ProtectedAppsActivity extends Activity {
     }
 
     private boolean getProtectedStateFromComponentName(ComponentName componentName) {
-        PackageManager pm = getPackageManager();
-
-        try {
-            return pm.getApplicationInfo(componentName.getPackageName(), 0).protect;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
+        return mProtectedApps.contains(componentName);
     }
 
     @Override
@@ -245,6 +258,7 @@ public class ProtectedAppsActivity extends Activity {
                         appList.componentNames, appList.state);
             }
 
+            updateProtectedComponentsList();
             return null;
         }
     }
