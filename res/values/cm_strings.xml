@@ -369,6 +369,7 @@
     <string name="title_tile_music">Music</string>
     <string name="title_tile_network_adb">ADB over network</string>
     <string name="title_tile_powermenu">Power menu</string>
+    <string name="title_tile_themes">Themes</string>
 
     <string name="title_dynamic_tiles">Dynamic tiles</string>
     <string name="dynamic_tiles_note_title">Note</string>

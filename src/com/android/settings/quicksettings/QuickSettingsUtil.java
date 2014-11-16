@@ -154,6 +154,9 @@ public class QuickSettingsUtil {
         registerTile(new QuickSettingsUtil.TileInfo(
                 TILE_GESTUREPANEL, R.string.title_gesturepanel_tile,
                 "com.android.systemui:drawable/ic_qs_gesture"));
+        registerTile(new QuickSettingsUtil.TileInfo(
+                TILE_THEMES, R.string.title_tile_themes,
+                "com.android.systemui:drawable/ic_qs_themes"));
     }
 
     private static void registerTile(QuickSettingsUtil.TileInfo info) {
