@@ -155,11 +155,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             getPreferenceScreen().removePreference(findPreference(KEY_BASEBAND_VERSION));
         }
 
-        // Dont show feedback option if there is no reporter.
-        if (TextUtils.isEmpty(getFeedbackReporterPackage(getActivity()))) {
-            getPreferenceScreen().removePreference(findPreference(KEY_DEVICE_FEEDBACK));
-        }
-
         /*
          * Settings is a generic app and should not contain any device-specific
          * info.
