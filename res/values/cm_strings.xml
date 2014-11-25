@@ -387,7 +387,7 @@
     <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing. Overrides IME switcher.</string>
     <string name="navigation_bar_recents_title">Recents long press action</string>
 
-    <string name="header_category_personalization">Personalization</string>
+    <string name="header_category_personalization">Voodoo</string>
 
     <!-- Status bar -->
     <string name="status_bar_title">Status bar</string>
