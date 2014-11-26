@@ -33,15 +33,6 @@
                     android:targetClass="@string/additional_system_update_menu" />
         </PreferenceScreen>
 
-        <!-- CyanogenMod Updates -->
-        <PreferenceScreen android:key="cm_updates"
-                android:title="@string/cmupdate_settings_title"
-                android:summary="@string/system_update_settings_list_item_summary">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.cyanogenmod.updater"
-                    android:targetClass="com.cyanogenmod.updater.UpdatesSettings" />
-        </PreferenceScreen>
-
         <!-- Advanced mode -->
         <com.android.settings.cyanogenmod.SecureSettingSwitchPreference
             android:key="advanced_mode"
@@ -57,57 +48,12 @@
                     android:targetClass="com.android.settings.deviceinfo.Status" />
         </PreferenceScreen>
 
-        <!-- Contributors cloud -->
-        <PreferenceScreen android:key="contributor_cloud"
-            android:title="@string/contributor_cloud_title"
-            android:fragment="com.android.settings.cyanogenmod.ContributorsCloud" >
-        </PreferenceScreen>
-
-        <!-- Legal Information -->
+        <!-- Contributors -->
+        <!--
         <PreferenceScreen
-                android:key="container"
-                android:title="@string/legal_information">
-                    
-            <!-- Note: The titles given here probably won't be used.  Instead, we programmatically
-                       fill the title with the label of the activity with the corresponding action.
-                       If there is not an activity for an action, the item will be removed from the
-                       list. -->
-
-            <!-- Copyright information -->
-            <PreferenceScreen
-                    android:key="copyright"
-                    android:title="@string/copyright_title">
-                <intent android:action="android.settings.COPYRIGHT" />
-            </PreferenceScreen>
-
-            <!-- License information -->
-            <PreferenceScreen
-                    android:key="license"
-                    android:title="@string/license_title">
-                <intent android:action="android.settings.LICENSE" />
-            </PreferenceScreen>
-
-            <!-- CM License information -->
-            <PreferenceScreen
-                    android:key="cmlicense"
-                    android:title="@string/cmlicense_title">
-                <intent android:action="android.settings.CMLICENSE" />
-            </PreferenceScreen>
-
-            <!-- Terms and conditions -->
-            <PreferenceScreen
-                    android:key="terms"
-                    android:title="@string/terms_title">
-                <intent android:action="android.settings.TERMS" />
-            </PreferenceScreen>
-
-            <!-- System WebView License information -->
-            <PreferenceScreen
-                    android:key="webview_license"
-                    android:title="@string/webview_license_title">
-                <intent android:action="android.settings.WEBVIEW_LICENSE" />
-            </PreferenceScreen>
-
+                android:key="contributors"
+                android:title="@string/contributors_title">
+            <intent android:action="android.settings.TEAM" />
         </PreferenceScreen>
 
         <PreferenceScreen
@@ -180,5 +126,44 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/selinux_status"
                 android:summary="@string/selinux_status_enforcing"/>
+
+        <!-- Legal Information -->
+        <PreferenceScreen
+                android:key="container"
+                android:title="@string/legal_information">
+
+            <!-- Note: The titles given here probably won't be used.  Instead, we programmatically
+                       fill the title with the label of the activity with the corresponding action.
+                       If there is not an activity for an action, the item will be removed from the
+                       list. -->
+
+            <!-- Copyright information -->
+            <PreferenceScreen
+                    android:key="copyright"
+                    android:title="@string/copyright_title">
+                <intent android:action="android.settings.COPYRIGHT" />
+            </PreferenceScreen>
+
+            <!-- License information -->
+            <PreferenceScreen
+                    android:key="license"
+                    android:title="@string/license_title">
+                <intent android:action="android.settings.LICENSE" />
+            </PreferenceScreen>
+
+            <!-- Terms and conditions -->
+            <PreferenceScreen
+                    android:key="terms"
+                    android:title="@string/terms_title">
+                <intent android:action="android.settings.TERMS" />
+            </PreferenceScreen>
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+                android:key="safetylegal"
+                android:title="@string/settings_safetylegal_title">
+            <intent android:action="android.settings.SAFETY" />
+        </PreferenceScreen>
 
 </PreferenceScreen>
