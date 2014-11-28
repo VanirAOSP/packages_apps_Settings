@@ -92,6 +92,13 @@
                 android:icon="@drawable/ic_settings_home"
                 />
 
+        <!-- Superuser -->
+        <dashboard-tile
+                android:id="@+id/superuser_settings"
+                android:title="@string/superuser"
+                android:fragment="com.android.settings.vanir.superuser.PolicyNativeFragment"
+                android:icon="@drawable/ic_action_permission"
+                />
 
     </dashboard-category>
 
@@ -265,14 +272,6 @@
                 android:title="@string/print_settings"
                 android:fragment="com.android.settings.print.PrintSettingsFragment"
                 android:icon="@drawable/ic_settings_print"
-                />
-
-        <!-- Superuser -->
-        <dashboard-tile
-                android:id="@+id/superuser_settings"
-                android:title="@string/superuser"
-                android:fragment="com.android.settings.vanir.superuser.PolicyNativeFragment"
-                android:icon="@drawable/ic_action_permission"
                 />
 
         <!-- Development -->
