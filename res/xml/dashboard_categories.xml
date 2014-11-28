@@ -71,10 +71,18 @@
 
     </dashboard-category>
 
-    <!-- Personalization -->
+	<!-- VOODOO -->
     <dashboard-category
             android:id="@+id/device_personalization"
             android:title="@string/voodoo_title" >
+
+        <!-- Interface -->
+        <dashboard-tile
+                android:id="@+id/interface_settings"
+                android:title="@string/interface_title"
+                android:fragment="com.android.settings.vanir.VanirInterface"
+                android:icon="@drawable/ic_settings_system"
+                />
 
         <!-- Home -->
         <dashboard-tile
@@ -92,7 +100,6 @@
                 android:icon="@drawable/ic_settings_home"
                 />
 
-
     </dashboard-category>
 
     <!-- DEVICE -->
@@ -106,8 +113,6 @@
                 android:fragment="com.android.settings.ButtonSettings"
                 android:icon="@drawable/ic_settings_buttons"
                 />
-
-
 
         <!-- Display -->
         <dashboard-tile
