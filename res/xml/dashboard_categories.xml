@@ -271,7 +271,7 @@
         <dashboard-tile
                 android:id="@+id/superuser_settings"
                 android:title="@string/superuser"
-                android:fragment="com.android.settings.cyanogenmod.superuser.PolicyNativeFragment"
+                android:fragment="com.android.settings.vanir.superuser.PolicyNativeFragment"
                 android:icon="@drawable/ic_action_permission"
                 />
 
