@@ -235,6 +235,7 @@
     <string name="spam_added_title">Added %1$s</string>
     <string name="spam_last_blocked_title">Last blocked %1$s</string>
     <string name="block_notifications_title">Filter notifications</string>
+    <string name="block_notifications_summary">Manage ignored notifications and filters</string>
     <string name="no_filters_title">No filters set</string>
     <string name="app_ops_ignored_count">Denied <xliff:g id="count" example="2 times">%s</xliff:g></string>
 
@@ -378,7 +379,7 @@
     <string name="notification_light_voicemail_title">Voicemail</string>
 
     <!-- Sound & notification > Sound section: Title for the option defining the default notification ringtone. [CHAR LIMIT=30] -->
-    <string name="notification_ringtone_title_cm">Notification ringtone</string>
+    <string name="notification_ringtone_title_cm">Notification tone</string>
 
     <!-- Whether to display IME switcher notifcation -->
     <string name="ime_switcher_notify">Selector notification</string>
