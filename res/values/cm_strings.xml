@@ -37,6 +37,12 @@
     <string name="root_access_adb">ADB only</string>
     <string name="root_access_all">Apps and ADB</string>
 
+    <!-- Keyguard Notification Settings -->
+    <string name="app_notification_show_on_keyguard_title">Show on lockscreen</string>
+    <string name="app_notification_show_on_keyguard_summary">Show notifications from this app on the lockscreen</string>
+    <string name="app_notification_no_ongoing_on_keyguard_title">Disable ongoing on lockscreen</string>
+    <string name="app_notification_no_ongoing_on_keyguard_summary">Never show ongoing notifications from this app on the lockscreen</string>
+
     <!-- Sound settings screen -->
     <string name="ring_mode_title">Ring mode</string>
     <string name="ring_mode_normal">Normal</string>
@@ -279,13 +285,16 @@
     <string name="block_notifications_summary">Manage ignored notifications and filters</string>
     <string name="no_filters_title">No filters set</string>
 
-    <!-- About phone screen, CyanogenMod version -->
-    <string name="mod_version">CyanogenMod version</string>
+    <!-- About phone screen,  setting option name -->
+    <string name="mod_version">Vanir version</string>
     <string name="mod_version_default">Unknown</string>
-
-    <!-- About phone screen, build date -->
+    <!-- About phone screen, build date of ROM -->
     <string name="build_date">Build date</string>
-    <string name="build_date_default">2014-01-01-0000</string>
+    <string name="build_date_default" translatable="false">2014-01-01-0000</string>
+    <!-- About device screen, Cpu info -->
+    <string name="cpu_info">CPU</string>
+    <!-- About phone screen, Free memory info -->
+    <string name="mem_info">Memory</string>
 
     <!--- Advanced Settings -->
     <string name="advanced_settings">Advanced settings</string>
@@ -366,7 +375,7 @@
     <string name="disable_navkeys_title">Enable on-screen nav bar</string>
     <string name="disable_navkeys_summary">Enable on-screen navigation bar and disable hardware buttons</string>
 
-    <string name="header_category_personalization">Personalization</string>
+    <string name="header_category_personalization">Voodoo</string>
 
     <!-- Status bar -->
     <string name="status_bar_title">Status bar</string>
