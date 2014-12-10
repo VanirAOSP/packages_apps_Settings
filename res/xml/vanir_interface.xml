@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 VanirAOSP && the Android Open Source Project
+<!-- Copyright (C) 2014 VanirAOSP
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
      limitations under the License.
 -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@android:id/text1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:drawablePadding="12dip"
-    android:paddingLeft="6dip"
-    android:paddingRight="6dip"
-    android:ellipsize="marquee"
-    android:singleLine="true"
-    android:textAppearance="?android:attr/textAppearanceLarge" />
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/vanir_settings_title"
+    settings:keywords="@string/vanir_settings_title">
+    
+    <PreferenceScreen
+            android:key="navigation_bar"
+            android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
+            android:title="@string/category_navbar"
+            />
+</PreferenceScreen>
