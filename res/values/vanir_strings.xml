@@ -22,4 +22,15 @@
 	<string name="vanirupdate_settings_alternate_title">System updates</string>
 	<string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
 
+    <!-- vanir actions and utilities -->
+    <string name="shortcut_label">Actions &amp; Utilities</string>
+    <string name="toggle_flushmemory">GC memory</string>
+    <string name="toggle_ring_vib">Ring/Vib</string>
+    <string name="toggle_ring_silent">Ring/Silent</string>
+    <string name="toggle_ring_vib_silent">Ring/Vib/Silent</string>
+    <string name="toggle_profile">Profiles</string>
+	<string name="toggle_profile_toast">Profiles are currently disabled</string>
+	<string name="toggle_dream">Screensaver</string>
+	<string name="toggle_dream_failed">Dreams are off or disabled</string>
+
 </resources>
