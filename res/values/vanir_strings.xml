@@ -13,13 +13,106 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
  
 	<!-- Vanir menus -->
-	<string name="voodoo_title">Voodoo</string>
-	<string name="vanir_settings_title">Vanir Interface</string>
+	<string name="voodoo_title">Exodus</string>
+	<string name="vanir_settings_title">Interface</string>
 	<string name="misc_short">Misc</string>
+	<string name="interface_title">Interface</string>
+	<string name="controls_title">Controls</string>
+	<string name="userpsace_title">Userspace</string>
  
-	<!-- Vanir Updater -->
-	<string name="vanirupdate_settings_title">Vanir updates</string>
-	<string name="vanirupdate_settings_alternate_title">System updates</string>
-	<string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
+    <!-- Vanir Updater -->
+    <string name="vanirupdate_settings_title">Exodus updates</string>
+    <string name="vanirupdate_settings_alternate_title">System updates</string>
+    <string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
+
+    <!-- Shortcut Picker -->
+    <string name="icon_picker_title">Choose icon source</string>
+    <string name="icon_picker_system_icons_title">System icons</string>
+    <string name="icon_picker_gallery_title">Gallery</string>
+    <string name="icon_picker_pack_title">Icon pack</string>
+    <string name="applist_title">Apps</string>
+    <string name="picker_activities">Activities</string>
+    <string name="select_custom_app_title">Select custom app</string>
+    <string name="select_custom_activity_title">Select custom activity</string>
+
+    <!-- Gesture panel -->
+    <string name="gesture_panel_title">Gesture panel actions</string>
+    <string name="button_add">Add gesture</string>
+    <string name="button_reload">Reload</string>
+    <string name="button_discard">Discard</string>
+    <string name="button_done">Done</string>
+    <string name="prompt_gesture_name">Name</string>
+    <string name="error_missing_name">You must enter a name</string>
+    <string name="save_success">Gesture saved in %s</string>
+    <string name="rename_action">OK</string>
+    <string name="cancel_action">Cancel</string>
+    <string name="gestures_loading">Loading gestures...</string>
+    <string name="gestures_empty">No gestures</string>
+    <string name="gestures_activity">Gestures</string>
+    <string name="gestures_edit">Edit</string>
+    <string name="gestures_delete">Delete</string>
+    <string name="gestures_delete_success">Gesture deleted</string>
+    <string name="gestures_rename_title">Rename gesture</string>
+    <string name="gestures_rename_label">Gesture name</string>
+    <string name="gestures_error_loading">Could not load %s. Make sure you have storage available.</string>
+
+    <!-- vanir actions and utilities -->
+    <string name="shortcut_label">Actions &amp; Utilities</string>
+    <string name="toggle_flushmemory">GC memory</string>
+    <string name="toggle_ring_vib">Ring/Vib</string>
+    <string name="toggle_ring_silent">Ring/Silent</string>
+    <string name="toggle_ring_vib_silent">Ring/Vib/Silent</string>
+    <string name="toggle_profile">Profiles</string>
+	<string name="toggle_profile_toast">Profiles are currently disabled</string>
+	<string name="toggle_dream">Screensaver</string>
+	<string name="toggle_dream_failed">Dreams are off or disabled</string>
+
+	<!-- Shortcut picker -->
+	<string name="use_custom_app_title">Use custom application</string>
+	<string name="use_custom_app_summary">Use custom application instead of the recent applications dialog</string>
+	<string name="group_applications">Applications</string>
+	<string name="select_custom_app_title">Select custom application</string>
+
+	<!-- Custom navigation bar targets -->
+	<string name="choose_action_double_tap_title">Choose double tap action</string>
+    <string name="choose_action_title">Choose action</string>
+    <string name="choose_action_short_title">Choose short action</string>
+    <string name="choose_action_long_title">Choose long action</string>
+    <string name="action_long_save">set as long action</string>
+    <string name="action_short">Short action</string>
+    <string name="action_long">Long action</string>
+    <string name="action_double">Double tap action</string>
+    <string name="action_icon">Custom icon</string>
+    <string name="custom_app_icon_successfully">"'s icon set successfully!"</string>
+    <string name="add_button">Add button</string>
+    <string name="category_navbar">Navigation bar</string>
+    <string name="navbar_tab_arrange">Editor</string>
+    <string name="navbar_tab_settings">Settings</string>
+    <string name="change_layouts_title"> Layout </string>
+	<string name="change_layouts_dialog_title">Select a layout to edit</string>
+	<string name="alternate_key_layouts">Number of enabled layouts</string>
+	<string name="alternate_key_layouts_summary">Enable the layout changer keys and set the number of enabled layouts</string>
+	<string name="alternate_key_layouts_enabled_summary">navigation bar layouts are currently enabled</string>
+	<string name="alternate_key_layouts_enabled_partial_summary">out of 5</string>
+	<string name="alternate_key_layouts_all_enabled_summary">All 5 navigation bar layouts are currently enabled</string>
+	<string name="alternate_menu_summary">Allow legacy menu key to replace layout switch when requested</string>
+	<string name="layouts_dialog_title">Number of enabled layouts</string>
+	<string name="enable_sidekeys">Allow legacy menu keys</string>
+	<string name="enable_sidekeys_summary">Add a space to allow the side menu keys in the navigation bar.</string>
+	<string name="navigation_bar_height_text">Bar height in portrait</string>
+	<string name="navigation_bar_height_landscape_text">Bar height in landscape</string>
+	<string name="navigation_bar_width_text">Bar width in landscape</string>
+	<string name="enable_ime_layout">Extra IME buttons</string>
+	<string name="enable_ime_layout_summary">Include a switch that changes the layout to keyboard arrows and the AOSP keyboard switcher</string>
+	<string name="enable_ime_layout_disabled">Not enough room in the layout: enable additional layouts or legacy menu keys</string>
+	<string name="customize_ime_layout_dialog_title">Customize IME key layout</string>
+	<string name="ime_layout_ime">IME switcher</string>
+	<string name="ime_layout_home">home button</string>
+	<string name="ime_layout_blank">blank space before dpad keys</string>
+    <string name="editor_instructions">Rearrange by dragging by the handle on the right. Remove by swiping.</string>
+    <string name="save">Save</string>
+    <string name="navigation_bar_longpress_timeout_text">Button longpress delay</string>
+    <string name="enable_navigation_ring_title">Navigation search assistant</string>
+    <string name="enable_navigation_ring_summary">Enable long-press on home for the google now search assistant</string>
 
 </resources>
