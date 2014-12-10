@@ -119,7 +119,7 @@ public class GestureBuilderActivity extends ListActivity
     public void reloadGestures(View v) {
         loadGestures();
     }
-    
+
     @SuppressWarnings({"UnusedDeclaration"})
     public void addGesture(View v) {
         mPicker.pickShortcut(null, null, 0);
@@ -128,7 +128,7 @@ public class GestureBuilderActivity extends ListActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_NEW_GESTURE:
@@ -146,7 +146,7 @@ public class GestureBuilderActivity extends ListActivity
     private void loadGestures() {
         if (mTask != null && mTask.getStatus() != GesturesLoadTask.Status.FINISHED) {
             mTask.cancel(true);
-        }        
+        }
         mTask = (GesturesLoadTask) new GesturesLoadTask().execute();
     }
 
@@ -245,8 +245,8 @@ public class GestureBuilderActivity extends ListActivity
 
             findViewById(R.id.addButton).setEnabled(false);
             findViewById(R.id.reloadButton).setEnabled(false);
-            
-            mAdapter.setNotifyOnChange(false);            
+
+            mAdapter.setNotifyOnChange(false);
             mAdapter.clear();
         }
 
