@@ -14,14 +14,15 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout style="@style/settingsFragmentStyle"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center_horizontal"
-              android:orientation="vertical">
+    <LinearLayout
+        style="@style/settingsFragmentStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <View
             android:layout_width="fill_parent"
@@ -37,13 +38,14 @@
             android:orientation="vertical">
 
             <TextView
-                    android:id="@+id/navigation_bar_height_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:paddingTop="4dp"
-                    android:text="@string/navigation_bar_height_text"
-                    android:textSize="16sp"/>
+                android:id="@+id/navigation_bar_height_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingTop="4dp"
+                android:text="@string/navigation_bar_height_text"
+                android:textSize="16sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
@@ -61,88 +63,93 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="17dp"
                         android:layout_marginRight="17dp" />
-           </LinearLayout>
+            </LinearLayout>
 
             <TextView
-                    android:id="@+id/navigation_bar_height_landscape_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:paddingTop="6dp"
-                    android:text="@string/navigation_bar_height_landscape_text"
-                    android:textSize="16sp"/>
+                android:id="@+id/navigation_bar_height_landscape_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingTop="6dp"
+                android:text="@string/navigation_bar_height_landscape_text"
+                android:textSize="16sp"/>
         
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                        android:id="@+id/navigation_bar_height_landscape_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:textSize="16sp"/>
+                    android:id="@+id/navigation_bar_height_landscape_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"/>
+
                 <SeekBar
-                        android:id="@+id/navigation_bar_height_landscape"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginRight="17dp" />
+                    android:id="@+id/navigation_bar_height_landscape"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp" />
             </LinearLayout>
 
             <TextView
-                    android:id="@+id/navigation_bar_width_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:paddingTop="8dp"
-                    android:text="@string/navigation_bar_width_text"
-                    android:textSize="16sp"/>
+                android:id="@+id/navigation_bar_width_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingTop="8dp"
+                android:text="@string/navigation_bar_width_text"
+                android:textSize="16sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                        android:id="@+id/navigation_bar_width_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:textSize="16sp"/>
+                    android:id="@+id/navigation_bar_width_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"/>
+
                 <SeekBar
-                        android:id="@+id/navigation_bar_width"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginRight="17dp" />
+                    android:id="@+id/navigation_bar_width"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp" />
             </LinearLayout>
 
-			<TextView
-                    android:id="@+id/navigation_bar_longpress_timeout_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:paddingTop="8dp"
-                    android:text="@string/navigation_bar_longpress_timeout_text"
-                    android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/navigation_bar_longpress_timeout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingTop="8dp"
+                android:text="@string/navigation_bar_longpress_timeout_text"
+                android:textSize="16sp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <TextView
-                        android:id="@+id/navigation_bar_longpress_timeout_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:textSize="16sp"/>
+                    android:id="@+id/navigation_bar_longpress_timeout_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="16sp"/>
+
                 <SeekBar
-                        android:id="@+id/navigation_bar_longpress_timeout"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="17dp"
-                        android:layout_marginRight="17dp" />
+                    android:id="@+id/navigation_bar_longpress_timeout"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp" />
             </LinearLayout>
 
             <View
@@ -164,6 +171,7 @@
                     android:layout_gravity="left"
                     android:text="@string/enable_sidekeys"
                     android:defaultValue="true" />
+
                 <TextView
                     android:id="@+id/sidekey_text"
                     android:layout_width="wrap_content"
@@ -222,6 +230,7 @@
                     android:layout_gravity="left"
                     android:textSize="16sp"
                     android:text="@string/alternate_key_layouts" />
+
                 <TextView
                     android:id="@+id/alternate_layout_text"
                     android:layout_width="wrap_content"
@@ -245,13 +254,14 @@
                 android:orientation="vertical"
                 android:clickable="true" >
 
-				<Switch
-				    android:id="@+id/enable_navigation_ring"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="left"
-					android:textSize="12sp"
-					android:text="@string/enable_navigation_ring_title" />
+                <Switch
+                    android:id="@+id/enable_navigation_ring"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="12sp"
+                    android:text="@string/enable_navigation_ring_title" />
+
                 <TextView
                     android:id="@+id/enable_navigation_ring_text"
                     android:layout_width="wrap_content"

@@ -45,7 +45,7 @@ public class ProfileActivity extends Activity implements DialogInterface.OnCance
 
     Profile mChosenProfile;
     ProfileManager mProfileManager;
-    
+
     public ProfileActivity() {
         super();
     }

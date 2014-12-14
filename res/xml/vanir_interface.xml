@@ -14,16 +14,17 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/vanir_settings_title"
-        settings:keywords="@string/vanir_settings_title">
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/vanir_settings_title"
+    settings:keywords="@string/vanir_settings_title">
     
     <PreferenceScreen
-			android:key="navigation_bar"
-			android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
-			android:title="@string/category_navbar"
-			/>
+            android:key="navigation_bar"
+            android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
+            android:title="@string/category_navbar"
+            />
 
     <PreferenceScreen
             android:id="@+id/status_bar_settings"

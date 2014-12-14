@@ -58,7 +58,7 @@ import java.util.HashMap;
 public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBarChangeListener,
         CompoundButton.OnCheckedChangeListener {
     private static final String TAG = NavbarSettingsFragment.class.getSimpleName();
-    
+
     private static final int SOFTKEY_LONG_PRES_DEF_VALUE = ViewConfiguration.getLongPressTimeout();
     private static final int SOFTKEY_LONG_PRESS_TIMEOUT_MIN_VAL = 225;
     private static final int SOFTKEY_LONG_PRESS_TIMEOUT_MAX_VAL = 575;
@@ -415,13 +415,13 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         boolean allow = layoutnumber > 1 || mSideKeys.isChecked();
         mArrows.setEnabled(allow);
         if (!allow) {
-			mArrows.setChecked(false);
-			Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, 0);
-			arrowsSummary.setText(getString(R.string.enable_ime_layout_disabled));
-		} else {
-			arrowsSummary.setText(getString(R.string.enable_ime_layout_summary));
-		}
-		
+            mArrows.setChecked(false);
+            Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, 0);
+            arrowsSummary.setText(getString(R.string.enable_ime_layout_disabled));
+        } else {
+            arrowsSummary.setText(getString(R.string.enable_ime_layout_summary));
+        }
+
         if (!DeviceUtils.isPackageInstalled(activity, "com.google.android.googlequicksearchbox")) {
             mNavring.setVisibility(View.GONE);
             v.findViewById(R.id.enable_navigation_ring_text).setVisibility(View.GONE);

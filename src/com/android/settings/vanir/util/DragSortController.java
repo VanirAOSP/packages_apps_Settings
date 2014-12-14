@@ -357,11 +357,11 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
         final int y = (int) ev.getY();
 
         int touchPos = mDslv.pointToPosition(x, y); //includes headers/footers
-        
+
         final int numHeaders = mDslv.getHeaderViewsCount();
         final int numFooters = mDslv.getFooterViewsCount();
         final int count = mDslv.getCount();
-        
+
         //Log.d("mobeta", "touch down on position " + itemnum);
         // We're only interested if the touch was on an
         // item that's not a header or footer.
@@ -369,13 +369,13 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
             final View item = mDslv.getChildAt(touchPos - mDslv.getFirstVisiblePosition());
             final int rawX = (int) ev.getRawX();
             final int rawY = (int) ev.getRawY();
-        
+
             //View dragBox = (View) item.getTag();
             View dragBox = (View) item.findViewById(id);
             boolean dragHit = false;
             if (dragBox != null) {
                 dragBox.getLocationOnScreen(mTempLoc);
-                
+
                 if (rawX > mTempLoc[0] && rawY > mTempLoc[1] &&
                         rawX < mTempLoc[0] + dragBox.getWidth() &&
                         rawY < mTempLoc[1] + dragBox.getHeight()) {
@@ -404,7 +404,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
 
         return true;
     }
-    
+
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         //Log.d("mobeta", "lift listener scrolled dX="+distanceX+" dY="+distanceY);

@@ -19,22 +19,22 @@ package com.android.settings.vanir.navbar;
 import android.text.TextUtils;
 
 public class SettingsButtonInfo {
-	String singleAction, doubleTapAction, longPressAction, iconUri;
+    String singleAction, doubleTapAction, longPressAction, iconUri;
 
-	public SettingsButtonInfo(String singleTap, String doubleTap, String longPress, String uri) {
-		this.singleAction = singleTap;
-		this.doubleTapAction = doubleTap;
-		this.longPressAction = longPress;
-		this.iconUri = uri;
+    public SettingsButtonInfo(String singleTap, String doubleTap, String longPress, String uri) {
+        this.singleAction = singleTap;
+        this.doubleTapAction = doubleTap;
+        this.longPressAction = longPress;
+        this.iconUri = uri;
 
-		if (singleAction == null) singleAction = "";
-		if (doubleTapAction == null) doubleTapAction = "";
-		if (longPressAction == null) longPressAction = "";
-		if (iconUri == null) iconUri = "";
-	}
+        if (singleAction == null) singleAction = "";
+        if (doubleTapAction == null) doubleTapAction = "";
+        if (longPressAction == null) longPressAction = "";
+        if (iconUri == null) iconUri = "";
+    }
 
-	@Override
-	public String toString() {
-		return singleAction + "," + doubleTapAction + "," + longPressAction + "," + iconUri;
-	}
+    @Override
+    public String toString() {
+        return singleAction + "," + doubleTapAction + "," + longPressAction + "," + iconUri;
+    }
 }

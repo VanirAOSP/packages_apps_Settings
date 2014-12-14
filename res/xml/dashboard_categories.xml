@@ -71,7 +71,7 @@
 
     </dashboard-category>
 
-	<!-- VOODOO -->
+    <!-- VOODOO -->
     <dashboard-category
             android:id="@+id/device_personalization"
             android:title="@string/voodoo_title" >

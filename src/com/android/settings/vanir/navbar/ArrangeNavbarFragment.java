@@ -420,16 +420,16 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
             SettingsButtonInfo button = getItem(position);
             DragGripView dragGripView = (DragGripView) convertView.findViewById(R.id.drag_handle);
 
-			TextView titleView = (TextView) convertView.findViewById(android.R.id.text1);
+            TextView titleView = (TextView) convertView.findViewById(android.R.id.text1);
             titleView.setText(NavbarUtils.getProperSummary(getContext(), button.singleAction));
 
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             image.setImageDrawable(NavbarUtils.getIconImage(getContext(),
-					button.iconUri == null 
-							? button.singleAction
-							: button.iconUri.isEmpty() 
-									? button.singleAction 
-									: button.iconUri));
+                                   button.iconUri == null
+                                   ? button.singleAction
+                                   : button.iconUri.isEmpty()
+                                   ? button.singleAction
+                                   : button.iconUri));
 
             return convertView;
         }
