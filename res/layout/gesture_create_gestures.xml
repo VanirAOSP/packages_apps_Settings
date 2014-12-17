@@ -32,7 +32,7 @@
             android:layout_marginRight="6dip"
             android:text="@string/prompt_gesture_name"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
+        
         <TextView
             android:id="@+id/gesture_name"
             android:layout_width="0dip"
@@ -76,5 +76,4 @@
             android:text="@string/button_discard" />
 
     </LinearLayout>
-
 </LinearLayout>

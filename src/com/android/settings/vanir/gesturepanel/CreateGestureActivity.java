@@ -40,7 +40,6 @@ public class CreateGestureActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.gesture_create_gestures);
 
         mDoneButton = findViewById(R.id.done);
@@ -84,7 +83,6 @@ public class CreateGestureActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         if (mGesture != null) {
             outState.putParcelable("gesture", mGesture);
         }
@@ -93,7 +91,6 @@ public class CreateGestureActivity extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
         mGesture = savedInstanceState.getParcelable("gesture");
         if (mGesture != null) {
             final GestureOverlayView overlay =
@@ -129,7 +126,6 @@ public class CreateGestureActivity extends Activity {
         }
 
         finish();
-
     }
 
     @SuppressWarnings({"UnusedDeclaration"})

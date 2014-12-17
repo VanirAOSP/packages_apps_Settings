@@ -75,4 +75,6 @@
 
     <color name="wifi_divider">#ffe0e0e0</color>
 
+    <!-- Gesture panel -->
+    <color name="gesture_color">#c0ffffff</color>
 </resources>

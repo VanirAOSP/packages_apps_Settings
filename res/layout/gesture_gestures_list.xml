@@ -59,6 +59,5 @@
             android:text="@string/button_reload" />
 
     </LinearLayout>
-
 </LinearLayout>
 
