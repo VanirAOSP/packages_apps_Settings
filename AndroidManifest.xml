@@ -1206,8 +1206,6 @@
 
         <activity android:name="ConfirmLockPattern"/>
 
-        <activity android:name="ConfirmLockGesture"/>
-
         <activity android:name="ConfirmLockPassword"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
@@ -1237,8 +1235,6 @@
         />
 
         <activity android:name="ChooseLockPattern" android:exported="false"/>
-
-        <activity android:name="ChooseLockGesture" android:exported="false"/>
 
         <activity android:name="ChooseLockPassword" android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
@@ -1864,7 +1860,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT" /> />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.CryptKeeperSettings" />
