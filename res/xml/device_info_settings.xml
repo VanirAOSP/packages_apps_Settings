@@ -20,15 +20,15 @@
     <PreferenceScreen android:key="logo1"
         android:layout="@layout/logo_row" />
 
-        <!-- Updater
+        <!-- Updater -->
         <PreferenceScreen android:key="vanir_updates"
                 android:title="@string/vanirupdate_settings_title"
                 android:summary="@string/vanirupdate_settings_summary">
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="com.vanir.updater"
                     android:targetClass="com.vanir.updater.UpdatesSettings" />
-        </PreferenceScreen>  -->
-
+        </PreferenceScreen>  
+        
         <!-- Device status - launches activity -->
         <PreferenceScreen android:key="status_info"
                 android:title="@string/device_status" 
