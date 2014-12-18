@@ -52,7 +52,6 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
-    private static final String KEY_IMMERSIVE_LOL = "immersive_mode_lol_profile";
     private static final String KEY_IMMERSIVE_ORIENTATION = "immersive_orientation";
     private static final String HARDWARE_IMMERSIVE_STYLE = "hardware_immersive_style";
     private static final String IMMERSIVE_ENABLED = "immersive_enabled";
@@ -62,7 +61,6 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
     private ListPreference mImmersiveOrientation;
     private ListPreference mImmersiveModePref;
-    private CheckBoxPreference mImmersiveLOL;
     private CheckBoxPreference mExpandedDesktop;
     private SwitchPreference mImmersiveModeState;
 
@@ -117,11 +115,6 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE, 0) == 1);
         mImmersiveModeState.setOnPreferenceChangeListener(this);
-
-        mImmersiveLOL = (CheckBoxPreference) findPreference(KEY_IMMERSIVE_LOL);
-        mImmersiveLOL.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.IMMERSIVE_LOL_PROFILE, 0) == 1);
-        mImmersiveLOL.setOnPreferenceChangeListener(this);
 
         mExpandedDesktop = (CheckBoxPreference) findPreference(KEY_EXPANDED_DESKTOP);
         mExpandedDesktop.setChecked(Settings.System.getInt(getContentResolver(),
@@ -197,12 +190,6 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
             Settings.System.putInt(getContentResolver(), Settings.System.IMMERSIVE_ORIENTATION,
                     value);
             setListPreferenceSummary(mImmersiveOrientation, strValue);
-            return true;
-
-        } else if (preference == mImmersiveLOL) {
-            Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.IMMERSIVE_LOL_PROFILE,
-                    (Boolean) objValue ? 1 : 0);
             return true;
 
         } else if (preference == mExpandedDesktop) {

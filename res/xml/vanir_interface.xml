@@ -53,11 +53,6 @@
             android:entryValues="@array/immersive_orientation_values" />
 
        <CheckBoxPreference
-            android:key="immersive_mode_lol_profile"
-            android:title="@string/immersive_mode_lol_profile_title"
-            android:summary="@string/immersive_mode_lol_on" />
-
-       <CheckBoxPreference
             android:key="expanded_desktop"
             android:title="@string/expanded_desktop_title"
             android:summary="@string/expanded_desktop_summary" />
