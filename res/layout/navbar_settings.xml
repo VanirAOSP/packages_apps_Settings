@@ -73,7 +73,7 @@
                 android:paddingTop="6dp"
                 android:text="@string/navigation_bar_height_landscape_text"
                 android:textSize="16sp"/>
-        
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
@@ -216,6 +216,36 @@
                 android:background="@android:color/darker_gray"/>
 
             <LinearLayout
+                style="@style/settingsFragmentStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <CheckBox
+                    android:id="@+id/clear_all_recents_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/clear_all_recents_title"
+                    android:defaultValue="false" />
+                <TextView
+                    android:id="@+id/clear_all_recents_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:textSize="12sp"
+                    android:text="@string/clear_all_recents_summary" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:paddingBottom="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/alternate_layouts"
                 style="@style/settingsFragmentStyle"
                 android:layout_width="fill_parent"
@@ -276,6 +306,6 @@
                 android:layout_height="1dp"
                 android:paddingBottom="1dp"
                 android:background="@android:color/darker_gray"/>
-        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

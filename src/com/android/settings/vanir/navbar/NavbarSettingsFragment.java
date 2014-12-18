@@ -79,6 +79,8 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private CheckBox mArrows;
     private LinearLayout mLayouts;
 
+    private CheckBox mC;
+
 //    private Switch mEnabledSwitch;
 
 	// value stored in SettingsProvider
@@ -275,6 +277,18 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             @Override
             public void onClick(View v) {
                 Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, mArrows.isChecked() ? 1 : 0);
+            }
+        });
+
+        // Clear all recents
+        mClearAll = (CheckBox) v.findViewById(R.id.clear_all_recents_checkbox);
+        mClearAll.setChecked(Settings.System.getInt(cr, Settings.System.CLEAR_ALL_RECENTS_NAVBAR_ENABLED, 0) == 1);
+        mClearAll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = ((CheckBox) v).isChecked();
+                Settings.System.putInt(cr, Settings.System.CLEAR_ALL_RECENTS_NAVBAR_ENABLED, isChecked ? 1 : 0);
+                updatePreferences(view);
             }
         });
 

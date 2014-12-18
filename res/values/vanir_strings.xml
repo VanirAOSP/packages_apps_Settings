@@ -296,4 +296,8 @@
     <!-- Summary for "Configure lockscreen" when security gesture is enabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_gesture">Gesture</string>
 
+    <!-- Clear all recents on navbar enabler strings -->
+    <string name="clear_all_recents_title">Clear all recents button on Navbar</string>
+    <string name="clear_all_recents_summary">Show clear all recents button in navigation bar</string>
+
 </resources>
