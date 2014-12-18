@@ -117,6 +117,27 @@
     <string name="enable_navigation_ring_title">Navigation search assistant</string>
     <string name="enable_navigation_ring_summary">Enable long-press on home for the google now search assistant</string>
 
+    <!-- Immersive Mode -->
+    <string name="power_menu_immersive_mode">Immersive mode</string>
+    <string name="power_menu_expanded_mode">Expanded desktop</string>
+    <string name="summary_immersive_mode">%1$s</string>
+    <string name="immersive_mode_hide_navbar">Hide the navbar only</string>
+    <string name="immersive_mode_hide_statusbar">Hide the statusbar only</string>
+    <string name="immersive_mode_hide_both">Hide the statusbar &amp; navbar</string>
+    <string name="immersive_mode_disabled">Disabled</string>
+    <string name="vanir_immersive_desktop">Immersive desktop</string>
+    <string name="immersive_mode_state">Enable</string>
+    <string name="immersive_mode_style">Immersive style</string>
+    <string name="expanded_desktop_title">Expanded desktop</string>
+    <string name="expanded_desktop_summary">Disable the immersive ui swipe gestures</string>
+    <string name="immersive_mode_lol_profile_title">Low profile mode</string>
+    <string name="immersive_mode_lol_on">Hide the statusbar and dim the navbar when applicable</string>
+    <string name="immersive_orientation_title">Orientation</string>
+    <string name="immersive_orientation_dialog_title">Select dependency:</string>
+    <string name="landscape_immersive">Landscape only</string>
+    <string name="portrait_immersive">Portrait only</string>
+    <string name="orientation_disabled">Default</string>
+
     <!-- Lock Gesture settings -->
     <!-- Security & location settings screen, setting option name -->
     <string name="lockgesture_change_lock_pattern_label">Change unlock gesture</string>
