@@ -19,7 +19,7 @@
     <string name="vanir_settings_title">Interface</string>
     <string name="misc_short">Misc</string>
     <string name="interface_title">Interface</string>
-    <string name="controls_title">Controls</string>
+    <string name="vanir_controls">Controls</string>
     <string name="userpsace_title">Userspace</string>
 
     <!-- Vanir Updater -->
@@ -116,6 +116,30 @@
     <string name="navigation_bar_longpress_timeout_text">Button longpress delay</string>
     <string name="enable_navigation_ring_title">Navigation search assistant</string>
     <string name="enable_navigation_ring_summary">Enable long-press on home for the google now search assistant</string>
+
+    <!-- Power menu enable disable -->
+    <string name="power_menu_settings">Power menu</string>
+    <string name="power_menu_reboot_title">Reboot menu</string>
+    <string name="power_menu_power_title">Power off</string>
+    <string name="power_menu_immersive_desktop">Immersive desktop</string>
+    <string name="power_menu_lockdown_title">Device lockdown</string>
+    <string name="power_menu_settings_title">Settings shortcut</string>
+    <string name="power_menu_bug_report_title">Bug report</string>
+    <string name="power_menu_profiles_title">Profile switcher</string>
+    <string name="power_menu_airplane_title">Airplane mode</string>
+    <string name="power_menu_users_title">User switcher</string>
+    <string name="power_menu_sound_title">Sound panel</string>
+    <string name="power_menu_bug_report_disabled">Bug reporting: enable option in development settings</string>
+    <string name="power_menu_immersive_disabled">Immersive mode: enable a style in interface settings</string>
+    <string name="power_menu_profiles_disabled">Profile switcher: system profiles are disabled</string>
+    <string name="expanded_desktop_style">Expanded desktop style</string>
+    <string name="expanded_desktop_disabled">Disabled</string>
+    <string name="expanded_desktop_status_bar">Status bar visible</string>
+    <string name="expanded_desktop_no_status_bar">Status bar hidden</string>
+    <string name="expanded_desktop_system_bars_visibility">Disable on lock screen</string>
+    <string name="expanded_desktop_system_bars_visibility_summary">Show status and navigation bar on lock screen during expanded desktop mode</string>
+    <string name="default_power_menu_options">Default options</string>
+    <string name="custom_power_menu_title">Custom options</string>
 
     <!-- Immersive Mode -->
     <string name="power_menu_immersive_mode">Immersive mode</string>

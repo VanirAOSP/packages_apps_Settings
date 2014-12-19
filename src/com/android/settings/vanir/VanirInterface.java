@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -182,6 +183,7 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
             setListPreferenceSummary(mImmersiveModePref, strValue);
             if (deviceKeys > 0) saveImmersiveState(immersiveModeValue);
             updateImmersiveModeDependencies();
+            updateRebootDialog();
             return true;
 
         } else if (preference == mImmersiveOrientation) {
@@ -202,6 +204,7 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STATE,
                     (Boolean) objValue ? 1 : 0);
+            updateRebootDialog();
             return true;
         }
         return false;
@@ -250,5 +253,11 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
 
     private void setListPreferenceSummary(final ListPreference pref, final String value) {
         pref.setSummary(pref.getEntries()[pref.findIndexOfValue(value)]);
+    }
+
+	private void updateRebootDialog() {
+        Intent u = new Intent();
+        u.setAction(Intent.UPDATE_POWER_MENU);
+        mContext.sendBroadcastAsUser(u, UserHandle.ALL);
     }
 }
