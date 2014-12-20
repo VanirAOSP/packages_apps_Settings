@@ -41,7 +41,7 @@
             android:key="volume_wake_screen"
             android:title="@string/button_wake_title"
             android:summary="@string/volume_wake_summary"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
         <CheckBoxPreference
             android:key="volbtn_music_controls"
