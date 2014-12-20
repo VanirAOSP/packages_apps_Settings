@@ -25,6 +25,8 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.vanir.util.DeviceUtils;
+
 public class StatusBarSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
 
@@ -61,6 +63,10 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         mStatusBarBatteryShowPercent.setValue(String.valueOf(batteryShowPercent));
         mStatusBarBatteryShowPercent.setSummary(mStatusBarBatteryShowPercent.getEntry());
         mStatusBarBatteryShowPercent.setOnPreferenceChangeListener(this);
+
+        if (!DeviceUtils.isPackageInstalled(getActivity(), "com.cyanogenmod.lockclock")) {
+            getPreferenceScreen().removePreference(findPreference("status_bar_show_weather"));
+        }
     }
 
     @Override
