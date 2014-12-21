@@ -36,6 +36,11 @@
             />
 
     <PreferenceScreen
+        android:key="app_circle_bar"
+        android:fragment="com.android.settings.liquid.AppCircleBar"
+        android:title="@string/app_circle_bar_title"/>
+
+    <PreferenceScreen
             android:id="@+id/power_menu"
             android:title="@string/power_menu_settings"
             android:fragment="com.android.settings.vanir.PowerMenuActions"
