@@ -67,11 +67,4 @@
             android:summary="@string/expanded_desktop_summary" />
 
     </PreferenceCategory>
-
-    <!-- Circle app bar -->
-    <PreferenceScreen
-        android:key="app_circle_bar"
-        android:fragment="com.android.settings.liquid.AppCircleBar"
-        android:title="@string/app_circle_bar_title"/>
-
 </PreferenceScreen>
