@@ -25,8 +25,8 @@
                 android:title="@string/vanirupdate_settings_title"
                 android:summary="@string/vanirupdate_settings_summary">
             <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.vanir.updater"
-                    android:targetClass="com.vanir.updater.UpdatesSettings" />
+                    android:targetPackage="com.exodus.updater"
+                    android:targetClass="com.exodus.updater.UpdatesSettings" />
         </PreferenceScreen>
 
         <!-- Device status - launches activity -->
