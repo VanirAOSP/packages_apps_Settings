@@ -101,6 +101,13 @@
         android:key="notification"
         android:title="@string/notification_section_header" >
 
+        <!-- Flash notifications -->
+        <com.android.settings.vanir.widgets.VanirPreferenceSwitch
+                android:key="flash_notifications_switch"
+                android:title="@string/flash_notifications_title"
+                android:fragment="com.android.settings.vanir.FlashNotifications" 
+                android:widgetLayout="@layout/listview_embedded_switchpreference" />
+
         <!-- Pulse notification light -->
         <PreferenceScreen
                 android:key="notification_light"
