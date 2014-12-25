@@ -2249,6 +2249,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.android.settings.vanir.FlashNotifications" />
+
         <activity android:name=".applications.LockPatternActivity"
                   android:label="@string/protected_apps"
                   android:excludeFromRecents="true">

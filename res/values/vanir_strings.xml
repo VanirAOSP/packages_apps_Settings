@@ -162,6 +162,18 @@
     <string name="portrait_immersive">Portrait only</string>
     <string name="orientation_disabled">Default</string>
 
+    <!-- Flash Notifications -->
+    <string name="flash_notifications_title">Flash notifications</string>
+    <string name="flash_notifications_summary">Trigger the camera flash when a notification is received</string>
+    <string name="excluded_apps_title">Flash notifications blacklist</string>
+    <string name="excluded_apps_summary">Excluded applications will not trigger flash notifications</string>
+    <string name="allow_flash_with_screen_on_title">Flash with screen on</string>
+    <string name="allow_flash_with_screen_on_summary">Allow flash notifications with the screen on</string>
+    <string name="allow_low_priority_title">Low priority</string>
+    <string name="allow_low_priority_summary">Allow flash for low priority notifications</string>
+    <string name="allow_non_clearable_title">Non-clearable</string>
+    <string name="allow_non_clearable_summary">Allow flash for non-clearable notifications</string>
+
     <!-- Lock Gesture settings -->
     <!-- Security & location settings screen, setting option name -->
     <string name="lockgesture_change_lock_pattern_label">Change unlock gesture</string>
