@@ -79,6 +79,8 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private CheckBox mArrows;
     private LinearLayout mLayouts;
 
+    private CheckBox mClearAll;
+
 //    private Switch mEnabledSwitch;
 
 	// value stored in SettingsProvider
@@ -248,7 +250,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         mBarWidthValue.setText(String.valueOf(currentWidthPercent + mMinWidthPercent)+"%");
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
 
-		// Softkey longpress timeout
+        // Softkey longpress timeout
         mSoftkeyLongPress = (SeekBar) v.findViewById(R.id.navigation_bar_longpress_timeout);
         mSoftkeyLongPressValue = (TextView) v.findViewById(R.id.navigation_bar_longpress_timeout_value);
         mSoftkeyLongPress.setMax(SOFTKEY_LONG_PRESS_TIMEOUT_MAX_VAL);
@@ -275,6 +277,18 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             @Override
             public void onClick(View v) {
                 Settings.System.putInt(cr, Settings.System.NAVIGATION_BAR_ARROWS, mArrows.isChecked() ? 1 : 0);
+            }
+        });
+
+        // Clear all recents
+        mClearAll = (CheckBox) v.findViewById(R.id.clear_all_recents_checkbox);
+        mClearAll.setChecked(Settings.System.getInt(cr, Settings.System.CLEAR_ALL_RECENTS_NAVBAR_ENABLED, 0) == 1);
+        mClearAll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = ((CheckBox) v).isChecked();
+                Settings.System.putInt(cr, Settings.System.CLEAR_ALL_RECENTS_NAVBAR_ENABLED, isChecked ? 1 : 0);
+                updatePreferences(view);
             }
         });
 
