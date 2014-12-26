@@ -79,7 +79,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private CheckBox mArrows;
     private LinearLayout mLayouts;
 
-    private CheckBox mC;
+    private CheckBox mClearAll;
 
 //    private Switch mEnabledSwitch;
 
@@ -250,7 +250,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         mBarWidthValue.setText(String.valueOf(currentWidthPercent + mMinWidthPercent)+"%");
         mNavigationBarWidth.setOnSeekBarChangeListener(this);
 
-		// Softkey longpress timeout
+        // Softkey longpress timeout
         mSoftkeyLongPress = (SeekBar) v.findViewById(R.id.navigation_bar_longpress_timeout);
         mSoftkeyLongPressValue = (TextView) v.findViewById(R.id.navigation_bar_longpress_timeout_value);
         mSoftkeyLongPress.setMax(SOFTKEY_LONG_PRESS_TIMEOUT_MAX_VAL);
