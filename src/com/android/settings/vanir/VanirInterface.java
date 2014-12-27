@@ -67,7 +67,6 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
 
     Context mContext;
     private int immersiveModeValue;
-    private int deviceKeys;
 
     private SettingsObserver mSettingsObserver;
 
@@ -85,11 +84,19 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
         @Override
         public void onChange(boolean selfChange) {
             ContentResolver resolver = mContext.getContentResolver();
+            boolean hasNavBar = false;
+
+            try {
+                hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
+
+            } catch (RemoteException e) {
+                Log.e(TAG, "Error getting navigation bar status");
+            }
 
             boolean enabled = Settings.System.getInt(resolver,
                          Settings.System.DEV_FORCE_SHOW_NAVBAR, 0) == 1;
 
-            setHardwareImmersiveState(enabled);
+            setHardwareImmersiveState(enabled || hasNavBar);
         }
     }
 
@@ -100,17 +107,6 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
         addPreferencesFromResource(R.xml.vanir_interface);
         PreferenceScreen prefSet = getPreferenceScreen();
         mContext = getActivity().getApplicationContext();
-
-        try {
-            boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
-
-            // Hide navigation bar category on devices without navigation bar
-            if (!hasNavBar) {
-                prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
-            }
-        } catch (RemoteException e) {
-            Log.e(TAG, "Error getting navigation bar status");
-        }
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(),
@@ -139,15 +135,10 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
     @Override
     public void onResume() {
         super.onResume();
-        deviceKeys = getResources().getInteger(
-                com.android.internal.R.integer.config_deviceHardwareKeys);
-
-        if (deviceKeys > 0) {
-            if (mSettingsObserver == null) {
-                mSettingsObserver = new SettingsObserver(new Handler());
-                mSettingsObserver.observe();
-                mSettingsObserver.onChange(true);
-            }
+        if (mSettingsObserver == null) {
+            mSettingsObserver = new SettingsObserver(new Handler());
+            mSettingsObserver.observe();
+            mSettingsObserver.onChange(true);
         }
     }
 
@@ -181,7 +172,7 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, immersiveModeValue);
             setListPreferenceSummary(mImmersiveModePref, strValue);
-            if (deviceKeys > 0) saveImmersiveState(immersiveModeValue);
+            saveImmersiveState(immersiveModeValue);
             updateImmersiveModeDependencies();
             updateRebootDialog();
             return true;
@@ -240,11 +231,18 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
     private void saveImmersiveState(int newValue) {
         final SharedPreferences prefs = mContext.getSharedPreferences(HARDWARE_IMMERSIVE_STYLE, Context.MODE_PRIVATE);
         final ContentResolver resolver = mContext.getContentResolver();
+        boolean hasNavBar = false;
+
+        try {
+            hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
+        } catch (RemoteException e) {
+            Log.e(TAG, "Error getting navigation bar status");
+        }
 
         boolean enabled = Settings.System.getInt(resolver,
                 Settings.System.DEV_FORCE_SHOW_NAVBAR, 0) == 1;
 
-        if (enabled) {
+        if (enabled || hasNavBar) {
             prefs.edit().putInt(IMMERSIVE_ENABLED, newValue).commit();
         } else {
             prefs.edit().putInt(IMMERSIVE_DISABLED, newValue).commit();
