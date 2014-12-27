@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/more_device_settings_title"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+        android:key="supported_hareware_preferences"
+        android:title="@string/supported_hardware_preferences" />
+
+    <Preference
+        android:key="buttons_navigation"
+        android:fragment="com.android.settings.vanir.ButtonNavigation"
+        android:title="@string/button_navigation_title" />
+
+    <PreferenceScreen
+        android:id="@+id/button_settings"
+        android:fragment="com.android.settings.cyanogenmod.ButtonSettings"
+        android:title="@string/button_settings" />
+
+ <!--   <Preference
+        android:id="@+id/performance_settings"
+        android:fragment="com.android.settings.cyanogenmod.PerformanceSettings"
+        android:title="@string/performance_settings_title" />  -->
+
+
+    <CheckBoxPreference
+        android:key="fast_charge"
+        android:title="@string/fast_charge_title"
+        android:summary="@string/fast_charge_summary"
+        android:persistent="true" />
+
+    <CheckBoxPreference
+        android:key="double_tap_wake_gesture"
+        android:title="@string/double_tap_to_wake_title"
+        android:defaultValue="false" />
+
+    <!-- Device Specific Touchscreen gestures. Avoid duplicating CMHW functionality, please -->
+    <Preference
+        android:key="touch_screen_gesture_settings">
+        <intent
+            android:action="com.cyanogenmod.action.LAUNCH_TOUCHSCREEN_GESTURE_SETTINGS"
+            android:targetPackage="com.cyanogenmod.settings.device"
+            android:targetClass="com.cyanogenmod.settings.device.TouchscreenGestureSettings" />
+    </Preference>
+
+    <PreferenceCategory
+        android:key="sensors_motors_category"
+        android:title="@string/sensors_motors_title" >
+
+        <com.android.settings.hardware.VibratorIntensity
+            android:key="vibration_intensity"
+            android:title="@string/vibrator_intensity_title"
+            android:dialogTitle="@string/vibrator_intensity_title"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

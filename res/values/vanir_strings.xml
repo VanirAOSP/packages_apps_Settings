@@ -21,6 +21,12 @@
     <string name="interface_title">Interface</string>
     <string name="vanir_controls">Controls</string>
     <string name="userpsace_title">Userspace</string>
+    <string name="general">General</string>
+
+    <!-- Other device settings -->
+    <string name="more_device_controls_title">More\u2026</string>
+    <string name="more_device_settings_title">Hardware</string>
+    <string name="sensors_motors_title">Sensors &amp; motors</string>
 
     <!-- Vanir Updater -->
     <string name="vanirupdate_settings_title">Exodus updates</string>
@@ -307,6 +313,27 @@
     <string name="lockpassword_confirm_your_gesture_header">Confirm your gesture</string>
     <!-- Header on first screen of choose gesture flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_gesture_header">Draw your gesture</string>
+
+    <!-- Hardware settings -->
+    <string name="performance_settings_title">Kernel performance</string>
+    <string name="button_settings_title">Navigation keys</string>
+    <string name="button_navigation_title">Button action rebinding</string>
+    <string name="button_settings">General button options</string>
+    <string name="fast_charge_title">USB fast charge</string>
+    <string name="fast_charge_summary">Draw more current to charge faster. Warning: this may damage the device.</string>
+    <string name="supported_hardware_preferences">Supported hardware options</string>
+    <string name="button_power_key_title">Power button</string>
+    <string name="swap_volume_buttons_title">Reorient</string>
+    <string name="volume_wake_summary">Pressing either volume button will wake your device</string>
+    <string name="swap_volume_buttons_title">Reorient</string>
+    <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated</string>
+    <string name="headset_category_title">Headset controls</string>
+    <string name="headset_connect_player_title">Launch music app</string>
+    <string name="headset_connect_player_summary">Launch the default music app when headset is connected</string>
+    <string name="button_headsethook_title">Headset in-line button</string>
+    <string name="button_headsethook_launch_voice_title">Voice controls</string>
+    <string name="button_headsethook_launch_voice_unchecked_summary">Headset button only plays/pauses media</string>
+    <string name="button_headsethook_launch_voice_checked_summary">Launches voice search/dialer with long press. Controls media with short press.</string>
 
     <!-- Title for preference that guides the user through creating an unlock gesture [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_gesture_title">Gesture</string>
