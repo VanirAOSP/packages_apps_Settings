@@ -23,11 +23,20 @@
     <PreferenceCategory
        android:title="@string/vanir_controls" />
 
-    <PreferenceScreen
+        <PreferenceScreen
             android:key="navigation_bar"
             android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
             android:title="@string/category_navbar"
             />
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="navigation_bar_left"
+            android:title="@string/navigation_bar_left_title"
+            android:summary="@string/navigation_bar_left_summary"
+            android:defaultValue="false" />
+
+    <PreferenceCategory
+       android:title="@string/general" />
 
     <PreferenceScreen
             android:id="@+id/status_bar_settings"

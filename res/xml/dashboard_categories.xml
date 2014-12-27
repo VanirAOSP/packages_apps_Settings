@@ -100,19 +100,21 @@
                 android:icon="@drawable/ic_action_permission"
                 />
 
+        <!-- Hardware -->
+        <dashboard-tile
+                android:id="@+id/more_device_settings"
+                android:title="@string/more_device_settings_title"
+                android:breadCrumbTitle="@string/more_device_settings_title"
+                android:fragment="com.android.settings.vanir.HardwareSettings"
+                android:icon="@drawable/ic_hardware"
+                />
+
     </dashboard-category>
 
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"
             android:title="@string/header_category_device" >
-
-        <dashboard-tile
-                android:id="@+id/button_settings"
-                android:title="@string/button_pref_title"
-                android:fragment="com.android.settings.ButtonSettings"
-                android:icon="@drawable/ic_settings_buttons"
-                />
 
         <!-- Display -->
         <dashboard-tile

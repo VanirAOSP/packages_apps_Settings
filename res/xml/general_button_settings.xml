@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <PreferenceCategory
+        android:key="navigation_bar"
+        android:title="@string/navigation_bar_category" />
+
+    <SwitchPreference
+        android:key="disable_nav_keys"
+        android:title="@string/disable_navkeys_title"
+        android:summary="@string/disable_navkeys_summary"
+        android:defaultValue="false" />
+
+    <PreferenceCategory
+        android:key="volume_keys"
+        android:title="@string/hardware_keys_volume_keys_title" >
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="volume_wake_screen"
+            android:title="@string/button_wake_title"
+            android:summary="@string/volume_wake_summary"
+            android:defaultValue="true" />
+
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+            android:key="volbtn_music_controls"
+            android:title="@string/volbtn_music_controls_title"
+            android:summary="@string/volbtn_music_controls_summary"
+            android:defaultValue="true" />
+
+        <ListPreference
+            android:key="volume_key_cursor_control"
+            android:dialogTitle="@string/volbtn_cursor_control_title"
+            android:title="@string/volbtn_cursor_control_title"
+            android:entries="@array/volbtn_cursor_control_entries"
+            android:entryValues="@array/volbtn_cursor_control_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="power_key"
+        android:title="@string/button_power_key_title" >
+
+        <CheckBoxPreference
+            android:key="power_end_call"
+            android:title="@string/power_end_call_title"
+            android:summary="@string/power_end_call_summary"
+            android:persistent="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/headset_category_title" >
+
+        <CheckBoxPreference
+            android:key="headset_connect_player"
+            android:title="@string/headset_connect_player_title"
+            android:summary="@string/headset_connect_player_summary"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
