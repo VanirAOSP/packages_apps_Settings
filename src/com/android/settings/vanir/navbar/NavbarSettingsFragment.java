@@ -304,7 +304,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         // Navigation ring
         mNavring = (Switch) v.findViewById(R.id.enable_navigation_ring);
         mNavring.setChecked((Settings.System.getInt(activity.getContentResolver(),
-                Settings.System.ENABLE_NAVIGATION_RING, 0) == 1));
+                Settings.System.ENABLE_NAVIGATION_RING, 1) == 1));
         mNavring.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
