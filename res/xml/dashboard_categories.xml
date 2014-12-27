@@ -84,6 +84,15 @@
                 android:icon="@drawable/ic_settings_system"
                 />
 
+        <!-- Hardware -->
+        <dashboard-tile
+                android:id="@+id/more_device_settings"
+                android:title="@string/more_device_settings_title"
+                android:breadCrumbTitle="@string/more_device_settings_title"
+                android:fragment="com.android.settings.vanir.HardwareSettings"
+                android:icon="@drawable/ic_hardware"
+                />
+
         <!-- Home -->
         <dashboard-tile
                 android:id="@+id/home_settings"
