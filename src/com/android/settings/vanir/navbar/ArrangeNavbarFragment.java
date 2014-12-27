@@ -51,6 +51,7 @@ import android.widget.TextView;
 import com.android.internal.util.vanir.NavbarConstants;
 import com.android.internal.util.vanir.NavbarConstants.NavbarConstant;
 import com.android.internal.util.vanir.NavbarUtils;
+import static com.android.internal.util.vanir.NavbarConstants.*;
 
 import com.android.settings.R;
 import com.android.settings.vanir.navbar.SettingsButtonInfo;
@@ -332,10 +333,18 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
                 mPicker.pickShortcut();
                 break;
             case SHORT_ACTION:
+                mActionTypeToChange = dConstant;
+                createDialog(getResources().getString(R.string.choose_action_short_title),
+                        mActions, mActionCodes);
+                break;
             case LONG_ACTION:
+                mActionTypeToChange = dConstant;
+                createDialog(getResources().getString(R.string.choose_action_long_title),
+                        mActions, mActionCodes);
+                break;
             case DOUBLE_TAP_ACTION:
                 mActionTypeToChange = dConstant;
-                createDialog(getTitleForTargetType(dConstant),
+                createDialog(getResources().getString(R.string.choose_action_double_tap_title),
                         mActions, mActionCodes);
                 break;
             case ICON_ACTION:
@@ -381,26 +390,6 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
         }
     }
 
-    private String getTitleForTargetType(final DialogConstant constant) {
-        String title = "";
-        int stringRes = R.string.choose_action_double_tap_title;
-        switch (constant) {
-            case SHORT_ACTION:
-                stringRes = R.string.choose_action_short_title;
-                break;
-            case LONG_ACTION:
-                stringRes = R.string.choose_action_long_title;
-                break;
-            case DOUBLE_TAP_ACTION:
-                stringRes = R.string.choose_action_double_tap_title;
-                break;
-            default:
-                break;
-        }
-        title = getString(stringRes);
-        return title;
-    }
-
     private class NavbarButtonsAdapter extends ArrayAdapter<SettingsButtonInfo> {
 
         boolean mShowDragGrips = true;
@@ -421,15 +410,12 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
             DragGripView dragGripView = (DragGripView) convertView.findViewById(R.id.drag_handle);
 
             TextView titleView = (TextView) convertView.findViewById(android.R.id.text1);
-            titleView.setText(NavbarUtils.getProperSummary(getContext(), button.singleAction));
+            String text = NavbarUtils.getProperSummary(getContext(), button.singleAction);
+            titleView.setText(text);
 
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             image.setImageDrawable(NavbarUtils.getIconImage(getContext(),
-                                   button.iconUri == null
-                                   ? button.singleAction
-                                   : button.iconUri.isEmpty()
-                                   ? button.singleAction
-                                   : button.iconUri));
+                    button.iconUri.isEmpty() ? button.singleAction : button.iconUri));
 
             return convertView;
         }
