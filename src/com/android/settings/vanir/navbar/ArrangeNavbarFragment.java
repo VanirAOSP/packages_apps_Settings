@@ -47,6 +47,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.internal.util.vanir.NavbarConstants;
 import com.android.internal.util.vanir.NavbarConstants.NavbarConstant;
@@ -347,6 +348,7 @@ public class ArrangeNavbarFragment extends Fragment implements OnPickListener {
                         mActions, mActionCodes);
                 break;
             case ICON_ACTION:
+                Toast.makeText(getActivity(), getResources().getString(R.string.navbar_use_gallary_warning), 300).show();
                 mActionTypeToChange = dConstant;
                 int width = 85;
                 int height = width;
