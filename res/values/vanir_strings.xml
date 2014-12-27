@@ -116,6 +116,7 @@
     <string name="navigation_bar_longpress_timeout_text">Button longpress delay</string>
     <string name="enable_navigation_ring_title">Navigation search assistant</string>
     <string name="enable_navigation_ring_summary">Enable long-press on home for the google now search assistant</string>
+    <string name="navbar_use_gallary_warning">Info: please select Gallery to save image</string>
 
     <!-- Power menu enable disable -->
     <string name="power_menu_settings">Power menu</string>
