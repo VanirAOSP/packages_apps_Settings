@@ -255,20 +255,20 @@
                 android:clickable="true" >
 
                 <Switch
-                    android:id="@+id/enable_navigation_ring"
+                    android:id="@+id/navigation_bar_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:textSize="12sp"
-                    android:text="@string/enable_navigation_ring_title" />
+                    android:text="@string/navigation_bar_left_title" />
 
                 <TextView
-                    android:id="@+id/enable_navigation_ring_text"
+                    android:id="@+id/enable_navigation_left_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:textSize="12sp"
-                    android:text="@string/enable_navigation_ring_summary" />
+                    android:text="@string/navigation_bar_left_summary" />
             </LinearLayout>
 
             <View

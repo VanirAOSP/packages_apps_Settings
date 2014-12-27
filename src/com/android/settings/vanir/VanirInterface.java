@@ -47,11 +47,14 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
+import com.vanir.util.DeviceUtils;
 public class VanirInterface extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
+
     private static final String TAG = "SystemSettings";
     
     private static final String CATEGORY_NAVBAR = "navigation_bar";
+    private static final String KEY_NAVIGATION_RING = "enable_navigation_ring";
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_IMMERSIVE_MODE_STYLE = "immersive_mode_style";
     private static final String KEY_IMMERSIVE_MODE_STATE = "immersive_mode_state";
@@ -67,6 +70,7 @@ public class VanirInterface extends SettingsPreferenceFragment implements
     private ListPreference mImmersiveModePref;
     private CheckBoxPreference mExpandedDesktop;
     private SwitchPreference mImmersiveModeState;
+    private SwitchPreference mNavring;
 
     Context mContext;
     private int immersiveModeValue;
@@ -143,6 +147,12 @@ public class VanirInterface extends SettingsPreferenceFragment implements
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
         updateImmersiveModeDependencies();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
+        
+        mNavring = (SwitchPreference) findPreference(KEY_NAVIGATION_RING);
+        if (!DeviceUtils.isPackageInstalled(getActivity(), "com.google.android.googlequicksearchbox")) {
+			mNavring.setEnabled(false);
+            mNavring.setSummary(getActivity().getResources().getString(R.string.navring_not_available));
+        }
     }
 
     @Override
@@ -179,7 +189,12 @@ public class VanirInterface extends SettingsPreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
 
-        if (preference == mImmersiveModePref) {
+        if (preference == mNavring) {
+			Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.ENABLE_NAVIGATION_RING,
+                    (Boolean) objValue ? 1 : 0);
+
+        } if (preference == mImmersiveModePref) {
             final String strValue = (String) objValue;
             immersiveModeValue = Integer.valueOf(strValue);
             Settings.System.putInt(getActivity().getContentResolver(),
