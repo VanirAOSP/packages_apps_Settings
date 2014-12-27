@@ -52,11 +52,6 @@
                 android:fragment="com.android.settings.DreamSettings" />
 
         <SwitchPreference
-                android:key="lift_to_wake"
-                android:title="@string/lift_to_wake_title"
-                android:persistent="false" />
-
-        <SwitchPreference
                 android:key="doze"
                 android:title="@string/doze_title"
                 android:summary="@string/doze_summary"
@@ -78,22 +73,6 @@
         <PreferenceCategory
                 android:key="advanced_display_prefs"
                 android:title="@string/advanced_settings">
-
-                <SwitchPreference
-                    android:key="double_tap_wake_gesture"
-                    android:title="@string/double_tap_to_wake_title" />
-
-                <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
-                    android:key="proximity_on_wake"
-                    android:title="@string/proximity_wake_title"
-                    android:summary="@string/proximity_wake_summary"
-                    android:defaultValue="true" />
-
-                <SwitchPreference
-                    android:key="wake_when_plugged_or_unplugged"
-                    android:title="@string/wake_when_plugged_or_unplugged_title"
-                    android:summary="@string/wake_when_plugged_or_unplugged_summary"
-                    android:defaultValue="false" />
 
                 <SwitchPreference
                     android:key="adaptive_backlight"
