@@ -73,7 +73,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
     private TextView mBarHeightLandscapeValue;
     private TextView mBarWidthValue;
 
-    private Switch mNavring;
+    private Switch mLeftSide;
 
     private CheckBox mSideKeys;
     private CheckBox mArrows;
@@ -302,13 +302,13 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         });
 
         // Navigation ring
-        mNavring = (Switch) v.findViewById(R.id.enable_navigation_ring);
-        mNavring.setChecked((Settings.System.getInt(activity.getContentResolver(),
-                Settings.System.ENABLE_NAVIGATION_RING, 1) == 1));
-        mNavring.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        mLeftSide = (Switch) v.findViewById(R.id.navigation_bar_left);
+        mLeftSide.setChecked((Settings.System.getInt(activity.getContentResolver(),
+                Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, 1) == 1));
+        mLeftSide.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Settings.System.putInt(cr, Settings.System.ENABLE_NAVIGATION_RING, mNavring.isChecked() ? 1 : 0);
+                Settings.System.putInt(cr, Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, mLeftSide.isChecked() ? 1 : 0);
             }
         });
 
@@ -422,10 +422,6 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             arrowsSummary.setText(getString(R.string.enable_ime_layout_summary));
         }
 
-        if (!DeviceUtils.isPackageInstalled(activity, "com.google.android.googlequicksearchbox")) {
-            mNavring.setVisibility(View.GONE);
-            v.findViewById(R.id.enable_navigation_ring_text).setVisibility(View.GONE);
-        }
         if (DeviceUtils.isPhone(activity)) {
             v.findViewById(R.id.navigation_bar_height_landscape_text).setVisibility(View.GONE);
             mBarHeightLandscapeValue.setVisibility(View.GONE);

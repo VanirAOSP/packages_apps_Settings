@@ -2210,6 +2210,7 @@
 
         <activity android:name=".vanir.navbar.NavbarTabHostFragment" />
         <activity android:name=".vanir.VanirInterface" />
+        <activity android:name=".vanir.HardwareSettings" />
 
         <receiver android:name=".cyanogenmod.BootReceiver" android:enabled="true">
             <intent-filter android:priority="2147483647">
