@@ -53,8 +53,6 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.vanir.widgets.VanirPreferenceSwitch;
 
-import com.vanir.util.DeviceUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -153,8 +151,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         mFlashPreference = (VanirPreferenceSwitch) findPreference(KEY_FLASH_NOTIFICATIONS);
         mFlashPreference.setSettingToWatch(Settings.System.FLASH_NOTIFICATIONS, 1);
 
-        if (!mPM.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
-                || !DeviceUtils.isPackageInstalled(mContext, "com.exodus.flash")) {
+        if (!mPM.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
             notification.removePreference(mFlashPreference);
         }
     }
@@ -162,6 +159,11 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     @Override
     public void onResume() {
         super.onResume();
+
+        if (mFlashPreference != null)
+            mFlashPreference.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.FLASH_NOTIFICATIONS, 0) == 1);
+
         refreshNotificationListeners();
         lookupRingtoneNames();
         mSettingsObserver.register(true);
