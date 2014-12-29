@@ -53,6 +53,12 @@ public class VanirPreferenceSwitch extends Preference implements OnCheckedChange
         setSettingToWatch(setting, 0);
     }
 
+    public void setChecked(boolean enable) {
+        if (mSwitch != null && mSetting != null) {
+            mSwitch.setChecked(enable);
+        }
+    }
+
     public void setSettingToWatch(String setting, int defaultVal) {
         mDefault = defaultVal;
         if (mSwitch != null && mSetting != null)
