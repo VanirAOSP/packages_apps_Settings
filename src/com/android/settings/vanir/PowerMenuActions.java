@@ -66,12 +66,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
 
-    private static String[] AVAILABLE_ACTIONS = {
-        GLOBAL_ACTION_KEY_POWER, GLOBAL_ACTION_KEY_REBOOT, GLOBAL_ACTION_KEY_AIRPLANE, GLOBAL_ACTION_KEY_BUGREPORT,
-        GLOBAL_ACTION_KEY_SILENT, GLOBAL_ACTION_KEY_USERS, GLOBAL_ACTION_KEY_SETTINGS, GLOBAL_ACTION_KEY_LOCKDOWN,
-        GLOBAL_ACTION_KEY_PROFILE, GLOBAL_ACTION_KEY_IMMERSIVE
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -267,17 +261,17 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     private void saveUserConfig() {
         StringBuilder s = new StringBuilder();
+        String[] availableActions = getActivity().getResources().getStringArray(R.array.power_menu_actions_array);
 
-        /* Enjoy some cheeseburgers until I finish the DragSortListView */
+        /* TODO: Use DragSortListView */
         ArrayList<String> setactions = new ArrayList<String>();
-        for (String action : AVAILABLE_ACTIONS) {
+        for (String action : availableActions) {
             if (settingsArrayContains(action)) {
                 setactions.add(action);
             } else {
                 continue;
             }
         }
-        /* Don't bitch ploxz. kthnx. */
 
         for (int i = 0; i < setactions.size(); i++) {
             s.append(setactions.get(i).toString());
