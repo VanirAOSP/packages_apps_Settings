@@ -37,7 +37,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
-import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
@@ -51,7 +50,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.vanir.widgets.VanirPreferenceSwitch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,7 +73,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_INCREASING_RING_VOLUME = "increasing_ring_volume";
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
-    private static final String KEY_FLASH_NOTIFICATIONS = "flash_notifications_switch";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -107,7 +104,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private Preference mNotificationAccess;
     private boolean mSecure;
     private int mLockscreenSelectedValue;
-    private VanirPreferenceSwitch mFlashPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,23 +143,11 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         mNotificationAccess = findPreference(KEY_NOTIFICATION_ACCESS);
         refreshNotificationListeners();
-        
-        mFlashPreference = (VanirPreferenceSwitch) findPreference(KEY_FLASH_NOTIFICATIONS);
-        mFlashPreference.setSettingToWatch(Settings.System.FLASH_NOTIFICATIONS, 1);
-
-        if (!mPM.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-            notification.removePreference(mFlashPreference);
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        if (mFlashPreference != null)
-            mFlashPreference.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.FLASH_NOTIFICATIONS, 0) == 1);
-
         refreshNotificationListeners();
         lookupRingtoneNames();
         mSettingsObserver.register(true);
