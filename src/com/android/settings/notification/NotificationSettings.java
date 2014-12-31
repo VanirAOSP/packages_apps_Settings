@@ -149,9 +149,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         refreshNotificationListeners();
         
         mFlashPreference = (VanirPreferenceSwitch) findPreference(KEY_FLASH_NOTIFICATIONS);
-        mFlashPreference.setSettingToWatch(Settings.System.FLASH_NOTIFICATIONS, 1);
+        mFlashPreference.setSettingToWatch(Settings.System.FLASH_NOTIFICATIONS_ALPHA, 0);
 
-        if (!mPM.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+        if (!getActivity().getResources().getBoolean(R.bool.has_sysfsForTorch) || !mPM.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
             notification.removePreference(mFlashPreference);
         }
     }
@@ -162,7 +162,7 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
         if (mFlashPreference != null)
             mFlashPreference.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
-                Settings.System.FLASH_NOTIFICATIONS, 0) == 1);
+                Settings.System.FLASH_NOTIFICATIONS_ALPHA, 0) == 1);
 
         refreshNotificationListeners();
         lookupRingtoneNames();

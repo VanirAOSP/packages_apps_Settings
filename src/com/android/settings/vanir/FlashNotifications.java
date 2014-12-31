@@ -60,7 +60,7 @@ public class FlashNotifications extends SettingsPreferenceFragment implements
 
         mEnabledPref = (SwitchPreference) prefs.findPreference(KEY_ENABLED);
         mEnabledPref.setChecked(Settings.System.getInt(cr,
-                Settings.System.FLASH_NOTIFICATIONS, 0) == 1);
+                Settings.System.FLASH_NOTIFICATIONS_ALPHA, 0) == 1);
 
         mPocketModePref = (CheckBoxPreference) prefs.findPreference(KEY_POCKET_MODE);
         mPocketModePref.setChecked(Settings.System.getInt(cr,
@@ -107,7 +107,7 @@ public class FlashNotifications extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mEnabledPref) {
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.FLASH_NOTIFICATIONS, mEnabledPref.isChecked() ? 1 : 0);
+                    Settings.System.FLASH_NOTIFICATIONS_ALPHA, mEnabledPref.isChecked() ? 1 : 0);
 
         } else if (preference == mAllowLowPriority) {
             Settings.System.putInt(getActivity().getContentResolver(), Settings.System.FLASH_NOTIFICATIONS_LOW_PRIORITY,
