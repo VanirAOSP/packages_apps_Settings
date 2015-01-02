@@ -47,7 +47,9 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.text.Spannable;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.android.internal.telephony.SmsApplication;
 import com.android.internal.telephony.SmsApplication.SmsApplicationData;
@@ -81,6 +83,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_SMS_APPLICATION = "sms_application";
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
+    private static final String KEY_CARRIER_LABEL = "custom_carrier_label";
 
     private static final String PHONE_PACKAGE = "com.android.phone";
 
@@ -97,6 +100,10 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private TelephonyManager mTm;
     private PackageManager mPm;
     private UserManager mUm;
+
+    private Preference mCustomLabel;
+
+    private String mCustomLabelText = null;
 
     private static final int MANAGE_MOBILE_PLAN_DIALOG_ID = 1;
     private static final String SAVED_MANAGE_MOBILE_PLAN_MSG = "mManageMobilePlanMessage";
@@ -120,6 +127,35 @@ public class WirelessSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == findPreference(KEY_MANAGE_MOBILE_PLAN)) {
             onManageMobilePlanClick();
+        } else if (preference == mCustomLabel) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage(R.string.custom_carrier_label_explain);
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(getActivity());
+            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+            alert.setView(input);
+            alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+ 
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = ((Spannable) input.getText()).toString();
+                    Settings.System.putString(getActivity().getContentResolver(),
+                            Settings.System.CUSTOM_CARRIER_LABEL, value);
+                    updateCustomLabelTextSummary();
+                    Intent i = new Intent();
+                    i.setAction("com.android.settings.LABEL_CHANGED");
+                    mContext.sendBroadcast(i);
+                }
+            });
+            alert.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Canceled.
+                }
+            });
+
+            alert.show();
         }
         // Let the intents be launched by the Preference manager
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -272,6 +308,9 @@ public class WirelessSettings extends SettingsPreferenceFragment
         final Activity activity = getActivity();
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
+
+        mCustomLabel = findPreference(KEY_CUSTOM_CARRIER_LABEL);
+        updateCustomLabelTextSummary();
 
         if (TelephonyManager.getDefault().getPhoneCount() > 1) {
             // Mobile Networks menu will traverse to Select Subscription menu.
@@ -492,6 +531,16 @@ public class WirelessSettings extends SettingsPreferenceFragment
         }
         return false;
     }
+
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null || mCustomLabelText.length() == 0) {
+            mCustomLabel.setSummary(R.string.custom_carrier_label_notset);
+        } else {
+            mCustomLabel.setSummary(mCustomLabelText);
+        }
+     } 
 
     /**
      * For Search.
