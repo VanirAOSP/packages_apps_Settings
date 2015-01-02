@@ -273,6 +273,9 @@ public class WirelessSettings extends SettingsPreferenceFragment
         mAirplaneModePreference = (SwitchPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
 
+        mCustomLabel = findPreference(KEY_CUSTOM_CARRIER_LABEL);
+        updateCustomLabelTextSummary();
+
         if (TelephonyManager.getDefault().getPhoneCount() > 1) {
             // Mobile Networks menu will traverse to Select Subscription menu.
             PreferenceScreen manageSub =
