@@ -50,4 +50,12 @@
                 android:fragment="com.android.settings.cyanogenmod.PowerMenuActions" 
                 />
 
+        <!-- LCD Changer -->
+        <PreferenceScreen
+                android:key="lcd_density_setup"
+                android:title="@string/lcd_density_title"
+                android:summary="@string/lcd_density_summary" 
+                android:fragment="com.android.settings.vanir.DensityChanger" 
+                />
+
 </PreferenceScreen>

@@ -24,9 +24,11 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -44,6 +46,9 @@ public class VanirInterface extends SettingsPreferenceFragment {
     private static final String TAG = "SystemSettings";
     
     private static final String CATEGORY_NAVBAR = "navigation_bar";
+    private static final String KEY_LCD_SETUP = "lcd_density_setup";
+
+    int newDensityValue;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,14 @@ public class VanirInterface extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.vanir_interface);
         PreferenceScreen prefSet = getPreferenceScreen();
+
+        String currentProperty = SystemProperties.get("ro.sf.lcd_density");
+        try {
+            newDensityValue = Integer.parseInt(currentProperty);
+        } catch (Exception e) {
+            getPreferenceScreen().removePreference(findPreference(KEY_LCD_SETUP));
+        }
+        findPreference(KEY_LCD_SETUP).setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
         try {
             boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
@@ -67,5 +80,5 @@ public class VanirInterface extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-    } 
+    }
 }

@@ -58,6 +58,32 @@
     <string name="gestures_rename_label">Gesture name</string>
     <string name="gestures_error_loading">Could not load %s. Make sure you have storage available.</string>
 
+    <!-- LCD Density -->
+    <string name="lcd_density_title">LCD Density</string>
+    <string name="lcd_density_summary">unknown</string>
+    <string name="default_lcd_density">The default density of this device is: </string>
+    <string name="current_lcd_density">"Current LCD Density: "</string>
+    <string name="lcd_density_wizard">LCD Density Wizard</string>
+    <string name="stock_density_title">Reset density to default</string>
+    <string name="stock_density_summary">"Reset the density to a default Android value"</string>
+    <string name="stock_density_changed_summary">"Density set to: "</string>
+    <string name="clear_market_data_title">Clear all relevant market data.</string>
+    <string name="clear_market_data_summary">If you\'ve run into compatibility issues: reset the market data</string>
+    <string name="clear_market_data_cleared">Data successfully cleared</string>
+    <string name="clear_market_data_donot_cleared">"Data couldn't be cleared, please clear it yourself!"</string>
+    <string name="if_your_a_moron_title">Warning:</string>
+    <string name="if_your_a_moron_summary">This feature is experimental and setting extreme values may cause layout issues. Do not report issues if you\'ve changed this setting.</string>
+    <string name="custom_density_title">Change the LCD density</string>
+    <string name="custom_density_summary_invalid">"INVALID DENSITY!"</string>
+    <string name="custom_density">custom</string>
+    <string name="set_custom_density_title">Set custom density</string>
+    <string name="set_custom_density_set">Set</string>
+    <string name="custom_density_dialog_title">WARNING!</string>
+    <string name="custom_density_dialog_summary">Changing your LCD density can cause unexpected app behavior. If you encounter market app incompatibility please return here and restart the process from step 1.</string>
+    <string name="custom_density_dialog_button_got">Got it!</string>
+    <string name="custom_density_dialog_button_reboot">Reboot now</string>
+    <string name="dpi">DPI</string>
+
     <!-- Lock Gesture settings -->
     <!-- Security & location settings screen, setting option name -->
     <string name="lockgesture_change_lock_pattern_label">Change unlock gesture</string>
