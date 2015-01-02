@@ -32,6 +32,7 @@ import android.os.UserHandle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -46,7 +47,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-public class VanirInterface extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class VanirInterface extends SettingsPreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
     private static final String TAG = "SystemSettings";
     
     private static final String CATEGORY_NAVBAR = "navigation_bar";
@@ -57,6 +59,7 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
     private static final String HARDWARE_IMMERSIVE_STYLE = "hardware_immersive_style";
     private static final String IMMERSIVE_ENABLED = "immersive_enabled";
     private static final String IMMERSIVE_DISABLED = "immersive_disabled";
+    private static final String KEY_LCD_SETUP = "lcd_density_setup";
 
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
@@ -67,6 +70,8 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
 
     Context mContext;
     private int immersiveModeValue;
+
+    int newDensityValue;
 
     private SettingsObserver mSettingsObserver;
 
@@ -107,6 +112,14 @@ public class VanirInterface extends SettingsPreferenceFragment implements Prefer
         addPreferencesFromResource(R.xml.vanir_interface);
         PreferenceScreen prefSet = getPreferenceScreen();
         mContext = getActivity().getApplicationContext();
+
+        String currentProperty = SystemProperties.get("ro.sf.lcd_density");
+        try {
+            newDensityValue = Integer.parseInt(currentProperty);
+        } catch (Exception e) {
+            getPreferenceScreen().removePreference(findPreference(KEY_LCD_SETUP));
+        }
+        findPreference(KEY_LCD_SETUP).setSummary(getResources().getString(R.string.current_lcd_density) + currentProperty);
 
         mImmersiveModeState = (SwitchPreference) findPreference(KEY_IMMERSIVE_MODE_STATE);
         mImmersiveModeState.setChecked(Settings.System.getInt(getContentResolver(),
