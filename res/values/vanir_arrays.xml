@@ -75,6 +75,7 @@
         <item>settings</item>
         <item>lockdown</item>
         <item>profile</item>
+        <item>immersive</item>
         <item>silent</item>
     </string-array>
 </resources>

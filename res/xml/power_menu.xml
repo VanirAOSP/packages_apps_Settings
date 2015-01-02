@@ -75,6 +75,6 @@
          <CheckBoxPreference
                 android:key="immersive"
                 android:title="@string/power_menu_immersive_mode"
-                android:defaultValue="true" />
+                android:defaultValue="false" />
 
 </PreferenceScreen>

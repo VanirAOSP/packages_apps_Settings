@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 VanirAOSP
+ * Copyright (C) 2014 Vanir-Exodus
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.CheckBoxPreference;
@@ -29,28 +30,21 @@ import android.preference.PreferenceScreen;
 import android.preference.ListPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import com.android.internal.util.vanir.PowerMenuConstants;
+import static com.android.internal.util.vanir.PowerMenuConstants.*;
+
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PowerMenuActions extends SettingsPreferenceFragment {
-	final static String TAG = "PowerMenuActions";
-
-    /* Valid settings for global actions keys.
-     * see config.xml config_globalActionList */
-    private static final String GLOBAL_ACTION_KEY_POWER = "power";
-    private static final String GLOBAL_ACTION_KEY_REBOOT = "reboot";
-    private static final String GLOBAL_ACTION_KEY_AIRPLANE = "airplane";
-    private static final String GLOBAL_ACTION_KEY_BUGREPORT = "bugreport";
-    private static final String GLOBAL_ACTION_KEY_SILENT = "silent";
-    private static final String GLOBAL_ACTION_KEY_USERS = "users";
-    private static final String GLOBAL_ACTION_KEY_SETTINGS = "settings";
-    private static final String GLOBAL_ACTION_KEY_LOCKDOWN = "lockdown";
-    private static final String GLOBAL_ACTION_KEY_PROFILE = "profile";
-    private static final String GLOBAL_ACTION_KEY_IMMERSIVE = "immersive";
+	private static final String TAG = "PowerMenuActions";
+	private static final boolean DEBUG = false;
 
     private CheckBoxPreference mPowerPref;
     private CheckBoxPreference mRebootPref;
@@ -65,6 +59,8 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
+    private String[] mAvailableActions;
+    private String[] mAllActions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +68,39 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.power_menu);
         mContext = getActivity().getApplicationContext();
+        
+        mAvailableActions = getActivity().getResources().getStringArray(R.array.power_menu_actions_array);
+        mAllActions = PowerMenuConstants.getAllActions();
+        
+        for (String action : mAllActions) {
+			// Remove preferences not present in the overlay
+            if (!isActionAllowed(action)) {
+				getPreferenceScreen().removePreference(findPreference(action));
+				continue;
+			}
+
+			if (action.equals(GLOBAL_ACTION_KEY_POWER)) {
+				mPowerPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_POWER);
+			} else if (action.equals(GLOBAL_ACTION_KEY_REBOOT)) {
+				mRebootPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_REBOOT);
+			} else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
+				mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
+			} else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
+				mBugReportPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
+			} else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
+				mSilentPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
+			} else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
+			    mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
+			} else if (action.equals(GLOBAL_ACTION_KEY_SETTINGS)) {
+				mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
+			} else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
+				mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
+			} else if (action.equals(GLOBAL_ACTION_KEY_PROFILE)) {
+				mProfilePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_PROFILE);
+			} else if (action.equals(GLOBAL_ACTION_KEY_IMMERSIVE)) {
+				mImmersiveModePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_IMMERSIVE);
+			}
+		}
 
         getUserConfig();
     }
@@ -79,47 +108,42 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     @Override
     public void onStart() {
         super.onStart();
-        mPowerPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_POWER);
-        mPowerPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_POWER));
+        if (mPowerPref != null)
+                mPowerPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_POWER));
 
-        mRebootPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_REBOOT);
-        mRebootPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_REBOOT));
+        if (mRebootPref != null)
+                mRebootPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_REBOOT));
 
-        mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
-        mAirplanePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_AIRPLANE));
+        if (mAirplanePref != null)
+                mAirplanePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_AIRPLANE));
 
-        mBugReportPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
-        mBugReportPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_BUGREPORT));
+        if (mBugReportPref != null)
+                mBugReportPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_BUGREPORT));
 
-        mSilentPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
-        mSilentPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SILENT));
+        if (mSilentPref != null)
+                mSilentPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SILENT));
 
-        mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
-        mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS));
-        setUsersEnabled();
+        if (mSettingsPref != null)
+                mSettingsPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SETTINGS));
 
-        mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
-        mSettingsPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SETTINGS));
+        if (mLockdownPref != null)
+                mLockdownPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_LOCKDOWN));
 
-        mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
-        mLockdownPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_LOCKDOWN));
+        if (mProfilePref != null)
+                mProfilePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_PROFILE));
 
-        mProfilePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_PROFILE);
-        mProfilePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_PROFILE));
+        if (mImmersiveModePref != null)
+                mImmersiveModePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_IMMERSIVE));
 
-        mImmersiveModePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_IMMERSIVE);
-        mImmersiveModePref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_IMMERSIVE));
-
+        if (mUsersPref != null) {
+            if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
+                getPreferenceScreen().removePreference(findPreference(GLOBAL_ACTION_KEY_USERS));
+            } else {
+				mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS));
+                setUsersEnabled();
+			}
+		}
         updatePreferences();
-
-        if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
-            getPreferenceScreen().removePreference(
-                    findPreference(GLOBAL_ACTION_KEY_USERS));
-        }
-    }
-
-    private boolean settingsArrayContains(String preference) {
-        return mLocalUserConfig.contains(preference);
     }
 
     @Override
@@ -178,6 +202,17 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         return true;
     }
 
+    private boolean settingsArrayContains(String preference) {
+        return mLocalUserConfig.contains(preference);
+    }
+
+    private boolean isActionAllowed(String action) {
+		if (Arrays.asList(mAvailableActions).contains(action)) {
+			return true;
+		}
+		return false;
+	}
+
     private void updateUserConfig(boolean enabled, String action) {
         if (enabled) {
             if (!settingsArrayContains(action)) {
@@ -214,31 +249,36 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         boolean profiles = Settings.System.getInt(getContentResolver(),
                 Settings.System.SYSTEM_PROFILES_ENABLED, 1) != 0;
 
-        mImmersiveModePref.setEnabled(immersive != 0);
-        if (immersive == 0) {
-            mImmersiveModePref.setTitle(R.string.power_menu_immersive_disabled);
-        } else {
-            if (!expanded) {
-                mImmersiveModePref.setTitle(R.string.power_menu_immersive_mode);
-            } else {
-                mImmersiveModePref.setTitle(R.string.power_menu_expanded_mode);
-            }
-        }
+        if (mImmersiveModePref != null) {
+			mImmersiveModePref.setEnabled(immersive != 0);
+			if (immersive == 0) {
+				mImmersiveModePref.setTitle(R.string.power_menu_immersive_disabled);
+			} else {
+				if (!expanded) {
+					mImmersiveModePref.setTitle(R.string.power_menu_immersive_mode);
+				} else {
+					mImmersiveModePref.setTitle(R.string.power_menu_expanded_mode);
+				}
+			}
+		}
 
-        // Only enable profiles item if System Profiles are also enabled
-        mProfilePref.setEnabled(profiles);
-        if (profiles) {
-            mProfilePref.setTitle(R.string.power_menu_profiles_title);
-        } else {
-            mProfilePref.setTitle(R.string.power_menu_profiles_disabled);
-        }
+        if (mProfilePref != null) {
+			mProfilePref.setEnabled(profiles);
+			if (profiles) {
+				mProfilePref.setTitle(R.string.power_menu_profiles_title);
+			} else {
+				mProfilePref.setTitle(R.string.power_menu_profiles_disabled);
+			}
+		}
 
-        mBugReportPref.setEnabled(bugreport);
-        if (bugreport) {
-            mBugReportPref.setTitle(R.string.power_menu_bug_report_title);
-        } else {
-            mBugReportPref.setTitle(R.string.power_menu_bug_report_disabled);
-        }
+		if (mBugReportPref != null) {
+			mBugReportPref.setEnabled(bugreport);
+			if (bugreport) {
+				mBugReportPref.setTitle(R.string.power_menu_bug_report_title);
+			} else {
+				mBugReportPref.setTitle(R.string.power_menu_bug_report_disabled);
+			}
+		}
     }
 
     private void getUserConfig() {
@@ -246,6 +286,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         String[] defaultActions;
         String savedActions = Settings.Global.getStringForUser(mContext.getContentResolver(),
                 Settings.Global.POWER_MENU_ACTIONS, UserHandle.USER_CURRENT);
+
         if (savedActions == null) {
             defaultActions = mContext.getResources().getStringArray(
                     com.android.internal.R.array.config_globalActionsList);
@@ -261,12 +302,11 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     private void saveUserConfig() {
         StringBuilder s = new StringBuilder();
-        String[] availableActions = getActivity().getResources().getStringArray(R.array.power_menu_actions_array);
 
         /* TODO: Use DragSortListView */
         ArrayList<String> setactions = new ArrayList<String>();
-        for (String action : availableActions) {
-            if (settingsArrayContains(action)) {
+        for (String action : mAllActions) {
+            if (settingsArrayContains(action) && isActionAllowed(action)) {
                 setactions.add(action);
             } else {
                 continue;
@@ -280,6 +320,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             }
         }
 
+        if (DEBUG) Log.e("POWER MENU", "adding power menu actions... " + s.toString());
         Settings.Global.putStringForUser(getContentResolver(),
                  Settings.Global.POWER_MENU_ACTIONS, s.toString(), UserHandle.USER_CURRENT);
         updateRebootDialog();
