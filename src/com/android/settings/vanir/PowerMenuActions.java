@@ -53,6 +53,8 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private CheckBoxPreference mSilentPref;
     private CheckBoxPreference mUsersPref;
     private CheckBoxPreference mSettingsPref;
+    private CheckBoxPreference mScreenshotPref;
+    private CheckBoxPreference mScreenrecordPref;
     private CheckBoxPreference mLockdownPref;
     private CheckBoxPreference mProfilePref;
     private CheckBoxPreference mImmersiveModePref;
@@ -93,6 +95,10 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 			    mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
 			} else if (action.equals(GLOBAL_ACTION_KEY_SETTINGS)) {
 				mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
+			} else if (action.equals(GLOBAL_ACTION_KEY_SCREENSHOT)) {
+				mScreenshotPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SCREENSHOT);
+			} else if (action.equals(GLOBAL_ACTION_KEY_SCREENRECORD)) {
+				mScreenrecordPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SCREENRECORD);
 			} else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
 				mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
 			} else if (action.equals(GLOBAL_ACTION_KEY_PROFILE)) {
@@ -125,6 +131,12 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
         if (mSettingsPref != null)
                 mSettingsPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SETTINGS));
+
+        if (mScreenshotPref != null)
+                mScreenshotPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENSHOT));
+
+        if (mScreenrecordPref != null)
+                mScreenrecordPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENRECORD));
 
         if (mLockdownPref != null)
                 mLockdownPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_LOCKDOWN));
@@ -183,6 +195,14 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         } else if (preference == mSettingsPref) {
             value = mSettingsPref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_SETTINGS);
+
+        } else if (preference == mScreenshotPref) {
+            value = mScreenshotPref.isChecked();
+            updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENSHOT);
+
+        } else if (preference == mScreenrecordPref) {
+            value = mScreenrecordPref.isChecked();
+            updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENRECORD);
 
         } else if (preference == mLockdownPref) {
             value = mLockdownPref.isChecked();
