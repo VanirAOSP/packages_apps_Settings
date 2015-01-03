@@ -53,6 +53,8 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private CheckBoxPreference mSilentPref;
     private CheckBoxPreference mUsersPref;
     private CheckBoxPreference mSettingsPref;
+    private CheckBoxPreference mScreenshotPref;
+    private CheckBoxPreference mScreenrecordPref;
     private CheckBoxPreference mLockdownPref;
     private CheckBoxPreference mProfilePref;
     private CheckBoxPreference mImmersiveModePref;
@@ -77,30 +79,34 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             if (!isActionAllowed(action)) {
 				getPreferenceScreen().removePreference(findPreference(action));
 				continue;
-			}
+            }
 
-			if (action.equals(GLOBAL_ACTION_KEY_POWER)) {
-				mPowerPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_POWER);
-			} else if (action.equals(GLOBAL_ACTION_KEY_REBOOT)) {
-				mRebootPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_REBOOT);
-			} else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
-				mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
-			} else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
-				mBugReportPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
-			} else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
-				mSilentPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
-			} else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
-			    mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
-			} else if (action.equals(GLOBAL_ACTION_KEY_SETTINGS)) {
-				mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
-			} else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
-				mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
-			} else if (action.equals(GLOBAL_ACTION_KEY_PROFILE)) {
-				mProfilePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_PROFILE);
-			} else if (action.equals(GLOBAL_ACTION_KEY_IMMERSIVE)) {
-				mImmersiveModePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_IMMERSIVE);
-			}
-		}
+            if (action.equals(GLOBAL_ACTION_KEY_POWER)) {
+                mPowerPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_POWER);
+            } else if (action.equals(GLOBAL_ACTION_KEY_REBOOT)) {
+                mRebootPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_REBOOT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_AIRPLANE)) {
+                mAirplanePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_AIRPLANE);
+            } else if (action.equals(GLOBAL_ACTION_KEY_BUGREPORT)) {
+                mBugReportPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_BUGREPORT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_SILENT)) {
+                mSilentPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SILENT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_USERS)) {
+                mUsersPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_USERS);
+            } else if (action.equals(GLOBAL_ACTION_KEY_SETTINGS)) {
+                mSettingsPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SETTINGS);
+            } else if (action.equals(GLOBAL_ACTION_KEY_SCREENSHOT)) {
+                mScreenshotPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SCREENSHOT);
+            } else if (action.equals(GLOBAL_ACTION_KEY_SCREENRECORD)) {
+                mScreenrecordPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_SCREENRECORD);
+            } else if (action.equals(GLOBAL_ACTION_KEY_LOCKDOWN)) {
+                mLockdownPref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_LOCKDOWN);
+            } else if (action.equals(GLOBAL_ACTION_KEY_PROFILE)) {
+                mProfilePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_PROFILE);
+            } else if (action.equals(GLOBAL_ACTION_KEY_IMMERSIVE)) {
+                mImmersiveModePref = (CheckBoxPreference) findPreference(GLOBAL_ACTION_KEY_IMMERSIVE);
+            }
+        }
 
         getUserConfig();
     }
@@ -125,6 +131,12 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
         if (mSettingsPref != null)
                 mSettingsPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SETTINGS));
+
+        if (mScreenshotPref != null)
+                mScreenshotPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENSHOT));
+
+        if (mScreenrecordPref != null)
+                mScreenrecordPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_SCREENRECORD));
 
         if (mLockdownPref != null)
                 mLockdownPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_LOCKDOWN));
@@ -183,6 +195,14 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         } else if (preference == mSettingsPref) {
             value = mSettingsPref.isChecked();
             updateUserConfig(value, GLOBAL_ACTION_KEY_SETTINGS);
+
+        } else if (preference == mScreenshotPref) {
+            value = mScreenshotPref.isChecked();
+            updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENSHOT);
+
+        } else if (preference == mScreenrecordPref) {
+            value = mScreenrecordPref.isChecked();
+            updateUserConfig(value, GLOBAL_ACTION_KEY_SCREENRECORD);
 
         } else if (preference == mLockdownPref) {
             value = mLockdownPref.isChecked();
