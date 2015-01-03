@@ -2208,7 +2208,6 @@
 
         <activity android:name=".vanir.navbar.NavbarTabHostFragment" />
         <activity android:name=".vanir.VanirInterface" />
-        <activity android:name=".vanir.HardwareSettings" />
 
         <receiver android:name=".cyanogenmod.BootReceiver" android:enabled="true">
             <intent-filter android:priority="2147483647">
@@ -2382,7 +2381,7 @@
         </activity>
         <activity
             android:name="com.android.settings.vanir.activities.ScreenRecordActivity"
-            android:label="@string/screen_recorder_activity"
+            android:label="@string/screen_recorder_title"
             android:icon="@drawable/ic_screen_record"
             android:theme="@*android:style/Theme.Material.Light.Dialog.Alert"
             android:excludeFromRecents="true"
