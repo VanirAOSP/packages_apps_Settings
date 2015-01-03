@@ -60,4 +60,12 @@
                 android:icon="@drawable/ic_settings_notification_drawer"
                 />
 
+        <!-- Recents  -->
+        <PreferenceScreen
+                android:key="@+id/recents_panel"
+                android:title="@string/recents_title"
+                android:fragment="com.android.settings.vanir.RecentsSettings"
+                android:icon="@drawable/ic_settings_home"
+                />
+
 </PreferenceScreen>

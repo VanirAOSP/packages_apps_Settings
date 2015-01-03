@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/recents_title" >
+
+    <ListPreference
+        android:key="recents_clear_all_location"
+        android:title="@string/recents_clear_all_location_title"
+        android:entries="@array/recents_clear_all_location_entries"
+        android:entryValues="@array/recents_clear_all_location_values"
+        android:defaultValue="1" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="recents_show_hide_search_bar"
+        android:title="@string/recents_show_searchbar"
+        android:summary="@string/recents_show_searchbar_summary"
+        android:defaultValue="false" />
+
+</PreferenceScreen>

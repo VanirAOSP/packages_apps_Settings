@@ -130,6 +130,17 @@
     <string name="status_bar_am_pm_title">AM/PM style</string>
     <string name="status_bar_am_pm_info">24-hour clock is enabled</string>
 
+    <!-- Recents panel settings -->
+    <string name="recents_title">Recents</string>
+    <string name="recents_clear_all_location_title">Clear all recents location</string>
+    <string name="recents_clear_all_location_bottom_right">Bottom right</string>
+    <string name="recents_clear_all_location_bottom_left">Bottom left</string>
+    <string name="recents_clear_all_hidden">Hidden</string>
+
+    <!-- Show/Hide Search Bar -->
+    <string name="recents_show_searchbar">Disable search bar in recents menu</string>
+    <string name="recents_show_searchbar_summary">Disable or enable the search bar in the recents menu</string>
+
     <!-- vanir actions and utilities -->
     <string name="shortcut_label">Actions &amp; Utilities</string>
     <string name="toggle_flushmemory">GC memory</string>
