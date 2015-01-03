@@ -1885,6 +1885,7 @@
         </activity-alias>
 
         <!-- Vanir activities start -->
+        <activity android:name=".vanir.HardwareSettings" />
         <activity android:name=".vanir.gesturepanel.CreateGestureActivity" />
         <activity android:name=".vanir.gesturepanel.GestureBuilderActivity"
                 android:launchMode="singleTop"

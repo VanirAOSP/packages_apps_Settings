@@ -48,7 +48,7 @@ import java.io.File;
 
 public class HardwareSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "MoreDeviceSettings";
+    private static final String TAG = "Hardware.Settings";
 
     private static final String KEY_SENSORS_MOTORS_CATEGORY = "sensors_motors_category";
     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
