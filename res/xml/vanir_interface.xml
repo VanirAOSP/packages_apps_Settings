@@ -21,13 +21,12 @@
     settings:keywords="@string/vanir_settings_title">
 
     <PreferenceCategory
-       android:title="@string/vanir_controls" />
+        android:title="@string/vanir_controls" />
 
         <PreferenceScreen
             android:key="navigation_bar"
             android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
-            android:title="@string/category_navbar"
-            />
+            android:title="@string/category_navbar" />
 
         <SwitchPreference
             android:key="enable_navigation_ring"
@@ -36,47 +35,45 @@
             android:defaultValue="true" />
 
     <PreferenceCategory
-       android:title="@string/general" />
+        android:title="@string/general" />
 
-    <PreferenceScreen
+        <PreferenceScreen
             android:id="@+id/status_bar_settings"
             android:title="@string/status_bar_title"
-            android:fragment="com.android.settings.cyanogenmod.StatusBarSettings"
-            />
+            android:fragment="com.android.settings.cyanogenmod.StatusBarSettings" />
 
-    <PreferenceScreen
+        <PreferenceScreen
             android:id="@+id/power_menu"
             android:title="@string/power_menu_settings"
-            android:fragment="com.android.settings.vanir.PowerMenuActions"
-            />
+            android:fragment="com.android.settings.vanir.PowerMenuActions" />
 
-     <PreferenceScreen
-         android:key="lcd_density_setup"
-         android:title="@string/lcd_density_title"
-         android:summary="@string/lcd_density_summary" 
-         android:fragment="com.android.settings.vanir.DensityChanger" />
+        <PreferenceScreen
+            android:key="lcd_density_setup"
+            android:title="@string/lcd_density_title"
+            android:summary="@string/lcd_density_summary"
+            android:fragment="com.android.settings.vanir.DensityChanger" />
 
     <PreferenceCategory
-       android:title="@string/vanir_immersive_desktop" >
+        android:title="@string/vanir_immersive_desktop" >
 
-       <SwitchPreference
+        <SwitchPreference
             android:key="immersive_mode_state"
             android:title="@string/immersive_mode_state" />
 
-       <ListPreference
+        <ListPreference
             android:key="immersive_mode_style"
             android:title="@string/immersive_mode_style"
             android:entries="@array/immersive_mode_entries"
             android:entryValues="@array/immersive_mode_values" />
 
-       <ListPreference
+        <ListPreference
             android:key="immersive_orientation"
             android:dialogTitle="@string/immersive_orientation_title"
             android:title="@string/immersive_orientation_title"
             android:entries="@array/immersive_orientation_entries"
             android:entryValues="@array/immersive_orientation_values" />
 
-       <CheckBoxPreference
+        <CheckBoxPreference
             android:key="expanded_desktop"
             android:title="@string/expanded_desktop_title"
             android:summary="@string/expanded_desktop_summary" />

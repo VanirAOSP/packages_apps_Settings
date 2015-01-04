@@ -544,9 +544,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } catch (RemoteException e) {
         }
         if (needsNavigationBar) {
-			mKillAppLongpressBack.setSummary(R.string.kill_app_navbar_summary);
-			mKillAppLongpressBack.setEnabled(false);
-		}
+            mKillAppLongpressBack.setSummary(R.string.kill_app_navbar_summary);
+            mKillAppLongpressBack.setEnabled(false);
+        }
 
         if (mHaveDebugSettings && !mLastEnabledState) {
             // Overall debugging is disabled, but there are some debug

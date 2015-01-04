@@ -151,12 +151,12 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
                 getPreferenceScreen().removePreference(findPreference(GLOBAL_ACTION_KEY_USERS));
             } else {
-				List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).getUsers();
-				boolean enabled = (users.size() > 1);
-				mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS) && enabled);
-				mUsersPref.setEnabled(enabled);
-			}
-		}
+                List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).getUsers();
+                boolean enabled = (users.size() > 1);
+                mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS) && enabled);
+                mUsersPref.setEnabled(enabled);
+            }
+        }
         updatePreferences();
     }
 

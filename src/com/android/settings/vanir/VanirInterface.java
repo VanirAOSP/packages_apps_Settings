@@ -147,10 +147,10 @@ public class VanirInterface extends SettingsPreferenceFragment implements
                     Settings.System.GLOBAL_IMMERSIVE_MODE_STYLE, 2);
         updateImmersiveModeDependencies();
         mImmersiveModePref.setOnPreferenceChangeListener(this);
-        
+
         mNavring = (SwitchPreference) findPreference(KEY_NAVIGATION_RING);
         if (!DeviceUtils.isPackageInstalled(getActivity(), "com.google.android.googlequicksearchbox")) {
-			mNavring.setEnabled(false);
+            mNavring.setEnabled(false);
             mNavring.setSummary(getActivity().getResources().getString(R.string.navring_not_available));
         }
     }
@@ -190,7 +190,7 @@ public class VanirInterface extends SettingsPreferenceFragment implements
         final String key = preference.getKey();
 
         if (preference == mNavring) {
-			Settings.System.putInt(getActivity().getContentResolver(),
+            Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.ENABLE_NAVIGATION_RING,
                     (Boolean) objValue ? 1 : 0);
 

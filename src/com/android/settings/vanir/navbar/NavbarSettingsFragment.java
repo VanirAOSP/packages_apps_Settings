@@ -81,7 +81,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
 
 //    private Switch mEnabledSwitch;
 
-	// value stored in SettingsProvider
+    // value stored in SettingsProvider
     private static int HValue;
     private static int LValue;
     private static int WValue;
