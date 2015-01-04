@@ -151,8 +151,10 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             if (!UserHandle.MU_ENABLED || !UserManager.supportsMultipleUsers()) {
                 getPreferenceScreen().removePreference(findPreference(GLOBAL_ACTION_KEY_USERS));
             } else {
-				mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS));
-                setUsersEnabled();
+				List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).getUsers();
+				boolean enabled = (users.size() > 1);
+				mUsersPref.setChecked(settingsArrayContains(GLOBAL_ACTION_KEY_USERS) && enabled);
+				mUsersPref.setEnabled(enabled);
 			}
 		}
         updatePreferences();
@@ -244,19 +246,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             }
         }
         saveUserConfig();
-    }
-
-    private void setUsersEnabled() {
-        List<UserInfo> users = ((UserManager) mContext.getSystemService(Context.USER_SERVICE))
-                .getUsers();
-
-        if (mUsersPref != null) {
-            if (users.size() > 1) {
-                mUsersPref.setEnabled(true);
-            } else {
-                mUsersPref.setEnabled(false);
-            }
-        }
     }
 
     private void updatePreferences() {
