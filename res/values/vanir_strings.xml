@@ -183,6 +183,9 @@
     <string name="default_power_menu_options">Default options</string>
     <string name="custom_power_menu_title">Custom options</string>
 
+    <!-- Old school longpress back to kill switch in dev settings -->
+    <string name="kill_app_navbar_summary">This device requires a navigation bar.  Set kill as a longpress target in navigation bar settings.</string>
+
     <!-- Immersive Mode -->
     <string name="power_menu_immersive_mode">Immersive mode</string>
     <string name="power_menu_expanded_mode">Expanded desktop</string>

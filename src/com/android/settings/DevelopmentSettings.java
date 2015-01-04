@@ -63,6 +63,7 @@ import android.util.Log;
 import android.view.HardwareRenderer;
 import android.view.IWindowManager;
 import android.view.View;
+import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -534,6 +535,17 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
         mSwitchBar.setChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
+
+        boolean needsNavigationBar = false;
+        try {
+            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            needsNavigationBar = wm.needsNavigationBar();
+        } catch (RemoteException e) {
+        }
+        if (needsNavigationBar) {
+			mKillAppLongpressBack.setSummary(R.string.kill_app_navbar_summary);
+			mKillAppLongpressBack.setEnabled(false);
+		}
 
         if (mHaveDebugSettings && !mLastEnabledState) {
             // Overall debugging is disabled, but there are some debug
