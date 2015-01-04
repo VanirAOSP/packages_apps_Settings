@@ -172,10 +172,10 @@ public class HardwareSettings extends SettingsPreferenceFragment implements
             return true;
 
         } else if (preference == mProxWake) {
-			Settings.System.putInt(getContentResolver(),
-			        Settings.System.PROXIMITY_ON_WAKE,
-			        mProxWake.isChecked() ? 1 : 0);
-			return true;
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.PROXIMITY_ON_WAKE,
+                    mProxWake.isChecked() ? 1 : 0);
+            return true;
 
         } else if (preference == mWakeWhenPluggedOrUnplugged) {
             Settings.Global.putInt(getContentResolver(),

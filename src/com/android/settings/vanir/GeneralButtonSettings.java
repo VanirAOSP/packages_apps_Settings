@@ -69,7 +69,7 @@ public class GeneralButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_POWER_BUTTON = "power_key";
     private static final String CATEGORY_HEADSETHOOK = "button_headsethook";
     private static final String CATEGORY_NAVBAR = "navigation_bar";
-    
+
     public static final int KEY_MASK_CAMERA = 0x20;
     public static final int KEY_MASK_VOLUME = 0x40;
 
