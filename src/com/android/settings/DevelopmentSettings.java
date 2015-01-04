@@ -535,6 +535,17 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mSwitchBar.setChecked(mLastEnabledState);
         setPrefsEnabledState(mLastEnabledState);
 
+        try {
+            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            boolean needsNavigationBar = wm.needsNavigationBar();
+        } catch (RemoteException e) {
+        }
+        if (needsNavigationBar) {
+			// for the sake of nostalgia and idiots we'll leave this where it is.. with a twist
+			mKillAppLongpressBack.setSummary(R.string.kill_app_navbar_summary);
+			mKillAppLongpressBack.setEnabled(false);
+		}
+
         if (mHaveDebugSettings && !mLastEnabledState) {
             // Overall debugging is disabled, but there are some debug
             // settings that are enabled.  This is an invalid state.  Switch
