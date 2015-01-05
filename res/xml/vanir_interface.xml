@@ -19,10 +19,35 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/vanir_settings_title"
     settings:keywords="@string/vanir_settings_title">
-    
-    <PreferenceScreen
-            android:key="navigation_bar"
-            android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
-            android:title="@string/category_navbar"
-            />
+
+        <!-- Button Settings -->
+        <PreferenceScreen
+                android:id="@+id/button_settings"
+                android:title="@string/button_pref_title"
+                android:fragment="com.android.settings.ButtonSettings"
+                android:icon="@drawable/ic_settings_buttons"
+                />
+
+        <!-- Navi Bar -->
+        <PreferenceScreen
+                android:key="navigation_bar"
+                android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
+                android:title="@string/category_navbar"
+                />
+
+        <!-- Status Bar -->
+        <PreferenceScreen
+                android:id="@+id/status_bar_settings"
+                android:title="@string/status_bar_title"
+                android:fragment="com.android.settings.cyanogenmod.StatusBarSettings"
+                android:icon="@drawable/ic_settings_home"
+                />
+
+        <!-- Power Menu -->
+        <PreferenceScreen
+                android:key="power_menu"
+                android:title="@string/power_menu_title"
+                android:fragment="com.android.settings.cyanogenmod.PowerMenuActions" 
+                />
+
 </PreferenceScreen>
