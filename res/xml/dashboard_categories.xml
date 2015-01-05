@@ -92,14 +92,6 @@
                 android:icon="@drawable/ic_settings_home"
                 />
 
-        <!-- Superuser -->
-        <dashboard-tile
-                android:id="@+id/superuser_settings"
-                android:title="@string/superuser"
-                android:fragment="com.android.settings.vanir.superuser.PolicyNativeFragment"
-                android:icon="@drawable/ic_action_permission"
-                />
-
         <!-- Hardware -->
         <dashboard-tile
                 android:id="@+id/more_device_settings"
