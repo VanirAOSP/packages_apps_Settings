@@ -13,7 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
- 
+
     <!-- Vanir menus -->
     <string name="voodoo_title">Exodus</string>
     <string name="vanir_settings_title">Interface</string>
@@ -408,5 +408,8 @@
     <string name="screen_recorder_bitrate_20000000">20000000</string>
     <string name="screen_recorder_record_audio_title">External audio</string>
     <string name="screen_recorder_record_audio_summary">Record audio from the microphone</string>
+
+    <!-- SuperSU -->
+    <string name="supersu_title">SuperSU</string>
 
 </resources>
