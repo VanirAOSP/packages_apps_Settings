@@ -415,13 +415,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mDozePreference != null) {
             int value = Settings.Secure.getInt(getContentResolver(), DOZE_ENABLED, 1);
             mDozePreference.setChecked(value != 0);
-            boolean notifications = Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
-            boolean privateNotifications = Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
-            mDozePreference.setSummary(notifications || privateNotifications
-                    ? getResources().getString(R.string.doze_summary)
-                    : getResources().getString(R.string.doze_neutered_summary));
         }
     }
 

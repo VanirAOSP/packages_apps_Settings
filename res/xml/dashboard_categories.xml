@@ -124,14 +124,6 @@
                 android:icon="@drawable/ic_settings_notifications"
                 />
 
-        <!-- Buttons -->
-        <dashboard-tile
-                android:id="@+id/button_settings"
-                android:title="@string/button_pref_title"
-                android:fragment="com.android.settings.ButtonSettings"
-                android:icon="@drawable/ic_settings_buttons"
-                />
-
         <!-- Storage -->
         <dashboard-tile
                 android:id="@+id/storage_settings"
