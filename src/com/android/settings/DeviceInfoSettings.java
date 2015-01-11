@@ -401,46 +401,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         return "";
     }
 
-    private String getMemInfo() {
-        String result = null;
-        BufferedReader reader = null;
-
-        try {
-            /* /proc/meminfo entries follow this format:
-             * MemTotal:         362096 kB
-             * MemFree:           29144 kB
-             * Buffers:            5236 kB
-             * Cached:            81652 kB
-             */
-            String firstLine = readLine(FILENAME_PROC_MEMINFO);
-            if (firstLine != null) {
-                String parts[] = firstLine.split("\\s+");
-                if (parts.length == 3) {
-                    result = Long.parseLong(parts[1])/1024 + " MB";
-                }
-            }
-        } catch (IOException e) {}
-
-        return result;
-    }
-
-    private String getCPUInfo() {
-        String result = null;
-
-        try {
-            /* The expected /proc/cpuinfo output is as follows:
-             * Processor	: ARMv7 Processor rev 2 (v7l)
-             * BogoMIPS	: 272.62
-             */
-            String firstLine = readLine(FILENAME_PROC_CPUINFO);
-            if (firstLine != null) {
-                result = firstLine.split(":")[1].trim();
-            }
-        } catch (IOException e) {}
-
-        return result;
-    }
-
     private static String getFeedbackReporterPackage(Context context) {
         final String feedbackReporter =
                 context.getResources().getString(R.string.oem_preferred_feedback_reporter);
@@ -553,5 +513,72 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
             }
         };
 
+    private String getMemInfo() {
+        String result = null;
+        BufferedReader reader = null;
+
+        try {
+            /* /proc/meminfo entries follow this format:
+             * MemTotal:         362096 kB
+             * MemFree:           29144 kB
+             * Buffers:            5236 kB
+             * Cached:            81652 kB
+             */
+            String firstLine = readLine(FILENAME_PROC_MEMINFO);
+            if (firstLine != null) {
+                String parts[] = firstLine.split("\\s+");
+                if (parts.length == 3) {
+                    result = Long.parseLong(parts[1])/1024 + " MB";
+                }
+            }
+        } catch (IOException e) {}
+
+        return result;
+    }
+
+    private String getCPUInfo() {
+        String result = null;
+
+        try {
+            /* The expected /proc/cpuinfo output is as follows:
+             * Processor    : ARMv7 Processor rev 2 (v7l)
+             * BogoMIPS    : 272.62
+             *
+             * This needs updating, since
+             *
+             * Hammerhead output :
+             * Processor   : ARMv7 Processor rev 0 (v7l)
+             * processor   : 0
+             * BogoMIPS    : xxx
+             *
+             * Shamu output :
+             * processor   : 0
+             * model name  : ARMv7 Processor rev 1 (v7l)
+             * BogoMIPS    : xxx
+             *
+             * Continue reading the file until running into a line starting
+             * with either "model name" or "Processor" to meet both
+             */
+
+            BufferedReader reader = new BufferedReader(new FileReader(FILENAME_PROC_CPUINFO), 256);
+
+            String Line = reader.readLine();
+
+            while (Line != null) {
+                if (Line.indexOf("model name") == -1 &&
+                    Line.indexOf("Processor" ) == -1    ) {
+                    Line = reader.readLine();
+                } else {
+                    result = Line.split(":")[1].trim();
+                    break;
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException e) {}
+
+        return result;
+    }
 }
 
