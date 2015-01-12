@@ -191,8 +191,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     }
 
     private void updateCheckState(String value) {
-		if (value == null || TextUtils.isEmpty(value)) mStatusBarGreeting.setChecked(false);
-	}
+        if (value == null || TextUtils.isEmpty(value)) mStatusBarGreeting.setChecked(false);
+    }
 
     private void enableStatusBarBatteryDependents(int batteryIconStyle) {
         if (batteryIconStyle == STATUS_BAR_BATTERY_STYLE_HIDDEN ||
