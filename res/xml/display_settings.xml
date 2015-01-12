@@ -19,6 +19,13 @@
         android:title="@string/display_settings"
         settings:keywords="@string/keywords_display">
 
+        <SwitchPreference
+                android:key="auto_brightness"
+                android:title="@string/auto_brightness_title"
+                settings:keywords="@string/keywords_display_auto_brightness"
+                android:summary="@string/auto_brightness_summary"
+                android:persistent="false" />
+
         <PreferenceScreen
                 android:key="brightness"
                 android:title="@string/brightness"
@@ -26,12 +33,13 @@
             <intent android:action="android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
         </PreferenceScreen>
 
-        <SwitchPreference
-                android:key="auto_brightness"
-                android:title="@string/auto_brightness_title"
-                settings:keywords="@string/keywords_display_auto_brightness"
-                android:summary="@string/auto_brightness_summary"
-                android:persistent="false" />
+        <ListPreference
+                android:key="brightness_adjust"
+                android:title="@string/brightness_adjustment_sliders_title"
+                android:summary="@string/brightness_adjustment_sliders_summary"
+                android:entries="@array/brightness_adjust_entries"
+                android:entryValues="@array/brightness_adjust_values"
+                android:defaultValue="3" />
 
         <PreferenceScreen
                 android:key="display_rotation"

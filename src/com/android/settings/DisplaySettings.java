@@ -88,6 +88,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SUNLIGHT_ENHANCEMENT = "sunlight_enhancement";
     private static final String KEY_COLOR_ENHANCEMENT = "color_enhancement";
     private static final String KEY_DISPLAY_ROTATION = "display_rotation";
+    private static final String KEY_BRIGHTNESS_ADJUSTMENT = "brightness_adjust";
 
     private static final String CATEGORY_ADVANCED = "advanced_display_prefs";
     private static final String KEY_DISPLAY_COLOR = "color_calibration";
@@ -103,6 +104,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private final Configuration mCurConfig = new Configuration();
 
     private ListPreference mScreenTimeoutPreference;
+    private ListPreference mBrightnessAdjustment;
     private Preference mScreenSaverPreference;
     private SwitchPreference mDozePreference;
     private SwitchPreference mAutoBrightnessPreference;
@@ -152,6 +154,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
         updateDisplayRotationPreferenceDescription();
+
+        mBrightnessAdjustment = (ListPreference) findPreference(KEY_BRIGHTNESS_ADJUSTMENT);
+        int brightness = Settings.System.getInt(resolver, Settings.System.BRIGHTNESS_ADJUSTMENT, 2);
+        mBrightnessAdjustment.setValue(String.valueOf(brightness));
+        mBrightnessAdjustment.setSummary(getString(R.string.brightness_adjustment_sliders_summary)
+                + mBrightnessAdjustment.getEntries()[mBrightnessAdjustment.findIndexOfValue("" + value)]);
+        mBrightnessAdjustment.setOnPreferenceChangeListener(this);
 
         mFontSizePref = (FontDialogPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
@@ -485,6 +494,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             boolean auto = (Boolean) objValue;
             Settings.System.putInt(getContentResolver(), SCREEN_BRIGHTNESS_MODE,
                     auto ? SCREEN_BRIGHTNESS_MODE_AUTOMATIC : SCREEN_BRIGHTNESS_MODE_MANUAL);
+        }
+        if (preference == mBrightnessAdjustment) {
+            int value = Integer.valueOf((String) objValue);
+            mBrightnessAdjustment.setValue(String.valueOf(value));
+            mBrightnessAdjustment.setSummary(getString(R.string.brightness_adjustment_sliders_summary) + mBrightnessAdjustment.getEntries()[mBrightnessAdjustment.findIndexOfValue("" + value)]);
+            Settings.System.putInt(getContentResolver(), Settings.System.BRIGHTNESS_ADJUSTMENT, value);
         }
         if (preference == mDozePreference) {
             boolean value = (Boolean) objValue;

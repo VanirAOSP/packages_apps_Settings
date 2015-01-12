@@ -76,6 +76,13 @@
     <string name="toggle_dream">Screensaver</string>
     <string name="toggle_dream_failed">Dreams are off or disabled</string>
 
+    <!-- Brightness sliders -->
+    <string name="brightness_adjustment_sliders_title">Brightness adjustment</string>
+    <string name="brightness_adjustment_sliders_summary">Adjustment method: </string>
+    <string name="brightness_adjust_none">No sliders enabled</string>
+    <string name="brightness_adjust_gesture">Status bar swipe</string>
+    <string name="brightness_adjust_quicksettings">Quicksettings slider</string>
+
     <!-- LCD Density -->
     <string name="lcd_density_title">LCD Density</string>
     <string name="lcd_density_summary">unknown</string>
@@ -112,6 +119,11 @@
     <string name="use_custom_app_summary">Use custom application instead of the recent applications dialog</string>
     <string name="group_applications">Applications</string>
     <string name="select_custom_app_title">Select custom application</string>
+
+    <!-- custom carrier text -->
+    <string name="custom_carrier_label_title">Custom carrier label</string>
+    <string name="custom_carrier_label_explain">Please enter a new label. Enter an empty label to revert to stock label.</string>
+    <string name="custom_carrier_label_notset">Custom label currently not set</string>
 
     <!-- Custom navigation bar targets -->
     <string name="choose_action_double_tap_title">Choose double tap action</string>

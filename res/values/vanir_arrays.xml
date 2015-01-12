@@ -28,6 +28,18 @@
         <item>**icon**</item>
     </string-array>
 
+    <!-- brightness options -->
+    <string-array name="brightness_adjust_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="brightness_adjust_entries" translatable="false">
+        <item>@string/brightness_adjust_none</item>
+        <item>@string/brightness_adjust_gesture</item>
+        <item>@string/brightness_adjust_quicksettings</item>
+    </string-array>
 
     <!-- Immersive desktop -->
     <string-array name="immersive_mode_entries" translatable="false">
