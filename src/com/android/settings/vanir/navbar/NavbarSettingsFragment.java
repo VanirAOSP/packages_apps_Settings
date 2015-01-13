@@ -304,7 +304,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
         // Navigation ring
         mLeftSide = (Switch) v.findViewById(R.id.navigation_bar_left);
         mLeftSide.setChecked((Settings.System.getInt(activity.getContentResolver(),
-                Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, 1) == 1));
+                Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0) == 1));
         mLeftSide.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -430,6 +430,7 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             v.findViewById(R.id.navigation_bar_width_text).setVisibility(View.GONE);
             mBarWidthValue.setVisibility(View.GONE);
             mNavigationBarWidth.setVisibility(View.GONE);
+            mLeftSide.setVisibility(View.GONE);
         }
     }
 }
