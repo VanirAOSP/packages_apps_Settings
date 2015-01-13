@@ -430,7 +430,8 @@ public class NavbarSettingsFragment extends Fragment implements SeekBar.OnSeekBa
             v.findViewById(R.id.navigation_bar_width_text).setVisibility(View.GONE);
             mBarWidthValue.setVisibility(View.GONE);
             mNavigationBarWidth.setVisibility(View.GONE);
-            mLeftSide.setVisibility(View.GONE);
+            v.findViewById(R.id.left_navbar_separator_view).setVisibility(View.GONE);
+            v.findViewById(R.id.leftside_navigation_bar).setVisibility(View.GONE);
         }
     }
 }

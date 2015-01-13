@@ -247,7 +247,7 @@
                 android:background="@android:color/darker_gray"/>
 
             <LinearLayout
-                android:id="@+id/alternate_layouts"
+                android:id="@+id/leftside_navigation_bar"
                 style="@style/settingsFragmentStyle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -272,6 +272,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/left_navbar_separator_view"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:paddingBottom="1dp"
