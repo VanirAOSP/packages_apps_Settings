@@ -60,4 +60,12 @@
                 android:icon="@drawable/ic_settings_notification_drawer"
                 />
 
+        <!-- Lockscreen wallpaper pickers - becuse most launchers don't allow setting lockscreen wallpaper -->
+        <Preference
+                android:key="lockscreen_wallpaper_settings"
+                android:title="@string/lockscreen_wallpaper_settings_title">
+                <intent android:targetPackage="com.android.wallpapercropper"
+                        android:targetClass="com.android.wallpapercropper.LockWallpaperPickerActivity" />
+        </Preference>
+
 </PreferenceScreen>
