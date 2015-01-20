@@ -45,7 +45,7 @@ public class RecentsSettings extends SettingsPreferenceFragment implements OnPre
 
         mRecentsClearAllLocation = (ListPreference) prefSet.findPreference(RECENTS_CLEAR_ALL_LOCATION);
         int location = Settings.System.getIntForUser(resolver,
-                Settings.System.RECENTS_CLEAR_ALL_LOCATION, 1, UserHandle.USER_CURRENT);
+                Settings.System.RECENTS_CLEAR_ALL_LOCATION, 0, UserHandle.USER_CURRENT);
         mRecentsClearAllLocation.setValue(String.valueOf(location));
         setListPreferenceSummary(mRecentsClearAllLocation, String.valueOf(location));
         mRecentsClearAllLocation.setOnPreferenceChangeListener(this);
