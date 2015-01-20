@@ -136,10 +136,10 @@
     <string name="recents_clear_all_location_bottom_right">Bottom right</string>
     <string name="recents_clear_all_location_bottom_left">Bottom left</string>
     <string name="recents_clear_all_hidden">Hidden</string>
-
-    <!-- Show/Hide Search Bar -->
-    <string name="recents_show_searchbar">Disable search bar in recents menu</string>
-    <string name="recents_show_searchbar_summary">Disable or enable the search bar in the recents menu</string>
+    <string name="recents_show_searchbar">Search bar in recents menu</string>
+    <string name="recents_show_searchbar_summary">Check to enable search bar in recents</string>
+    <string name="recents_show_membar_title">Memory bar</string>
+    <string name="recents_show_membar_summary">Show a bar with the device\'s available memory</string>
 
     <!-- vanir actions and utilities -->
     <string name="shortcut_label">Actions &amp; Utilities</string>

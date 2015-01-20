@@ -15,6 +15,12 @@
         android:key="recents_show_hide_search_bar"
         android:title="@string/recents_show_searchbar"
         android:summary="@string/recents_show_searchbar_summary"
+        android:defaultValue="true" />
+
+    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+        android:key="systemui_recents_mem_display"
+        android:title="@string/recents_show_membar_title"
+        android:summary="@string/recents_show_membar_summary"
         android:defaultValue="false" />
 
 </PreferenceScreen>
