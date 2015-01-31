@@ -1758,8 +1758,6 @@
                 android:resource="@id/voice_wakeup_settings" />
         </activity>
 
-        <activity android:name=".headsup.HeadsUpSettings" />
-
         <activity android:name="Settings$ProfilesSettingsActivity"
                 android:label="@string/profile_settings"
                 android:taskAffinity=""
