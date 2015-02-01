@@ -950,6 +950,10 @@
     <string name="qs_advanced_location_title">Advanced location settings</string>
     <string name="qs_advanced_location_summary">Enable advanced settings for location in Quick Settings</string>
 
+    <!-- QuickSettings collapse panel -->
+    <string name="quick_settings_collapse_title">Auto close panel</string>
+    <string name="quick_settings_collapse_summary">Close the Quick Settings panel upon toggle</string>
+
     <!-- Gesture Settings -->
     <!-- Settings main menu entry -->
     <string name="gesture_settings_title">Gestures</string>
