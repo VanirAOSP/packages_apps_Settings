@@ -44,6 +44,7 @@ public class VanirInterface extends SettingsPreferenceFragment {
     private static final String TAG = "SystemSettings";
     
     private static final String CATEGORY_NAVBAR = "navigation_bar";
+    private static final String KEY_NAVRING = "navigation_bar_ring";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class VanirInterface extends SettingsPreferenceFragment {
             // Hide navigation bar category on devices without navigation bar
             if (!hasNavBar) {
                 prefSet.removePreference(findPreference(CATEGORY_NAVBAR));
+                prefSet.removePreference(findPreference(KEY_NAVRING));
             }
         } catch (RemoteException e) {
             Log.e(TAG, "Error getting navigation bar status");

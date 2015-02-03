@@ -36,6 +36,11 @@
                 android:icon="@drawable/ic_settings_system"
                 />
 
+        <PreferenceScreen
+                android:key="navigation_bar_ring"
+                android:fragment="com.android.settings.cyanogenmod.NavRing"
+                android:title="@string/navigation_ring_title" />
+
         <!-- Status Bar -->
         <PreferenceScreen
                 android:id="@+id/status_bar_settings"
