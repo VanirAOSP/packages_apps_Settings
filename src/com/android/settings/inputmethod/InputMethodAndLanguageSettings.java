@@ -371,8 +371,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
                         chkPref.isChecked() ? 1 : 0);
                 return true;
             }
-        } else if (preference == mHighTouchSensitivity) {
-            return HighTouchSensitivity.setEnabled(mHighTouchSensitivity.isChecked());
+        } else if (preference instanceof SwitchPreference) {
+            if (preference == mHighTouchSensitivity) {
+                return HighTouchSensitivity.setEnabled(mHighTouchSensitivity.isChecked());
+            }
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }

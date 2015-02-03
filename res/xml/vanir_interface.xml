@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 VanirAOSP
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/vanir_settings_title"
+    settings:keywords="@string/vanir_settings_title">
+
+        <!-- Button Settings -->
+        <PreferenceScreen
+                android:id="@+id/button_settings"
+                android:title="@string/button_pref_title"
+                android:fragment="com.android.settings.ButtonSettings"
+                android:icon="@drawable/ic_settings_buttons"
+                />
+
+        <!-- Navi Bar -->
+        <PreferenceScreen
+                android:key="navigation_bar"
+                android:fragment="com.android.settings.vanir.navbar.NavbarTabHostFragment"
+                android:title="@string/category_navbar"
+                android:icon="@drawable/ic_settings_system"
+                />
+
+        <!-- Status Bar -->
+        <PreferenceScreen
+                android:id="@+id/status_bar_settings"
+                android:title="@string/status_bar_title"
+                android:fragment="com.android.settings.cyanogenmod.StatusBarSettings"
+                android:icon="@drawable/ic_settings_extdesk_hidenavbar"
+                />
+
+        <!-- Power Menu -->
+        <PreferenceScreen
+                android:key="power_menu"
+                android:title="@string/power_menu_title"
+                android:fragment="com.android.settings.cyanogenmod.PowerMenuActions" 
+                android:icon="@drawable/ic_settings_battery"
+                />
+
+        <!-- Notification drawer -->
+        <PreferenceScreen
+                android:id="@+id/notification_drawer_settings"
+                android:title="@string/notification_drawer_title"
+                android:fragment="com.android.settings.cyanogenmod.NotificationDrawerSettings"
+                android:icon="@drawable/ic_settings_notification_drawer"
+                />
+
+</PreferenceScreen>
