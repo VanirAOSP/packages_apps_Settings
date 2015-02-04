@@ -57,6 +57,11 @@
                 android:title="@string/screensaver_settings_title"
                 android:fragment="com.android.settings.DreamSettings" />
 
+        <SwitchPreference
+                android:key="lift_to_wake"
+                android:title="@string/lift_to_wake_title"
+                android:persistent="false" />
+
         <PreferenceScreen
                 android:key="expanded_desktop"
                 android:title="@string/power_menu_expanded_desktop"
@@ -84,11 +89,6 @@
         <PreferenceCategory
                 android:key="advanced_display_prefs"
                 android:title="@string/advanced_settings">
-
-                <SwitchPreference
-                    android:key="lift_to_wake"
-                    android:title="@string/lift_to_wake_title"
-                    android:persistent="false" />
 
                 <SwitchPreference
                     android:key="double_tap_wake_gesture"
