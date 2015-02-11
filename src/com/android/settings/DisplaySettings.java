@@ -571,7 +571,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     if (!mHasTapToWake) {
                         result.add(KEY_TAP_TO_WAKE);
                     }
-
                     if (!isAutomaticBrightnessAvailable(context.getResources())) {
                         result.add(KEY_AUTO_BRIGHTNESS);
                     }
