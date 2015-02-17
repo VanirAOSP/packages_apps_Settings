@@ -231,7 +231,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 (SwitchPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
 
         mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
-        if (!isPostProcessingSupported()) {
+        if (!isPostProcessingSupported(getActivity())) {
             getPreferenceScreen().removePreference(mScreenColorSettings);
         }
     }
@@ -637,9 +637,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private boolean isPostProcessingSupported() {
+    private static boolean isPostProcessingSupported(Context context) {
         boolean ret = true;
-        final PackageManager pm = getPackageManager();
+        final PackageManager pm = context.getPackageManager();
         try {
             pm.getPackageInfo("com.qualcomm.display", PackageManager.GET_META_DATA);
         } catch (NameNotFoundException e) {
@@ -723,7 +723,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     if (!mHasColorEnhancement) {
                         result.add(KEY_COLOR_ENHANCEMENT);
                     }
-                    if (!isPostProcessingSupported()) {
+                    if (!isPostProcessingSupported(context)) {
                         result.add(KEY_SCREEN_COLOR_SETTINGS);
                     }
                     if (!mHasDisplayColor) {
