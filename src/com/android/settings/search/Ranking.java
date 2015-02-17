@@ -34,10 +34,8 @@ import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.location.LocationSettings;
-import com.android.settings.lockscreen.LockScreenSettings;
 import com.android.settings.net.DataUsageMeteredSettings;
-import com.android.settings.notification.NotificationManagerSettings;
-import com.android.settings.SoundSettings;
+import com.android.settings.notification.NotificationSettings;
 import com.android.settings.notification.OtherSoundSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
@@ -111,8 +109,7 @@ public final class Ranking {
         sRankMap.put(DisplaySettings.class.getName(), RANK_DISPLAY);
 
         // Notifications
-        sRankMap.put(SoundSettings.class.getName(), RANK_NOTIFICATIONS);
-        sRankMap.put(NotificationManagerSettings.class.getName(), RANK_NOTIFICATIONS);
+        sRankMap.put(NotificationSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(OtherSoundSettings.class.getName(), RANK_NOTIFICATIONS);
         sRankMap.put(ZenModeSettings.class.getName(), RANK_NOTIFICATIONS);
 
@@ -131,7 +128,6 @@ public final class Ranking {
 
         // Security
         sRankMap.put(SecuritySettings.class.getName(), RANK_SECURITY);
-        sRankMap.put(LockScreenSettings.class.getName(), RANK_SECURITY);
         sRankMap.put(ChooseLockGeneric.ChooseLockGenericFragment.class.getName(), RANK_SECURITY);
         sRankMap.put(ScreenPinningSettings.class.getName(), RANK_SECURITY);
 

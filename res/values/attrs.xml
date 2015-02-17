@@ -102,7 +102,6 @@
     <!-- For Search -->
     <declare-styleable name="Preference">
         <attr name="keywords" format="string" />
-        <attr name="advanced" format="boolean" />
     </declare-styleable>
 
     <attr name="switchBarTheme" format="reference" />

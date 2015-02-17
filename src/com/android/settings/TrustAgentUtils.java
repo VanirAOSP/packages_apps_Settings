@@ -54,9 +54,9 @@ public class TrustAgentUtils {
     }
 
     public static class TrustAgentComponentInfo {
-        public ComponentName componentName;
-        public String title;
-        public String summary;
+        ComponentName componentName;
+        String title;
+        String summary;
     }
 
     public static ComponentName getComponentName(ResolveInfo resolveInfo) {
