@@ -52,16 +52,31 @@
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title" />
 
+    <!-- Mobile networks -->
     <PreferenceScreen
-        android:key="mobile_network_settings"
-        android:title="@string/network_settings_title"
-        settings:keywords="@string/keywords_more_mobile_networks"
-        android:dependency="toggle_airplane">
+            android:id="@+id/mobile_networks"
+            android:title="@string/network_settings_title">
         <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.phone"
-            android:targetClass="com.android.phone.MobileNetworkSettings" />
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.phone"
+                android:targetClass="com.android.phone.MobileNetworkSettings" />
     </PreferenceScreen>
+
+    <!-- MSIM Mobile networks -->
+    <!-- TARGET_THEME is located in packages/services/Telephony -->
+    <PreferenceScreen
+            android:id="@+id/msim_mobile_networks"
+            android:title="@string/network_settings_title">
+        <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.phone"
+                android:targetClass="com.android.phone.msim.SelectSubscription">
+                <extra android:name="PACKAGE" android:value="com.android.phone" />
+                <extra android:name="TARGET_CLASS" android:value="com.android.phone.MobileNetworkSettings" />
+                <extra android:name="TARGET_THEME" android:value="Theme.Material.Settings" />
+         </intent>
+    </PreferenceScreen>
+
 
     <Preference
         android:key="manage_mobile_plan"
