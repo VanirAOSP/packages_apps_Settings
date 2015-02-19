@@ -274,11 +274,10 @@ public class WirelessSettings extends SettingsPreferenceFragment
         SwitchPreference nfc = (SwitchPreference) findPreference(KEY_TOGGLE_NFC);
 
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
-        PreferenceScreen nfcPayment = (PreferenceScreen) findPreference(KEY_NFC_PAYMENT_SETTINGS);
         CheckBoxPreference nsd = (CheckBoxPreference) findPreference(KEY_TOGGLE_NSD);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
-        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, nfcPayment);
+        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam);
 
         mSmsApplicationPreference = (AppListPreference) findPreference(KEY_SMS_APPLICATION);
         mSmsApplicationPreference.setOnPreferenceChangeListener(this);
@@ -325,7 +324,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
             findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
-            findPreference(KEY_NFC_PAYMENT_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
         // Remove NFC if not available
@@ -334,9 +332,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(nfc);
             getPreferenceScreen().removePreference(androidBeam);
             mNfcEnabler = null;
-        } else if (!mPm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
-            // Only show if we have the HCE feature
-            getPreferenceScreen().removePreference(nfcPayment);
         }
 
         // Remove Mobile Network Settings and Manage Mobile Plan for secondary users,
@@ -501,7 +496,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
 
                 result.add(KEY_TOGGLE_NSD);
 
-                final PackageManager pm = context.getPackageManager();
                 final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
                 final boolean isSecondaryUser = UserHandle.myUserId() != UserHandle.USER_OWNER;
                 final boolean isWimaxEnabled = !isSecondaryUser && context.getResources().getBoolean(
@@ -522,11 +516,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
                     if (adapter == null) {
                         result.add(KEY_TOGGLE_NFC);
                         result.add(KEY_ANDROID_BEAM_SETTINGS);
-                        result.add(KEY_NFC_PAYMENT_SETTINGS);
-                    } else if (!pm.hasSystemFeature(
-                            PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
-                        // Only show if we have the HCE feature
-                        result.add(KEY_NFC_PAYMENT_SETTINGS);
                     }
                 }
 
@@ -550,6 +539,8 @@ public class WirelessSettings extends SettingsPreferenceFragment
                 if (!tm.isSmsCapable()) {
                     result.add(KEY_SMS_APPLICATION);
                 }
+
+                final PackageManager pm = context.getPackageManager();
 
                 // Remove Airplane Mode settings if it's a stationary device such as a TV.
                 if (pm.hasSystemFeature(PackageManager.FEATURE_TELEVISION)) {
