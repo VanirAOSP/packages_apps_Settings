@@ -207,7 +207,7 @@
   <string name="cmupdate_settings_title">Mises à jour CyanogenMod</string>
   <string name="update_recovery_title">Mettre à jour le recovery de Cyanogen</string>
   <string name="update_recovery_summary">Mettre à jour le recovery avec les mises à jour système</string>
-  <string name="mod_version">Version CyanogenMod</string>
+  <string name="mod_version">Version Vanir</string>
   <string name="mod_version_default">Inconnue</string>
   <string name="model_name">Nom du modèle</string>
   <string name="build_date">Date de compilation</string>

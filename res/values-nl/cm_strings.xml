@@ -620,8 +620,8 @@
   <string name="graphics_title">Grafisch en weergave</string>
   <string name="edge_gesture_service_title">Aanraakgebaren blokkeren</string>
   <string name="edge_gesture_service_summary">Aanraakgebaren voor navigatie- en statusbalk niet naar apps sturen</string>
-  <string name="cmlicense_title">Juridische afdeling van CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Juridische afdeling van CyanogenMod</string>
+  <string name="cmlicense_title">Juridische afdeling van Vanir</string>
+  <string name="settings_cmlicense_activity_title">Juridische afdeling van Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Geen netwerkverbinding. Ga naar %s om deze informatie te bekijken op een computer met internet.</string>
   <string name="unlock_quick_unlock_control_title">Snel ontgrendelen</string>
   <string name="unlock_quick_unlock_control_summary">Automatisch ontgrendelen als uw pincode/wachtwoord correct is ingevoerd</string>
