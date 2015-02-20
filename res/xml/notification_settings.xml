@@ -124,6 +124,12 @@
                 android:title="@string/lock_screen_notifications_title"
                 android:persistent="false" />
 
+        <!-- Vibrate on touch -->
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+                android:key="haptic_feedback_enabled"
+                android:title="@string/vibrate_on_touch_title"
+                android:defaultValue="true"/>
+
         <!-- App notifications -->
         <PreferenceScreen
                 android:key="app_notifications"
@@ -138,5 +144,4 @@
                 android:fragment="com.android.settings.notification.NotificationAccessSettings" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>

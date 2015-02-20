@@ -35,6 +35,7 @@ import android.os.Vibrator;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
 import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
 import android.provider.MediaStore;
@@ -74,6 +75,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
     private static final String KEY_INCREASING_RING_VOLUME = "increasing_ring_volume";
     private static final String KEY_NOTIFICATION_LIGHT = "notification_light";
     private static final String KEY_BATTERY_LIGHT = "battery_light";
+    private static final String KEY_VIBRATION_INTENSITY = "vibration_intensity";
+    private static final String KEY_VIBRATE_ON_TOUCH = "vibrate_on_touch";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -137,6 +140,9 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         initRingtones(sound);
         initVibrateWhenRinging(sound);
         initIncreasingRing(sound);
+        if (!VibratorIntensity.isSupported()) {
+            vibrate.removePreference(vibrate.findPreference(KEY_VIBRATION_INTENSITY));
+        }
 
         final PreferenceCategory notification = (PreferenceCategory)
                 findPreference(KEY_NOTIFICATION);
@@ -161,6 +167,11 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         super.onPause();
         mVolumeCallback.stopSample();
         mSettingsObserver.register(false);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     // === Volumes ===
@@ -545,6 +556,13 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
+        private boolean mHasVibratorIntensity;
+
+        @Override
+        public void prepare() {
+            super.prepare();
+            mHasVibratorIntensity = VibratorIntensity.isSupported();
+        }
 
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
@@ -562,6 +580,14 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 rt.add(KEY_PHONE_RINGTONE);
                 rt.add(KEY_VIBRATE_WHEN_RINGING);
             }
+            Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            if (vib == null || !vib.hasVibrator()) {
+                rt.add(KEY_VIBRATE);
+            }
+            if (!mHasVibratorIntensity) {
+                rt.add(KEY_VIBRATION_INTENSITY);
+            }
+
             return rt;
         }
     };
