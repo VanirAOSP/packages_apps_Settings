@@ -90,8 +90,6 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-
         mDevelopmentPreferences = getActivity().getSharedPreferences(
                 DevelopmentSettings.PREF_FILE, Context.MODE_PRIVATE);
 
@@ -111,12 +109,6 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
         // 3. never show individual processor control if profiles enabled
 
         PreferenceCategory category = (PreferenceCategory) prefSet.findPreference(CATEGORY_PROFILES);
-        if (!mPowerManager.hasPowerProfiles()) {
-            prefSet.removePreference(category);
-        } else {
-            ((PreferenceCategory) prefSet.findPreference(CATEGORY_SYSTEM)).removePreference(
-                    prefSet.findPreference(CATEGORY_PROCESSOR));
-        }
 
         mPerfProfilePref = (ListPreference)prefSet.findPreference(PERF_PROFILE_PREF);
         if (mPerfProfilePref != null && !mPowerManager.hasPowerProfiles()) {
