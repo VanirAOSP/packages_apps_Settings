@@ -90,6 +90,8 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mPowerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
         mDevelopmentPreferences = getActivity().getSharedPreferences(
                 DevelopmentSettings.PREF_FILE, Context.MODE_PRIVATE);
 
