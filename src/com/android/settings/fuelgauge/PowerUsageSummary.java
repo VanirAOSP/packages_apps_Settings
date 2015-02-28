@@ -17,11 +17,14 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
+import android.content.res.Resources;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +36,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,6 +63,8 @@ public class PowerUsageSummary extends PreferenceFragment {
 
     private static final String KEY_APP_LIST = "app_list";
 
+    private static final String KEY_BATTERY_SAVER = "low_power";
+
     private static final String BATTERY_HISTORY_FILE = "tmp_bat_history.bin";
 
     private static final int MENU_STATS_TYPE = Menu.FIRST;
@@ -72,6 +78,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     private PreferenceGroup mAppListGroup;
     private String mBatteryLevel;
     private String mBatteryStatus;
+    private boolean mBatteryPluggedIn;
 
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -81,6 +88,7 @@ public class PowerUsageSummary extends PreferenceFragment {
     private static final int SECONDS_IN_HOUR = 60 * 60;
 
     private BatteryStatsHelper mStatsHelper;
+    private SwitchPreference mBatterySaverPref;
 
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
 
@@ -111,6 +119,8 @@ public class PowerUsageSummary extends PreferenceFragment {
         addPreferencesFromResource(R.xml.power_usage_summary);
         mAppListGroup = (PreferenceGroup) findPreference(KEY_APP_LIST);
         setHasOptionsMenu(true);
+
+        mBatterySaverPref = (SwitchPreference) findPreference(KEY_BATTERY_SAVER);
     }
 
     @Override
@@ -130,6 +140,10 @@ public class PowerUsageSummary extends PreferenceFragment {
             mStatsHelper.clearStats();
         }
         refreshStats();
+
+        if (mBatterySaverPref != null) {
+            refreshBatterySaverOptions();
+        }
     }
 
     @Override
@@ -169,7 +183,7 @@ public class PowerUsageSummary extends PreferenceFragment {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         if (!(preference instanceof PowerGaugePreference)) {
-            return false;
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatteryEntry entry = pgp.getInfo();
@@ -218,12 +232,57 @@ public class PowerUsageSummary extends PreferenceFragment {
                 mHandler.removeMessages(MSG_REFRESH_STATS);
                 return true;
             case MENU_BATTERY_SAVER:
-                final SettingsActivity sa = (SettingsActivity) getActivity();
-                sa.startPreferencePanel(BatterySaverSettings.class.getName(), null,
-                        R.string.battery_saver, null, null, 0);
+                Resources res = getResources();
+
+                final int defWarnLevel = res.getInteger(
+                        com.android.internal.R.integer.config_lowBatteryWarningLevel);
+                final int value = Settings.Global.getInt(getContentResolver(),
+                        Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, defWarnLevel);
+
+                int selectedIndex = -1;
+                final int[] intVals = res.getIntArray(R.array.battery_saver_trigger_values);
+                String[] strVals = new String[intVals.length];
+                for (int i = 0; i < intVals.length; i++) {
+                    if (intVals[i] == value) {
+                        selectedIndex = i;
+                    }
+                    if (intVals[i] > 0 && intVals[i] < 100) {
+                        strVals[i] = res.getString(R.string.battery_saver_turn_on_automatically_pct,
+                                intVals[i]);
+                    } else {
+                        strVals[i] =
+                                res.getString(R.string.battery_saver_turn_on_automatically_never);
+                    }
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.battery_saver_turn_on_automatically_title)
+                        .setSingleChoiceItems(strVals,
+                                selectedIndex,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Settings.Global.putInt(getContentResolver(),
+                                                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
+                                                intVals[which]);
+                                    }
+                                })
+                        .setPositiveButton(R.string.ok, null);
+                builder.create().show();
+
                 return true;
             default:
                 return false;
+        }
+    }
+
+    private void refreshBatterySaverOptions() {
+        if (mBatterySaverPref != null) {
+            mBatterySaverPref.setEnabled(!mBatteryPluggedIn);
+            mBatterySaverPref.setChecked(!mBatteryPluggedIn && mPowerManager.isPowerSaveMode());
+            mBatterySaverPref.setSummary(mBatteryPluggedIn
+                    ? R.string.battery_saver_summary_unavailable
+                    : R.string.battery_saver_summary);
         }
     }
 
@@ -242,10 +301,18 @@ public class PowerUsageSummary extends PreferenceFragment {
             if (!batteryLevel.equals(mBatteryLevel) || !batteryStatus.equals(mBatteryStatus)) {
                 mBatteryLevel = batteryLevel;
                 mBatteryStatus = batteryStatus;
+                mBatteryPluggedIn = isBatteryPluggedIn(intent);
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean isBatteryPluggedIn(Intent intent) {
+        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
+        return status == BatteryManager.BATTERY_STATUS_CHARGING
+                || status == BatteryManager.BATTERY_STATUS_FULL;
     }
 
     private void refreshStats() {
@@ -364,6 +431,9 @@ public class PowerUsageSummary extends PreferenceFragment {
                 case MSG_REFRESH_STATS:
                     mStatsHelper.clearStats();
                     refreshStats();
+                    if (mBatterySaverPref != null) {
+                        refreshBatterySaverOptions();
+                    }
             }
             super.handleMessage(msg);
         }

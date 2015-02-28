@@ -16,7 +16,15 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/power_usage_summary_title"
-        settings:keywords="@string/keywords_battery"
-        android:key="app_list">
+                  android:title="@string/power_usage_summary_title">
+
+    <com.android.settings.cyanogenmod.GlobalSettingSwitchPreference
+            android:key="low_power"
+            android:title="@string/battery_saver"/>
+
+    <PreferenceCategory
+            android:title="@string/power_usage_history_title"
+            settings:keywords="@string/keywords_battery"
+            android:key="app_list" />
+
 </PreferenceScreen>
