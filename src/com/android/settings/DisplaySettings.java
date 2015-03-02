@@ -166,24 +166,18 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
 
-        mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
-        if (mAutoBrightnessPreference != null && isAutomaticBrightnessAvailable(getResources())) {
+        if (isAutomaticBrightnessAvailable(getResources())) {
+            mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
             mAutoBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
-            if (mAutoBrightnessPreference != null) {
-                removePreference(KEY_AUTO_BRIGHTNESS);
-                mAutoBrightnessPreference = null;
-            }
+            removePreference(KEY_AUTO_BRIGHTNESS);
         }
 
-        mLiftToWakePreference = (SwitchPreference) findPreference(KEY_LIFT_TO_WAKE);
-        if (mLiftToWakePreference != null && isLiftToWakeAvailable(activity)) {
+        if (isLiftToWakeAvailable(activity)) {
+            mLiftToWakePreference = (SwitchPreference) findPreference(KEY_LIFT_TO_WAKE);
             mLiftToWakePreference.setOnPreferenceChangeListener(this);
         } else {
-            if (mLiftToWakePreference != null) {
-                removePreference(KEY_LIFT_TO_WAKE);
-                mLiftToWakePreference = null;
-            }
+            removePreference(KEY_LIFT_TO_WAKE);
         }
 
         PreferenceCategory advancedPrefs = (PreferenceCategory) findPreference(CATEGORY_ADVANCED);
@@ -237,7 +231,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 (SwitchPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
 
         mScreenColorSettings = (PreferenceScreen) findPreference(KEY_SCREEN_COLOR_SETTINGS);
-        if (!isPostProcessingSupported(getActivity())) {
+        if (!isPostProcessingSupported()) {
             getPreferenceScreen().removePreference(mScreenColorSettings);
         }
     }
@@ -643,9 +637,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private static boolean isPostProcessingSupported(Context context) {
+    private boolean isPostProcessingSupported() {
         boolean ret = true;
-        final PackageManager pm = context.getPackageManager();
+        final PackageManager pm = getPackageManager();
         try {
             pm.getPackageInfo("com.qualcomm.display", PackageManager.GET_META_DATA);
         } catch (NameNotFoundException e) {
@@ -683,19 +677,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-                private boolean mHasTapToWake;
-                private boolean mHasSunlightEnhancement, mHasColorEnhancement;
-                private boolean mHasDisplayGamma, mHasDisplayColor;
-
-                @Override
-                public void prepare() {
-                    mHasTapToWake = isTapToWakeSupported();
-                    mHasSunlightEnhancement = isSunlightEnhancementSupported();
-                    mHasColorEnhancement = isColorEnhancementSupported();
-                    mHasDisplayGamma = DisplayGamma.isSupported();
-                    mHasDisplayColor = DisplayColor.isSupported();
-                }
-
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
@@ -715,28 +696,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     if (!context.getResources().getBoolean(
                             com.android.internal.R.bool.config_dreamsSupported)) {
                         result.add(KEY_SCREEN_SAVER);
-                    }
-                    if (!context.getResources().getBoolean(
-                            com.android.internal.R.bool.config_proximityCheckOnWake)) {
-                        result.add(KEY_PROXIMITY_WAKE);
-                    }
-                    if (!mHasTapToWake) {
-                        result.add(KEY_TAP_TO_WAKE);
-                    }
-                    if (!mHasSunlightEnhancement) {
-                        result.add(KEY_SUNLIGHT_ENHANCEMENT);
-                    }
-                    if (!mHasColorEnhancement) {
-                        result.add(KEY_COLOR_ENHANCEMENT);
-                    }
-                    if (!isPostProcessingSupported(context)) {
-                        result.add(KEY_SCREEN_COLOR_SETTINGS);
-                    }
-                    if (!mHasDisplayColor) {
-                        result.add(KEY_DISPLAY_COLOR);
-                    }
-                    if (!mHasDisplayGamma) {
-                        result.add(KEY_DISPLAY_GAMMA);
                     }
                     if (!isAutomaticBrightnessAvailable(context.getResources())) {
                         result.add(KEY_AUTO_BRIGHTNESS);
