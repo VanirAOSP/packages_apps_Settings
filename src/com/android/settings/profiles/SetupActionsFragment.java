@@ -208,7 +208,7 @@ public class SetupActionsFragment extends SettingsPreferenceFragment
         mItems.add(new LockModeItem(mProfile));
 
         // app groups
-        if (SettingsActivity.showAdvancedPreferences(getActivity())) {
+        if (true) {
             mItems.add(new Header(getString(R.string.profile_app_group_category_title)));
 
             int groupsAdded = 0;
