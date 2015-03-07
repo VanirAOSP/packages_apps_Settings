@@ -1167,7 +1167,8 @@ public class SettingsActivity extends Activity
                 } else if (id == R.id.mobile_networks) {
                     if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
                         removeTile = true;
-                    } else if (TelephonyManager.getDefault().getPhoneCount() > 1) {
+                } else if (id == R.id.mobile_networks) {
+                    if (TelephonyManager.getDefault().getPhoneCount() > 1) {
                         removeTile = true;
                     }
                 } else if (id == R.id.msim_mobile_networks) {
