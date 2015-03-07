@@ -427,9 +427,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
-        }
-    }
-
     /**
      * Reads the current font size and sets the value in the summary text
      */

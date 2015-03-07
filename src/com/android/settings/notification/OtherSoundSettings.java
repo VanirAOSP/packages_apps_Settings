@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.hardware.CmHardwareManager;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -43,7 +44,6 @@ import android.telephony.TelephonyManager;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.hardware.VibratorIntensity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -88,6 +88,9 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
     private SwitchPreference mPowerSounds;
     private SwitchPreference mPowerSoundsVibrate;
     private Preference mPowerSoundsRingtone;
+
+    private CmHardwareManager mCmHardwareManager;
+    mCmHardwareManager = (CmHardwareManager) context.getSystemService(Context.CMHW_SERVICE);
 
     private static final SettingPref PREF_DIAL_PAD_TONES = new SettingPref(
             TYPE_SYSTEM, KEY_DIAL_PAD_TONES, System.DTMF_TONE_WHEN_DIALING, DEFAULT_ON) {
@@ -143,10 +146,8 @@ public class OtherSoundSettings extends SettingsPreferenceFragment implements In
             TYPE_SYSTEM, KEY_VIBRATION_INTENSITY, System.HAPTIC_FEEDBACK_ENABLED, DEFAULT_ON) {
         @Override
         public boolean isApplicable(Context context) {
-            return VibratorIntensity.isSupported();
-        }
-    };
-
+            mCmHardwareManager.setVibratorIntensity(mCmHardwareManager.getVibratorIntensity());
+        };
 
     private static final SettingPref PREF_DOCK_AUDIO_MEDIA = new SettingPref(
             TYPE_GLOBAL, KEY_DOCK_AUDIO_MEDIA, Global.DOCK_AUDIO_MEDIA_ENABLED,
