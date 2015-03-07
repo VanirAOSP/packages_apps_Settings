@@ -105,5 +105,6 @@ public class Settings extends SettingsActivity {
     public static class GestureSettingsActivity extends Settings { /* empty */ }
     public static class ProfilesSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LiveDisplayActivity extends SettingsActivity { /* empty */ }
+    public static class DisplayRotationActivity extends SettingsActivity { /* empty */ }
 }
 
