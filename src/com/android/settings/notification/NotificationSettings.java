@@ -602,14 +602,6 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-<<<<<<< HEAD:src/com/android/settings/notification/NotificationSettings.java
-=======
-
-        @Override
-        public void prepare() {
-            super.prepare();
-        }
->>>>>>> caccdad... Settings: Change to CmHardwareService:src/com/android/settings/SoundSettings.java
 
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
