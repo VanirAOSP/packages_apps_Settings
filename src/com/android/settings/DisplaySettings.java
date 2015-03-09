@@ -170,8 +170,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mLiftToWakePreference != null && isLiftToWakeAvailable(activity)) {
             mLiftToWakePreference.setOnPreferenceChangeListener(this);
         } else {
-            if (mLiftToWakePreference != null) {
-                removePreference(KEY_LIFT_TO_WAKE);
+            if (displayPrefs != null && mLiftToWakePreference != null) {
+                displayPrefs.removePreference(mLiftToWakePreference);
                 mLiftToWakePreference = null;
             }
         }
@@ -180,7 +180,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (mDozePreference != null && isDozeAvailable(activity)) {
             mDozePreference.setOnPreferenceChangeListener(this);
         } else {
-            removePreference(KEY_DOZE);
+            if (displayPrefs != null && mDozePreference != null) {
+                displayPrefs.removePreference(mDozePreference);
+            }
         }
 
         mTapToWake = (SwitchPreference) findPreference(KEY_TAP_TO_WAKE);
