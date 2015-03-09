@@ -209,14 +209,16 @@ public class LockscreenShortcuts extends Fragment implements View.OnClickListene
         } else {
             mSelectedView.setTag(uri);
             saveCustomActions();
-            updateDrawables();
-            mSelectedView.postOnAnimation(new Runnable() {
-                @Override
-                public void run() {
-                    final GlowBackground background = (GlowBackground) mSelectedView.getBackground();
-                    background.hideGlow();
-                }
-            });
+            if (mShortcutHelper.getDrawablesForTargets() != null) {
+                updateDrawables();
+                mSelectedView.postOnAnimation(new Runnable() {
+                    @Override
+                    public void run() {
+                        final GlowBackground background = (GlowBackground) mSelectedView.getBackground();
+                        background.hideGlow();
+                    }
+                });
+            };
         }
     }
 
