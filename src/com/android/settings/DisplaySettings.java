@@ -76,8 +76,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
 
-    private static final String KEY_CATEGORY_DISPLAY = "display";
-    private static final String KEY_CATEGORY_INTERFACE = "interface";
+    private static final String KEY_CATEGORY_DISPLAY = "advanced_display_prefs";
 
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_FONT_SIZE = "font_size";
@@ -136,8 +135,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     
         PreferenceCategory displayPrefs = (PreferenceCategory)
         	findPreference(KEY_CATEGORY_DISPLAY);
-        PreferenceCategory interfacePrefs = (PreferenceCategory)
-        	findPreference(KEY_CATEGORY_INTERFACE);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
