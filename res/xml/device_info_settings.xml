@@ -29,6 +29,12 @@
                     android:targetClass="com.vanir.updater.UpdatesSettings" />
         </PreferenceScreen>
 
+
+	<!-- Vanir team -->
+	<PreferenceScreen android:key="candy_team"
+	android:title="@string/vanir_team_title"
+	android:fragment="com.android.settings.vanir.Team" />
+
         <!-- Device status - launches activity -->
         <PreferenceScreen android:key="status_info"
                 android:title="@string/device_status" 
