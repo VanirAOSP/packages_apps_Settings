@@ -15,7 +15,8 @@
 -->
 
 <dashboard-categories
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
 
     <!-- WIRELESS and NETWORKS -->
     <dashboard-category
