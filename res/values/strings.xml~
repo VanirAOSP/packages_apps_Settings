@@ -5982,8 +5982,7 @@
    <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\'t yet be available.</string>
 
     <!-- Partition Info -->
-    <string name="partition_info_title">View partition information</string>
-    <string name="partition_info_summary">Shows you the partition information for the device</string>
+    <string name="partition_info_title">Partition info</string>
     <string name="partition_info_system">/system</string>
     <string name="partition_info_data">/data</string>
     <string name="partition_info_cache">/cache</string>

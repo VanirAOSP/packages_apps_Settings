@@ -21,4 +21,15 @@
 
 <!-- Preference categories are dynamically created based on the list of available storage volumes -->
 
+    <!-- Partition info -->
+
+        <Preference
+            android:title="@string/partition_info_title"
+            android:summary="@string/partition_info_summary">
+        <intent
+            android:action="com.android.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.PartitionInfo" />
+        </Preference>
+
 </PreferenceScreen>
