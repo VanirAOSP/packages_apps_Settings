@@ -165,8 +165,7 @@
                 android:icon="@drawable/ic_settings_home"
                 />
 
-
-
+    </dashboard-category>
 
     <!-- DEVICE -->
     <dashboard-category
