@@ -71,7 +71,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_LICENSE = "license";
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_WEBVIEW_LICENSE = "webview_license";
-    private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     private static final String PROPERTY_SELINUX_STATUS = "ro.build.selinux";
     private static final String KEY_KERNEL_VERSION = "kernel_version";
@@ -88,7 +87,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
     private static final String KEY_MOD_VERSION = "mod_version";
     private static final String KEY_MOD_BUILD_DATE = "build_date";
-    private static final String KEY_CM_UPDATES = "cm_updates";
+    private static final String KEY_VANIR_UPDATES = "vanir_updates";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -134,9 +133,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
         // Only the owner should see the Updater settings, if it exists
         if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            removePreferenceIfPackageNotInstalled(findPreference(KEY_CM_UPDATES));
+            removePreferenceIfPackageNotInstalled(findPreference(KEY_VANIR_UPDATES));
         } else {
-            getPreferenceScreen().removePreference(findPreference(KEY_CM_UPDATES));
+            getPreferenceScreen().removePreference(findPreference(KEY_VANIR_UPDATES));
         }
 
         // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
@@ -174,20 +173,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_WEBVIEW_LICENSE,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-
-        // These are contained by the root preference screen
-        parentPreference = getPreferenceScreen();
-        if (UserHandle.myUserId() == UserHandle.USER_OWNER) {
-            Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
-                    KEY_SYSTEM_UPDATE_SETTINGS,
-                    Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-            /* Make sure the activity is provided by who we want... */
-            if (findPreference(KEY_SYSTEM_UPDATE_SETTINGS) != null)
-                removePreferenceIfPackageNotInstalled(findPreference(KEY_SYSTEM_UPDATE_SETTINGS));
-        } else {
-            // Remove for secondary users
-            removePreference(KEY_SYSTEM_UPDATE_SETTINGS);
-        }
 
         // Read platform settings for additional system update setting
         removePreferenceIfBoolFalse(KEY_UPDATE_SETTING,
@@ -499,9 +484,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 }
                 if (!checkIntentAction(context, "android.settings.WEBVIEW_LICENSE")) {
                     keys.add(KEY_WEBVIEW_LICENSE);
-                }
-                if (UserHandle.myUserId() != UserHandle.USER_OWNER) {
-                    keys.add(KEY_SYSTEM_UPDATE_SETTINGS);
                 }
                 if (!context.getResources().getBoolean(
                         R.bool.config_additional_system_update_setting_enable)) {
