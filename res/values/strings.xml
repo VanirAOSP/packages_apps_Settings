@@ -6065,4 +6065,6 @@
    <string name="imei_information_summary">IMEI relative information</string>
    <string name="slot_number">(Slot<xliff:g id="slot_num">%1$d</xliff:g>)</string>
 
+    <!-- [CHAR LIMIT=20] Zen mode settings: End time option: Summary text value format -->
+    <string name="zen_mode_end_time_summary_format"><xliff:g id="formatted_time">%s</xliff:g> next day</string>
 </resources>
