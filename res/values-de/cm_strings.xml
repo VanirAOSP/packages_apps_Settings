@@ -205,12 +205,12 @@
   <string name="block_notifications_title">Benachrichtigungen filtern</string>
   <string name="block_notifications_summary">Ignorierte Benachrichtigungen und Filter verwalten</string>
   <string name="no_filters_title">Keine Filter aktiv</string>
-  <string name="cmupdate_settings_title">CyanogenMod-Updates</string>
+  <string name="cmupdate_settings_title">Vanir-Updates</string>
   <string name="update_recovery_title">CM-Recovery aktualisieren</string>
   <string name="update_recovery_summary">Recovery bei System-Updates aktualisieren</string>
   <string name="update_recovery_on_warning">HINWEIS: Wenn diese Funktion aktiviert ist, wird Ihr installiertes Recovery-System durch das in der aktuellen Version des Betriebssystems ersetzt.\n\nIhr Recovery-System wird zusammen mit Updates des System aktualisiert werden, wodurch die Kompatibilität mit zukünftigen Versionen gewährleisten wird.\n\nWollen Sie diese Funktion aktivieren?</string>
   <string name="update_recovery_off_warning">ACHTUNG: Wenn diese Funktion deaktiviert ist, wird das installierte Recovery-System nicht gemeinsam mit dem Betriebssystems aktualisiert.\n\nZukünftige OS-Updates können möglicherweise nicht mit veralteten oder benutzerdefinierten Recovery-Versionen installieren werden.\n\nMöchten sie diese Funktion wirklich deaktivieren?</string>
-  <string name="mod_version">CyanogenMod-Version</string>
+  <string name="mod_version">Vanir-Version</string>
   <string name="mod_version_default">Unbekannt</string>
   <string name="model_name">Modellname</string>
   <string name="build_date">Build-Datum</string>
@@ -645,8 +645,8 @@
   <string name="graphics_title">Grafikoptionen</string>
   <string name="edge_gesture_service_title">Berührungsgesten unterdrücken</string>
   <string name="edge_gesture_service_summary">Berührungsgesten für die Status- und Navigationsleiste nicht an Apps senden</string>
-  <string name="cmlicense_title">Rechtliche Hinweise zu CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Rechtliche Hinweise zu CyanogenMod</string>
+  <string name="cmlicense_title">Rechtliche Hinweise zu Vanir</string>
+  <string name="settings_cmlicense_activity_title">Rechtliche Hinweise zu Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Es besteht keine Datenverbindung. Besuchen Sie %s mit einem beliebigen Computer mit Internetverbindung, um die Informationen jetzt anzusehen.</string>
   <string name="unlock_quick_unlock_control_title">Schnelles Entsperren</string>
   <string name="unlock_quick_unlock_control_summary">Entsperren durch korrekte PIN- oder Passworteingabe</string>

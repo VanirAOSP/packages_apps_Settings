@@ -205,11 +205,11 @@
   <string name="block_notifications_title">Notifikatiounsfilter</string>
   <string name="block_notifications_summary">Ignoréiert Notifikatiounen a Filteren geréieren</string>
   <string name="no_filters_title">Keng Filtere gesat</string>
-  <string name="cmupdate_settings_title">CyanogenMod-Aktualiséierungen</string>
+  <string name="cmupdate_settings_title">Vanir-Aktualiséierungen</string>
   <string name="update_recovery_title">Cyanogen-Recovery aktualiséieren</string>
   <string name="update_recovery_summary">De Recovery-Programm zesumme mam System aktualiséieren</string>
   <string name="update_recovery_off_warning">WARNUNG: Wann dës Funktioun deaktivéiert ass, gëtt däin installéierte Recovery-Programm net mat dengem System aktualiséiert.\n\nZukünfteg System-Aktualiséierungen loosse sech mat veraalten oder eegene Recovery-Programmer eventuell net installéierne.\n\nWëlls du dës Funktioun sécher deaktivéieren?</string>
-  <string name="mod_version">CyanogenMod-Versioun</string>
+  <string name="mod_version">Vanir-Versioun</string>
   <string name="mod_version_default">Onbekannt</string>
   <string name="model_name">Modellnumm</string>
   <string name="build_date">Build-Datum</string>
@@ -631,8 +631,8 @@
   <string name="graphics_title">Grafikoptiounen</string>
   <string name="edge_gesture_service_title">Gesten-Evenementer blockéieren</string>
   <string name="edge_gesture_service_summary">Keng Beréierungsgesten déi op der Navigatiouns- oder Statusläischt ausgefouert ginn un Appe schécken</string>
-  <string name="cmlicense_title">Rechtlesch Hiwäiser iwwer CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Rechtlesch Hiwäiser iwwer CyanogenMod</string>
+  <string name="cmlicense_title">Rechtlesch Hiwäiser iwwer Vanir</string>
+  <string name="settings_cmlicense_activity_title">Rechtlesch Hiwäiser iwwer Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Du hues keng Dateconnectioun. Fir dës Informatioun elo ze liesen, besich %s vun egal wéi engem Computer dee mam Internet verbonnen ass.</string>
   <string name="unlock_quick_unlock_control_title">Séiert Entspären</string>
   <string name="unlock_quick_unlock_control_summary">Automatesch Entspäre wann de PIN oder d\'Passwuert korrekt sinn</string>

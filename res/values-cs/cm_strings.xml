@@ -209,12 +209,12 @@
   <string name="block_notifications_title">Oznámení filtru</string>
   <string name="block_notifications_summary">Spravovat ignorovaná upozornění a filtry</string>
   <string name="no_filters_title">Nenastaven žádný filtr</string>
-  <string name="cmupdate_settings_title">Aktualizace CyanogenMod</string>
+  <string name="cmupdate_settings_title">Aktualizace Vanir</string>
   <string name="update_recovery_title">Aktualizovat Cyanogen recovery</string>
   <string name="update_recovery_summary">Aktualizovat recovery pomocí aktualizace systému</string>
   <string name="update_recovery_on_warning">UPOZORNĚNÍ: Pokud je tato funkce zapnutá, vaše nainstalované recovery bude nahrazeno aktuální verzí z právě nainstalovaného systému.\n\nOddíl recovery bude aktualizován současně s aktualizací systému, čímž bude zajištěna kompatibilita s budoucími verzemi.\n\nChcete povolit tuto funkci?</string>
   <string name="update_recovery_off_warning">VAROVÁNÍ: Pokud je tato funkce vypnutá, vaše nainstalované recovery nebude aktualizováno s aktualizacemi systému.\n\nBudoucí aktualizace systému se se starou verzí recovery nemusí správně nainstalovat.\n\nOpravdu chcete tuto funkci vypnout?</string>
-  <string name="mod_version">CyanogenMod verze</string>
+  <string name="mod_version">Vanir verze</string>
   <string name="mod_version_default">Neznámá</string>
   <string name="model_name">Název modelu</string>
   <string name="build_date">Datum sestavení</string>
@@ -660,8 +660,8 @@
   <string name="graphics_title">Grafika a vykreslování</string>
   <string name="edge_gesture_service_title">Blokovat události dotyků gest</string>
   <string name="edge_gesture_service_summary">Nepropuštět dotyky pro stavovou nebo navigační lištu do aplikací</string>
-  <string name="cmlicense_title">Právní ujednání CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Právní ujednání CyanogenMod</string>
+  <string name="cmlicense_title">Právní ujednání Vanir</string>
+  <string name="settings_cmlicense_activity_title">Právní ujednání Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Zobrazit licenční ujednání není možné, protože není aktivní žádné datové připojení. Pro zobrazení tohoto ujednání navštivte prosím stránku %s z jakéhokoliv počítače, připojeného na internet.</string>
   <string name="unlock_quick_unlock_control_title">Rychlé odemknutí</string>
   <string name="unlock_quick_unlock_control_summary">Automatické odemknutí, pokud je zadán správný PIN/heslo</string>

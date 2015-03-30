@@ -205,12 +205,12 @@
   <string name="block_notifications_title">Filtrere meddelelser</string>
   <string name="block_notifications_summary">Administrere ignoreret underretninger og filtre</string>
   <string name="no_filters_title">Der er ingen filtre</string>
-  <string name="cmupdate_settings_title">CyanogenMod-opdateringer</string>
+  <string name="cmupdate_settings_title">Vanir-opdateringer</string>
   <string name="update_recovery_title">Opdatér Cyanogen recovery</string>
   <string name="update_recovery_summary">Opdatér recovery med systemopdateringer</string>
   <string name="update_recovery_on_warning">BEMÆRK: Når denne funktion er aktiveret, vil din installerede \'recovery\' blive erstattet af en inkluderet i den aktuelle version af styresystemet.\n\nDin \'recovery\' opdateres sammen med opdateringer til styresystemet, hvilket sikrer kompatibilitet med fremtidige versioner.\n\nVil du aktivere denne funktion?</string>
   <string name="update_recovery_off_warning">ARVARSEL: Med denne funktion slået fra, vil din \'recovery\' ikke blive opdateret sammen med styresystemet.\n\nFremtidige opdateringer til styresystemet kan måske ikke installeres med en forældet \'recovery\'\n\nVil du virkelig slå denne funktion fra?</string>
-  <string name="mod_version">CyanogenMod-version</string>
+  <string name="mod_version">Vanir-Version</string>
   <string name="mod_version_default">Ukendt</string>
   <string name="model_name">Modelnavn</string>
   <string name="build_date">Kørselsdato</string>
@@ -638,8 +638,8 @@
   <string name="graphics_title">Grafik og rendering</string>
   <string name="edge_gesture_service_title">Blokér berøringsevents for bevægelser</string>
   <string name="edge_gesture_service_summary">Send ikke berøringsevents for navigations- og statuslinjebevægelser til apps</string>
-  <string name="cmlicense_title">Juridisk information for CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Juridisk information for CyanogenMod</string>
+  <string name="cmlicense_title">Juridisk information for Vanir</string>
+  <string name="settings_cmlicense_activity_title">Juridisk information for Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Du har ingen dataforbindelse. Gå til %s fra en computer tilsluttet Internettet for at vise denne information nu.</string>
   <string name="unlock_quick_unlock_control_title">Hurtig-oplåsning</string>
   <string name="unlock_quick_unlock_control_summary">Lås automatisk op, når det korrekte PIN/kodeord er indtastet</string>

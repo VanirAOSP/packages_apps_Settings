@@ -208,12 +208,12 @@
   <string name="block_notifications_title">Filtrar notificações</string>
   <string name="block_notifications_summary">Gerenciar notificações e filtros ignorados</string>
   <string name="no_filters_title">Nenhum filtro definido</string>
-  <string name="cmupdate_settings_title">Atualizações CyanogenMod</string>
+  <string name="cmupdate_settings_title">Atualizações Vanir</string>
   <string name="update_recovery_title">Atualizar o recovery da Cyanogen</string>
   <string name="update_recovery_summary">Atualizar o recovery com atualizações de sistema</string>
   <string name="update_recovery_on_warning">AVISO: Quando este recurso é ativado, seu recovery será substituído pelo o que é incluído no sistema operacional em execução.\n\nSeu recovery será atualizado junto com o sistema, ajudando a garantir a compatibilidade com versões futuras.\n\nVocê que você gosta de ativar este recurso?</string>
   <string name="update_recovery_off_warning">AVISO: Quando este recurso estiver desativado, seu recovery instalado não será atualizado junto com o sistema.\n\nVersões mais atuais do sistema operacional podem não instalar com um recovery antigo ou customizado.\n\nVocê realmente quer desativar este recurso?</string>
-  <string name="mod_version">Versão CyanogenMod</string>
+  <string name="mod_version">Versão Vanir</string>
   <string name="mod_version_default">Desconhecida</string>
   <string name="model_name">Nome do modelo</string>
   <string name="build_date">Data de compilação</string>
@@ -662,8 +662,8 @@
   <string name="graphics_title">Gráficos e renderização</string>
   <string name="edge_gesture_service_title">Bloquear eventos de gestos de touch</string>
   <string name="edge_gesture_service_summary">Não enviar eventos de touch da barra de navegação e status para os apps</string>
-  <string name="cmlicense_title">Licença CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Licença CyanogenMod</string>
+  <string name="cmlicense_title">Licença Vanir</string>
+  <string name="settings_cmlicense_activity_title">Licença Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Você não tem conexão com a Internet. Para ver esta informação agora, navegue para %s de qualquer computador conectado à Internet.</string>
   <string name="unlock_quick_unlock_control_title">Desbloqueio rápido</string>
   <string name="unlock_quick_unlock_control_summary">Não é necessário pressionar OK ao digitar PIN ou senha. Apagar conta como erro.</string>

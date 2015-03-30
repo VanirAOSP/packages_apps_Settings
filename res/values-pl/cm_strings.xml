@@ -206,12 +206,12 @@
   <string name="block_notifications_title">Filtrowanie powiadomień</string>
   <string name="block_notifications_summary">Zarządzaj ignorowanymi powiadomieniami i filtrami</string>
   <string name="no_filters_title">Nie wybrano filtrów</string>
-  <string name="cmupdate_settings_title">Aktualizacje CyanogenMod</string>
+  <string name="cmupdate_settings_title">Aktualizacje Vanir</string>
   <string name="update_recovery_title">Aktualizuj recovery Cyanogen</string>
   <string name="update_recovery_summary">Aktualizuj recovery wraz z aktualizacjami systemu</string>
   <string name="update_recovery_on_warning">UWAGA: Kiedy ta funkcja jest włączona, twoje recovery zostanie zastąpione przez to dołączone do aktualnie działającej wersji systemu.\n\nTwoje recovery będzie aktualizowane wraz z aktualizacjami systemu, pomagając w zapewnieniu kompatybilność z przyszłymi wersjami.\n\nChciałbyś włączyć tę funkcję?</string>
   <string name="update_recovery_off_warning">OSTRZEŻENIE: Kiedy ta funkcja jest wyłączona, zainstalowane recovery nie będzie się aktualizowało wraz z aktualizacjami systemu.\n\nPrzyszłe aktualizacje systemu mogą się nie zainstalować przy przestarzałych lub zewnętrznych wersjach recovery.\n\nCzy jesteś pewien, że chcesz wyłączyć tę funkcję?</string>
-  <string name="mod_version">Wersja CyanogenMod</string>
+  <string name="mod_version">Wersja Vanir</string>
   <string name="mod_version_default">Nieznana</string>
   <string name="model_name">Nazwa modelu</string>
   <string name="build_date">Data kompilacji</string>
@@ -639,8 +639,8 @@
   <string name="graphics_title">Grafika i renderowanie</string>
   <string name="edge_gesture_service_title">Blokuj zdarzenia gestów dotykowych</string>
   <string name="edge_gesture_service_summary">Nie przesyłaj zdarzeń dotykowych dla gestów pasków nawigacji i statusu do aplikacji</string>
-  <string name="cmlicense_title">Informacje prawne CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Informacje prawne CyanogenMod</string>
+  <string name="cmlicense_title">Informacje prawne Vanir</string>
+  <string name="settings_cmlicense_activity_title">Informacje prawne Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Nie masz połączenia z internetem. Aby zobaczyć te informacje przejdź do %s z dowolnego komputera podłączonego do internetu</string>
   <string name="unlock_quick_unlock_control_title">Szybkie odblokowywanie</string>
   <string name="unlock_quick_unlock_control_summary">Odblokuj automatycznie, gdy wprowadzony zostanie poprawny PIN/hasło</string>

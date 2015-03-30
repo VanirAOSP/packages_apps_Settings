@@ -208,12 +208,12 @@
   <string name="block_notifications_title">Filtrere varslinger</string>
   <string name="block_notifications_summary">Administrere ignorerte varslinger og filtre</string>
   <string name="no_filters_title">Ingen filtre valgt</string>
-  <string name="cmupdate_settings_title">CyanogenMod oppdateringer</string>
+  <string name="cmupdate_settings_title">Vanir oppdateringer</string>
   <string name="update_recovery_title">Oppdater Cyanogen recovery</string>
   <string name="update_recovery_summary">Oppdater recovery med systemoppdateringer</string>
   <string name="update_recovery_on_warning">Merknad: Når denne funksjonen er oppdatert, vil din installerte recovery bli overskrivd av en som er inkludert i siste versjon av det kjørende OS.\n\nDin recvovery vil bli oppdatert sammen med systemoppdateringer, for å hjelpe deg med å beholde kompabiliteten med fremtidige versjoner.\n\nVil du aktivere denne funksjonen?</string>
   <string name="update_recovery_off_warning">Advarsel: Når denne funksjonen er deaktivert, vil ikke din nåværende recovery bli oppdatert med systemoppdateringer.\n\nFremtidige systemoppdateringer vil kanskje ikke installeres på en gammel eller egendefinert recovery.\n\nVil du deaktivere denne funksjonen?</string>
-  <string name="mod_version">CyanogenMod versjon</string>
+  <string name="mod_version">Vanir versjon</string>
   <string name="mod_version_default">Ukjent</string>
   <string name="model_name">Modellnummer</string>
   <string name="build_date">Bygge dato</string>
@@ -659,8 +659,8 @@
   <string name="graphics_title">Grafikk og gjengivelse</string>
   <string name="edge_gesture_service_title">Blokker touchbevegelseshendelser</string>
   <string name="edge_gesture_service_summary">Ikke send touch hendelser for navigering og status bar bevegelser til apps</string>
-  <string name="cmlicense_title">CyanogenMod juridisk</string>
-  <string name="settings_cmlicense_activity_title">CyanogenMod juridisk</string>
+  <string name="cmlicense_title">Vanir juridisk</string>
+  <string name="settings_cmlicense_activity_title">Vanir juridisk</string>
   <string name="settings_cmlicense_activity_unreachable">Du trenger ikke en datatilkobling. For å se denne informasjonen nå, gå til %s fra enhver datamaskin koblet til Internett.</string>
   <string name="unlock_quick_unlock_control_title">Hurtig opplåsning</string>
   <string name="unlock_quick_unlock_control_summary">Låse opp automatisk når det angis riktig PIN/passord</string>

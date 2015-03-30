@@ -204,12 +204,12 @@
   <string name="block_notifications_title">通知のフィルタリング</string>
   <string name="block_notifications_summary">無視する通知やフィルターを管理する</string>
   <string name="no_filters_title">フィルターが設定されていません</string>
-  <string name="cmupdate_settings_title">CyanogenModアップデート</string>
+  <string name="cmupdate_settings_title">Vanirアップデート</string>
   <string name="update_recovery_title">Cyanogenリカバリーをアップデート</string>
   <string name="update_recovery_summary">システムアップデートと同時にリカバリーをアップデートする</string>
   <string name="update_recovery_on_warning">注意: この機能を有効にすると、インストールされているリカバリーは実行しているOSの現在のバージョンに含まれるリカバリーに変更されます。\n\nシステムのアップグレードと同時にリカバリーがアップデートされるので、今後のバージョンとの互換性の確保に繋がります。\n\nこの機能を有効にしますか？</string>
   <string name="update_recovery_off_warning">警告: この機能を無効にすると、インストールされているリカバリーはOSのアップグレードと同時にはアップデートされなくなります。\n\nカスタムリカバリーバージョンが古いと、今後のOSアップデートがインストールできなくなる恐れがあります。\n\nこの機能を本当に無効にしますか？</string>
-  <string name="mod_version">CyanogenModバージョン</string>
+  <string name="mod_version">Vanirバージョン</string>
   <string name="mod_version_default">不明</string>
   <string name="model_name">モデル名</string>
   <string name="build_date">ビルド日時</string>
@@ -637,8 +637,8 @@
   <string name="graphics_title">グラフィックスとレンダリング</string>
   <string name="edge_gesture_service_title">ジェスチャータッチイベントをブロック</string>
   <string name="edge_gesture_service_summary">ナビゲーションバーとステータスバーのジェスチャーのタッチイベントをアプリに送信しない</string>
-  <string name="cmlicense_title">CyanogenMod利用規約</string>
-  <string name="settings_cmlicense_activity_title">CyanogenMod利用規約</string>
+  <string name="cmlicense_title">Vanir利用規約</string>
+  <string name="settings_cmlicense_activity_title">Vanir利用規約</string>
   <string name="settings_cmlicense_activity_unreachable">データ接続がありません。この情報を表示するにはインターネットに接続されているパソコンから%sにアクセスしてください。</string>
   <string name="unlock_quick_unlock_control_title">クイックロック解除</string>
   <string name="unlock_quick_unlock_control_summary">正しいPIN/パスワードが入力されたときはロックを自動的に解除する</string>

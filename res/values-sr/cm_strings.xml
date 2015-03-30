@@ -212,7 +212,7 @@
   <string name="update_recovery_summary">Ажурирај опоравак са системским ажурирањем</string>
   <string name="update_recovery_on_warning">НАПОМЕНА: Када је ова функција омогућена, твој инсталирани опоравак ће бити замењен са једним укљученим у тренутну верзију покренутог OS-а.\n\nТвој опоравак ће бити ажуриран заједно са надоградњом вашег система, помажући да се осигура компатибилност са будућим верзијама.\n\nДа ли желите да омогућите ову функцију?</string>
   <string name="update_recovery_off_warning">УПОЗОРЕЊЕ: Када је ова опција онемогућена, твој инсталиран опоравак неће бити ажуриран са надоградњом OS-а.\n\nБудуће ОС исправке се можда не могу инсталирати са застарелим или прерађеном верзијом опоравка.\n\nДа ли заиста желите да искључите ову функцију?</string>
-  <string name="mod_version">CyanogenMod верзија</string>
+  <string name="mod_version">Vanir верзија</string>
   <string name="mod_version_default">Непознато</string>
   <string name="model_name">Име модела</string>
   <string name="build_date">Датум израде</string>
@@ -640,8 +640,8 @@
   <string name="graphics_title">Графика и рендеровање</string>
   <string name="edge_gesture_service_title">Блокирај догађаје гестова</string>
   <string name="edge_gesture_service_summary">Немој слати додирне догађаје за навигацију и гестове статусне траке апликацијама</string>
-  <string name="cmlicense_title">CyanogenMod лиценца</string>
-  <string name="settings_cmlicense_activity_title">CyanogenMod лиценца</string>
+  <string name="cmlicense_title">Vanir лиценца</string>
+  <string name="settings_cmlicense_activity_title">Vanir лиценца</string>
   <string name="settings_cmlicense_activity_unreachable">Немаш везу за пренос података. Да би одмах видео ове информације, иди на %s са било ког рачунара који је повезан на интернет.</string>
   <string name="unlock_quick_unlock_control_title">Брзо откључавање</string>
   <string name="unlock_quick_unlock_control_summary">Откључај аутоматски када се унесе исправан PIN/лозинка</string>

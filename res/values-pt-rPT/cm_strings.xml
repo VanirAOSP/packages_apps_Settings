@@ -210,7 +210,7 @@
   <string name="update_recovery_summary">Atualizar a recuperação com as atualizações do sistema</string>
   <string name="update_recovery_on_warning">Aviso: Quando este recurso estiver ativado, a sua recuperação instalada será substituída por uma incluída na versão atual do SO.\n\nA sua recuperação será atualizada juntamente com as atualizações do seu sistema, ajudando a garantir a compatibilidade com futuras versões.\n\nQuer ativar este recurso?</string>
   <string name="update_recovery_off_warning">Aviso: Quando este recurso está desativado, a sua recuperação instalada não será atualizada com o SO.\n\nFuturas atualizações do SO poderão não se instalar com uma versão da recuperação desatualizada ou personalizada.\n\nQuer desativar este recurso?</string>
-  <string name="mod_version">Versão CyanogenMod</string>
+  <string name="mod_version">Versão Vanir</string>
   <string name="mod_version_default">Desconhecido</string>
   <string name="model_name">Modelo</string>
   <string name="build_date">Data de compilação</string>
@@ -638,8 +638,8 @@
   <string name="graphics_title">Gráficos e renderização</string>
   <string name="edge_gesture_service_title">Bloquear eventos de gestos</string>
   <string name="edge_gesture_service_summary">Não enviar às aplicações eventos de toque para os gestos da barra de navegação e estado</string>
-  <string name="cmlicense_title">Licença CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Licença CyanogenMod</string>
+  <string name="cmlicense_title">Licença Vanir</string>
+  <string name="settings_cmlicense_activity_title">Licença Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Não tem uma ligação de dados. Para exibir estas informações agora, vá para %s de qualquer computador ligado à Internet.</string>
   <string name="unlock_quick_unlock_control_title">Desbloqueio rápido</string>
   <string name="unlock_quick_unlock_control_summary">Desbloquear automaticamente quando o PIN/senha correto é inserido</string>

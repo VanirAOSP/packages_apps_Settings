@@ -205,12 +205,12 @@
   <string name="block_notifications_title">Értesítések szűrése</string>
   <string name="block_notifications_summary">Figyelmen kívül hagyott értesítések és szűrők kezelése</string>
   <string name="no_filters_title">Nincs szűrő beállítva</string>
-  <string name="cmupdate_settings_title">CyanogenMod frissítések</string>
+  <string name="cmupdate_settings_title">Vanir frissítések</string>
   <string name="update_recovery_title">CM recovery frissítése</string>
   <string name="update_recovery_summary">Rendszerfrissítések telepítése közben frissítse a recovery-t</string>
   <string name="update_recovery_on_warning">FIGYELEM: Ha ezen funkció aktiválva van, a telepített recovery le lesz cserélve a jelenleg futó operációs rendszerének megfelelően.\n\nA recovery együtt lesz frissítve a rendszerrel, ezáltal biztosítva a kompatibilitást a jövőbeli verziókkal.\n\nBiztosan aktiválja a funkciót?</string>
   <string name="update_recovery_off_warning">FIGYELEM: Ha ez a funkció ki van kapcsolva, a telepített recovery nem le lesz cserélve a jelenleg futó operációs rendszerének megfelelően.\n\nAz újabb operációs rendszer frissítések lehet, hogy nem támogatják a régi recovery verziókat.\n\nBiztosan inaktiválja a funkciót?</string>
-  <string name="mod_version">CyanogenMod verzió</string>
+  <string name="mod_version">Vanir verzió</string>
   <string name="mod_version_default">Ismeretlen</string>
   <string name="model_name">Modell neve</string>
   <string name="build_date">Build dátuma</string>
@@ -638,8 +638,8 @@
   <string name="graphics_title">Grafika és renderelés</string>
   <string name="edge_gesture_service_title">Kézmozdulatok letiltása</string>
   <string name="edge_gesture_service_summary">Az alkalmazások nem veszik figyelembe a navigációs- és állapotsáv érintéseket</string>
-  <string name="cmlicense_title">CyanogenMod jogi nyilatkozat</string>
-  <string name="settings_cmlicense_activity_title">CyanogenMod jogi nyilatkozat</string>
+  <string name="cmlicense_title">Vanir jogi nyilatkozat</string>
+  <string name="settings_cmlicense_activity_title">Vanir jogi nyilatkozat</string>
   <string name="settings_cmlicense_activity_unreachable">Nincs internet kapcsolat. Az információ megtekintéséhez, látogasson el a %s címre egy olyan számítógéppel, mely kapcsolódik az internethez.</string>
   <string name="unlock_quick_unlock_control_title">Gyors feloldás</string>
   <string name="unlock_quick_unlock_control_summary">Automatikus feloldás a helyes jelszó/PIN kód beütése után</string>

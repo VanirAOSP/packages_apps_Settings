@@ -203,8 +203,8 @@
   <string name="block_notifications_title">Notifikasi penyaringan</string>
   <string name="block_notifications_summary">Kelola pemberitahuan yang diabaikan dan filter</string>
   <string name="no_filters_title">Belum ada penyaring</string>
-  <string name="cmupdate_settings_title">Pembaruan CyanogenMod</string>
-  <string name="mod_version">Versi CyanogenMod</string>
+  <string name="cmupdate_settings_title">Pembaruan Vanir</string>
+  <string name="mod_version">Versi Vanir</string>
   <string name="mod_version_default">Tidak diketahui</string>
   <string name="model_name">Nama model</string>
   <string name="build_date">Tanggal pembuatan</string>
@@ -620,8 +620,8 @@
   <string name="graphics_title">Grafis dan rendering</string>
   <string name="edge_gesture_service_title">Block gesture touch events</string>
   <string name="edge_gesture_service_summary">Jangan kirim events sentuhan untuk navigasi dan gerakan statusbar untuk aplikasi</string>
-  <string name="cmlicense_title">Hukum CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">Hukum CyanogenMod</string>
+  <string name="cmlicense_title">Hukum Vanir</string>
+  <string name="settings_cmlicense_activity_title">Hukum Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">Anda tidak memiliki koneksi data. Untuk melihat informasi ini sekarang, pergi ke %s dari semua komputer yang terhubung ke Internet.</string>
   <string name="unlock_quick_unlock_control_title">Membuka cepat</string>
   <string name="unlock_quick_unlock_control_summary">Membuka secara otomatis ketika memasuki password/PIN yang benar</string>

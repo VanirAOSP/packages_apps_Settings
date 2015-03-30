@@ -205,12 +205,12 @@
   <string name="block_notifications_title">Filter kennisgewings</string>
   <string name="block_notifications_summary">Bestuur geïgnoreerde kennisgewings en ​​filters</string>
   <string name="no_filters_title">Geen filters opgestel</string>
-  <string name="cmupdate_settings_title">CyanogenMod opgradering</string>
+  <string name="cmupdate_settings_title">Vanir opgradering</string>
   <string name="update_recovery_title">Opdateer Cyanogen recovery</string>
   <string name="update_recovery_summary">Opdateer recovery met stelsel opdaterings</string>
   <string name="update_recovery_on_warning">KENNISGEWING: Wanneer hierdie funksie geaktiveer is, sal jou geïnstalleerde recovery vervang word deur een ingesluit met die huidige weergawe van die Beheer Stelsel\n\nJou recovery sal opgedateer word saam met die opgraderings aan jou stelsel, dit help om versoenbaarheid te verseker van toekomstige weergawes.\n\nWil jy hierdie funksie aktiveer?</string>
   <string name="update_recovery_off_warning">WAARSKUWING: Wanneer hierdie funksie afgeskakel is, sal jou geïnstalleerde recovery nie opgedateer word met Beheer Stelsel (BS) opgraderings nie.\n\nToekomstige BS opdaterings kan dalk nie geïnstalleer word met verouderde of persoonlike recovery weergawes nie.\n\nWil jy regtig hierdie funksie af skakel?</string>
-  <string name="mod_version">CyanogenMod weergawe</string>
+  <string name="mod_version">Vanir weergawe</string>
   <string name="mod_version_default">Onbekend</string>
   <string name="model_name">Model naam</string>
   <string name="build_date">Bou datum</string>
@@ -632,8 +632,8 @@
   <string name="graphics_title">Grafika en vertoning</string>
   <string name="edge_gesture_service_title">Blok gebaar raak gebeure</string>
   <string name="edge_gesture_service_summary">Moenie raak gebeure vir navigasie en status balk gebare stuur na programme</string>
-  <string name="cmlicense_title">CyanogenMod Regs</string>
-  <string name="settings_cmlicense_activity_title">CyanogenMod Regs</string>
+  <string name="cmlicense_title">Vanir Regs</string>
+  <string name="settings_cmlicense_activity_title">Vanir Regs</string>
   <string name="settings_cmlicense_activity_unreachable">Jy het nie \'n data verbinding. Om hierdie inligting nou te sien, gaan na %s van enige rekenaar wat verbind is tot die Internet.</string>
   <string name="unlock_quick_unlock_control_title">Vinnige oopsluit</string>
   <string name="unlock_quick_unlock_control_summary">Ontsluit outomaties wanneer die korrekte PIN/wagwoord ingesleutel is</string>

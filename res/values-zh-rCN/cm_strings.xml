@@ -207,12 +207,12 @@
   <string name="block_notifications_title">通知过滤</string>
   <string name="block_notifications_summary">管理已忽略的通知和过滤器</string>
   <string name="no_filters_title">没有设置过滤</string>
-  <string name="cmupdate_settings_title">CyanogenMod 更新</string>
+  <string name="cmupdate_settings_title">Vanir 更新</string>
   <string name="update_recovery_title">更新 Cyanogen 恢复模式</string>
   <string name="update_recovery_summary">使用系统更新来更新恢复模式</string>
   <string name="update_recovery_on_warning">注意：启用此功能后，您已安装的恢复模式会被正在运行的系统所包含的恢复模式所替换。\n\n您的恢复模式会随着系统一起更新，以确保对未来版本的兼容性。\n\n您确定启用此功能？</string>
   <string name="update_recovery_off_warning">警告：此功能被禁用后，你安装的恢复模式将不会随着系统一起更新。\n\n未来的系统更新可能不支持用过旧的或自制的恢复模式安装。\n\n您确定要禁用此功能？</string>
-  <string name="mod_version">CyanogenMod 版本</string>
+  <string name="mod_version">Vanir 版本</string>
   <string name="mod_version_default">未知</string>
   <string name="model_name">型号名称</string>
   <string name="build_date">编译日期</string>
@@ -658,8 +658,8 @@
   <string name="graphics_title">图形和渲染</string>
   <string name="edge_gesture_service_title">拦截手势触摸事件</string>
   <string name="edge_gesture_service_summary">不向应用发送导航栏和状态栏的触摸事件</string>
-  <string name="cmlicense_title">CyanogenMod 法律信息</string>
-  <string name="settings_cmlicense_activity_title">CyanogenMod 法律信息</string>
+  <string name="cmlicense_title">Vanir 法律信息</string>
+  <string name="settings_cmlicense_activity_title">Vanir 法律信息</string>
   <string name="settings_cmlicense_activity_unreachable">您没有数据连接。要立即查看此信息，请通过已联网的任意计算机访问 %s。</string>
   <string name="unlock_quick_unlock_control_title">快速解锁</string>
   <string name="unlock_quick_unlock_control_summary">当输入正确的 PIN 码或密码后自动解锁</string>

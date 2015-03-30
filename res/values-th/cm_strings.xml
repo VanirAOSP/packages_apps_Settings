@@ -173,8 +173,8 @@
   <string name="sms_security_check_limit_summary">แอปสามารถส่ง %d ข้อความ ในเวลา 30 นาที ก่อนที่จะต้องการการยืนยัน</string>
   <string name="block_notifications_title">ตัวกรองการแจ้งเตือน</string>
   <string name="block_notifications_summary">จัดการการละเว้นการแจ้งเตือนและตัวกรอง</string>
-  <string name="cmupdate_settings_title">ปรับปรุงรุ่น CyanogenMod</string>
-  <string name="mod_version">รุ่นของ CyanogenMod</string>
+  <string name="cmupdate_settings_title">ปรับปรุงรุ่น Vanir</string>
+  <string name="mod_version">รุ่นของ Vanir</string>
   <string name="mod_version_default">ไม่ทราบ</string>
   <string name="build_date">วันที่บิวด์</string>
   <string name="contributor_cloud_title">ผู้ร่วมพัฒนา</string>
@@ -442,8 +442,8 @@
   <string name="graphics_title">ภาพและกราฟฟิก</string>
   <string name="edge_gesture_service_title">บล็อกการแตะเมื่อปัด</string>
   <string name="edge_gesture_service_summary">อย่าส่งกิจกรรมการแตะไปยังแอป หากใช้ปัดแถบแจ้งเตือนหรือแถบนำทาง</string>
-  <string name="cmlicense_title">เกี่ยวกับกฎหมาย CyanogenMod</string>
-  <string name="settings_cmlicense_activity_title">เกี่ยวกับกฎหมาย CyanogenMod</string>
+  <string name="cmlicense_title">เกี่ยวกับกฎหมาย Vanir</string>
+  <string name="settings_cmlicense_activity_title">เกี่ยวกับกฎหมาย Vanir</string>
   <string name="settings_cmlicense_activity_unreachable">คุณไม่มีการเชื่อมต่ออินเตอร์เน็ต, เพื่อดูข้อมูลเดียวนี้,ไปยัง %s จากคอมพิวเตอร์ที่เชื่อมต่ออินเตอร์เน็ต</string>
   <string name="unlock_quick_unlock_control_title">ปลดล็อคแบบเร็ว</string>
   <string name="unlock_quick_unlock_control_summary">ปลดล็อคอัตโนมัติเมื่อ PIN/รหัส ที่ถูกต้องถูกป้อนเข้ามา</string>
