@@ -44,7 +44,7 @@
     <string name="ring_mode_mute">Mute</string>
 
     <!-- Profiles settings  -->
-    <string name="profiles_settings_title">System profiles</string>
+    <string name="profiles_settings_title">Profiles</string>
     <string name="profiles_add">Add</string>
     <string name="profile_settings_title">Profile</string>
     <string name="profile_empty_list_profiles_off">To configure and use system profiles, turn profiles on.</string>

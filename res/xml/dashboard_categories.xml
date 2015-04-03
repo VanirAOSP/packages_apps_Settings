@@ -124,20 +124,20 @@
                 android:icon="@drawable/ic_settings_system"
                 />
 
-        <!-- Sound -->
-        <dashboard-tile
-                android:id="@+id/sound_settings"
-                android:title="@string/category_sounds"
-                android:fragment="com.android.settings.SoundSettings"
-                android:icon="@drawable/ic_settings_notifications"
-                />
-
         <!-- Display & lights -->
         <dashboard-tile
                 android:id="@+id/display_and_lights_settings"
                 android:title="@string/display_and_lights"
                 android:fragment="com.android.settings.DisplaySettings"
                 android:icon="@drawable/ic_settings_display"
+                />
+
+        <!-- Sound -->
+        <dashboard-tile
+                android:id="@+id/sound_settings"
+                android:title="@string/category_sounds"
+                android:fragment="com.android.settings.SoundSettings"
+                android:icon="@drawable/ic_settings_notifications"
                 />
 
         <!-- Performance -->
@@ -176,15 +176,13 @@
             android:id="@+id/device_section"
             android:title="@string/header_category_device" >
 
-        <!-- O-Click -->
+        <!-- Application Settings -->
         <dashboard-tile
-                android:id="@+id/oclick"
-                android:icon="@drawable/ic_settings_oclick">
-            <intent
-                    android:action="com.cyanogenmod.action.LAUNCH_BLUETOOTH_INPUT_SETTINGS"
-                    android:targetPackage="com.cyanogenmod.settings.device"
-                    android:targetClass="com.cyanogenmod.settings.device.BluetoothInputSettings" />
-        </dashboard-tile>
+                android:id="@+id/application_settings"
+                android:title="@string/applications_settings"
+                android:fragment="com.android.settings.applications.ManageApplications"
+                android:icon="@drawable/ic_settings_applications"
+                />
 
         <!-- Battery -->
         <dashboard-tile
@@ -194,21 +192,31 @@
                 android:icon="@drawable/ic_settings_battery"
                 />
 
-        <!-- Security -->
+        <!-- Storage -->
         <dashboard-tile
-                android:id="@+id/security_settings"
-                android:title="@string/security_settings_title"
-                android:fragment="com.android.settings.SecuritySettings"
-                android:icon="@drawable/ic_settings_security"
+                android:id="@+id/storage_settings"
+                android:title="@string/storage_settings"
+                android:fragment="com.android.settings.deviceinfo.Memory"
+                android:icon="@drawable/ic_settings_storage"
                 />
 
-        <!-- Manage users -->
+        <!-- Location -->
         <dashboard-tile
-                android:id="@+id/user_settings"
-                android:title="@string/user_settings_title"
-                android:fragment="com.android.settings.users.UserSettings"
-                android:icon="@drawable/ic_settings_multiuser"
+                android:id="@+id/location_settings"
+                android:title="@string/location_settings_title"
+                android:fragment="com.android.settings.location.LocationSettings"
+                android:icon="@drawable/ic_settings_location"
                 />
+
+        <!-- O-Click -->
+        <dashboard-tile
+                android:id="@+id/oclick"
+                android:icon="@drawable/ic_settings_oclick">
+            <intent
+                    android:action="com.cyanogenmod.action.LAUNCH_BLUETOOTH_INPUT_SETTINGS"
+                    android:targetPackage="com.cyanogenmod.settings.device"
+                    android:targetClass="com.cyanogenmod.settings.device.BluetoothInputSettings" />
+        </dashboard-tile>
 
     </dashboard-category>
 
@@ -233,12 +241,20 @@
                 android:icon="@drawable/ic_settings_profiles"
                 />
 
-        <!-- Application Settings -->
+        <!-- Manage users -->
         <dashboard-tile
-                android:id="@+id/application_settings"
-                android:title="@string/applications_settings"
-                android:fragment="com.android.settings.applications.ManageApplications"
-                android:icon="@drawable/ic_settings_applications"
+                android:id="@+id/user_settings"
+                android:title="@string/user_settings_title"
+                android:fragment="com.android.settings.users.UserSettings"
+                android:icon="@drawable/ic_settings_multiuser"
+                />
+
+        <!-- Security -->
+        <dashboard-tile
+                android:id="@+id/security_settings"
+                android:title="@string/security_settings_title"
+                android:fragment="com.android.settings.SecuritySettings"
+                android:icon="@drawable/ic_settings_security"
                 />
 
         <!-- CyanogenMod Privacy Settings -->
@@ -250,12 +266,12 @@
                 android:icon="@drawable/ic_settings_privacy"
                 />
 
-        <!-- Location -->
+        <!-- Backup and reset -->
         <dashboard-tile
-                android:id="@+id/location_settings"
-                android:title="@string/location_settings_title"
-                android:fragment="com.android.settings.location.LocationSettings"
-                android:icon="@drawable/ic_settings_location"
+                android:id="@+id/privacy_settings"
+                android:title="@string/privacy_settings"
+                android:fragment="com.android.settings.PrivacySettings"
+                android:icon="@drawable/ic_settings_backup"
                 />
 
     </dashboard-category>
@@ -273,22 +289,6 @@
                 android:icon="@drawable/ic_settings_date_time"
                 />
 
-        <!-- Accessibility feedback -->
-        <dashboard-tile
-                android:id="@+id/accessibility_settings"
-                android:title="@string/accessibility_settings"
-                android:fragment="com.android.settings.accessibility.AccessibilitySettings"
-                android:icon="@drawable/ic_settings_accessibility"
-                />
-
-        <!-- Storage -->
-        <dashboard-tile
-                android:id="@+id/storage_settings"
-                android:title="@string/storage_settings"
-                android:fragment="com.android.settings.deviceinfo.Memory"
-                android:icon="@drawable/ic_settings_storage"
-                />
-
         <!-- Language -->
         <dashboard-tile
                 android:id="@+id/language_settings"
@@ -297,12 +297,12 @@
                 android:icon="@drawable/ic_settings_language"
                 />
 
-        <!-- Backup and reset -->
+        <!-- Accessibility feedback -->
         <dashboard-tile
-                android:id="@+id/privacy_settings"
-                android:title="@string/privacy_settings"
-                android:fragment="com.android.settings.PrivacySettings"
-                android:icon="@drawable/ic_settings_backup"
+                android:id="@+id/accessibility_settings"
+                android:title="@string/accessibility_settings"
+                android:fragment="com.android.settings.accessibility.AccessibilitySettings"
+                android:icon="@drawable/ic_settings_accessibility"
                 />
 
         <!-- Print -->
