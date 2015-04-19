@@ -17,11 +17,13 @@
 	<string name="misc_short">Misc</string>
 	<string name="vanir_settings_title">Vanir Interface</string>
 	<string name="voodoo_title">Voodoo</string>
-	
  
 	<!-- Vanir Updater -->
 	<string name="vanirupdate_settings_title">Vanir updates</string>
 	<string name="vanirupdate_settings_alternate_title">System updates</string>
 	<string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
+
+	<!-- Clock and Weather  -->
+	<string name="clock_settings">Clock and Weather Settings</string>
 
 </resources>
