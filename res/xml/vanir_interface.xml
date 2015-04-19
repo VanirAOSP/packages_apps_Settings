@@ -54,11 +54,20 @@
         />
 
     <!-- Notification manager -->
-	<PreferenceScreen
+    <PreferenceScreen
         android:id="@+id/notification_manager"
         android:title="@string/notification_manager"
         android:fragment="com.android.settings.notification.NotificationManagerSettings"
         android:icon="@drawable/ic_settings_notifications"
         />
+
+    <!-- Clock & Weather -->
+    <PreferenceScreen
+        android:title="@string/clock_settings"
+        android:icon="@drawable/ic_settings_date_time">
+        <intent android:targetPackage="com.cyanogenmod.lockclock"
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+    </PreferenceScreen>
 
 </PreferenceScreen>

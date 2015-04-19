@@ -11,17 +11,19 @@
 	limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
- 
-	<!-- Vanir menus -->
-	<string name="interface_title">Interface</string>
-	<string name="misc_short">Misc</string>
-	<string name="vanir_settings_title">Vanir Interface</string>
-	<string name="voodoo_title">Voodoo</string>
-	
- 
-	<!-- Vanir Updater -->
-	<string name="vanirupdate_settings_title">Vanir updates</string>
-	<string name="vanirupdate_settings_alternate_title">System updates</string>
-	<string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
+
+    <!-- Vanir menus -->
+    <string name="interface_title">Interface</string>
+    <string name="misc_short">Misc</string>
+    <string name="vanir_settings_title">Vanir Interface</string>
+    <string name="voodoo_title">Voodoo</string>
+
+    <!-- Vanir Updater -->
+    <string name="vanirupdate_settings_title">Vanir updates</string>
+    <string name="vanirupdate_settings_alternate_title">System updates</string>
+    <string name="vanirupdate_settings_summary">Check for, view or install available updates</string>
+
+    <!-- Clock and Weather  -->
+    <string name="clock_settings">Clock and Weather Settings</string>
 
 </resources>
