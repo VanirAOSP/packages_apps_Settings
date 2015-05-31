@@ -115,6 +115,7 @@
     <!-- Profiles - system settings -->
     <string name="profile_system_settings_title">System settings</string>
     <string name="profile_lockmode_title">Lock screen mode</string>
+    <string name="profile_lockmode_policy_disabled_summary">This profile option is disabled by a device administrator policy</string>
     <string name="profile_lockmode_insecure_summary">Don\'t ask for PIN or password</string>
     <string name="profile_lockmode_disabled_summary">Disable lock screen</string>
     <string name="profile_airplanemode_title">Airplane mode</string>
@@ -270,7 +271,7 @@
     <!-- Sms security limit -->
     <string name="app_security_title">App security</string>
     <string name="sms_security_check_limit_title">SMS message limit</string>
-    <string name="sms_security_check_limit_summary">Apps can send %d messages in 30 minutes before requiring confirmation</string>
+    <string name="sms_security_check_limit_summary">Apps can send %d messages in 1 minute before requiring confirmation</string>
     <string name="sms_security_check_limit_summary_none">Apps are not allowed to send any messages without confirmation</string>
     <string name="sms_security_check_limit_none">None</string>
 
