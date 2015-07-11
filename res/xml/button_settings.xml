@@ -51,7 +51,14 @@
             android:key="navigation_bar"
             android:fragment="com.android.settings.cyanogenmod.NavBar"
             android:title="@string/navigation_bar_title"
+            android:summary="@string/navigation_bar_title_summary"
             settings:advanced="true"/>
+
+        <PreferenceScreen
+             android:key="navbar_dimensions"
+             android:fragment="com.android.settings.vanir.NavBarDimensions"
+             android:summary="@string/navigation_bar_dimensions_title_summary"
+             android:title="@string/navigation_bar_dimensions_title"/>
 
         <PreferenceScreen
             android:key="navigation_bar_ring"
