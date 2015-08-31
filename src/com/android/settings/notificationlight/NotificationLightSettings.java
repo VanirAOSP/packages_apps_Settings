@@ -72,14 +72,15 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private static final int MENU_ADD = 0;
     private static final int DIALOG_APPS = 0;
 
-    private boolean mMultiColorNotificationLed;
     private int mDefaultColor;
     private int mDefaultLedOn;
     private int mDefaultLedOff;
     private PackageManager mPackageManager;
     private PreferenceGroup mApplicationPrefList;
+    private PreferenceScreen mNotificationLedBrightnessPref;
     private SystemSettingSwitchPreference mEnabledPref;
     private SystemSettingSwitchPreference mCustomEnabledPref;
+    private SystemSettingSwitchPreference mScreenOnLightsPref;
     private ApplicationLightPreference mDefaultPref;
     private ApplicationLightPreference mCallPref;
     private ApplicationLightPreference mVoicemailPref;
@@ -96,11 +97,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         PreferenceScreen prefSet = getPreferenceScreen();
         Resources resources = getResources();
 
-        PreferenceGroup mGeneralPrefs = (PreferenceGroup) prefSet.findPreference("general_section");
-        PreferenceGroup mPhonePrefs = (PreferenceGroup) prefSet.findPreference("phone_list");
-
-        mMultiColorNotificationLed = resources.getBoolean(
-                com.android.internal.R.bool.config_multiColorNotificationLed);
+        PreferenceGroup mAdvancedPrefs = (PreferenceGroup) prefSet.findPreference("advanced_section");
 
         // Get the system defined default notification color
         mDefaultColor =
@@ -114,12 +111,25 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         mEnabledPref = (SystemSettingSwitchPreference)
                 findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE);
         mEnabledPref.setOnPreferenceChangeListener(this);
-        mCustomEnabledPref = (SystemSettingSwitchPreference)
-                findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE);
-        mCustomEnabledPref.setOnPreferenceChangeListener(this);
 
         mDefaultPref = (ApplicationLightPreference) findPreference(DEFAULT_PREF);
         mDefaultPref.setOnPreferenceChangeListener(this);
+
+        // Advanced light settings
+        mNotificationLedBrightnessPref = (PreferenceScreen)
+                findPreference(Settings.System.NOTIFICATION_LIGHT_BRIGHTNESS_LEVEL);
+        mScreenOnLightsPref = (SystemSettingSwitchPreference)
+                findPreference(Settings.System.NOTIFICATION_LIGHT_SCREEN_ON);
+        mScreenOnLightsPref.setOnPreferenceChangeListener(this);
+        mCustomEnabledPref = (SystemSettingSwitchPreference)
+                findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE);
+        mCustomEnabledPref.setOnPreferenceChangeListener(this);
+        if (!resources.getBoolean(
+                com.android.internal.R.bool.config_adjustableNotificationLedBrightness)) {
+            mAdvancedPrefs.removePreference(mNotificationLedBrightnessPref);
+        } else {
+            mNotificationLedBrightnessPref.setOnPreferenceChangeListener(this);
+        }
 
         // Missed call and Voicemail preferences should only show on devices with a voice capabilities
         TelephonyManager tm = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
@@ -141,13 +151,9 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         mPackageAdapter = new PackageListAdapter(getActivity());
 
         mPackages = new HashMap<String, Package>();
+        setHasOptionsMenu(true);
 
-        if (mMultiColorNotificationLed) {
-            setHasOptionsMenu(true);
-        } else {
-            mGeneralPrefs.removePreference(mCustomEnabledPref);
-            prefSet.removePreference(mPhonePrefs);
-            prefSet.removePreference(mApplicationPrefList);
+        if (!resources.getBoolean(com.android.internal.R.bool.config_multiColorNotificationLed)) {
             resetColors();
         }
     }
@@ -224,10 +230,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             mVoicemailPref.setAllValues(vmailColor, vmailTimeOn, vmailTimeOff);
         }
 
-        if (mMultiColorNotificationLed) {
-            mApplicationPrefList = (PreferenceGroup) findPreference("applications_list");
-            mApplicationPrefList.setOrderingAsAdded(false);
-        }
+        mApplicationPrefList = (PreferenceGroup) findPreference("applications_list");
+        mApplicationPrefList.setOrderingAsAdded(false);
     }
 
     private void refreshCustomApplicationPrefs() {
@@ -368,13 +372,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         Settings.System.putInt(resolver, NOTIFICATION_LIGHT_PULSE_CALL_COLOR, mDefaultColor);
         Settings.System.putInt(resolver, NOTIFICATION_LIGHT_PULSE_VMAIL_COLOR, mDefaultColor);
 
-        // Reset to the framework default custom pulse length & speed
-        Settings.System.putInt(resolver, NOTIFICATION_LIGHT_PULSE_CALL_LED_ON, mDefaultLedOn);
-        Settings.System.putInt(resolver, NOTIFICATION_LIGHT_PULSE_CALL_LED_OFF, mDefaultLedOff);
-
-        Settings.System.putInt(resolver, NOTIFICATION_LIGHT_PULSE_VMAIL_LED_ON, mDefaultLedOn);
-        Settings.System.putInt(resolver, NOTIFICATION_LIGHT_PULSE_VMAIL_LED_OFF, mDefaultLedOff);
-
         refreshDefault();
     }
 
@@ -402,7 +399,9 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (preference == mEnabledPref || preference == mCustomEnabledPref) {
+        if (preference == mEnabledPref || preference == mCustomEnabledPref ||
+                preference == mNotificationLedBrightnessPref ||
+                preference == mScreenOnLightsPref) {
             getActivity().invalidateOptionsMenu();
         } else {
             ApplicationLightPreference lightPref = (ApplicationLightPreference) preference;
