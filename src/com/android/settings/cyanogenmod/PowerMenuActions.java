@@ -29,6 +29,11 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.ListPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceFragment;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
+import android.preference.SlimSeekBarPreference;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
@@ -58,6 +63,29 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private CheckBoxPreference mSilentPref;
     private CheckBoxPreference mVoiceAssistPref;
     private CheckBoxPreference mAssistPref;
+public class PowerMenuActions extends PreferenceFragment implements
+        Preference.OnPreferenceChangeListener {
+	
+	private static final String PREF_ON_THE_GO_ALPHA = "on_the_go_alpha";		
+    private static final String PREF_SHOW_ADVANCED_REBOOT =
+            "power_menu_show_advanced_reboot";
+
+    private SwitchPreference mPowerPref;
+    private SwitchPreference mRebootPref;
+    private SwitchPreference mScreenshotPref;
+    private SwitchPreference mScreenrecordPref;
+    private SwitchPreference mAirplanePref;
+    private SwitchPreference mUsersPref;
+    private SwitchPreference mSettingsPref;
+    private SwitchPreference mLockdownPref;
+    private SwitchPreference mAssistPref;
+    private SwitchPreference mVoicePref;
+//    private SwitchPreference mBugReportPref;
+    private SwitchPreference mSilentPref;
+    private SwitchPreference mShowAdvancedReboot;
+    private SlimSeekBarPreference mOnTheGoAlphaPref;
+    
+    private ContentResolver mResolver;
 
     Context mContext;
     private ArrayList<String> mLocalUserConfig = new ArrayList<String>();
@@ -70,6 +98,19 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
         addPreferencesFromResource(R.xml.power_menu_settings);
         mContext = getActivity().getApplicationContext();
+        
+        mResolver = getActivity().getContentResolver();
+
+        mShowAdvancedReboot =
+                (SwitchPreference) findPreference(PREF_SHOW_ADVANCED_REBOOT);
+        mShowAdvancedReboot.setChecked((Settings.System.getInt(mResolver,
+                Settings.System.POWER_MENU_SHOW_ADVANCED_REBOOT, 0) == 1));
+        mShowAdvancedReboot.setOnPreferenceChangeListener(this);
+        
+        mOnTheGoAlphaPref = (SlimSeekBarPreference) findPreference(PREF_ON_THE_GO_ALPHA);
+        mOnTheGoAlphaPref.setDefault(50);
+        mOnTheGoAlphaPref.setInterval(1);
+        mOnTheGoAlphaPref.setOnPreferenceChangeListener(this);
 
         mAvailableActions = getActivity().getResources().getStringArray(
                 R.array.power_menu_actions_array);
@@ -231,6 +272,23 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     private boolean isActionAllowed(String action) {
         if (Arrays.asList(mAvailableActions).contains(action)) {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object objValue) {
+
+        if (preference == mShowAdvancedReboot) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(mResolver,
+                    Settings.System.POWER_MENU_SHOW_ADVANCED_REBOOT, value ? 1 : 0);
+            return true;
+        } else if (preference == mOnTheGoAlphaPref) {
+            float val = Float.parseFloat((String) objValue);
+            Settings.System.putFloat(mResolver, Settings.System.ON_THE_GO_ALPHA,
+                    val / 100);
             return true;
         }
         return false;
