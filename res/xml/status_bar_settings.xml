@@ -74,6 +74,11 @@
         android:summary="@string/status_bar_notif_count_summary"
         android:defaultValue="false" />
 
+    <Preference
+        android:key="traffic"
+        android:fragment="com.android.settings.vanir.Traffic"
+        android:title="@string/traffic_category" />
+
     <ListPreference
         android:key="qs_quick_pulldown"
         android:title="@string/status_bar_quick_qs_pulldown_title"
