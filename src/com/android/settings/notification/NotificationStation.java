@@ -27,8 +27,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -76,7 +74,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private PackageManager mPm;
     private INotificationManager mNoMan;
-    private ColorFilter mFilter;
 
     private Runnable mRefreshListRunnable = new Runnable() {
         @Override
@@ -128,15 +125,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot register listener", e);
         }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        logd("onCreate(%s)", savedInstanceState);
-        super.onCreate(savedInstanceState);
-
-        int colorPrimaryDark = getResources().getColor(R.color.theme_primary_dark);
-        mFilter = new LightingColorFilter(colorPrimaryDark, colorPrimaryDark);
     }
 
     @Override
@@ -287,16 +275,13 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
     private Drawable loadIconDrawable(String pkg, int userId, int resId) {
         Resources r = getResourcesForUserPackage(pkg, userId);
-        Drawable d;
 
         if (resId == 0) {
             return null;
         }
 
         try {
-            d = r.getDrawable(resId, null).mutate();
-            d.setColorFilter(mFilter);
-            return d;
+            return r.getDrawable(resId, null);
         } catch (RuntimeException e) {
             Log.w(TAG, "Icon not found in "
                     + (pkg != null ? resId : "<system>")
