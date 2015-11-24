@@ -28,7 +28,7 @@ import android.widget.AdapterView;
  */
 public class BandMode extends Activity {
     private static final String LOG_TAG = "phone";
-    private static final boolean DBG = true;
+    private static final boolean DBG = false;
 
     private static final int EVENT_BAND_SCAN_COMPLETED = 100;
     private static final int EVENT_BAND_SELECTION_DONE = 200;
