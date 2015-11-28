@@ -2768,5 +2768,8 @@
             </intent-filter>
         </activity>
 
+        <!-- Vanir Settings -->
+        <activity android:name=".vanir.VanirInterface" />
+
     </application>
 </manifest>
