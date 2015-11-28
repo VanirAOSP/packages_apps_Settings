@@ -48,4 +48,13 @@
             android:targetClass="com.cyanogenmod.settings.device.TouchscreenGestureSettings" />
         </PreferenceScreen>
 
+    <!-- Clock & Weather -->
+    <PreferenceScreen
+        android:title="@string/clock_settings"
+        android:icon="@drawable/ic_settings_date_time">
+        <intent android:targetPackage="com.cyanogenmod.lockclock"
+            android:action="android.intent.action.MAIN"
+            android:targetClass="com.cyanogenmod.lockclock.preference.Preferences" />
+    </PreferenceScreen>
+
 </PreferenceScreen>
