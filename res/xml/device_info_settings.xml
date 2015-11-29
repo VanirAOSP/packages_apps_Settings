@@ -38,31 +38,6 @@
                     android:targetClass="com.android.settings.deviceinfo.Status" />
         </PreferenceScreen>
 
-        <!-- Manual -->
-        <PreferenceScreen
-                android:key="manual"
-                android:title="@string/manual">
-            <intent android:action="android.settings.SHOW_MANUAL" />
-        </PreferenceScreen>
-        -->
-
-        <!-- Legal Information -->
-        <PreferenceScreen
-                android:key="container"
-                android:title="@string/legal_information"
-                android:fragment="com.android.settings.LegalSettings" />
-
-        <PreferenceScreen
-                android:key="regulatory_info"
-                android:title="@string/regulatory_information">
-            <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
-        </PreferenceScreen>
-
-        <!-- Feedback on the device -->
-        <PreferenceScreen android:key="device_feedback"
-                android:title="@string/device_feedback">
-        </PreferenceScreen>
-
         <!-- Device hardware model -->
         <Preference android:key="device_model"
                 style="?android:preferenceInformationStyle"
@@ -122,5 +97,30 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/selinux_status"
                 android:summary="@string/selinux_status_enforcing"/>
+
+        <!-- Feedback on the device -->
+        <PreferenceScreen android:key="device_feedback"
+                android:title="@string/device_feedback">
+        </PreferenceScreen>
+
+        <!-- Manual -->
+        <PreferenceScreen
+                android:key="manual"
+                android:title="@string/manual">
+            <intent android:action="android.settings.SHOW_MANUAL" />
+        </PreferenceScreen>
+        -->
+
+        <!-- Legal Information -->
+        <PreferenceScreen
+                android:key="container"
+                android:title="@string/legal_information"
+                android:fragment="com.android.settings.LegalSettings" />
+
+        <PreferenceScreen
+                android:key="regulatory_info"
+                android:title="@string/regulatory_information">
+            <intent android:action="android.settings.SHOW_REGULATORY_INFO" />
+        </PreferenceScreen>
 
 </PreferenceScreen>
