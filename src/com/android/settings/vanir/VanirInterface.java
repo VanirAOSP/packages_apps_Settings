@@ -16,25 +16,9 @@
 
 package com.android.settings.vanir;
 
-import android.app.AlertDialog;
-import android.content.ContentResolver;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.SystemProperties;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
-import android.text.Spannable;
-import android.util.Log;
-import android.view.WindowManagerGlobal;
-import android.widget.EditText;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -55,4 +39,9 @@ public class VanirInterface extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
     } 
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.DONT_TRACK_ME_BRO;
+    }
 }
