@@ -38,6 +38,7 @@
                     android:targetClass="com.android.settings.deviceinfo.Status" />
         </PreferenceScreen>
 
+
         <!-- Device hardware model -->
         <Preference android:key="device_model"
                 style="?android:preferenceInformationStyle"
