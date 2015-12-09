@@ -149,20 +149,20 @@
             android:key="@string/category_key_device"
             android:title="@string/header_category_device" >
 
-        <!-- Home -->
-        <dashboard-tile
-                android:id="@+id/home_settings"
-                android:title="@string/home_settings"
-                android:fragment="com.android.settings.HomeSettings"
-                android:icon="@drawable/ic_settings_home"
-                />
-
         <!-- Battery -->
         <dashboard-tile
                 android:id="@+id/battery_settings"
                 android:title="@string/power_usage_summary_title"
                 android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
                 android:icon="@drawable/ic_settings_battery"
+                />
+
+        <!-- Application Settings -->
+        <dashboard-tile
+                android:id="@+id/application_settings"
+                android:title="@string/applications_settings"
+                android:fragment="com.android.settings.applications.ManageApplications"
+                android:icon="@drawable/ic_settings_applications"
                 />
 
         <!-- Memory -->
@@ -173,12 +173,20 @@
                 android:icon="@drawable/ic_settings_memory"
                 />
 
-        <!-- Manage users -->
+        <!-- Storage -->
         <dashboard-tile
-                android:id="@+id/user_settings"
-                android:title="@string/user_settings_title"
-                android:fragment="com.android.settings.users.UserSettings"
-                android:icon="@drawable/ic_settings_multiuser"
+                android:id="@+id/storage_settings"
+                android:title="@string/storage_usb_settings"
+                android:fragment="com.android.settings.deviceinfo.StorageSettings"
+                android:icon="@drawable/ic_settings_storage"
+                />
+
+        <!-- Location -->
+        <dashboard-tile
+                android:id="@+id/location_settings"
+                android:title="@string/location_settings_title"
+                android:fragment="com.android.settings.location.LocationSettings"
+                android:icon="@drawable/ic_settings_location"
                 />
 
     </dashboard-category>
@@ -197,28 +205,28 @@
                 android:icon="@drawable/ic_settings_home"
                 />
 
-        <!-- Profiles -->
-        <dashboard-tile
-                android:id="@+id/profile_settings"
-                android:fragment="com.android.settings.profiles.ProfilesSettings"
-                android:title="@string/profiles_settings_title"
-                android:icon="@drawable/ic_settings_profiles"
-                />
-
-        <!-- Location -->
-        <dashboard-tile
-                android:id="@+id/location_settings"
-                android:title="@string/location_settings_title"
-                android:fragment="com.android.settings.location.LocationSettings"
-                android:icon="@drawable/ic_settings_location"
-                />
-
         <!-- Account -->
         <dashboard-tile
                 android:id="@+id/account_settings"
                 android:title="@string/account_settings_title"
                 android:fragment="com.android.settings.accounts.AccountSettings"
                 android:icon="@drawable/ic_settings_accounts"
+                />
+
+        <!-- Manage users -->
+        <dashboard-tile
+                android:id="@+id/user_settings"
+                android:title="@string/user_settings_title"
+                android:fragment="com.android.settings.users.UserSettings"
+                android:icon="@drawable/ic_settings_multiuser"
+                />
+
+        <!-- Profiles -->
+        <dashboard-tile
+                android:id="@+id/profile_settings"
+                android:fragment="com.android.settings.profiles.ProfilesSettings"
+                android:title="@string/profiles_settings_title"
+                android:icon="@drawable/ic_settings_profiles"
                 />
 
         <!-- Marker for where to place external tiles in this category -->
@@ -235,18 +243,18 @@
         <!-- CyanogenMod Privacy Settings -->
         <!-- This is the 'real' Privacy items and includes Privacy Guard, Blacklist & WhisperPush -->
         <dashboard-tile
-                android:id="@+id/application_settings"
-                android:title="@string/applications_settings"
-                android:fragment="com.android.settings.applications.ManageApplications"
-                android:icon="@drawable/ic_settings_applications"
+                android:id="@+id/privacy_settings_cyanogenmod"
+                android:title="@string/privacy_settings_cyanogenmod_title"
+                android:fragment="com.android.settings.cyanogenmod.PrivacySettings"
+                android:icon="@drawable/ic_settings_privacy"
                 />
 
-        <!-- Location -->
+        <!-- Backup and reset -->
         <dashboard-tile
-                android:id="@+id/location_settings"
-                android:title="@string/location_settings_title"
-                android:fragment="com.android.settings.location.LocationSettings"
-                android:icon="@drawable/ic_settings_location"
+                android:id="@+id/privacy_settings"
+                android:title="@string/privacy_settings"
+                android:fragment="com.android.settings.PrivacySettings"
+                android:icon="@drawable/ic_settings_backup"
                 />
 
     </dashboard-category>
@@ -273,28 +281,12 @@
                 android:icon="@drawable/ic_settings_accessibility"
                 />
 
-        <!-- Storage -->
-        <dashboard-tile
-                android:id="@+id/storage_settings"
-                android:title="@string/storage_usb_settings"
-                android:fragment="com.android.settings.deviceinfo.StorageSettings"
-                android:icon="@drawable/ic_settings_storage"
-                />
-
         <!-- Language -->
         <dashboard-tile
                 android:id="@+id/language_settings"
                 android:title="@string/language_settings"
                 android:fragment="com.android.settings.inputmethod.InputMethodAndLanguageSettings"
                 android:icon="@drawable/ic_settings_language"
-                />
-
-        <!-- Backup and reset -->
-        <dashboard-tile
-                android:id="@+id/privacy_settings"
-                android:title="@string/privacy_settings"
-                android:fragment="com.android.settings.PrivacySettings"
-                android:icon="@drawable/ic_settings_backup"
                 />
 
         <!-- Print -->
