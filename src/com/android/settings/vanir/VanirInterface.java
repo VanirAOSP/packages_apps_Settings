@@ -16,6 +16,8 @@
 
 package com.android.settings.vanir;
 
+import static com.android.settings.dashboard.DashboardTile.TILE_ID_UNDEFINED;
+
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceScreen;
