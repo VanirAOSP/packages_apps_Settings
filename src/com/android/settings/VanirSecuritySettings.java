@@ -147,7 +147,7 @@ public class VanirSecuritySettings extends SettingsPreferenceFragment
     private Intent mTrustAgentClickIntent;
 
     private Preference mOwnerInfoPref;
-    private int mFilterType = TYPE_SECURITY_EXTRA;
+    private int mFilterType = TYPE_LOCKSCREEN_EXTRA;
 
     @Override
     protected int getMetricsCategory() {
