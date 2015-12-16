@@ -80,8 +80,8 @@ public class VanirSecuritySettings extends SettingsPreferenceFragment
 
     // Fitler types for this panel
     private static final String FILTER_TYPE_EXTRA = "filter_type";
-    private static final int TYPE_LOCKSCREEN_EXTRA = 0;
-    private static final int TYPE_SECURITY_EXTRA = 1;
+    private static final int TYPE_LOCKSCREEN_EXTRA = 1;
+    private static final int TYPE_SECURITY_EXTRA = 0;
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
