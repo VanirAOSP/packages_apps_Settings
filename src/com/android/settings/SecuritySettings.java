@@ -80,8 +80,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     // Fitler types for this panel
     private static final String FILTER_TYPE_EXTRA = "filter_type";
-    private static final int TYPE_LOCKSCREEN_EXTRA = 0;
-    private static final int TYPE_SECURITY_EXTRA = 1;
+    protected static final int TYPE_LOCKSCREEN_EXTRA = 0;
+    protected static final int TYPE_SECURITY_EXTRA = 1;
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
@@ -147,7 +147,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private Intent mTrustAgentClickIntent;
 
     private Preference mOwnerInfoPref;
-    private int mFilterType = TYPE_SECURITY_EXTRA;
+    private int mFilterType;
+
+    public SecuritySettings() {
+        super();
+        mFilterType = getDefaultFilterType();
+    }
+
+    protected int getDefaultFilterType() {
+        return TYPE_SECURITY_EXTRA;
+    }
 
     @Override
     protected int getMetricsCategory() {
@@ -167,7 +176,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else {
             Bundle bundle = getArguments();
             if (bundle != null) {
-                mFilterType = bundle.getInt(FILTER_TYPE_EXTRA, TYPE_SECURITY_EXTRA);
+                mFilterType = bundle.getInt(FILTER_TYPE_EXTRA, getDefaultFilterType());
             }
         }
 
