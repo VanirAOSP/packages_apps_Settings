@@ -147,7 +147,7 @@ public class VanirSecuritySettings extends SettingsPreferenceFragment
     private Intent mTrustAgentClickIntent;
 
     private Preference mOwnerInfoPref;
-    private int mFilterType = TYPE_SECURITY_EXTRA;
+    private int mFilterType = TYPE_LOCKSCREEN_EXTRA;
 
     @Override
     protected int getMetricsCategory() {
@@ -167,7 +167,7 @@ public class VanirSecuritySettings extends SettingsPreferenceFragment
         } else {
             Bundle bundle = getArguments();
             if (bundle != null) {
-                mFilterType = bundle.getInt(FILTER_TYPE_EXTRA, TYPE_SECURITY_EXTRA);
+                mFilterType = bundle.getInt(FILTER_TYPE_EXTRA, TYPE_LOCKSCREEN_EXTRA);
             }
         }
 
