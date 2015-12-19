@@ -39,10 +39,16 @@
         </PreferenceScreen>
 
 
+        <!-- Device name -->
+        <Preference android:key="device_name"
+                style="?android:preferenceInformationStyle"
+                android:title="@string/device_name"
+                android:summary="@string/device_info_default"/>
+
         <!-- Device hardware model -->
         <Preference android:key="device_model"
                 style="?android:preferenceInformationStyle"
-                android:title="@string/model_name"
+                android:title="@string/device_model"
                 android:summary="@string/device_info_default"/>
 
         <!-- Device firmware version -->
@@ -110,7 +116,6 @@
                 android:title="@string/manual">
             <intent android:action="android.settings.SHOW_MANUAL" />
         </PreferenceScreen>
-        -->
 
         <!-- Legal Information -->
         <PreferenceScreen
@@ -125,4 +130,3 @@
         </PreferenceScreen>
 
 </PreferenceScreen>
-
