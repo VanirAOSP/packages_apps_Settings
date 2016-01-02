@@ -616,16 +616,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             if (putString.length() == 0) {
                 putString = null;
             }
-            CMSettings.Secure.putString(getContentResolver(),
-                    CMSettings.Secure.RECENTS_LONG_PRESS_ACTIVITY, putString);
-            return true;
-        } else if (preference == mCameraDoubleTapPowerGesture) {
-            boolean value = (Boolean) newValue;
-            Settings.Secure.putInt(getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
-                    value ? 0 : 1 /* Backwards because setting is for disabling */);
-            return true;
-        }
-        return false;
+           
     }
 
     private static void writeDisableNavkeysOption(Context context, boolean enabled) {
