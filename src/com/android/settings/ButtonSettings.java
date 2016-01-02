@@ -615,7 +615,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             mNavigationRecentsLongPressAction.setSummary(summary);
             if (putString.length() == 0) {
                 putString = null;
-            }
+            
            
     }
 
