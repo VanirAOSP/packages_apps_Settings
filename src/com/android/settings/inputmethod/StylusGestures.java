@@ -32,7 +32,7 @@ import android.provider.Settings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
+import com.android.internal.logging.MetricsLogger;
 
 import java.util.Collections;
 import java.util.List;
@@ -85,7 +85,7 @@ public class StylusGestures extends SettingsPreferenceFragment implements
 
     @Override
     protected int getMetricsCategory() {
-        return CMMetricsLogger.STYLUS_GESTURES;
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     private ListPreference setupGesturePref(String key, String settingName) {

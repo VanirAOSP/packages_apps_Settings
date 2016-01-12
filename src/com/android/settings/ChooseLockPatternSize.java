@@ -24,7 +24,6 @@ import android.preference.PreferenceScreen;
 
 import com.android.internal.logging.MetricsConstants;
 import com.android.internal.widget.LockPatternUtils;
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 public class ChooseLockPatternSize extends PreferenceActivity {
 
@@ -101,7 +100,7 @@ public class ChooseLockPatternSize extends PreferenceActivity {
 
         @Override
         protected int getMetricsCategory() {
-            return CMMetricsLogger.CHOOSE_LOCK_PATTERN_SIZE;
+            return MetricsConstants.DONT_TRACK_ME_BRO;
         }
     }
 }

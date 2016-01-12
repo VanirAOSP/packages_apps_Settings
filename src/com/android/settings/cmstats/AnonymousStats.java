@@ -24,12 +24,10 @@ import android.os.UserHandle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-
 import cyanogenmod.providers.CMSettings;
-
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 public class AnonymousStats extends SettingsPreferenceFragment {
 
@@ -102,6 +100,6 @@ public class AnonymousStats extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return CMMetricsLogger.ANONYMOUS_STATS;
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 }

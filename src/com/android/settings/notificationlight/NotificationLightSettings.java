@@ -41,6 +41,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.cyanogenmod.PackageListAdapter;
@@ -54,7 +55,6 @@ import java.util.List;
 import java.util.Map;
 
 import cyanogenmod.providers.CMSettings;
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 public class NotificationLightSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, AdapterView.OnItemLongClickListener {
@@ -164,7 +164,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
     @Override
     protected int getMetricsCategory() {
-        return CMMetricsLogger.NOTIFICATION_LIGHT_SETTINGS;
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override

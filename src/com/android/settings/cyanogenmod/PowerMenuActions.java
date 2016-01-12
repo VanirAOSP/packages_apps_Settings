@@ -36,7 +36,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.util.cm.PowerMenuConstants;
 import cyanogenmod.providers.CMSettings;
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 import static com.android.internal.util.cm.PowerMenuConstants.*;
 
@@ -110,7 +109,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return CMMetricsLogger.POWER_MENU_ACTIONS;
+        return MetricsLogger.DONT_TRACK_ME_BRO;
     }
 
     @Override
