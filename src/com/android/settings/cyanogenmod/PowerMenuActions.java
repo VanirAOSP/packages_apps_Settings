@@ -35,7 +35,9 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.internal.util.cm.PowerMenuConstants;
+
 import cyanogenmod.providers.CMSettings;
+
 
 import static com.android.internal.util.cm.PowerMenuConstants.*;
 
@@ -48,7 +50,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     private CheckBoxPreference mRebootPref;
     private CheckBoxPreference mScreenshotPref;
-    private CheckBoxPreference mProfilePref;
     private CheckBoxPreference mAirplanePref;
     private CheckBoxPreference mUsersPref;
     private CheckBoxPreference mSettingsPref;
@@ -251,17 +252,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private void updatePreferences() {
         boolean bugreport = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.BUGREPORT_IN_POWER_MENU, 0) != 0;
-        boolean profiles = CMSettings.System.getInt(getContentResolver(),
-                CMSettings.System.SYSTEM_PROFILES_ENABLED, 1) != 0;
-
-        if (mProfilePref != null) {
-            mProfilePref.setEnabled(profiles);
-            if (profiles) {
-                mProfilePref.setSummary(null);
-            } else {
-                mProfilePref.setSummary(R.string.power_menu_profiles_disabled);
-            }
-        }
 
         if (mBugReportPref != null) {
             mBugReportPref.setEnabled(bugreport);
