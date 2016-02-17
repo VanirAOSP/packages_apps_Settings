@@ -84,7 +84,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             new Intent(TrustAgentService.SERVICE_INTERFACE);
 
     // Fitler types for this panel
-    private static final String FILTER_TYPE_EXTRA = "filter_type";
+    protected static final String FILTER_TYPE_EXTRA = "filter_type";
     protected static final int TYPE_LOCKSCREEN_EXTRA = 0;
     protected static final int TYPE_SECURITY_EXTRA = 1;
 
