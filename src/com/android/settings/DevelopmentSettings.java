@@ -287,8 +287,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private SwitchPreference mAdvancedReboot;
 
-    private SwitchPreference mColorTemperaturePreference;
-
     private SwitchPreference mDevelopmentShortcut;
 
     private SwitchPreference mColorTemperaturePreference;
