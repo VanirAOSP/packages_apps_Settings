@@ -95,9 +95,9 @@ import android.widget.TabWidget;
 
 import com.android.internal.util.UserIcons;
 import com.android.settings.UserAdapter.UserDetails;
+import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.dashboard.DashboardTile;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.io.IOException;

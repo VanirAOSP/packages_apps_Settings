@@ -38,9 +38,6 @@
     <!-- The duration (in milliseconds) of activity transitions -->
     <integer name="setup_wizard_transition_duration">300</integer>
 
-    <!-- When true enable color temperature setting. -->
-    <bool name="config_enableColorTemperature">false</bool>
-    
     <!-- Config to show/hide Wifi calling mode Preference UI option -->
     <bool name="config_wfc_mode_supported" translatable="false">true</bool>
 
@@ -111,4 +108,8 @@
 
     <!-- Whether to disable allcaps default state of tabtext within datausage -->
     <bool name="config_gcf_disable_default_tabtext_allcaps">false</bool>
+
+    <!-- When true enable color temperature setting. -->
+    <bool name="config_enableColorTemperature">false</bool>
+
 </resources>
