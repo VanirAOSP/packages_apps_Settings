@@ -1001,6 +1001,7 @@
     <string name="notification_manager">Notifications</string>
     <string name="lockscreen_settings">Lock screen</string>
     <string name="category_lights">Lights</string>
+    <string name="category_notifications">Notification switches</string>
     <string name="category_volume">Volume</string>
     <string name="category_vibrate">Vibrate</string>
     <string name="category_misc">Miscellaneous</string>

@@ -185,4 +185,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+            android:key="notifications"
+            android:title="@string/category_notifications">
+
+        <!-- Battery fully charged notification -->
+        <com.android.settings.cyanogenmod.SystemSettingSwitchPreference
+        android:key="battery_fully_charged_notification"
+        android:title="@string/battery_fully_charged_notif_title"
+        android:summary="@string/battery_fully_charged_notif_summary" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -30,4 +30,8 @@
     <string name="cpu_info">CPU</string>
     <string name="mem_info">Memory</string>
 
+    <!-- Battery fully charged notification -->
+    <string name="battery_fully_charged_notif_title">Battery fully charged notification</string>
+    <string name="battery_fully_charged_notif_summary">Show a notification when the battery is fully charged</string>
+
 </resources>
