@@ -34,4 +34,7 @@
     <string name="battery_fully_charged_notif_title">Battery fully charged notification</string>
     <string name="battery_fully_charged_notif_summary">Show a notification when the battery is fully charged</string>
 
+    <!-- Lockscreen charging current switch -->
+	<string name="lock_screen_current">Charging Current</string>
+
 </resources>
