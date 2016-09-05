@@ -79,7 +79,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
 
     private static final String KEY_VANIR_UPDATES = "vanir_updates";
 
-    static final int TAPS_TO_BE_A_DEVELOPER = 7;
+    static final int TAPS_TO_BE_A_DEVELOPER = 3;
 
     long[] mHits = new long[3];
     int mDevHitCountdown;
