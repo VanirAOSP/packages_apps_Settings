@@ -48,6 +48,7 @@ public class BootReceiver extends BroadcastReceiver {
         }
 
         LocationSettings.restore(ctx);
+        DevelopmentSettings.initializeUpdateRecoveryOption(ctx);
     }
 
     private boolean hasRestoredTunable(Context context) {
