@@ -148,8 +148,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         final Preference kernelPref = findPreference(KEY_KERNEL_VERSION);
         kernelPref.setEnabled(true);
         kernelPref.setSummary(getFormattedKernelVersion());
-        findPreference(KEY_MOD_VERSION).setSummary(
-                cyanogenmod.os.Build.CYANOGENMOD_DISPLAY_VERSION);
         findPreference(KEY_MOD_VERSION).setEnabled(true);
         setValueSummary(KEY_MOD_BUILD_DATE, "ro.build.date");
         findPreference(KEY_MOD_BUILD_DATE).setEnabled(true);
