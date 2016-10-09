@@ -286,4 +286,7 @@
     <string name="update_recovery_summary">Update recovery with system updates</string>
     <string name="update_recovery_on_warning">NOTICE: When this feature is enabled, your installed recovery will be replaced by one included with the current version of the running OS.\n\nYour recovery will be updated along with upgrades to your system, helping to ensure compatibility with future versions.\n\nWould you like to enable this feature?</string>
 
+    <!-- title for lock screen weather preference -->
+    <string name="lockscreen_weather_enabled_title">Show weather</string>
+
 </resources>
