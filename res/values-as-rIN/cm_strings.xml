@@ -36,7 +36,7 @@
   <string name="root_access_adb">কেৱল ADB</string>
   <string name="root_access_all">এপ্প্‌চ আৰু ADB</string>
   <!-- Preference link for root appops -->
-  <!-- About phone screen, CyanogenMod version -->
+  <!-- About phone screen, Vanir version -->
   <string name="mod_version">CyanogenMod সংস্কৰণ</string>
   <string name="mod_version_default">অজ্ঞাত</string>
   <!-- About phone screen, Device model -->

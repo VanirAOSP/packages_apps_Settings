@@ -38,7 +38,7 @@
   <!-- Preference link for root appops -->
   <string name="root_appops_title">Xestionar accesos root</string>
   <string name="root_appops_summary">Ver e xestionar as regras de root</string>
-  <!-- About phone screen, CyanogenMod version -->
+  <!-- About phone screen, Vanir version -->
   <string name="mod_version">Versión de CyanogenMod</string>
   <string name="mod_version_default">Descoñecido</string>
   <!-- About phone screen, Device model -->

@@ -36,7 +36,7 @@
   <string name="root_access_adb">Ainult ADB</string>
   <string name="root_access_all">Rakendused ja ADB</string>
   <!-- Preference link for root appops -->
-  <!-- About phone screen, CyanogenMod version -->
+  <!-- About phone screen, Vanir version -->
   <string name="mod_version">CyanogenMod versioon</string>
   <string name="mod_version_default">Teadmata</string>
   <!-- About phone screen, Device model -->

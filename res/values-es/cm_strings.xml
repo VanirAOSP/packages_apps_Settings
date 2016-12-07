@@ -36,7 +36,7 @@
   <string name="root_access_adb">Solo ADB</string>
   <string name="root_access_all">Aplicaciones y ADB</string>
   <!-- Preference link for root appops -->
-  <!-- About phone screen, CyanogenMod version -->
+  <!-- About phone screen, Vanir version -->
   <string name="mod_version">Versión de CyanogenMod</string>
   <string name="mod_version_default">Desconocida</string>
   <!-- About phone screen, Device model -->

@@ -35,7 +35,7 @@
   <string name="root_access_adb">ADB لا</string>
   <string name="root_access_all">Apps ۋە ADB</string>
   <!-- Preference link for root appops -->
-  <!-- About phone screen, CyanogenMod version -->
+  <!-- About phone screen, Vanir version -->
   <string name="mod_version">CyanogenMod نەشرى</string>
   <string name="mod_version_default">يوچۇن</string>
   <!-- About phone screen, Device model -->
