@@ -26,4 +26,7 @@
     <!-- Clock and Weather  -->
     <string name="clock_settings">Clock and Weather Settings</string>
 
+    <!-- Awesome Settings -->
+    <string name="header_category_vanir">Voodoo</string>
+
 </resources>
