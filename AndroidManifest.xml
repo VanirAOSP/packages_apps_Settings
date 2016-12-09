@@ -130,7 +130,7 @@
 
         <activity android:name=".Settings$WirelessSettings"
             android:label="@string/header_category_wireless_networks">
-            <intent-filter android:priority="5">
+            <intent-filter android:priority="6">
                 <action android:name="com.android.settings.category.wireless" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -138,8 +138,16 @@
 
         <activity android:name=".Settings$VanirSettings"
             android:label="@string/header_category_vanir">
-            <intent-filter android:priority="4">
+            <intent-filter android:priority="5">
                 <action android:name="com.android.settings.category.vanir" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Settings$AppsSettings"
+            android:label="@string/header_category_apps">
+            <intent-filter android:priority="4">
+                <action android:name="com.android.settings.category.apps" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

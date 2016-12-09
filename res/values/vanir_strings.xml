@@ -28,5 +28,6 @@
 
     <!-- Awesome Settings -->
     <string name="header_category_vanir">Voodoo</string>
+    <string name="header_category_apps">Applications</string>
 
 </resources>
