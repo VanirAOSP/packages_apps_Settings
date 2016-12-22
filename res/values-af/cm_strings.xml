@@ -39,19 +39,19 @@
   <string name="root_appops_title">Bestuur root toegang</string>
   <string name="root_appops_summary">Kyk na en beheer die root reëls</string>
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod weergawe</string>
+  <string name="mod_version">Vanir weergawe</string>
   <string name="mod_version_default">Onbekend</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Toestel tipe</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">Toestel naam</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">CyanogenMod API vlak</string>
+  <string name="mod_api_level">Vanir API vlak</string>
   <string name="mod_api_level_default">Onbekend</string>
   <!-- About phone screen, build date -->
   <string name="build_date">Bou datum</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod opgradering</string>
+  <string name="cmupdate_settings_title">Vanir opgradering</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Ligging</string>
   <string name="app_ops_categories_personal">Persoonlik</string>
@@ -300,7 +300,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod Regs</string>
+  <string name="cmlicense_title">Vanir Regs</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">Vind die vingerafdruk sensor op die <xliff:g id="sensor_location">%1$s </xliff:g> van jou foon.</string>
   <!-- Fingerprint sensor locations -->

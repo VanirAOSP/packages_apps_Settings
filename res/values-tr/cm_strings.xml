@@ -37,19 +37,19 @@
   <string name="root_access_all">Uygulamalar ve ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod sürümü</string>
+  <string name="mod_version">Vanir sürümü</string>
   <string name="mod_version_default">Bilinmeyen</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Cihaz modeli</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">Cihaz ismi</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">CyanogenMod API düzeyi</string>
+  <string name="mod_api_level">Vanir API düzeyi</string>
   <string name="mod_api_level_default">Bilinmeyen</string>
   <!-- About phone screen, build date -->
   <string name="build_date">İnşa tarihi</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod güncellemeleri</string>
+  <string name="cmupdate_settings_title">Vanir güncellemeleri</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Konum</string>
   <string name="app_ops_categories_personal">Kişisel</string>
@@ -298,7 +298,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod yasal</string>
+  <string name="cmlicense_title">Vanir yasal</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

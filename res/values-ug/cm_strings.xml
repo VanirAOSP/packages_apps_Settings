@@ -36,19 +36,19 @@
   <string name="root_access_all">Apps ۋە ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod نەشرى</string>
+  <string name="mod_version">Vanir نەشرى</string>
   <string name="mod_version_default">يوچۇن</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">ئۈسكىنە تىپى</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">ئۈسكۈنە ئاتى</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">CyanogenMod نىڭ API دەرىجىسى</string>
+  <string name="mod_api_level">Vanir نىڭ API دەرىجىسى</string>
   <string name="mod_api_level_default">يوچۇن</string>
   <!-- About phone screen, build date -->
   <string name="build_date">ھاسىللىغان چېسلا</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod يېڭىلانمىلار</string>
+  <string name="cmupdate_settings_title">Vanir يېڭىلانمىلار</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">ئورنى</string>
   <string name="app_ops_categories_personal">شەخسىي</string>
@@ -297,7 +297,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod قانۇن ئۇچۇرى</string>
+  <string name="cmlicense_title">Vanir قانۇن ئۇچۇرى</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

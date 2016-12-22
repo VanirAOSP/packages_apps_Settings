@@ -38,19 +38,19 @@
   <!-- Preference link for root appops -->
   <string name="root_appops_title">Administrer root adgang</string>
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod-version</string>
+  <string name="mod_version">Vanir-version</string>
   <string name="mod_version_default">Ukendt</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Enhedsmodel</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">Enhedens navn</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">CyanogenMod API niveau</string>
+  <string name="mod_api_level">Vanir API niveau</string>
   <string name="mod_api_level_default">Ukendt</string>
   <!-- About phone screen, build date -->
   <string name="build_date">Kørselsdato</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod-opdateringer</string>
+  <string name="cmupdate_settings_title">Vanir-opdateringer</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Placering</string>
   <string name="app_ops_categories_personal">Personlig</string>

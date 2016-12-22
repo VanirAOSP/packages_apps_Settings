@@ -37,7 +37,7 @@
   <string name="root_access_all">Rakendused ja ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod versioon</string>
+  <string name="mod_version">Vanir versioon</string>
   <string name="mod_version_default">Teadmata</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Seadme mudel</string>
@@ -48,7 +48,7 @@
   <!-- About phone screen, build date -->
   <string name="build_date">Kooste kuupäev</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod uuendused</string>
+  <string name="cmupdate_settings_title">Vanir uuendused</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Asukoht</string>
   <string name="app_ops_categories_personal">Isiklik</string>
@@ -239,7 +239,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod juriidiline info</string>
+  <string name="cmlicense_title">Vanir juriidiline info</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

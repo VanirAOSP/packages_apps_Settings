@@ -30,7 +30,7 @@
   <string name="root_access_all">應用程式和 ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod 版本</string>
+  <string name="mod_version">Vanir 版本</string>
   <string name="mod_version_default">不明</string>
   <!-- About phone screen, Device model -->
   <!-- About phone screen, Device name -->
@@ -40,7 +40,7 @@
   <!-- About phone screen, build date -->
   <string name="build_date">版本日期</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod 更新</string>
+  <string name="cmupdate_settings_title">Vanir 更新</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">位置</string>
   <string name="app_ops_categories_personal">個人</string>
@@ -216,7 +216,7 @@
   <!-- NFC PreferenceCategory title -->
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod 法律條款</string>
+  <string name="cmlicense_title">Vanir 法律條款</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

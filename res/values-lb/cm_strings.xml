@@ -37,7 +37,7 @@
   <string name="root_access_all">Appen an ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod-Versioun</string>
+  <string name="mod_version">Vanir-Versioun</string>
   <string name="mod_version_default">Onbekannt</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Apparatmodell</string>
@@ -48,7 +48,7 @@
   <!-- About phone screen, build date -->
   <string name="build_date">Build-Datum</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod-Aktualiséierungen</string>
+  <string name="cmupdate_settings_title">Vanir-Aktualiséierungen</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Standuert</string>
   <string name="app_ops_categories_personal">Perséinlech</string>

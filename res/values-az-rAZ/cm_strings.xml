@@ -37,7 +37,7 @@
   <string name="root_access_all">Tətbiqetmələr və ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod versiyası</string>
+  <string name="mod_version">Vanir versiyası</string>
   <string name="mod_version_default">Bilinməyən</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Cihaz modeli</string>
@@ -48,7 +48,7 @@
   <!-- About phone screen, build date -->
   <string name="build_date">Quruluş tarixi</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod yeniləmələri</string>
+  <string name="cmupdate_settings_title">Vanir yeniləmələri</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Yer</string>
   <string name="app_ops_categories_personal">Şəxsi</string>

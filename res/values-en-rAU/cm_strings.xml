@@ -46,7 +46,7 @@
   <!-- About phone screen, build date -->
   <string name="build_date">Build date</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod updates</string>
+  <string name="cmupdate_settings_title">Vanir updates</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Location</string>
   <string name="app_ops_categories_personal">Personal</string>
@@ -226,7 +226,7 @@
   <!-- NFC PreferenceCategory title -->
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod legal</string>
+  <string name="cmlicense_title">Vanir legal</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

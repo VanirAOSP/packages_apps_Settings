@@ -315,7 +315,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod משפטי</string>
+  <string name="cmlicense_title">Vanir משפטי</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">אתר את חיישן טביעות האצבע הנמצא ב<xliff:g id="sensor_location">%1$s</xliff:g> המכשיר שלך.</string>
   <!-- Fingerprint sensor locations -->

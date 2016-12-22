@@ -40,19 +40,19 @@
   <string name="root_appops_title">Upravljaj root pristupima</string>
   <string name="root_appops_summary">Prikaz i kontrola root pravila</string>
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">CyanogenMod verzija</string>
+  <string name="mod_version">Vanir verzija</string>
   <string name="mod_version_default">Nepoznato</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Model uređaja</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">Naziv uređaja</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">CyanogenMod API razina</string>
+  <string name="mod_api_level">Vanir API razina</string>
   <string name="mod_api_level_default">Nepoznato</string>
   <!-- About phone screen, build date -->
   <string name="build_date">Datum izdavanja</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">CyanogenMod ažuriranja</string>
+  <string name="cmupdate_settings_title">Vanir ažuriranja</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Lokacija</string>
   <string name="app_ops_categories_personal">Osobno</string>
@@ -337,7 +337,7 @@
   <!-- Notification importance -->
   <string name="tuner_full_importance_settings">Kontrole obavijesti energije</string>
   <!-- CM Legal -->
-  <string name="cmlicense_title">CyanogenMod licenca</string>
+  <string name="cmlicense_title">Vanir licenca</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">Pronađite senzor otiska prsta na <xliff:g id="sensor_location">%1$s</xliff:g> vašeg telefona.</string>
   <!-- Fingerprint sensor locations -->
