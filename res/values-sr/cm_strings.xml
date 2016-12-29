@@ -47,7 +47,7 @@
   <!-- About phone screen, Device name -->
   <string name="device_name">Име уређаја</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">Ниво CyanogenMod API-а</string>
+  <string name="mod_api_level">Ниво Vanir API-а</string>
   <string name="mod_api_level_default">Непознато</string>
   <!-- About phone screen, build date -->
   <string name="build_date">Датум израде</string>

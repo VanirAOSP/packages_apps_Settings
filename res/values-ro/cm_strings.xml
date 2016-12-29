@@ -38,7 +38,7 @@
   <string name="root_access_all">Aplicații și ADB</string>
   <!-- Preference link for root appops -->
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">versiune CyanogenMod</string>
+  <string name="mod_version">versiune Vanir</string>
   <string name="mod_version_default">Necunoscut</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Modelul dispozitivului</string>
@@ -49,7 +49,7 @@
   <!-- About phone screen, build date -->
   <string name="build_date">Dată compilare</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">Actualizări CyanogenMod</string>
+  <string name="cmupdate_settings_title">Actualizări Vanir</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Locație</string>
   <string name="app_ops_categories_personal">Personal</string>
@@ -283,7 +283,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">Juridic CyanogenMod</string>
+  <string name="cmlicense_title">Juridic Vanir</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

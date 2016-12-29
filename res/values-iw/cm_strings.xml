@@ -41,19 +41,19 @@
   <string name="root_appops_title">ניהול גישות שורש</string>
   <string name="root_appops_summary">הצג ושלוט בחוקי גישת השורש</string>
   <!-- About phone screen, Vanir version -->
-  <string name="mod_version">גרסת CyanogenMod</string>
+  <string name="mod_version">גרסת Vanir</string>
   <string name="mod_version_default">לא ידוע</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">דגם המכשיר</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">שם המכשיר</string>
   <!-- About phone screen, CyanogenMod Api Level -->
-  <string name="mod_api_level">רמת ה-API של CyanogenMod</string>
+  <string name="mod_api_level">רמת ה-API של Vanir</string>
   <string name="mod_api_level_default">לא ידוע</string>
   <!-- About phone screen, build date -->
   <string name="build_date">תאריך בנייה</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">עדכוני CyanogenMod</string>
+  <string name="cmupdate_settings_title">עדכוני Vanir</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">מיקום</string>
   <string name="app_ops_categories_personal">אישי</string>

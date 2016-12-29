@@ -282,7 +282,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">Rechtlech Hiweiser iwwer CyanogenMod</string>
+  <string name="cmlicense_title">Rechtlech Hiweiser iwwer Vanir</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <!-- Tethering & portable hotspot other category -->

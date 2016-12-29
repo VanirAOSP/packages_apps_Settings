@@ -82,7 +82,7 @@
                 android:title="@string/mod_version"
                 android:summary="@string/mod_version_default" />
 
-        <!-- CyanogenMod API Version -->
+        <!-- Vanir API Version -->
         <Preference android:key="mod_api_level"
                 android:enabled="false"
                 android:shouldDisableView="false"

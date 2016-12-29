@@ -325,7 +325,7 @@
   <!-- Notification importance -->
   <string name="tuner_full_importance_settings">Kontroller til strømunderretninger</string>
   <!-- CM Legal -->
-  <string name="cmlicense_title">Juridisk information for CyanogenMod</string>
+  <string name="cmlicense_title">Juridisk information for Vanir</string>
   <!-- Format string for fingerprint location message -->
   <!-- Fingerprint sensor locations -->
   <string name="security_settings_fingerprint_sensor_location_back">tilbage</string>

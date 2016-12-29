@@ -334,7 +334,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">Juridische afdeling van CyanogenMod</string>
+  <string name="cmlicense_title">Juridische afdeling van Vanir</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">Vind de vingerafdruksensor op de <xliff:g id="sensor_location">%1$s</xliff:g> van uw telefoon.</string>
   <!-- Fingerprint sensor locations -->
