@@ -1044,7 +1044,6 @@ public class SettingsActivity extends SettingsDrawerActivity
      */
     private Fragment switchToFragment(String fragmentName, Bundle args, boolean validate,
             boolean addToBackStack, int titleResId, CharSequence title, boolean withTransition) {
-
         if (validate && !isValidFragment(fragmentName)) {
             throw new IllegalArgumentException("Invalid fragment for this activity: "
                     + fragmentName);
@@ -1127,7 +1126,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_NFC)
                         && pm.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
                         && adapter != null && adapter.isEnabled(), isAdmin, pm);
-
         setTileEnabled(new ComponentName(packageName,
                 Settings.PrintSettingsActivity.class.getName()),
                 pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin, pm);

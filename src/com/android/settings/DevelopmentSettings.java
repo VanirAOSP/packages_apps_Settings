@@ -854,6 +854,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             }
         }
         resetDebuggerOptions();
+        resetRootAccessOptions();
+        resetAdbNotifyOptions();
         writeLogpersistOption(null, true);
         writeLogdSizeOption(null);
         resetRootAccessOptions();
@@ -957,6 +959,11 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateRootAccessOptions();
     }
 
+    private void resetAdbNotifyOptions() {
+        CMSettings.Secure.putInt(getActivity().getContentResolver(),
+                CMSettings.Secure.ADB_NOTIFY, 1);
+    }
+
     private void resetRootAccessOptions() {
         String oldValue = SystemProperties.get(ROOT_ACCESS_PROPERTY, "0");
         SystemProperties.set(ROOT_ACCESS_PROPERTY, "0");
@@ -968,11 +975,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                     Settings.Secure.ADB_ENABLED, 1);
         }
         updateRootAccessOptions();
-    }
-
-    private void resetAdbNotifyOptions() {
-        CMSettings.Secure.putInt(getActivity().getContentResolver(),
-                CMSettings.Secure.ADB_NOTIFY, 1);
     }
 
     private void updateHdcpValues() {
@@ -2405,6 +2407,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mEnableDialog.dismiss();
             mEnableDialog = null;
         }
+        if (mLogpersistClearDialog != null) {
+            mLogpersistClearDialog.dismiss();
+            mLogpersistClearDialog = null;
+        }
         if (mRootDialog != null) {
             mRootDialog.dismiss();
             mRootDialog = null;
@@ -2412,10 +2418,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mAdbTcpDialog != null) {
             mAdbTcpDialog.dismiss();
             mAdbTcpDialog = null;
-        }
-        if (mLogpersistClearDialog != null) {
-            mLogpersistClearDialog.dismiss();
-            mLogpersistClearDialog = null;
         }
         if (mUpdateRecoveryDialog != null) {
             mUpdateRecoveryDialog.dismiss();
@@ -2464,6 +2466,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 // Reset the toggle
                 mSwitchBar.setChecked(false);
             }
+        } else if (dialog == mLogpersistClearDialog) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                setLogpersistOff(true);
+            } else {
+                updateLogpersistValues();
+            }
         } else if (dialog == mRootDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 writeRootAccessOptions(mSelectedRootValue);
@@ -2475,12 +2483,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 CMSettings.Secure.putInt(getActivity().getContentResolver(),
                         CMSettings.Secure.ADB_PORT, 5555);
-            }
-        } else if (dialog == mLogpersistClearDialog) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                setLogpersistOff(true);
-            } else {
-                updateLogpersistValues();
             }
         } else if (dialog == mUpdateRecoveryDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
@@ -2501,14 +2503,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mSwitchBar.setChecked(false);
             }
             mEnableDialog = null;
+        } else if (dialog == mLogpersistClearDialog) {
+            mLogpersistClearDialog = null;
         } else if (dialog == mRootDialog) {
             updateRootAccessOptions();
             mRootDialog = null;
         } else if (dialog == mAdbTcpDialog) {
             updateAdbOverNetwork();
             mAdbTcpDialog = null;
-        } else if (dialog == mLogpersistClearDialog) {
-            mLogpersistClearDialog = null;
         } else if (dialog == mUpdateRecoveryDialog) {
             updateUpdateRecoveryOptions();
             mUpdateRecoveryDialog = null;

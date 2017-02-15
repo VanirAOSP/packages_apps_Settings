@@ -31,6 +31,17 @@
                     android:targetClass="com.vanir.updater.UpdatesSettings" />
         </PreferenceScreen>
 
+        <!-- LineageOS Updates -->
+        <cyanogenmod.preference.SelfRemovingPreference android:key="cm_updates"
+                android:title="@string/cmupdate_settings_title"
+                android:summary="@string/system_update_settings_list_item_summary"
+                cm:requiresOwner="true"
+                cm:requiresPackage="org.lineageos.updater">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="org.lineageos.updater"
+                    android:targetClass="com.cyanogenmod.updater.UpdatesActivity" />
+        </cyanogenmod.preference.SelfRemovingPreference>
+
         <!-- Device status - launches activity -->
         <PreferenceScreen android:key="status_info"
                 android:title="@string/device_status"
@@ -129,6 +140,13 @@
                 android:summary="@string/device_info_default"
                 settings:allowDividerAbove="true"
                 settings:allowDividerBelow="true"/>
+
+        <!-- Build date -->
+        <Preference android:key="build_date"
+                android:enabled="false"
+                android:shouldDisableView="false"
+                android:title="@string/build_date"
+                android:summary="@string/build_date_default" />
 
         <!-- Build date -->
         <Preference android:key="build_date"

@@ -177,8 +177,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     privateTotalBytes += volumeTotalBytes;
                 }
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
-                mExternalCategory.addPreference(
-                        new StorageVolumePreference(context, vol, COLOR_PUBLIC, 0));
+                StorageVolumePreference ExStorageVolumePreference =
+                        new StorageVolumePreference(context, vol, COLOR_PUBLIC, 0);
+
+                //Disable preference when in change
+                ExStorageVolumePreference.setEnabled(vol.getState()!= VolumeInfo.STATE_CHECKING
+                    && vol.getState() != VolumeInfo.STATE_EJECTING);
+                mExternalCategory.addPreference(ExStorageVolumePreference);
             }
         }
 

@@ -91,6 +91,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_NIGHT_DISPLAY = "night_display";
     private static final String KEY_NIGHT_MODE = "night_mode";
     private static final String KEY_CAMERA_GESTURE = "camera_gesture";
+
     private static final String KEY_WALLPAPER = "wallpaper";
     private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
 
@@ -129,12 +130,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
 
         mScreenTimeoutPreference = (TimeoutListPreference) findPreference(KEY_SCREEN_TIMEOUT);
-
         mFontSizePref = findPreference(KEY_FONT_SIZE);
-
-        if (!NightDisplayController.isAvailable(activity)) {
-            removePreference(KEY_NIGHT_DISPLAY);
-        }
 
         if (displayPrefs != null) {
             mAutoBrightnessPreference = (SwitchPreference) findPreference(KEY_AUTO_BRIGHTNESS);
@@ -144,6 +140,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                 } else {
                     displayPrefs.removePreference(mAutoBrightnessPreference);
                 }
+            }
+
+            if (!NightDisplayController.isAvailable(activity)) {
+                removePreference(KEY_NIGHT_DISPLAY);
             }
 
             mLiftToWakePreference = (SwitchPreference) findPreference(KEY_LIFT_TO_WAKE);

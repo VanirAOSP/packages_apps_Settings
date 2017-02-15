@@ -374,7 +374,6 @@ public class WirelessSettings extends SettingsPreferenceFragment implements Inde
             removePreference(KEY_NETWORK_RESET);
         }
 
-
         // Enable link to CMAS app settings depending on the value in config.xml.
         boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
                 com.android.internal.R.bool.config_cellBroadcastAppLinks);
