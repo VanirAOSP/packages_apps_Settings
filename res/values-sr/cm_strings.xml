@@ -41,14 +41,14 @@
   <string name="root_appops_title">Управљај приступом руту</string>
   <string name="root_appops_summary">Види и контролиши правила рута</string>
   <!-- About phone screen, LineageOS version -->
-  <string name="mod_version">LineageOS верзија</string>
+  <string name="mod_version">Vanir верзија</string>
   <string name="mod_version_default">Непознато</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Модел уређаја</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">Име уређаја</string>
   <!-- About phone screen, LineageOS Api Level -->
-  <string name="mod_api_level">Ниво LineageOS API-а</string>
+  <string name="mod_api_level">Ниво Vanir API-а</string>
   <string name="mod_api_level_default">Непознато</string>
   <!-- About phone screen, build date -->
   <string name="build_date">Датум израде</string>
@@ -304,7 +304,7 @@
   <string name="nfc_title_category">NFC</string>
   <!-- Notification importance -->
   <!-- CM Legal -->
-  <string name="cmlicense_title">LineageOS лиценца</string>
+  <string name="cmlicense_title">Vanir лиценца</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">Нађи сензор отиска прста <xliff:g id="sensor_location">%1$s</xliff:g> твог телефона.</string>
   <!-- Fingerprint sensor locations -->

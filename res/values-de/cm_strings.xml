@@ -40,19 +40,19 @@
   <string name="root_appops_title">Root-Zugriffe verwalten</string>
   <string name="root_appops_summary">Anzeigen und Kontrollieren der Root-Regeln</string>
   <!-- About phone screen, LineageOS version -->
-  <string name="mod_version">LineageOS-Version</string>
+  <string name="mod_version">Vanir-Version</string>
   <string name="mod_version_default">Unbekannt</string>
   <!-- About phone screen, Device model -->
   <string name="device_model">Gerätemodell</string>
   <!-- About phone screen, Device name -->
   <string name="device_name">Gerätename</string>
   <!-- About phone screen, LineageOS Api Level -->
-  <string name="mod_api_level">LineageOS API-Level</string>
+  <string name="mod_api_level">Vanir API-Level</string>
   <string name="mod_api_level_default">Unbekannt</string>
   <!-- About phone screen, build date -->
   <string name="build_date">Build-Datum</string>
   <!-- CM Updater -->
-  <string name="cmupdate_settings_title">LineageOS-Updates</string>
+  <string name="cmupdate_settings_title">Vanir-Updates</string>
   <!-- Names of categories of app ops tabs - extension of AOSP -->
   <string name="app_ops_categories_location">Standort</string>
   <string name="app_ops_categories_personal">Persönlich</string>
@@ -339,7 +339,7 @@
   <!-- Notification importance -->
   <string name="tuner_full_importance_settings">Erweiterte Benachrichtigungseinstellungen</string>
   <!-- CM Legal -->
-  <string name="cmlicense_title">Rechtliche Hinweise zu LineageOS</string>
+  <string name="cmlicense_title">Rechtliche Hinweise zu Vanir</string>
   <!-- Format string for fingerprint location message -->
   <string name="security_settings_fingerprint_enroll_find_sensor_message_cm">Suchen Sie den Fingerabdrucksensor auf der <xliff:g id="sensor_location">%1$s</xliff:g> des Geräts.</string>
   <!-- Fingerprint sensor locations -->
