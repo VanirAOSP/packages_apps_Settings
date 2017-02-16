@@ -504,14 +504,6 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         return builder.toString();
     }
 
-    private static String constructApiLevelString() {
-        int sdkInt = cyanogenmod.os.Build.CM_VERSION.SDK_INT;
-        StringBuilder builder = new StringBuilder();
-        builder.append(cyanogenmod.os.Build.getNameForSDKInt(sdkInt))
-                .append(" (" + sdkInt + ")");
-        return builder.toString();
-    }
-
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
         private final Context mContext;
