@@ -1236,15 +1236,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return false;
     }
 
-    public static boolean isCarrierDemoUser(Context context) {
-        final String carrierDemoModeSetting =
-                context.getString(com.android.internal.R.string.config_carrierDemoModeSetting);
-        return UserManager.isDeviceInDemoMode(context)
-                && getUserManager(context).isDemoUser()
-                && !TextUtils.isEmpty(carrierDemoModeSetting)
-                && Settings.Secure.getInt(
-                        context.getContentResolver(), carrierDemoModeSetting, 0) == 1;
-    }
     public static String join(Resources res, List<String> items) {
         final int count = items.size();
         if (items.isEmpty()) {
@@ -1264,5 +1255,15 @@ public final class Utils extends com.android.settingslib.Utils {
             return res.getString(R.string.join_many_items_last, allButLast,
                     items.get(count - 1));
         }
+    }
+
+    public static boolean isCarrierDemoUser(Context context) {
+        final String carrierDemoModeSetting =
+                context.getString(com.android.internal.R.string.config_carrierDemoModeSetting);
+        return UserManager.isDeviceInDemoMode(context)
+                && getUserManager(context).isDemoUser()
+                && !TextUtils.isEmpty(carrierDemoModeSetting)
+                && Settings.Secure.getInt(
+                        context.getContentResolver(), carrierDemoModeSetting, 0) == 1;
     }
 }
